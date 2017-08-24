@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="31" height="40" viewBox="0 0 31 40">
+  <defs>
+    <style>
+      .cls-1, .cls-2 {
+        font-size: 39px;
+      }
+
+      .cls-1 {
+        opacity: 0.2;
+      }
+
+      .cls-2 {
+        fill: #fff;
+        font-family: "FontAwesome";
+      }
+    </style>
+  </defs>
+  <text y="34" class="cls-1"><tspan class="cls-2"></tspan></text>
+</svg>

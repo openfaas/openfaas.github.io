@@ -9,117 +9,131 @@
 <html lang="en-US">
 <!--<![endif]-->
 <html>
+
 <head>
-	<meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable = yes" >
-	<link rel="stylesheet" id="style-css"  href="./assets/css/app.css" type="text/css" media="all" />
-        <title>OpenFaaS - cloud native serverless framework</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable = yes">
+    <link rel="stylesheet" id="style-css" href="./assets/css/app.css" type="text/css" media="all" />
+    <title>OpenFaaS - Serverless Functions Made Simple</title>
 </head>
+
 <body>
-	<header id="header" class="text-center">
-		<div class="grid-container">
-	        <div class="grid-x grid-padding-x">
-	            <div class="cell large-12">
-	                <img id="logo" alt="logo" src="./assets/images/openfaas.png">
-	                <p>A Serverless Framework for Docker and Kubernetes</p>
-	            </div>
-	            <div id="demo" class="cell large-12">
-					<a href="https://github.com/openfaas/faas" class="btn">view on github</a>
-                                        <span><a href="https://skillsmatter.com/skillscasts/10813-faas-and-furious-0-to-serverless-in-60-seconds-anywhere">Video Demo</a></span>
-	            </div>
-	        </div>
-	    </div>
-	    <div class="wave"><img id="whale" src="./assets/images/logo.png"></div>
-	</header>
-	<section id="about">
-		<div class="grid-container">
-			<div class="grid-x grid-padding-x">
-				<div class="cell large-7">
-					<div class="about">
-						<p>With OpenFaaS you can package anything as a serverless function - from Node.js to Golang to CSharp, even binaries like ffmpeg or <a href="https://blog.alexellis.io/serverless-imagemagick/">ImageMagick</a>.</p>
- 						<p>You can try OpenFaaS in 60 seconds or write and deploy <a href="https://blog.alexellis.io/first-faas-python-function/">your first Python function</a> in around 10-15 minutes. Grab a coffee and <a href="https://blog.alexellis.io/quickstart-openfaas-cli/">learn how the FaaS-CLI makes serverless easy.</a></p>
-						<p>So bring your laptop, your own on-prem hardware or create a cluster in the cloud. Pick Docker or Kubernetes to do the heavy lifting enabling you to build a scaleable, fault-tolerant event-driven serverless platform for your applications.</p>
-						<p>Read what people are saying about OpenFaaS on our <a href="https://github.com/alexellis/faas/blob/master/community.md">community page</a>.</p>
-					</div>
-				</div>
-				<div class="cell large-5">
-					<div class="author">
-						<div class="grid-x grid-padding-x">
-							<div class="cell large-4">
-								<img src="./assets/images/author/ellis.jpg" alt="author">
-							</div>
-							<div class="cell large-8">
-								<h3>Hi, I’m Alex Ellis</h3>
-								<p>I'm the author of OpenFaaS, principal developer at ADP, Docker Captain and all-around open-source enthusiast.</p>
-								<p>I write a tech blog on containers, Linux, Raspberry Pi and coding over at <a href="https://blog.alexellis.io">blog.alexellis.io</a></p>
-							</div>
-							<div class="cell large-12">
-								<ul id="social-buttons">
-									<li><a class="twitter" href="https://twitter.com/alexellisuk"><i class="fi flaticon-twitter"></i> Twitter</a></li>
-									<li><a class="linkedin" href="https://www.alexellis.io/goto/linkedin"><i class="fi flaticon-linkedin-letters"></i> Linkedin</a></li>
-									<li><a class="github" href="https://github.com/alexellis"><i class="fi flaticon-github-logo"></i> Github</a></li>
-								</ul>
-							</div>
-						</div>
-				</div>
-			</div>
-		</div>
-	</section>
+    <header id="header" class="text-center">
+        <div class="grid-container">
+            <div class="grid-x grid-padding-x">
+                <div class="cell large-12">
+                    <img id="logo" alt="logo" src="./assets/images/openfaas.png">
+                    <p>Serverless Functions Made Simple for Docker and Kubernetes</p>
+                </div>
+                <div id="demo" class="cell large-12">
+                    <a href="https://github.com/openfaas/faas" class="btn">view on github</a>
+                    <span><a href="https://www.youtube.com/watch?v=C3agSKv2s_w&list=PLlIapFDp305AiwA17mUNtgi5-u23eHm5j&index=1">Video Demo</a></span>
+                </div>
+            </div>
+        </div>
+        <div class="wave"><img id="whale" src="./assets/images/logo.png"></div>
+    </header>
+    <section id="about">
+        <div class="grid-container">
+            <div class="grid-x grid-padding-x">
+                <div class="cell large-7">
+                    <div class="about">
+                        <p>With OpenFaaS you can package anything as a serverless function - from Node.js to Golang to CSharp, even binaries like ffmpeg or <a href="https://blog.alexellis.io/serverless-imagemagick/">ImageMagick</a>.</p>
+                        <p>You can try OpenFaaS in 60 seconds or write and deploy <a href="https://blog.alexellis.io/first-faas-python-function/">your first Python function</a> in around 10-15 minutes. So grab a coffee and <a href="https://blog.alexellis.io/quickstart-openfaas-cli/">learn how the FaaS-CLI makes serverless functions simple.</a></p>
+                        <p>So bring your laptop, your own on-prem hardware or create a cluster in the cloud. Pick Docker or Kubernetes to do the heavy lifting enabling you to build a scaleable, fault-tolerant event-driven serverless platform for your applications.</p>
+                        <p>Our core values are: developer first, operational simplicity and community centric.</p>
 
-	<footer>
-		<div class="grid-container">
-			<div class="grid-x grid-padding-x">
-				<div class="cell large-6 text-left">
-					<p>OpenFaaS is maintained by <a href="https://www.alexellis.io/">alexellis</a> and a growing community of contributors.</p>
-				</div>
-				<div class="cell large-6 text-right">
-					<p></p>
-				</div>
-			</div>
-		</div>
-	</footer>
-<script src="./assets/libs/macy-js/dist/macy.js"></script>
+                        <p>Find out what people are building with OpenFaaS on our <a href="https://github.com/alexellis/faas/blob/master/community.md">community page</a>,
+                            <a href="https://blog.alexellis.io/tag/openfaas">read the latest OpenFaaS blogs</a> or
+                            <a href="https://github.com/openfaas/faas/blob/master/guide/README.md">dive into the documentation</a>.</p>
+                    </div>
+                </div>
+                <div class="cell large-5">
+                    <div class="author">
+                        <div class="grid-x grid-padding-x">
+                            <div class="cell large-4">
+                                <img src="./assets/images/author/ellis.jpg" alt="author">
+                            </div>
+                            <div class="cell large-8">
+                                <h3>Hi, I’m Alex Ellis</h3>
+                                <p>I'm the Director of OpenFaaS Ltd and author of the OpenFaaS Project. I'm best known for my speaking and writing on containers, Linux, Raspberry Pi and open-source software.</p>
+                                <p>Read my latest blogs and tutorials over at <a href="https://blog.alexellis.io">blog.alexellis.io</a></p>
+                                <p><i>You may also know me as Docker Captain and Principal Developer with ADP.</i></p>
+                            </div>
+                            <div class="cell large-12">
+                                <ul id="social-buttons">
+                                    <li><a class="twitter" href="https://twitter.com/alexellisuk"><i class="fi flaticon-twitter"></i> Twitter</a></li>
+                                    <li><a class="linkedin" href="https://www.alexellis.io/goto/linkedin"><i class="fi flaticon-linkedin-letters"></i> Linkedin</a></li>
+                                    <li><a class="github" href="https://github.com/alexellis"><i class="fi flaticon-github-logo"></i> Github</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
 
-<!-- GoogleAnalytics -->
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    <footer>
+        <div class="grid-container">
+            <div class="grid-x grid-padding-x">
+                <div class="cell large-12 text-left">
+                    <p>OpenFaaS Ltd. is a registered company. The OpenFaaS Project is being built by <a href="https://www.alexellis.io/">alexellis</a> and a growing community of contributors.</p>
+                </div>
+                <div class="cell large-6 text-right">
+                    <p></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="./assets/libs/macy-js/dist/macy.js"></script>
 
-  ga('create', 'UA-60759269-4', 'auto');
-  ga('send', 'pageview');
+    <!-- GoogleAnalytics -->
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
-</script>
+        ga('create', 'UA-60759269-4', 'auto');
+        ga('send', 'pageview');
+    </script>
 
-<!-- End of GoogleAnalytics -->
-<script>
-var masonry = new Macy({
-    container: '#cards',
-    trueOrder: false,
-    waitForImages: false,
-    debug: true,
-    margin: {
-        x: 30,
-        y: 30
-    },
-    columns: 4,
-    breakAt: {
-        1200: {
-            columns: 4,
+    <!-- End of GoogleAnalytics -->
+    <script>
+        var masonry = new Macy({
+            container: '#cards',
+            trueOrder: false,
+            waitForImages: false,
+            debug: true,
             margin: {
-                x: 20,
-                y: 20
+                x: 30,
+                y: 30
+            },
+            columns: 4,
+            breakAt: {
+                1200: {
+                    columns: 4,
+                    margin: {
+                        x: 20,
+                        y: 20
+                    }
+                },
+                520: {
+                    columns: 1
+                },
+                400: {
+                    columns: 1
+                }
             }
-        },
-        520: {
-            columns: 1
-        },
-        400: {
-            columns: 1
-        }
-    }
-});
-</script>
+        });
+    </script>
 </body>
+
 </html>

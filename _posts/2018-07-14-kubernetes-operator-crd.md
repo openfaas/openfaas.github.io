@@ -115,7 +115,7 @@ If we can now use `kubectl` to create functions then what does that mean for the
 
 > At KubeCon in Austin Kelsey Hightower urged us not to go near `kubectl` as developers. His point was that we should not be operating our clusters manually with access to potentially dangerous tooling.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/kOa_llowQ1c" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+{% include youtube.html id="kOa_llowQ1c" %}
 
 Access to `kubectl` and the `function` CRD gives more power to those who need it and opens new extension points for future work and ideas. All the existing tooling is compatible, but it really becomes powerful when coupled with a "git push" GitOps CI/CD pipeline like [OpenFaaS Cloud](https://github.com/openfaas/openfaas-cloud).
 

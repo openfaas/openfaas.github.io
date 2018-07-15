@@ -17,7 +17,7 @@
 }
 
 section {
-	background: #fff;
+	background: #f9f9f9;
 }
 
 .pad {
@@ -25,7 +25,7 @@ section {
 }
 
 header {
-	color: #fff;
+	color: #f9f9f9;
 	padding: 15px 0;
 	position: fixed;
 	width: 100%;
@@ -87,14 +87,14 @@ header {
 		display: inline-block;
 
 		img {
-			height: 30px;
+			height: 20px;
 			width: auto;
 		}
 	}
 }
 
 .content {
-	background: #fff;
+	background: #f9f9f9;
 }
 
 .info img {
@@ -122,31 +122,31 @@ header {
 	text-align: center;
 }
 
-blockquote {
-	padding: 18px 25px;
-	margin: 0;
-	quotes: "\201C""\201D""\2018""\2019";
-	font-style: italic;
+// blockquote {
+// 	padding: 18px 25px;
+// 	margin: 0;
+// 	quotes: "\201C""\201D""\2018""\2019";
+// 	font-style: italic;
 
-	cite {
-		display: block;
-		font-weight: bold;
-		margin: 10px 0 0 0;
-	}
+// 	cite {
+// 		display: block;
+// 		font-weight: bold;
+// 		margin: 10px 0 0 0;
+// 	}
 
-	p {
-		display: inline;
-	}
-}
+// 	p {
+// 		display: inline;
+// 	}
+// }
 
-blockquote:before {
-	color: #ccc;
-	content: open-quote;
-	font-size: 4em;
-	line-height: 0.1em;
-	margin-right: 0.25em;
-	vertical-align: -0.4em;
-}
+// blockquote:before {
+// 	color: #ccc;
+// 	content: open-quote;
+// 	font-size: 4em;
+// 	line-height: 0.1em;
+// 	margin-right: 0.25em;
+// 	vertical-align: -0.4em;
+// }
 
 .square-image {
 	width: 200px;
@@ -186,36 +186,4 @@ blockquote:before {
 	.arrow {
 		font-size: .6em;
 	}
-}
-
-.editor-link {
- 	display: none;
-	margin-top: 0;
-	padding-top: 30px;
-	.btn {
-		border: 0;
-		border-radius: 2px;
-		width: 100%;
-		max-width: 500px;
-		box-sizing: border-box;
-		font-size: 2rem;
-		text-decoration: none;
-		padding: 10px 15px;
-		margin: 0;
-		font-size: 18px;
-		cursor: pointer;
-		background-color: #f7e064;
-		color: #333;
-		box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.2);
-
-		&:hover {
-			background-color: #f4d525;
-			color: #333;
-		}
-	}
-
-}
-
-.cms-editor-active .editor-link {
-	display: block;
 }

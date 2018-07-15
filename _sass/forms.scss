@@ -5,7 +5,7 @@
 	transition: .2s ease-in-out;
 	display: inline-block;
 	padding: 16px 50px;
-	background: #fff;
+	background: #f9f9f9;
 }
 
 .button a:hover, input[type=submit]:hover {
@@ -21,7 +21,7 @@
 }
 
 .button.alt a:hover {
-	background: #fff;
+	background: #f9f9f9;
 	color: $brand-color;
 	text-shadow: none;
 }

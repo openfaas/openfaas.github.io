@@ -1,7 +1,9 @@
 # ----
 # Site
 
-title: Frisco Template
+remote_theme: CloudCannon/frisco-jekyll-template
+
+title: OpenFaaS - Serverless Functions Made Simple
 url: "https://brave-submarine.cloudvent.net"
 baseurl:
 google_analytics_key:
@@ -10,22 +12,22 @@ disqus_shortname:
 
 # Values for the jekyll-seo-tag gem (https://github.com/jekyll/jekyll-seo-tag)
 logo: /siteicon.png
-description: App marketing template for Jekyll.
+description: OpenFaaS - Serverless Functions Made Simple
 author:
   name:
   email:
-  twitter: # twitter username without the @ symbol
+  twitter: openfaas
 social:
-  name: Frisco Template
+  name: OpenFaaS - Serverless Functions Made Simple
   links:
-    - https://github.com/CloudCannon/frisco-jekyll-template
+    - https://github.com/openfaas/faas
 
 # -----
 # Build
 
 timezone: Etc/UTC
 
-permalink: pretty
+permalink: /:title/
 
 plugins:
   - jekyll-sitemap
@@ -38,7 +40,7 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - README.md
-  - LICENCE
+  - LICENCE.jekyll_theme
 
 collections:
   staff_members:
@@ -55,6 +57,11 @@ defaults:
     scope:
       path: ""
     values:
+      layout: "landing"
+  -
+    scope:
+      path: "blog"
+    values:
       layout: "default"
   -
     scope:
@@ -69,11 +76,6 @@ defaults:
         content:
           width: 1500
           height: 2000
-  -
-    scope:
-      path: "contact-success.html"
-    values:
-      layout: "page"
   -
     scope:
       path: ""
@@ -92,12 +94,7 @@ defaults:
 # CloudCannon
 
 social_icons:
-  - Facebook
-  - Google Plus
-  - Instagram
-  - LinkedIn
-  - Pinterest
-  - Tumblr
+  - GitHub
   - Twitter
   - YouTube
   - Email

@@ -3,6 +3,8 @@ left_links:
     link: /
   - name: Blog
     link: /blog/
+  - name: Docs
+    link: https://docs.openfaas.com/
 right_links:
   - name:
     link: https://twitter.com/openfaas

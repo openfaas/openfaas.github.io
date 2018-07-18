@@ -2,6 +2,8 @@
   link: /
 - name: Blog
   link: /blog/
+- name: Docs
+  link: https://docs.openfaas.com/
 - name: <i class="fab fa-github"></i> Github
   link: https://github.com/openfaas/faas
 - name: <i class="fab fa-youtube"></i> Video Demo

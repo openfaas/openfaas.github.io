@@ -5,6 +5,7 @@ image: /images/kubernetes-operator-crd/pexels-asphalt-blue-sky-clouds-490411.jpg
 categories:
   - kubernetes
 author_staff_member: alex
+canonical_url: https://blog.alexellis.io/introducing-the-openfaas-operator/
 ---
 
 This blog post introduces OpenFaaS Operator which is a CRD and Controller for OpenFaaS on Kubernetes. We started working on this in the community in October last year to enable a tighter integration with Kubernetes. The most visible way you'll see this is by being able to type in `kubectl get functions`.

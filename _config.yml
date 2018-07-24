@@ -29,7 +29,7 @@ social:
 
 timezone: Etc/UTC
 
-permalink: /:title/
+permalink: /blog/:title/
 
 plugins:
   - jekyll-sitemap

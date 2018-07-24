@@ -3,7 +3,7 @@
 	text-align: center;
 	height: 45vh;
 	min-height: 550px;
-	background: rgba(69,99,221,1);
+	background: $brand-color;
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center center;
@@ -40,6 +40,12 @@
 		position: absolute;
 		right: 0;
 	}
+}
+
+
+.full {
+	min-height: calc(100vh - 53px);
+	background-color: #f9f9f9;
 }
 
 .image {

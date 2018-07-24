@@ -4,8 +4,8 @@
 remote_theme: CloudCannon/frisco-jekyll-template
 
 title: OpenFaaS - Serverless Functions Made Simple
-url: "https://brave-submarine.cloudvent.net"
-baseurl:
+url: "https://www.openfaas.com"
+baseurl: 
 google_analytics_key:
 google_maps_javascript_api_key:
 disqus_shortname:
@@ -16,7 +16,9 @@ description: OpenFaaS - Serverless Functions Made Simple
 author:
   name:
   email:
-  twitter: openfaas
+  twitter:
+    username: openfaas
+    card: summary
 social:
   name: OpenFaaS - Serverless Functions Made Simple
   links:

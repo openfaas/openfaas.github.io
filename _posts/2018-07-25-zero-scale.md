@@ -75,7 +75,7 @@ The scaling up behaviour can be enabled in the OpenFaaS gateway by setting the `
 
 This wraps up the introductory blog post on zero-scale in OpenFaaS.
 
-> [Berndt Jung](https://twitter.com/berndtj) from VMware has already been making use of zero-scale with OpenFaaS to reduce the size (and cost) of his FaaS dev and test environments on public cloud. I also want to think Berndt for his PR to the [faas-netes](https://github.com/openfaas/faas-netes/pull/249) project to help fine-tune the start-up times of functions.
+> [Berndt Jung](https://twitter.com/berndtj) from VMware has already been making use of zero-scale with OpenFaaS to reduce the size (and cost) of his FaaS dev and test environments on public cloud. I'd also like to thank Berndt for his PR to [faas-netes](https://github.com/openfaas/faas-netes/pull/249) which helps fine-tune the start-up times of functions.
 
 So if you're an early adopter and like tinkering or if you're a member of the Slack workspace then you can try out zero-scale in OpenFaaS today. For everyone else: keep an eye on the docs and for a follow-up tutorial on the OpenFaaS blog.
 

@@ -1,5 +1,6 @@
 ---
 title: Scale to Zero and Back Again with OpenFaaS
+description: Alex Ellis introduces the new zero-scale feature in OpenFaaS to help you save capacity within your clusters by scaling functions down when they're idle
 date: 2018-07-25
 image: /images/zero-scale/background-1.jpg
 categories:

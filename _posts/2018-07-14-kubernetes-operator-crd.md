@@ -18,7 +18,7 @@ The original controller called `faas-netes` was created by the community and muc
 
 Here is a conceptual diagram from the [documentation site](https://docs.openfaas.com/architecture/gateway/). The Operator does not change this architecture, but changes the way it is created through listening to events.
 
-![](https://raw.githubusercontent.com/openfaas/faas/master/docs/of-overview.png)
+![OpenFaaS Conceptual Overview](https://raw.githubusercontent.com/openfaas/faas/master/docs/of-overview.png)
 
 The use of Kubernetes primitives from the beginning has meant users can use `kubectl` to check logs, debug and monitor OpenFaaS functions in the same way they would any other Kubernetes resources. OpenFaaS runs on all Kubernetes services such as GKE, AKS, EKS, with OpenShift or with `kubeadm`.
 
@@ -124,7 +124,7 @@ Access to `kubectl` and the `function` CRD gives more power to those who need it
 
 * Please try out the OpenFaaS Operator and let us know what you think
 
-The helm chart has been re-published so follow the brief README here to get installed and upgraded today: https://github.com/openfaas/faas-netes/tree/master/chart/openfaas
+The helm chart has been re-published so follow the brief README here to get installed and upgraded today: [https://github.com/openfaas/faas-netes/tree/master/chart/openfaas](https://github.com/openfaas/faas-netes/tree/master/chart/openfaas)
 
 ## Join the community
 

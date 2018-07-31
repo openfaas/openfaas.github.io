@@ -43,6 +43,9 @@ exclude:
   - Gemfile.lock
   - README.md
   - LICENCE.jekyll_theme
+  - .DEREK.yml
+  - .gitignore
+  - CNAME
 
 collections:
   staff_members:

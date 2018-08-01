@@ -6,6 +6,54 @@ This repository contains the OpenFaaS webpage and blog - https://www.openfaas.co
 
 The following sections provide a basic guide to some common changes that will be made to the site, adding posts, authors etc.
 
+### Editorial / style guidelines
+
+#### Post structure
+
+All blog posts must have a title *and* description, this helps with SEO. Author's name could be mentioned in the description.
+
+Format:
+
+* Short intro/overview (150 words)
+
+* Series of logical steps or points / topics
+
+Embed conceptual diagram, video or picture to help make case.
+
+* Call to action
+
+Point to Slack/Docs/GitHub or something else.
+
+* Acknowledgements
+
+If necessary show acknowledgements to others who collaborated or gave feedback you used. When working on GitHub this is available in public history, so use sparingly.
+
+#### Voice
+
+When using steps use the active/imperative voice for headings "Get started" vs "Getting started", "Configure the node" vs "Configuring the node" etc.
+
+#### Plain English
+
+Write in plain English at all times, when a simpler word exists use it, avoid words derived from Latin when possible.
+
+#### Images
+
+Place all images in a sub-folder `./images/<post-name>`
+
+* Add a background post
+
+Each post should have a background photo picked from free stock photography or provided with a Creative Commons license. Do not pull images in from Google without checking that the usage / license is valid first. Crop the background to a width of 1500 pixels. Use JPEG and aim for 200Kb size when exporting (increase compression)
+
+* In-post images and screenshots
+
+Each blog post should have at least one conceptual diagram. This should show the logical flow or abstract view of the feature, news or design. An embedded Tweet or video could also serve this purpose.
+
+Images are important for every post, but try to compress / crop the images as much as is reasonable and possible. This will help mitigate the huge size a GitHub repo can grow to which is full of images.
+
+#### Cross-posting content
+
+Cross-posting content negatively affects SEO scores, so should not be done unless additional care and attention is made to include the required "og" headers. Make sure all content on the OpenFaaS community blog is original.
+
 ### Developing locally
 
 A Docker Compose file is provided to simplify developing/contributing to the website and blog, this has been verified to work on both OSX and Windows 10 (when developing/writing on Windows please use Unix line endings in your editor).

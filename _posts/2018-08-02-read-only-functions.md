@@ -1,7 +1,7 @@
 ---
 title: Serverless Security&#58; read-only functions with OpenFaaS
 description: Alex Ellis introduces the read-only functions feature for OpenFaaS - a security concept available with containers and Kubernetes to prevent tampering
-date: 2018-08-01
+date: 2018-08-02
 image: /images/read-only/railings.jpg
 categories:
   - security
@@ -22,7 +22,7 @@ We also use a read-only file-system in the OpenFaaS API Gateway which provides a
 
 Before applying this patch to the OpenFaaS providers we also changed all the OpenFaaS templates to run as non-root users to prevent tampering with system files, installing packages at runt-time and modifiying shared libraries. This change goes one step further and prevents a function from tampering with its own code either through a malicious actor or an inadvertent defect in the code.
 
-In both Kubernetes and Docker Swarm, we enabled a feature in the built-in security context to make the root file-system `/` read-only. 
+In both Kubernetes and Docker Swarm, we enabled features in the built-in container security contexts to make the root file-system `/` read-only. 
 
 To see this in action with a regular Docker container try the following:
 

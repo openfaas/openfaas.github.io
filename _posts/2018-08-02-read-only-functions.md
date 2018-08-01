@@ -20,7 +20,9 @@ We also use a read-only file-system in the OpenFaaS API Gateway which provides a
 
 ## How does it work?
 
-In both Kubernetes and Docker Swarm, we enabled a feature in the built-in security context to make the root file-system `/` read-only. Before we applied this patch to the OpenFaaS providers we also changed all the OpenFaaS templates to run as non-root users to prevent tampering with system files, this change goes one step further and prevents a function from tampering with its own code.
+Before we applied this patch to the OpenFaaS providers we also changed all the OpenFaaS templates to run as non-root users to prevent tampering with system files, installing packages at runt-time and modifiying shared libraries. This change goes one step further and prevents a function from tampering with its own code either through a malicious actor or an inadvertent defect in the code.
+
+In both Kubernetes and Docker Swarm, we enabled a feature in the built-in security context to make the root file-system `/` read-only. 
 
 To see this in action with a regular Docker container try the following:
 
@@ -134,6 +136,16 @@ If you want the best of both worlds, then we have enabled a temporary area for y
 
 ## What next?
 
+Throughout the development of OpenFaaS we are always looking for ways to improve security and tighten controls. We've done this by switching to non-root users where possible for all OpenFaaS core services and the official templates. All core OpenFaaS services are uploaded to both the Docker Hub and to [Quay.io by CoreOS](https://quay.io) where continuous vulnerability and CVE scanning runs to give you peace of mind when you deploy your functions to production.
+
+![](/images/read-only/scanned-by-quay.png)
+
+*Pictured: OpenFaaS API Gateway passing vulnerability scanning.*
+
+See also: [OpenFaaS official images on Quay.io](openfaas/faas: OpenFaaS - Serverless Functions Made Simple for Docker & Kubernetes)
+
+> In future posts you will learn about NetworkPolicy and how to enable isolated multi-team and multi-environment installations of OpenFaaS, so make sure to subscribe to the RSS feed with [Feedly](https://feedly.com/i/discover/sources/search/feed/https%3A%2F%2Fwww.openfaas.com%2Fblog%2F) and follow [@openfaas on Twitter](https://twitter.com/openfaas).
+
 It's now over to you to try out a read-only filesystem with your functions and step up your Serverless Security.
 
 ### Try it out
@@ -144,11 +156,11 @@ If you'd like to get started with OpenFaaS, then you can deploy with helm, kubec
 
 ### Star &amp; share
 
+Add your *Star* to the GitHub repo over at [openfaas/faas](https://github.com/openfaas/faas/) because it helps us help you.
+
 <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Are you using OpenFaaS? Let us know so we can list you on the homepage and docs site <a href="https://t.co/UolMK2uMvA">https://t.co/UolMK2uMvA</a> <a href="https://t.co/EoBVLkZcBv">pic.twitter.com/EoBVLkZcBv</a></p>&mdash; OpenFaaS (@openfaas) <a href="https://twitter.com/openfaas/status/1024403113694900224?ref_src=twsrc%5Etfw">July 31, 2018</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
 
 If you're a user of OpenFaaS, then let us know about it so that we can list you on the project homepage:
 
 * [OpenFaaS Users](https://docs.openfaas.com/#users-of-openfaas)
-
-Add your *Star* to the GitHub repo over at [openfaas/faas](https://github.com/openfaas/faas/) because it helps us help you.
 

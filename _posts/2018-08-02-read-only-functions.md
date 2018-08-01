@@ -20,7 +20,7 @@ We also use a read-only file-system in the OpenFaaS API Gateway which provides a
 
 ## How does it work?
 
-Before we applied this patch to the OpenFaaS providers we also changed all the OpenFaaS templates to run as non-root users to prevent tampering with system files, installing packages at runt-time and modifiying shared libraries. This change goes one step further and prevents a function from tampering with its own code either through a malicious actor or an inadvertent defect in the code.
+Before applying this patch to the OpenFaaS providers we also changed all the OpenFaaS templates to run as non-root users to prevent tampering with system files, installing packages at runt-time and modifiying shared libraries. This change goes one step further and prevents a function from tampering with its own code either through a malicious actor or an inadvertent defect in the code.
 
 In both Kubernetes and Docker Swarm, we enabled a feature in the built-in security context to make the root file-system `/` read-only. 
 
@@ -42,17 +42,23 @@ A read-only file-system is highly recommended for your functions to prevent tamp
 
 ### How do I try it?
 
-This feature is released and available with the latest versions of OpenFaaS including the CLI (0.6.17), Kubernetes faas-netes & operator (0.8.4/0.6.0) and Swarm (0.4.0) support.
+This feature is released and available with the latest versions of OpenFaaS including the CLI (0.6.17), Kubernetes and Swarm.
 
 * Create a function
 
+We'll create a function named `access-control` which can be invoked over HTTP. It will tell us which user has access to our system. The user with access is `alexellis` and that will be hard-coded into the function's Docker image.
+
+Let's also add a back-door where by a querystring of `update=1` means the code will try to overwrite the value for our chosen user.
+
+The example code will be available [on GitHub here](https://github.com/alexellis/openfaas-access-control-example).
+
 ```bash
-faas-cli new --lang node overwrite-me --prefix=alexellis2
-mv overwrite-me.yml stack.yml
-echo "alexellis" > ./overwrite-me/valid_user.txt
+faas-cli new --lang node access-control --prefix=alexellis2
+mv access-control.yml stack.yml
+echo "alexellis" > ./access-control/valid_user.txt
 ```
 
-* Update the function code: `./overwrite-me/handler.js`:
+* Update the function code: `./access-control/handler.js`:
 
 ```js
 "use strict"
@@ -70,7 +76,6 @@ module.exports = (context, callback) => {
         });
     }
 }
-
 ```
 
 * Build/push/deploy
@@ -84,13 +89,13 @@ faas-cli build \
 You can now deploy the function and query the valid user, then try to update it.
 
 ```
-echo | faas-cli invoke overwrite-me
+echo | faas-cli invoke access-control
 {"action":"get","value":"alexellis\n"}
 
-echo stefanprodan | faas-cli invoke overwrite-me --query update=1
+echo stefanprodan | faas-cli invoke access-control --query update=1
 {"action":"update","value":"stefanprodan\n"}
 
-echo | faas-cli invoke overwrite-me
+echo | faas-cli invoke access-control
 {"action":"get","value":"stefanprodan\n"}
 ```
 
@@ -100,10 +105,10 @@ Edit your function's stack YAML file and add a property of `readonly_root_filesy
 
 ```yaml
 functions:
-  overwrite-me:
+  access-control:
     lang: node
-    handler: ./overwrite-me
-    image: alexellis2/overwrite-me:latest
+    handler: ./access-control
+    image: alexellis2/access-control:latest
     readonly_root_filesystem: true
 ```
 
@@ -112,10 +117,10 @@ Now deploy the function and try to update the value to "stefanprodan":
 ```
 faas-cli deploy
 
-echo get | faas-cli invoke overwrite-me 
+echo get | faas-cli invoke access-control 
 {"action":"get","value":"alexellis\n"}
 
-echo stefanprodan | faas-cli invoke overwrite-me --query update=1
+echo stefanprodan | faas-cli invoke access-control --query update=1
 
 { Error: EROFS: read-only file system, open '/home/app/function/valid_user.txt'
   errno: -30,

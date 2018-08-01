@@ -1,8 +1,8 @@
 ---
-title: Serverless Security: read-only functions with OpenFaaS
-description: Alex Ellis introduces a read-only functions for OpenFaaS, a security concept available from Docker to prevent tampering
-date: 2018-08-02
-image: /images/zero-scale/background-1.jpg
+title: Serverless Security&#58; read-only functions with OpenFaaS
+description: Alex Ellis introduces the read-only functions feature for OpenFaaS - a security concept available with containers and Kubernetes to prevent tampering
+date: 2018-08-01
+image: /images/read-only/railings.jpg
 categories:
   - security
   - kubernetes
@@ -15,6 +15,8 @@ In this post I'll highlight one of the ways we're making OpenFaaS a more secure 
 ## What is a read-only function?
 
 All functions deployed to OpenFaaS are first built into immutable Docker images. We do this so that you get exactly the same results wherever you want to run your code. Read-only functions are functions which run with an enhanced security profile so that users cannot make changes to the underlying file-system in the container. This protects the underlying filesystem, shared libraries and the code for the function.
+
+We also use a read-only file-system in the OpenFaaS API Gateway which provides a REST API and user-friendly UI for your functions.
 
 ## How does it work?
 
@@ -29,6 +31,12 @@ docker run --rm -ti --read-only alpine:3.7
 ERROR: Unable to lock database: Read-only file system
 ERROR: Failed to open apk database: Read-only file system
 ```
+
+A read-only file-system is highly recommended for your functions to prevent tampering.
+
+![](/images/read-only/conceptual.png)
+
+*Above: Conceptual diagram showing an altered container and a read-only container*
 
 ### How do I try it?
 
@@ -84,9 +92,9 @@ echo | faas-cli invoke overwrite-me
 {"action":"get","value":"stefanprodan\n"}
 ```
 
-Now let's apply a read-only root file-system and see what that looks like:
+Now let's apply a read-only root file-system and see what that looks like.
 
-In the function's stack file edit the following:
+Edit your function's stack YAML file and add a property of `readonly_root_filesystem` with a value of `true`:
 
 ```yaml
 functions:
@@ -122,16 +130,25 @@ Read on for what to do if you do need somewhere to write some temporary data suc
 
 This feature is opt-in, but we'd suggest using it as a matter of course and we're changing over all the [OpenFaaS Function Store images to run this way](https://github.com/openfaas/store/issues/35).
 
-If you want the best of both worlds, then we have enabled a temporary area for you in the `/tmp` mount. It is emphemeral and is not guaranteed to be available between requests or replicas. It is suitable for writing temporary data.
+If you want the best of both worlds, then we have enabled a temporary area for you in the `/tmp` mount. It is emphemeral and is not guaranteed to be available between requests. It is suitable for writing temporary data. 
 
 ## What next?
 
 It's now over to you to try out a read-only filesystem with your functions and step up your Serverless Security.
 
+### Try it out
+
 If you'd like to get started with OpenFaaS, then you can deploy with helm, kubectl or Docker Swarm:
 
 * [Docs: deployment](https://docs.openfaas.com/deployment/)
 
+### Star &amp; share
+
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Are you using OpenFaaS? Let us know so we can list you on the homepage and docs site <a href="https://t.co/UolMK2uMvA">https://t.co/UolMK2uMvA</a> <a href="https://t.co/EoBVLkZcBv">pic.twitter.com/EoBVLkZcBv</a></p>&mdash; OpenFaaS (@openfaas) <a href="https://twitter.com/openfaas/status/1024403113694900224?ref_src=twsrc%5Etfw">July 31, 2018</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
+
 If you're a user of OpenFaaS, then let us know about it so that we can list you on the project homepage:
 
 * [OpenFaaS Users](https://docs.openfaas.com/#users-of-openfaas)
+
+Add your *Star* to the GitHub repo over at [openfaas/faas](https://github.com/openfaas/faas/) because it helps us help you.
+

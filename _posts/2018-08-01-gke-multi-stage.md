@@ -12,7 +12,7 @@ author_staff_member: stefan
 This is a step-by-step guide on setting up OpenFaaS on GKE with the following characteristics: 
 two OpenFaaS instances, one for staging and one for production use, isolated with network policies. 
 A dedicated GKE node pool for OpenFaaS long-running services and a second one made out of preemptible VMs for OpenFaaS functions. 
-Autoscaling for functions and their underling infrastructure.
+Autoscaling for functions and their underlying infrastructure.
 Secure OpenFaaS ingress with Let's Encrypt TLS and authentication.
 
 ![openfaas-gke](/images/gke-multi-stage/overview.png)
@@ -44,7 +44,7 @@ The above command will create a node pool named `default-pool` made of n1-standa
 You will use the default pool to run the following OpenFaaS components:
 * Core services ([Gateway](https://github.com/openfaas/faas) and Kubernetes [Operator](https://github.com/openfaas-incubator/openfaas-operator))
 * Async services ([NATS streaming](https://github.com/nats-io/nats-streaming-server) and [queue worker](https://github.com/openfaas/queue-worker))  
-* Monitoring and autoscaling services ([Prometheus](https://github.com/prometheus/prometheus) and [Alertmanager](https://github.com/prometheus/alertmanager))
+* Monitoring and Autoscaling services ([Prometheus](https://github.com/prometheus/prometheus) and [Alertmanager](https://github.com/prometheus/alertmanager))
 
 Create a node pool of n1-highcpu-4 (vCPU: 4, RAM 3.60GB, DISK: 30GB) preemptible VMs with autoscaling enabled:
 
@@ -64,7 +64,7 @@ gcloud container node-pools create fn-pool \
 
 [Preemptible VMs](https://cloud.google.com/preemptible-vms/) are up to 80% cheaper than regular instances 
 but will be terminated and replaced after a maximum of 24 hours. 
-In order to avoid all nodes to be terminated at the same time, wait for 30 minutes and scale up the fn pool to two nodes: 
+In order to avoid all nodes to be terminated at the same time, wait for 30 minutes and scale up the function pool to two nodes: 
 
 ```bash
 gcloud container clusters resize openfaas \
@@ -119,7 +119,6 @@ Create a service account and a cluster role binding for Tiller:
 
 ```bash
 kubectl -n kube-system create sa tiller
-
 kubectl create clusterrolebinding tiller-cluster-rule \
     --clusterrole=cluster-admin \
     --serviceaccount=kube-system:tiller 
@@ -170,19 +169,7 @@ helm install --name cert-manager \
 
 Create a cluster issuer definition (replace `email@example.com` with a valid email address):
 
-```yaml
-apiVersion: certmanager.k8s.io/v1alpha1
-kind: ClusterIssuer
-metadata:
-  name: letsencrypt
-spec:
-  acme:
-    email: email@example.com
-    http01: {}
-    privateKeySecretRef:
-      name: letsencrypt-cert
-    server: https://acme-v02.api.letsencrypt.org/directory
-```
+{% gist fc8d7ef8f4af3d0d81a9f28ff8c6edcb letsencrypt-issuer.yaml %}
 
 Save the above resource as `letsencrypt-issuer.yaml` and then apply it:
 
@@ -194,35 +181,9 @@ kubectl apply -f ./letsencrypt-issuer.yaml
 
 ![network-policies](/images/gke-multi-stage/network-policy.png)
 
-Create the OpenFaaS dev and prod namespaces:
+Create the OpenFaaS staging and production namespaces:
 
-```yaml
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: openfaas-stg
-  labels:
-    role: openfaas-system
-    access: openfaas-system
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: openfaas-stg-fn
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: openfaas-prod
-  labels:
-    role: openfaas-system
-    access: openfaas-system
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: openfaas-prod-fn
-```
+{% gist fc8d7ef8f4af3d0d81a9f28ff8c6edcb openfaas-ns.yaml %}
 
 Save the above resource as `openfaas-ns.yaml` and then apply it:
 
@@ -238,67 +199,7 @@ kubectl label namespace heptio-contour access=openfaas-system
 
 Create network policies to isolate the OpenFaaS core services from the function namespaces:
 
-```yaml
-kind: NetworkPolicy
-apiVersion: networking.k8s.io/v1
-metadata:
-  name: openfaas-stg
-  namespace: openfaas-stg
-spec:
-  policyTypes:
-  - Ingress
-  podSelector: {}
-  ingress:
-  - from:
-    - namespaceSelector:
-        matchLabels:
-          access: openfaas-system
----
-apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
-metadata:
-  name: openfaas-stg-fn
-  namespace: openfaas-stg-fn
-spec:
-  policyTypes:
-  - Ingress
-  podSelector: {}
-  ingress:
-  - from:
-    - namespaceSelector:
-        matchLabels:
-          role: openfaas-system
----
-kind: NetworkPolicy
-apiVersion: networking.k8s.io/v1
-metadata:
-  name: openfaas-prod
-  namespace: openfaas-prod
-spec:
-  policyTypes:
-  - Ingress
-  podSelector: {}
-  ingress:
-  - from:
-    - namespaceSelector:
-        matchLabels:
-          access: openfaas-system
----
-apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
-metadata:
-  name: openfaas-prod-fn
-  namespace: openfaas-prod-fn
-spec:
-  policyTypes:
-  - Ingress
-  podSelector: {}
-  ingress:
-  - from:
-    - namespaceSelector:
-        matchLabels:
-          role: openfaas-system
-```
+{% gist fc8d7ef8f4af3d0d81a9f28ff8c6edcb network-policies.yaml %}
 
 Save the above resource as `network-policies.yaml` and then apply it:
 
@@ -323,37 +224,7 @@ kubectl -n openfaas-stg create secret generic basic-auth \
 
 Create the staging configuration (replace `example.com` with your own domain):
 
-```yaml
-functionNamespace: openfaas-stg-fn
-basic_auth: true
-operator:
-  create: true
-  createCRD: true
-ingress:
-  enabled: true
-  annotations:
-    kubernetes.io/ingress.class: "contour"
-    certmanager.k8s.io/cluster-issuer: "letsencrypt"
-    contour.heptio.com/request-timeout: "30s"
-    contour.heptio.com/num-retries: "3"
-    contour.heptio.com/retry-on: "gateway-error"
-  hosts:
-    - host: openfaas-stg.example.com
-      serviceName: gateway
-      servicePort: 8080
-      path: /
-  tls:
-    - secretName: openfaas-cert
-      hosts:
-      - openfaas-stg.example.com
-affinity:
-  nodeAffinity:
-    requiredDuringSchedulingIgnoredDuringExecution:
-      nodeSelectorTerms:
-      - matchExpressions:
-        - key: cloud.google.com/gke-preemptible
-          operator: DoesNotExist
-```
+{% gist fc8d7ef8f4af3d0d81a9f28ff8c6edcb openfaas-stg.yaml %}
 
 Note that the OpenFaaS components will be running on the default pool due to the affinity constraint `cloud.google.com/gke-nodepool=default-pool`.
 
@@ -389,48 +260,7 @@ kubectl -n openfaas-prod create secret generic basic-auth \
 
 Create the production configuration (replace `example.com` with your own domain):
 
-```yaml
-functionNamespace: openfaas-prod-fn
-basic_auth: true
-operator:
-  create: true
-  createCRD: false
-gateway:
-  replicas: 2
-ingress:
-  enabled: true
-  annotations:
-    kubernetes.io/ingress.class: "contour"
-    certmanager.k8s.io/cluster-issuer: "letsencrypt"
-    contour.heptio.com/request-timeout: "30s"
-    contour.heptio.com/num-retries: "3"
-    contour.heptio.com/retry-on: "gateway-error"
-  hosts:
-    - host: openfaas.example.com
-      serviceName: gateway
-      servicePort: 8080
-      path: /
-  tls:
-    - secretName: openfaas-cert
-      hosts:
-      - openfaas.example.com
-affinity:
-  nodeAffinity:
-    requiredDuringSchedulingIgnoredDuringExecution:
-      nodeSelectorTerms:
-      - matchExpressions:
-        - key: cloud.google.com/gke-preemptible
-          operator: DoesNotExist
-  podAntiAffinity:
-    preferredDuringSchedulingIgnoredDuringExecution:
-      - weight: 100
-        podAffinityTerm:
-          labelSelector:
-            matchLabels:
-              app: gateway
-              release: openfaas-prod
-          topologyKey: kubernetes.io/hostname
-```
+{% gist fc8d7ef8f4af3d0d81a9f28ff8c6edcb openfaas-prod.yaml %}
 
 For production the OpenFaaS gateway is scaled to two replicas and with the pod anti-affinity rule we make sure that each replica will run on a different node. 
 Note that `operator.createCRD` is set to false since the `functions.openfaas.com` custom resource definition is already present on the cluster.
@@ -449,27 +279,7 @@ helm upgrade openfaas-prod --install openfaas/openfaas \
 
 Using the OpenFaaS CRD you can define functions as Kubernetes custom resource:
 
-```yaml
-apiVersion: openfaas.com/v1alpha2
-kind: Function
-metadata:
-  name: certinfo
-spec:
-  name: certinfo
-  image: stefanprodan/certinfo:latest
-  labels:
-    com.openfaas.scale.min: "2"
-    com.openfaas.scale.max: "12"
-    com.openfaas.scale.factor: "4"
-  limits:
-    cpu: "1000m"
-    memory: "128Mi"
-  requests:
-    cpu: "10m"
-    memory: "64Mi"
-  constraints:
-    - "cloud.google.com/gke-preemptible=true"
-```
+{% gist fc8d7ef8f4af3d0d81a9f28ff8c6edcb certinfo.yaml %}
 
 Note that this function will be running on the fn pool due to the affinity constraint `cloud.google.com/gke-preemptible=true`.
 

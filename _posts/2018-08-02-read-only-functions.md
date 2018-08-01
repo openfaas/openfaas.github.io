@@ -14,7 +14,7 @@ In this post I'll highlight one of the ways we're making OpenFaaS a more secure 
 
 ## What is a read-only function?
 
-Any function in OpenFaaS ia always built into an immutable Docker image, so that you get exactly the same results wherever you want to run your code. A read-only function runs in a Docker image with enhanced security so that users cannot make changes to the underlying file-system in the container or the code of the function either.
+All functions deployed to OpenFaaS are first built into immutable Docker images. We do this so that you get exactly the same results wherever you want to run your code. Read-only functions are functions which run with an enhanced security profile so that users cannot make changes to the underlying file-system in the container. This protects the underlying filesystem, shared libraries and the code for the function.
 
 ## How does it work?
 
@@ -97,14 +97,26 @@ functions:
     readonly_root_filesystem: true
 ```
 
+Now deploy the function and try to update the value to "stefanprodan":
+
 ```
 faas-cli deploy
 
-echo stefanprodan | faas-cli invoke overwrite-me 
+echo get | faas-cli invoke overwrite-me 
 {"action":"get","value":"alexellis\n"}
+
+echo stefanprodan | faas-cli invoke overwrite-me --query update=1
+
+{ Error: EROFS: read-only file system, open '/home/app/function/valid_user.txt'
+  errno: -30,
+  code: 'EROFS',
+  syscall: 'open',
+  path: '/home/app/function/valid_user.txt' }
 ```
 
-You can now see that the value is never updated. Read on for what to do if you do need somewhere to write some temporary data such as a process identifier number or other kind of intermediate data.
+You can now see that the value is never updated and an error is generated.
+
+Read on for what to do if you do need somewhere to write some temporary data such as a process identifier number or other kind of intermediate data.
 
 ### What if I want to write to the filesystem?
 

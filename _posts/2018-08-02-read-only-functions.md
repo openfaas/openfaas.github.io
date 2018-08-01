@@ -126,9 +126,12 @@ If you want the best of both worlds, then we have enabled a temporary area for y
 
 ## What next?
 
-Over to you to try it out and give us your feedback on the new feature.
+It's now over to you to try out a read-only filesystem with your functions and step up your Serverless Security.
 
-Deploy OpenFaaS with helm, kubectl or Docker Swarm:
+If you'd like to get started with OpenFaaS, then you can deploy with helm, kubectl or Docker Swarm:
 
 * [Docs: deployment](https://docs.openfaas.com/deployment/)
 
+If you're a user of OpenFaaS, then let us know about it so that we can list you on the project homepage:
+
+* [OpenFaaS Users](https://docs.openfaas.com/#users-of-openfaas)

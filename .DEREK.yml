@@ -9,6 +9,7 @@ maintainers:
  - rorpage
  - kenfdev
  - BurtonR
+ - stefanprodan
 
 features:
  - dco_check

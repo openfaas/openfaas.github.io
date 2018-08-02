@@ -25,7 +25,8 @@ hosted on GKE and development taking place on a local environment such as Miniku
 Create a cluster with two nodes and network policy enabled:
 
 ```bash
-k8s_version=$(gcloud container get-server-config --format=json | jq -r '.validNodeVersions[0]')
+k8s_version=$(gcloud container get-server-config --format=json \
+| jq -r '.validNodeVersions[0]')
 
 gcloud container clusters create openfaas \
     --cluster-version=${k8s_version} \
@@ -93,7 +94,7 @@ The above setup along with a GCP load balancer forwarding rule and a 30GB ingres
 
 The cost estimation was generated with the [Google Cloud pricing calculator](https://cloud.google.com/products/calculator/) on 31 July 2018 and could change any time. 
 
-## GKE addons setup 
+## GKE TLS Ingress setup 
 
 Set up credentials for `kubectl`:
 
@@ -182,10 +183,10 @@ kubectl apply -f ./letsencrypt-issuer.yaml
 ![network-policies](/images/gke-multi-stage/network-policy.png)
 
 An OpenFaaS instance is composed out of two namespaces: one for the core services and one for functions. 
-Kubernetes namespaces alone offer only a logical separation between workloads, 
-to enforce network segregation you'll be using the access role labels to define network policies.
+Kubernetes namespaces alone offer only a logical separation between workloads. 
+To enforce network segregation we need to apply access role labels to the namespaces and to create network policies.
 
-Create the OpenFaaS staging and production namespaces with access role labels:
+Now create the OpenFaaS *staging* and *production* namespaces with the *access role* labels:
 
 {% gist fc8d7ef8f4af3d0d81a9f28ff8c6edcb openfaas-ns.yaml %}
 
@@ -230,7 +231,8 @@ Create the staging configuration (replace `example.com` with your own domain):
 
 {% gist fc8d7ef8f4af3d0d81a9f28ff8c6edcb openfaas-stg.yaml %}
 
-Note that the OpenFaaS components will be running on the default pool due to the affinity constraint `cloud.google.com/gke-nodepool=default-pool`.
+Note the to the affinity constraint `cloud.google.com/gke-nodepool=default-pool` 
+means that the OpenFaaS components will be running on the default pool.
 
 Save the above file as `openfaas-stg.yaml` and install OpenFaaS staging instance from the project helm repository:
 
@@ -252,7 +254,7 @@ Certificate issued successfully
 
 ## OpenFaaS production setup
 
-Generate a random password and create the basic-auth secret in the openfaas-prod namespace:
+Generate a random password and create the `basic-auth` secret in the openfaas-prod namespace:
 
 ```bash
 password=$(head -c 12 /dev/urandom | shasum | cut -d' ' -f1)
@@ -266,8 +268,8 @@ Create the production configuration (replace `example.com` with your own domain)
 
 {% gist fc8d7ef8f4af3d0d81a9f28ff8c6edcb openfaas-prod.yaml %}
 
-For production the OpenFaaS gateway is scaled to two replicas and with the pod anti-affinity rule we make sure that each replica will run on a different node. 
-Note that `operator.createCRD` is set to false since the `functions.openfaas.com` custom resource definition is already present on the cluster.
+For the production deployment the OpenFaaS gateway has high-availability through two replicas. 
+We make sure those replicas are scheduled on different nodes through the use of a pod anti-affinity rule.Note that `operator.createCRD` is set to false since the `functions.openfaas.com` custom resource definition is already present on the cluster.
 
 Save the above file as `openfaas-prod.yaml` and install OpenFaaS instance from the project helm repository:
 
@@ -335,7 +337,7 @@ _4._ Build the function as a Docker image
 faas-cli build -f myfn.yaml
 ```
 
-_5._ Run the function on your local cluster
+_5._ Test the function on your local cluster (such as minikube or Docker for Mac)
 
 ```
 faas-cli deploy -f myfn.yaml -g localhost:8080
@@ -356,7 +358,7 @@ faas-cli push --tag -f myfn.yml
 _8._ Generate the function Kubernetes custom resource
 
 ```
-faas-cli generate --tag --yaml myfn.yaml > myfn-k8s.yaml
+faas-cli generate -n="" --tag --yaml myfn.yaml > myfn-k8s.yaml
 ```
 
 _9._ Add the preemptible constraint to `myfn-k8s.yaml`

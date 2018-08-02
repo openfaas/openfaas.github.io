@@ -181,7 +181,11 @@ kubectl apply -f ./letsencrypt-issuer.yaml
 
 ![network-policies](/images/gke-multi-stage/network-policy.png)
 
-Create the OpenFaaS staging and production namespaces:
+An OpenFaaS instance is composed out of two namespaces: one for the core services and one for functions. 
+Kubernetes namespaces alone offer only a logical separation between workloads, 
+to enforce network segregation you'll be using the access role labels to define network policies.
+
+Create the OpenFaaS staging and production namespaces with access role labels:
 
 {% gist fc8d7ef8f4af3d0d81a9f28ff8c6edcb openfaas-ns.yaml %}
 
@@ -294,15 +298,15 @@ Verify both endpoints are live:
 
 ```
 curl -d "openfaas-stg.example.com" https://openfaas-stg.example.com/function/certinfo
-
 Issuer Let's Encrypt Authority X3
 ....
 
 curl -d "openfaas.example.com" https://openfaas.example.com/function/certinfo
-
 Issuer Let's Encrypt Authority X3
 ....
 ```
+
+## Development workflow
 
 To manage functions on Kubernetes you can use kubectl but for development you'll need the OpenFaaS CLI. 
 You can install faas-cli and connect to the staging instance with:
@@ -315,17 +319,65 @@ echo $stg_password | faas-cli login -u admin --password-stdin -g https://openfaa
 
 Using faas-cli and kubectl a development workflow would look like this:
 
-* Create a function from a code template `faas-cli new myfn --lang go --prefix gcr.io/project-id` 
-* Add the scale labels, limits, requests to `myfn.yaml` 
-* Implement the function handler
-* Build the function as a Docker image `faas-cli build -f myfn.yaml`
-* Run the function on your local cluster `faas-cli deploy -f myfn.yaml -g localhost:8080`
-* Push the image to GCP Container Registry `faas-cli push -f myfn.yml`
-* Generate the function Kubernetes custom resource `faas-cli generate --yaml myfn.yaml > myfn-k8s.yaml`
-* Add the preemptible constraint to `myfn-k8s.yaml`
-* Deploy it on the staging environment `kubectl -n openfaas-stg-fn apply -f myfn-k8s.yaml`
-* Run integration tests on staging `cat test.json | faas-cli invoke myfn -g https://openfaas-stg.exmaple.com`
-* Promote the function to production `kubectl -n openfaas-prod-fn apply -f myfn-k8s.yaml`
+_1._ Create a function from a code template 
+
+```
+faas-cli new myfn --lang go --prefix gcr.io/gcp-project-id
+```
+
+_2._ Add the scale labels, limits, requests to `myfn.yaml` 
+
+_3._ Implement the function handler
+
+_4._ Build the function as a Docker image 
+
+```
+faas-cli build -f myfn.yaml
+```
+
+_5._ Run the function on your local cluster
+
+```
+faas-cli deploy -f myfn.yaml -g localhost:8080
+```
+
+_6._ Commit your changes to Git and rebuild the image by tagging it with the commit short SHA
+
+```
+faas-cli build --tag -f myfn.yaml
+```
+
+_7._ Push the image to GCP Container Registry
+
+```
+faas-cli push --tag -f myfn.yml
+```
+
+_8._ Generate the function Kubernetes custom resource
+
+```
+faas-cli generate --tag --yaml myfn.yaml > myfn-k8s.yaml
+```
+
+_9._ Add the preemptible constraint to `myfn-k8s.yaml`
+
+_10._ Deploy it on the staging environment
+
+```
+kubectl -n openfaas-stg-fn apply -f myfn-k8s.yaml
+```
+
+_11._ Run integration tests on staging
+
+```
+cat test.json | faas-cli invoke myfn -g https://openfaas-stg.exmaple.com
+```
+
+_12._ Promote the function to production
+
+```
+kubectl -n openfaas-prod-fn apply -f myfn-k8s.yaml
+```
 
 In a later post I'll show you how you can automate the CI and staging deployment with OpenFaaS Cloud 
 and production promotions with Weave Flux Helm Operator.

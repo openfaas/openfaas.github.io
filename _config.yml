@@ -9,6 +9,13 @@ baseurl:
 google_analytics_key:
 google_maps_javascript_api_key:
 disqus_shortname:
+markdown: kramdown
+
+kramdown:
+  # use Github Flavored Markdown
+  input: GFM
+  # do not replace newlines by <br>s
+  hard_wrap: false
 
 # Values for the jekyll-seo-tag gem (https://github.com/jekyll/jekyll-seo-tag)
 logo: /siteicon.png

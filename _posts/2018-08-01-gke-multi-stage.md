@@ -9,11 +9,18 @@ categories:
 author_staff_member: stefan
 ---
 
-This is a step-by-step guide on setting up OpenFaaS on GKE with the following characteristics: 
-two OpenFaaS instances, one for staging and one for production use, isolated with network policies. 
-A dedicated GKE node pool for OpenFaaS long-running services and a second one made out of preemptible VMs for OpenFaaS functions. 
-Autoscaling for functions and their underlying infrastructure.
-Secure OpenFaaS ingress with Let's Encrypt TLS and authentication.
+This is a guide on setting up a cost effective, auto-scalable, multi-stage OpenFaaS on Google Cloud Kubernetes Engine.
+
+Experience level:
+
+intermediate OpenFaaS / intermediate GKE
+
+At the end of this guide you will be running two OpenFaaS environments on the same GKE cluster with the following characteristics: 
+* a dedicated GKE node pool for OpenFaaS core services 
+* a dedicated node pool made out of preemptible VMs for OpenFaaS functions 
+* autoscaling for functions and their underlying infrastructure
+* isolated staging and production environments with network policies
+* secure OpenFaaS ingress with Let's Encrypt TLS and authentication
 
 ![openfaas-gke](/images/gke-multi-stage/overview.png)
 
@@ -42,8 +49,8 @@ gcloud container clusters create openfaas \
 
 The above command will create a node pool named `default-pool` made of n1-standard-1 (vCPU: 1, RAM 3.75GB, DISK: 30GB) VMs. 
 
-You will use the default pool to run the following OpenFaaS components:
-* Core services ([Gateway](https://github.com/openfaas/faas) and Kubernetes [Operator](https://github.com/openfaas-incubator/openfaas-operator))
+You will use the default pool to run the following OpenFaaS services:
+* API [Gateway](https://github.com/openfaas/faas) and Kubernetes [Operator](https://github.com/openfaas-incubator/openfaas-operator)
 * Async services ([NATS streaming](https://github.com/nats-io/nats-streaming-server) and [queue worker](https://github.com/openfaas/queue-worker))  
 * Monitoring and Autoscaling services ([Prometheus](https://github.com/prometheus/prometheus) and [Alertmanager](https://github.com/prometheus/alertmanager))
 
@@ -64,11 +71,13 @@ gcloud container node-pools create fn-pool \
 ```
 
 [Preemptible VMs](https://cloud.google.com/preemptible-vms/) are up to 80% cheaper than regular instances 
-but will be terminated and replaced after a maximum of 24 hours. 
-In order to avoid all nodes to be terminated at the same time, wait for 30 minutes and scale up the function pool to two nodes: 
+and are terminated and replaced after a maximum of 24 hours. 
+
+In order to avoid all nodes getting replaced at the same time, wait for 30 minutes and scale up the function pool to two nodes.
+Open a new terminal and run the scale up command: 
 
 ```bash
-gcloud container clusters resize openfaas \
+sleep 30m && gcloud container clusters resize openfaas \
     --size=2 \
     --node-pool=fn-pool \
     --zone=europe-west3-a 
@@ -92,9 +101,15 @@ The above setup along with a GCP load balancer forwarding rule and a 30GB ingres
 | Load Balancer ingress | Ingress | 30 GB | $0.30 |
 | Total |  |  | $150.84 |
 
-The cost estimation was generated with the [Google Cloud pricing calculator](https://cloud.google.com/products/calculator/) on 31 July 2018 and could change any time. 
+The cost estimation for a total of 10 vCPU and 22GB RAM was generated with the [Google Cloud pricing calculator](https://cloud.google.com/products/calculator/) on 31 July 2018 and could change any time. 
 
 ## GKE TLS Ingress setup 
+
+When exposing OpenFaaS on the internet you should enable HTTPS to encrypt all traffic. 
+To do that you'll need the following tools:
+
+* [Heptio Contour](https://github.com/heptio/contour) as Kubernetes Ingress controller (or another ingress controller such as Nginx)
+* [JetStack cert-manager](https://github.com/jetstack/cert-manager) as Let's Encrypt provider 
 
 Set up credentials for `kubectl`:
 
@@ -130,12 +145,6 @@ Deploy Tiller in the kube-system namespace:
 ```bash
 helm init --skip-refresh --upgrade --service-account tiller
 ```
-
-When exposing OpenFaaS on the internet you should enable HTTPS to encrypt all traffic. 
-To do that you'll need the following tools:
-
-* [Heptio Contour](https://github.com/heptio/contour) as Kubernetes Ingress controller (or another ingress controller such as Nginx)
-* [JetStack cert-manager](https://github.com/jetstack/cert-manager) as Let's Encrypt provider 
 
 Heptio Contour is an ingress controller based on [Envoy](https://www.envoyproxy.io) reverse proxy that supports dynamic configuration updates. 
 Install Contour with:
@@ -186,7 +195,7 @@ An OpenFaaS instance is composed out of two namespaces: one for the core service
 Kubernetes namespaces alone offer only a logical separation between workloads. 
 To enforce network segregation we need to apply access role labels to the namespaces and to create network policies.
 
-Now create the OpenFaaS *staging* and *production* namespaces with the *access role* labels:
+Create the OpenFaaS *staging* and *production* namespaces with the *access role* labels:
 
 {% gist fc8d7ef8f4af3d0d81a9f28ff8c6edcb openfaas-ns.yaml %}
 
@@ -202,14 +211,11 @@ Allow ingress traffic from the `heptio-contour` namespace to both OpenFaaS envir
 kubectl label namespace heptio-contour access=openfaas-system
 ``` 
 
-Create network policies to isolate the OpenFaaS core services from the function namespaces:
-
-{% gist fc8d7ef8f4af3d0d81a9f28ff8c6edcb network-policies.yaml %}
-
-Save the above resource as `network-policies.yaml` and then apply it:
+Create [network policies](https://gist.github.com/stefanprodan/fc8d7ef8f4af3d0d81a9f28ff8c6edcb#file-network-policies-yaml)
+to isolate the OpenFaaS core services from the function namespaces:
 
 ```bash
-kubectl apply -f ./network-policies.yaml
+kubectl apply -f https://gist.githubusercontent.com/stefanprodan/fc8d7ef8f4af3d0d81a9f28ff8c6edcb/raw/9ad1f60a5b6b5d474ac1551b39779824c32f3251/network-policies.yaml
 ```
 
 Note that the above configuration will prohibit functions from calling each other or from reaching the
@@ -231,10 +237,10 @@ Create the staging configuration (replace `example.com` with your own domain):
 
 {% gist fc8d7ef8f4af3d0d81a9f28ff8c6edcb openfaas-stg.yaml %}
 
-Note the to the affinity constraint `cloud.google.com/gke-nodepool=default-pool` 
-means that the OpenFaaS components will be running on the default pool.
+The OpenFaaS core services will be running on the default pool
+because you've set the affinity constraint to `cloud.google.com/gke-nodepool=default-pool`.
 
-Save the above file as `openfaas-stg.yaml` and install OpenFaaS staging instance from the project helm repository:
+Save the above file as `openfaas-stg.yaml` and install the OpenFaaS staging instance from the project helm repository:
 
 ```bash
 helm repo add openfaas https://openfaas.github.io/faas-netes/
@@ -269,9 +275,10 @@ Create the production configuration (replace `example.com` with your own domain)
 {% gist fc8d7ef8f4af3d0d81a9f28ff8c6edcb openfaas-prod.yaml %}
 
 For the production deployment the OpenFaaS gateway has high-availability through two replicas. 
-We make sure those replicas are scheduled on different nodes through the use of a pod anti-affinity rule.Note that `operator.createCRD` is set to false since the `functions.openfaas.com` custom resource definition is already present on the cluster.
+We make sure those replicas are scheduled on different nodes through the use of a pod anti-affinity rule.
+Note that `operator.createCRD` is set to false since the `functions.openfaas.com` custom resource definition is already present on the cluster.
 
-Save the above file as `openfaas-prod.yaml` and install OpenFaaS instance from the project helm repository:
+Save the above file as `openfaas-prod.yaml` and install the OpenFaaS production instance with helm:
 
 ```bash
 helm upgrade openfaas-prod --install openfaas/openfaas \
@@ -279,24 +286,28 @@ helm upgrade openfaas-prod --install openfaas/openfaas \
     -f openfaas-prod.yaml
 ```
 
-## OpenFaaS functions operations
+## Manage your functions with kubectl
 
 ![openfaas-operator](/images/gke-multi-stage/operator.png)
 
-Using the OpenFaaS CRD you can define functions as Kubernetes custom resource:
+Using the OpenFaaS CRD you can define functions as Kubernetes custom resources.
+
+Create `certinfo.yaml` with the following content:
 
 {% gist fc8d7ef8f4af3d0d81a9f28ff8c6edcb certinfo.yaml %}
 
-Note that this function will be running on the fn pool due to the affinity constraint `cloud.google.com/gke-preemptible=true`.
+In oder to make use of the preemptible node pool you need to 
+set the affinity constraint to `cloud.google.com/gke-preemptible=true` so that certinfo will be deployed on the `fn-pool`.
 
-Save the above resource as `certinfo.yaml` and use `kubectl` to deploy the function on both instances:
+Use `kubectl` to deploy the function to both environments by changing the namespace parameter:
 
 ```bash
 kubectl -n openfaas-stg-fn apply -f certinfo.yaml
 kubectl -n openfaas-prod-fn apply -f certinfo.yaml
 ```
 
-Verify both endpoints are live:
+The certinfo function will tell you the SSL information for your domain. 
+User certinfo to verify both endpoints are live:
 
 ```
 curl -d "openfaas-stg.example.com" https://openfaas-stg.example.com/function/certinfo
@@ -308,42 +319,61 @@ Issuer Let's Encrypt Authority X3
 ....
 ```
 
-## Development workflow
+You can get the list of functions running in a namespace:
 
-To manage functions on Kubernetes you can use kubectl but for development you'll need the OpenFaaS CLI. 
-You can install faas-cli and connect to the staging instance with:
+```
+kubectl -n openfaas-stg-fn get functions
+```
+
+And you can delete a function from an namespace with:
+
+```
+kubectl -n openfaas-stg-fn delete function certinfo
+```
+
+## Developer workflow
+
+When it comes to the development workflow you will be using OpenfaaS CLI.
+
+Install faas-cli and login to the staging instance with:
 
 ```bash
 curl -sL https://cli.openfaas.com | sudo sh
 
-echo $stg_password | faas-cli login -u admin --password-stdin -g https://openfaas-stg.example.com
+echo $stg_password | faas-cli login -u admin --password-stdin \
+ -g https://openfaas-stg.example.com
 ```
 
-Using faas-cli and kubectl a development workflow would look like this:
+Using faas-cli, Git and kubectl a development workflow would look like this:
 
-_1._ Create a function from a code template 
+_1._ Create a function using the golang template 
 
 ```
 faas-cli new myfn --lang go --prefix gcr.io/gcp-project-id
 ```
 
-_2._ Add the scale labels, limits, requests to `myfn.yaml` 
+_2._ Implement your function logic by editing the `myfn/handler.go` file
 
-_3._ Implement the function handler
-
-_4._ Build the function as a Docker image 
+_3._ Build the function as a Docker image 
 
 ```
 faas-cli build -f myfn.yaml
 ```
 
-_5._ Test the function on your local cluster (such as minikube or Docker for Mac)
+_4._ Test the function on your local cluster (click [here](https://github.com/openfaas/faas-netes/blob/master/chart/openfaas/README.md) if you haven’t set up your local environment yet)
 
 ```
-faas-cli deploy -f myfn.yaml -g localhost:8080
+faas-cli deploy -f myfn.yaml -g 127.0.0.1:31112
 ```
 
-_6._ Commit your changes to Git and rebuild the image by tagging it with the commit short SHA
+_5._ Initialize a Git repository for your function and commit your changes
+
+```
+git init
+gti add . && git commit -s -m "Initial function version"
+```
+
+_6._ Rebuild the image by tagging it with the Git commit short SHA
 
 ```
 faas-cli build --tag -f myfn.yaml
@@ -363,13 +393,18 @@ faas-cli generate -n="" --tag --yaml myfn.yaml > myfn-k8s.yaml
 
 _9._ Add the preemptible constraint to `myfn-k8s.yaml`
 
+```yaml
+  constraints:
+    - "cloud.google.com/gke-preemptible=true"
+```
+
 _10._ Deploy it on the staging environment
 
 ```
 kubectl -n openfaas-stg-fn apply -f myfn-k8s.yaml
 ```
 
-_11._ Run integration tests on staging
+_11._ Test the function on staging, if everything looks good go to next step, if not go back to step 2
 
 ```
 cat test.json | faas-cli invoke myfn -g https://openfaas-stg.exmaple.com
@@ -381,9 +416,9 @@ _12._ Promote the function to production
 kubectl -n openfaas-prod-fn apply -f myfn-k8s.yaml
 ```
 
-In a later post I'll show you how you can automate the CI and staging deployment with OpenFaaS Cloud 
-and production promotions with Weave Flux Helm Operator.
+In a future post I will show how you can monitor your functions with Prometheus and Grafana and 
+how to take that forward with a managed solution like [Weave Cloud](https://www.weave.works).
 
-If you have questions about OpenFaaS please join the `#kubernetes` channel on 
-[OpenFaaS Slack](https://docs.openfaas.com/community/).  
+If you have questions or comments about this tutorial please join the `#kubernetes` channel on 
+[OpenFaaS Slack](https://docs.openfaas.com/community/). I'll be happy to answer your questions on Slack.
 

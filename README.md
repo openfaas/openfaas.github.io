@@ -175,7 +175,7 @@ The site uses the [SASS](https://sass-lang.com/) Stylesheet language, any altera
 
 ### Altering the Header and Footer
 
-The sites navbar and footer are configured via YAML in the following files:
+The site's navbar and footer are configured via YAML in the following files:
 
  - `_data/footer.yml`
  - `_data/navigation.yml`

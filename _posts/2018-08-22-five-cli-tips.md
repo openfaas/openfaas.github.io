@@ -160,5 +160,4 @@ I hope you've enjoyed my list of top 5 productivity boosts for the CLI. If you w
 
 Do you have your own tips? It'd be great to hear them over on [Twitter @openfaas](https://twitter.com/openfaas) or in the [Slack community](https://docs.openfaas.com/community).
 
-Curious about who is using OpenFaaS in production? Check out the list of companies that have let us know so far over at https://docs.openfaas.com/
-
+Curious about who is using OpenFaaS in production? Check out the list of companies that have let us know so far over at [https://docs.openfaas.com/](https://docs.openfaas.com/).

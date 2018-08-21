@@ -11,7 +11,7 @@ categories:
 author_staff_member: alex
 ---
 
-In this post I'll will share 5 top tips for boosting productivity with the [OpenFaaS CLI](https://github.com/openfaas/faas-cli). The CLI used by developers to interact with OpenFaaS from the terminal is the most popular part of the project for new contributors to cut their teeth on. Since 2017 the contributors been incrementally fine-tuning the developer-experience through user-feedback, new features and productivity-boosters.
+In this post I'll share 5 top tips for boosting productivity with the [OpenFaaS CLI](https://github.com/openfaas/faas-cli). The CLI is used by developers to interact with OpenFaaS from the terminal is the most popular part of the project for new contributors to cut their teeth on. Since 2017 the contributors been incrementally fine-tuning the developer-experience through user-feedback, new features and productivity-boosters.
 
 Part of this work has also involved expanding the set of language templates that are pre-packaged with OpenFaaS to include languages such as [Java](https://blog.alexellis.io/java-comes-to-openfaas/). A recent [developer-survey by DigitalOcean](https://www.digitalocean.com/currents/june-2018/) showed a high-level of overlap between the languages being used in containers in the responses and the list provided by the project.
 

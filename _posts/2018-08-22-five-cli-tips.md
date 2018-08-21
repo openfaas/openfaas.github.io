@@ -1,8 +1,8 @@
 ---
 title: 5 tips and tricks for the OpenFaaS CLI
-description: Alex shares 5 top tips for boosting productivity with the OpenFaaS CLI. This post will feature some classic features and brand-new additions too.
+description: Alex shares his top 5 tips and tricks for boosting productivity with the OpenFaaS CLI. This post will feature some classic features and brand-new additions too.
 
-date: 2018-08-20
+date: 2018-08-21
 image: /images/five-cli-tips/background.jpg
 categories:
   - cli

@@ -11,13 +11,14 @@ categories:
 author_staff_member: alex
 ---
 
-In this post I'll will share 5 top tips for boosting productivity with the [OpenFaaS CLI](https://github.com/openfaas/faas-cli). The Command-Line Interface or the CLI is the most popular part of the project for new contributors to cut their teeth. Since 2017 we've been incrementally fine-tuning the developer-experience through user-feedback, new features and productivity-boosters.
+In this post I'll will share 5 top tips for boosting productivity with the [OpenFaaS CLI](https://github.com/openfaas/faas-cli). The CLI used by developers to interact with OpenFaaS from the terminal is the most popular part of the project for new contributors to cut their teeth on. Since 2017 the contributors been incrementally fine-tuning the developer-experience through user-feedback, new features and productivity-boosters.
 
-Part of this work has also involved expanding the set of language templates pre-packed with OpenFaaS such as [Java](https://blog.alexellis.io/java-comes-to-openfaas/). A recent [developer-survey by DigitalOcean](https://www.digitalocean.com/currents/june-2018/) showed a high-level of overlap between the languages being used in containers and the list provided by the project.
+Part of this work has also involved expanding the set of language templates that are pre-packaged with OpenFaaS to include languages such as [Java](https://blog.alexellis.io/java-comes-to-openfaas/). A recent [developer-survey by DigitalOcean](https://www.digitalocean.com/currents/june-2018/) showed a high-level of overlap between the languages being used in containers in the responses and the list provided by the project.
 
 <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">From <a href="https://twitter.com/digitalocean?ref_src=twsrc%5Etfw">@digitalocean</a> report &quot;For those using containers, what languages are you most frequently using?&quot; vs. &quot;faas-cli new --list&quot; in OpenFaaS - what else would you like to see as a template? <a href="https://t.co/1S49KYMj42">pic.twitter.com/1S49KYMj42</a></p>&mdash; Alex Ellis (@alexellisuk) <a href="https://twitter.com/alexellisuk/status/1014412959798431744?ref_src=twsrc%5Etfw">July 4, 2018</a></blockquote>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
+> Note: any binary or container can be made into a function with OpenFaaS meaning you can run any code, anywhere you like at any scale.
 
 Before we get started, make sure you have the OpenFaaS CLI installed [via the docs](https://docs.openfaas.com/cli/install/).
 
@@ -161,3 +162,4 @@ I hope you've enjoyed my list of top 5 productivity boosts for the CLI. If you w
 Do you have your own tips? It'd be great to hear them over on [Twitter @openfaas](https://twitter.com/openfaas) or in the [Slack community](https://docs.openfaas.com/community).
 
 Curious about who is using OpenFaaS in production? Check out the list of companies that have let us know so far over at [https://docs.openfaas.com/](https://docs.openfaas.com/).
+

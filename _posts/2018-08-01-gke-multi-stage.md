@@ -8,6 +8,7 @@ categories:
   - kubernetes
   - gke
 author_staff_member: stefan
+darkbackground: true
 ---
 
 This is a guide on how to set up OpenFaaS on Google Kubernetes Engine (GKE) with a cost-effective, auto-scaling, multi-stage deployment.

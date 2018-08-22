@@ -34,6 +34,14 @@
 		h1, h2, p, .button {
 			text-shadow: 1px 1px 1px rgba(0,0,0,.8);
 		}
+
+		.dark-background-title {
+			background-color: rgba(0,0,0,0.5);
+		}
+
+		.dark-background-description {
+			background-color: rgba(0,0,0,0.8);
+		}
 	}
 
 	.hero-text-right {

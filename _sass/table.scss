@@ -1,9 +1,11 @@
+@import "variables";
+
 //-------------------- General definitions --------------------//
-$font-stack: 'Rubik','Roboto' , sans-serif; //A list of fonts
+$font-stack: 'Rubik', sans-serif; //A list of fonts
 $table-w: 100%; // width definition , relative to parent
 
 //-------------------- Colors -------------------- //
-$header-bg-color: #4563dd; //header color
+$header-bg-color: $brand-color; //header color , pulls in brand color from 'variables.scss'.
 $header-text-color: #FFF; //header text color
 $table-text-color: #000; //table text color
 $border-style: 1px solid #CCC; //simple grey border
@@ -14,7 +16,7 @@ $text-align: left; // alignment , when you need it
 $skinny-font: 100; // fat free font size
 $small-screen: 800px; //used for media queries
 
-.table {
+.post-content table {
   font-family: $font-stack;
   color: $table-text-color;
   border-collapse: collapse;

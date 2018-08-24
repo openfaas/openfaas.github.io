@@ -1,7 +1,7 @@
 ---
 title: Deploying OpenFaaS on DigitalOcean with Ansible
 description: Richard Gee introduces Ansible based automation to deploy Kubernetes or Swarm based OpenFaaS onto DigitalOcean in around 5 minutes
-date: 2018-08-24
+date: 2018-08-27
 image: /images/deploy-digitalocean-ansible/gears_small.jpg
 categories:
   - automation

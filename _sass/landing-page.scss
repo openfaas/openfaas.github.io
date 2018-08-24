@@ -1,12 +1,17 @@
 .hero {
 	color: #f9f9f9;
 	text-align: center;
-	height: 45vh;
-	min-height: 550px;
 	background: $brand-color;
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center center;
+	min-height: 100%;
+	height: 100vh;
+
+	@media #{$mid-point} {
+		height: 45vh;
+		min-height: 550px;
+	}
 
 	&:before {
 		content: "";

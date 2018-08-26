@@ -1,7 +1,7 @@
 ---
-title: Deploying OpenFaaS on DigitalOcean with Ansible
+title: Deploy OpenFaaS on DigitalOcean with Ansible
 description: Richard Gee introduces Ansible based automation to deploy Kubernetes or Swarm based OpenFaaS onto DigitalOcean in around 5 minutes
-date: 2018-08-27
+date: 2018-08-26
 image: /images/deploy-digitalocean-ansible/gears_small.jpg
 categories:
   - automation
@@ -15,7 +15,7 @@ This article will demonstrate how to have an [OpenFaaS](https://www.openfaas.com
 
 ![DigitalOcean Logo](/images/deploy-digitalocean-ansible/DO_Logo_Horizontal_Black.png)
 
-DigitalOcean is a simple and robust cloud computing platform, designed for developers that offers an Infrastructure as a Service (IaaS) platform where droplets - virtual servers to non-DOers - can be deployed in a multitude of flavours, sizes and locations. The company is very popular with open source developers and each October joins with GitHub to promote [Hacktoberfest](https://hacktoberfest.digitalocean.com/?2017), the month long celebration of open source software and community.
+DigitalOcean describes itself as _"a simple and robust cloud computing platform, designed for developers". It offers an Infrastructure as a Service (IaaS) platform where droplets - virtual servers to non-DOers - can be deployed in a multitude of flavours, sizes and locations. The company is very popular with open source developers and each October joins with GitHub to promote [Hacktoberfest](https://hacktoberfest.digitalocean.com/?2017), the month long celebration of open source software and community.
 
 ![Ansible logo](/images/deploy-digitalocean-ansible/ansible.png)
 
@@ -23,7 +23,7 @@ Ansible is an open source based product by Red Hat that is described as _"a radi
 
 The playbook used here contains two plays:
 
-* the first play is executed on the control machine.  This uses the `dopy` module to drive the DigitalOcean API into creating a droplet as defined by a set of variables. Once the droplet starts to respond on port 22 the second play can commence.
+* the first play is executed on the control machine (your laptop).  This uses the `dopy` module to drive the DigitalOcean API into creating a droplet as defined by a set of variables. Once the droplet starts to respond on port 22 the second play can commence.
 
 * the second play executes its tasks on the newly create droplet.  The control machine connects over SSH and executes a number of tasks to ready the droplet for deployment of OpenFaaS.  The number of tasks will vary depending upon the chosen orchestrator.
 
@@ -32,7 +32,7 @@ The playbook used here contains two plays:
 Once the playbook completes the reader will have a fully functioning single node OpenFaaS instance.
 
 ## Pre-Requisites
-Ordinarily, a little pre-work is required in order to configure the automation environment, and as with most automation, the effort required upfront is far outweighed by the benefits borne out throughout its lifetime.  For the purpose of this article the Ansible based pre-reqs have been taken care of through the creation of a [Docker image](https://hub.docker.com/r/rgee0/ansible-playbook/) which already has [Python](https://www.python.org/), [pip](https://pip.pypa.io/en/stable/installing/), [dopy](https://pypi.org/project/dopy) and [Ansible](http://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html) installed.  Therefore, the only pre-requisite here is Docker on the machine where the playbook will be run from.
+Ordinarily, a little pre-work is required in order to configure the automation environment, and as with most automation, the effort required upfront is far outweighed by the benefits borne out throughout its lifetime - [xkcd illustrates this well](https://xkcd.com/1319/).  For the purpose of this article the Ansible based pre-reqs have been taken care of through the creation of a [Docker image](https://hub.docker.com/r/rgee0/ansible-playbook/) which already has [Python](https://www.python.org/), [pip](https://pip.pypa.io/en/stable/installing/), [dopy](https://pypi.org/project/dopy) and [Ansible](http://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html) installed.  So, the only pre-requisite here is Docker on the machine where the playbook will be run from.
 
 ```
 $ curl -sSL get.docker.com | sh
@@ -112,7 +112,7 @@ Clone the playbook:
 ```bash
 $ mkdir -p ~/openfaas && \
   cd ~/openfaas && \
-  git clone git@github.com:rgee0/openfaas-on-digitalocean.git .
+  git clone https://github.com/rgee0/openfaas-on-digitalocean.git .
 ```
 
 The playbook definition can be found in `site.yml`. The API key and chosen sshid now need adding to the playbook as variables in the `create_droplet` role used in the first play.
@@ -133,11 +133,9 @@ The resulting `main.yml` should look similar to this:
 ### Run the Playbook
 Having added the required detail to `create_droplet/vars/main.yml` then the playbook is ready to be run.  Running the playbook will call upon a Docker image, `rgee0/ansible-playbook:2.6.0`, which offers a ready-made Ansible environment.  Three volumes are mounted, two make the SSH key-pair available to Ansible - the values represented below are consistent with locations used earlier, ensure these are changed if different locations / names were used.  The final volume mounts the project directory into the container so that Ansible can access the playbook.
 
-> To execute from a Raspberry Pi 3 then use `rgee0/ansible-playbook:2.6.0-arm32v7` instead
-
 All that remains is to choose one of the two orchestrators and pass the value as a extra variable:
 
-Kubernetes
+Here the `orchestrator` is set to `k8s` to provide a Kubernetes based instance
 
 ```bash
 $ cd ~/openfaas && \
@@ -148,7 +146,7 @@ $ cd ~/openfaas && \
   rgee0/ansible-playbook:2.6.0 site.yml -e "orchestrator=k8s"
 ```
 
-Swarm 
+Similarly, the `orchestrator` can be set to `swarm` to provide a Swarm based instance
 
 ```bash
 $ cd ~/openfaas && \
@@ -161,7 +159,7 @@ $ cd ~/openfaas && \
 
 ## Head over to the UI
 
-As the playbook completes, a set of information will be displayed, which will guide you to the OpenFaaS UI on the brand new droplet.  Also provided are the credentials needed to satisfy basic auth, which is enabled by default.
+As the playbook completes, a set of information will be displayed, which will guide you to the OpenFaaS UI on the new droplet. As authentication is enabled by default the credentials needed to satisfy this are also provided.
 
 ```json
 ok: [209.97.188.227] => {
@@ -183,13 +181,13 @@ localhost         : ok=6   changed=2  unreachable=0  failed=0
 
 ## Next steps
 
-The quickest way to deploy a function to the new instance is to grab one of the pre-built functions from the store; click either of the `Deploy New Function` buttons to access a list of these.
+The quickest way to deploy a function to the new instance is to grab one of the pre-built functions from the store. Click `Deploy New Function` in the UI.
 
 ![Empty OpenFaaS instance](/images/deploy-digitalocean-ansible/empty_portal.png)
 
 Why not use the fresh OpenFaaS instance in conjunction with the learning materials in the [OpenFaaS Workshop](https://github.com/openfaas/workshop/blob/master/README.md) to help accelerate learning around the project, its features and potential applications.  Having already deployed an instance its possible to skip to the [OpenFaaS CLI](https://github.com/openfaas/workshop/blob/master/lab1.md#openfaas-cli) section in Lab 1 and then head straight into Lab 2. 
 
-To keep in touch with future community led features then  subscribe to the [OpenFaaS youtube channel](https://www.youtube.com/channel/UCdKi97g5FmzvrmtIp9FyOVA) and be notified as new content is added.
+To keep in touch with future community led features then  subscribe to the [OpenFaaS YouTube channel](https://www.youtube.com/channel/UCdKi97g5FmzvrmtIp9FyOVA) and be notified as new content is added.
 
 ## Acknowledgements
-Thanks to [Marko](https://twitter.com/walokra/) for the [inspiration behind](http://ruleoftech.com/2017/dockerizing-all-the-things-running-ansible-inside-docker-container) the [Ansible Docker image](https://hub.docker.com/r/rgee0/ansible-playbook/).
+Thanks to [Marko Wallin](https://twitter.com/walokra/) for the [inspiration behind](http://ruleoftech.com/2017/dockerizing-all-the-things-running-ansible-inside-docker-container) the [Ansible Docker image](https://hub.docker.com/r/rgee0/ansible-playbook/).

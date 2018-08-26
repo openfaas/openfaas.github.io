@@ -1,7 +1,7 @@
 ---
 title: Deploy OpenFaaS on DigitalOcean with Ansible
 description: Richard Gee introduces Ansible based automation to deploy Kubernetes or Swarm based OpenFaaS onto DigitalOcean in around 5 minutes
-date: 2018-08-26
+date: 2018-08-27
 image: /images/deploy-digitalocean-ansible/gears_small.jpg
 categories:
   - automation
@@ -9,17 +9,18 @@ categories:
   - swarm
   - ansible
 author_staff_member: richard
+dark_background: true
 ---
 
 This article will demonstrate how to have an [OpenFaaS](https://www.openfaas.com/) instance up and running on a [DigitalOcean](https://www.digitalocean.com/) droplet in around 5 minutes through an [Ansible](https://www.ansible.com/) playbook.  Both Kubernetes and Swarm providers are supported. 
 
-![DigitalOcean Logo](/images/deploy-digitalocean-ansible/DO_Logo_Horizontal_Black.png)
+![DigitalOcean Logo](/images/deploy-digitalocean-ansible/digital_ocean.svg)
 
-DigitalOcean describes itself as _"a simple and robust cloud computing platform, designed for developers". It offers an Infrastructure as a Service (IaaS) platform where droplets - virtual servers to non-DOers - can be deployed in a multitude of flavours, sizes and locations. The company is very popular with open source developers and each October joins with GitHub to promote [Hacktoberfest](https://hacktoberfest.digitalocean.com/?2017), the month long celebration of open source software and community.
+DigitalOcean has described itself as _"a simple and robust cloud computing platform, designed for developers"_. It offers an Infrastructure as a Service (IaaS) platform where droplets - virtual servers to non-DOers - can be deployed in a multitude of flavours, sizes and locations. The company is very popular with open source developers and each October joins with GitHub to promote [Hacktoberfest](https://hacktoberfest.digitalocean.com/?2017), the month long celebration of open source software and community.
 
-![Ansible logo](/images/deploy-digitalocean-ansible/ansible.png)
+![Ansible logo](/images/deploy-digitalocean-ansible/ansible.svg)
 
-Ansible is an open source based product by Red Hat that is described as _"a radically simple IT automation engine that automates cloud provisioning, configuration management, application deployment, intra-service orchestration, and many other IT needs"_.  Put simply, it enables automated deployment of the full stack, enabling developers and engineers to describe their deployments through a series of yaml based tasks that are grouped into plays.  These plays are collectively found in playbooks which are invoked through the `ansible-playbook` command.
+Ansible is an open source based product by Red Hat that is [described](https://www.ansible.com/overview/how-ansible-works) as _"a radically simple IT automation engine that automates cloud provisioning, configuration management, application deployment, intra-service orchestration, and many other IT needs"_.  Put simply, it enables automated deployment of the full stack, enabling developers and engineers to describe their deployments through a series of yaml based tasks that are grouped into plays.  These plays are collectively found in playbooks which are invoked through the `ansible-playbook` command.
 
 The playbook used here contains two plays:
 
@@ -131,7 +132,11 @@ The resulting `main.yml` should look similar to this:
 ```
 
 ### Run the Playbook
-Having added the required detail to `create_droplet/vars/main.yml` then the playbook is ready to be run.  Running the playbook will call upon a Docker image, `rgee0/ansible-playbook:2.6.0`, which offers a ready-made Ansible environment.  Three volumes are mounted, two make the SSH key-pair available to Ansible - the values represented below are consistent with locations used earlier, ensure these are changed if different locations / names were used.  The final volume mounts the project directory into the container so that Ansible can access the playbook.
+Having added the required detail to `create_droplet/vars/main.yml` then the playbook is ready to be run.  Running the playbook will call upon a Docker image, `rgee0/ansible-playbook:2.6.2`, which offers a ready-made Ansible environment.  
+
+> If you'd prefer to build your own Docker image the Dockerfile can be found [here](https://github.com/rgee0/ansible-playbook)
+
+Three volumes are mounted, two make the SSH key-pair available to Ansible - the values represented below are consistent with locations used earlier, ensure these are changed if different locations / names were used.  The final volume mounts the project directory into the container so that Ansible can access the playbook.
 
 All that remains is to choose one of the two orchestrators and pass the value as a extra variable:
 
@@ -143,7 +148,7 @@ $ cd ~/openfaas && \
   -v $(pwd):/ansible/playbooks \
   -v ~/.ssh/id_rsa_blog:/root/.ssh/id_rsa \
   -v ~/.ssh/id_rsa_blog.pub:/root/.ssh/id_rsa.pub \
-  rgee0/ansible-playbook:2.6.0 site.yml -e "orchestrator=k8s"
+  rgee0/ansible-playbook:2.6.2 site.yml -e "orchestrator=k8s"
 ```
 
 Similarly, the `orchestrator` can be set to `swarm` to provide a Swarm based instance
@@ -154,7 +159,7 @@ $ cd ~/openfaas && \
   -v $(pwd):/ansible/playbooks \
   -v ~/.ssh/id_rsa_blog:/root/.ssh/id_rsa \
   -v ~/.ssh/id_rsa_blog.pub:/root/.ssh/id_rsa.pub \
-  rgee0/ansible-playbook:2.6.0 site.yml -e "orchestrator=swarm"
+  rgee0/ansible-playbook:2.6.2 site.yml -e "orchestrator=swarm"
 ```
 
 ## Head over to the UI
@@ -185,9 +190,9 @@ The quickest way to deploy a function to the new instance is to grab one of the 
 
 ![Empty OpenFaaS instance](/images/deploy-digitalocean-ansible/empty_portal.png)
 
-Why not use the fresh OpenFaaS instance in conjunction with the learning materials in the [OpenFaaS Workshop](https://github.com/openfaas/workshop/blob/master/README.md) to help accelerate learning around the project, its features and potential applications.  Having already deployed an instance its possible to skip to the [OpenFaaS CLI](https://github.com/openfaas/workshop/blob/master/lab1.md#openfaas-cli) section in Lab 1 and then head straight into Lab 2. 
+Why not use the fresh OpenFaaS instance in conjunction with the learning materials in the [OpenFaaS Workshop](https://github.com/openfaas/workshop/blob/master/README.md) to help accelerate learning around the project, its features and potential applications.  Having already deployed an instance it's possible to skip to the [OpenFaaS CLI](https://github.com/openfaas/workshop/blob/master/lab1.md#openfaas-cli) section in Lab 1 and then head straight into Lab 2. 
 
-To keep in touch with future community led features then  subscribe to the [OpenFaaS YouTube channel](https://www.youtube.com/channel/UCdKi97g5FmzvrmtIp9FyOVA) and be notified as new content is added.
+To keep in touch with future community led features then subscribe to the [OpenFaaS YouTube channel](https://www.youtube.com/channel/UCdKi97g5FmzvrmtIp9FyOVA) and be notified as new content is added.
 
 ## Acknowledgements
 Thanks to [Marko Wallin](https://twitter.com/walokra/) for the [inspiration behind](http://ruleoftech.com/2017/dockerizing-all-the-things-running-ansible-inside-docker-container) the [Ansible Docker image](https://hub.docker.com/r/rgee0/ansible-playbook/).

@@ -8,3 +8,5 @@
   link: https://github.com/openfaas/faas
 - name: <i class="fab fa-youtube"></i> Video Demo
   link: https://www.youtube.com/watch?v=C3agSKv2s_w&list=PLlIapFDp305AiwA17mUNtgi5-u23eHm5j&index=1
+- name: Privacy Policy
+  link: /policy/

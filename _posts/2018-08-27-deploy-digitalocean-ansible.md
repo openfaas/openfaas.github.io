@@ -1,6 +1,6 @@
 ---
-title: Deploy OpenFaaS on DigitalOcean with Ansible
-description: Richard Gee introduces Ansible based automation to deploy Kubernetes or Swarm based OpenFaaS onto DigitalOcean in around 5 minutes
+title: Deploy OpenFaaS and Kubernetes on DigitalOcean with Ansible
+description: Richard Gee introduces the quickest way yet to get a working Kubernetes or Swarm cluster on DigitalOcean with OpenFaaS
 date: 2018-08-27
 image: /images/deploy-digitalocean-ansible/gears_small.jpg
 categories:
@@ -12,7 +12,7 @@ author_staff_member: richard
 dark_background: true
 ---
 
-This article will demonstrate how to have an [OpenFaaS](https://www.openfaas.com/) instance up and running on a [DigitalOcean](https://www.digitalocean.com/) droplet in around 5 minutes through an [Ansible](https://www.ansible.com/) playbook.  Both Kubernetes and Swarm providers are supported. 
+This article will demonstrate how to have an [OpenFaaS](https://www.openfaas.com/) instance up and running on a [DigitalOcean](https://www.digitalocean.com/) droplet in around 5 minutes through an [Ansible](https://www.ansible.com/) playbook. You can pick either Kubernetes or Docker Swarm in the tutorial. 
 
 ![DigitalOcean Logo](/images/deploy-digitalocean-ansible/digital_ocean.svg)
 

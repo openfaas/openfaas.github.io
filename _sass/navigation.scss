@@ -42,6 +42,10 @@ nav {
 			color: rgba(255,255,255,.8);
 		}
 
+		&:hover {
+			color: inherit;
+			opacity: 0.5;
+		}
 
 		&.nav-toggle {
 			display: inline;

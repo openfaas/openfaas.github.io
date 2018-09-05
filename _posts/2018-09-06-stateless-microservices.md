@@ -41,13 +41,13 @@ Since the original post I re-wrote my initial observations as a series of proper
 Functions are:
 
 * stateless
-* emphemeral & short-lived
+* ephemeral & short-lived
 * auto-scaling
 * single-purposed
 
 Functions are stateless because they do not rely on internal state-machines, stored files or sessions. Each call to the function should result in the same end-result. They don't have to be strictly idempotent, but they are easier to manage when they are.
 
-Functions are emphemeral because at any point they should be able to be replaced by any similar variant. This property means that all functions can be managed in the same way - from their health-check to their lifecycle, logging and monitoring.
+Functions are ephemeral because at any point they can be replaced by an identical copy without impacting behaviour. This property means that all functions can be managed in the same way - from their health-check to their lifecycle, logging and monitoring.
 
 Functions auto-scale either from a minimum replica count to a maximum count, or even down to zero and back again to match demand or to conserve resources.
 
@@ -71,7 +71,9 @@ We see a similar pattern of abstraction and off-loading of boring details with m
 
 ## What's a stateless microservice?
 
-A stateless microservice is a microservice which can be deployed as if it were a FaaS Function and managed by a FaaS framework or Platform such as OpenFaaS. For this reason no special routes, flags or filters are needed in the OpenFaaS CLI, Gateway API or UI. 
+A stateless microservice is a microservice which can be deployed as if it were a FaaS Function and managed by a FaaS framework or Platform such as OpenFaaS. For this reason no special routes, flags or filters are needed in the OpenFaaS CLI, Gateway API or UI.
+
+![Venn diagram showing Functions vs Microservices](/images/stateless-microservices/venn.png)
 
 As far as the OpenFaaS components are concerned a function is written in any language and packaged in a Docker image. It must serve content over HTTP on port 8080 and write a lock file to `/tmp/.lock`. If your function or service detects it is unhealthy then you can remove the lock file and OpenFaaS will restart/reschedule your function.
 

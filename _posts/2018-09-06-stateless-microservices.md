@@ -249,7 +249,7 @@ When your bash `for` loop completes or when you cancel it with Ctrl+C you will s
 
 You can also use the OpenFaaS UI to monitor and invoke the microservice at http://127.0.0.1:8080
 
-![](/images/stateless-microservices/frank-says.png)
+![OpenFaaS UI](/images/stateless-microservices/frank-says.png)
 
 Read more on auto-scaling including how to [configure min, max and zero replica scaling parameters](https://docs.openfaas.com/architecture/autoscaling/).
 
@@ -278,7 +278,7 @@ Use the URL given to you by the command above to access the microservice.
 
 Sign the guest book using the UI and when you're done you can reset the MySQL table at any time by posting to `/function/guestbook/reset`.
 
-![](/images/stateless-microservices/signed.png)
+![Guestbook screenshot](/images/stateless-microservices/signed.png)
 
 The guestbook code stores its state in a MySQL table which means that it can be restarted at any time without losing data. This is a key property of FaaS functions and stateless microservices. If OpenFaaS adds additional replicas of our code - each one will have the same view of the world because it relies on the external database for its data.
 
@@ -290,7 +290,7 @@ Then add a label to your `stack.yml` file to tell OpenFaaS that your function is
 
 ```
     labels:
-      com.openfaas.scale.zero: false
+      com.openfaas.scale.zero: true
 ```
 
 Finally redeploy the guestbook with `faas-cli up`. The faas-idler will now scale your function to zero replicas as soon as it is detected as idle. The default idle period is set at *5 minutes*, but this can be configured at deployment time.

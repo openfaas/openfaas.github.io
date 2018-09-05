@@ -1,8 +1,7 @@
 ---
 title: Introducing stateless microservices for OpenFaaS
 description: Alex walks us through the latest addition to OpenFaaS - full support for stateless microservices giving an example of a guestbook written in Ruby with Sinatra
-# date: 2018-09-06
-date: 2018-09-04
+date: 2018-09-05
 image: /images/stateless-microservices/mixed-services.jpg
 categories:
   - kubernetes
@@ -45,7 +44,7 @@ Functions are:
 * auto-scaling
 * single-purposed
 
-Functions are stateless because they do not rely on internal state-machines, stored files or sessions. Each call to the function should result in the same end-result. They don't have to be strictly idempotent, but they are easier to manage when they are.
+Functions are stateless because they do not rely on internal memory, state-machines, stored files or mounted volumes. Subject to external services each call to a function should result in the same end-result. Functions don't have to be strictly idempotent, but they are easier to manage when they are.
 
 Functions are ephemeral because at any point they can be replaced by an identical copy without impacting behaviour. This property means that all functions can be managed in the same way - from their health-check to their lifecycle, logging and monitoring.
 
@@ -240,7 +239,7 @@ We can now trigger auto-scaling with a simple bash `for` loop:
 $ for i in {1..10000} ; do sleep 0.01 && curl http://127.0.0.1:8080/function/frank-says && echo ; done
 ```
 
-In another window enter: `watch faas-cli list` or run `faas-cli list` periodically. You should see the value for `Inovcations` increase and the `Replicas` increase as auto-scaling kicks in.
+In another window enter: `watch faas-cli list` or run `faas-cli list` periodically. You should see the value for `Invocations` increase and the `Replicas` increase as auto-scaling kicks in.
 
 ```
 Function                        Invocations     Replicas

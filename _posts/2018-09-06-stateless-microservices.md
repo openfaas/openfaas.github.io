@@ -36,7 +36,7 @@ Functions tend to involve:
 * when working well makes the complex appear simple
 * has several related concerns: infrastructure management, batching, access control, definitions, scaling & dependencies
 
-Over the last year I've simplified this defintion into a number of properties.
+Since the original post I re-wrote my initial observations as a series of properties.
 
 Functions are:
 
@@ -77,7 +77,7 @@ As far as the OpenFaaS components are concerned a function is written in any lan
 
 OpenFaaS has a Ruby language template which can be used to create Ruby FaaS functions. A Ruby stateless microservice is a Ruby microservice created with [Ruby on Rails](https://rubyonrails.org), Sinatra or some other Ruby microservice framework. The primary difference is that you have more work to do than with a FaaS function. Now you have to manage your own Dockerfile, health-checks and routes.
 
-Sinatra is a DSL or framework for Ruby for building microservices rapidly.
+Sinatra is a DSL or framework for Ruby used to build microservices rapidly.
 
 Here's the hello-world example from the official website:
 
@@ -89,7 +89,7 @@ get '/frank-says' do
 end
 ```
 
-If we saved this file as `main.rb` and ran `gem install sinatra` followed by `ruby main.rb` a web-server would come up on the default port of 5678 and then we could navigtate to the `/frank-says` URL.
+If we saved this file as `main.rb` and ran `gem install sinatra` followed by `ruby main.rb` a web-server would be started on the default port of `5678` and then we could navigtate to the URL `http://127.0.0.1:5678/frank-says`.
 
 The OpenFaaS CLI can template, build and deploy this microservice. The OpenFaaS platform will then track metrics for the invocations of the microservice and auto-scale it up, down or even to zero and back again.
 
@@ -280,20 +280,25 @@ Sign the guest book using the UI and when you're done you can reset the MySQL ta
 
 ![](/images/stateless-microservices/signed.png)
 
-This guestbook is stateless so it stores its state in a MySQL table meaning each auto-scaled replica gets the exact same view of the world. This is a key part of a stateless microservice.
+The guestbook code stores its state in a MySQL table which means that it can be restarted at any time without losing data. This is a key property of FaaS functions and stateless microservices. If OpenFaaS adds additional replicas of our code - each one will have the same view of the world because it relies on the external database for its data.
 
 #### Enable Zero-Scale
 
-To enable zero-scale, simply [follow the documentation](https://docs.openfaas.com/architecture/autoscaling/) to enable the `faas-idler`.
+To enable zero-scale, simply [follow the documentation](https://docs.openfaas.com/architecture/autoscaling/#zero-scale) to enable the `faas-idler`.
 
 Then add a label to your `stack.yml` file to tell OpenFaaS that your function is eligible for zero-scaling:
 
-`com.openfaas.scale.zero: true`
+```
+    labels:
+      com.openfaas.scale.zero: false
+```
 
-Finally redeploy the guestbook with `faas-cli up`. The faas-idler will now scale your function to zero replicas as soon as it is detected as idle.
+Finally redeploy the guestbook with `faas-cli up`. The faas-idler will now scale your function to zero replicas as soon as it is detected as idle. The default idle period is set at *5 minutes*, but this can be configured at deployment time.
+
+Going back to Sid's original ask, we've deployed a stateless microservice written in Ruby that will scale to zero when idle and back again in time to serve traffic. It can be managed in exactly the same way as our existing FaaS functions and means you get to focus on building what matters rather than worrying about the internals of Kubernetes or Docker Swarm.
 
 ## Wrapping up
 
-We've now deployed a simple hello-world Sinatra service and a more complete guestbook example using MySQL, ebs views, Bootstrap and Sinatra. It's over to you to start simplifying your developer workflow with OpenFaaS - whether you want to use FaaS Functions or just make it easier to manage your microserviecs.
+We've now deployed both a simple hello-world Sinatra service and a more complete guestbook example using MySQL, ebs views, Bootstrap and Sinatra. It's over to you to start simplifying your developer workflow with OpenFaaS - whether you want to use FaaS Functions or just make it easier to manage your microserviecs.
 
 For questions, comments and suggestions follow us on [Twitter @openfaas](https://twitter.com/openfaas) and join the [Slack community](https://docs.openfaas.com/community).

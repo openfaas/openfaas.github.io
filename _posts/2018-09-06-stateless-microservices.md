@@ -12,7 +12,15 @@ author_staff_member: alex
 dark_background: true
 ---
 
-I want to share some news with you - we've merged and released support for stateless microservices in [OpenFaaS 0.9.0](https://github.com/openfaas/faas/releases/0.9.0). This means you can take advantage of OpenFaaS as a single pane of glass to manage your microservices and functions - from the CLI to the Prometheus metrics to the built-in auto-scaling, even scaling to zero and back again. I'll walk you through deploying a Ruby and Sinatra guestbook based by MySQL running on OpenFaaS with Kubernetes.
+I want to share some news with you. We've merged and released support for stateless microservices in [OpenFaaS 0.9.0](https://github.com/openfaas/faas/releases/0.9.0). This means you can now take advantage of the simple, but powerful developer experience of OpenFaaS as a single pane of glass to manage your FaaS functions and microservices. The whole experience is included from the CLI, to the Prometheus metrics to the built-in auto-scaling. Even scaling to zero is supported. I'll walk you through deploying a Ruby and Sinatra guestbook backed by MySQL deployed to OpenFaaS with Kubernetes.
+
+## Why are we doing this now?
+
+There is a lot of overlap between modern, cloud-native microservices and FaaS functions as I'll go on to explain in the next section. OpenFaaS has always had support for running any container or process whether that be a FaaS Function, the AWS CLI, ImageMagick, or even PowerShell on Windows. Two requests came in from the community within a short period of time which acted as a catalyst for this next step in our story.
+
+One of our newest users at [Wireline.io](https://www.wireline.io) raised a [feature request](https://github.com/openfaas/faas/issues/716) to enhance the HTTP route functionality of functions. Wireline wanted to write functions which could run both on [AWS Lambda](https://aws.amazon.com/free/webapps/?https://aws.amazon.com/lambda/) and on OpenFaaS without any additional changes. Around that same time the CEO of [GitLab](https://about.gitlab.com/), [Sid Sijbrandi](https://twitter.com/sytses?lang=en) reached out to learn more about Serverless and how it could be leveraged at GitLab. Sid asked me whether OpenFaaS could be used to manage both FaaS Functions and the microservices his team was more familiar with such as a Sinatra apps. He showed a particular interest in [scaling to zero](https://www.openfaas.com/blog/zero-scale/) when idle.
+
+Let's look at some background before moving into the tutorial showing how to put this into practice.
 
 ## What's a Function?
 

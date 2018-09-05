@@ -26,7 +26,7 @@ Let's look at some background before moving into the tutorial showing how to put
 
 Before getting into what a "stateless microservice" is, let's go back to my definition of a "FaaS Function" as defined in my blog post: [Functions as a Service (FaaS) (Jan 2017)](https://blog.alexellis.io/functions-as-a-service/).
 
-Functions tend to invoke:
+Functions tend to involve:
 
 * invoking short-lived functions (Lambda has a default 1-sec timeout)
 * does not publish TCP services - often accesses third-party services or resources
@@ -95,17 +95,23 @@ The OpenFaaS CLI can template, build and deploy this microservice. The OpenFaaS 
 
 ## Create the Sinatra stateless microservices
 
-Let's create a stateless microservice with Sinatra. You'll need OpenFaaS deployed and the OpenFaaS CLI before you go any further install them here: [Deployment](https://docs.openfaas.com/deployment/).
+Let's create a stateless microservice with Sinatra.
+
+You'll need a few tools available first:
+
+* [Docker for Mac/Linux/Windows](https://www.docker.com/get-started)
+* [A Docker Hub account](https://hub.docker.com/) or an account with a different Docker registry
+* [OpenFaaS and the CLI](https://docs.openfaas.com/deployment/) - pick Kubernetes or Swarm
 
 ### Create a hello-world service
 
 First of all create a new folder and generate a `dockerfile` function. The `dockerfile` template tells the OpenFaaS CLI to run a Docker build without applying any additional scaffolding or templating, you'll have to supply your own Dockerfile.
 
 ```bash
-mkdir -p sinatra-for-openfaas/
-cd sinatra-for-openfaas/
+$ mkdir -p sinatra-for-openfaas/ \
+  && cd sinatra-for-openfaas/
 
-faas-cli new --prefix=alexellis2 --lang dockerfile frank-says
+$ faas-cli new --prefix=alexellis2 --lang dockerfile frank-says
 ```
 
 Replace `alexellis2` with your Docker Hub account or another Docker registry. A Docker image will be pushed here as part of the build / `faas-cli up` command.
@@ -127,6 +133,10 @@ require 'sinatra'
 set :port, 8080
 set :bind, '0.0.0.0'
 
+open('/tmp/.lock', 'w') { |f|
+  f.puts "Service started"
+}
+
 get '/' do
     'Frank has entered the building'
 end
@@ -136,7 +146,10 @@ get '/logout' do
 end
 ```
 
-All FaaS functions and stateless microservices must listen on a consistent port which is TCP/8080.
+Notes on workloads:
+
+* They must bind to TCP port 8080
+* They must write a file `/tmp/.lock` when they are ready to receive traffic
 
 `./frank-says/Gemfile`:
 
@@ -159,9 +172,9 @@ RUN addgroup -S app \
 RUN chown app:app -R /home/app
 WORKDIR /home/app
 
-RUN touch /tmp/.lock
-HEALTHCHECK --interval=2s CMD [ -e /tmp/.lock ] || exit 1
+HEALTHCHECK --interval=5s CMD [ -e /tmp/.lock ] || exit 1
 
+USER app
 CMD ["ruby", "main.rb"]
 ```
 
@@ -169,17 +182,23 @@ The Dockerfile does the following:
 
 * Adds a non-root user
 * Adds the Ruby source and Gemfile then installs the `sinatra` gem
-* Adds a healthcheck and temporary lock file required by OpenFaaS.
+* Adds a healthcheck on a 5-second interval
 * Sets the start-up command
 
 #### Deploy the example
 
 Now you're ready to build and deploy the example using the OpenFaaS CLI.
 
-```bash
-docker login    # Login with your account details
+* Login with your account details
 
-faas-cli up --yaml frank-says.yml
+```bash
+$ docker login
+```
+
+* Run the `up` command which is an alias for `build`, `push` and `deploy`.
+
+```
+$ faas-cli up --yaml frank-says.yml
 
 Deploying: frank-says.
 
@@ -216,7 +235,7 @@ frank-says                      5               1
 We can now trigger auto-scaling with a simple bash `for` loop:
 
 ```
-for i in {1..10000} ; do sleep 0.01 && curl http://127.0.0.1:8080/function/frank-says && echo ; done
+$ for i in {1..10000} ; do sleep 0.01 && curl http://127.0.0.1:8080/function/frank-says && echo ; done
 ```
 
 In another window enter: `watch faas-cli list` or run `faas-cli list` periodically. You should see the value for `Inovcations` increase and the `Replicas` increase as auto-scaling kicks in.
@@ -237,20 +256,20 @@ Read more on auto-scaling including how to [configure min, max and zero replica 
 ### Deploy the Sinatra guestbook with MySQL
 
 ```
-git clone https://github.com/openfaas-incubator/openfaas-sinatra-guestbook
-cd openfaas-sinatra-guestbook
+$ git clone https://github.com/openfaas-incubator/openfaas-sinatra-guestbook \
+  && cd openfaas-sinatra-guestbook
 ```
 
 Configure your MySQL database details in `./sql.yml`. If you don't have access to MySQL you can deploy it using [helm](https://github.com/helm/charts/tree/master/stable/mysql) on Kubernetes.
 
 ```
-cp sql.example.yml sql.yml
+$ cp sql.example.yml sql.yml
 ```
 
 Finally deploy the guestbook:
 
 ```
-faas-cli up
+$ faas-cli up
 
 http://127.0.0.1:8080/function/guestbook
 ```

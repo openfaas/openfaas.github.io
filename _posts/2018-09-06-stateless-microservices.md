@@ -284,7 +284,7 @@ The guestbook code stores its state in a MySQL table which means that it can be 
 
 #### Enable Zero-Scale
 
-To enable zero-scale, simply [follow the documentation](https://docs.openfaas.com/architecture/autoscaling/#zero-scale) to enable the `faas-idler`.
+To enable [scaling to zero](https://www.openfaas.com/blog/zero-scale/) simply [follow the documentation](https://docs.openfaas.com/architecture/autoscaling/#zero-scale) to enable the `faas-idler`.
 
 Then add a label to your `stack.yml` file to tell OpenFaaS that your function is eligible for zero-scaling:
 

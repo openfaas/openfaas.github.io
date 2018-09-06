@@ -19,7 +19,7 @@ There is a lot of overlap between modern, cloud-native microservices and FaaS fu
 
 One of our newest users at [Wireline.io](https://www.wireline.io) raised a [feature request](https://github.com/openfaas/faas/issues/716) to enhance the HTTP route functionality of functions. Wireline wanted to write functions which could run both on [AWS Lambda](https://aws.amazon.com/free/webapps/?https://aws.amazon.com/lambda/) and on OpenFaaS without any additional changes. Around that same time the CEO of [GitLab](https://about.gitlab.com/), [Sid Sijbrandi](https://twitter.com/sytses?lang=en) reached out to learn more about Serverless and how it could be leveraged at GitLab. Sid asked me whether OpenFaaS could be used to manage both FaaS Functions and the microservices his team was more familiar with such as a Sinatra apps. He showed a particular interest in [scaling to zero](https://www.openfaas.com/blog/zero-scale/) when idle.
 
-Let's look at some background before moving into the tutorial showing how to put this into practice.
+Let's look at some background before moving into the tutorial showing how to put this into practice with Sid's request.
 
 ## What's a Function?
 
@@ -94,6 +94,8 @@ If we saved this file as `main.rb` and ran `gem install sinatra` followed by `ru
 
 The OpenFaaS CLI can template, build and deploy this microservice. The OpenFaaS platform will then track metrics for the invocations of the microservice and auto-scale it up, down or even to zero and back again.
 
+Read more: [OpenFaaS workloads](https://docs.openfaas.com/reference/workloads/)
+
 ## Create the Sinatra stateless microservices
 
 Let's create a stateless microservice with Sinatra.
@@ -147,7 +149,7 @@ get '/logout' do
 end
 ```
 
-Notes on workloads:
+Notes on [OpenFaaS workloads](https://docs.openfaas.com/reference/workloads/):
 
 * They must bind to TCP port 8080
 * They must write a file `/tmp/.lock` when they are ready to receive traffic

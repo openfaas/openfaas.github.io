@@ -86,7 +86,7 @@ Here's the hello-world example from the official website:
 require 'sinatra'
 
 get '/frank-says' do
-    'Put this in your pipe & smoke it!'
+  'Put this in your pipe & smoke it!'
 end
 ```
 
@@ -139,11 +139,11 @@ open('/tmp/.lock', 'w') { |f|
 }
 
 get '/' do
-    'Frank has entered the building'
+  'Frank has entered the building'
 end
 
 get '/logout' do
-    'Frank has left the building'
+  'Frank has left the building'
 end
 ```
 

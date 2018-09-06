@@ -86,7 +86,7 @@ Here's the hello-world example from the official website:
 require 'sinatra'
 
 get '/frank-says' do
-    'Put this in your pipe & smoke it!'
+  'Put this in your pipe & smoke it!'
 end
 ```
 
@@ -134,16 +134,16 @@ require 'sinatra'
 set :port, 8080
 set :bind, '0.0.0.0'
 
-open('/tmp/.lock', 'w') { |f|
+open('/tmp/.lock', 'w') do |f|
   f.puts "Service started"
-}
+end
 
 get '/' do
-    'Frank has entered the building'
+  'Frank has entered the building'
 end
 
 get '/logout' do
-    'Frank has left the building'
+  'Frank has left the building'
 end
 ```
 

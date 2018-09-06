@@ -266,7 +266,7 @@ $ git clone https://github.com/openfaas-incubator/openfaas-sinatra-guestbook \
   && cd openfaas-sinatra-guestbook
 ```
 
-Configure your MySQL database details in `./sql.yml`. If you don't have access to MySQL you can deploy it using [helm](https://github.com/helm/charts/tree/master/stable/mysql) on Kubernetes.
+Configure your MySQL database details in `./sql.yml`. If you don't have access to MySQL you can deploy it within a few minutes using [helm](https://github.com/helm/charts/tree/master/stable/mysql) on Kubernetes or `docker run` and the official [Docker Image](https://hub.docker.com/_/mysql/).
 
 ```
 $ cp sql.example.yml sql.yml

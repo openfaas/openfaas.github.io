@@ -236,7 +236,12 @@ frank-says                      5               1
 We can now trigger auto-scaling with a simple bash `for` loop:
 
 ```
-$ for i in {1..10000} ; do sleep 0.01 && curl http://127.0.0.1:8080/function/frank-says && echo ; done
+$ for i in {1..10000}
+do
+  sleep 0.01 \
+  && curl http://127.0.0.1:8080/function/frank-says \
+  && echo
+done
 ```
 
 In another window enter: `watch faas-cli list` or run `faas-cli list` periodically. You should see the value for `Invocations` increase and the `Replicas` increase as auto-scaling kicks in.

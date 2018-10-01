@@ -361,13 +361,13 @@ _2._ Implement your function logic by editing the `myfn/handler.go` file
 _3._ Build the function as a Docker image 
 
 ```bash
-faas-cli build -f myfn.yaml
+faas-cli build -f myfn.yml
 ```
 
 _4._ Test the function on your local cluster (click [here](https://github.com/openfaas/faas-netes/blob/master/chart/openfaas/README.md) if you haven’t set up your local environment yet)
 
 ```bash
-faas-cli deploy -f myfn.yaml -g 127.0.0.1:31112
+faas-cli deploy -f myfn.yml -g 127.0.0.1:31112
 ```
 
 _5._ Initialize a Git repository for your function and commit your changes
@@ -380,19 +380,19 @@ git add . && git commit -s -m "Initial function version"
 _6._ Rebuild the image by tagging it with the Git commit short SHA
 
 ```bash
-faas-cli build --tag -f myfn.yaml
+faas-cli build --tag sha -f myfn.yml
 ```
 
 _7._ Push the image to GCP Container Registry
 
 ```bash
-faas-cli push --tag -f myfn.yml
+faas-cli push --tag sha -f myfn.yml
 ```
 
 _8._ Generate the function Kubernetes custom resource
 
 ```bash
-faas-cli generate -n="" --tag --yaml myfn.yaml > myfn-k8s.yaml
+faas-cli generate -n "" --tag sha --yaml myfn.yml > myfn-k8s.yaml
 ```
 
 _9._ Add the preemptible constraint to `myfn-k8s.yaml`

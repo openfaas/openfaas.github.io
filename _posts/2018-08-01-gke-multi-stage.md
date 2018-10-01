@@ -36,12 +36,13 @@ We will be creating a cluster on Google's Kubernetes Engine (GKE), if you don't 
 Create a cluster with two nodes and network policy enabled:
 
 ```bash
-k8s_version=$(gcloud container get-server-config --format=json \
+zone=europe-west3-a
+k8s_version=$(gcloud container get-server-config --zone=${zone} --format=json \
 | jq -r '.validNodeVersions[0]')
 
 gcloud container clusters create openfaas \
     --cluster-version=${k8s_version} \
-    --zone=europe-west3-a \
+    --zone=${zone} \
     --num-nodes=2 \
     --machine-type=n1-standard-1 \
     --no-enable-cloud-logging \
@@ -65,7 +66,7 @@ gcloud container node-pools create fn-pool \
     --cluster=openfaas \
     --preemptible \
     --node-version=${k8s_version} \
-    --zone=europe-west3-a \
+    --zone=${zone} \
     --num-nodes=1 \
     --enable-autoscaling --min-nodes=2 --max-nodes=4 \
     --machine-type=n1-highcpu-4 \
@@ -84,7 +85,7 @@ Open a new terminal and run the scale up command:
 sleep 30m && gcloud container clusters resize openfaas \
     --size=2 \
     --node-pool=fn-pool \
-    --zone=europe-west3-a 
+    --zone=${zone} 
 ```
 Now let that command run in the background and carry on with the next step.
 
@@ -119,7 +120,7 @@ To do that you'll need the following tools:
 Set up credentials for `kubectl`:
 
 ```bash
-gcloud container clusters get-credentials europe -z=europe-west3-a
+gcloud container clusters get-credentials openfaas -z=${zone}
 ```
 
 Create a cluster admin role binding:
@@ -258,7 +259,7 @@ helm upgrade openfaas-stg --install openfaas/openfaas \
 In a couple of seconds cert-manager should fetch a certificate from LE:
 
 ```bash
-kubectl -n kube-system logs deployment/cert-manager-cert-manager
+kubectl -n kube-system logs deployment/cert-manager
 Certificate issued successfully
 ```
 

@@ -156,7 +156,7 @@ Notes on [OpenFaaS workloads](https://docs.openfaas.com/reference/workloads/):
 
 `./frank-says/Gemfile`:
 
-```Gemfile
+```ruby
 source 'https://rubygems.org'
 gem "sinatra"
 ```
@@ -165,7 +165,7 @@ Any list of gems can be added in this file.
 
 Now replace the `./frank-says/Dockerfile` with:
 
-```Dockerfile
+```dockerfile
 FROM ruby:2.4-alpine3.6
 WORKDIR /home/app
 COPY    .   .

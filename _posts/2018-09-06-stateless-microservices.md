@@ -56,7 +56,7 @@ If you've written at least one serverless function then you'll be aware that the
 
 Here's an example of a Node.js function:
 
-```
+```js
 "use strict"
 
 module.exports = (context, callback) => {
@@ -200,7 +200,7 @@ $ docker login
 
 * Run the `up` command which is an alias for `build`, `push` and `deploy`.
 
-```
+```bash
 $ faas-cli up --yaml frank-says.yml
 
 Deploying: frank-says.
@@ -218,7 +218,7 @@ Frank has entered the building.
 
 You can also try a custom route:
 
-```
+```bash
 $ curl http://127.0.0.1:8080/function/frank-says/logout
 Frank has left the building.
 ```
@@ -227,7 +227,7 @@ You can try updating the messages or adding some other routes then run `faas-cli
 
 Now check out `faas-cli list` to see the invocation count rising each time you access the microservice.
 
-```
+```bash
 $ faas-cli list
 Function                        Invocations     Replicas
 frank-says                      5               1
@@ -237,7 +237,7 @@ frank-says                      5               1
 
 We can now trigger auto-scaling with a simple bash `for` loop:
 
-```
+```bash
 $ for i in {1..10000}
 do
   sleep 0.01 \
@@ -250,7 +250,7 @@ In another window enter: `watch faas-cli list` or run `faas-cli list` periodical
 
 ```
 Function                        Invocations     Replicas
-frank-says                    	702            	4 
+frank-says                      702             4
 ```
 
 When your bash `for` loop completes or when you cancel it with Ctrl+C you will see the replica count decrease back to `1`.
@@ -263,20 +263,20 @@ Read more on auto-scaling including how to [configure min, max and zero replica 
 
 ### Deploy the Sinatra guestbook with MySQL
 
-```
+```bash
 $ git clone https://github.com/openfaas-incubator/openfaas-sinatra-guestbook \
   && cd openfaas-sinatra-guestbook
 ```
 
 Configure your MySQL database details in `./sql.yml`. If you don't have access to MySQL you can deploy it within a few minutes using [helm](https://github.com/helm/charts/tree/master/stable/mysql) on Kubernetes or `docker run` and the official [Docker Image](https://hub.docker.com/_/mysql/).
 
-```
+```bash
 $ cp sql.example.yml sql.yml
 ```
 
 Finally deploy the guestbook:
 
-```
+```bash
 $ faas-cli up
 
 http://127.0.0.1:8080/function/guestbook
@@ -296,7 +296,7 @@ To enable [scaling to zero](https://www.openfaas.com/blog/zero-scale/) simply [f
 
 Then add a label to your `stack.yml` file to tell OpenFaaS that your function is eligible for zero-scaling:
 
-```
+```yaml
     labels:
       com.openfaas.scale.zero: true
 ```

@@ -117,7 +117,7 @@
 			word-wrap: break-word;
 		}
 
-		h2, h3 {
+		h2, h3, h4 {
 			font-family: "Open Sans", sans-serif;
 			font-feature-settings: "dlig", "liga", "lnum", "kern";
 			text-rendering: geometricPrecision;
@@ -134,6 +134,14 @@
 
 		h3 {
 			font-size: 30px;
+			font-weight: 700;
+			letter-spacing: -0.6px;
+			line-height: 34.5px;
+			margin-bottom: 12px;
+		}
+
+		h4 {
+			font-size: 24px;
 			font-weight: 700;
 			letter-spacing: -0.6px;
 			line-height: 34.5px;

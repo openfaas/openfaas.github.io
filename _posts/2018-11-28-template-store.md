@@ -1,6 +1,6 @@
 ---
 title: Introducing the Template Store for OpenFaaS
-description: Alex Ellis walks us through how OpenFaaS approaches serverless packaging and the new "Template Store" feature making it easy to discover custom function templates.
+description: Alex Ellis walks us through how OpenFaaS approaches serverless packaging and the new "Template Store" feature making it easy to share and discover custom function templates.
 date: 2018-11-28
 image: /images/template-store/tea-store.jpg
 categories:

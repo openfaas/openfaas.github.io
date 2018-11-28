@@ -34,7 +34,7 @@ There are some drawbacks to using zip files for packaging software to run as a f
 
 Some common Python or Node.js modules need to make use of a native C/C++ toolchain to build their dependencies - these are known as *native dependencies*. Since most modules need to build against shared libraries or modules such as gLibc this makes building such modules very painful and frustrating. Ideally you need a complete replica of the Lambda runtime environment such as a separate Virtual Machine running Amazon Linux in order to build your code's dependencies. 
 
-Assuming you have a VM set up you now need to circulate that within your team and make sure you all use the exact same version. If you don't then the builds being made are no longer repeatable or portable.
+Assuming you have a VM set up you now need to circulate that within your team and make sure you all use the exact same version. If you don't then the builds being made are no longer repeatable nor portable.
 
 Running a VM or having to build native modules for a different set of shared modules or OS target during CI/CD is problematic and will mean a complicated build environment is needed to apply software delivery best practices. Once a working pipeline is set up the zip files will need to be versioned and stored in a separate artifact store making even more work. This artifact must be uploaded to S3 using tooling such as the AWS CLI which means credential management is also required.
 
@@ -113,17 +113,17 @@ The function store and the template store both have a similar model where a JSON
 
 To get your template into the store follow this process:
 
-* 1. Propose the template through a new issue
+#### 1. Propose the template through a new issue
 
 We'll review the repo, Dockerfile and how the template is structured to make sure it is suitable for and workable in the store. You may get some feedback from the community before being given the go-ahead
 
-* 2. You'll receive the go-ahead
+#### 2. Wait for the go-ahead
 
-Once you've got the go-ahead you can send a PR to the store.json file
+Once you've got the go-ahead you can send a PR to the [templates.json](https://github.com/openfaas/store/blob/master/templates.json) file
 
-* 3. Share and enjoy
+#### 3. Share and enjoy
 
-You'll now be able to use the `faas-cli template store` commands to list and download your new template.
+Once merged you will be able to use the `faas-cli template store` commands to download your new template and start using it in your projects right away.
 
 If you want to maintain your own template store for personal use or for your team then you can just pass the `--url` variable to your own file or set the `OPENFAAS_TEMPLATE_STORE_URL` environmental variable if you want to make this more permanent.
 
@@ -142,9 +142,11 @@ For instance you could create a new serverless function using Rust by first typi
 ```bash
 $ faas-cli template store list
 
+NAME                    SOURCE             DESCRIPTION
+rust                    booyaa             Rust template
 ```
 
-If you're curious or want to check things out you can use the `--verbose/-v` flag to see the git repo where the template will be fetched from.
+If you're curious or want to check things out you can use the `--verbose/-v` flag to see more information.
 
 Then the following (replacing `alexellis` with your Docker Hub username):
 

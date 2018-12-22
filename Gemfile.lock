@@ -256,6 +256,7 @@ PLATFORMS
 DEPENDENCIES
   github-pages
   html-proofer
+  rouge
 
 BUNDLED WITH
    1.17.1

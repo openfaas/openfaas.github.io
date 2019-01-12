@@ -87,9 +87,11 @@ For example, if you add your own post in `_posts/2018-07-31-my-post.md` you will
     openfaas-jekyll_1  |       Remote Theme: Using theme cloudcannon/frisco-jekyll-template
     openfaas-jekyll_1  |                     ...done in 2.0199265 seconds.
 
-### Adding an Author
+### Adding an Author\Team Member
 
-In order to have a blog post properly attributed to an author you must create an `<author_name>.md` file in the `_staff_members` directory.
+In order to have a blog post properly attributed to an author, they must be added to team by creating an `<author_name>.md` file in the `_staff_members` directory.
+
+Display of team member on Team Page is based on position in the data/members.yml file.
 
 Attribution in a blog post is based on the filename.
 

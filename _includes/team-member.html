@@ -11,10 +11,10 @@
         <a target="_blank" href="https://github.com/{{ author.github_username }}"><i class="fab fa-github"></i></a>
         {% endif %}
         {% if author.linkedin_username %}
-        <a target="_blank" href="https://linkedin.com/{{ author.linkedin_username }}"><i class="fab fa-linkedin"></i></a>
+        <a target="_blank" href="https://linkedin.com/in/{{ author.linkedin_username }}"><i class="fab fa-linkedin"></i></a>
         {% endif %}
         {% if author.webpage %}
-        <a target="_blank" href="https://linkedin.com/{{ author.webpage }}"><i class="fas fa-globe-europe"></i></a>
+        <a target="_blank" href="{{ author.webpage }}"><i class="fas fa-globe-europe"></i></a>
         {% endif %}
     </div>
     <p class="team blurb">{{ author.blurb }}</p>

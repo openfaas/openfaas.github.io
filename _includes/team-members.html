@@ -1,0 +1,8 @@
+<div class="team">
+    <div class="team title">{{ include.type }}</div>
+    <div class="team members">
+        {% for member in include.members %}
+        {% include team-member.html name=member %}
+        {% endfor %}
+    </div>
+</div>

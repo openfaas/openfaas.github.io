@@ -77,6 +77,11 @@ defaults:
       layout: "default"
   -
     scope:
+      path: "team"
+    values:
+      layout: "default"
+  -
+    scope:
       type: "posts"
     values:
       layout: "post"

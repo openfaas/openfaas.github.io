@@ -1,5 +1,7 @@
 - name: About
   link: /
+- name: Team
+  link: /team/
 - name: Blog
   link: /blog/
 - name: Docs

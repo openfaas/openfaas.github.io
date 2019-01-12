@@ -1,0 +1,25 @@
+---
+title: Team
+description: Keep up with the latest news.
+image: https://source.unsplash.com/MqJX_8EaStM/2000x1322?a=.png
+---
+
+
+<div class="full">
+    <section class="hero">
+        <div class="inner-hero text-container">
+            <div class="hero-text-container">
+                <h1 class="editable">Our Team</h1>
+                <p class="subtext editable">Meet the community behind OpenFaaS.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="teams">
+        <div class="text-container">
+            {% include team-members.html type="Team Lead" members=site.data.members.founders %}
+            {% include team-members.html type="Core Team" members=site.data.members.core %}
+            {% include team-members.html type="Members" members=site.data.members.members %}
+        </div>
+    </section>
+</div>

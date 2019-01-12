@@ -1,0 +1,64 @@
+@import "variables";
+
+.team {
+    .title {
+		text-align: left;
+		font-size: 2.6em;
+        margin: 0;
+        padding-top: 50px;
+    }
+
+    .name {
+		text-align: center;
+		font-size: 1.6em;
+        margin: 0;
+        padding-top: 5px;
+    }
+
+    .social {
+        padding-top: 5px;
+		text-align: center;
+        width: 100%;
+        
+        a {
+            font-size: 1.2em;
+            display: inline-block;
+        }
+    }
+
+    .members {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        margin: 0;
+        display: grid;
+        grid-template-columns: repeat(auto-fill,minmax(200px, 1fr));
+    }
+
+    .member {
+        background-color: #EEEEEE;
+        border-radius: 10px;
+        padding: 5px;
+        margin-top: 10px;
+        margin-left: 5px;
+
+        text-align: center;
+        flex: 1 1 160px;
+    }
+
+    .avatar {
+        width: 100%;
+        border-radius: 5%;
+    }
+
+    .blurb {
+        font-family: "Merriweather", serif;
+        font-size: 14px;
+        word-wrap: break-word;
+        margin: 0;
+        padding-top: 5px;
+    }
+}
+
+.teams {
+    padding-bottom: 20px;
+}

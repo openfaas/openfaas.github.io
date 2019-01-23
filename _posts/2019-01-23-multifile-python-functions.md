@@ -13,7 +13,13 @@ As a core contributor to OpenFaaS, I hangout in the OpenFaaS Slack a lot, you ca
 
 > [How can I] write a function in python that uses multiple source files so that the main `handler.py` is able to import helper functions from separate source files.
 
-Today, I will walk though creating exactly this kind of function by creating a word count function. I assume some familiarity with OpenFaaS and that you may have even started/completed the [OpenFaaS Workshop][workshop-repo], so I won't go into a lot of detail about the specific OpenFaaS setup instructions below. Instead, I want to focus on how to comfortably develop a Python function as it goes from a small "one-liner" function to a larger multi-module project.
+Using multiple files to create sub-modules helps keep the code organized and makes reusing code between projects/fuctions much easier. Functions and variables defined within a module importable into other modules and allows you to scope your function and variable names without worrying about conflicts. From [the Python docs](https://docs.python.org/3/tutorial/modules.html#more-on-modules):
+
+> Each module has its own private symbol table, which is used as the global symbol table by all functions defined in the module. Thus, the author of a module can use global variables in the module without worrying about accidental clashes with a user’s global variables.
+
+Today, I will demonstrate how to do this in OpenFaaS by creating a word count function that is split into 3 files.
+
+I assume some familiarity with OpenFaaS and that you may have even started/completed the [OpenFaaS Workshop][workshop-repo], so I won't go into a lot of detail about the specific OpenFaaS setup instructions below. Instead, I want to focus on how to comfortably develop a Python function as it goes from a small "one-liner" function to a larger multi-module project.
 
 ## Set up a Python environment
 

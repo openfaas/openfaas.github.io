@@ -9,7 +9,7 @@ author_staff_member: lucas
 dark_background: true
 ---
 
-As a core contributor to OpenFaaS, I hangout in the OpenFaaS Slack a lot, you can [join us here][openfaas-slack-singnup]. Most recently that meant trying to answer this question
+As a core contributor to OpenFaaS, I hangout in the OpenFaaS Slack a lot (to help new users and contributors?). You can join the community [here][openfaas-slack-singnup]. A new user joined the community recently and asked the following question:
 
 > [How can I] write a function in python that uses multiple source files so that the main `handler.py` is able to import helper functions from separate source files.
 
@@ -72,14 +72,14 @@ The project should now look like
 
 ## Relative imports
 
-We are going to add two more files to our function:
+The user asked how we can split our code across multiple files. We're going to start by creating two more files:
 
 ```sh
 touch wordcloud/stopwords
 touch wordcloud/wordcloud.py
 ```
 
-The project now looks like
+The project should now look like this
 
 ```txt
 .
@@ -205,14 +205,13 @@ Deploying: wordcloud.
 Deployed. 202 Accepted.
 URL: http://127.0.0.1:31112/function/wordcloud
 
-$ curl -X POST http://127.0.0.1:31112/function/wordcloud \
-  -d 'This is some example text that we want to see a frequency response for.  It has text like apple, apples, apple tree, etc'
+$ echo 'This is some example text that we want to see a frequency response for.  It has text like apple, apples, apple tree, etc' | faas-cli invoke wordcloud
 {"example": 1, "text": 2, "want": 1, "see": 1, "frequency": 1, "response": 1, "for": 1, "apple": 3, "tree": 1, "etc": 1}
 ```
 
 ## Wrapping up
 
-Using relative imports allows the creation of Python functions that are split between several files. We could take this further and import from sub-folders or sub-folders of sub-folders even. This has the added benefit that the code is valid in both your local environment and the final docker container. Try the [completed code example in this repo.][project-repo]
+Using relative imports allows the creation of Python functions that are split between several files. We could take this further and import from sub-folders or sub-folders of sub-folders. This has the added benefit that the code is valid in both your local environment and the final docker container. Try the [completed code example in this repo.][project-repo]
 
 [openfaas-homepage]: https://openfaas.com
 [openfaas-slack-singnup]: https://docs.openfaas.com/community/#slack-workspace

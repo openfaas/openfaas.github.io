@@ -156,7 +156,7 @@ def strip_punctuation(text: str) -> str:
     # ...
 ```
 
-Note that processing the `STOPWORDS` at the start of the file means it will be loaded into memory once the package is imported. In this case, once OpenFaaS deploys the function.
+Note that processing the `STOPWORDS` at the start of the file means it will be loaded into memory once the package is imported rather than on every request, which would create additional latency and I/O overhead.
 
 Using an explicit relative import, we can very easily use the `process_text` method to create a very simple `handler.py`:
 

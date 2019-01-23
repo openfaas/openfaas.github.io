@@ -15,7 +15,7 @@ As a core contributor to OpenFaaS, I hangout in the OpenFaaS Slack a lot, you ca
 
 Today, I will walk though creating exactly this kind of function by creating a word count function. I assume some familiarity with OpenFaaS and that you may have even started/completed the [OpenFaaS Workshop][workshop-repo], so I won't go into a lot of detail about the specific OpenFaaS setup instructions below. Instead, I want to focus on how to comfortably develop a Python function as it goes from a small "one-liner" function to a larger multi-module project.
 
-## Set up a python environment
+## Set up a Python environment
 
 This project uses Python 3 and I like to use Conda for my development environments:
 

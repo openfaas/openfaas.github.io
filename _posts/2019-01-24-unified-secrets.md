@@ -188,9 +188,9 @@ The format for inviting a new user will be a JSON payload:
 
 ```json
 {
- "first": "alex",
- "last": "ellis",
- "email": "alex@openfaas.com"
+"first": "alex",
+"last": "ellis",
+"email": "alex@openfaas.com"
 }
 ```
 
@@ -208,14 +208,11 @@ const passwordFile = "/var/openfaas/secrets/slack-login-password";
 const slackTokenFile = "/var/openfaas/secrets/slack-token";
 
 module.exports = (event, context) => {
-    let err;
-
-    process.stderr.write(JSON.stringify(event)+"\n");
-    process.stderr.write(JSON.stringify(context)+"\n");
-
     fs.readFile(passwordFile, "utf-8", (err, loginPassword) => {
         if(err) {
-            return context.status(500).succeed({"status": "error", "message": "unable to read secret"});
+            return context
+            .status(500)
+            .succeed({"status": "error", "message": "unable to read secret"});
         }
 
         if(!validAuth(event.headers, loginPassword.trim())) {
@@ -225,7 +222,9 @@ module.exports = (event, context) => {
         }
         invite(event.body, (err, res) =>{
             if(err) {
-                return context.status(500).succeed({"status": "error", "message": "unable to invite user: " + err});
+                return context
+                .status(500)
+                .succeed({"status": "error", "message": "unable to invite user: " + err});
             }
             context.status(202).succeed(res);
         });

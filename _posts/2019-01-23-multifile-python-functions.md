@@ -1,6 +1,6 @@
 ---
 title: Multifile python functions
-description: "Tidy python in an OpenFaaS world; or, what happens when you want to split your Python function into multiple modules?"
+description: "Are your Python functions bringing you joy? Or, what happens when you want to split your Python function into multiple modules?"
 date: 2019-01-23
 image: /images/multifile-python-function/pexels-book-stack-books-bookshop-264635.jpg
 categories:

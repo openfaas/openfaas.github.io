@@ -12,9 +12,9 @@ author_staff_member: alex
 dark_background: true
 ---
 
-Today I want to tell you about a new feature we built for you that unifies the experience of working with secrets in OpenFaaS. We introduced the ability to manage secrets using OpenFaaS API and CLI no matter what provider you are using - Swarm, Kubernetes, Nomad or something else. This simplifies the commands you need to learn and remember for creating, updating and managing secrets for your functions.
+Today I want to tell you about a new feature released in OpenFaaS that unifies the experience of working with secrets. We introduced the ability to manage secrets in one consistent way whether you are using Kubernetes, Swarm or Nomad. The changes we made to the REST API and CLI simplify the amount of commands you need to learn and remember to manage confidential data used by your functions.
 
-We'll start this post by looking at what I mean by `secret`, some *Dos and Don'ts*, how the new feature works and can be used and then we'll build a full example of a Slack invitation bot you can use with your own Slack workspace.
+We will start by looking at what I mean by `secret`, some *Dos and Don'ts* and how the new feature works. Then we'll build a full example of an invitation bot you can use with your own Slack workspace.
 
 ## What do you mean by a `secret`?
 

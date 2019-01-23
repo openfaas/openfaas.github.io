@@ -1,6 +1,6 @@
 ---
 title: Unifying Secrets for OpenFaaS
-description: Alex Ellis shows how the community unified the secret experience with Kubernetes, Docker Swarm and other OpenFaaS providers. He will examine secret management for Kubernetes and show a full worked-example of secrets with Slack using the new OpenFaaS CLI.
+description: Alex Ellis shows how new features released in OpenFaaS unify the developer-experience for managing secrets across Kubernetes, Docker Swarm and Nomad. He will examine secret management for Kubernetes and show a full worked-example of applying secrets to create a Slack invitation bot.
 date: 2019-01-23
 image: /images/unified-secrets/barrier-chain-chain-link-fence-951408.jpg
 categories:
@@ -20,9 +20,9 @@ We will start by looking at what I mean by `secret`, some *Dos and Don'ts* and h
 
 When I say `secret` I am referring to confidential data which needs to be protected from public viewing. This may be an API key, access code or even configuration data which is sensitive such as the name of a database or a validation rule stored as a Regular Expression.
 
-There are various ways to consume passwords in Kubernetes or Swarm.
-
 ### Dos and Don'ts
+
+There are various ways to consume passwords in Kubernetes or Swarm. Here are some of my "Do" and "Don't" recommendations.
 
 * Don't store secrets in your Docker image with `COPY` or `ADD`
 
@@ -31,6 +31,12 @@ Anyone who can pull the Docker image can see the secret. Even if you use a priva
 * Don't configure confidental data using environmental variables
 
 Environmental variables can be used to configure non-confidential data such as feature-flags, verbose logging and in some circumstances the names of other services that you may want to reach. The [12-Factor App Manifesto](https://12factor.net/) may recommend this, but fortunately Kubernetes, Swarm and the OpenFaaS Nomad provider all provide more suitable alternatives.
+
+* Do manage config with environmental variables
+
+You can manage configuration with environmental variables by declaring an `environment:` section in your function's `stack.yml` file. Or you can create an external file for your environmental configuration with `environment_file:`.
+
+Read more about using environmental variables for config in the [YAML reference](https://docs.openfaas.com/reference/yaml/#function-environmental-variables).
 
 * Do read the secret in your function from the standard location
 

@@ -9,7 +9,7 @@ author_staff_member: lucas
 dark_background: true
 ---
 
-As a core contributor to OpenFaaS, I hangout in the OpenFaaS Slack a lot (to help new users and contributors?). You can join the community [here][openfaas-slack-singnup]. A new user joined the community recently and asked the following question:
+As a core contributor to OpenFaaS, I hangout in the OpenFaaS Slack a lot (to help new users and contributors?). You can join the community [here][openfaas-slack-signup]. A new user joined the community recently and asked the following question:
 
 > [How can I] write a function in python that uses multiple source files so that the main `handler.py` is able to import helper functions from separate source files.
 
@@ -158,7 +158,7 @@ def strip_punctuation(text: str) -> str:
 
 Note that processing the `STOPWORDS` at the start of the file means it will be loaded into memory once the package is imported rather than on every request, which would create additional latency and I/O overhead.
 
-Using an explicit relative import, we can very easily use the `process_text` method to create a very simple `handler.py`:
+Using a relative import, we can very easily use the `process_text` method to create a very simple `handler.py`:
 
 ```py
 # handler.py
@@ -222,8 +222,13 @@ $ echo 'This is some example text that we want to see a frequency response for. 
 
 Using relative imports allows the creation of Python functions that are split between several files. We could take this further and import from sub-folders or sub-folders of sub-folders. This has the added benefit that the code is valid in both your local environment and the final docker container. Try the [completed code example in this repo.][project-repo]
 
+Checkout the [OpenFaas Workshop][openfaas-workshop] for a step-by-step guide of writing and deploying a Python function detailing the other features of OpenFaas: asynchronous functions, timeouts, auto-scaling, and managing secret values.
+
+For questions, comments and suggestions follow us on [Twitter @openfaas][openfaas-twitter] and [join the Slack community][openfaas-slack-signup].
+
 [openfaas-homepage]: https://openfaas.com
-[openfaas-slack-singnup]: https://docs.openfaas.com/community/#slack-workspace
+[openfaas-slack-signup]: https://docs.openfaas.com/community/#slack-workspace
+[openfaas-twitter]: https://twitter.com/openfaas
 [project-repo]: https://github.com/LucasRoesler/openfaas-multifile-example
 [workshop-repo]: https://github.com/openfaas/workshop
 [100-common-en-words]: https://www.espressoenglish.net/the-100-most-common-words-in-english/

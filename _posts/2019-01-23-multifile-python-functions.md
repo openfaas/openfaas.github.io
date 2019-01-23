@@ -13,11 +13,7 @@ As a core contributor to OpenFaaS, I hangout in the OpenFaaS Slack a lot, you ca
 
 > [How can I] write a function in python that uses multiple source files so that the main `handler.py` is able to import helper functions from separate source files.
 
-Today, I will walk though creating exactly this kind of function by creating a word count function.
-
-**TL;DR**: Use explicit relative imports to split your python code into several files. If you want to quickly jump to the finished code, I have create a [public repo here][project-repo].
-
-I assume some familiarity with OpenFaaS and that you may have even started/completed the [OpenFaaS Workshop][workshop-repo], so I won't go into a lot of detail about the specific OpenFaaS setup instructions below. Instead, I want to focus on how to comfortably develop a Python function as it goes from a small "one-liner" function to a larger multi-module project.
+Today, I will walk though creating exactly this kind of function by creating a word count function. I assume some familiarity with OpenFaaS and that you may have even started/completed the [OpenFaaS Workshop][workshop-repo], so I won't go into a lot of detail about the specific OpenFaaS setup instructions below. Instead, I want to focus on how to comfortably develop a Python function as it goes from a small "one-liner" function to a larger multi-module project.
 
 ## Set up a python environment
 

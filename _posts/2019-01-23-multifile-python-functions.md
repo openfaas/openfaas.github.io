@@ -19,7 +19,7 @@ Using multiple files to create sub-modules helps keep the code organized and mak
 
 Today, I will demonstrate how to do this in OpenFaaS by creating a word count function that is split into 3 files.
 
-I assume some familiarity with OpenFaaS and that you may have even started/completed the [OpenFaaS Workshop][workshop-repo], so I won't go into a lot of detail about the specific OpenFaaS setup instructions below. Instead, I want to focus on how to comfortably develop a Python function as it goes from a small "one-liner" function to a larger multi-module project.
+I assume some familiarity with OpenFaaS, so ou will need a basic understanding of how to create functions in OpenFaaS, but if you're new you can get up to speed using the [workshop][workshop-repo]. Instead, I want to focus on how to comfortably develop a Python function as it goes from a small "one-liner" function to a larger multi-module project.
 
 ## Set up a Python environment
 

@@ -70,7 +70,7 @@ The project should now look like
     └── requirements.txt
 ```
 
-## The word count implementation with relative imports
+## Relative imports
 
 We are going to add two more files to our function:
 

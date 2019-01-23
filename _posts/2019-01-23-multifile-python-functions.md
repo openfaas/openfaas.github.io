@@ -44,6 +44,11 @@ Fetch templates from repository: https://github.com/openfaas-incubator/python-fl
 2019/01/19 10:55:34 Attempting to expand templates from https://github.com/openfaas-incubator/python-flask-template
 2019/01/19 10:55:35 Fetched 3 template(s) : [python27-flask python3-flask python3-flask-armhf] from https://github.com/openfaas-incubator/python-flask-template
 $ faas-cli new wordcloud --lang python3-flask
+```
+
+Finally, move the generated stack file to the default location so that we don't have to specify the file location in future commands.
+
+```sh
 $ mv wordcloud.yml stack.yml
 ```
 

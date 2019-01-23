@@ -94,7 +94,16 @@ The project should now look like this
     └── wordcloud.py
 ```
 
-The `stopwords` is a plain text file of words that will be excluded in the wordcount. These are short common words that you would not want to include in a wordcloud visualization such as: `a`, `an`, `him`, `her`, and so on. This list of words will depend on your use case, adjust as you see fit.
+The `stopwords` is a plain text file of words that will be excluded in the wordcount. These are short common words that you would not want to include in a wordcloud visualization such as:s
+
+```txt
+a
+an
+him
+her
+```
+
+This list of words will depend on your use case and local, you should add more to match your needs, for example [the 100 most common English words][100-common-words] or [the 100 most common French words][100-common-fr-words].
 
 All of the real fun happens in `wordcloud.py`:
 
@@ -217,3 +226,5 @@ Using relative imports allows the creation of Python functions that are split be
 [openfaas-slack-singnup]: https://docs.openfaas.com/community/#slack-workspace
 [project-repo]: https://github.com/LucasRoesler/openfaas-multifile-example
 [workshop-repo]: https://github.com/openfaas/workshop
+[100-common-en-words]: https://www.espressoenglish.net/the-100-most-common-words-in-english/
+[100-common-fr-words]: https://www.vistawide.com/french/top_100_french_words.htm

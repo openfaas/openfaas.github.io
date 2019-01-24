@@ -1,7 +1,7 @@
 ---
 title: Unifying Secrets for OpenFaaS
 description: Alex Ellis shows how new features released in OpenFaaS unify the developer-experience for managing secrets across Kubernetes, Docker Swarm and Nomad. He will examine secret management for Kubernetes and show a full worked-example of applying secrets to create a Slack invitation bot.
-date: 2019-01-23
+date: 2019-01-24
 image: /images/unified-secrets/barrier-chain-chain-link-fence-951408.jpg
 categories:
   - kubernetes
@@ -72,9 +72,13 @@ cat fn-api-key.txt | docker secret create fn-api-key -
 
 It turned out that maintaining two sets of instructions for creating secrets in Kubernetes or Docker Swarm is a lot of work. We first saw this in the [OpenFaaS workshop](https://github.com/openfaas/workshop) where we had to duplicate a lot of content for Kubernetes or Swarm users. Recently the provider for Hashicorp's Nomad orchestrator also gained secrets and so we'd have yet another set of commands for our contributors and users to remember.
 
+## Try it out
+
+I'll now go over how you can try out the new feature - first with the `faas-cli` and then via the REST API.
+
 ### Use the faas-cli
 
-Our `faas-cli` is now a core piece of the OpenFaaS developer-experience and our users run it locally and in their CI jobs, so it seemed like a great place to start.
+The OpenFaaS CLI (or `faas-cli`) is now a core piece of the OpenFaaS developer-experience and our users run it locally and in their CI jobs.
 
 Create the secret from a text value:
 
@@ -93,6 +97,8 @@ In both instances the file will be available in the same standard location whate
 ```
 /var/openfaas/secrets/fn-api-key
 ```
+
+You can find out more information about this command via `faas-cli secret --help` or through the [manage secrets](https://docs.openfaas.com/cli/secrets/) page.
 
 ### Use the REST API
 

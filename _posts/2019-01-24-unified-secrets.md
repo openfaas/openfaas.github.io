@@ -114,7 +114,7 @@ You'll notice this is not CRUD, but CLUD. We specifically did not want to make t
 Here's how you can create a new secret using the REST API:
 
 ```bash
-export OPENFAAS_URL=http://
+export OPENFAAS_URL=your.gateway.com
 
 curl -X POST \
   -d '{"name":"fn-api-key","value":"VALUE_HERE"}' \

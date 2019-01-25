@@ -28,15 +28,15 @@ There are various ways to consume passwords in Kubernetes or Swarm. Here are som
 
 Anyone who can pull the Docker image can see the secret. Even if you use a private registry this makes your confidential data hard to change or update over time.
 
-* Don't configure confidental data using environmental variables
+* Don't configure confidental data using environment variables
 
-Environmental variables can be used to configure non-confidential data such as feature-flags, verbose logging and in some circumstances the names of other services that you may want to reach. The [12-Factor App Manifesto](https://12factor.net/) may recommend this, but fortunately Kubernetes, Swarm and the OpenFaaS Nomad provider all provide more suitable alternatives.
+environment variables can be used to configure non-confidential data such as feature-flags, verbose logging and in some circumstances the names of other services that you may want to reach. The [12-Factor App Manifesto](https://12factor.net/) may recommend this, but fortunately Kubernetes, Swarm and the OpenFaaS Nomad provider all provide more suitable alternatives.
 
-* Do manage config with environmental variables
+* Do manage config with environment variables
 
-You can manage configuration with environmental variables by declaring an `environment:` section in your function's `stack.yml` file. Or you can create an external file for your environmental configuration with `environment_file:`.
+You can manage configuration with environment variables by declaring an `environment:` section in your function's `stack.yml` file. Or you can create an external file for your environmental configuration with `environment_file:`.
 
-Read more about using environmental variables for config in the [YAML reference](https://docs.openfaas.com/reference/yaml/#function-environmental-variables).
+Read more about using environment variables for config in the [YAML reference](https://docs.openfaas.com/reference/yaml/#function-environmental-variables).
 
 * Do read the secret in your function from the standard location
 
@@ -114,18 +114,22 @@ You'll notice this is not CRUD, but CLUD. We specifically did not want to make t
 Here's how you can create a new secret using the REST API:
 
 ```bash
-export OPENFAAS_URL=http://
 
+# Note do not add the http or https prefix
+export GATEWAY=host:port
+
+# Customise to http/https as needed
 curl -X POST \
   -d '{"name":"fn-api-key","value":"VALUE_HERE"}' \
-  http://admin:password@$OPENFAAS_URL/system/secrets
+  http://admin:password@$GATEWAY/system/secrets
 ```
 
 Now verify it:
 
 ```bash
+# Customise to http/https as needed
 curl -X GET \
-  http://admin:password@$OPENFAAS_URL/system/list
+  http://admin:password@$GATEWAY/system/list
 ```
 
 ## Let's put it all together

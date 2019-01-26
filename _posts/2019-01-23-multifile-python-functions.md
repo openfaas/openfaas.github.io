@@ -5,42 +5,33 @@ date: 2019-01-23
 image: /images/multifile-python-function/pexels-book-stack-books-bookshop-264635.jpg
 categories:
   - python
+  - coding
+  - examples
 author_staff_member: lucas
 dark_background: true
 ---
 
-As a core contributor to OpenFaaS, I hangout in the OpenFaaS Slack a lot (to help new users and contributors?). You can join the community [here][openfaas-slack-signup]. A new user joined the community recently and asked the following question:
+As a core contributor to OpenFaaS, I hangout in the OpenFaaS Slack a lot (to help new users and contributors?). You can join the community [here][openfaas-slack-signup]. A new user joined the community recently and asked:
 
-> [How can I] write a function in python that uses multiple source files so that the main `handler.py` is able to import helper functions from separate source files.
+"How can I write a function in python that uses multiple source files so that the main `handler.py` is able to import helper functions from separate source files."
 
-Using multiple files to create sub-modules helps keep the code organized and makes reusing code between projects/fuctions much easier. Functions and variables defined within a module importable into other modules and allows you to scope your function and variable names without worrying about conflicts. From [the Python docs](https://docs.python.org/3/tutorial/modules.html#more-on-modules):
+Using multiple files to create sub-modules helps keep the code organized and makes reusing code between projects/functions much easier. Functions and variables defined within a module importable into other modules and allows you to scope your function and variable names without worrying about conflicts. From [the Python docs](https://docs.python.org/3/tutorial/modules.html#more-on-modules):
 
 > Each module has its own private symbol table, which is used as the global symbol table by all functions defined in the module. Thus, the author of a module can use global variables in the module without worrying about accidental clashes with a user’s global variables.
 
-Today, I will demonstrate how to do this in OpenFaaS by creating a word count function that is split into 3 files.
+Today, I will demonstrate how to do this in OpenFaaS by creating a Python 3 word count function that is split into 3 files.
 
 I assume some familiarity with OpenFaaS, so ou will need a basic understanding of how to create functions in OpenFaaS, but if you're new you can get up to speed using the [workshop][workshop-repo]. Instead, I want to focus on how to comfortably develop a Python function as it goes from a small "one-liner" function to a larger multi-module project.
-
-## Set up a Python environment
-
-This project uses Python 3 and I like to use Conda for my development environments:
-
-```sh
-$ conda create --name faaswordcount  python=3.7.2 black autopep8 flake8 pylint mypy flask gevent
-$ conda source activate faaswordcount
-```
-
-Or from my example repo: `conda env create -f environment.yml`.
-
-Creating a local environment like this will allow your editor/ide to lint/hint/autocomplete as needed.
 
 ## Start the function
 
 Next, to start a new Python 3 function, I like to use the flask template because I am going to load a static list of "stop words" into memory when the function starts. Using the flask templates allows the function to do this only once instead of on each invocation.
 
+Change `--prefix` to your Docker Hub account or your private registry. Note you will need to use docker login before the next step.
+
 ```sh
 $ faas-cli template store pull python3-flask
-$ faas-cli new wordcount --lang python3-flask
+$ faas-cli new wordcount --lang python3-flask --prefix=alexellis
 ```
 
 The project should now look like
@@ -168,37 +159,12 @@ def handle(req):
 
 This style of relative imports will work for any file or sub-package you include inside of your function folder. Additionally, your IDE and linter will be able to resolve the imported code correctly!
 
-## Setup OpenFaaS
-
-OpenFaaS on Kubeneretes is my go-to deployment because I can use the built in k8s cluster in Docker-for-Mac.
-
-```sh
-$ kubectl apply -f https://raw.githubusercontent.com/openfaas/faas-netes/master/namespaces.yml
-namespace "openfaas" created
-namespace "openfaas-fn" created
-
-$ helm repo add openfaas https://openfaas.github.io/faas-netes/ && helm repo update
-"openfaas" has been added to your repositories
-Hang tight while we grab the latest from your chart repositories...
-...Successfully got an update from the "incubator" chart repository
-...Successfully got an update from the "contiamo" chart repository
-...Successfully got an update from the "openfaas" chart repository
-...Successfully got an update from the "stable" chart repository
-Update Complete. ⎈ Happy Helming!⎈
-
-$ helm upgrade openfaas --install openfaas/openfaas \
-    --namespace openfaas  \
-    --set basic_auth=false \
-    --set faasnetesd.imagePullPolicy='IfNotPresent' \
-    --set functionNamespace=openfaas-fn
-```
-
-This creates an OpenFaaS installation with auth disabled and it will use my locally built images for my functions.
-
 ## Deploy and test the function
 
+You should have [OpenFaaS deployed][openfaas-deployment] and have run `faas-cli login` already.
+
 ```sh
-$  faas-cli up -f wordcount.yml --skip-push
+$  faas-cli up -f wordcount.yml
 # Docker build output ...
 Deploying: wordcount.
 
@@ -209,18 +175,27 @@ $ echo 'This is some example text that we want to see a frequency response for. 
 {"example": 1, "text": 2, "want": 1, "see": 1, "frequency": 1, "response": 1, "for": 1, "apple": 3, "tree": 1, "etc": 1}
 ```
 
+## Python 2
+
+Using the [`__future__` package][python-future] you can get the same behavior in your Python 2 functions. Add `from __future__ import absolute_import` as the first import in `handler.py` and `wordcount.py` to ensure that the relative imports are resolved correctly.
+
+Note, Python 2 is [End Of Life this year][python2-eol] and will not receive any bugfix releases after 2020. If you are still transitioning to Python 3, use the `__future__` package to help smooth the transition.
+
 ## Wrapping up
 
 Using relative imports allows the creation of Python functions that are split between several files. We could take this further and import from sub-folders or sub-folders of sub-folders. This has the added benefit that the code is valid in both your local environment and the final docker container. Try the [completed code example in this repo.][project-repo]
 
-Checkout the [OpenFaas Workshop][openfaas-workshop] for a step-by-step guide of writing and deploying a Python function detailing the other features of OpenFaas: asynchronous functions, timeouts, auto-scaling, and managing secret values.
+Checkout the [OpenFaas Workshop][workshop-repo] for a step-by-step guide of writing and deploying a Python function detailing the other features of OpenFaas: asynchronous functions, timeouts, auto-scaling, and managing secret values.
 
 For questions, comments and suggestions follow us on [Twitter @openfaas][openfaas-twitter] and [join the Slack community][openfaas-slack-signup].
 
 [openfaas-homepage]: https://openfaas.com
 [openfaas-slack-signup]: https://docs.openfaas.com/community/#slack-workspace
 [openfaas-twitter]: https://twitter.com/openfaas
+[openfaas-deployment]: https://docs.openfaas.com/deployment/
 [project-repo]: https://github.com/LucasRoesler/openfaas-multifile-example
 [workshop-repo]: https://github.com/openfaas/workshop
 [100-common-en-words]: https://www.espressoenglish.net/the-100-most-common-words-in-english/
 [100-common-fr-words]: https://www.vistawide.com/french/top_100_french_words.htm
+[python2-eol]: https://legacy.python.org/dev/peps/pep-0373/
+[python-future]: https://docs.python.org/2/library/__future__.html

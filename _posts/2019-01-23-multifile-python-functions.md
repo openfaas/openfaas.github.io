@@ -19,7 +19,7 @@ Using multiple files to create sub-modules helps keep the code organized and mak
 
 > Each module has its own private symbol table, which is used as the global symbol table by all functions defined in the module. Thus, the author of a module can use global variables in the module without worrying about accidental clashes with a user’s global variables.
 
-Today, I will demonstrate how to do this in OpenFaaS by creating a Python 3 word count function that is split into 3 files.
+Today, I will demonstrate how to do this in OpenFaaS by creating a Python 3 word count function that is split across multiple files.
 
 I assume some familiarity with OpenFaaS, so ou will need a basic understanding of how to create functions in OpenFaaS, but if you're new you can get up to speed using the [workshop][workshop-repo]. Instead, I want to focus on how to comfortably develop a Python function as it goes from a small "one-liner" function to a larger multi-module project.
 

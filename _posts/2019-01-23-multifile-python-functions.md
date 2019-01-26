@@ -96,7 +96,7 @@ her
 
 This list of words will depend on your use case and local, you should add more to match your needs, for example [the 100 most common English words][100-common-words] or [the 100 most common French words][100-common-fr-words].
 
-All of the real fun happens in `wordcount.py`:
+All of the code for processing text and generating the counts is found in `wordcount.py`:
 
 ```py
 # modified wordcount.py

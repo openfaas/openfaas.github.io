@@ -54,7 +54,9 @@ The project should now look like
 
 ## Relative imports
 
-The user asked how we can split our code across multiple files. We're going to start by creating two more files:
+Python allows you to reuse code from other files [by `import`ing it][pep-328]. For functions, [relative imports][abs-vs-rel-imports] allow us to specify those resources relative to the file doing the import. This provides maximum flexibility because the import is then agnostic to how/where the package is installed, which is perfect for OpenFaaS functions.
+
+We're going to start by creating two more files:
 
 ```sh
 touch wordcount/stopwords
@@ -85,7 +87,7 @@ him
 her
 ```
 
-This list of words will depend on your use case and local, you should add more to match your needs, for example [the 100 most common English words][100-common-words] or [the 100 most common French words][100-common-fr-words].
+This list of words will depend on your use case and local, you should add more to match your needs, for example [the 100 most common English words][100-common-en-words] or [the 100 most common French words][100-common-fr-words].
 
 All of the code for processing text and generating the counts is found in `wordcount.py`:
 
@@ -199,3 +201,5 @@ For questions, comments and suggestions follow us on [Twitter @openfaas][openfaa
 [100-common-fr-words]: https://www.vistawide.com/french/top_100_french_words.htm
 [python2-eol]: https://legacy.python.org/dev/peps/pep-0373/
 [python-future]: https://docs.python.org/2/library/__future__.html
+[abs-vs-rel-imports]: https://realpython.com/absolute-vs-relative-python-imports/#relative-imports
+[pep-328]: https://www.python.org/dev/peps/pep-0328/

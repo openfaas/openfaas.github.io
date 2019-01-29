@@ -1,6 +1,6 @@
 ---
 name: Richard Gee
-position: Contributor
+position: Core Contributor
 image_path: /images/author/richard.jpg
 twitter_username: rgee0
 github_username: rgee0

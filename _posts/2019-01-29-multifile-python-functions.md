@@ -1,7 +1,7 @@
 ---
-title: Multifile python functions
+title: Designing Python Functions with multiple files
 description: "Are your Python functions bringing you joy? Or, what happens when you want to split your Python function into multiple modules?"
-date: 2019-01-23
+date: 2019-01-29
 image: /images/multifile-python-function/pexels-book-stack-books-bookshop-264635.jpg
 categories:
   - python
@@ -13,7 +13,7 @@ dark_background: true
 
 As a core contributor to OpenFaaS, I hangout in the OpenFaaS Slack a lot (to help new users and contributors?). You can join the community [here][openfaas-slack-signup]. A new user joined the community recently and asked:
 
-"How can I write a function in python that uses multiple source files so that the main `handler.py` is able to import helper functions from separate source files."
+"How can I write a function in Python that uses multiple source files so that the main `handler.py` is able to import helper functions from separate source files."
 
 Using multiple files to create sub-modules helps keep the code organized and makes reusing code between projects/functions much easier. Functions and variables defined within a module importable into other modules and allows you to scope your function and variable names without worrying about conflicts. From [the Python docs](https://docs.python.org/3/tutorial/modules.html#more-on-modules):
 
@@ -177,7 +177,7 @@ $ echo 'This is some example text that we want to see a frequency response for. 
 {"example": 1, "text": 2, "want": 1, "see": 1, "frequency": 1, "response": 1, "for": 1, "apple": 3, "tree": 1, "etc": 1}
 ```
 
-## Python 2
+## A note on Python 2 usage
 
 Using the [`__future__` package][python-future] you can get the same behavior in your Python 2 functions. Add `from __future__ import absolute_import` as the first import in `handler.py` and `wordcount.py` to ensure that the relative imports are resolved correctly.
 

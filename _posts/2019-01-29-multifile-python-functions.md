@@ -11,7 +11,7 @@ author_staff_member: lucas
 dark_background: true
 ---
 
-As a core contributor to OpenFaaS, I hangout in the OpenFaaS Slack a lot (to help new users and contributors?). You can join the community [here][openfaas-slack-signup]. A new user joined the community recently and asked:
+As a core contributor to OpenFaaS, you'll find me in the OpenFaaS Slack hanging out and ready to help new users and contributors. You can join the community [here][openfaas-slack-signup]. This was post inspired by a question from a new user who had just joined the community. He asked:
 
 "How can I write a function in Python that uses multiple source files so that the main `handler.py` is able to import helper functions from separate source files."
 
@@ -21,17 +21,28 @@ Using multiple files to create sub-modules helps keep the code organized and mak
 
 Today, I will demonstrate how to do this in OpenFaaS by creating a Python 3 word count function that is split across multiple files.
 
-I assume some familiarity with OpenFaaS, so ou will need a basic understanding of how to create functions in OpenFaaS, but if you're new you can get up to speed using the [workshop][workshop-repo]. Instead, I want to focus on how to comfortably develop a Python function as it goes from a small "one-liner" function to a larger multi-module project.
+You should have a basic knowledge of OpenFaaS and Python, but if you're new you can get up to speed using the [workshop][workshop-repo]. I want to focus on how to take a "one-liner" function and turn it into a larger multi-module project.
 
 ## Start the function
 
 Next, to start a new Python 3 function, I like to use the flask template because I am going to load a static list of "stop words" into memory when the function starts. Using the flask templates allows the function to do this only once instead of on each invocation.
 
-Change `--prefix` to your Docker Hub account or your private registry. Note you will need to use docker login before the next step.
+* Let's create a new folder to work in
+
+```sh
+mkdir -p ~/dev/multi-module
+cd ~/dev/multi-module
+```
+
+* Type in `docker login`
+
+* Change `--prefix` to your Docker Hub account or your private registry
+
+* Now pull in the `python3-flask` template and create a new function named `wordcount`
 
 ```sh
 $ faas-cli template store pull python3-flask
-$ faas-cli new wordcount --lang python3-flask --prefix=alexellis
+$ faas-cli new wordcount --lang python3-flask --prefix=USERNAME
 ```
 
 The project should now look like
@@ -173,7 +184,10 @@ Deploying: wordcount.
 Deployed. 202 Accepted.
 URL: http://127.0.0.1:31112/function/wordcount
 
-$ echo 'This is some example text that we want to see a frequency response for.  It has text like apple, apples, apple tree, etc' | faas-cli -f wordcount.yml invoke wordcount
+$ echo \
+  'This is some example text that we want to see a frequency response for.  It has text like apple, apples, apple tree, etc' \
+  | faas-cli -f wordcount.yml invoke wordcount
+
 {"example": 1, "text": 2, "want": 1, "see": 1, "frequency": 1, "response": 1, "for": 1, "apple": 3, "tree": 1, "etc": 1}
 ```
 
@@ -185,7 +199,7 @@ Note, Python 2 is [End Of Life this year][python2-eol] and will not receive any 
 
 ## Wrapping up
 
-Using relative imports allows the creation of Python functions that are split between several files. We could take this further and import from sub-folders or sub-folders of sub-folders. This has the added benefit that the code is valid in both your local environment and the final docker container. Try the [completed code example in this repo.][project-repo]
+When we use relative imports then we can easily split our code over several files for better organisation. We could take this further and import from sub-folders or sub-folders of sub-folders. This has the added benefit that the code is valid in both your local environment and the final docker container. Try the [completed code example in this repo.][project-repo]
 
 Checkout the [OpenFaas Workshop][workshop-repo] for a step-by-step guide of writing and deploying a Python function detailing the other features of OpenFaas: asynchronous functions, timeouts, auto-scaling, and managing secret values.
 

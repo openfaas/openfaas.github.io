@@ -1,6 +1,6 @@
 ---
-title: Designing Python Functions with multiple files
-description: "Are your Python functions bringing you joy? Or, what happens when you want to split your Python function into multiple modules?"
+title: How to split large Python Functions across multiple files
+description: "Are your Python functions bringing you joy? Lucas Roesler shares his tips on how to split your Python functions into multiple modules to help your project grow"
 date: 2019-01-29
 image: /images/multifile-python-function/pexels-book-stack-books-bookshop-264635.jpg
 categories:

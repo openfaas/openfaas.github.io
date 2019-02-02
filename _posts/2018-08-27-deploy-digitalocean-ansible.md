@@ -41,7 +41,7 @@ $ curl -sSL get.docker.com | sh
 
 ## DigitalOcean account
 In order to deploy onto [DigitalOcean](https://www.digitalocean.com/) the reader must have an account and enable API access by generating an API key. 
-> A DigitalOcean account with $10 of credit can be  [created here](https://m.do.co/c/2962aa9e56a1) - $10 is enough to try out this post and much more besides.
+> A DigitalOcean account with $100/60 days of credit can be  [created here](https://m.do.co/c/2962aa9e56a1) - $100 is enough to try out this post and much more besides.
 
 ### Create and upload an SSH key
 

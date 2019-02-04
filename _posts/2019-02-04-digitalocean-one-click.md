@@ -1,7 +1,7 @@
 ---
 title: "Ride the Serverless Wave with DigitalOcean's One-click Droplet"
 description: Join Richard Gee as he guides you through the experience of creating your first OpenFaaS function on DigitalOcean using DigitalOcean's new one-click Droplet image.
-date: 2019-02-02
+date: 2019-02-04
 image: /images/digitalocean-one-click/balance-macro-ocean.jpg
 categories:
   - developer-experience

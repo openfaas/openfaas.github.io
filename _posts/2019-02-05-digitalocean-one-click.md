@@ -1,7 +1,7 @@
 ---
 title: "Ride the Serverless wave with DigitalOcean's OpenFaaS One-click"
 description: With DigitalOcean's OpenFaaS One-click application now available.  Join Richard Gee as he guides you through the experience of creating your first OpenFaaS function on DigitalOcean.
-date: 2019-02-02
+date: 2019-02-05
 image: /images/digitalocean-One-click/balance-macro-ocean.jpg
 categories:
   - developer-experience

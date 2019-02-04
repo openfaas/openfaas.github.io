@@ -64,7 +64,7 @@ Copy the IP address and using your favourite terminal log in to the Droplet usin
 
 Once logged in follow the instructions; at the time of writing this is simply to press Enter.
 
-![Logged in](/images/digitalocean-one-click/terminal.jpg)
+![Logged in](/images/digitalocean-one-click/terminal.gif)
 
 A number of configuration actions will be performed for you, and the result will be a running Swarm-based OpenFaaS instance. Make a note of the credentials - in particular the final line which will set our credentials in the `faas-cli` - we'll need this when we deploy our function. We can now close the connection to the Droplet.
 

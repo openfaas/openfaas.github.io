@@ -1,7 +1,7 @@
 ---
 title: "Ride the Serverless Wave with DigitalOcean's One-click Droplet"
 description: Join Richard Gee as he guides you through the experience of creating your first OpenFaaS function on DigitalOcean using DigitalOcean's new one-click Droplet image.
-date: 2019-02-05
+date: 2019-02-02
 image: /images/digitalocean-one-click/balance-macro-ocean.jpg
 categories:
   - developer-experience
@@ -16,11 +16,11 @@ dark_background: false
 
 Last August I wrote [a post](/blog/deploy-digitalocean-ansible.md) showing how you could set up OpenFaaS on DigitalOcean with Kubernetes or Docker Swarm in 5 minutes. This week saw the culmination of a collaboration between DigitalOcean and the OpenFaaS community, which resulted in the general availability of an OpenFaaS one-click Droplet image. This makes it even easier to deploy OpenFaaS in the most cost-effective way with DigitalOcean.
 
-We now have three well-documented ways to setup OpenFaaS for your team on DigitalOcean:
+We now have three well-documented ways to setup OpenFaaS for your team on DigitalOcean's infrastructure:
 
-* [Set up OpenFaaS on Droplets running Swarm or Kubernetes](/blog/deploy-digitalocean-ansible.md)
-* Install OpenFaaS on [DigitalOcean's Kubernetes Service (DOKS)](https://blog.alexellis.io/digitalocean-kubernetes-engine/)
-* Use the new one-click Droplet image available today
+* [Deploy OpenFaaS to DigitalOcean's Kubernetes Service (DOKS)](https://blog.alexellis.io/digitalocean-kubernetes-engine/)
+* [Deploy OpenFaaS with Ansible with Kubernetes or Swarm](/blog/deploy-digitalocean-ansible.md)
+* Use the new one-click Droplet image available today (this post)
 
 In this post we'll guide you through creating your first OpenFaaS function using the one-click Droplet image which uses a single-node Docker Swarm cluster.
 
@@ -185,17 +185,22 @@ Access the UI to see the deployed function by visiting `http://159.65.92.17:8080
 
 From here you can also invoke the function - simply click on the invoke button; you'll notice the invocation count increase as you do. You can also deploy from a set of ready-made functions via the OpenFaaS store - Click on `Deploy New Function` to see what's available.
 
-
 ## Wrapping up
 
 We've taken our first steps into creating a function using DigitalOcean's OpenFaaS one-click application. The in-built configuration created a Docker Swarm based publicly accessible instance with basic authentication enabled by default. We've looked at how the OpenFaaS CLI can be used to build our functions and deploy them to a remote instance by setting the `OPENFAAS_URL`.
 
 This is great as a starting point to quickly getting hands on with OpenFaaS. With an instance up and running you are ideally placed to work through the [OpenFaaS Workshop](https://github.com/openfaas/workshop). If you've followed this article fully then you should be able to skip straight on to [Lab 2](https://github.com/openfaas/workshop/blob/master/lab2.md) - remember to substitute any workshop references to `127.0.0.1` with the IP address of your Droplet.
 
+### Keep learning
+
 Taking it further we could look at how to configure a domain name to point at the instance and enable transit encryption through use of a service like [Let's Encrypt](https://letsencrypt.org/).
 
-* For questions, comments and suggestions follow us on [Twitter @openfaas](https://twitter.com/openfaas) and join the [Slack community](https://docs.openfaas.com/community).
+#### Get in touch
 
-* Learn how to contribute to OpenFaaS on YouTube
+For questions, comments and suggestions follow us on [Twitter @openfaas](https://twitter.com/openfaas) and join the [Slack community](https://docs.openfaas.com/community).
+
+#### Contribute
+
+Learn how to contribute to OpenFaaS on YouTube
 
 {% include youtube.html id="kOgHjU38Efg" %}

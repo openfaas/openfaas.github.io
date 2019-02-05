@@ -14,12 +14,12 @@ author_staff_member: richard
 dark_background: false
 ---
 
-Last August I wrote [a post](/blog/deploy-digitalocean-ansible.md) showing how you could set up OpenFaaS on DigitalOcean with Kubernetes or Docker Swarm in 5 minutes. This week saw the culmination of a collaboration between DigitalOcean and the OpenFaaS community, which resulted in the general availability of an OpenFaaS one-click Droplet image. This makes it even easier to deploy OpenFaaS in the most cost-effective way with DigitalOcean.
+Last August I wrote [a post](/blog/deploy-digitalocean-ansible) showing how you could set up OpenFaaS on DigitalOcean with Kubernetes or Docker Swarm in 5 minutes. This week saw the culmination of a collaboration between DigitalOcean and the OpenFaaS community, which resulted in the general availability of an OpenFaaS one-click Droplet image. This makes it even easier to deploy OpenFaaS in the most cost-effective way with DigitalOcean.
 
 We now have three well-documented ways to setup OpenFaaS for your team on DigitalOcean's infrastructure:
 
 * [Deploy OpenFaaS to DigitalOcean's Kubernetes Service (DOKS)](https://blog.alexellis.io/digitalocean-kubernetes-engine/)
-* [Deploy OpenFaaS with Ansible with Kubernetes or Swarm](/blog/deploy-digitalocean-ansible.md)
+* [Deploy OpenFaaS with Ansible with Kubernetes or Swarm](/blog/deploy-digitalocean-ansible/)
 * Use the new one-click Droplet image available today (this post)
 
 In this post we'll guide you through creating your first OpenFaaS function using the one-click Droplet image which uses a single-node Docker Swarm cluster.

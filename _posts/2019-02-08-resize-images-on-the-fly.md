@@ -1,7 +1,7 @@
 ---
 title: "How to resize your images on-the-fly with OpenFaaS"
 description: In this post Tarun from Iconscout walks us through how his company is leveraging a Serverless approach with Node.js and OpenFaaS to boost image resizing and conversion speeds of up to 4-5x.
-date: 2019-02-04
+date: 2019-02-08
 image: /images/resize-on-fly/watching-from-cave.jpg
 categories:
   - end-user

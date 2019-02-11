@@ -13,11 +13,12 @@ dark_background: true
 
 How to run OpenFaaS on AWS Fargate with economical, auto-scaling containers. A low friction AWS
 native deployment using VPCs, ECS, security groups, ALBs, AWS Secrets Manager and AWS Route 53 for
-DNS, load-balancing and service discovery
+DNS, load-balancing and service discovery.
 
-_Experience level:_
+Experience required:
 
-_beginner OpenFaaS / intermediate AWS Fargate_
+* Basic-level OpenFaaS
+* Intermediate-level AWS
 
 This article will explain why I've chosen to run OpenFaaS on AWS Fargate. We then move on to explore
 how to deploy a fully working environment and run our first function.

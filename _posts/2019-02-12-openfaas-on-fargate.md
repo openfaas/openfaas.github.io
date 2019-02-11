@@ -283,23 +283,30 @@ Destroy complete! Resources: 133 destroyed.
 ```
 
 ## Wrapping up
-We've seen how the OpenFaaS provider architecture makes it easy to extend the platform and
-run serverless functions on AWS Fargate.
 
-Next we deployed a complete OpenFaaS stack using terraform on to AWS Fargate and secured the 
-transport layer using the ACME provider and Let's Encrypt. 
+We've seen how the OpenFaaS provider architecture makes it easy to extend the platform and 
+run serverless functions on AWS Fargate. Then we deployed a complete OpenFaaS stack using terraform 
+on to AWS Fargate and secured the transport layer using the ACME provider and Let's Encrypt. 
 
-OpenFaaS Fargate repositories mentioned in this post:
+My code:
 
-- [Faas-fargate](https://github.com/ewilde/faas-fargate): OpenFaaS provider for AWS Fargate
+- [faas-fargate](https://github.com/ewilde/faas-fargate): OpenFaaS provider for AWS Fargate
 - [Terraform installer for faas-fargate](https://github.com/ewilde/terraform-aws-openfaas-fargate): Installs the 
 OpenFaaS platform for AWS Fargate using Terraform
 
-### Give feedback
-I welcome feedback and contributions from the community.
-For questions, comments and suggestions follow us on [Twitter @openfaas](https://twitter.com/openfaas) 
-and join the [Slack community](https://docs.openfaas.com/community).
+### What's next for faas-fargate
 
-## What's next for OpenFaaS on Fargate
 * Support _scale to zero_ using the [faas-idler](https://github.com/openfaas-incubator/faas-idler).
 * Provide better _observability_ for users and integrate Grafana with the standard deployment to surface function metrics.
+
+### Get connected
+
+Get connected, ask questions, make comments and suggestions on:
+
+* [openfaas/faas](https://github.com/openfaas/faas)
+* [Slack](https://docs.openfaas.com/community)
+* [Twitter](https://twitter.com/openfaas)
+
+**New:** Join the [OpenFaaS #TeamServerless LinkedIn Group](https://www.linkedin.com/groups/13670843/).
+
+

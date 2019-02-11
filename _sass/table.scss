@@ -39,6 +39,18 @@ $small-screen: 800px; //used for media queries
     color: $header-text-color;
   }
 
+  thead {
+    tr {
+        th {
+            a {
+                color: white;
+                a:hover, a:visited, a:active {
+                    color: white;
+                }
+            }
+        }
+    }
+  }
   tr:nth-child(even) {
     background-color: $row-primary-color;
   }

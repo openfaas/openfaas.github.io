@@ -1,6 +1,6 @@
 ---
-title: Faas on Fargate&#58; run OpenFaaS on AWS Fargate
-description: Edward Wilde introduces running OpenFaaS on AWS Fargate - a simple, low cost way to deploy and run OpenFaaS functions without managing servers
+title: FaaS comes to Fargate&#58; OpenFaaS with AWS Fargate
+description: Edward Wilde introduces faas-fargate, or OpenFaaS for AWS Fargate. Learn about a simple, low-cost way to deploy and run OpenFaaS functions on AWS without managing servers
 date: 2019-02-12
 image: /images/openfaas-on-fargate/astronomy-atmosphere-earth-220201.jpg
 categories:

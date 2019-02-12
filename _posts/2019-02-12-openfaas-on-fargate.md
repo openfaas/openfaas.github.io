@@ -129,7 +129,7 @@ terraform apply
 
 | Name                | Description                                                                                                                      |
 |---------------------|----------------------------------------------------------------------------------------------------------------------------------|
-| acme_enabled        | (Recommended)`1` to use the official [acme]() terraform provider to create TLS certificates. Defaults to `0`                       |
+| acme_enabled        | (Recommended)`1` to use the official [acme](https://www.terraform.io/docs/providers/acme/index.html) terraform provider to create TLS certificates. Defaults to `0`                       |
 | acme_email_address  | (Recommended) Email address used to register TLS account, used in conjunction with `acme_enabled`                                  |
 | aws_region          | (Required) The aws region to create the openfaas ecs cluster in                                                                  |
 | alb_logs_bucket     | (Required) S3 bucket to store alb logs                                                                                           |

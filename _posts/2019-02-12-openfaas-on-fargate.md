@@ -1,6 +1,6 @@
 ---
-title: Faas on Fargate&#58; run OpenFaaS on AWS Fargate
-description: Edward Wilde introduces running OpenFaaS on AWS Fargate - a simple, low cost way to deploy and run OpenFaaS functions without managing servers
+title: FaaS comes to Fargate&#58; OpenFaaS with AWS Fargate
+description: Edward Wilde introduces faas-fargate, or OpenFaaS for AWS Fargate. Learn about a simple, low-cost way to deploy and run OpenFaaS functions on AWS without managing servers
 date: 2019-02-12
 image: /images/openfaas-on-fargate/astronomy-atmosphere-earth-220201.jpg
 categories:
@@ -13,11 +13,12 @@ dark_background: true
 
 How to run OpenFaaS on AWS Fargate with economical, auto-scaling containers. A low friction AWS
 native deployment using VPCs, ECS, security groups, ALBs, AWS Secrets Manager and AWS Route 53 for
-DNS, load-balancing and service discovery
+DNS, load-balancing and service discovery.
 
-_Experience level:_
+Experience required:
 
-_beginner OpenFaaS / intermediate AWS Fargate_
+* Basic-level OpenFaaS
+* Intermediate-level AWS
 
 This article will explain why I've chosen to run OpenFaaS on AWS Fargate. We then move on to explore
 how to deploy a fully working environment and run our first function.
@@ -128,7 +129,7 @@ terraform apply
 
 | Name                | Description                                                                                                                      |
 |---------------------|----------------------------------------------------------------------------------------------------------------------------------|
-| acme_enabled        | (Recommended)`1` to use the official [acme](https://www.terraform.io/docs/providers/acme/index.html) terraform provider to create TLS certificates. Defaults to `0`                       |
+| acme_enabled        | (Recommended)`1` to use the official [acme]() terraform provider to create TLS certificates. Defaults to `0`                       |
 | acme_email_address  | (Recommended) Email address used to register TLS account, used in conjunction with `acme_enabled`                                  |
 | aws_region          | (Required) The aws region to create the openfaas ecs cluster in                                                                  |
 | alb_logs_bucket     | (Required) S3 bucket to store alb logs                                                                                           |
@@ -282,23 +283,30 @@ Destroy complete! Resources: 133 destroyed.
 ```
 
 ## Wrapping up
-We've seen how the OpenFaaS provider architecture makes it easy to extend the platform and
-run serverless functions on AWS Fargate.
 
-Next we deployed a complete OpenFaaS stack using terraform on to AWS Fargate and secured the 
-transport layer using the ACME provider and Let's Encrypt. 
+We've seen how the OpenFaaS provider architecture makes it easy to extend the platform and 
+run serverless functions on AWS Fargate. Then we deployed a complete OpenFaaS stack using terraform 
+on to AWS Fargate and secured the transport layer using the ACME provider and Let's Encrypt. 
 
-OpenFaaS Fargate repositories mentioned in this post:
+My code:
 
-- [Faas-fargate](https://github.com/ewilde/faas-fargate): OpenFaaS provider for AWS Fargate
+- [faas-fargate](https://github.com/ewilde/faas-fargate): OpenFaaS provider for AWS Fargate
 - [Terraform installer for faas-fargate](https://github.com/ewilde/terraform-aws-openfaas-fargate): Installs the 
 OpenFaaS platform for AWS Fargate using Terraform
 
-### Give feedback
-I welcome feedback and contributions from the community.
-For questions, comments and suggestions follow us on [Twitter @openfaas](https://twitter.com/openfaas) 
-and join the [Slack community](https://docs.openfaas.com/community).
+### What's next for faas-fargate
 
-## What's next for OpenFaaS on Fargate
 * Support _scale to zero_ using the [faas-idler](https://github.com/openfaas-incubator/faas-idler).
 * Provide better _observability_ for users and integrate Grafana with the standard deployment to surface function metrics.
+
+### Get connected
+
+Get connected, ask questions, make comments and suggestions on:
+
+* [openfaas/faas](https://github.com/openfaas/faas)
+* [Slack](https://docs.openfaas.com/community)
+* [Twitter](https://twitter.com/openfaas)
+
+**New:** Join the [OpenFaaS #TeamServerless LinkedIn Group](https://www.linkedin.com/groups/13670843/).
+
+

@@ -48,7 +48,9 @@ There are a number of benefits to using a Serverless approach with OpenFaaS for 
 * Open Source & MIT licensed
 * Write code in any programming language
 
-Now, you may very well be able to do all of the above using a micro-services framework such as Spring, but what a micro-services framework will not do for you is automate all the boilerplate entrypoint code, timeouts, retries, health-checks, logging, metrics, Dockerfile creation and maintenance or auto-scaling. Much of the benefit of using a framework like OpenFaaS is being able to move faster because you only have to care about writing your code. We’ll also cover some of the benefits of using OpenFaaS Cloud as a managed platform whether that is self-hosted or through the Community Cluster or another vendor.
+Now, you may very well be able to do all of the above using a micro-services framework such as Spring, but what a micro-services framework will not do for you is automate all the boilerplate entrypoint code, timeouts, retries, health-checks, logging, metrics, Dockerfile creation and maintenance or auto-scaling. We found that around 300 lines of YAML were required to define a basic HTTP service correctly on Kubernetes, with the OpenFaaS [stack.yaml file](https://docs.openfaas.com/reference/yaml/) this was reduced to 4-6 lines.
+
+Much of the benefit of using a framework like OpenFaaS is being able to move faster because you only have to care about writing your code. We’ll also cover some of the benefits of using OpenFaaS Cloud as a managed platform whether that is self-hosted or through the Community Cluster or another vendor.
 
 ### Architecture
 
@@ -75,6 +77,8 @@ OpenFaaS templates used:
 
 This template allows custom HTTP headers to be written back to the caller and uses a handler which is similar to Node.js for AWS Lambda.
 
+When you generate a new function using `faas-cli new` this is the handler you get:
+
 ```js
 "use strict"
 
@@ -93,6 +97,8 @@ module.exports = (event, context) => {
 * [golang-middleware](https://github.com/openfaas-incubator/golang-http-template#20-golang-middleware)
 
 The Golang middleware template allows us to use a persistent connection to Postgres or to take advantage of connection-pools.
+
+When you generate a new function using `faas-cli new` this is the handler you get:
 
 ```go
 package function

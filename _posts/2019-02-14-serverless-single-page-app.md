@@ -60,9 +60,9 @@ Conceptual design:
 
 We will have three functions:
 
-* “leaderboard-page” which is a Single Page App written in [Vue.js](https://vuejs.org) and served by a Node.js function as a static website. It makes a GET request using `axios` to the “leaderboard” function. They are both served from the same domain so there are no concerns about CORS.
-* “leaderboard” which is a Golang function that executes a [Postgres](https://www.postgresql.org) function to query the current statistics.
-* “github-sub” which is our pub-sub function written in Golang and connected to a webhook on our GitHub organisation or repo. It receives events, validates them with HMAC and then performs an insert for new users and activities.
+* [leaderboard-page](https://github.com/alexellis/leaderboard-app/tree/master/leaderboard-page) which is a Single Page App written in [Vue.js](https://vuejs.org) and served by a Node.js function as a static website. It makes a GET request using `axios` to the `leaderboard` function. They are both served from the same domain so there are no concerns about CORS.
+* [leaderboard](https://github.com/alexellis/leaderboard-app/tree/master/leaderboard) which is a Golang function that executes a [Postgres](https://www.postgresql.org) function to query the current statistics.
+* [github-sub](https://github.com/alexellis/leaderboard-app/tree/master/github-sub) which is our pub-sub function written in Golang and connected to a webhook on our GitHub organisation or repo. It receives events, validates them with HMAC and then performs an insert for new users and activities.
 
 So whilst today’s application is inspired by the GitHub API stats function Ken and I wrote, but it has evolved in several ways:
 
@@ -71,7 +71,7 @@ So whilst today’s application is inspired by the GitHub API stats function Ken
 * The leaderboard is rendered from a Postgres function (aka. Stored procedure).
 * Instead of measuring commits per person, we’re measuring engagement. This is a great way to make the end result more inclusive to those who don’t write code, but who do give user support on GitHub.
 
-OpenFaaS templates used:
+You can view the complete code at the end of the post, but here are examples of functions using the templates we are using today. OpenFaaS also allows you to customize and build your own templates to suit your needs which includes writing templates for other languages such as Swift, Rust, Erlang or even Bash.
 
 * [node10-express](https://github.com/openfaas-incubator/node10-express-template)
 
@@ -160,6 +160,21 @@ We need several pieces of configuration - the non-confidential data will use env
 
 The [OpenFaaS CLI](https://github.com/openfaas/faas-cli) allows secrets to be created for Swarm, Kubernetes or Nomad by typing `faas-cli secret create`, but when running on OpenFaaS Cloud we can encrypt our secrets using [Bitnami’s SealedSecrets project](https://github.com/bitnami-labs/sealed-secrets) and then leave them in our GitHub repo as a `secrets.yaml` file. Upon git push these secrets will be read into the cluster, decrypted (unsealed) and attached to our functions.
 
+I used this command to create the secrets we needed for the app:
+
+```sh
+faas-cli cloud seal --name=alexellis-leaderboard-app-secrets \
+--literal username="$PG_USER" \
+--literal password="$PG_PASSWORD" \
+--literal host="$PG_HOST" \
+--literal webhook-secret="$GH_WEBHOOK_SECRET" \
+--cert=./pub-cert.pem
+```
+
+If you want to try the example you'll need to run the command to re-generate the secrets for your own account.
+
+At runtime OpenFaaS secrets are made available via `/var/openfaas/secrets/<name>`.
+
 * Postgres
 
 In this example I am using [Postgres 10](https://www.postgresql.org/docs/10/index.html) hosted on [DigitalOcean](https://www.digitalocean.com/) using the new DBaaS service. It costs around 15 USD at time of writing and gives a node which can accept 22 concurrent connections and has 1GB RAM, 10GB storage.
@@ -208,9 +223,9 @@ You can find the code for all three functions in the following GitHub repo. Fork
 
 Functions:
 
-* `leaderboard` - the Go function for rendering the latest statistics as JSON
-* `github-sub` - the GitHub event ingestion function in Go
-* `leaderboard-page` - the Vue.js dashboard
+* [github-sub](https://github.com/alexellis/leaderboard-app/tree/master/github-sub) - the GitHub event ingestion function in Go using the [database/sql](https://golang.org/pkg/database/sql/) and [github.com/lib/pq](https://github.com/lib/pq) packages. We create the connection in the `init()` function of the handler so that a persistent connection is available.
+* [leaderboard](https://github.com/alexellis/leaderboard-app/tree/master/leaderboard) - the Go function for rendering the latest statistics as JSON
+* [leaderboard-page](https://github.com/alexellis/leaderboard-app/tree/master/leaderboard-page) - the Vue.js dashboard. The client folder contains the `src` and `dist` folders, and the `handler.js` acts merely to serve the static assets when deployed.
 
 Other files:
 

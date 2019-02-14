@@ -19,7 +19,7 @@ My aim in this post is to outline the architecture and patterns I applied in a r
 
 ## Background to the application
 
-With the number of OpenFaaS contributors growing over 350% in 12 months and around a dozen [GitHub repos](https://github.com/openfaas/), it became ever more complicated to accurately say how many people had contributed, how many GitHub stars we had or how many commits were in the project, and where. One of the earliest contributors to OpenFaaS is [Ken Fukuyama](https://twitter.com/kenfdev), he wrote an OpenFaaS provider to bring Serverless to Rancher 1.x and since then he’s been instrumental in building and maintaining the visual aspects of the UI in the project.
+With the number of [OpenFaaS](https://github.com/openfaas/) contributors growing over 350% in 12 months and around a dozen [GitHub repos](https://github.com/openfaas/), it became ever more complicated to accurately say how many people had contributed, how many GitHub stars we had or how many commits were in the project, and where. One of the earliest contributors to OpenFaaS is [Ken Fukuyama](https://twitter.com/kenfdev), he wrote an OpenFaaS provider to bring Serverless to Rancher 1.x and since then he’s been instrumental in building and maintaining the visual aspects of the UI in the project.
 
 Between the two of us we came up with an idea to [make a function](https://github.com/kenfdev/faas-github-stats/blob/master/github-stats/handler.js) to give us an accurate count of contributors, commits and stars etc. This was really useful for me in the first 12 months of the project where I needed to be able to present accurate data on how we were growing and gaining traction. I would invoke the function with `curl` before a presentation and then update my slides or reply to an analyst/editor with that data. The statistics felt flat and hard to parse as text, so Ken put together [a page](https://github.com/kenfdev/faas-github-stats/tree/master/assets/github-stats-page) with [Vue.js](https://vuejs.org) to render a leaderboard and a number of charts to show the breakdown of each repository.
 
@@ -27,7 +27,7 @@ Between the two of us we came up with an idea to [make a function](https://githu
 
 Use can use [this link](https://kenfdev.o6s.io/github-stats-page#/) to view the statistics of the OpenFaaS project, rather than a single component.
 
-Around a year and a half ago I started [OpenFaaS Cloud](https://docs.openfaas.com/openfaas-cloud/intro/) to provide a managed and automated OpenFaaS experience. One of my primary goals was to allow the community to build and deploy functions with HTTPS, without having to worry about managing or paying for a Kubernetes cluster. We have deployed Ken’s function to the Community Cluster and it’s publicly accessible. 
+Around a year and a half ago I started [OpenFaaS Cloud](https://docs.openfaas.com/openfaas-cloud/intro/) to provide a managed and automated OpenFaaS experience. One of my primary goals was to allow the community to build and deploy functions with HTTPS, without having to worry about managing or paying for a [Kubernetes](https://kubernetes.io) cluster. We have deployed Ken’s function to the Community Cluster and it’s publicly accessible. 
 
 ## Today’s application
 
@@ -43,7 +43,7 @@ There are a number of benefits to using a Serverless approach with OpenFaaS for 
 
 * Portable to any cloud
 * Same experience on a cluster as on your laptop
-* Simple workflow backed by Kubernetes
+* Simple workflow backed by [Kubernetes](https://kubernetes.io)
 * Developer-friendly UX
 * Open Source & MIT licensed
 * Write code in any programming language

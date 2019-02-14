@@ -1,7 +1,7 @@
 ---
 title: "How to build a Serverless Single Page App"
 description: Alex outlines an architecture for building a Single Page App (SPA) with Serverless Functions using Vue.js for the front-end, Postgres for storage, Go for the backend and OpenFaaS with Kubernetes for a resilient scalable compute platform.
-date: 2019-02-15
+date: 2019-02-14
 image: /images/single-page/beach-clouds-daytime-994605-crop.jpg
 categories:
   - end-user

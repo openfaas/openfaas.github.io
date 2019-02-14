@@ -21,7 +21,7 @@ My aim in this post is to outline the architecture and patterns I applied in a r
 
 With the number of OpenFaaS contributors growing over 350% in 12 months and around a dozen [GitHub repos](https://github.com/openfaas/), it became ever more complicated to accurately say how many people had contributed, how many GitHub stars we had or how many commits were in the project, and where. One of the earliest contributors to OpenFaaS is [Ken Fukuyama](https://twitter.com/kenfdev), he wrote an OpenFaaS provider to bring Serverless to Rancher 1.x and since then he’s been instrumental in building and maintaining the visual aspects of the UI in the project.
 
-Between the two of us we came up with an idea to [make a function](https://github.com/kenfdev/faas-github-stats/blob/master/github-stats/handler.js) to give us an accurate count of contributors, commits and stars etc. This was really useful for me in the first 12 months of the project where I needed to be able to present accurate data on how we were growing and gaining traction. I would invoke the function with `curl` before a presentation and then update my slides or reply to an analyst/editor with that data. The statistics felt flat and hard to parse as text, so Ken put together a [Vue.js page](https://github.com/kenfdev/faas-github-stats/tree/master/assets/github-stats-page) to render a leaderboard and a number of charts to show the breakdown of each repository.
+Between the two of us we came up with an idea to [make a function](https://github.com/kenfdev/faas-github-stats/blob/master/github-stats/handler.js) to give us an accurate count of contributors, commits and stars etc. This was really useful for me in the first 12 months of the project where I needed to be able to present accurate data on how we were growing and gaining traction. I would invoke the function with `curl` before a presentation and then update my slides or reply to an analyst/editor with that data. The statistics felt flat and hard to parse as text, so Ken put together [a page](https://github.com/kenfdev/faas-github-stats/tree/master/assets/github-stats-page) with [Vue.js](https://vuejs.org) to render a leaderboard and a number of charts to show the breakdown of each repository.
 
 ![v1 of the leaderboard](/images/single-page/leaderboard-v1.png)
 
@@ -58,7 +58,7 @@ Conceptual design:
 
 We will have three functions:
 
-* “leaderboard-page” which is a Single Page App written in Vue.js and served by a Node.js function as a static website. It makes a GET request using `axios` to the “leaderboard” function. They are both served from the same domain so there are no concerns about CORS.
+* “leaderboard-page” which is a Single Page App written in [Vue.js](https://vuejs.org) and served by a Node.js function as a static website. It makes a GET request using `axios` to the “leaderboard” function. They are both served from the same domain so there are no concerns about CORS.
 * “leaderboard” which is a Golang function that executes a [Postgres](https://www.postgresql.org) function to query the current statistics.
 * “github-sub” which is our pub-sub function written in Golang and connected to a webhook on our GitHub organisation or repo. It receives events, validates them with HMAC and then performs an insert for new users and activities.
 

@@ -1,20 +1,31 @@
 footer {
 	font-size: .6em;
 	position: relative;
-	background: #2b2b40;
+	background: #383838;
 	color: #fff;
+
+	.openfaas {
+		background: #4563dd;
+		padding-top: 10px;
+		padding-bottom: 30px;
+	}
+
+	.cncf {
+		background: #383838;
+	}
 
 	&,
 	a {
-		color: #999;
+		color: #fff;
 	}
 
 	a {
 		text-decoration: none;
-		padding: 0 10px;
+		padding: 0 14px;
 
 		&:hover {
 			color: #fff;
+			text-decoration: underline;
 		}
 	}
 
@@ -24,9 +35,12 @@ footer {
 
 		&.footer-right-links {
 			float: left;
+			font-size: 1.8em;
 			@media #{$tablet} {
 				float: right;
 			}
+			text-transform: uppercase;
+			padding-top: 1px;
 		}
 
 		&.footer-left-links {
@@ -35,14 +49,11 @@ footer {
 
 		li {
 			list-style: none;
-			margin: 15px auto;
+			margin: 21px auto;
 			display: inline-block;
 
 			a {
 
-				&:hover {
-					text-decoration: none;
-				}
 				svg {
 					fill: #999;
 					transition: fill 0.2s ease;
@@ -85,20 +96,72 @@ footer {
 			}
 		}
 	}
-}
+	
+	.logo {
+		img {
+			height: 24px;
+		}
 
-.copyright {
-	margin: 15px auto;
-	float: left;
+		.icon {
+			height: 30px;
+			padding-right: 5px;
+		}
 
-	a {
-		color: #999;
+		a {
+			padding: 0px;
+		}
 	}
 
-	@media #{$desktop} {
-		text-align: center;
-		float: none;
-		padding: 16px 0;
-		margin: 0;
+
+
+	.missionstatement {
+		padding: 0;
+		list-style: none;
+		margin: 24px auto auto 24px;
+		letter-spacing: 0.05em;
+		display: inline-block;
+		font-size: 1.7em;
+		font-weight: 900;
+		font-family: "Leto", sans-serif;
+	}
+
+
+	.copyright {
+		overflow: hidden;
+		display: inline-block;
+		font-size: 1.2em;
+	
+		a {
+			color: #fff;
+			font-size: inherit;
+			text-decoration: underline;
+			padding: 0px;
+		}
+	
+		@media #{$desktop} {
+			float: none;
+			padding: 30px 0;
+			margin: 0;
+		}
+
+		p {
+			color: #939393;
+			margin-bottom: 0px;
+		}
+	}
+
+	.landscape {
+		float: right;
+		display: inline-block;
+		color: #939393;
+		text-align: right;
+		font-style: italic;
+		font-size: .8em;
+		padding-top: 25px;
+
+		p {
+			margin: 0px;
+		}
+	
 	}
 }

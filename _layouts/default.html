@@ -13,14 +13,15 @@
 	<link rel="icon" type="image/png" href="{{ site.baseurl }}/touch-icon.png" sizes="192x192">
 	<link rel="icon" type="image/png" href="{{ site.baseurl }}/images/favicon.png">
 
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300|Rubik:300">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,900">
 
-	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400">
+	<link rel="stylesheet" type="text/css"
+		href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:900,700,400">
 
 	<link rel="stylesheet" href="{{ site.baseurl }}/css/screen.css">
 	<link rel="stylesheet" href="{{ site.baseurl }}/css/highlighter/gruvbox.light.css">
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
-	 crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+		integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 
 	{% if jekyll.environment == 'production' and site.google_analytics_key != '' %}
 	<script>
@@ -38,8 +39,10 @@
 		<div class="container">
 			<div class="company-name">
 				<a href="{{ site.baseurl }}/">
-					<span class="dark-logo"><img src="{{ site.baseurl }}/images/openfaas_dark.png" alt="dark OpenFaaS logo"></span>
-					<span class="light-logo"><img src="{{ site.baseurl }}/images/openfaas_light.png" alt="light OpenFaaS logo"></span>
+					<span class="dark-logo"><img src="{{ site.baseurl }}/images/openfaas_dark.png"
+							alt="dark OpenFaaS logo"></span>
+					<span class="light-logo"><img src="{{ site.baseurl }}/images/openfaas_light.png"
+							alt="light OpenFaaS logo"></span>
 				</a>
 			</div>
 			{% include navigation.html %}
@@ -49,35 +52,53 @@
 	{{ content }}
 
 	<footer>
-		<div class="container">
-			<ul class="footer-left-links">
-				{% for link in site.data.footer.left_links %}
-				<li>
-					<a {% if link.new_window %}target="_blank" {% endif %} href="{% include relative-src.html src=link.link %}" {% if
-					 link.social_icon %}class="{{ link.social_icon | slugify }}-icon" {% endif %}>
-						{% if link.social_icon %}{% include social-icon.html icon=link.social_icon %}{% endif %}
-						{{ link.name }}
-					</a>
-				</li>
-				{% endfor %}
-			</ul>
-			<ul class="footer-right-links">
-				{% for link in site.data.footer.right_links %}
-				<li>
-					<a {% if link.new_window %}target="_blank" {% endif %} href="{% include relative-src.html src=link.link %}" {% if
-					 link.social_icon %}class="{{ link.social_icon | slugify }}-icon" {% endif %}>
-						{% if link.social_icon %}{% include social-icon.html icon=link.social_icon %}{% endif %}
-						{{ link.name }}
-					</a>
-				</li>
-				{% endfor %}
-			</ul>
-			<p class="copyright">
-				<a href="https://cloudcannon.com/">
-					Template by CloudCannon
-				</a>
-			</p>
-		</div>
+		<section class="openfaas">
+			<div class="container">
+				<ul class="footer-left-links logo">
+					<li>
+						<a href="/"><img class="icon" src="http://localhost:4000/images/white-openfaas-logo.png"
+								alt="OpenFaaS Footer Logo"></a>
+					</li>
+					<li>
+						<a href="/"><img src="http://localhost:4000/images/openfaas_light.png"
+								alt="OpenFaaS Footer Logo"></a>
+					</li>
+				</ul>
+				<div class="missionstatement">
+					Serverless Functions, Made Simple.
+				</div>
+				<ul class="footer-right-links">
+					{% for link in site.data.footer.right_links %}
+					<li>
+						<a {% if link.new_window %}target="_blank" {% endif %}
+							href="{% include relative-src.html src=link.link %}"
+							{% if link.social_icon %}class="{{ link.social_icon | slugify }}-icon" {% endif %}>
+							{% if link.social_icon %}{% include social-icon.html icon=link.social_icon %}{% endif %}
+							{{ link.name }}
+						</a>
+					</li>
+					{% endfor %}
+				</ul>
+			</div>
+		</section>
+		<section class="cncf">
+			<div class="container">
+				<div class="copyright">
+					<p>OpenFaaS &reg; was founded by <a href="https://www.alexellis.io/">alexellis</a> and is being
+						built by a growing <a
+							href="https://github.com/alexellis/faas/blob/master/community.md">community of
+							contributors</a>.</p>
+					<p>OpenFaaS Ltd. is a registered company in England &amp; Wales with number: 11076587, registered
+						address: Peterborough UK.</p>
+				</div>
+				<div class="landscape">
+					<p>Featured on</p>
+					<p>
+						<img src="/images/cncf-landscape-logo.svg" width="140px" alt="CNCF Landscape logo">
+					</p>
+				</div>
+			</div>
+		</section>
 	</footer>
 
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>

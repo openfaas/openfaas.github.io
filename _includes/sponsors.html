@@ -1,0 +1,16 @@
+<section class="tiers">
+    <div class="text-container">
+        {% for tier in site.data.sponsors %}
+        {% if tier[1].size > 0 %}
+        <div class="tier">
+            <div class="title">{{tier[0] | capitalize}} Sponsors</div>
+            <div class="sponsors">
+                {% for sponsor in tier[1] %}
+                {% include sponsor.html name=sponsor.name logo=sponsor.logo url=sponsor.url %}
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+</section>

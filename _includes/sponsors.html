@@ -6,7 +6,7 @@
             <div class="title">{{tier[0] | capitalize}} Sponsors</div>
             <div class="sponsors">
                 {% for sponsor in tier[1] %}
-                {% include sponsor.html name=sponsor.name logo=sponsor.logo url=sponsor.url %}
+                {% include sponsor.html name=sponsor.name logo=sponsor.logo alt=sponsor.alt %}
                 {% endfor %}
             </div>
         </div>

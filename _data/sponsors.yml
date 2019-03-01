@@ -2,6 +2,6 @@ platinum:
 gold:
 silver:
 bronze:
-  - name: Asyncy
+  - alt: ASYNCY - The Kubernetes Native DSL
     url: https://asyncy.com/
-    logo: asyncy.jpg
+    logo: asyncy.png

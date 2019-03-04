@@ -21,7 +21,11 @@ Google Forms are really convenient ways to collect user feedback, organise an ev
 
 You will need OpenFaaS running locally along with the `faas-cli` installed. Head over to the deployment guide in the [docs](https://docs.openfaas.com) if you don't have this set up already.
 
-All of the code is available through a [GitHub Gist](https://gist.github.com/burtonr/ba12d9c1e0905b77344b41acbe147eb3)
+All of the code is available in a [GitHub Repo](https://github.com/burtonr/openfaas-google-form-handler)
+
+You can optionally install [.NET Core](https://dotnet.microsoft.com/download) locally
+
+I recommend [VSCode](https://code.visualstudio.com/) as an editor for Linux, Mac, and Windows
 
 ## Create the Signup Form
 
@@ -326,3 +330,9 @@ In the image we're posting a message so that the team is aware of the request to
 Now that you've seen my example, what would you create? You could create a form to request access to an internal IT system, organize a team-lunch or any other kind of questionnaire.
 
 For questions, comments and suggestions follow us on [Twitter @openfaas](https://twitter.com/openfaas) and join the [Slack community](https://docs.openfaas.com/community).
+
+## See Also
+
+[How to build a Kubernetes Cluster with ARM Raspberry Pi then run .NET Core on OpenFaaS](https://www.hanselman.com/blog/HowToBuildAKubernetesClusterWithARMRaspberryPiThenRunNETCoreOnOpenFaas.aspx) by Scott Hanselman
+
+[Building a Raspberry Pi Kubernetes Cluster and running .NET Core - Alex Ellis & Scott Hanselman (video)](https://www.youtube.com/watch?v=ZyTLMnzehyU)

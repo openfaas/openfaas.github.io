@@ -1,11 +1,12 @@
 ---
 title: "OpenFaaS Function to Handle Google Form Responses"
 description: Create an OpenFaaS function to handle responses from a Google Form to sign up to your Slack workspace
-date: 2019-03-05
+date: 2019-03-06
 image: /images/google-form-response/dots.jpg
 categories:
-  - google
+  - productivity
   - C#
+  - dotnet
   - tutorial
   - examples
 author_staff_member: burton

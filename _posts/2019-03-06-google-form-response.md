@@ -1,7 +1,7 @@
 ---
 title: "Process Google Forms Responses with OpenFaaS"
 description: Burton outlines how you can use an OpenFaaS function to send Google Forms responses into a Slack channel using .NET and Serverless Functions.
-date: 2019-03-01
+date: 2019-03-06
 image: /images/google-form-response/dots.jpg
 categories:
   - productivity

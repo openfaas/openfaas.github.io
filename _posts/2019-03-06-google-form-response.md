@@ -1,7 +1,7 @@
 ---
-title: "OpenFaaS Function to Handle Google Form Responses"
-description: Create an OpenFaaS function to handle responses from a Google Form to sign up to your Slack workspace
-date: 2019-03-06
+title: "Process Google Forms Responses with OpenFaaS"
+description: Burton outlines how you can use an OpenFaaS function to send Google Forms responses into a Slack channel using .NET and Serverless Functions.
+date: 2019-03-01
 image: /images/google-form-response/dots.jpg
 categories:
   - productivity
@@ -13,16 +13,21 @@ author_staff_member: burton
 dark_background: true
 ---
 
-In this post, we'll work through creating a custom signup form using Google Forms and handling the response with an OpenFaaS function to let the channel know that someone would like to join the team's Slack workspace. We'll send a message to a Slack channel with the question responses so that the team can give the new member a nice warm welcome to the community.
+In this post, I'll walk you through to use OpenFaaS and dotnet / C# to get notified on Slack every time that someone fills out your Google Form.
 
-> This assumes you have an instance of OpenFaaS running already, and `faas-cli` already installed. If not, head over to the [docs](https://docs.openfaas.com) to get set up
+Google Forms are really convenient ways to collect user feedback, organise an event or for a Slack sign-up flow. We'll be building a workflow with Google Forms, OpenFaaS and Functions written in C#. When we're finished - every time someone fills out our Form, we'll send a message to a Slack channel with the responses from the form. This means you and your team can give them a warm welcome into the community.
 
-All of the code is available on [Github Gist](https://gist.github.com/burtonr/ba12d9c1e0905b77344b41acbe147eb3)
+## Pre-requisites
+
+You will need OpenFaaS running locally along with the `faas-cli` installed. Head over to the deployment guide in the [docs](https://docs.openfaas.com) if you don't have this set up already.
+
+All of the code is available through a [GitHub Gist](https://gist.github.com/burtonr/ba12d9c1e0905b77344b41acbe147eb3)
 
 ## Create the Signup Form
-The first step is to create the form that people can fill out requesting to join your team's workspace. We'll just ask for a little background information, and ask their reason for wanting to join your team.
 
-> of course you'll need a Google account. The link may ask you to sign in, or create an account if you're not already signed in
+Our first task is to create a Google Form that people can fill out to request access to Slack. We'll need some background information and the reason for wanting to join the workspace.
+
+For this step you will need a Google account. The link may ask you to sign in, or create an account if you're not already signed in.
 
 * Head over to [Google Forms](https://docs.google.com/forms/u/0/) site to start the process
 * Click the "Template Gallery" link in the upper right side of the page and select the one labeled "RSVP"
@@ -80,7 +85,8 @@ function onSubmit(entry) {
 };
 
 ```
-> Also available on [Github Gist](https://gist.github.com/burtonr/ba12d9c1e0905b77344b41acbe147eb3)
+
+> Also available on [GitHub Gist](https://gist.github.com/burtonr/ba12d9c1e0905b77344b41acbe147eb3)
 
 * Now, set up your script trigger so that this script will get run when a user clicks "Submit"
 * Go to the "Edit" menu, and select "Current project's triggers"
@@ -107,9 +113,15 @@ I will be using C# as the language to write the handler function in. The code is
 
 In your terminal of choice, create the new function from the `csharp` template:
 
-`$ faas-cli new signup-form --lang csharp`
+```sh
+$ faas-cli new signup-form --lang csharp
 
-We're going to need to add a dependency to Newtonsoft.Json as well to handle the JSON response from the form. We'll also add the C# Slack SDK to make it easy to post a message to the appropriate channel
+# Rename signup-form.yml to the default "stack.yml", to reduce on typing.
+
+$ mv signup-form.yml stack.yml
+```
+
+We're going to need to add a dependency to `Newtonsoft.Json` to parse the JSON request from the form. We'll also add the C# Slack SDK to make it easy to post a message to the appropriate channel. The dependencies will be added from Nuget via `dotnet add`:
 
 ```sh
 $ cd signup-form
@@ -225,6 +237,7 @@ private string GetSecret(string name)
 ```
 
 ## Setup the Slack App
+
 Here, we'll create a simple Slack App that will allow posting messages to a specific channel in your Slack workspace. You will need access to:
 
 * Create a new Slack App on the [Slack API site](https://api.slack.com/apps?new_app=1)
@@ -254,6 +267,7 @@ That's it for the Slack App. There are more options available on the App Setting
 Now, back to the function...
 
 ## Deploy the Function
+
 The final step, deploying your function! 
 
 As mentioned earlier, this assumes that you already have an OpenFaaS cluster running and available to deploy to.
@@ -285,7 +299,7 @@ functions:
 * Now, with a single command, we can build the image, push the image to a repository, and deploy the function
 
 ```sh
-$ faas-cli up -f signup-form.yml
+$ faas-cli up
 ```
 
 * When that's complete, you should see a successful deployment message like this:
@@ -300,14 +314,15 @@ URL: http://<openfaas gateway>/function/signup-form
 * Now you can send out links to your Google Form and see the messages pouring in to your Slack workspace.
 
 ## Summary
+
 We've successfully created a custom Google Form, added a script that will pass the questions and answers to an OpenFaaS function. That function then parses the responses, and creates a nice message which is posted to Slack introducing the new member to the team. 
 
-You should see something like this in your Slack channel
+You should see something like this in your Slack channel:
 
 ![Request Slack Message](/images/google-form-response/slack-message.png)
 
-Here, we're posting a message so that the team is aware of the request to join with some information to help give a warm welcome. You could easily modify the function to send the invite link directly. This wouldn't require any special access to the Form creator's Google account, just regular development practices to update the function. 
+In the image we're posting a message so that the team is aware of the request to join with some information to help give a warm welcome. You could easily modify the function to send the invite link directly.
 
-You can imagine the possibilities! Create a simple form to request access somewhere, get a lunch questionnaire going to post suggestions in the #lunch channel. 
+Now that you've seen my example, what would you create? You could create a form to request access to an internal IT system, organize a team-lunch or any other kind of questionnaire.
 
 For questions, comments and suggestions follow us on [Twitter @openfaas](https://twitter.com/openfaas) and join the [Slack community](https://docs.openfaas.com/community).

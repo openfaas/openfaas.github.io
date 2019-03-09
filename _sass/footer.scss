@@ -4,10 +4,21 @@ footer {
 	background: #383838;
 	color: #fff;
 
+	.container {
+		margin: 0 auto;
+		position: relative;
+		padding: 0 20px;
+		clear: left; 
+	}
+
 	.openfaas {
 		background: #4563dd;
 		padding-top: 10px;
 		padding-bottom: 30px;
+		text-align: center;
+		@media #{$footer-mission-statement-fit} {
+			text-align: unset;
+		}
 	}
 
 	.cncf {
@@ -34,17 +45,20 @@ footer {
 		margin: 0;
 
 		&.footer-right-links {
-			float: left;
+			float: right;
 			font-size: 1.8em;
-			@media #{$tablet} {
-				float: right;
+			visibility: hidden;
+			@media #{$footer-menu-fit} {
+				visibility: visible;
 			}
 			text-transform: uppercase;
 			padding-top: 1px;
 		}
 
 		&.footer-left-links {
-			float: left;
+			@media #{$footer-mission-statement-fit} {
+				float: left;
+			}
 		}
 
 		li {
@@ -147,6 +161,7 @@ footer {
 		p {
 			color: #939393;
 			margin-bottom: 0px;
+			margin-block-start: 0px;
 		}
 	}
 

@@ -129,7 +129,7 @@ Now verify it:
 ```bash
 # Customise to http/https as needed
 curl -X GET \
-  http://admin:password@$GATEWAY/system/list
+  http://admin:password@$GATEWAY/system/secrets
 ```
 
 ## Let's put it all together

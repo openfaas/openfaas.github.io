@@ -55,11 +55,11 @@ curl -sLS cli.openfaas.com | sudo sh
 
 * `kubectl`
 
-If you haven't already then install `kubectl` from https://kubernetes.io/docs/tasks/tools/install-kubectl/
+If you haven't already then install `kubectl` from [https://kubernetes.io/docs/tasks/tools/install-kubectl/](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 
 * `helm`
 
-Install the helm CLI only from https://github.com/helm/helm
+Install the helm CLI only from [https://github.com/helm/helm](https://github.com/helm/helm)
 
 ### Get `ofc-bootstrap`
 
@@ -72,7 +72,7 @@ git clone https://github.com/openfaas-incubator/ofc-bootstrap
 cd ~/dev/ofc/ofc-bootstrap
 ```
 
-Now fetch the latest release from: https://github.com/openfaas-incubator/ofc-bootstrap/releases and save it in `/usr/local/bin/`
+Now fetch the latest release from: [https://github.com/openfaas-incubator/ofc-bootstrap/releases](https://github.com/openfaas-incubator/ofc-bootstrap/releases) and save it in `/usr/local/bin/`
 
 Create a new init.yaml file with this command:
 

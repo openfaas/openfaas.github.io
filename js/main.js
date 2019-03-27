@@ -6,6 +6,18 @@
 		header.classList.toggle("header-background", scrollTop >= 50 || document.body.classList.contains("nav-open"));
 	}
 
+	var stars = 0;
+
+	const getGithubStars = async() => {
+		const response = await fetch('https://api.github.com/repos/openfaas/faas');
+		  const json = await response.json();		  
+		  stars = Math.floor(json.stargazers_count/100)*100;
+		  stars = stars.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		  document.getElementById("github-starcount").innerHTML = stars;
+	}
+
+	getGithubStars();
+
 	var didScroll = false;
 
 	$(window).scroll(function () {

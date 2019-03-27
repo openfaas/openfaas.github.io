@@ -37,16 +37,20 @@
 
 <body>
 	<header id="mainHeader">
-		<div class="container">
-			<div class="company-name">
-				<a href="{{ site.baseurl }}/">
-					<span class="dark-logo"><img src="{{ site.baseurl }}/images/openfaas_dark.png"
-							alt="dark OpenFaaS logo"></span>
-					<span class="light-logo"><img src="{{ site.baseurl }}/images/openfaas_light.png"
-							alt="light OpenFaaS logo"></span>
-				</a>
-			</div>
-			{% include navigation.html %}
+		<div class="company-name">
+			<a href="{{ site.baseurl }}/">
+				<span class="dark-logo"><img src="{{ site.baseurl }}/images/openfaas_dark.png"
+						alt="dark OpenFaaS logo"></span>
+				<span class="light-logo"><img src="{{ site.baseurl }}/images/openfaas_light.png"
+						alt="light OpenFaaS logo"></span>
+			</a>
+		</div>
+		{% include navigation.html %}
+		<div class="github">
+			<a href="https://github.com/openfaas/faas" class="btn">
+				<i class="fab fa-github"></i>
+					<span id="github-starcount"></span>  
+			VIEW ON GITHUB</a>
 		</div>
 	</header>
 

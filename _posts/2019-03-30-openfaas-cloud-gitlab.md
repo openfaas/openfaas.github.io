@@ -306,6 +306,16 @@ git commit
 git push origin master
 ```
 
+You will now receive feedback directly in the GitLab UI.
+
+Here are some past builds:
+
+![](/images/openfaas-cloud-gitlab/pipeline.png)
+
+And here are the pipeline steps with one for the overall stack and one more for each function:
+
+![](/images/openfaas-cloud-gitlab/pipeline-detail.png)
+
 The function will appear on your dashboard:
 
 ![](/images/openfaas-cloud-gitlab/dashboard.png)

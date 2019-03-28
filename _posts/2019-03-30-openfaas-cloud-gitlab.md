@@ -1,6 +1,6 @@
 ---
 title: "Introducing OpenFaaS Cloud with GitLab"
-description: Learn how to provision your own OpenFaaS Cloud connected to a self-hosted GitLab instance on any public or private cloud within 100 seconds.
+description: Learn how to provision your own OpenFaaS Cloud on Kubernetes connected to a self-hosted GitLab instance on any public or private cloud within 100 seconds.
 date: 2019-03-28
 image: /images/openfaas-cloud-gitlab/palms-1.jpg
 categories:

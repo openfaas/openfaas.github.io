@@ -1,8 +1,7 @@
 ---
-title: "Host your own OpenFaaS Cloud with GitLab"
-description: Learn how to host your own OpenFaaS Cloud connected to a self-hosted GitLab instance.
-# date: 2019-03-30
-date: 2019-03-26
+title: "Introducing OpenFaaS Cloud with GitLab"
+description: Learn how to provision your own OpenFaaS Cloud connected to a self-hosted GitLab instance on any public or private cloud within 100 seconds.
+date: 2019-03-28
 image: /images/openfaas-cloud-gitlab/palms-1.jpg
 categories:
   - cloud
@@ -12,16 +11,36 @@ author_staff_member: alex
 dark_background: true
 ---
 
-In this post, I'll walk you through to host your own OpenFaaS Cloud connected to a self-hosted GitLab instance.
+In this post, I'll walk you through to provision your own OpenFaaS Cloud connected to a self-hosted GitLab instance so that you can run your Serverless functions and stateless microservices on any private or public cloud.
 
 [OpenFaaS Cloud](https://docs.openfaas.com/openfaas-cloud/intro/) provides a managed version of the OpenFaaS experience along with OAuth2, CI/CD, TLS via LetsEncrypt and a personalized dashboard for each user's repo or project in your GitLab instance.
 
 <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Announcing <a href="https://twitter.com/openfaas?ref_src=twsrc%5Etfw">@openfaas</a> cloud at <a href="https://twitter.com/DevNetCreate?ref_src=twsrc%5Etfw">@DevNetCreate</a> <a href="https://twitter.com/hashtag/TeamServerless?src=hash&amp;ref_src=twsrc%5Etfw">#TeamServerless</a> <a href="https://twitter.com/hashtag/Serverless?src=hash&amp;ref_src=twsrc%5Etfw">#Serverless</a> <a href="https://t.co/n6hhcRK0I5">pic.twitter.com/n6hhcRK0I5</a></p>&mdash; Jock Reed (@JockDaRock) <a href="https://twitter.com/JockDaRock/status/983779290100613120?ref_src=twsrc%5Etfw">April 10, 2018</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
 
+## What's GitLab?
+
+[GitLab](https://gitlab.com) is an open source Source Control Management for Git. Its core business model [revolves around an Open Core "enterprise edition"](https://news.ycombinator.com/item?id=17229940).
+
+I often hear from teams that they like GitLab because it's portable and can be installed on any cloud. That aligns really well with my mission with OpenFaaS: Serverless Functions Made Simple. I started the OpenFaaS project back in December 2016 because I wanted a way to run Serverless Functions on any cloud, hardware or edge device such as a Raspberry Pi.
+
+The first time I integrated OpenFaaS into GitLab was through the use of a `.gitlab-ci.yml` file, but in fall 2018 I lead efforts to build a deeper integration for functions so that users wouldn't have to worry about maintaining individual build pipelines for their functions and stateless microservices. That's where OpenFaaS Cloud started and it's what we'll be using today along with the `ofc-bootstrap` installation tool.
+
+![OpenFaaS multi-cloud portability](/images/openfaas-cloud-gitlab/ofc-infra-layer.png)
+
+OpenFaaS combined with GitLab provides a completely portable CI/CD experience for all your stateless microservices and functions on Kubernetes including:
+
+* Scale to zero
+* Microservice support
+* Functions in any language
+* Detailed Prometheus metrics
+* Auto-scaling (aka Horizonal Pod Scaling)
+* Portability through the Docker / OCI-image format.
+
+See also: [Sample .gitlab-ci.yml file](https://docs.openfaas.com/reference/cicd/gitlab/)
+
 ## Tutorial
 
 We will configure an existing GitLab installation and then use the `ofc-bootstrap` tool to install OpenFaaS Cloud in around 100 seconds.
-
 
 ![](/images/openfaas-cloud-gitlab/conceptual.png)
 

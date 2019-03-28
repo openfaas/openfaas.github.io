@@ -22,6 +22,15 @@ In this post, I'll walk you through to host your own OpenFaaS Cloud connected to
 
 We will configure an existing GitLab installation and then use the `ofc-bootstrap` tool to install OpenFaaS Cloud in around 100 seconds.
 
+
+![](/images/openfaas-cloud-gitlab/conceptual.png)
+
+Pictured: conceptual overview of OpenFaaS Cloud with GitLab.
+
+GitLab subscribes to `git push` events on each repository an then triggers a System Hook (webhook) over HTTPS to OpenFaaS Cloud's webhook receiver. From there OpenFaaS Cloud checks for a tag on the GitLab repo of `openfaas-cloud`, if present it will clone and checkout the repository for the given commit and then use BuildKit to publish a Docker image.
+
+Feedback is available on the OpenFaaS Cloud dashboard as container logs and also within GitLab under the CI view. A successful build is then deployed to the OpenFaaS instance. Each user and project has their own dashboard which is protected by OAuth2 using the users from your GitLab system to log in.
+
 ### Pre-requisites
 
 * A domain-name
@@ -159,6 +168,10 @@ If using DigitalOcean, save an access token to:
 ```
 ~/Downloads/do-access-token
 ```
+
+`ofc-boostrap` will pass the token onto `cert-manager` as a Kubernetes secret.
+
+If you are using GCP or AWS to manage DNS then see the [README.md file](https://github.com/openfaas-incubator/ofc-bootstrap).
 
 #### Authenticate to your registry
 

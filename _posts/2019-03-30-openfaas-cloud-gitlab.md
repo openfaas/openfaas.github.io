@@ -21,7 +21,9 @@ In this post, I'll walk you through to provision your own OpenFaaS Cloud connect
 
 [GitLab](https://gitlab.com) is an open source Source Control Management for Git. Its core business model [revolves around an Open Core "enterprise edition"](https://news.ycombinator.com/item?id=17229940).
 
-I often hear from teams that they like GitLab because it's portable and can be installed on any cloud. That aligns really well with my mission with OpenFaaS: Serverless Functions Made Simple. I started the OpenFaaS project back in December 2016 because I wanted a way to run Serverless Functions on any cloud, hardware or edge device such as a Raspberry Pi.
+I often hear from teams that they like GitLab because it's portable and can be installed on any cloud. That aligns really well with my mission with OpenFaaS: Serverless Functions Made Simple. I started the OpenFaaS project back in December 2016 because I wanted a way to run Serverless Functions on any cloud, hardware or edge device, even something like a Raspberry Pi.
+
+See also: [Jan 2017: Functions as a Service (FaaS)](https://blog.alexellis.io/functions-as-a-service/)
 
 The first time I integrated OpenFaaS into GitLab was through the use of a `.gitlab-ci.yml` file, but in fall 2018 I lead efforts to build a deeper integration for functions so that users wouldn't have to worry about maintaining individual build pipelines for their functions and stateless microservices. That's where OpenFaaS Cloud started and it's what we'll be using today along with the `ofc-bootstrap` installation tool.
 

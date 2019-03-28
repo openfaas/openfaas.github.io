@@ -11,7 +11,7 @@ author_staff_member: alex
 dark_background: true
 ---
 
-In this post, I'll walk you through to provision your own OpenFaaS Cloud connected to a self-hosted GitLab instance so that you can run your Serverless functions and stateless microservices on any private or public cloud.
+In this post, I'll walk you through how to provision your own OpenFaaS Cloud connected to a self-hosted GitLab instance, so that you can run your Serverless functions and stateless microservices on any private or public cloud.
 
 [OpenFaaS Cloud](https://docs.openfaas.com/openfaas-cloud/intro/) provides a managed version of the OpenFaaS experience along with OAuth2, CI/CD, TLS via LetsEncrypt and a personalized dashboard for each user's repo or project in your GitLab instance.
 
@@ -25,7 +25,7 @@ I often hear from teams that they like GitLab because it's portable and can be i
 
 See also: [Jan 2017: Functions as a Service (FaaS)](https://blog.alexellis.io/functions-as-a-service/)
 
-The first time I integrated OpenFaaS into GitLab was through the use of a `.gitlab-ci.yml` file, but in fall 2018 I lead efforts to build a deeper integration for functions so that users wouldn't have to worry about maintaining individual build pipelines for their functions and stateless microservices. That's where OpenFaaS Cloud started and it's what we'll be using today along with the `ofc-bootstrap` installation tool.
+The first time I integrated OpenFaaS into GitLab was through the use of a `.gitlab-ci.yml` file, but in fall 2018 I led efforts to build a deeper integration for functions so that users wouldn't have to worry about maintaining individual build pipelines for their functions and stateless microservices. That's where OpenFaaS Cloud started and it's what we'll be using today along with the `ofc-bootstrap` installation tool.
 
 ![OpenFaaS multi-cloud portability](/images/openfaas-cloud-gitlab/ofc-infra-layer.png)
 
@@ -50,7 +50,7 @@ We will configure an existing GitLab installation and then use the `ofc-bootstra
 
 Pictured: conceptual overview of OpenFaaS Cloud with GitLab.
 
-GitLab subscribes to `git push` events on each repository an then triggers a System Hook (webhook) over HTTPS to OpenFaaS Cloud's webhook receiver. From there OpenFaaS Cloud checks for a tag on the GitLab repo of `openfaas-cloud`, if present it will clone and checkout the repository for the given commit and then use BuildKit to publish a Docker image.
+GitLab subscribes to `git push` events on each repository and then triggers a System Hook (webhook) over HTTPS to OpenFaaS Cloud's webhook receiver. From there OpenFaaS Cloud checks for a tag on the GitLab repo of `openfaas-cloud`, if present it will clone and checkout the repository for the given commit and then use BuildKit to publish a Docker image.
 
 Feedback is available on the OpenFaaS Cloud dashboard as container logs and also within GitLab under the CI view. A successful build is then deployed to the OpenFaaS instance. Each user and project has their own dashboard which is protected by OAuth2 using the users from your GitLab system to log in.
 
@@ -58,7 +58,7 @@ Feedback is available on the OpenFaaS Cloud dashboard as container logs and also
 
 * A domain-name
 
-You should have a domain name registered - this can be new or existing. You will need to set its nameservers configured to point at either DigitalOcean, Google Cloud or AWS. I recommend using DigitalOcean because it is free at time of writing.
+You should have a domain name registered - this can be new or existing. You will need to configure its nameservers to point at either DigitalOcean, Google Cloud or AWS. I recommend using DigitalOcean because it is free at time of writing.
 
 This constraint is due to the use of wild-card TLS certificates and cert-manager and the DNS01 challange.
 
@@ -99,7 +99,7 @@ Install the helm CLI only from [https://github.com/helm/helm](https://github.com
 
 ### Get `ofc-bootstrap`
 
-The `ofc-bootstrap` tool is used to install OpenFaaS Cloud in a single click. You will need to configure it will all the necessary secrets and configuration beforehand using a YAML file.
+The `ofc-bootstrap` tool is used to install OpenFaaS Cloud in a single click. You will need to configure it with all the necessary secrets and configuration beforehand using a YAML file.
 
 ![](/images/openfaas-cloud-gitlab/ofc-bootstrap.png)
 
@@ -163,7 +163,7 @@ This hook will publish events when there is a `git push` into a repo.
 * Go to your Admin area.
 * Click *System Hooks*
 * Enter the URL `https://system.domain.com/gitlab-event` replacing `domain.com` with your domain
-* Enter no value for *Secret Token* at this time
+* Do not enter a value for *Secret Token* at this time
 
 ![System hooks](/images/openfaas-cloud-gitlab/system-hook.png)
 
@@ -223,9 +223,9 @@ Private registries are also supported but outside of the scope of this post.
 
 #### Configure your CUSTOMERS ACL
 
-The CUSTOMERS ACL list containers a list of projects and users for which CI/CD can be triggered.
+The CUSTOMERS ACL list contains a list of projects and users for which CI/CD can be triggered.
 
-* Create a public GitLab repo called whatever you like for instance: `ofc-acl`
+* Create a public GitLab repo called whatever you like, for instance: `ofc-acl`
 * Add a CUSTOMERS plain-text file and enter each name on a new line
 * Find the Raw URL from the UI (Open Raw)
 * Edit the line that says `customers_url` and enter the URL i.e. `https://gitlab.domain.com/user/ofc-acl/raw/master/CUSTOMERS`
@@ -336,7 +336,7 @@ module.exports = (event, context) => {
 }
 ```
 
-We need to rename our function’s YAML file to stack.yml, so that it can be picked up by the OpenFaaS Cloud CI/CD pipeline.
+We need to rename our function’s YAML file to `stack.yml`, so that it can be picked up by the OpenFaaS Cloud CI/CD pipeline.
 
 ```
 mv timezone-shift.yml stack.yml
@@ -392,7 +392,7 @@ You are the first user for your installation, now you can invite your team, coll
 
 To start building from a new repo just add the `openfaas-cloud` tag.
 
-At any time if you want to stop building a specific repository or to delete its functions from OpenFaaS Cloud remove the tag `openfaas-clou` and a System hook from GitLab will fire into OpenFaaS Cloud to remove the function.
+At any time if you want to stop building a specific repository or to delete its functions from OpenFaaS Cloud remove the tag `openfaas-cloud` and a System hook from GitLab will fire into OpenFaaS Cloud to remove the function.
 
 ## Wrapping up
 

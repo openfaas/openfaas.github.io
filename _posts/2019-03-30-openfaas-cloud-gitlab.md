@@ -40,6 +40,8 @@ OpenFaaS combined with GitLab provides a completely portable CI/CD experience fo
 
 See also: [Sample .gitlab-ci.yml file](https://docs.openfaas.com/reference/cicd/gitlab/)
 
+> Note: OpenFaaS, OpenFaaS Cloud and ofc-bootstrap are all Open Source under the MIT license.
+
 ## Tutorial
 
 We will configure an existing GitLab installation and then use the `ofc-bootstrap` tool to install OpenFaaS Cloud in around 100 seconds.
@@ -98,6 +100,10 @@ Install the helm CLI only from [https://github.com/helm/helm](https://github.com
 ### Get `ofc-bootstrap`
 
 The `ofc-bootstrap` tool is used to install OpenFaaS Cloud in a single click. You will need to configure it will all the necessary secrets and configuration beforehand using a YAML file.
+
+![](/images/openfaas-cloud-gitlab/ofc-bootstrap.png)
+
+> `ofc-bootstrap` packages a number of primitives such as an IngressController, a way to obtain certificates from LetsEncrypt, the OpenFaaS Cloud components, OpenFaaS itself and Minio for build log storage. Each component is interchangeable.
 
 ```
 mkdir -p ~/dev/ofc/

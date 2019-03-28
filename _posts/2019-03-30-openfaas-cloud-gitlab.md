@@ -342,7 +342,7 @@ At any time if you want to stop building a specific repository or to delete its 
 
 ## Wrapping up
 
-We installed OpenFaaS Cloud and enabled CI/CD, TLS and OAuth2 on any repo without any complicated configuration or pipelines or maintenance overhead.
+We installed OpenFaaS Cloud and enabled CI/CD, TLS and OAuth2 on any repo without any complicated configuration or pipelines or maintenance overhead. In this post we used a self-hosted GitLab instance as our SCM, but public and private GitHub repos and organisations are also supported by ofc-bootstrap!
 
 You can [follow me @alexellisuk](https://twitter.com/alexellisuk/) and [@openfaas on Twitter](https://twitter.com/openfaas/)
 

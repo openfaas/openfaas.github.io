@@ -301,11 +301,23 @@ https://username.domain.com/timezone-shift -H "Content-type: application/json" -
 {"meeting":"2019-02-18T17:00:00Z","adjusted":"2019-02-18T09:00:00Z"}
 ```
 
+### Day 2
+
+You can find out more about day 2 operations over on [the documentation site](https://docs.openfaas.com/)
+
+#### Use secrets in your repos
+
 You can also use secrets for your functions by encrypting them or "sealing" them using Bitnami's SealedSecrets. [Read more](https://docs.openfaas.com/openfaas-cloud/self-hosted/secrets/).
 
-### Invite your team
+#### Invite your team
 
 You are the first user for your installation, now you can invite your team, colleagues and friends, or keep the environment for yourself. You can enroll new users by adding their usernames or top-level projects to your CUSTOMERS file at any time.
+
+#### Add and remove repos
+
+To start building from a new repo just add the `openfaas-cloud` tag.
+
+At any time if you want to stop building a specific repository or to delete its functions from OpenFaaS Cloud remove the tag `openfaas-clou` and a System hook from GitLab will fire into OpenFaaS Cloud to remove the function.
 
 ## Wrapping up
 

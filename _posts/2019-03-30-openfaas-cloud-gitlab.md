@@ -64,9 +64,13 @@ This constraint is due to the use of wild-card TLS certificates and cert-manager
 
 Your cluster can be private and self-hosted, but in post we will install TLS via LetsEncrypt so I recommend you use a managed service such as DigitalOcean, Amazon EKS or Google's GKE.
 
+> Note: I reviewed DigitalOcean's Kubernetes service and rate it highly for beginners. [Get free credits here](https://m.do.co/c/8d4e75e9886f) to test everything out for free.
+
 * A self-hosted GitLab CE or EE instance
 
 You may already have a GitLab installation, if you don't you can [install it easily](https://about.gitlab.com/install/) or use a the official [helm chart](https://docs.gitlab.com/ee/install/kubernetes/gitlab_chart.html).
+
+> Alternatively GitLab is available in the [DigitalOcean Marketplace](https://cloud.digitalocean.com/marketplace/5c76e3e2d6ac503fd2f78642?i=7a455c) as a one-click VM.
 
 * `faas-cli`
 
@@ -102,15 +106,17 @@ git clone https://github.com/openfaas-incubator/ofc-bootstrap
 cd ~/dev/ofc/ofc-bootstrap
 ```
 
-Now fetch the latest release from: [https://github.com/openfaas-incubator/ofc-bootstrap/releases](https://github.com/openfaas-incubator/ofc-bootstrap/releases) and save it in `/usr/local/bin/`
+Now fetch the latest release from: [GitHub](https://github.com/openfaas-incubator/ofc-bootstrap/releases) and save it in `/usr/local/bin/`. If you're on MacOS download "ofc-bootstrap-darwin" and save it as "ofc-bootstrap".
 
-Create a new init.yaml file with this command:
+Run `chmod +x /usr/local/bin/ofc-bootstrap`
+
+Now create a new init.yaml file with this command:
 
 ```
 cp example.init.yaml init.yaml
 ```
 
-Look for the `### User-input` section of the file
+Look for the `### User-input` section of the file. This is where we'll now be populating our configuration and secrets for later use with the tool.
 
 ### Plan your DNS records
 
@@ -127,6 +133,8 @@ In `init.yaml` set your `root_domain` i.e. `domain.com`.
 ### Configure GitLab
 
 * Edit `init.yaml` and set `gitlab_instance:` to the public address of your GitLab instance.
+
+* Edit `init.yaml` and set `scm: github` to `scm: gitlab`.
 
 #### Create an access token
 
@@ -168,19 +176,19 @@ The OAuth application will be used for logging in to your dashboard.
 
 After creating your application you will get a client_id and client_secret.
 
-Set your client_secret in `init.yaml` under: `"of-client-secret"`.
+Set your (Application Id) client_id in `init.yaml` under: `oauth` and `client_id`
 
-Set your client_id in `init.yaml` under: `oauth` and `client_id`
+Set your (Secret) client_secret in `init.yaml` under: `"of-client-secret"`.
 
-Set `oauth_provider_base_url` to `https://gitlab.domain.com`, where this is the domain of your GitLab instance.
+Set `oauth_provider_base_url` to `https://gitlab.domain.com`, where this is the domain of your GitLab instance. Don't add a final slash to the URL.
 
 Set `enable_oauth` to `true`
-
-Under `tls_config` change `issuer_type` to `prod` and `email` to your email.
 
 #### Configure your TLS secret
 
 * Turn on TLS by setting `tls: true`
+
+* Under `tls_config` change `issuer_type` to `prod` and `email` to your email.
 
 A secret is required by cert-manager to obtain a wildcard TLS certificate using a DNS01 challenge.
 
@@ -189,6 +197,8 @@ If using DigitalOcean, save an access token to:
 ```
 ~/Downloads/do-access-token
 ```
+
+> Note: you can create a new access token by logging into your DigitalOcean account and clicking API then *Generate New Token*.
 
 `ofc-boostrap` will pass the token onto `cert-manager` as a Kubernetes secret.
 
@@ -199,20 +209,22 @@ If you are using GCP or AWS to manage DNS then see the [README.md file](https://
 * Open the Docker Desktop settings and make sure you have “Store my credentials in a key-chain” set to false
 * Now run `docker login` and login with your Docker Hub account
 
-If you don't have an account you can sign-up at: https://hub.docker.com
+If you don't have an account you can sign-up at: [https://hub.docker.com](https://hub.docker.com)
 
-Edit `init.yaml` and set `registry:` to `docker.io/ofctest/` replacing `ofctest` with your username on the Docker Hub.
+Edit `init.yaml` and set `registry:` to `docker.io/ofctest/` replacing `ofctest` with your username on the Docker Hub. You can also create an organization through the Docker Hub so that your images are kept in one place.
+
+Private registries are also supported but outside of the scope of this post.
 
 #### Configure your CUSTOMERS ACL
 
 The CUSTOMERS ACL list containers a list of projects and users for which CI/CD can be triggered.
 
-* Create a public GitLab repo
+* Create a public GitLab repo called whatever you like for instance: `ofc-acl`
 * Add a CUSTOMERS plain-text file and enter each name on a new line
-* Find the Raw URL from the UI
-* Edit the line that says `customers_url` and enter the URL
+* Find the Raw URL from the UI (Open Raw)
+* Edit the line that says `customers_url` and enter the URL i.e. `https://gitlab.domain.com/user/ofc-acl/raw/master/CUSTOMERS`
 
-You can edit this file at any time.
+You can edit the content of this file at any time.
 
 #### Run the tool
 

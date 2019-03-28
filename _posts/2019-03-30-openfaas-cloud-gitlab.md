@@ -250,6 +250,8 @@ Now create your DNS A records as follows all pointing at the same IP:
 * system.domain.com
 * *.domain.com
 
+I recommend using a short TTL such as 60 seconds. To verify that DNS has propagated use `ping -c 1 subdomain.domain.com`.
+
 Now find the generated webhook secret:
 
 ```
@@ -257,6 +259,28 @@ echo $(kubectl get secret -n openfaas-fn gitlab-webhook-secret -o jsonpath="{.da
 ```
 
 Update your "Payload secret" on the System Hooks page. This secret is used to verify the sender of webhooks.
+
+You can check your TLS certficates with:
+
+Check the system domain:
+
+```
+curl -v https://system.domain.com/healthz
+```
+
+Check the auth domain:
+
+```
+curl -v https://auth.system.domain.com/healthz
+```
+
+Check the wildcard domain:
+
+```
+curl -v https://username.domain.com/healthz
+```
+
+You're now good to go.
 
 ### Create your first functions or microservices
 
@@ -283,7 +307,9 @@ faas-cli template store pull node10-express
 faas-cli new --lang node10-express timezone-shift --prefix=dockerhub_username
 ```
 
-Now let's create a quick function to shift timezones for meetings:
+Now let's create a quick function to shift timezones for meetings.
+
+We'll install an `npm` module so you'll need to have Node.js installed on your local machine, or run this command in a container and grab the resulting `package.json` file.
 
 ```
 cd timezone-shift

@@ -198,7 +198,7 @@ You can edit this file at any time.
 Make sure your `kubectl` is pointing to the correct cluster.
 
 ```
-ofc-bootstrap
+ofc-bootstrap -yaml=init.yaml
 ```
 
 If anything goes wrong you can reset using the `./scripts/reset.sh` bash script found in the GitHub repo which we cloned earlier.
@@ -310,3 +310,13 @@ You are the first user for your installation, now you can invite your team, coll
 ## Wrapping up
 
 We installed OpenFaaS Cloud and enabled CI/CD, TLS and OAuth2 on any repo without any complicated configuration or pipelines or maintenance overhead.
+
+You can [follow me @alexellisuk](https://twitter.com/alexellisuk/) and [@openfaas on Twitter](https://twitter.com/openfaas/)
+
+If you have comments, questions or suggestions then please [join the OpenFaaS Slack](https://docs.openfaas.com/community/) to chat with the community.
+
+### You may also like:
+
+* [Build a single page app with OpenFaaS Cloud](https://www.openfaas.com/blog/serverless-single-page-app/)
+* [Sailing through the Serverless Ocean with Spotinst & OpenFaaS Cloud](https://spotinst.com/blog/2019/03/25/sailing-through-the-serverless-ocean-with-openfaas-cloud/)
+* [OpenFaaS workshop](https://github.com/openfaas/workshop/)

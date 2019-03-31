@@ -1,7 +1,7 @@
 <section class="tiers">
     <div class="text-container">
         {% for tier in site.data.sponsors %}
-        {% if tier[1].size > 0 %}
+        {% if tier[1].size > 0 and tier[0] != "bronze" %}
         <div class="tier">
             <div class="title">{{tier[0] | capitalize}} Sponsors</div>
             <div class="sponsors">

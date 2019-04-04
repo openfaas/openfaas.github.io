@@ -200,3 +200,4 @@ For a more detailed understanding of how the site is built please refer to the J
   - [jekyll-archives](https://github.com/jekyll/jekyll-archives)
 
 Refer to the documenation above for details on how each plugin can be used and configured.
+

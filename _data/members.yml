@@ -1,3 +1,4 @@
+# Lists are sorted on surname
 founders:
   - alex
 
@@ -12,5 +13,7 @@ members:
   - andrew
   - martin
   - ken
+  - rishabh
   - john
+  - matias
   - vivek

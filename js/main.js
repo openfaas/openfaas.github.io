@@ -1,29 +1,82 @@
-(function () {
-	var header = document.getElementById("mainHeader");
+/*------------HTTP request helper-------------*/
+/*--------------------------------------------*/
+function sendRequest(url, callback) {
+    var req = createXMLHTTPObject();
 
-	function changeHeader() {
-		var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-		header.classList.toggle("header-background", scrollTop >= 50 || document.body.classList.contains("nav-open"));
-	}
+    if (!req) {
+        return;
+    }
 
-	var didScroll = false;
+    var method = 'GET';
 
-	$(window).scroll(function () {
-		didScroll = true;
-	});
+    req.open(method, url, true);
 
-	setInterval(function() {
-		if (didScroll) {
-			didScroll = false;
-			changeHeader();
-		}
-	}, 100);
+    req.onreadystatechange = function () {
+        if (req.readyState != 4) {
+            return;
+        }
 
-	changeHeader();
+        if (req.status != 200 && req.status != 304) {
+            return;
+        }
 
-	document.getElementById("open-nav").addEventListener("click", function (event) {
-		event.preventDefault();
-		document.body.classList.toggle("nav-open");
-		changeHeader();
-	});
-})();
+        callback(JSON.parse(req.response));
+    }
+
+    if (req.readyState == 4) {
+        return;
+    }
+
+    req.send();
+}
+
+var XMLHttpFactories = [
+    function() { return new XMLHttpRequest() },
+    function() { return new ActiveXObject('Msxml2.XMLHTTP') },
+    function() { return new ActiveXObject('Msxml3.XMLHTTP') },
+    function() { return new ActiveXObject('Microsoft.XMLHTTP') }
+];
+
+function createXMLHTTPObject() {
+    var xmlhttp = false;
+
+    for (var i = 0; i < XMLHttpFactories.length; i++) {
+        try {
+            xmlhttp = XMLHttpFactories[i]();
+        } catch(e) {
+            continue;
+        }
+        break;
+    }
+
+    return xmlhttp;
+}
+
+
+/*------------Gets github stars counter-------------*/
+/*--------------------------------------------------*/
+
+function getGithubStars() {
+    var starsCounterWrapper = document.getElementById('git-stars');
+    var counter = document.getElementById('stars-counter');
+
+    try {
+        sendRequest('https://api.github.com/repos/openfaas/faas', function(resp) {
+            starsCounterWrapper.classList.add('visible');
+
+            if (resp && resp.stargazers_count) {
+                var stars = String(resp.stargazers_count);
+
+                counter.innerText = stars.split(/(?=(?:\d{3})+(?:\.|$))/g).join(',');
+            }
+        })
+    } catch (e) {
+        starsCounterWrapper.classList.add('visible');
+    }
+}
+
+/*------------Init scripts on pageload--------------*/
+/*--------------------------------------------------*/
+document.addEventListener('DOMContentLoaded', function() {
+    getGithubStars();
+})

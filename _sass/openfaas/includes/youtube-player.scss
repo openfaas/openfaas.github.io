@@ -1,0 +1,71 @@
+.yt {
+    &-player {
+        &-container {
+            display: -webkit-flex;
+            display: -ms-flex;
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+        }
+
+        &-iframe-wrapper {
+            position: relative;
+
+            max-width: 642px;
+            max-height: 360px;
+
+            width: 50vw;
+            height: calc(50vw / 1.78); // keep ratio
+
+            margin-top: 40px;
+            margin-top: 40px;
+
+            background: url('../images/openfaas/yt-cover.png');
+
+            background-repeat: no-repeat;
+            background-size: cover;
+
+            iframe {
+                position: relative;
+
+                width: 642px;
+                height: 360px;
+
+                opacity: 0;
+
+                transition: opacity .3s;
+
+                z-index: 0;
+
+                &.playing {
+                    opacity: 1;
+
+                    z-index: 2;
+                }
+            }
+        }
+    }
+}
+
+#yt-player-play {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: 168px;
+    height: 94px;
+
+    transform: translate(-50%, -50%);
+
+    background: url('../images/openfaas/play.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    cursor: pointer;
+
+    z-index: 2;
+}

@@ -11,6 +11,9 @@ $padding-step: 20px;
     .grey {
         background: $of-grey;
     }
+    .white {
+        background: white;
+    }
 
     .grey-darker-bis {
         background: $of-grey-darker-bis;
@@ -29,6 +32,25 @@ $padding-step: 20px;
         &.demo {
             padding-top: $padding-step * 7;
             padding-bottom: $padding-step * 6;
+        }
+
+        &.users {
+            padding-top: $padding-step * 6;
+            padding-bottom: $padding-step * 6;
+
+            a {
+                display: -webkit-flex;
+                display: -ms-flex;
+                display: flex;
+
+                figure {
+                    display: -webkit-flex;
+                    display: -ms-flex;
+                    display: flex;
+
+                    align-items: center;
+                }
+            }
         }
 
         .column {
@@ -149,7 +171,7 @@ a.button {
 
             .code-samples-preview {
                 padding: $padding-step;
-                
+
                 border: 5px solid $of-text-dark;
                 border-radius: 0 0 10px 10px;
                 border-top: 0;

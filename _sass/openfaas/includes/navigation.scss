@@ -1,7 +1,15 @@
 .navbar {
+    min-height: auto;
+
+    &>.container {
+        min-height: auto;
+    }
+
     &.is-primary {
         .navbar-brand {
             align-items: center;
+
+            min-height: auto;
 
             a.navbar-item {
                 &:hover {

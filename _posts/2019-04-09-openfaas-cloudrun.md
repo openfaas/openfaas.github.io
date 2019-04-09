@@ -42,13 +42,19 @@ The traits and characteristics of Cloud Run (hosted Knative) closely follow [wha
 | Run any binary as a service  | Yes               | No             | No |
 | SaaS offering                | [OpenFaaS Cloud](https://docs.openfaas.com/openfaas-cloud/intro/)    | Cloud Run      | 3rd-party offerings |
 
-There's an undeniable level of similarity between the work we've done in the OpenFaaS community and what we're seeing today in Google's Knative project. There are however some important differences, but exploring these is beyond the scope of this post. One of the key differences is that OpenFaaS targets simple, light-weight, primitives directly within the Kubernetes API. The [OpenFaaS design](https://docs.openfaas.com/architecture/gateway/) provides its own set of UNIX-like primitives that allow any container orchestrator to implement functions.
+There's an undeniable level of similarity between the work we've done in the OpenFaaS community and what we're seeing today in Google's Knative project.
 
 <iframe src="https://giphy.com/embed/9S706ievhjXVfG9s9Q" width="480" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/cat-clone-cloned-9S706ievhjXVfG9s9Q">via GIPHY</a></p>
 
+There are however some important differences, but exploring these is beyond the scope of this post. One of the key differences is that OpenFaaS targets simple, light-weight, primitives directly within the Kubernetes API. The [OpenFaaS design](https://docs.openfaas.com/architecture/gateway/) provides its own set of UNIX-like primitives that allow any container orchestrator to implement functions.
+
 ## Tutorial
 
-Let's get started with the tutorial. We'll be taking a function I built to shift the timezone of a meeting from UTC to the Bay Area. I currently have this deployed to the free [OpenFaaS Cloud Community Cluster](https://docs.openfaas.com/openfaas-cloud/intro/#community-cluster).
+Let's get started with the tutorial. We'll be taking a function I built to shift the timezone of a meeting from UTC to the Bay Area. I currently have my GitHub repository linked to the [OpenFaaS Cloud Community Cluster](https://docs.openfaas.com/openfaas-cloud/intro/#community-cluster) which builds and deploys my functions automatically with its built-in CI/CD process.
+
+> To link our GitHub repository to Cloud Run, we will have to provision additional infrastructure to carry out CI and CD tasks. Google's chosen tool is Cloud Build which will mean adding specific `cloudbuild.yaml` files to each repository. In contrast, OpenFaaS cloud enables automatic CI/CD for each repository without the need for separate infrastructure or managing many different CI/CD configs.
+
+This is how the function works:
 
 If you send no argument and use HTTP GET, the function returns the current time shifted:
 

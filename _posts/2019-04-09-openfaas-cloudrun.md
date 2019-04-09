@@ -48,7 +48,7 @@ There's an undeniable level of similarity between the work we've done in the Ope
 
 ## Tutorial
 
-Let's get started with the tutorial. We'll be taking a function I built to shift the timezone of a meeting from UTC to the Bay Area.
+Let's get started with the tutorial. We'll be taking a function I built to shift the timezone of a meeting from UTC to the Bay Area. I currently have this deployed to the free [OpenFaaS Cloud Community Cluster](https://docs.openfaas.com/openfaas-cloud/intro/#community-cluster).
 
 If you send no argument and use HTTP GET, the function returns the current time shifted:
 
@@ -57,8 +57,6 @@ curl -SLs https://alexellis.o6s.io/timezone-shift
 
 {"meeting":"2019-04-09T14:05:58Z","adjusted":"2019-04-09T06:05:58Z"}
 ```
-
-If you send no argument and use HTTP GET, the function returns the current time shifted.
 
 Let's plan a meeting with our colleagues in the Bay Area starting at 5pm UTC:
 

@@ -42,7 +42,7 @@ The traits and characteristics of Cloud Run (hosted Knative) closely follow [wha
 | Run any binary as a service  | Yes               | No             | No |
 | SaaS offering                | [OpenFaaS Cloud](https://docs.openfaas.com/openfaas-cloud/intro/)    | Cloud Run      | 3rd-party offerings |
 
-There's an undeniable level of similarity between the work we've done in the OpenFaaS community and what we're seeing today in Google's Knative project. There are however some important differences, however exploring these is beyond the scope of this post. One of the key differences is that OpenFaaS targets light-weight, simple primitives directly within the Kubernetes API. The [OpenFaaS design](https://docs.openfaas.com/architecture/gateway/) builds its own set of UNIX-like primitives that allow any container orchestrator to implement functions.
+There's an undeniable level of similarity between the work we've done in the OpenFaaS community and what we're seeing today in Google's Knative project. There are however some important differences, but exploring these is beyond the scope of this post. One of the key differences is that OpenFaaS targets simple, light-weight, primitives directly within the Kubernetes API. The [OpenFaaS design](https://docs.openfaas.com/architecture/gateway/) provides its own set of UNIX-like primitives that allow any container orchestrator to implement functions.
 
 <iframe src="https://giphy.com/embed/9S706ievhjXVfG9s9Q" width="480" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/cat-clone-cloned-9S706ievhjXVfG9s9Q">via GIPHY</a></p>
 

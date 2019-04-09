@@ -22,7 +22,7 @@ Yesterday we saw Google [launch a new product](https://news.ycombinator.com/item
 
 > What does that mean for you and me?
 
-It means that we can deploy functions in containers to GCP and run them up to certain limits without incurring any billing costs. I thought it would be worth kicking the tires by deploying one of the OpenFaaS functions I developed in my latest introductory post on [OpenFaaS Cloud & GitLab](https://www.openfaas.com/blog/openfaas-cloud-gitlab/).
+It means that we can deploy functions in containers to GCP and run them [up to certain limits](https://cloud.google.com/run/pricing) without incurring costs. I thought it would be worth kicking the tires by deploying one of the OpenFaaS functions I developed in my latest introductory post on [OpenFaaS Cloud & GitLab](https://www.openfaas.com/blog/openfaas-cloud-gitlab/).
 
 You may already be familiar with OpenFaaS - Serverless Functions Made Simple. I started the project in December 2016 out of a desire to run serverless-style workloads on any cloud without fear of getting locked-in. For that reason OpenFaaS builds Docker or OCI-format container images.
 

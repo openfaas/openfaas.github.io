@@ -48,7 +48,46 @@ There's an undeniable level of similarity between the work we've done in the Ope
 
 ## Tutorial
 
-Let's get started with the tutorial.
+Let's get started with the tutorial. We'll be taking a function I built to shift the timezone of a meeting from UTC to the Bay Area.
+
+If you send no argument and use HTTP GET, the function returns the current time shifted:
+
+```sh
+curl -SLs https://alexellis.o6s.io/timezone-shift
+
+{"meeting":"2019-04-09T14:05:58Z","adjusted":"2019-04-09T06:05:58Z"}
+```
+
+If you send no argument and use HTTP GET, the function returns the current time shifted.
+
+Let's plan a meeting with our colleagues in the Bay Area starting at 5pm UTC:
+
+```sh
+echo -n '{"meeting": "2019-02-18 17:00:00"}' | \
+ curl -SLs https://alexellis.o6s.io/timezone-shift -H "Content-type: application/json" --data-binary @- ; \
+ echo
+
+{"meeting":"2019-02-18T17:00:00Z","adjusted":"2019-02-18T09:00:00Z"}
+```
+
+Here's the function code:
+
+```js
+"use strict"
+
+const moment = require('moment');
+
+module.exports = (event, context) => {
+    let meeting = moment.utc(event.body.meeting)
+    let adjusted = meeting.clone().utc().add(-8, 'hours');
+
+    context
+        .status(200)
+        .succeed({ meeting: meeting.format(), adjusted: adjusted.format() });
+}
+```
+
+See also: [handler.js](https://github.com/alexellis/openfaas-cloud-test/blob/master/timezone-shift/handler.js)
 
 ### Sign-up for GCP
 

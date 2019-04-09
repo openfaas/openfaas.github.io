@@ -1,33 +1,35 @@
 /*------------HTTP request helper-------------*/
 /*--------------------------------------------*/
-function sendRequest(url, callback) {
+function sendRequest(url, postData, method, callback) {
     var req = createXMLHTTPObject();
 
     if (!req) {
-        return;
+        return
     }
-
-    var method = 'GET';
 
     req.open(method, url, true);
 
+    if (postData) {
+        req.setRequestHeader('Content-type','application/json');
+    }
+
     req.onreadystatechange = function () {
         if (req.readyState != 4) {
-            return;
+            return
         }
 
         if (req.status != 200 && req.status != 304) {
             return;
         }
 
-        callback(JSON.parse(req.response));
+        callback(req);
     }
 
     if (req.readyState == 4) {
-        return;
+        return
     }
 
-    req.send();
+    req.send(postData);
 }
 
 var XMLHttpFactories = [
@@ -43,7 +45,8 @@ function createXMLHTTPObject() {
     for (var i = 0; i < XMLHttpFactories.length; i++) {
         try {
             xmlhttp = XMLHttpFactories[i]();
-        } catch(e) {
+        }
+        catch(e) {
             continue;
         }
         break;
@@ -61,7 +64,7 @@ function getGithubStars() {
     var counter = document.getElementById('stars-counter');
 
     try {
-        sendRequest('https://api.github.com/repos/openfaas/faas', function(resp) {
+        sendRequest('https://api.github.com/repos/openfaas/faas', null, 'GET', function(resp) {
             starsCounterWrapper.classList.add('visible');
 
             if (resp && resp.stargazers_count) {
@@ -112,6 +115,5 @@ window.addEventListener('scroll', function() {
 /*------------Init scripts on pageload--------------*/
 /*--------------------------------------------------*/
 document.addEventListener('DOMContentLoaded', function() {
-    getGithubStars();
     shrinkNav();
 })

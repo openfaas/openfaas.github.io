@@ -2,18 +2,20 @@
     <div class="columns is-multiline">
         <div class="column is-12 is-spaced-bottom">
             <h1 class="title is-size-2 has-text-grey-darker">
-                End-users & case-studies
+                <a href="#">#TeamServerless </a> — Our community and contributors of 160+
             </h1>
         </div>
 
-        {% for user in site.data.users %}
-            <div class="column is-2">
-                    <a href="{{ user.link }}"  title="{{ user.title }}" target="_blank">
-                        <figure class="image is-128x128">
-                            <img src="images/users-logos/{{ user.icon }}" alt="{{ user.title }}">
+        <div class="column is-12">
+            <div class="columns is-multiline">
+                {% for member in site.data.github_stats.byLogin %}
+                    <div class="column">
+                        <figure style="width: 100px; height: 100px" class="image">
+                            <img data-counter="{{member[1]}}" src="https://github.com/{{member[0]}}.png?size=100" alt="{{member[0]}}">
                         </figure>
-                    </a>
+                    </div>
+                {% endfor %}
             </div>
-        {% endfor %}
+        </div>
     </div>
 </div>

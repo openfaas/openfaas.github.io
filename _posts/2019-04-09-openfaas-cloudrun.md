@@ -16,7 +16,7 @@ In this post I'll introduce Google's new Cloud Run product which like OpenFaaS a
 
 ## Serverless 2.0 - it's about containers
 
-In my conference talk at [goto Copenhagen](https://www.youtube.com/watch?v=yOpYYYRuDQ0) last fall I coined the term *Serverless 2.0* which builds upon the learnings of the first-generate of proprietary SaaS products from major cloud vendors, but which uses containers for portability and to avoid lock-in. This approach has been core to the OpenFaaS community from day 1.
+In my conference talk at [goto Copenhagen](https://www.youtube.com/watch?v=yOpYYYRuDQ0) last fall I coined the term *Serverless 2.0*. Serverless 2.0 builds upon the learnings of the first-generation of proprietary SaaS products from major cloud vendors by using containers for portability and to avoid lock-in. Your deployments for Serverless and the rest of your applications no-longer have to be orthogonal managed by two sets of tools. This approach has been core to the OpenFaaS community from day 1.
 
 Yesterday we saw Google [launch a new product](https://news.ycombinator.com/item?id=19610830) named [Cloud Run](https://cloud.google.com/run/docs/). This is a proprietary serverless add-on for Google Cloud Platform (GCP) built around their flagship [Istio](https://istio.io) and [Knative](https://cloud.google.com/knative/) projects.
 

@@ -2,7 +2,7 @@
 title: "Simple Serverless with Golang Functions and Microservices"
 description: In this post Alex will explore what a Serverless function and microservice look like in Golang with OpenFaaS. We'll see how the OpenFaaS templates abstract away boilerplate code and how to start building your own templates.
 date: 2019-04-10
-image: /images/golang-serverless/foundations.jpg
+image: /images/golang-serverless/foundation.jpg
 categories:
   - templates
   - golang

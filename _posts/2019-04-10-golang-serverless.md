@@ -45,6 +45,13 @@ See also: [Introducing Stateless microservices](https://www.openfaas.com/blog/st
 
 Here we'll show you how to build a function using two of the available templates and compare the differences. We'll then show you have to construct a microservice followed by how we could get the best of both worlds using a Golang middleware template.
 
+I will be using the OpenFaaS CLI which is available via `brew install faas-cli`, [GitHub releases](https://github.com/openfaas/faas-cli/) or on Linux/Mac with:
+
+```sh
+ # use `sudo sh` to move to /usr/local/bin/
+curl https://cli.openfaas.com | sh
+```
+
 ### Golang Function template (classic)
 
 The classic Golang template for OpenFaaS forks one process for every incoming request meaning that state is not retained between invocations. This is a similar model to cgi-bin and uses UNIX STDIO pipes to send the request to the function and to retrieve the response.

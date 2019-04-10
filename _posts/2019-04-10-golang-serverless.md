@@ -43,7 +43,7 @@ See also: [Introducing Stateless microservices](https://www.openfaas.com/blog/st
 
 ## Tutorial
 
-Here we'll show you how to build a function using two of the available templates and compare the differences. We'll then show you have to construct a microservice followed by how we could get the best of both worlds using a Golang middleware template.
+Here we'll show you how to build a function using two of the available templates and compare the differences. We'll then show you how to construct a microservice followed by how we could get the best of both worlds using a Golang middleware template.
 
 I will be using the OpenFaaS CLI which is available via `brew install faas-cli`, [GitHub releases](https://github.com/openfaas/faas-cli/) or on Linux/Mac with:
 

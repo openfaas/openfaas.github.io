@@ -339,6 +339,10 @@ X-Served-Date: 2019-04-10 15:11:49.998860566 +0000 UTC m=+1.512602566
 OK
 ```
 
+As part of a blog post on how to build a full Single Page App with OpenFaaS I used the golang-middleware template to build a function to consume events from GitHub and to store them in a Postgres database.
+
+You can read the code here for [handler.go](https://github.com/alexellis/leaderboard-app/blob/master/github-sub/handler.go). Confidential data is configured through the use of secrets and non-confidential configuration us set through environment variables in [stack.yml](https://github.com/alexellis/leaderboard-app/blob/master/stack.yml#L18).
+
 ## Custom templates
 
 The easiest way to start building your own template is to checkout some of the examples available from the community in the [template store](https://github.com/openfaas/store) or the [Official Classic templates](https://github.com/openfaas/templates/). And remember the [OpenFaaS workloads](https://docs.openfaas.com/reference/workloads/) contract.

@@ -7,13 +7,13 @@
         </div>
 
         {% for user in site.data.users %}
-            <div class="column is-2">
-                    <a href="{{ user.link }}"  title="{{ user.title }}" target="_blank">
-                        <figure class="image is-128x128">
-                            <img src="images/users-logos/{{ user.icon }}" alt="{{ user.title }}">
-                        </figure>
-                    </a>
-            </div>
+        <div class="column is-2">
+            <a href="{{ user.link }}"  title="{{ user.title }}" target="_blank">
+                <figure class="image is-128x128">
+                    <img src="images/users-logos/{{ user.icon }}" alt="{{ user.title }}">
+                </figure>
+            </a>
+        </div>
         {% endfor %}
     </div>
 </div>

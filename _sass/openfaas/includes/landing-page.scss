@@ -9,14 +9,15 @@ $padding-step: 20px;
     }
 
     .grey {
-        background: $of-grey;
+        background-color: $of-grey;
     }
+
     .white {
-        background: white;
+        background-color: white;
     }
 
     .grey-darker-bis {
-        background: $of-grey-darker-bis;
+        background-color: $of-grey-darker-bis;
     }
 
     .hero-body {
@@ -177,6 +178,68 @@ a.button {
                 border-top: 0;
 
                 background: $of-grey-darker-bis;
+            }
+        }
+
+        .contributors {
+            position: relative;
+            padding-top: calc(100vw * 0.1);
+
+            &:before {
+                content: '';
+
+                position: absolute;
+
+                top: 0;
+                left: 0;
+
+                width: 100%;
+
+                height: calc(100vw * 0.15);
+
+                background: url('../images/openfaas/wave-2.png');
+                background-repeat: no-repeat;
+                background-position: center top;
+                background-size: 100%;
+            }
+
+            .title {
+                a {
+                    &.contributors-link {
+                        text-decoration: underline;
+                        color: $primary;
+                    }
+                }
+            }
+
+            .user {
+                &-rows {
+                    display: -webkit-flex;
+                    display: -ms-flex;
+                    display: flex;
+
+                    flex-direction: column;
+
+                    align-items: flex-end;
+                }
+
+                &-row {
+                    $imageSize: 110px;
+
+                    display: -webkit-flex;
+                    display: -ms-flex;
+                    display: flex;
+
+                    justify-content: flex-end;
+
+                    figure {
+                        padding: 5px;
+
+                        img {
+                            max-width: $imageSize;
+                        }
+                    }
+                }
             }
         }
     }

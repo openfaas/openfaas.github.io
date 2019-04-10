@@ -2,7 +2,17 @@ const https = require('https');
 const fs = require('fs');
 
 function sortContribs(data) {
-	data.byLogin = Object.entries(data.byLogin).sort((a, b) => b[1] - a[1]).reduce((a, b) => { a[b[0]] = b[1]; return a }, {})
+	let groupedUsers = [];
+	const rows = [12, 13, 14, 14]; // users/row
+	const sortedEntries = Object.entries(data.byLogin).sort((a, b) => b[1] - a[1]);
+
+	data.byLogin = sortedEntries.reduce((a, b) => { a[b[0]] = b[1]; return a; }, {});
+
+	rows.forEach(r => {
+		groupedUsers.push(sortedEntries.splice(0, r));
+	})
+
+	data['contributorsColumns'] = groupedUsers;
 
 	return data;
 }
@@ -15,6 +25,7 @@ function httpsPost({body, ...options}) {
 			...options,
 		}, res => {
 			const chunks = [];
+
 			res.on('data', data => chunks.push(data))
 			res.on('end', () => {
 				let body = Buffer.concat(chunks);
@@ -24,13 +35,16 @@ function httpsPost({body, ...options}) {
 					body = JSON.parse(body);
 					break;
 				}
+
 				resolve(body)
 			})
 		})
 		req.on('error',reject);
-		if(body) {
+
+		if (body) {
 			req.write(body);
 		}
+
 		req.end();
 	})
 }
@@ -47,10 +61,10 @@ httpsPost({
         org: 'openfaas'
     })
 }).then(resp => {
-	const sorted = sortContribs(resp)
+	const sorted = sortContribs(resp);
 	fs.writeFile('_data/github_stats.json', JSON.stringify(sorted), 'utf8', () => {
 		console.log('Github stats file generated');
 	});
 }).catch(err => {
-	console.log(err)
+	console.log(err);
 })

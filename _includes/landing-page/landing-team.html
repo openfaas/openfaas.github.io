@@ -1,21 +1,30 @@
 <div class="container">
     <div class="columns is-multiline">
-        <div class="column is-12 is-spaced-bottom">
+        <div class="column is-12 is-spaced-bottom has-text-right">
             <h1 class="title is-size-2 has-text-grey-darker">
-                <a href="#">#TeamServerless </a> — Our community and contributors of 160+
+                <a class="contributors-link" href="https://github.com/openfaas" target="_blank">#TeamServerless </a> — Our community and contributors of 160+
             </h1>
         </div>
 
-        <div class="column is-12">
-            <div class="columns is-multiline">
-                {% for member in site.data.github_stats.byLogin %}
-                    <div class="column">
-                        <figure style="width: 100px; height: 100px" class="image">
-                            <img data-counter="{{member[1]}}" src="https://github.com/{{member[0]}}.png?size=100" alt="{{member[0]}}">
-                        </figure>
-                    </div>
-                {% endfor %}
-            </div>
+        <div class="user-rows">
+            {% for column in site.data.github_stats.contributorsColumns %}
+                <div class="user-row">
+                    {% if forloop.index == 1 %}
+                        <figure class="image placeholder"><img src="images/openfaas/transparent-placeholder.png" alt=""></figure>
+                        <figure class="image placeholder"><img src="images/openfaas/transparent-placeholder.png" alt=""></figure>
+                    {% endif %}
+                    {% if forloop.index == 2 %}
+                        <figure class="image placeholder"><img src="images/openfaas/transparent-placeholder.png" alt=""></figure>
+                    {% endif %}
+                    {% for member in column%}
+                        <a href="https://github.com/{{member[0]}}" target="_blank">
+                            <figure class="image">
+                                <img data-counter="{{member[1]}}" src="https://github.com/{{member[0]}}.png?size=100" alt="{{member[0]}}">
+                            </figure>
+                        </a>
+                    {% endfor %}
+                </div>
+            {% endfor %}
         </div>
     </div>
 </div>

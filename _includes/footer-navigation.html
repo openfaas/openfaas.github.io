@@ -1,0 +1,23 @@
+<nav id="bottom-nav" class="navbar is-primary" role="navigation" aria-label="main navigation">
+    <div class="container is-fluid">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="{{ site.baseurl }}/">
+                <img src="{{ site.baseurl }}/images/openfaas/footer-of-logo.png">
+            </a>
+        </div>
+
+        <div class="navbar-menu">
+            <div class="navbar-middle">
+                {% for link in site.data.navigation %}
+                	{% assign class = link.class %}
+
+                	{% if link.link == page.url %}
+                		{% assign class = class | append: " is-active" %}
+                	{% endif %}
+                	<a href="{% include relative-src.html src=link.link %}" class="{{ class }}" {% if link.new_window %}target="_blank"{% endif %}>{{ link.name }}</a>
+                {% endfor %}
+            </div>
+
+        </div>
+    </div>
+</nav>

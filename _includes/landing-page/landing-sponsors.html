@@ -1,0 +1,41 @@
+<div class="container">
+    <div class="columns is-multiline">
+        <div class="column is-12 is-spaced-bottom has-text-centered">
+            <h1 class="title is-size-2 has-text-grey-darker">
+                OpenFaaS Sponsors
+            </h1>
+        </div>
+
+        {% for category in site.data.sponsors %}
+            <div class="column is-12 has-text-centered">
+                <h1 class="title is-size-4 has-text-grey sponsors-category">
+                    {{ category[0] }}
+                </h1>
+            </div>
+
+            <div class="column is-6 is-offset-3">
+                <div class="columns">
+                    {% for sponsor in category[1] %}
+                        {% if sponsor %}
+                            <div class="column is-narrow">
+                                <a href="{{ sponsor.url }}"  title="{{ sponsor.alt }}" target="_blank">
+                                    <figure class="image">
+                                        <img src="images/sponsors/{{ sponsor.logo }}" alt="{{ sponsor.alt }}">
+                                    </figure>
+                                </a>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                    <div class="column {% if category[1] %} has-text-right {% else %} has-text-centered {% endif %}">
+                        <a href="{{ site.baseurl }}/donate" class="button {{category[0]}}">
+                            Become a <br> {{ category[0] }} sponsor
+                            <span class="icon">
+                                <i class="fas fa-long-arrow-alt-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>

@@ -8,6 +8,13 @@ $padding-step: 20px;
         background-size: 100%;
     }
 
+    .wavy-2 {
+        background: url('../images/openfaas/wave-2.png');
+        background-repeat: no-repeat;
+        background-position: center top;
+        background-size: 100%;
+    }
+
     .grey {
         background-color: $of-grey;
     }
@@ -38,25 +45,27 @@ $padding-step: 20px;
         &.users {
             padding-top: $padding-step * 6;
             padding-bottom: $padding-step * 6;
+        }
 
-            a {
-                display: -webkit-flex;
-                display: -ms-flex;
-                display: flex;
+        &.sponsors {
+            padding: $padding-step * 8 0;
+        }
 
-                figure {
-                    display: -webkit-flex;
-                    display: -ms-flex;
-                    display: flex;
-
-                    align-items: center;
-                }
-            }
+        &.call-to-action {
+            padding: $padding-step * 8 0;
         }
 
         .column {
             &.is-spaced-bottom {
                 padding-bottom: $padding-step * 2;
+            }
+
+            &.is-spaced-top {
+                padding-top: $padding-step * 2;
+
+                &-x2 {
+                    padding-top: $padding-step * 4;
+                }
             }
         }
     }
@@ -98,6 +107,23 @@ a.button {
 
 .hero {
     &.is-primary {
+        .hero-body {
+            &.users {
+                a {
+                    display: -webkit-flex;
+                    display: -ms-flex;
+                    display: flex;
+
+                    figure {
+                        display: -webkit-flex;
+                        display: -ms-flex;
+                        display: flex;
+
+                        align-items: center;
+                    }
+                }
+            }
+        }
         .code-samples {
             padding: $padding-step * 4 0;
 
@@ -185,23 +211,7 @@ a.button {
             position: relative;
             padding-top: calc(100vw * 0.1);
 
-            &:before {
-                content: '';
-
-                position: absolute;
-
-                top: 0;
-                left: 0;
-
-                width: 100%;
-
-                height: calc(100vw * 0.15);
-
-                background: url('../images/openfaas/wave-2.png');
-                background-repeat: no-repeat;
-                background-position: center top;
-                background-size: 100%;
-            }
+            padding-bottom: $padding-step * 6;
 
             .title {
                 a {
@@ -242,6 +252,143 @@ a.button {
                 }
             }
         }
+
+        .sponsors {
+            &-category {
+                &.title {
+                    font-weight: 300;
+                    text-transform: capitalize;
+                }
+            }
+
+            .button {
+                width: 175px;
+                height: 56px;
+
+                white-space: normal;
+                font-size: 14px;
+                color: white;
+
+                border: 3px solid;
+                border-radius: 10px;
+
+                align-items: flex-end;
+
+                &:hover {
+                    .icon {
+                        margin-left: 15px;
+                    }
+                }
+
+                &.platinum {
+                    background: #959595;
+                    border-color: #636363;
+                }
+                &.gold {
+                    background: #FEA553;
+                    border-color: #C68141;
+                }
+                &.bronze {
+                    background: #ea955f;
+                    border-color: #cc8152;
+                }
+                &.silver {
+                    background: #c5c5c5;
+                    border-color: #adadad;
+                }
+
+                .icon {
+                    height: 1.35rem;
+
+                    margin-right: -20px;
+
+                    transition: margin .3s;
+                }
+            }
+
+            figure {
+                max-width: 200px;
+            }
+        }
+
+        .call-to-action {
+            .cards-wrapper {
+                display: -webkit-flex;
+                display: -ms-flex;
+                display: flex;
+
+                justify-content: space-between;
+
+                .card {
+                    display: -webkit-flex;
+                    display: -ms-flex;
+                    display: flex;
+
+                    flex-direction: column;
+
+                    flex-basis: 45%;
+
+                    align-items: center;
+
+                    min-height: 420px;
+
+                    padding: $padding-step * 3 - 10px;
+                    background: $of-grey-darker-bis;
+
+                    box-shadow: none;
+
+                    border-radius: 10px;
+
+
+                    .card-logo {
+                        margin-bottom: 20px;
+
+                        figure {
+                            max-width: 98px;
+                        }
+                    }
+
+                    .button {
+                        height: auto;
+
+                        padding: 15px 20px;
+
+                        border-radius: 7px;
+
+                        font-size: 20px;
+                        font-weight: 400;
+
+                        .icon {
+                            color: #FEA553;
+                        }
+                    }
+                }
+            }
+
+            .cta-button {
+                display: -webkit-flex;
+                display: -ms-flex;
+                display: flex;
+
+                justify-content: space-around;
+
+                height: auto;
+
+                border: none;
+
+                text-align: left;
+                font-size: 18px;
+                white-space: pre-wrap;
+                color: $of-text-grey;
+                font-weight: 600;
+
+                background: transparent;
+
+                span {
+                    padding-left: $padding-step;
+                }
+            }
+        }
     }
 }
 
@@ -271,10 +418,29 @@ a.button {
 }
 
 @media (max-width: 1080px) {
+    .cards-wrapper {
+        margin: 0 $padding-step;
+    }
+
     a.button {
         &.button-use-case {
             flex-direction: row;
             font-size: 20px;
+        }
+    }
+}
+
+@media (max-width: 840px) {
+    .cards-wrapper {
+        margin: 0 $padding-step;
+
+        flex-direction: column;
+
+        align-items: center;
+
+        .card {
+            margin-bottom: $padding-step;
+            max-width: 400px;
         }
     }
 }

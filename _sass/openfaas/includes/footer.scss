@@ -1,0 +1,17 @@
+.footer {
+	background-color: $of-text-dark;
+
+	color: $of-text-grey;
+
+	padding: 3rem 1.5rem;
+
+	p {
+		font-weight: 300;
+		font-size: 18px;
+	}
+
+	a {
+		color: white;
+		text-decoration: underline;
+	}
+}

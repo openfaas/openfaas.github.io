@@ -88,6 +88,10 @@ function shrinkNav() {
     var maxHeight = 184;
     var minHeight = 80;
 
+    if (window.innerWidth <= 1080) {
+        maxHeight = 110;
+    }
+
     var scrolled = window.scrollY;
 
     if (scrolled === 0) {
@@ -112,8 +116,26 @@ window.addEventListener('scroll', function() {
     shrinkNav();
 });
 
+window.addEventListener('resize', function() {
+    shrinkNav();
+});
+
+/*----------Add navbar menu toggle action-----------*/
+/*--------------------------------------------------*/
+
+function initNavToggler() {
+    var toggler = document.querySelector('.navbar-burger');
+    var menu = document.querySelector('.navbar-menu');
+
+    toggler.addEventListener('click', function() {
+        toggler.classList.toggle('is-active');
+        menu.classList.toggle('is-active');
+    });
+}
+
 /*------------Init scripts on pageload--------------*/
 /*--------------------------------------------------*/
 document.addEventListener('DOMContentLoaded', function() {
     shrinkNav();
+    initNavToggler();
 })

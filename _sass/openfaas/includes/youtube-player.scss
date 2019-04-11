@@ -69,3 +69,10 @@
 
     z-index: 2;
 }
+
+@media (max-width: $tablet) {
+    .yt-player-iframe-wrapper {
+        width: 80vw;
+        height: calc(80vw / 1.78); // keep ratio
+    }
+}

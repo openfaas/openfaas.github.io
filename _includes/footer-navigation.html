@@ -4,10 +4,11 @@
             <a class="navbar-item" href="{{ site.baseurl }}/">
                 <img src="{{ site.baseurl }}/images/openfaas/footer-of-logo.png">
             </a>
+            <p class="navbar-item is-size-5 is-size-4-fullhd has-text-weight-bold">Serverless Functions, Made Simple.</p>
         </div>
 
-        <div class="navbar-menu">
-            <div class="navbar-middle">
+        <div class="navbar-menu is-visible-desktop">
+            <div class="navbar-end">
                 {% for link in site.data.navigation %}
                 	{% assign class = link.class %}
 

@@ -1,0 +1,37 @@
+$visible-items-mobile: 13;
+
+.hero.is-primary {
+	.hero-body.users {
+		a.user-link {
+			display: -webkit-flex;
+			display: -ms-flex;
+			display: flex;
+
+			figure {
+				display: -webkit-flex;
+				display: -ms-flex;
+				display: flex;
+
+				align-items: center;
+			}
+		}
+
+		.users-wrapper {
+			display: -webkit-flex;
+			display: -ms-flex;
+			display: flex;
+
+			flex-wrap: wrap;
+		}
+	}
+}
+
+@media (max-width: $tablet) {
+	.users-wrapper.show-less {
+		.column {
+			&:nth-child(n+#{$visible-items-mobile}) {
+				display: none;
+			}
+		}
+	}
+}

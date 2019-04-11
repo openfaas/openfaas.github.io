@@ -4,6 +4,10 @@
 
     &>.container {
         min-height: auto;
+
+        .navbar-end {
+            flex-grow: 0;
+        }
     }
 
     &.is-primary {
@@ -30,7 +34,8 @@
         justify-content: center;
     }
 
-    &-middle {
+    &-middle,
+    &-end {
         display: -webkit-flex;
         display: -ms-flex;
         display: flex;
@@ -47,6 +52,7 @@
             color: white;
 
             &.is-active {
+                background: transparent;
                 border-bottom: 2px solid #ffa74d;
             }
         }
@@ -95,10 +101,6 @@
             }
         }
     }
-}
-
-#bottom-nav {
-    height: 110px;
 }
 
 @media screen and (max-width: 1300px) {

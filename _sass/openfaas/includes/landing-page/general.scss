@@ -1,0 +1,74 @@
+$padding-step: 20px;
+
+.hero {
+    .wavy {
+        background: url('../images/openfaas/wave.png'), linear-gradient(to bottom, transparent 46%, $of-grey 46%);
+        background-repeat: no-repeat;
+        background-position: 0 125px;
+        background-size: 100%;
+    }
+
+    .wavy-2 {
+        background: url('../images/openfaas/wave-2.png');
+        background-repeat: no-repeat;
+        background-position: center top;
+        background-size: 100%;
+    }
+
+    .grey {
+        background-color: $of-grey;
+    }
+
+    .white {
+        background-color: white;
+    }
+
+    .grey-darker-bis {
+        background-color: $of-grey-darker-bis;
+    }
+
+    .hero-body {
+        &.features {
+            padding-top: $padding-step * 4;
+            padding-bottom: $padding-step * 6;
+        }
+        &.description {
+            padding-top: $padding-step * 6;
+            padding-bottom: $padding-step * 6;
+        }
+
+        &.demo {
+            padding-top: $padding-step * 7;
+            padding-bottom: $padding-step * 6;
+        }
+
+        &.users {
+            padding-top: $padding-step * 6;
+            padding-bottom: $padding-step * 6;
+        }
+
+        &.sponsors {
+            padding-top: $padding-step * 8;
+            padding-bottom: $padding-step * 8;
+        }
+
+        &.call-to-action {
+            padding-top: $padding-step * 8;
+            padding-bottom: $padding-step * 8;
+        }
+
+        .column {
+            &.is-spaced-bottom {
+                padding-bottom: $padding-step * 2;
+            }
+
+            &.is-spaced-top {
+                padding-top: $padding-step * 2;
+
+                &-x2 {
+                    padding-top: $padding-step * 4;
+                }
+            }
+        }
+    }
+}

@@ -1,5 +1,7 @@
 const https = require('https');
 const fs = require('fs');
+const maxRetry = 3;
+let retries = 0;
 
 function sortContribs(data) {
 	let groupedUsers = [];
@@ -18,7 +20,6 @@ function sortContribs(data) {
 }
 
 function httpsPost({body, ...options}) {
-	console.log('Fetching data.....')
 	return new Promise((resolve,reject) => {
 		const req = https.request({
 			method: 'POST',
@@ -32,7 +33,16 @@ function httpsPost({body, ...options}) {
 
 				switch(res.headers['content-type']) {
 					case 'application/json':
-					body = JSON.parse(body);
+					try {
+						body = JSON.parse(body);
+					} catch (e) {
+						console.log('Failed to parse reponse, retrying...');
+						if (retries < maxRetry) {
+							retries += 1;
+							console.log('Attempt ' + retries);
+							postRequest()
+						}
+					}
 					break;
 				}
 
@@ -49,22 +59,29 @@ function httpsPost({body, ...options}) {
 	})
 }
 
-httpsPost({
-	hostname: 'kenfdev.o6s.io',
-	port: 443,
-	path: '/github-stats',
-	method: 'POST',
-	headers: {
-		'Content-Type': 'application/json'
-	},
-    body: JSON.stringify({
-        org: 'openfaas'
-    })
-}).then(resp => {
-	const sorted = sortContribs(resp);
-	fs.writeFile('_data/github_stats.json', JSON.stringify(sorted), 'utf8', () => {
-		console.log('Github stats file generated');
-	});
-}).catch(err => {
-	console.log(err);
-})
+function postRequest() {
+	console.log('Fetching data.....')
+
+	httpsPost({
+		hostname: 'kenfdev.o6s.io',
+		port: 443,
+		path: '/github-stats',
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({
+			org: 'openfaas'
+		})
+	}).then(resp => {
+		const sorted = sortContribs(resp);
+
+		fs.writeFile('_data/github_stats.json', JSON.stringify(sorted), 'utf8', () => {
+			console.log('Github stats file generated');
+		});
+	}).catch(err => {
+		console.log(err);
+	})
+}
+
+postRequest()

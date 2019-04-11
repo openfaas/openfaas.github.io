@@ -1,0 +1,22 @@
+#bottom-nav {
+    height: 110px;
+
+    .navbar {
+        &-item {
+            &.is-active {
+                background-color: transparent;
+            }
+        }
+    }
+}
+
+@media (max-width: $desktop) {
+	#bottom-nav {
+		height: 92px;
+		padding: $padding-step;
+
+		.navbar-brand {
+			justify-content: center;
+		}
+	}
+}

@@ -1,0 +1,69 @@
+.hero.is-primary {
+	.sponsors {
+		&-category {
+			&.title {
+				font-weight: 300;
+				text-transform: capitalize;
+			}
+		}
+
+		.button {
+			width: 175px;
+			height: 56px;
+
+			white-space: normal;
+			font-size: 14px;
+			color: white;
+
+			border: 3px solid;
+			border-radius: 10px;
+
+			align-items: flex-end;
+
+			&:hover {
+				.icon {
+					margin-left: 15px;
+				}
+			}
+
+			&.platinum {
+				background: #959595;
+				border-color: #636363;
+			}
+			&.gold {
+				background: #FEA553;
+				border-color: #C68141;
+			}
+			&.bronze {
+				background: #ea955f;
+				border-color: #cc8152;
+			}
+			&.silver {
+				background: #c5c5c5;
+				border-color: #adadad;
+			}
+
+			.icon {
+				height: 1.35rem;
+
+				margin-right: -20px;
+
+				transition: margin .3s;
+			}
+		}
+
+		figure {
+			max-width: 175px;
+		}
+	}
+}
+
+@media (max-width: $tablet) {
+	.of-sponsor-logo {
+		display: -webkit-flex;
+		display: -ms-flex;
+		display: flex;
+
+		justify-content: center;
+	}
+}

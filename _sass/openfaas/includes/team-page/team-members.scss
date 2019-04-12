@@ -1,53 +1,145 @@
 .hero {
 	.hero-body {
 		&.intro {
-			padding-bottom: $padding-step * 6;
+			background: white;
+
+			padding-top: $padding-step * 4;
+			padding-bottom: $padding-step * 4;
 		}
 
 		&.team-wrapper {
+			padding-top: $padding-step * 4;
+			padding-bottom: $padding-step * 4;
+
+			.column > .title {
+				text-shadow: 20px 20px 0px #e6e7e7;
+				padding-bottom: $padding-step * 4;
+			}
+
 			.card {
 				display: -webkit-flex;
 				display: -ms-flex;
 				display: flex;
 
-				flex-direction: column;
-
-				align-items: center;
-
-				position: relative;
-
 				background: transparent;
 				box-shadow: none;
 
-				z-index: 1;
-
 				padding: $padding-step;
 
-				&:before,
-				&:after {
-					content: '';
+				.avatar {
+					display: -webkit-flex;
+					display: -ms-flex;
+					display: flex;
 
-					position: absolute;
+					min-width: 200px;
+					flex-basis: 200px;
 
-					border: 2px solid $primary;
+					flex-direction: column;
 
-					z-index: 0;
+					img {
+						width: 100%;
 
+						border-radius: 5px;
+
+						transform: translate(-$padding-step, -$padding-step);
+
+						box-shadow: 7px 7px 0px 0px #000;
+					}
+
+					.social {
+						display: -webkit-flex;
+						display: -ms-flex;
+						display: flex;
+
+						justify-content: space-between;
+
+						background: transparent;
+
+						color: $grey-darker;
+
+						padding: 0 20px 0 0;
+						margin-left: -20px;
+
+						a {
+							font-size: 20px;
+
+							&:hover {
+								color: #ffa74c;
+							}
+						}
+					}
 				}
 
-				img {
-					width: 250px;
+				.about {
+					flex-grow: 1;
 
-					margin-bottom: $padding-step;
-				}
+					padding: $padding-step;
+					border-radius: 5px;
 
-				.name {
+					background: white;
 
+					.name {
+						font-size: 30px;
+						font-weight: bold;
+					}
+
+					.blurb {
+						a {
+							color: $primary;
+						}
+					}
 				}
 			}
 
 			&.founder {
+				.card {
+					.about {
 
+					}
+				}
+			}
+		}
+	}
+}
+
+@media (max-width: $tablet) {
+	.hero {
+		.hero-body.team-wrapper {
+			.card {
+				flex-direction: column;
+
+				.avatar {
+					background: white;
+
+					flex-basis: auto;
+					align-items: center;
+
+					padding-top: $padding-step;
+
+					img {
+						width: 200px;
+						height: 200px;
+
+						border-radius: 50%;
+
+						padding: 0;
+
+						box-shadow: none;
+
+						transform: translate(0, 0);
+
+					}
+
+					.social {
+						width: 100%;
+
+						margin: 0;
+
+						padding: $padding-step 0 0 0;
+
+						justify-content: space-around;
+					}
+				}
 			}
 		}
 	}

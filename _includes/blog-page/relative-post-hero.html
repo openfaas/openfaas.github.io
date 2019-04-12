@@ -1,0 +1,1 @@
+{% if include.src %}{% assign prefix = include.src | slice: 0, 2 %}{% assign protocol = include.src | slice: 0, 4 %}style="background-image: url({% unless protocol == 'http' or prefix == "//" %}{{ site.baseurl }}{% endunless %}{{ include.src }})"{% endif %}

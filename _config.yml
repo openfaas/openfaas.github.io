@@ -82,6 +82,11 @@ defaults:
       layout: "default"
   -
     scope:
+      path: "donate"
+    values:
+      layout: "default"
+  -
+    scope:
       type: "posts"
     values:
       layout: "post"

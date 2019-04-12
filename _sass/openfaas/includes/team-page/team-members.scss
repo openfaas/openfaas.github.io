@@ -16,87 +16,78 @@
 				padding-bottom: $padding-step * 4;
 			}
 
-			.card {
-				display: -webkit-flex;
-				display: -ms-flex;
-				display: flex;
 
-				background: transparent;
-				box-shadow: none;
+		}
+	}
+}
+.card.team.member {
+	display: -webkit-flex;
+	display: -ms-flex;
+	display: flex;
 
-				padding: $padding-step;
+	background: transparent;
+	box-shadow: none;
 
-				.avatar {
-					display: -webkit-flex;
-					display: -ms-flex;
-					display: flex;
+	padding: $padding-step;
 
-					min-width: 200px;
-					flex-basis: 200px;
+	.avatar {
+		display: -webkit-flex;
+		display: -ms-flex;
+		display: flex;
 
-					flex-direction: column;
+		min-width: 200px;
+		flex-basis: 200px;
 
-					img {
-						width: 100%;
+		flex-direction: column;
 
-						border-radius: 5px;
+		img {
+			width: 100%;
 
-						transform: translate(-$padding-step, -$padding-step);
+			border-radius: 5px;
 
-						box-shadow: 7px 7px 0px 0px #000;
-					}
+			transform: translate(-$padding-step, -$padding-step);
+		}
 
-					.social {
-						display: -webkit-flex;
-						display: -ms-flex;
-						display: flex;
+		.social {
+			display: -webkit-flex;
+			display: -ms-flex;
+			display: flex;
 
-						justify-content: space-between;
+			justify-content: space-between;
 
-						background: transparent;
+			background: transparent;
 
-						color: $grey-darker;
+			color: $grey-darker;
 
-						padding: 0 20px 0 0;
-						margin-left: -20px;
+			padding: 0 20px 0 0;
+			margin-left: -20px;
 
-						a {
-							font-size: 20px;
+			a {
+				font-size: 20px;
 
-							&:hover {
-								color: #ffa74c;
-							}
-						}
-					}
-				}
-
-				.about {
-					flex-grow: 1;
-
-					padding: $padding-step;
-					border-radius: 5px;
-
-					background: white;
-
-					.name {
-						font-size: 30px;
-						font-weight: bold;
-					}
-
-					.blurb {
-						a {
-							color: $primary;
-						}
-					}
+				&:hover {
+					color: #ffa74c;
 				}
 			}
+		}
+	}
 
-			&.founder {
-				.card {
-					.about {
+	.about {
+		flex-grow: 1;
 
-					}
-				}
+		padding: $padding-step;
+		border-radius: 5px;
+
+		background: white;
+
+		.name {
+			font-size: 30px;
+			font-weight: bold;
+		}
+
+		.blurb {
+			a {
+				color: $primary;
 			}
 		}
 	}

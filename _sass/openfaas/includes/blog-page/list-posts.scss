@@ -1,0 +1,43 @@
+.hero.is-primary {
+	.blog {
+		&-post {
+			padding: $padding-step * 2 $padding-step;
+
+			background: white;
+
+			>.title {
+				color: $primary;
+			}
+
+			.post {
+				&-preview {
+					>p {
+						color: $of-text-dark;
+						margin-bottom: $padding-step;
+
+						a {
+							color: $primary!important;
+						}
+					}
+				}
+
+				&-date {
+					font-size: 15px;
+					color: #ffa74c;
+				}
+			}
+		}
+	}
+}
+
+#paginator {
+	margin: $padding-step 0;
+
+	a {
+		color: $of-text-dark;
+
+		&.is-current {
+			color: white;
+		}
+	}
+}

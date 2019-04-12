@@ -41,8 +41,14 @@
 		}
 	}
 
-	pre {
+	.highlight {
+		background-color: whitesmoke!important;
 		margin-bottom: $padding-step;
+
+		pre {
+			margin-bottom: $padding-step;
+			background-color: whitesmoke!important;
+		}
 	}
 
 	.author {

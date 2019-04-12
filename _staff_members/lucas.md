@@ -1,7 +1,7 @@
 ---
 name: Lucas Roesler
 position: Contributor
-image_path: /images/author/lucas.jpg
+image_path: /images/author/lucas.png
 twitter_username: theaxer
 github_username: LucasRoesler
 webpage: https://lucasroesler.com/

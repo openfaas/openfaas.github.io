@@ -1,7 +1,7 @@
 ---
 name: Burton Rheutan
 position: Contributor
-image_path: /images/author/burton.jpg
+image_path: /images/author/burton.png
 twitter_username: _burtonr
 github_username: burtonr
 webpage: https://www.burtonr.com/

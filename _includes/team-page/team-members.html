@@ -1,15 +1,15 @@
 <div class="container">
     <div class="columns is-multiline">
         <div class="column is-12 has-text-centered">
-            <h1 class="title is-size-3-tablet is-size-2-desktop has-text-grey-darker">
+            <h1 class="title is-size-4-tablet is-size-3-desktop has-text-grey-darker">
                 {{ include.type }}
             </h1>
         </div>
         <div class="column is-12">
-            <div class="columns">
+            <div class="columns is-multiline">
                 {% for member in include.members %}
-                    <div class="column">
-                        {% include team-page/team-member.html name=member %}
+                    <div class="column is-12 is-6-desktop">
+                        {% include team-page/team-member.html name=member type=include.type%}
                     </div>
                 {% endfor %}
             </div>

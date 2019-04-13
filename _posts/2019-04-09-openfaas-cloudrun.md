@@ -18,7 +18,7 @@ In this post I'll introduce Google's new Cloud Run product which like OpenFaaS a
 
 In my conference talk at [goto Copenhagen](https://www.youtube.com/watch?v=yOpYYYRuDQ0) last fall I coined the term *Serverless 2.0*. Serverless 2.0 builds upon the learnings of the first-generation of proprietary SaaS products from major cloud vendors by using containers for portability and to avoid lock-in. Your deployments for Serverless and the rest of your applications no-longer have to be orthogonal managed by two sets of tools. This approach has been core to the OpenFaaS community from day 1.
 
-Yesterday we saw Google [launch a new product](https://news.ycombinator.com/item?id=19610830) named [Cloud Run](https://cloud.google.com/run/docs/). This is a proprietary serverless add-on for Google Cloud Platform (GCP) built around their flagship [Istio](https://istio.io) and [Knative](https://cloud.google.com/knative/) projects.
+Yesterday we saw Google [launch a new product](https://news.ycombinator.com/item?id=19610830) named [Cloud Run](https://cloud.google.com/run/docs/). This is a proprietary serverless add-on for Google Cloud Platform (GCP) built around the [11-year old AppEngine product](https://cloud.google.com/appengine/). You may be wondering where [Knative](https://cloud.google.com/knative/) and the flagship product [Istio](https://istio.io) come into it? Knative is apparently only being used [as an API interface](https://twitter.com/alexellisuk/status/1116247440829681664) so that workloads can be deployed to either AppEngine or Knative & Istio on Kubernetes.
 
 > What does that mean for you and me?
 
@@ -31,9 +31,10 @@ You may already be familiar with OpenFaaS - Serverless Functions Made Simple. I 
 The traits and characteristics of Cloud Run (hosted Knative) closely follow [what I outlined for OpenFaaS over two and a half years ago](https://blog.alexellis.io/functions-as-a-service/). This validates the design and [future of OpenFaaS into 2019 and beyond](https://blog.alexellis.io/openfaas-bright-2019/).
 
 | Trait                        | OpenFaaS          | Cloud Run      | Knative
-|------------------------------|-------------------|----------------|-------------|
-| License                      | Open Source (MIT) | Proprietary    | Open Souce (Apache 2) |
-| Workload                     | Container         | Container      | Container |
+|------------------------------|-------------------|----------------|------------------------|
+| License                      | Open Source (MIT) | Proprietary    | Open Source (Apache 2) |
+| Workload                     | Container         | Container      | Container              |
+| Platform runtime             | Kubernetes        | AppEngine      | Istio & Kubernetes    |
 | TCP Port                     | HTTP 8080         | HTTP 8080      | HTTP 8080 |
 | Auto-scaling on QPS          | Yes               | Yes            | Yes |
 | Scale to zero                | Yes               | Yes            | Yes |

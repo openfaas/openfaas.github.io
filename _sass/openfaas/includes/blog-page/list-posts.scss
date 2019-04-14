@@ -1,12 +1,20 @@
 .hero.is-primary {
 	.blog {
 		&-post {
+			max-width: 750px;
+
 			padding: $padding-step * 2 $padding-step;
+
+			margin: 0 auto 10px;
 
 			background: white;
 
 			>.title {
-				color: $primary;
+				color: $of-text-dark;
+
+				a {
+					font-size: 41px;
+				}
 			}
 
 			.post {
@@ -14,10 +22,14 @@
 					>p {
 						color: $of-text-dark;
 						margin-bottom: $padding-step;
+						font-size: 20px;
+					}
 
-						a {
-							color: $primary!important;
-						}
+					.button {
+						font-size: 17px;
+						width: auto;
+						height: auto;
+						padding: 15px 30px;
 					}
 				}
 
@@ -28,6 +40,7 @@
 			}
 		}
 	}
+
 }
 
 #paginator {

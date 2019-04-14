@@ -12,11 +12,8 @@
 			padding-bottom: $padding-step * 4;
 
 			.column > .title {
-				text-shadow: 20px 20px 0px #e6e7e7;
 				padding-bottom: $padding-step * 4;
 			}
-
-
 		}
 	}
 }
@@ -25,7 +22,7 @@
 	display: -ms-flex;
 	display: flex;
 
-	background: transparent;
+	background: white;
 	box-shadow: none;
 
 	padding: $padding-step;
@@ -44,8 +41,6 @@
 			width: 100%;
 
 			border-radius: 5px;
-
-			transform: translate(-$padding-step, -$padding-step);
 		}
 
 		.social {
@@ -59,8 +54,7 @@
 
 			color: $grey-darker;
 
-			padding: 0 20px 0 0;
-			margin-left: -20px;
+			padding: 0 20px;
 
 			a {
 				font-size: 20px;

@@ -2,6 +2,13 @@
 
 	.container {
 		max-width: 750px;
+		font-size: 20px;
+
+		>h1.title,
+		>h2.subtitle {
+			text-shadow: 1px 1px 1px #656565;
+		}
+
 	}
 
 	.hero {
@@ -31,6 +38,15 @@
 				}
 			}
 		}
+
+	}
+
+	.content {
+		font-size: 20px;
+
+		code {
+			word-break: break-all;
+		}
 	}
 
 	.post-tabs-date {
@@ -58,8 +74,12 @@
 		border-top: 1px solid $of-text-grey;
 		border-bottom: 1px solid $of-text-grey;
 
+		.card {
+			background: #f3f3f3;
+		}
+
 		.team.about {
-			background: #f1f1f1;
+			background: transparent;
 		}
 	}
 

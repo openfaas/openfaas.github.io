@@ -6,10 +6,9 @@
 		{% include blog-page/post-title.html post=post %}
 		<div class="post-preview">
 			{{ post.excerpt }}
-			<a class="button is-outlined is-primary" href="{% include relative-src.html src=post.url %}">
+			<a class="button is-outlined is-large is-primary" href="{% include relative-src.html src=post.url %}">
 				Read More
 			</a>
 		</div>
-		<hr>
 	</li>
 {% endfor %}

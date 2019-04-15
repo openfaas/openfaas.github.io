@@ -114,7 +114,7 @@ A newer template was developed to give full access and control to the underlying
 
 To use this template just pull it from the [template store](https://www.openfaas.com/blog/template-store/).
 
-```ssh
+```sh
 $ faas-cli template store pull golang-http
 $ faas-cli new --lang golang-http http-go
 ```

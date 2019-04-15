@@ -183,7 +183,7 @@ This will create `go-microservice.yml` and the folder `go-microservice`. Simply 
 
 Let's look at how much code we'd need for a middleware handler, `Dockerfile` and `main.go` entrypoint.
 
-```Dockerfile
+```Docker
 FROM golang:1.10.4-alpine3.8 as build
 
 RUN mkdir -p /go/src/handler

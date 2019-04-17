@@ -137,7 +137,7 @@ The function is a simple `Hello World` written in Go, you can edit it if you wan
 
 Edit the `stack.yml` file by adding `topic` annotation with the value which which we pointed in the Kafka Connector `payment-received`. The file should look like this:
 
-```
+```yaml
 provider:
   name: openfaas
   gateway: http://127.0.0.1:8080

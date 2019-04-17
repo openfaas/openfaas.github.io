@@ -1,7 +1,7 @@
 ---
 title: "Staying on topic: trigger your OpenFaaS functions with Apache Kafka"
 description: Martin outlines how you can make use of Apache Kafka to trigger your functions in OpenFaaS through the new connector-sdk component.
-date: 2019-04-20
+date: 2019-04-17
 image: /images/kafka-connector/aluminium-building.jpg
 categories:
   - kafka
@@ -45,7 +45,6 @@ For this tutorial we will use Kubernetes. I have chosen minikube for my own loca
 
 * Install OpenFaaS using the [getting started guide](https://docs.openfaas.com/deployment/kubernetes/).
 
-
 * Install the [faas-cli](https://docs.openfaas.com/cli/install/)
 
 * Set your`OPENFAAS_URL` environmental variable so that it points at your gateway.
@@ -58,7 +57,7 @@ A development version of Apache Kafka has been made available so that you can ge
 
  ```bash
 $ git clone https://github.com/openfaas-incubator/kafka-connector && \
-  kafka-connector/yaml/kubernetes
+  cd kafka-connector/yaml/kubernetes
 ```
 
 * Apply the Broker files:
@@ -177,20 +176,12 @@ $ kubectl exec $PRODUCER -ti -n openfaas \
     --topic payment-received
 ```
 
-In the second terminal follow the Kafka Connector's logs.
-
-First find the kafka-connector's pod name:
-
-```bash
-$ KAFKA_CONNECTOR=$(kubectl get pods -o name -n openfaas |
-    grep -m1 kafka-connector |
-    cut -d'/' -f 2)
-```
+In the second terminal follow the Kafka Connector's logs:
 
 Follow the logs with this command:
 
 ```bash
-$ kubectl logs $KAFKA_CONNECTOR -n openfaas \
+$ kubectl logs deploy/kafka-broker -n openfaas \
     --tail 100 \
     --follow
 ```
@@ -211,20 +202,20 @@ Hello, Go. You said: Kafka and go
 ...
 ```
 
-## Real world examples
-
-There are multiple real world examples where Kafka in combination with the Serverless approach provided by OpenFaaS becomes a really powerful tool as Kafka can make even the smallest of systems extensible and OpenFaaS provides us with the quick way to add those extensions.
-
-When a customer creates an account you need to process their information and store it in a database. However, there are a number of other departments also interested in new customers - theres marketing who want to send a welcome pack, there's payments who want to check their credit score. Just create topic, for example `user-creation`, which will be populated with the information and then create OpenFaaS function which handles the processing and updating of that information to the database. Similarly marketing and payments can both implement functions to process the data in a way that makes sense for them.
-
-If we extend on the example above, again you would like to add some quick feature for the user. Attach another function to the same topic to extend the already existing functionality or just add another topic and write the function which handles that feature, it is as simple as that. 
-
 ## Wrapping up
 
-Kafka Connector implements the [Connector SDK](https://github.com/openfaas-incubator/connector-sdk) with which you can create your own invoking mechanism.
+There are multiple real world examples where an event-driven approach with Apache Kafka can help integrate your existing tools and applications, and to extend functionality of existing systems without risking any regression.
 
-You can check the existing connectors like the [Cron Connector](https://github.com/zeerorg/cron-connector) or [vCenter Connector](https://github.com/openfaas-incubator/vcenter-connector) or all the existing function [Triggers](https://docs.openfaas.com/reference/triggers/).
+Let me give you an example. Suppose that whenever a new customers signs-up and creates an account we may need to process their information in various ways in addition to just storing it in a SQL table.
 
-Now you already know the basics. It is over to you to deploy the connector with development tools like we did in the blog, or attach it to your existing Kafka deployment and start invoking functions. You can perhaps try attaching your function to another topic and extend the Hello World function with your own language of choice. Serverless with Kafka is all in your hands with the Kafka Connector.
+We could publish their data on a topic such as: `customer-signup`. With an event-driven approach using OpenFaaS and the kafka-connector we can now broadcast a message on the `customer-signup` topic and then process it in a number of ways by using different functions. I.e. to check their credit score, update a lead in SalesForce and or even schedule a welcome pack in the post. So at any time you can extend the workflow of tasks for a `customer-signup` message by just defining a new function and giving it an annotation of `topic: customer-signup`.
+
+Now that I've shown you how to connect to Kafka and explored a real-world use-case, it's over to you to try it out and let us know what you think through the [Slack community](https://docs.openfaas.com/community) or [Twitter](https://twitter.com/openfaas).
+
+## Going further
+
+The kafka-connector implements the [Connector SDK](https://github.com/openfaas-incubator/connector-sdk), checkout the SDK written in Go for how you can start connecting your own events and triggers.
+
+Other examples include the [Cron Connector](https://github.com/zeerorg/cron-connector) and the [vCenter Connector](https://github.com/openfaas-incubator/vcenter-connector). You can view the other [triggers here](https://docs.openfaas.com/reference/triggers/).
 
 Editor(s): [Alex Ellis](https://www.alexellis.io/) & [Richard Gee](https://twitter.com/rgee0)

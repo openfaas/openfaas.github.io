@@ -224,4 +224,16 @@ The kafka-connector implements the [Connector SDK](https://github.com/openfaas-i
 
 Other examples include the [Cron Connector](https://github.com/zeerorg/cron-connector) and the [vCenter Connector](https://github.com/openfaas-incubator/vcenter-connector). You can view the other [triggers here](https://docs.openfaas.com/reference/triggers/).
 
+## Remove the components
+
+If you would like to remove the components off your cluster just run the following command:
+
+```bash
+$ kubectl delete deploy/kafka-broker -n openfaas && \
+  kubectl delete svc/kafka -n openfaas && \
+  kubectl delete deploy/zookeeper -n openfaas && \
+  kubectl delete svc/zookeeper -n openfaas && \
+  helm delete --purge kafka-connector
+```
+
 Editor(s): [Alex Ellis](https://www.alexellis.io/) & [Richard Gee](https://twitter.com/rgee0)

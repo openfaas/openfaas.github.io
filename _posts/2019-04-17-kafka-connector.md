@@ -1,7 +1,7 @@
 ---
 title: "Staying on topic: trigger your OpenFaaS functions from Kafka"
 description: Martin outlines how you can use Kafka and subscribe OpenFaaS function to a topic using kafka-connector plugin.
-date: 2019-04-09
+date: 2019-04-20
 image: /images/kafka-connector/aluminium-building.jpg
 categories:
   - kafka

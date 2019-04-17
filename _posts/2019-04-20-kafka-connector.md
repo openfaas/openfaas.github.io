@@ -1,6 +1,6 @@
 ---
-title: "Staying on topic: trigger your OpenFaaS functions from Kafka"
-description: Martin outlines how you can use Kafka and subscribe OpenFaaS function to a topic using kafka-connector plugin.
+title: "Staying on topic: trigger your OpenFaaS functions with Apache Kafka"
+description: Martin outlines how you can make use of Apache Kafka to trigger your functions in OpenFaaS through the new connector-sdk component.
 date: 2019-04-20
 image: /images/kafka-connector/aluminium-building.jpg
 categories:
@@ -11,67 +11,72 @@ author_staff_member: martin
 dark_background: true
 ---
 
-In this post I will show you how to subscribe your OpenFaaS functions to Kafka topics when running your functions via Kubernetes.
+In this post I will show you how you can build subscriptions between your OpenFaaS functions and your Apache Kafka topics. I'll be using Kubernetes to show you around, but the connector-sdk works with any OpenFaaS provider.
 
-OpenFaaS is solving real problems for our end-user community, who are using OpenFaaS in production. 
+OpenFaaS is solving real problems for our [end-user community](https://docs.openfaas.com/#users-of-openfaas), many of whom are now relying on the project to in production and for core services. The kafka-connector was created to help those users integrate their existing systems with their functions.
 
-OpenFaaS functions and microservices are accessible over HTTP endpoints via the Gateway service, but how can other events be used to trigger our functions?
+OpenFaaS functions and microservices are accessible over HTTP endpoints via the Gateway service, but let's explore how other events can be used to trigger our functions.
 
-Kafka is stream-processing platform and at a high level the important concepts are Producers, Consumers and Brokers which communicate with each-other via messages attached to Topics. The way it works is that the Producer is sending messages on specific Topics to the Broker, then the Consumers poll all the topics of interest from the Brokers. The approach is fitting for distributed systems, because it decouples the communication between your services.
+## Apache Kafka
+
+Apache Kafka is a stream-processing platform. At a high level the important concepts are Producers, Consumers and Brokers which communicate with each-other via messages attached to Topics.
+
+The way it works is that the Producer is sending messages on specific Topics to the Broker, then the Consumers poll all the topics of interest from the Brokers. This approach is popular in distributed systems because it decouples direct communication between services and allows messages to be replayed or redelivered when required from a persistent log.
 
 See also: [Apache Kafka Documentation](https://kafka.apache.org/documentation/).
 
 ## Kafka Connector
 
-The kafka-connector can be used to connect Kafka topics to OpenFaaS Functions. After deploying the kafka-connector and pointing it at your broker, you can connect functions to topics by adding a simple annotation via your stack YAML file.
+The [kafka-connector](https://github.com/openfaas-incubator/kafka-connector) is designed to connect Kafka topics to OpenFaaS Functions. After deploying the kafka-connector and pointing it at your broker, you can connect functions to topics by adding a simple annotation via your functions' stack.yml file.
 
 Conceptual architecture diagram:
 
 ![Kafka Diagram](/images/kafka-connector/overview-diagram.jpg)
 
-The connector periodically queries the Gateway’s list of functions and then builds a map between each function and topic. This map is then used to invoke functions when messages arrive on a given topic.
+The connector makes use of the connector-sdk, a Golang library which periodically queries the Gateway’s list of functions and then builds a map between each function and a topic. This map is then used to invoke functions when messages arrive on a given topic.
+
+Each OpenFaaS connector that the community develops can take advantage of this shared functionality and its only responsibility is to read from a data source or queue and forward the message on.
+
+> See also: [Triggers & Events in OpenFaaS](https://docs.openfaas.com/reference/triggers/)
 
 ## Pre-requisites
 
-For this tutorial we will use Kubernetes, so you should install OpenFaaS using the [getting started guide](https://docs.openfaas.com/deployment/kubernetes/). I have chosen minikube for my own local cluster.
+For this tutorial we will use Kubernetes. I have chosen minikube for my own local cluster, but alternatives are available.
 
-The [faas-cli](https://docs.openfaas.com/cli/install/) binary along with populated `OPENFAAS_URL` environmental variable pointing at your gateway.
+* Install OpenFaaS using the [getting started guide](https://docs.openfaas.com/deployment/kubernetes/).
 
-## Clone the Kafka Connector
 
-Pull the `kafka-connector` code from github:
+* Install the [faas-cli](https://docs.openfaas.com/cli/install/)
+
+* Set your`OPENFAAS_URL` environmental variable so that it points at your gateway.
+
+## Deploy Apache Kafka
+
+A development version of Apache Kafka has been made available so that you can get this tutorial up and running in a few minutes. You can also customise the connector to use your existing Kafka deployment.
+
+* Clone the repository:
 
  ```bash
-$ git clone https://github.com/openfaas-incubator/kafka-connector
+$ git clone https://github.com/openfaas-incubator/kafka-connector && \
+  kafka-connector/yaml/kubernetes
 ```
 
-Inside `kafka-connector` folder navigate to `yaml/kubernetes`:
-
- ```bash
-$ cd kafka-connector/yaml/kubernetes
-```
-
-Here we can see the Kafka Zookeeper and Broker which we will be using to send payloads to our functions.
-
-## Deploy the components with configuration
-
-In order to deploy the Zookeeper and Broker apply the `yaml` files while in the `kubernetes` folder.
-
-Apply the Broker files:
+* Apply the Broker files:
 
 ```bash
 $ kubectl apply -f kafka-broker-dep.yml,kafka-broker-svc.yml
 ```
 
-Apply the Zookeeper files:
+* Apply the Zookeeper files:
 
 ```bash
 $ kubectl apply -f zookeeper-dep.yaml,zookeeper-svc.yaml
 ```
+## Deploy the connector with helm
 
-If you don't have the OpenFaaS Charts repository added, use this command:
+Add the OpenFaaS charts repository:
 
-```
+```sh
 $ helm repo add openfaas https://openfaas.github.io/faas-netes/
 ```
 
@@ -87,12 +92,17 @@ $ helm upgrade kafka-connector openfaas/kafka-connector \
     --set print_response_body="true"
 ```
 
-Here it is important to note that our Broker resides in a service called `kafka` in the same namespace as our Gateway and Kafka Connector service. If you have the Broker service in another namespace, again called `kafka`, just append the namespace like so `kafka.<your_namespace>` to the `broker_host` environmental variable so the Connector can discover it. The default kafka port `9092` is appended to the service name by default.
+* Set the `topics` to the topics you want to subscribe to as a comma separated list without separating spaces
+
+* If you deployed Kafka to a remote location or a different namespace or port then just update the `broker_host` value.
+
+> Note: if you do not want to install tiller on your cluster, then you can make use of `helm template` to generate YAML files
 
 We have now deployed the following components:
+
 * Zookeeper
 * Broker Host with Producer
-* Kafka Connector
+* kafka-connector
 
 Before we proceed, make sure you have all the components running:
 
@@ -103,23 +113,20 @@ kafka-connector-5d9f447f5-5drv7   1/1     Running            0          4m
 zookeeper-699f568f6f-6b4n2        1/1     Running            0          3m
 ```
 
-## Subscribe function
+## Subscribe to a topic
 
-In order to consume topics via the connector we simply need to apply an annotation with a key of `topic` and the chosen value used in the `connector-dep.yml` - in our case it was `payment-received`.
+In order to consume topics via the connector we need to apply an annotation with a key of `topic`, for example: `topic: payment-received`. This should match at least one of the topics we defined in the earlier step for the connector.
 
-Before we start log in into your Docker Hub account.
+* Create a [Docker Hub](https://hub.docker.com) account if you don't already have one and sign in with `docker login`.
 
-We will first create custom function the following way:
+* Create a new function in Go
 
-```
+```sh
 $ faas-cli new kafka-message --lang=go --prefix=<your_dockerhub_username>
-```
-
-Rename the function's YAML file to `stack.yml`:
-
-```
 $ mv kafka-message.yml stack.yml
 ```
+
+> We also renamed the function's YAML file to  `stack.yml` (the default)
 
 The function is a simple `Hello World` written in Go, you can edit it if you want, but for simplicity in our example we will keep the default message.
 
@@ -129,6 +136,7 @@ Edit the `stack.yml` file by adding `topic` annotation with the value which whic
 provider:
   name: openfaas
   gateway: http://127.0.0.1:8080
+
 functions:
   kafka-message:
     lang: go
@@ -144,20 +152,18 @@ Build, Push and Deploy the function with single command:
 $ faas-cli up
 ```
 
-Voila, your function is now subscribed to the topic and it can be invoked by producing message on that topic.
+The kafka-connector will now rebuild its topic map and detect that the "kafka-message" function wants to be invoked with messages published on the `payment-received` topic.
 
-You can see the response of the function in two places: the function’s logs and, since we set the `print_response_body` to true when deploying the connector, in the connector’s logs too.
+You can see the response of the function in two places: the function’s logs and in the connector's logs. This is configurable in the helm chart.
 
-## Create messages on the topic
+## Produce messages on the topic
 
 Lets proceed by opening two terminals, one will be used to check the output of the function and the other will create messages on the topic.
 
 In the first terminal get the producer's name:
 
 ```bash
-$ PRODUCER=$(kubectl get pods -o name -n openfaas |
-    grep -m1 kafka-broker |
-    cut -d'/' -f 2)
+$ PRODUCER=$(kubectl get pods -l=component=kafka-broker -n openfaas -o jsonpath="{.items[*].metadata.name}")
 ```
 
 Then open a shell session inside the Broker pod to connect with the producer:
@@ -220,3 +226,5 @@ Kafka Connector implements the [Connector SDK](https://github.com/openfaas-incub
 You can check the existing connectors like the [Cron Connector](https://github.com/zeerorg/cron-connector) or [vCenter Connector](https://github.com/openfaas-incubator/vcenter-connector) or all the existing function [Triggers](https://docs.openfaas.com/reference/triggers/).
 
 Now you already know the basics. It is over to you to deploy the connector with development tools like we did in the blog, or attach it to your existing Kafka deployment and start invoking functions. You can perhaps try attaching your function to another topic and extend the Hello World function with your own language of choice. Serverless with Kafka is all in your hands with the Kafka Connector.
+
+Editor(s): [Alex Ellis](https://www.alexellis.io/) & [Richard Gee](https://twitter.com/rgee0)

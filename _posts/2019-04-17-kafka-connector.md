@@ -13,13 +13,19 @@ dark_background: true
 
 In this post I will show you how you can build subscriptions between your OpenFaaS functions and your Apache Kafka topics. I'll be using Kubernetes to show you around, but the connector-sdk works with any OpenFaaS provider.
 
-OpenFaaS is solving real problems for our [end-user community](https://docs.openfaas.com/#users-of-openfaas), many of whom are now relying on the project to in production and for core services. The kafka-connector was created to help those users integrate their existing systems with their functions.
+OpenFaaS is solving real problems for our [end-user community](https://docs.openfaas.com/#users-of-openfaas), many of whom are now relying on the project to in production and for core services. The [kafka-connector](https://github.com/openfaas-incubator/kafka-connector) was created to help those users integrate their existing systems with their functions.
 
 OpenFaaS functions and microservices are accessible over HTTP endpoints via the Gateway service, but let's explore how other events can be used to trigger our functions.
 
 ## Apache Kafka
 
-Apache Kafka is a stream-processing platform. At a high level the important concepts are Producers, Consumers and Brokers which communicate with each-other via messages attached to Topics.
+According to [Datadog](https://www.datadoghq.com/blog/monitoring-kafka-performance-metrics/):
+
+> [Apache Kafka](https://kafka.apache.org) is an open-source stream-processing software platform. The project aims to provide a unified, high-throughput, low-latency platform for handling real-time data feeds. Its storage layer is essentially a "massively scalable pub/sub message queue designed as a distributed transaction log".
+
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Overview_of_Apache_Kafka.svg/1280px-Overview_of_Apache_Kafka.svg.png)
+
+At a high level the important concepts are Producers, Consumers and Brokers which communicate with each-other via messages attached to Topics.
 
 The way it works is that the Producer is sending messages on specific Topics to the Broker, then the Consumers poll all the topics of interest from the Brokers. This approach is popular in distributed systems because it decouples direct communication between services and allows messages to be replayed or redelivered when required from a persistent log.
 

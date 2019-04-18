@@ -98,6 +98,8 @@ Topics include:
 
 You can check [the community events](https://github.com/openfaas/faas/blob/master/community.md#events-in-2019) for your next in-person training or [request one via email](mailto:alex@openfaas.com).
 
+> If you've already done the workshop with Docker Swarm, try the new updated version for Kubernetes and make sure you don't miss my [5 productivity tips for the faas-cli](https://www.openfaas.com/blog/five-cli-tips/).
+
 Begin the [OpenFaaS workshop](http://github.com/openfaas/workshop) or *Star* it on GitHub for later.
 
 ### 5. Try the OpenFaaS Cloud Community Cluster
@@ -118,7 +120,7 @@ Here's a demo of the OpenFaaS Cloud flow in action:
 
 Form: [Request access now](https://forms.gle/8e6ZXJKMcDHpV6Xu6)
 
-If you're experienced with OpenFaaS, then perhaps you'd like to stand-up your own OpenFaaS Cloud with the [ofc-bootstrap tool](https://github.com/openfaas-incubator/ofc-bootstrap)? It takes around 100 seconds to deploy to a Kubernetes service such as [DigitalOcean Kubernetes](https://www.digitalocean.com/products/kubernetes/) or [Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine/).
+If you're experienced with OpenFaaS, then perhaps you'd like to stand-up your own OpenFaaS Cloud with the [ofc-bootstrap tool](https://github.com/openfaas-incubator/ofc-bootstrap)? It takes around 100 seconds to deploy to a Kubernetes service such as [DigitalOcean Kubernetes](https://www.digitalocean.com/products/kubernetes/) or [Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine/). You'll get the same experience as with the Community Cluster including automatic TLS and support for GitHub.com or GitLab self-hosted.
 
 ## Wrapping up
 
@@ -132,4 +134,4 @@ You can [follow me @alexellisuk](https://twitter.com/alexellisuk/) and [@openfaa
 
 * [Introducing the Kubernetes Operator and CRD](/blog/kubernetes-operator-crd/)
 * [Build a single page app with OpenFaaS Cloud](/blog/serverless-single-page-app/)
-* [Sailing through the Serverless Ocean with Spotinst & OpenFaaS Cloud](https://spotinst.com/blog/2019/03/25/sailing-through-the-serverless-ocean-with-openfaas-cloud/)
+* [Simple Serverless with Golang Functions and Microservices](https://www.openfaas.com/blog/golang-serverless/)

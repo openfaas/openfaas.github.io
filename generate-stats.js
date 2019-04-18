@@ -68,22 +68,11 @@ function generateTemplate(data) {
 		USE generate-stats.js for adjustments.
 		------------------------*/
 		var contributors = ${JSON.stringify(Object.entries(data))};
-		var rows = [12, 13, 14, 14]; // users/row;
-		var groupedUsers = [];
+        var userRows;
+		var rows = [14, 14, 14, 14]; // users/row;
 		var maxRowSize = rows.slice().sort().reverse()[0];
 
 		var rowsString = '';
-
-		function placeholder(count) {
-			var string = '<figure class="image placeholder"><img src="images/openfaas/transparent-placeholder.png" alt=""></figure>'
-			var placeholderString = '';
-
-			for (var i = 0; i < count; i++) {
-				placeholderString += string;
-			}
-
-			return placeholderString;
-		}
 
 		function shuffle(array) {
 			for (let i = array.length - 1; i > 0; i--) {
@@ -104,25 +93,25 @@ function generateTemplate(data) {
 
 		shuffle(contributors);
 
-		rows.forEach(r => {
-			rowsString += '<div class="user-row">';
+		function buildRows(rowSet) {
+            rows.forEach(r => {
+    			rowsString += '<div class="user-row">';
 
-			if (r < maxRowSize) {
-				rowsString += placeholder(maxRowSize - r);
-			}
+    			for (var i = 0; i < r; i++) {
+    				rowsString += userTemplate(contributors.shift());
+    			}
 
-			for (var i = 0; i < r; i++) {
-				rowsString += userTemplate(contributors.shift());
-			}
+    			rowsString += '</div>';
+    		});
 
-			rowsString += '</div>';
-		})
+            return rowsString
+        }
 
 		document.addEventListener('DOMContentLoaded', function() {
-		    var userRowsElement = document.getElementById('github-users');
+		    userRows = document.getElementById('github-users');
 
-			userRowsElement.innerHTML = rowsString;
-		})`;
+			userRows.innerHTML = buildRows(rows);
+		});`;
 
 	return templateString.replace(/^(\t\t)/gm, '');
 }

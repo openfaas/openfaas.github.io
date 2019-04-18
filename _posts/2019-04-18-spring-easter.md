@@ -11,14 +11,14 @@ author_staff_member: alex
 dark_background: true
 ---
 
-In this post I want to run through three of my top tips for getting to grips with Serverless on Kubernetes. If you're taking some time off over the Easter Bank Holiday weekend, then grab a cup of tea or coffee and your laptop to begin learning.
+In this post I want to run through my top five tips for getting to grips with Serverless on Kubernetes. If you're taking some time off over the Easter Bank Holiday weekend, then grab a cup of tea or coffee and your laptop to begin learning.
 
 ### 1. Connect with the community
 
 > The OpenFaaS community values are: developers-first, operational simplicity, and community-centric.
 
 The easiest way to start learning is to connect with the OpenFaaS community. We're a friendly bunch and enjoy meeting-up in person at conferences and local events. 
-All future, past and present events and blog posts are recorded in the community guide which is available publicly so if you'd like to meet face-to-face or hear about what we're all building in person check that out.
+All future, past and present events and blog posts are recorded in the community guide which is available publicly. So if you'd like to meet face-to-face or hear about what we're all building in person check that out.
 
 ![](/images/spring-easter/contributors.jpg)
 
@@ -26,7 +26,8 @@ All future, past and present events and blog posts are recorded in the community
 
 * [Community events 2019](https://github.com/openfaas/faas/blob/master/community.md#events-in-2019)
 * [Community blogs 2019](https://github.com/openfaas/faas/blob/master/community.md#blog-posts-and-write-ups-2019)
-* [Slack](https://docs.openfaas.com/community/)
+
+* [OpenFaaS Community Slack](https://docs.openfaas.com/community/)
 * [#TeamServerless private group on LinkedIn](https://www.linkedin.com/groups/13670843/)
 * [@openfaas Twitter](https://twitter.com/openfaas/)
 
@@ -42,25 +43,29 @@ Here's three of the top guides from the documentation and blog:
 
 * [Kubernetes guide](https://docs.openfaas.com/deployment/kubernetes/) / [Kubernetes helm-chart](https://github.com/openfaas/faas-netes/blob/master/HELM.md)
 * [Docker Swarm guide](https://docs.openfaas.com/deployment/docker-swarm/)
-* [One-click deployment to DigitalOcean Marketplace](https://www.openfaas.com/blog/digitalocean-one-click/)
+* [One-click deployment via the DigitalOcean Marketplace](https://www.openfaas.com/blog/digitalocean-one-click/)
 
 After that you may want to try the workshop (below) or one of the many tutorials and blog posts [from the community guide](https://github.com/openfaas/faas/blob/master/community.md#blog-posts-and-write-ups-2019).
+
+* [Will it cluster? k3s on your Raspberry Pi](https://blog.alexellis.io/test-drive-k3s-on-raspberry-pi/)
+
+Something that resonates particularly well with our community as a weekend-project is building a Raspberry Pi cluster. In the post I explain the need for k3s, its differences to other local Kubernetes distributions and then full Bill of materials (BoM) for the cluster. You'll follow step-by-step instructions on how to deploy Kubernetes using the new light-weight [k3s project from Rancher](https://k3s.io/) and how to use it with OpenFaaS on the Raspberry Pi (ARM) platform.
 
 ### 3. Find out about our end-user community
 
 ![End users as of Apr 2019](/images/spring-easter/end-users.png)
 
-*End users as of Apr 2019*
+*End users, as of April 2019*
 
 One of the most recent recordings of an OpenFaaS end-user was from KubeCon in Seattle in late 2018.
 
-Patricio Diaz joined me from Vision Banco in Paraguay to relate his experiences of moving from unstable, legacy systems to 100% uptime with OpenFaaS on Kubernetes.
+[Patricio Diaz](https://twitter.com/padiazg?lang=en) joined me from Vision Banco in Paraguay to relate his experiences of moving from unstable, legacy systems to 100% uptime with OpenFaaS on Kubernetes.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/mPjI34qj5vU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 If you're using OpenFaaS at your company or within your team for internal or external-facing projects or products, please reach out over email to: alex@openfaas.com for how to join.
 
-In a few weeks at KubeCon two OpenFaaS end-users will present how they're leveraging OpenFaaS in production to solve business problems.
+In just a few weeks, at KubeCon two more end-user companies will present on how they're leveraging OpenFaaS in production to solve business problems.
 
 * [How LivePerson is Tailoring its Conversational Platform Using OpenFaaS - Simon Pelczer, LivePerson](https://kccnceu19.sched.com/event/MPeR/how-liveperson-is-tailoring-its-conversational-platform-using-openfaas-simon-pelczer-liveperson-ivana-yovcheva-vmware)
 * [Accelerating the Journey of an AI Algorithm to Production with OpenFaaS - Joost Noppen, BT PLC & Alex Ellis](https://kccnceu19.sched.com/event/MPeF/accelerating-the-journey-of-an-ai-algorithm-to-production-with-openfaas-joost-noppen-bt-plc-alex-ellis-vmware)
@@ -91,7 +96,7 @@ Topics include:
 * Lab 10 - Advanced Feature - Secrets
 * Lab 11 - Advanced feature - Trust with HMAC
 
-You can check the community events for your next in-person training or [request one via email](mailto:alex@openfaas.com).
+You can check [the community events](https://github.com/openfaas/faas/blob/master/community.md#events-in-2019) for your next in-person training or [request one via email](mailto:alex@openfaas.com).
 
 Begin the [OpenFaaS workshop](http://github.com/openfaas/workshop) or *Star* it on GitHub for later.
 

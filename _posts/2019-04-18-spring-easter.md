@@ -1,5 +1,5 @@
 ---
-title: "Get to grips with Serverless on Kubernetes this Spring"
+title: "Get to grips with Serverless Kubernetes this Spring"
 description: Alex will give you his top five tips for getting to grips with Serverless on Kubernetes for this Spring including training materials and ways to connect with the community.
 date: 2019-04-18
 image: /images/spring-easter/crocus.jpg

@@ -56,6 +56,8 @@
 
 			padding: 0 20px;
 
+            margin: 10px 0;
+
 			a {
 				font-size: 20px;
 
@@ -88,44 +90,38 @@
 }
 
 @media (max-width: $tablet) {
-	.hero {
-		.hero-body.team-wrapper {
-			.card {
-				flex-direction: column;
+    .card.team.member {
+        flex-direction: column;
 
-				.avatar {
-					background: white;
+        .avatar {
+            flex-basis: auto;
+            align-items: center;
 
-					flex-basis: auto;
-					align-items: center;
+            padding-top: $padding-step;
 
-					padding-top: $padding-step;
+            img {
+                width: 200px;
+                height: 200px;
 
-					img {
-						width: 200px;
-						height: 200px;
+                border-radius: 50%;
 
-						border-radius: 50%;
+                padding: 0;
 
-						padding: 0;
+                box-shadow: none;
 
-						box-shadow: none;
+                transform: translate(0, 0);
 
-						transform: translate(0, 0);
+            }
 
-					}
+            .social {
+                width: 100%;
 
-					.social {
-						width: 100%;
+                margin: 0;
 
-						margin: 0;
+                padding: $padding-step 0 0 0;
 
-						padding: $padding-step 0 0 0;
-
-						justify-content: space-around;
-					}
-				}
-			}
-		}
-	}
+                justify-content: space-around;
+            }
+        }
+    }
 }

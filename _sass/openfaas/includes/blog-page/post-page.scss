@@ -1,16 +1,14 @@
 .post-page-full {
+    .container {
+        max-width: 750px;
+        font-size: 20px;
 
-	.container {
-		max-width: 750px;
-		font-size: 20px;
+        >h1.title,
+        >h2.subtitle {
+            text-shadow: 1px 1px 1px #656565;
+        }
 
-		>h1.title,
-		>h2.subtitle {
-			text-shadow: 1px 1px 1px #656565;
-		}
-
-	}
-
+    }
 	.hero {
 		&.cover {
 			position: relative;
@@ -105,4 +103,12 @@
 			height: 100%;
 		}
 	}
+}
+
+@media(max-width: $tablet) {
+    .post-content {
+        p {
+            word-break: break-all;
+        }
+    }
 }

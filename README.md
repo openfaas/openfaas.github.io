@@ -86,6 +86,12 @@ For example, if you add your own post in `_posts/2018-07-31-my-post.md` you will
     openfaas-jekyll_1  |                     _posts/2018-08-22-my-post.md
     openfaas-jekyll_1  |       Remote Theme: Using theme cloudcannon/frisco-jekyll-template
     openfaas-jekyll_1  |                     ...done in 2.0199265 seconds.
+### Landing page users
+The contributors section on the landing page is being generated using a small `node` script located in the `generate-stats.js` file. It is recommended that you run this script before opening a PR. This will ensure the contributors section is up-to-date:
+
+    node generate-stats.js
+
+NOTE: requires [Node.js](https://nodejs.org) to be installed on your system.
 
 ### Adding an Author/Team Member
 
@@ -173,7 +179,16 @@ Adding images uses the normal Markdown format, and while external images are pos
 
 ### Styling
 
-The site uses the [SASS](https://sass-lang.com/) Stylesheet language, any alterations to the sites look and feel must be made using SASS, do not contribute raw `.css` files. 
+The site uses the [SASS](https://sass-lang.com/) Stylesheet language, any alterations to the sites look and feel must be made using SASS, do not contribute raw `.css` files.
+
+We are also using [Bulma](https://bulma.io/) as our css framework.
+Before making any style changes / additions please consider:
+
+- follow [Bulma](https://bulma.io/) guidelines
+- DO NOT overwrite [Bulma](https://bulma.io/) files directly. Use custom saas files and/or variables
+- make use of the declared SASS variables and mixins
+- each section on the website should have its own SASS file
+
 
 ### Altering the Header and Footer
 

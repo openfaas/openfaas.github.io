@@ -4,9 +4,10 @@ description: Alex will give you his top five tips for getting to grips with Serv
 date: 2019-04-18
 image: /images/spring-easter/crocus.jpg
 categories:
-  - templates
-  - golang
-  - go
+  - community
+  - workshop
+  - events
+  - kubernetes
 author_staff_member: alex
 dark_background: true
 ---

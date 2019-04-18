@@ -1,16 +1,16 @@
 .hero {
     .wavy {
-        background: url('../images/openfaas/wave.png'), linear-gradient(to bottom, transparent 46%, $of-grey 46%);
+        background: url('../images/openfaas/wave-a.svg'), linear-gradient(to bottom, transparent 46%, $of-grey 46%);
         background-repeat: no-repeat;
-        background-position: 0 125px;
-        background-size: 100%;
+        background-position: center;
+        background-size: 100vw;
     }
 
     .wavy-2 {
-        background: url('../images/openfaas/wave-2.png');
+        background: url('../images/openfaas/wave-b.svg');
         background-repeat: no-repeat;
         background-position: center top;
-        background-size: 100%;
+        background-size: 100vw;
     }
 
     .grey {

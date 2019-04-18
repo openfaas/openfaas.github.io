@@ -21,6 +21,7 @@
 				display: flex;
 
 				flex-direction: column;
+
 			}
 
 			&-row {
@@ -31,6 +32,25 @@
 				display: flex;
 
 				justify-content: flex-end;
+
+                &:first-child {
+                    a {
+                        &:first-child,
+                        &:nth-child(2) {
+                            opacity: 0;
+                            pointer-events: none;
+                        }
+                    }
+                }
+
+                &:nth-child(2) {
+                    a {
+                        &:first-child{
+                            opacity: 0;
+                            pointer-events: none;
+                        }
+                    }
+                }
 
 				figure {
 					padding: 5px;
@@ -65,13 +85,35 @@
 				flex-wrap: wrap;
 				justify-content: space-between;
 
-				.placeholder {
+                &:first-child {
+                    a {
+                        &:first-child,
+                        &:nth-child(2) {
+                            opacity: 1;
+                            pointer-events: all;
+                        }
+                    }
+                }
+
+                &:nth-child(2) {
+                    a {
+                        &:first-child{
+                            opacity: 1;
+                            pointer-events: all;
+                        }
+                    }
+                }
+
+                a {
+                    flex: 13%;
+                }
+
+                .placeholder {
 					display: none;
 				}
 
 				figure {
 					padding: 1px;
-					max-width: 80px;
 				}
 			}
 		}

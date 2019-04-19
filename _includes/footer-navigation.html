@@ -15,7 +15,7 @@
                 	{% if link.link == page.url %}
                 		{% assign class = class | append: " is-active" %}
                 	{% endif %}
-                	<a href="{% include relative-src.html src=link.link %}" class="{{ class }}" {% if link.new_window %}target="_blank"{% endif %}>{{ link.name }}</a>
+                	<a {% if link.link %} href="{% include relative-src.html src=link.link %}" {% endif %}class="{{ class }}" {% if link.new_window %}target="_blank"{% endif %}>{{ link.name }}</a>
                 {% endfor %}
             </div>
 

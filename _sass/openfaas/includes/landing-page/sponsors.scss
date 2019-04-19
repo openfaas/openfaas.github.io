@@ -7,63 +7,43 @@
 			}
 		}
 
-		.button {
-			width: 175px;
-			height: 56px;
+        .of-sponsor-logo {
+    		display: -webkit-flex;
+    		display: -ms-flex;
+    		display: flex;
 
-			white-space: normal;
-			font-size: 14px;
-			color: white;
+    		justify-content: center;
+    	}
+
+		.button {
+            margin-top: $padding-step * 4;
 
 			border: 3px solid;
 			border-radius: 10px;
 
-			align-items: flex-end;
+            background: #FEA553;
+            border-color: #C68141;
 
-			&:hover {
-				.icon {
-					margin-left: 15px;
-				}
-			}
+            color: white;
 
-			&.platinum {
-				background: #959595;
-				border-color: #636363;
-			}
-			&.gold {
-				background: #FEA553;
-				border-color: #C68141;
-			}
-			&.bronze {
-				background: #ea955f;
-				border-color: #cc8152;
-			}
-			&.silver {
-				background: #c5c5c5;
-				border-color: #adadad;
-			}
+            transition: box-shadow .3s;
+            
+            &:hover {
+                box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.26);
+                .icon {
+                    transform: translateX(10px);
+                }
+            }
 
-			.icon {
-				height: 1.35rem;
+            .icon {
+                margin: 0 0 0 10px;
 
-				margin-right: -20px;
-
-				transition: margin .3s;
-			}
+                transition: transform .3s;
+            }
 		}
 
 		figure {
-			max-width: 175px;
+			max-width: 200px;
 		}
-	}
-}
-
-@media (max-width: $tablet) {
-	.of-sponsor-logo {
-		display: -webkit-flex;
-		display: -ms-flex;
-		display: flex;
-
-		justify-content: center;
 	}
 }

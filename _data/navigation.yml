@@ -11,8 +11,7 @@
   class: navbar-item
   link: https://docs.openfaas.com/
 - name: Video Demo
-  class: navbar-item
-  link: https://www.youtube.com/watch?v=yOpYYYRuDQ0
+  class: navbar-item start-demo-video
 - name: Donate
   class: navbar-item
   link: /donate/

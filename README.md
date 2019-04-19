@@ -127,6 +127,7 @@ image_path | Path to the authors portrait, this should be a 154px * 154px image
 twitter_username | Authors Twitter handle (with no `@`)
 blurb | Free text information about the user, this should be very short
 
+
 ### Contributing a post
 
 Contributing a post is as straight forward as raising a PR containing your post in markdown format along with any embedded images.

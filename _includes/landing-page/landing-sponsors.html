@@ -13,11 +13,11 @@
                 </h1>
             </div>
 
-            <div class="column is-6 is-offset-3 has-text-centered-tablet">
+            <div class="column is-12 has-text-centered">
                 <div class="columns">
                     {% for sponsor in category[1] %}
                         {% if sponsor %}
-                            <div class="column is-narrow of-sponsor-logo">
+                            <div class="column of-sponsor-logo">
                                 <a href="{{ sponsor.url }}"  title="{{ sponsor.alt }}" target="_blank">
                                     <figure class="image">
                                         <img src="images/sponsors/{{ sponsor.logo }}" alt="{{ sponsor.alt }}">
@@ -26,16 +26,16 @@
                             </div>
                         {% endif %}
                     {% endfor %}
-                    <div class="column has-text-centered-mobile {% if category[1] %} has-text-right-desktop {% else %} has-text-centered {% endif %}">
-                        <a href="{{ site.baseurl }}/donate" class="button {{category[0]}}">
-                            Become a <br> {{ category[0] }} sponsor
-                            <span class="icon">
-                                <i class="fas fa-long-arrow-alt-right"></i>
-                            </span>
-                        </a>
-                    </div>
                 </div>
             </div>
         {% endfor %}
+        <div class="column is-12 has-text-centered">
+            <a href="{{ site.baseurl }}/donate" class="button is-large">
+                Become a sponsor
+                <span class="icon">
+                    <i class="fas fa-long-arrow-alt-right"></i>
+                </span>
+            </a>
+        </div>
     </div>
 </div>

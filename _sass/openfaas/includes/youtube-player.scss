@@ -49,6 +49,37 @@
     }
 }
 
+// Modal youtube player
+.modal {
+    &.modal-youtube {
+        animation-name: fadeIn;
+        animation-duration: .3s;
+        animation-fill-mode: forwards;
+
+        .modal-background {
+            background: rgba(10, 10, 10, 0.7);
+        }
+
+        .modal-content {
+            display: -webkit-flex;
+            display: -ms-flex;
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
+
+            width: auto;
+        }
+    }
+}
+
+
+#modal-player {
+    width: 50vw;
+    height: calc(50vw / 1.78); // keep ratio
+}
+
+
 #yt-player-play {
     position: absolute;
 
@@ -70,8 +101,19 @@
     z-index: 2;
 }
 
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
 @media (max-width: $tablet) {
-    .yt-player-iframe-wrapper {
+    .yt-player-iframe-wrapper,
+    #modal-player {
         width: 80vw;
         height: calc(80vw / 1.78); // keep ratio
     }

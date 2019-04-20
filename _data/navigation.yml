@@ -1,14 +1,17 @@
 - name: About
+  class: navbar-item
   link: /
 - name: Team
+  class: navbar-item
   link: /team/
 - name: Blog
+  class: navbar-item
   link: /blog/
 - name: Docs
+  class: navbar-item
   link: https://docs.openfaas.com/
-- name: <i class="fab fa-github"></i> Github
-  link: https://github.com/openfaas/faas
-- name: <i class="fab fa-youtube"></i> Video Demo
-  link: https://www.youtube.com/watch?v=yOpYYYRuDQ0
+- name: Video Demo
+  class: navbar-item start-demo-video
 - name: Donate
+  class: navbar-item
   link: /donate/

@@ -1,7 +1,7 @@
 ---
 name: Vivek Singh
 position: Contributor
-image_path: /images/author/vivek.jpeg
+image_path: /images/author/vivek.png
 github_username: viveksyngh
 twitter_username: viveksyngh
 linkedin_username: viveksyngh

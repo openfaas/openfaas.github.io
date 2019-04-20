@@ -1,0 +1,24 @@
+<nav id="bottom-nav" class="navbar is-primary" role="navigation" aria-label="main navigation">
+    <div class="container is-fluid">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="{{ site.baseurl }}/">
+                <img src="{{ site.baseurl }}/images/openfaas/footer-of-logo.png">
+            </a>
+            <p class="navbar-item is-size-5 is-size-4-fullhd has-text-weight-bold is-hidden-mobile">Serverless Functions, Made Simple.</p>
+        </div>
+
+        <div class="navbar-menu is-visible-desktop">
+            <div class="navbar-end">
+                {% for link in site.data.navigation %}
+                	{% assign class = link.class %}
+
+                	{% if link.link == page.url %}
+                		{% assign class = class | append: " is-active" %}
+                	{% endif %}
+                	<a {% if link.link %} href="{% include relative-src.html src=link.link %}" {% endif %}class="{{ class }}" {% if link.new_window %}target="_blank"{% endif %}>{{ link.name }}</a>
+                {% endfor %}
+            </div>
+
+        </div>
+    </div>
+</nav>

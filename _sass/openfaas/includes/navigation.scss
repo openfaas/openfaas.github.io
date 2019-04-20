@@ -1,0 +1,177 @@
+.navbar {
+    min-height: auto;
+    height: 184px;
+
+    &>.container {
+        min-height: auto;
+
+        .navbar-end {
+            flex-grow: 0;
+        }
+    }
+
+    &.is-primary {
+        .navbar-brand {
+            align-items: center;
+
+            min-height: auto;
+
+            a.navbar-item {
+                &:hover {
+                    background-color: transparent;
+                }
+            }
+        }
+    }
+
+    &-item {
+        img {
+            max-width: $navbar-brand-img-width;
+        }
+    }
+
+    &-menu {
+        justify-content: center;
+    }
+
+    &-middle,
+    &-end {
+        display: -webkit-flex;
+        display: -ms-flex;
+        display: flex;
+
+        flex-grow: 0.5;
+
+        justify-content: space-around;
+        align-items: center;
+
+        a {
+            font-weight: 100;
+            font-size: 20px;
+            text-transform: uppercase;
+            color: white;
+
+            &.is-active {
+                background: transparent;
+                border-bottom: 2px solid #ffa74d;
+            }
+        }
+    }
+
+    &-end {
+        .github-repo {
+            display: -webkit-flex;
+            display: -ms-flex;
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
+
+            width: $navbar-brand-img-width;
+
+            border: 3px solid #ffa74c;
+            padding: 0 13px;
+            border-radius: 5px;
+
+            a {
+                display: -webkit-flex;
+                display: -ms-flex;
+                display: flex;
+
+                justify-content: space-between;
+
+                align-items: center;
+
+                width: 100%;
+                padding: 10px 0;
+
+                color: white;
+                text-align: center;
+
+
+                span {
+                    font-size: 16px;
+
+                    &:last-child {
+                        font-size: 18px;
+                        text-transform: uppercase;
+                        font-weight: 400;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1300px) {
+    .navbar {
+        &-item {
+            img {
+                max-width: 200px;
+            }
+        }
+
+        &-middle {
+            a {
+                font-size: 16px;
+            }
+        }
+        &-end {
+            .github-repo {
+                width: 220px;
+
+                a {
+                    span {
+                        font-size: 14px;
+
+                        &:last-child {
+                            font-size: 14px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1087px) {
+    #top-nav {
+        display: -webkit-flex;
+        display: -ms-flex;
+        display: flex;
+
+        align-items: center;
+    }
+
+    .navbar {
+        &-burger {
+            width: 50px;
+            height: 50px;
+        }
+
+        &-menu {
+            background: $primary;
+
+            &.is-active {
+                position: absolute;
+
+                right: 20px;
+
+                width: 300px;
+
+                border: 1px solid #5371ea;
+
+                .navbar-middle {
+                    flex-direction: column;
+                    align-items: stretch;
+
+                    padding: 0 20px;
+                }
+            }
+        }
+
+        &-end {
+            display: none;
+        }
+    }
+}

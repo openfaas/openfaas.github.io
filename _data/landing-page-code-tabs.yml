@@ -1,0 +1,9 @@
+code-samples:
+  - name: Unit tests for a Github push
+    icon: <i class="fab fa-github"></i>
+  - name: Updating a cosmosDB database
+    icon: <i class="fas fa-spa"></i>
+  - name: Sending a Slack message
+    icon: <i class="fab fa-slack"></i>
+  - name: Sending a Twitter DM
+    icon: <i class="fab fa-twitter"></i>

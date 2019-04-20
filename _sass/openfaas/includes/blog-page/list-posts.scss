@@ -1,0 +1,56 @@
+.hero.is-primary {
+	.blog {
+		&-post {
+			max-width: 750px;
+
+			padding: $padding-step * 2 $padding-step;
+
+			margin: 0 auto 10px;
+
+			background: white;
+
+			>.title {
+				color: $of-text-dark;
+
+				a {
+					font-size: 41px;
+				}
+			}
+
+			.post {
+				&-preview {
+					>p {
+						color: $of-text-dark;
+						margin-bottom: $padding-step;
+						font-size: 20px;
+					}
+
+					.button {
+						font-size: 17px;
+						width: auto;
+						height: auto;
+						padding: 15px 30px;
+					}
+				}
+
+				&-date {
+					font-size: 15px;
+					color: #ffa74c;
+				}
+			}
+		}
+	}
+
+}
+
+#paginator {
+	margin: $padding-step 0;
+
+	a {
+		color: $of-text-dark;
+
+		&.is-current {
+			color: white;
+		}
+	}
+}

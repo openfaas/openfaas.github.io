@@ -5,7 +5,7 @@ remote_theme: CloudCannon/frisco-jekyll-template
 
 title: OpenFaaS - Serverless Functions Made Simple
 url: "https://www.openfaas.com"
-baseurl: 
+baseurl:
 google_analytics_key: "UA-60759269-4"
 google_maps_javascript_api_key:
 disqus_shortname:
@@ -78,6 +78,11 @@ defaults:
   -
     scope:
       path: "team"
+    values:
+      layout: "default"
+  -
+    scope:
+      path: "donate"
     values:
       layout: "default"
   -

@@ -1,7 +1,7 @@
 ---
 name: Andrew Cornies
 position: Contributor
-image_path: /images/author/andrew.jpg
+image_path: /images/author/andrew.png
 twitter_username: acornies
 github_username: acornies
 linkedin_username: acornies

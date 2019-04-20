@@ -1,0 +1,25 @@
+<div class="card team member">
+    {% assign author_id = include.name | prepend: "/staff_members/" | append: "/" %}
+    {% assign author = site.staff_members | where: "url", author_id | first %}
+    <div class="avatar">
+        <img class="team avatar" src="{% include relative-src.html src=author.image_path %}"></img>
+        <div class="team social">
+            {% if author.twitter_username %}
+            <a target="_blank" href="https://twitter.com/{{ author.twitter_username }}"><i class="fab fa-twitter"></i></a>
+            {% endif %}
+            {% if author.github_username %}
+            <a target="_blank" href="https://github.com/{{ author.github_username }}"><i class="fab fa-github"></i></a>
+            {% endif %}
+            {% if author.linkedin_username %}
+            <a target="_blank" href="https://linkedin.com/in/{{ author.linkedin_username }}"><i class="fab fa-linkedin"></i></a>
+            {% endif %}
+            {% if author.webpage %}
+            <a target="_blank" href="{{ author.webpage }}"><i class="fas fa-globe"></i></a>
+            {% endif %}
+        </div>
+    </div>
+    <div class="team about">
+        <p class="team name">{{ author.name }}</p>
+        <p class="team blurb">{{ author.blurb }}</p>
+    </div>
+</div>

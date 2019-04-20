@@ -1,9 +1,3 @@
 ---
 ---
-@import "variables";
-@import "openfaas-landing/foundation";
-@import "openfaas-landing/mixins/landing";
-@import "openfaas-landing/fonts";
-@import "openfaas-landing/vars";
-@import "openfaas-landing/home";
-@import "openfaas-landing/landing";
+@import "../_sass/core.scss";

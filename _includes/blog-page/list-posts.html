@@ -1,0 +1,14 @@
+{% for post in include.posts %}
+	<li class="blog-post">
+		<h1 class="title is-size-4 is-size-3-desktop has-text-weight-light">
+			<a href="{% include relative-src.html src=post.url %}">{{ post.title }}</a>
+		</h1>
+		{% include blog-page/post-title.html post=post %}
+		<div class="post-preview">
+			{{ post.excerpt }}
+			<a class="button is-outlined is-large is-primary" href="{% include relative-src.html src=post.url %}">
+				Read More
+			</a>
+		</div>
+	</li>
+{% endfor %}

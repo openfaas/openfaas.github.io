@@ -1,0 +1,114 @@
+.post-page-full {
+    .container {
+        max-width: 750px;
+        font-size: 20px;
+
+        >h1.title,
+        >h2.subtitle {
+            text-shadow: 1px 1px 1px #656565;
+        }
+
+    }
+	.hero {
+		&.cover {
+			position: relative;
+
+			background-size: cover;
+			background-repeat: no-repeat;
+
+			&:before {
+				content: '';
+
+				position: absolute;
+
+				left: 0;
+				right: 0;
+				top: 0;
+				bottom: 0;
+
+				background: rgba(58, 95, 233, 0.65);
+			}
+
+			.hero-body {
+				.title,
+				.subtitle {
+					color: white;
+				}
+			}
+		}
+
+	}
+
+	.content {
+		font-size: 20px;
+	}
+
+	.post-tabs-date {
+		margin: $padding-step * 2 0;
+
+		.post-date {
+			font-size: 15px;
+		}
+	}
+
+	.highlight {
+		background-color: whitesmoke!important;
+		margin-bottom: $padding-step;
+
+		pre {
+			margin-bottom: $padding-step;
+			background-color: whitesmoke!important;
+		}
+	}
+
+	.author {
+		padding: $padding-step 0;
+		margin: $padding-step * 2 0;
+
+		border-top: 1px solid $of-text-grey;
+		border-bottom: 1px solid $of-text-grey;
+
+		.card {
+			background: #f3f3f3;
+		}
+
+		.team.about {
+			background: transparent;
+		}
+	}
+
+	.blog-navigation {
+		display: -webkit-flex;
+		display: -ms-flex;
+		display: flex;
+
+		padding: $padding-step 0;
+	}
+
+	.ytcontainer {
+		position: relative;
+		width: 100%;
+		height: 0;
+		padding-bottom: 56.25%;
+
+		iframe {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+		}
+	}
+}
+
+@media(max-width: $tablet) {
+    .post-content {
+        p {
+            word-break: break-all;
+        }
+
+        code {
+			word-break: break-all;
+		}
+    }
+}

@@ -4,36 +4,47 @@ description: Keep up with the latest news.
 image: https://source.unsplash.com/MqJX_8EaStM/2000x1322?a=.png
 ---
 
+<section class="hero is-primary is-small">
+    <div class="hero-body has-text-centered intro">
+        <h1 class="title is-size-3 is-size-2-desktop has-text-grey-darker">
+            The latest news
+        </h1>
+        <h1 class="title is-size-5 is-size-4-desktop has-text-grey-darker has-text-weight-light">
+            Hear the latest news on OpenFaaS from the community.
+        </h1>
+    </div>
 
-<div class="full">
-<section class="hero">
-	<div class="inner-hero text-container">
-		<div class="hero-text-container">
-			<h1 class="editable">The latest news</h1>
-			<p class="subtext editable">Hear the latest news on OpenFaaS from the community.</p>
+    <div class="hero-body grey">
+		<div class="container">
+			<ul class="blog-posts">
+				{% include blog-page/list-posts.html posts=paginator.posts %}
+			</ul>
+
+            {% if paginator.total_pages > 1 %}
+                <nav id="paginator" class="pagination" role="navigation" aria-label="pagination">
+                    {% if paginator.previous_page %}
+                        <a href="{{ site.baseurl }}{{ paginator.previous_page_path }}" class="pagination-previous">Newer posts</a>
+                    {% endif %}
+                    {% if paginator.next_page %}
+                        <a href="{{ site.baseurl }}{{ paginator.next_page_path }}"class="pagination-next">Older posts</a>
+                    {% endif %}
+                    <ul class="pagination-list">
+                        <li>
+                            <a class="pagination-link is-current" disabled>
+                                {{ paginator.page }}
+                            </a>
+                        </li>
+                        <li>
+                            <span class="pagination-ellipsis">of</span>
+                        </li>
+                        <li>
+                            <a class="pagination-link" disabled>
+                                {{ paginator.total_pages }}
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+			{% endif %}
 		</div>
-	</div>
+    </div>
 </section>
-
-<section>
-	<div class="text-container">
-		<ul class="blog-posts">
-			{% include list-posts.html posts=paginator.posts %}
-		</ul>
-
-		{% if paginator.total_pages > 1 %}
-			<div class="pagination">
-				{% if paginator.previous_page %}
-					<a href="{{ site.baseurl }}{{ paginator.previous_page_path }}" class="previous btn">&larr; Newer posts</a>
-				{% endif %}
-
-				<span class="page_number ">{{ paginator.page }} of {{ paginator.total_pages }}</span>
-
-				{% if paginator.next_page %}
-					<a href="{{ site.baseurl }}{{ paginator.next_page_path }}" class="next btn">Older posts &rarr;</a>
-				{% endif %}
-			</div>
-		{% endif %}
-	</div>
-</section>
-</div>

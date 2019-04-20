@@ -1,0 +1,16 @@
+// Font family override
+$family-primary: $of-primary-font;
+$family-secondary: $of-secondary-font;
+
+// Colors override
+$primary: $of-brand-color;
+$grey-darker: $of-text-dark;
+$grey: $of-text-grey;
+
+// Navbar overrides
+$navbar-height: 11.5rem;
+$navbar-item-hover-color: white;
+$navbar-item-hover-background-color: #244be6;
+$navbar-item-img-max-height: 3rem;
+$navbar-item-active-color: white;
+$navbar-brand-img-width: 245px;

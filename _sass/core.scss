@@ -1,0 +1,17 @@
+// IMPORTS FILE
+// DO NOT ADD SAAS/CSS here! Use only for importing your files
+
+// VARIABLES
+@import "./openfaas/variables/core.scss";
+
+// OPENSAAS BRAND STYLES
+@import "./openfaas/theme/core.scss";
+
+// BULMA CSS FRAMEWORK https://bulma.io/
+@import "./bulma/bulma.sass";
+
+// COMPONENTS STYLES
+@import "./openfaas/includes/core.scss";
+
+// SITE VIEWS
+@import "./openfaas/layouts/core.scss";

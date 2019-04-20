@@ -2,14 +2,25 @@
 layout: default
 ---
 
-<!-- <section class="hero" style="background-image: url({% include relative-src.html src=page.image %})"> -->
-<section class="hero" {% include relative-post-hero.html src=page.image %}>
-		<div class="inner-hero text-container">
-		<div class="hero-text-container">
-			<h1><span{% if page.dark_background %} class="dark-background-title"{% endif %}>{{ page.title }}</span></h1>
-			<p class="subtext"><span{% if page.dark_background %} class="dark-background-description"{% endif %}>{{ page.description }}</span></p>
+<div class="post-page-full">
+	<section class="hero is-medium is-bold cover" {% include blog-page/relative-post-hero.html src=page.image %}>
+		<div class="hero-body">
+			<div class="container">
+				<h1 class="title is-size-3 is-size-1-desktop has-text-weight-normal">
+					{{ page.title }}
+				</h1>
+				<h2 class="subtitle is-size-4">
+					{{ page.description }}
+				</h2>
+			</div>
 		</div>
-	</div>
-</section>
+	</section>
 
-{{ content }}
+    <section class="hero is-medium">
+    	<div class="hero-body">
+            <div class="container">
+                {{ content }}
+            </div>
+    	</div>
+    </section>
+</div>

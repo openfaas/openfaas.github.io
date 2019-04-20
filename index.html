@@ -3,114 +3,40 @@ title: Home
 description: Serverless Functions Made Simple for Docker and Kubernetes.
 ---
 
-<header id="of-header" class="text-center">
-	<div class="grid-container">
-		<div class="grid-x grid-padding-x">
-			<div class="cell large-12">
-				<img id="logo" alt="logo" src="./images/openfaas/openfaas.png">
-				<p>Serverless Functions Made Simple for Docker and Kubernetes</p>
-			</div>
-			<div id="demo" class="cell large-12">
-				<a href="https://github.com/openfaas/faas" class="btn">view on github</a>
-				<span><a href="https://www.youtube.com/watch?v=yOpYYYRuDQ0">Video Demo</a></span>
-			</div>
-		</div>
-	</div>
-	<div class="wave"><img id="whale" src="./images/openfaas/logo.png"></div>
-</header>
-<section id="about">
-	<div class="grid-container">
-		<div class="grid-x grid-padding-x">
-			<div class="cell large-7">
-				<div class="about">
+<section class="hero is-primary is-small">
+    <div class="hero-body has-text-centered">
+        {% include landing-page/landing-intro.html %}
+    </div>
 
-					<p>The mission of OpenFaaS &reg; is to Make Serverless Functions Simple. It can be run on any cloud
-						through the use of portable Docker containers without the fear of getting locked-in or having to
-						manage complex infrastructure.</p>
+    <div class="hero-body wavy">
+        {% include landing-page/yt-player/youtube.html %}
+    </div>
 
-					<p>The project follows a UNIX-like design and has a composable architecture meaning that OpenFaaS
-						can run on Kubernetes, Docker Swarm and many other platforms using the same UI, CLI and
-						ecosystem. We let the container orchestrator do the heavy lifting meaning you get a highly
-						scalable, fault-tolerant and event-driven platform for your applications.</p>
+    <div class="hero-body grey features">
+        {% include landing-page/landing-features.html %}
+    </div>
 
-					<p>You can deploy your <a href="/blog/stateless-microservices/">existing microservices</a> to
-						OpenFaaS or package any code or binary as a Serverless Function using the wide range of <a
-							href="/blog/template-store">templates</a> we have made available. So whether you want to
-						use: Go, Java, Python, C#, Ruby - Express.js, Django, ASP.NET Core or even binaries like ffmpeg,
-						<a href="https://blog.alexellis.io/serverless-imagemagick/">ImageMagick</a> or anything else we
-						have you covered.</p>
+    <div class="hero-body grey-darker-bis description">
+        {% include landing-page/landing-description.html %}
+    </div>
 
-					<p>Testing out OpenFaaS only takes 60 seconds. From there you can deploy one of the many pre-built
-						community functions from the function store, or <a
-							href="https://blog.alexellis.io/first-faas-python-function/">build your own</a> using the
-						faas-cli. Learn everything you need to know with our tried-and-tested hands-on labs in the <a
-							href="https://github.com/openfaas/workshop">OpenFaaS workshop</a>
-					</p>
+    <div class="hero-body grey demo">
+        {% include landing-page/landing-demo.html %}
+    </div>
 
-					<p>See <a href="https://docs.openfaas.com/">who's solving real problems</a> with OpenFaaS, read the
-						<a href="https://www.openfaas.com/blog/">latest blogs</a>. Got questions or want to get
-						connected? <a href="https://docs.openfaas.com/community/">Join us on Slack.</a>
-					</p>
+    <div class="hero-body white users">
+        {% include landing-page/landing-users.html %}
+    </div>
 
-					<p>
-						<strong>New!</strong> Are you looking for an easy way to manage functions for your team?
-						Checkout <a href="https://docs.openfaas.com/openfaas-cloud/intro/">OpenFaaS Cloud</a> which
-						provides a multi-user Serverless experience with built-in CI/CD and integration with
-						GitHub/GitLab.
-					</p>
-				</div>
-			</div>
-			<div class="cell large-5">
-				<div class="author">
-					<div class="grid-x grid-padding-x">
-						<div class="cell large-4">
-							<img src="./images/author/ellis.jpg" alt="author">
-						</div>
-						<div class="cell large-8">
-							<h3>Welcome to OpenFaaS!</h3>
-							<p>Hi, I’m <a href="https://www.alexellis.io">Alex Ellis</a> the founder of OpenFaaS &reg;. I started this project in Dec 2016 with
-								a single commit and since then have built up a thriving global community with over 190
-								contributors.</p>
-							<p><a href="https://www.openfaas.com/team">A team</a> of core contributors &amp; GitHub
-								members and a large <a href="https://docs.openfaas.com/#users-of-openfaas">end-user
-									community</a> are helping me shape the direction and future of the project. The project
-								is driven by these values: developers-first, operational simplicity and community-centric.
-							</p>
-							<p>OpenFaaS &reg; is an independent open source project and not owned by any vendor. The
-								mission is to Make Serverless Functions Simple.
-							</p>
-						</div>
-						<div class="cell large-12">
-							<p>
-								Connect with the community:
-							</p>
-							<ul id="social-buttons">
-								<li><a class="twitter" href="https://twitter.com/openfaas"><i class="fab fa-twitter"></i> Twitter</a></li>
-								<li><a class="linkedin" href="https://www.linkedin.com/groups/13670843/"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
-								<li><a class="slack" href="https://docs.openfaas.com/community"><i class="fab fa-slack"></i>Slack</a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-</section>
+    <div class="hero-body grey wavy-2 contributors">
+        {% include landing-page/landing-contributors.html %}
+    </div>
 
-{% include sponsors.html %}
+    <div class="hero-body grey-darker-bis sponsors">
+        {% include landing-page/landing-sponsors.html %}
+    </div>
 
-<section id="about-footer">
-	<div class="grid-container">
-		<div class="grid-x grid-padding-x">
-			<div class="cell large-12 text-left">
-				<p>OpenFaaS &reg; was founded by <a href="https://www.alexellis.io/">alexellis</a> and is being built by
-					a growing <a href="https://github.com/alexellis/faas/blob/master/community.md">community of
-						contributors</a>.</p>
-				<p>OpenFaaS Ltd. is a registered company in England &amp; Wales with number: 11076587, registered
-					address: Peterborough UK.</p>
-			</div>
-			<div class="cell large-6 text-right">
-				<p></p>
-			</div>
-		</div>
-	</div>
+    <div class="hero-body grey call-to-action">
+        {% include landing-page/landing-bottom-cta.html %}
+    </div>
 </section>

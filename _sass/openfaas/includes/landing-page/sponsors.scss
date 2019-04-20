@@ -1,0 +1,49 @@
+.hero.is-primary {
+	.sponsors {
+		&-category {
+			&.title {
+				font-weight: 300;
+				text-transform: capitalize;
+			}
+		}
+
+        .of-sponsor-logo {
+    		display: -webkit-flex;
+    		display: -ms-flex;
+    		display: flex;
+
+    		justify-content: center;
+    	}
+
+		.button {
+            margin-top: $padding-step * 4;
+
+			border: 3px solid;
+			border-radius: 10px;
+
+            background: #FEA553;
+            border-color: #C68141;
+
+            color: white;
+
+            transition: box-shadow .3s;
+            
+            &:hover {
+                box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.26);
+                .icon {
+                    transform: translateX(10px);
+                }
+            }
+
+            .icon {
+                margin: 0 0 0 10px;
+
+                transition: transform .3s;
+            }
+		}
+
+		figure {
+			max-width: 200px;
+		}
+	}
+}

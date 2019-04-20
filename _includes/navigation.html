@@ -1,14 +1,40 @@
-<nav>
-	<a class="nav-toggle" id="open-nav" href="#">&#9776;</a>
-	{% for link in site.data.navigation %}
-		{% assign class = "" %}
-		{% if link.highlight %}
-			{% assign class = class | append: " highlight" %}
-		{% endif %}
+<nav id="top-nav" class="navbar is-fixed-top is-primary" role="navigation" aria-label="main navigation">
+    <div class="container is-fluid">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="{{ site.baseurl }}/">
+                <img src="{{ site.baseurl }}/images/openfaas_light.png">
+            </a>
 
-		{% if link.link == page.url %}
-			{% assign class = class | append: " active" %}
-		{% endif %}
-		<a href="{% include relative-src.html src=link.link %}" class="{{ class }}" {% if link.new_window %}target="_blank"{% endif %}>{{ link.name }}</a>
-	{% endfor %}
+            <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div class="navbar-menu">
+            <div class="navbar-middle">
+                {% for link in site.data.navigation %}
+                	{% assign class = link.class %}
+
+                	{% if link.link == page.url %}
+                		{% assign class = class | append: " is-active" %}
+                	{% endif %}
+                	<a {% if link.link %} href="{% include relative-src.html src=link.link %}"{% endif %} class="{{ class }}" {% if link.new_window %}target="_blank"{% endif %}>{{ link.name }}</a>
+                {% endfor %}
+            </div>
+
+        </div>
+        <div class="navbar-end">
+            <div class="navbar-item">
+                <div id="git-stars" class="navigation-item github-repo">
+                    <a href="https://github.com/openfaas/faas" target="_blank">
+                        <i class="fab fa-github"></i>
+                        <span id="stars-counter">{{site.data.github_stats.total.stars}}</span>
+                        <span>View on github</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 </nav>

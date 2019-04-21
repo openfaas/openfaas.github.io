@@ -85,20 +85,17 @@
 		padding: $padding-step 0;
 	}
 
-	.ytcontainer {
-		position: relative;
-		width: 100%;
-		height: 0;
-		padding-bottom: 56.25%;
 
-		iframe {
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-		}
+	iframe {
+		width: 750px;
+		height: calc(750px / 1.78); // keep ratio
 	}
+
+    .twitter-tweet {
+        margin: 0 auto;
+        margin-top: $padding-step!important;
+        margin-bottom: $padding-step!important;
+    }
 }
 
 @media(max-width: $tablet) {
@@ -110,5 +107,14 @@
         code {
 			word-break: break-all;
 		}
+    }
+}
+
+@media(max-width: 810px) {
+    .post-page-full {
+        iframe {
+            width: calc(100vw - 3rem);
+            height: calc((100vw - 3rem) / 1.78); // keep ratio
+        }
     }
 }

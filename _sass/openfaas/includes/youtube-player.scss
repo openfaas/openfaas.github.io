@@ -22,10 +22,19 @@
             margin-top: 40px;
             margin-top: 40px;
 
-            background: url('../images/openfaas/yt-cover.png');
+            background: #3ab7ea;
 
-            background-repeat: no-repeat;
-            background-size: cover;
+            border-radius: 10px;
+
+            overflow: hidden;
+
+            &.ready {
+                #yt-player-play {
+                    opacity: 1;
+
+                    pointer-events: all;
+                }
+            }
 
             iframe {
                 position: relative;
@@ -79,6 +88,14 @@
     height: calc(50vw / 1.78); // keep ratio
 }
 
+#sample-video {
+    position: absolute;
+
+    border-radius: 10px;
+
+    opacity: .3;
+}
+
 
 #yt-player-play {
     position: absolute;
@@ -97,6 +114,12 @@
     background-position: center;
 
     cursor: pointer;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition: opacity .3s;
 
     z-index: 2;
 }

@@ -2,7 +2,7 @@ version: "3"
 services:
   openfaas-jekyll:
     command: jekyll serve --force_polling
-    image: jekyll/jekyll:latest
+    image: jekyll/jekyll:stable
     volumes:
       - .:/srv/jekyll
     ports:

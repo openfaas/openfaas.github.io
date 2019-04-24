@@ -18,6 +18,7 @@ function playVideo() {
     landingPlayer.playVideo();
     landingPlayer.a.classList.add('playing');
     sampleVideo.classList.add('is-hidden');
+    playerControl.classList.add('is-hidden');
 }
 
 function initYoutubePlayer() {

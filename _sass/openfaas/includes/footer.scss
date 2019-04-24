@@ -59,6 +59,10 @@
 			}
 
 			&-right {
+                display: -webkit-flex;
+                display: -ms-flex;
+                display: flex;
+
 				flex-direction: row;
 				justify-content: center;
 				align-items: center;
@@ -67,9 +71,7 @@
 
 				margin-right: 0;
 
-				img {
-					margin-left: $padding-step;
-				}
+                text-align: center;
 			}
 		}
 	}

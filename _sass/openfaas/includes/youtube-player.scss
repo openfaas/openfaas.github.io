@@ -94,6 +94,8 @@
     border-radius: 10px;
 
     opacity: .3;
+
+    z-index: 3;
 }
 
 
@@ -121,7 +123,7 @@
 
     transition: opacity .3s;
 
-    z-index: 2;
+    z-index: 4;
 }
 
 @keyframes fadeIn {

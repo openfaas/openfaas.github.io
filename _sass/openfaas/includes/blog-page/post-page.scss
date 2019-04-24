@@ -99,15 +99,6 @@
 }
 
 @media(max-width: $tablet) {
-    .post-content {
-        p {
-            word-break: break-all;
-        }
-
-        code {
-			word-break: break-all;
-		}
-    }
 }
 
 @media(max-width: 810px) {

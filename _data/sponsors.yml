@@ -2,12 +2,10 @@
 # gold:
 # silver:
 bronze:
-  - alt: ASYNCY - The Kubernetes Native DSL
-    url: https://asyncy.com/
-    logo: asyncy.png
 
-# Note: 1 March payment taken as regular backer of 25 USD.
-# Mark as active 1st April when bronze sponsor tier kicks-in
-  # - alt: Garden - Next-generation development platform for backend systems
-  #   url: https://garden.io/
-  #   logo: garden.png
+#  - alt: ASYNCY - The Kubernetes Native DSL
+#    url: https://asyncy.com/
+#    logo: asyncy.png
+# - alt: Garden - Next-generation development platform for backend systems
+#   url: https://garden.io/
+#   logo: garden.png

@@ -86,7 +86,14 @@ For example, if you add your own post in `_posts/2018-07-31-my-post.md` you will
     openfaas-jekyll_1  |                     _posts/2018-08-22-my-post.md
     openfaas-jekyll_1  |       Remote Theme: Using theme cloudcannon/frisco-jekyll-template
     openfaas-jekyll_1  |                     ...done in 2.0199265 seconds.
+
+### Add end-user company
+
+* Edit `_data/users.yml`
+* Copy the logo in SVG or png format to `images/users-logos/`
+
 ### Landing page users
+
 The contributors section on the landing page is being generated using a small `node` script located in the `generate-stats.js` file. It is recommended that you run this script before opening a PR. This will ensure the contributors section is up-to-date:
 
     node generate-stats.js

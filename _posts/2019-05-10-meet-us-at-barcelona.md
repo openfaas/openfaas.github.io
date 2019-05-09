@@ -16,17 +16,17 @@ I'll outline a few places where you can find us if you'd like to catch a session
 
 ### Monday 20th May - Serverless Practioners Summit
 
-The [Serverless Practioners Summit](https://spseu19.sched.com) is a co-located event hosted by the [CNCF](https://www.cncf.io) at KubeCon. It's on Monday so it's technically a "day 0" event. If you planned your travel accordingly, then we'd love to see you there. The event is being organised by the OpenFaaS Founder and the companies that are behind Knative such as IBM and Google.
+The [Serverless Practioners Summit](https://spseu19.sched.com) is a co-located event hosted by the [CNCF](https://www.cncf.io) at KubeCon. The event will take place on Monday which is the day before the main KubeCon event kicks-off. If you planned your travel accordingly, it would be great to see you there. I'm co-organizing the event with folks from Google and IBM who will be representing Google's new [Knative project](https://github.com/knative/).
 
-In the morning we'll have talks and updates from the OpenFaaS and Knative projects followed by an update from the CNCF's Serverless Working Group. In the Afternoon there will be additional talks as well as open discussion sessions called Birds of a Feather or (BoF). The Google team will be running an afternoon of sponsored content on Knative.
+In the morning we'll have talks and updates from the OpenFaaS and Knative projects followed by an update from the CNCF's Serverless Working Group. In the afternoon there will be additional talks, as well as open discussion sessions called Birds of a Feather or (BoF). The Google team will be running an afternoon of sponsored content on Knative.
 
 * [A bright 2019 for OpenFaaS - project & community updates](https://spseu19.sched.com/event/Nq4i/a-bright-2019-for-openfaas-project-community-updates)
 
-In the opening talk Alex will share highlights and lessons learned from the past 12 months of community development. During that time we've seen over 17k GitHub stars, 40 companies sign-up to the end-user community and over 200 contributors have PRs successfully merged.
+In the opening talk [Alex](https://github.com/alexellis) will share highlights and lessons learned from the past 12 months of community development. During that time we've seen over 17k GitHub stars, 40 companies sign-up to the end-user community and over 200 contributors have PRs successfully merged.
 
 * [Kubernetes and AWS Lambda can play nicely together with OpenFaaS](https://spseu19.sched.com/event/Nq4u/kubernetes-and-aws-lambda-can-play-nicely-together-with-openfaas)
 
-Before lunch Ed Wilde will show us how innovation can come from mixing together two existing technologies to create a new one. Ed came up with the idea of faas-lambda over the holiday period last year and has since developed an interface (provider) for the OpenFaaS ecosystem that enables it to target AWS Lambda.
+Before lunch [Ed Wilde](https://twitter.com/ewilde/) of [Form3](https://form3.tech) will show us how innovation can come from mixing existing technologies to create a new one. Over the holidays Ed and I had a pub lunch where we came up with a crazy idea of building an OpenFaaS provider that would deploy functions directly to AWS Lambda without any modifications. Ed began work on the idea several months ago, and at his talk he will open-source the code and show us how `faas-lambda` works.
 
 * [OpenFaaS Birds of a Feather Session](https://spseu19.sched.com/event/Nq5C/bof-open-faas)
 
@@ -36,17 +36,17 @@ Join Alex, contributors and other end-users for an open session where you can as
 
 * [Accelerating the Journey of an AI Algorithm to Production with OpenFaaS @ BT](https://kccnceu19.sched.com/event/MPeF/accelerating-the-journey-of-an-ai-algorithm-to-production-with-openfaas-joost-noppen-bt-plc-alex-ellis-vmware)
 
-Joost Noppen from BT (British Telecom) will join OpenFaaS founder Alex Ellis to talk about how his team were able to accelerate the delivery of AI to end-users. Joost shares some of the problems his team works on and how functions on Kubernetes with OpenFaaS were able to speed-up their delivery from 3 years to just 3 months. Alex will also share some of the recent innovation in the project and updates on what to expect in 2019.
+[Joost Noppen](https://twitter.com/jarnoppen?lang=en) from [BT](https://www.bt.com/) will join OpenFaaS founder Alex Ellis to talk about how his team were able to accelerate the delivery of AI to end-users. Joost will share some of the problems his team works on and how functions on Kubernetes with OpenFaaS were able to speed-up their delivery from 3 years to just 3 months. Alex will also share some of the recent innovation in the project and updates on what to expect in 2019.
 
 * [Merging Quickly in a Cloud Native World](https://kccnceu19.sched.com/event/MPZM/merging-quickly-in-a-cloud-native-world-lucas-roesler-contiamo)
 
-On 22th May Lucas Roesler from Contiamo will share his experiences of working at scale on an Open Source project. He'll give you tips and tricks for getting your PRs merged quickly upstream. All skill levels are welcome.
+On 22th May [Lucas Roesler](https://github.com/lucasroesler) from [Contiamo](https://www.contiamo.com) will share his experiences of working at scale on an Open Source project. He'll give you tips and tricks for getting your PRs merged quickly upstream. All skill levels are welcome.
 
 ### 3. Wednesday 23rd May
 
-* [How LivePerson is Tailoring its Conversational Platform Using OpenFaaS @ LivePerson](https://kccnceu19.sched.com/event/MPeR/how-liveperson-is-tailoring-its-conversational-platform-using-openfaas-simon-pelczer-liveperson-ivana-yovcheva-vmware)
+* [How LivePerson is Tailoring its Conversational Platform Using OpenFaaS](https://kccnceu19.sched.com/event/MPeR/how-liveperson-is-tailoring-its-conversational-platform-using-openfaas-simon-pelczer-liveperson-ivana-yovcheva-vmware)
 
-Simon Pelczer from LivePerson will present on how he and his team were able to cope with increasingly bespoke feature requests from customers. They allowed customers to extend their workloads by writing their own functionality through OpenFaaS functions. [Ivana Yovcheva](https://twitter.com/ivanabyov), a contributor from [VMware](https://www.vmware.com/) will join Simon to give an overview of OpenFaaS 
+[Simon Pelczer](https://github.com/templum) from LivePerson will present on how he and his team were able to cope with increasingly bespoke feature requests from customers. They allowed customers to extend their workloads by writing their own functionality through OpenFaaS functions. [Ivana Yovcheva](https://twitter.com/ivanabyov), a contributor from [VMware](https://www.vmware.com/) will join Simon to give an overview of OpenFaaS 
 
 ### 4. Hallway track / face-to-face
 

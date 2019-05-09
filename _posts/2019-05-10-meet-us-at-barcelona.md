@@ -2,7 +2,7 @@
 title: "Meet us at KubeCon 2019, Barcelona"
 description: Meet the community in person over the week 20-23th May at the KubeCon 2019 event in Barcelona. 
 date: 2019-04-18
-image: /images/spring-easter/crocus.jpg
+image: /images/meet-us-at-kubecon-2019-barcelona/backdrop.jpg
 categories:
   - community
   - workshop
@@ -16,7 +16,7 @@ I'll outline a few places where you can find us if you'd like to catch a session
 
 ### Monday 20th May - Serverless Practioners Summit
 
-The Serverless Practioners Summit is a co-located event hosted by the CNCF at KubeCon. It's on Monday so it's technically a "day 0" event. If you planned your travel accordingly, then we'd love to see you there. The event is being organised by the OpenFaaS Founder and the companies that are behind Knative such as IBM and Google.
+The [Serverless Practioners Summit](https://spseu19.sched.com) is a co-located event hosted by the [CNCF](https://www.cncf.io) at KubeCon. It's on Monday so it's technically a "day 0" event. If you planned your travel accordingly, then we'd love to see you there. The event is being organised by the OpenFaaS Founder and the companies that are behind Knative such as IBM and Google.
 
 In the morning we'll have talks and updates from the OpenFaaS and Knative projects followed by an update from the CNCF's Serverless Working Group. In the Afternoon there will be additional talks as well as open discussion sessions called Birds of a Feather or (BoF). The Google team will be running an afternoon of sponsored content on Knative.
 
@@ -46,11 +46,11 @@ On 22th May Lucas Roesler from Contiamo will share his experiences of working at
 
 * [How LivePerson is Tailoring its Conversational Platform Using OpenFaaS @ LivePerson](https://kccnceu19.sched.com/event/MPeR/how-liveperson-is-tailoring-its-conversational-platform-using-openfaas-simon-pelczer-liveperson-ivana-yovcheva-vmware)
 
-Simon Pelczer from LivePerson will present on how he and his team were able to cope with increasingly bespoke feature requests from customers. They allowed customers to extend their workloads by writing their own functionality through OpenFaaS functions. Ivana Yovcheva, a contributor from VMware will join Simon to give an overview of OpenFaaS 
+Simon Pelczer from LivePerson will present on how he and his team were able to cope with increasingly bespoke feature requests from customers. They allowed customers to extend their workloads by writing their own functionality through OpenFaaS functions. [Ivana Yovcheva](https://twitter.com/ivanabyov), a contributor from [VMware](https://www.vmware.com/) will join Simon to give an overview of OpenFaaS 
 
 ### 4. Hallway track / face-to-face
 
-If you'd like to catch any of us in the hallway track for a chat, then the best way to reach out is in the #kubecon-eu-2019 Slack channel in the OpenFaaS Slack Workspace, or via Twitter.
+If you'd like to catch any of us in the hallway track for a chat, then the best way to reach out is in the #kubecon-eu-2019 channel on [OpenFaaS Slack](https://docs.openfaas.com/community/), or via Twitter.
 
 We'll be organizing a face-to-face at a local cafe or bar, so if you want to be part of that please register your interest in the Slack channel and follow [@openfaas](https://twitter.com/openfaas/) on Twitter for updates.
 

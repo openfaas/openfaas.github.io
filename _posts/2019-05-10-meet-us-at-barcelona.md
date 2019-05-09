@@ -14,7 +14,11 @@ dark_background: true
 
 I'll outline a few places where you can find us if you'd like to catch a session, grab a coffee, swag or just chat about Kubernetes and Serverless
 
-### 1. Serverless Practioners Summit (20-May-2019)
+### Monday 20th May - Serverless Practioners Summit
+
+The Serverless Practioners Summit is a co-located event hosted by the CNCF at KubeCon. It's on Monday so it's technically a "day 0" event. If you planned your travel accordingly, then we'd love to see you there. The event is being organised by the OpenFaaS Founder and the companies that are behind Knative such as IBM and Google.
+
+In the morning we'll have talks and updates from the OpenFaaS and Knative projects followed by an update from the CNCF's Serverless Working Group. In the Afternoon there will be additional talks as well as open discussion sessions called Birds of a Feather or (BoF). The Google team will be running an afternoon of sponsored content on Knative.
 
 * [A bright 2019 for OpenFaaS - project & community updates](https://spseu19.sched.com/event/Nq4i/a-bright-2019-for-openfaas-project-community-updates)
 
@@ -28,21 +32,21 @@ Before lunch Ed Wilde will show us how innovation can come from mixing together 
 
 Join Alex, contributors and other end-users for an open session where you can ask questions, see demos and find out more about the project's roadmap and future.
 
-### 2. End-user talks (22-23 May)
+### 2. Tuesday 22th May
 
-* 23-May: [How LivePerson is Tailoring its Conversational Platform Using OpenFaaS @ LivePerson](https://kccnceu19.sched.com/event/MPeR/how-liveperson-is-tailoring-its-conversational-platform-using-openfaas-simon-pelczer-liveperson-ivana-yovcheva-vmware)
-
-Simon Pelczer from LivePerson will present on how he and his team were able to cope with increasingly bespoke feature requests from customers. They allowed customers to extend their workloads by writing their own functionality through OpenFaaS functions. Ivana Yovcheva, a contributor from VMware will join Simon to give an overview of OpenFaaS 
-
-* 22-May: [Accelerating the Journey of an AI Algorithm to Production with OpenFaaS @ BT](https://kccnceu19.sched.com/event/MPeF/accelerating-the-journey-of-an-ai-algorithm-to-production-with-openfaas-joost-noppen-bt-plc-alex-ellis-vmware)
+* [Accelerating the Journey of an AI Algorithm to Production with OpenFaaS @ BT](https://kccnceu19.sched.com/event/MPeF/accelerating-the-journey-of-an-ai-algorithm-to-production-with-openfaas-joost-noppen-bt-plc-alex-ellis-vmware)
 
 Joost Noppen from BT (British Telecom) will join OpenFaaS founder Alex Ellis to talk about how his team were able to accelerate the delivery of AI to end-users. Joost shares some of the problems his team works on and how functions on Kubernetes with OpenFaaS were able to speed-up their delivery from 3 years to just 3 months. Alex will also share some of the recent innovation in the project and updates on what to expect in 2019.
 
-### 3. Community talks (22 May)
-
-* 22-May: [Merging Quickly in a Cloud Native World](https://kccnceu19.sched.com/event/MPZM/merging-quickly-in-a-cloud-native-world-lucas-roesler-contiamo)
+* [Merging Quickly in a Cloud Native World](https://kccnceu19.sched.com/event/MPZM/merging-quickly-in-a-cloud-native-world-lucas-roesler-contiamo)
 
 On 22th May Lucas Roesler from Contiamo will share his experiences of working at scale on an Open Source project. He'll give you tips and tricks for getting your PRs merged quickly upstream. All skill levels are welcome.
+
+### 3. Wednesday 23rd May
+
+* [How LivePerson is Tailoring its Conversational Platform Using OpenFaaS @ LivePerson](https://kccnceu19.sched.com/event/MPeR/how-liveperson-is-tailoring-its-conversational-platform-using-openfaas-simon-pelczer-liveperson-ivana-yovcheva-vmware)
+
+Simon Pelczer from LivePerson will present on how he and his team were able to cope with increasingly bespoke feature requests from customers. They allowed customers to extend their workloads by writing their own functionality through OpenFaaS functions. Ivana Yovcheva, a contributor from VMware will join Simon to give an overview of OpenFaaS 
 
 ### 4. Hallway track / face-to-face
 

@@ -12,7 +12,7 @@ author_staff_member: alex
 dark_background: true
 ---
 
-I'll outline a few places where you can find us if you'd like to catch a session, grab a coffee, swag or just chat about Kubernetes and Serverless
+I'll outline a few places where you can find us if you'd like to catch a session, grab a coffee, swag or just chat about Kubernetes and Serverless.
 
 ### Monday 20th May - Serverless Practioners Summit
 
@@ -55,6 +55,8 @@ If you'd like to catch any of us in the hallway track for a chat, then the best 
 We'll be organizing a face-to-face at a local cafe or bar, so if you want to be part of that please register your interest in the Slack channel and follow [@openfaas](https://twitter.com/openfaas/) on Twitter for updates.
 
 ## Wrapping up
+
+Are you using OpenFaaS in production? [Join the end-user community](https://github.com/openfaas/faas/issues/776) or [sponsor the project](https://www.openfaas.com/donate/) to give back and show your appreciation.
 
 If you have comments, questions or suggestions or would like to join the community, then please [join us on OpenFaaS Slack](https://docs.openfaas.com/community/).
 

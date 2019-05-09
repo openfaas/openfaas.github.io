@@ -1,12 +1,13 @@
 ---
 title: "Meet us at KubeCon 2019, Barcelona"
 description: Meet the community in person over the week 20-23th May at the KubeCon 2019 event in Barcelona. 
-date: 2019-04-18
+date: 2019-05-10
 image: /images/meet-us-at-kubecon-2019-barcelona/backdrop.jpg
 categories:
   - community
-  - workshop
   - events
+  - end-user
+  - kubecon
   - kubernetes
 author_staff_member: alex
 dark_background: true

@@ -37,6 +37,9 @@
 - icon: intraffic.svg
   link: https://www.intraffic.nl/
   title: InTraffic
+- icon: kwc-logo.png
+  link: https://www.kw-commerce.de/
+  title: KW-Commerce
 - icon: liveperson.png
   link: https://www.liveperson.com/
   title: LivePerson
@@ -46,9 +49,9 @@
 - icon: naamio.svg
   link: https://naamio.cloud/
   title: Naamio
-- icon: kwc-logo.png
-  link: https://www.kw-commerce.de/
-  title: KW-Commerce
+- icon: nexylan.png
+  link: https://www.nexylan.com/
+  title: Nexylan
 - icon: packet.png
   link: https://www.packet.net/
   title: Packet Host

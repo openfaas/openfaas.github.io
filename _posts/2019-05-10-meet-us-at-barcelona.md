@@ -15,7 +15,7 @@ dark_background: true
 
 I'll outline a few places where you can find us if you'd like to catch a session, grab a coffee, swag or just chat about Kubernetes and Serverless.
 
-### Monday 20th May - Serverless Practioners Summit
+### 1. Monday 20th May - Serverless Practioners Summit
 
 The [Serverless Practioners Summit](https://spseu19.sched.com) is a co-located event hosted by the [CNCF](https://www.cncf.io) at KubeCon. The event will take place on Monday which is the day before the main KubeCon event kicks-off. If you planned your travel accordingly, it would be great to see you there. I'm co-organizing the event with folks from Google and IBM who will be representing Google's new [Knative project](https://github.com/knative/).
 

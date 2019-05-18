@@ -33,7 +33,7 @@ Before lunch [Ed Wilde](https://twitter.com/ewilde/) of [Form3](https://form3.te
 
 Join Alex, contributors and other end-users for an open session where you can ask questions, see demos and find out more about the project's roadmap and future.
 
-### 2. Tuesday 22th May
+### 2. Wednesday 22th May
 
 * [Accelerating the Journey of an AI Algorithm to Production with OpenFaaS @ BT](https://kccnceu19.sched.com/event/MPeF/accelerating-the-journey-of-an-ai-algorithm-to-production-with-openfaas-joost-noppen-bt-plc-alex-ellis-vmware)
 
@@ -41,9 +41,9 @@ Join Alex, contributors and other end-users for an open session where you can as
 
 * [Merging Quickly in a Cloud Native World](https://kccnceu19.sched.com/event/MPZM/merging-quickly-in-a-cloud-native-world-lucas-roesler-contiamo)
 
-On 22th May [Lucas Roesler](https://github.com/lucasroesler) from [Contiamo](https://www.contiamo.com) will share his experiences of working at scale on an Open Source project. He'll give you tips and tricks for getting your PRs merged quickly upstream. All skill levels are welcome.
+[Lucas Roesler](https://github.com/lucasroesler) from [Contiamo](https://www.contiamo.com) will share his experiences of working at scale on an Open Source project. He'll give you tips and tricks for getting your PRs merged quickly upstream. All skill levels are welcome.
 
-### 3. Wednesday 23rd May
+### 3. Thursday 23rd May
 
 * [How LivePerson is Tailoring its Conversational Platform Using OpenFaaS](https://kccnceu19.sched.com/event/MPeR/how-liveperson-is-tailoring-its-conversational-platform-using-openfaas-simon-pelczer-liveperson-ivana-yovcheva-vmware)
 

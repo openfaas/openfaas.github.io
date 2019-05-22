@@ -44,6 +44,7 @@ plugins:
   - jekyll-feed
   - jekyll-paginate
   - jekyll-archives
+  - jekyll-redirect-from
 
 exclude:
   - Gemfile
@@ -78,6 +79,11 @@ defaults:
   -
     scope:
       path: "team"
+    values:
+      layout: "default"
+  -
+    scope:
+      path: "donate"
     values:
       layout: "default"
   -

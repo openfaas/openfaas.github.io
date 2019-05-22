@@ -12,6 +12,6 @@
   link: https://docs.openfaas.com/
 - name: Video Demo
   class: navbar-item start-demo-video
-- name: Donate
+- name: Support
   class: navbar-item
-  link: /donate/
+  link: /support/

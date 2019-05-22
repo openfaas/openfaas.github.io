@@ -57,7 +57,7 @@ We'll be organizing a face-to-face at a local cafe or bar, so if you want to be 
 
 ## Wrapping up
 
-Are you using OpenFaaS in production? [Join the end-user community](https://github.com/openfaas/faas/issues/776) or [sponsor the project](https://www.openfaas.com/donate/) to give back and show your appreciation.
+Are you using OpenFaaS in production? [Join the end-user community](https://github.com/openfaas/faas/issues/776) or [sponsor the project](https://www.openfaas.com/support/) to give back and show your appreciation.
 
 If you have comments, questions or suggestions or would like to join the community, then please [join us on OpenFaaS Slack](https://docs.openfaas.com/community/).
 

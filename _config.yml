@@ -82,7 +82,7 @@ defaults:
       layout: "default"
   -
     scope:
-      path: "donate"
+      path: "support"
     values:
       layout: "default"
   -

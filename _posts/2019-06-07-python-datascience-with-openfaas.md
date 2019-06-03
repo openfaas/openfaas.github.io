@@ -18,14 +18,14 @@ Last month OpenFaaS was at [Kubecon Barcelona][kubecon-homepage]
 
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Up bright and early? We&#39;re meeting for an OpenFaaS f2f with end-users, contributors and community. 10.20am outside the keynote hall. See you there? <a href="https://twitter.com/hashtag/serverless?src=hash&amp;ref_src=twsrc%5Etfw">#serverless</a> <a href="https://twitter.com/hashtag/community?src=hash&amp;ref_src=twsrc%5Etfw">#community</a> <a href="https://twitter.com/hashtag/faas?src=hash&amp;ref_src=twsrc%5Etfw">#faas</a> <a href="https://twitter.com/hashtag/microservices?src=hash&amp;ref_src=twsrc%5Etfw">#microservices</a> <a href="https://twitter.com/hashtag/gitops?src=hash&amp;ref_src=twsrc%5Etfw">#gitops</a> <a href="https://t.co/Af3BmXvaKl">pic.twitter.com/Af3BmXvaKl</a></p>&mdash; OpenFaaS (@openfaas) <a href="https://twitter.com/openfaas/status/1131450940807098368?ref_src=twsrc%5Etfw">May 23, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-A frequent topic was deploying data science models to Kubernetes and, of course, can OpenFaaS help deploy models? In this post we will introduce a new function template aimed at Python data scientist and walk through a concrete example of deploy a [PyTorch][pytorch-homepage] model.
+A frequent topic was deploying data science models to Kubernetes and, of course, can OpenFaaS help deploy models? In this post we will introduce a new function template aimed at Python data scientists and walk through a concrete example of deploying a [PyTorch][pytorch-homepage] model.
 
-## The `pydatascience-template`
-The [pydatascience-template][pydata-template] show cases a couple ideas that anyone can leverage in their own functions and templates:
+## The `pydatascience template`
+The [pydatascience template][pydata-template] showcases a couple of ideas that anyone can leverage in their own functions and templates:
 
 1. using the [Conda package manager][conda-homepage]
-2. setting up a non-root user python environment
-3. [multi-module python function][multifile-blog-post]
+2. setting up a non-root user Python environment
+3. [multi-module Python function][multifile-blog-post]
 4. using HTTP mode in [of-watchdog][of-watchdog-homepage] to load an asset (in this case a model) into memory during startup
 
 ## The name classifier function
@@ -33,7 +33,7 @@ The [pydatascience-template][pydata-template] show cases a couple ideas that any
 In this post, we share an example [name classifier][name-classifier-repo].  It is a relatively simple function that accepts a `name` and then attempts to guess the nationality of that name, returning the top three guesses.
 
 ```sh
-echo "lucas" | faas-cli invoke classify
+echo "Lucas" | faas-cli invoke classify
 [
   ["(-1.4300)","Irish"],
   ["(-1.6112)","Italian"],
@@ -52,12 +52,12 @@ Caution, I did not say it would be a great guesser. This model was built on a re
 ## Understanding the template
 
 ### Why Conda
-I have recently started to use Conda for many of my own experiments with Python, especially when they involve Pandas and Numpy, because the install is very fast and environment management is fairly easy.  For function development and build, the speed is really nice. For this project it was also the easiest way to [install PyTorch][pytorch-install].  Finally, Conda also supports non-python packages, e.g. curl, yarn-js, and zeromq are installable via Conda.
+I have recently started to use Conda for many of my own experiments with Python, especially when they involve Pandas and Numpy, because the install is very fast and environment management is fairly easy.  For function development and build, the speed is really nice. For this project it was also the easiest way to [install PyTorch][pytorch-install].  Finally, Conda also supports non-Python packages, e.g. curl, yarn-js, and zeromq are installable via Conda.
 
 ### Setting up a non-root function
-If you spend much time with Docker containers, you will here people talk about using non-root images. These images tend to be much safer to deploy. Fortunately, OpenFaaS [makes it easy to enforce][of-force-non-root], even when the original image is not non-root by default.  When we build new templates, it is important that we consider non-root deployments as the default. For Python environments, Conda made this very easy.
+If you spend much time with Docker containers, you will hear people talk about using non-root images. These images tend to be much safer to deploy. Fortunately, OpenFaaS [makes it easy to enforce][of-force-non-root], even when the original image is not non-root by default.  When we build new templates, it is important that we consider non-root deployments as the default. For Python environments, Conda made this very easy.
 
-The first thing the dockerfile does is create a new user and then setup and fix the permissions on some standard folders.  This will ensure that when we change users later, Conda and the function code will run smoothly. The `/opt/conda` folder is often used by Conda and the function code will eventually be put into `/root` (as is done in many of the core templates).
+The first thing the Dockerfile does is create a new user and then setup and fix the permissions on some standard folders.  This will ensure that when we change users later, Conda and the function code will run smoothly. The `/opt/conda` folder is often used by Conda and the function code will eventually be put into `/root` (as is done in many of the core templates).
 
 ```dockerfile
 RUN addgroup app && adduser app --system --ingroup app \
@@ -75,7 +75,7 @@ RUN apt-get update \
     ...
 ```
 
-Once the additional packages and watchdog are installed, we can switch to the non-root `app` user and finish the python installation
+Once the additional packages and watchdog are installed, we can switch to the non-root `app` user and finish the Python installation
 
 ```dockerfile
 WORKDIR /root/
@@ -88,7 +88,7 @@ RUN bash /tmp/miniconda.sh -bfp $HOME/conda \
     && rm -rf /tmp/miniconda.sh
 ```
 
-From here on out, the Docker image will use the `app` user, improving the security of the final function.  This pattern should work for almost any template.  The hard part is knowing which folders the `app` user will need full permissions for. This is were Conda was helpful, because it was easy to find and setup the required permissions and once those folders are configured, Conda behaves as expected when run as a non-root user.
+From here on out, the Docker image will use the `app` user, improving the security of the final function.  This pattern should work for almost any template.  The hard part is knowing which folders the `app` user will need full permissions for. This is where Conda was helpful, because it was easy to find and setup the required permissions and once those folders are configured, Conda behaves as expected when run as a non-root user.
 
 ### A multi-module template
 
@@ -134,9 +134,9 @@ classify
 ```
 
 ### Training
-The other thing to note is the training data folder is also included here, `data/names` and a serialized model is also include `data/char-rnn-classification.pt`.
+Another point to note is the training data folder is also included here, `data/names` and a serialized model is also include `data/char-rnn-classification.pt`.
 
-This template is designed to run the training as part of the build process.  You can easily trigger the the training using
+This template is designed to run the training as part of the build process.  You can easily trigger the training using
 
 ```bash
 python train.py
@@ -150,14 +150,14 @@ There are two methods for [saving PyTorch models][pytorch-saving-models]:
 2. saving just the model `state_dict`.
 
 
-We have opted for the second method because it is more portable.  The `pickle` method is sensitive to the python environment and I had issues making sure that it would load correctly in the deployed function.
+We have opted for the second method because it is more portable.  The `pickle` method is sensitive to the Python environment and I had issues making sure that it would load correctly in the deployed function.
 
 ```python
 torch.save(rnn.state_dict(), "data/char-rnn-classification.pt")
 ```
 
 ### Loading the model into function memory
-Using the `HTTP` mode in the [of-watchdog][of-watchdog-homepage] enables us to load this model into memory once and reuse it for multiple requests. We only need to load the model at the start the `handler.py` implementation
+Using the `HTTP` mode in the [of-watchdog][of-watchdog-homepage] enables us to load this model into memory once and reuse it for multiple requests. We only need to load the model at the start of the `handler.py` implementation
 
 ```python
 import json
@@ -181,7 +181,7 @@ RNN.load_state_dict(
 
 
 def predict(line: str, n_predictions: int = 3) -> List[Any]:
-    """omitted for bevity"""
+    """omitted for brevity"""
 
 def handle(req: bytes) -> str:
     """handle a request to the function
@@ -198,7 +198,7 @@ def handle(req: bytes) -> str:
     return json.dumps(output)
 ```
 
-When a function instance is started, e.g. during scaling or deployment, this file is parsed and the model is loaded into memory. This will happen exactly once because the http mode loads this handler as a very small background web sever.  The original forking mode in the watchdog would instead load this file for every invocation. When loading models, this creates an unacceptable latency.
+When a function instance is instantiated, e.g. during scaling or deployment, this file is parsed and the model is loaded into memory. This will happen exactly once because the HTTP mode loads this handler as a very small background web sever.  The original forking mode in the watchdog would instead load this file for every invocation. When loading models, this creates additional latency.
 
 This template uses Flask to power the background web server. The `handle` can return any value that [Flask would accept][flask-return-values].  This provides a lot of flexibility to control the response. For example, you could instead set the error status code and body like this
 
@@ -207,18 +207,18 @@ return json.dumps({"error": "No input provided"}), 400
 ```
 
 ### Deployment
-This template is designed to bundle the pre-trained model into the final docker image. This means that the deployment steps look like
+This template is designed to bundle the pre-trained model into the final Docker image. This means that the deployment steps look like this
 
 ```bash
 cd classify && python train.py && cd -
 faas-cli build classify --tag=sha
 ```
 
-This results in a completely self-contained docker image that does not need access to a database or S3 during runtime. This provides several benefits:
+This results in a completely self-contained Docker image that does not need access to a database or S3 during runtime. This provides several benefits:
 
 1. This model becomes very easy to share because you don't need to share access to your model storage.
-2. It also means that each new deployment is completely versioned, you know the version of the model from the docker tag. This makes rolling backward or forward as simple as changing the docker tag on the deployment.
-3. One final benefit is that startup time can be slightly faster because once a node has the docker image in its cache, it has everything it needs to start new instances of the function.  If you load the model from an external source, then every function instance that starts _must_ curl/copy from that external location, there is no way to cache it for new instances.
+2. It also means that each new deployment is completely versioned, you know the version of the model from the Docker tag. This makes rolling backward or forward as simple as changing the Docker tag on the deployment.
+3. One final benefit is that startup time can be slightly faster because once a node has the Docker image in its cache, it has everything it needs to start new instances of the function.  If you load the model from an external source, then every function instance that starts _must_ curl/copy from that external location, there is no way to cache it for new instances.
 
 You can try the latest version of this function in your own cluster using
 

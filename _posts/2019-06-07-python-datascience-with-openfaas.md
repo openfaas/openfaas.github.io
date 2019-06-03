@@ -45,7 +45,7 @@ You can try this in your own OpenFaaS cluster using
 faas-cli deploy --image=theaxer/classify:latest --name=classify
 ```
 
-Caution, I did not say it would be a great guesser. This model was built on a relatively small data set and is intended to be a fun toy. And remember, with all things data science, "with great power comes great responsibility".
+Caution, I did not say it would be a great guesser. This model was built on a relatively small data set and is intended to be a simple demonstration. And remember, with all things data science, "with great power comes great responsibility".
 
 ## Understanding the template
 

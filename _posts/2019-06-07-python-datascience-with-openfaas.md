@@ -218,6 +218,8 @@ This results in a completely self-contained Docker image that does not need acce
 2. It also means that each new deployment is completely versioned, you know the version of the model from the Docker tag. This makes rolling backward or forward as simple as changing the Docker tag on the deployment.
 3. One final benefit is that startup time can be slightly faster because once a node has the Docker image in its cache, it has everything it needs to start new instances of the function.  If you load the model from an external source, then every function instance that starts _must_ curl/copy from that external location, there is no way to cache it for new instances.
 
+On the other hand, this does result in slightly larger images, in this case the model is 107k. This size will, of course, depend on the libraries being used and the type of model being serialized.  For many models, the simplicity of a self-contained image out-weighs the cost of the additional size. Often Docker layer caching will hide almost all of it.
+
 You can try the latest version of this function in your own cluster using
 
 ```bash

@@ -148,7 +148,7 @@ There are two methods for [saving PyTorch models][pytorch-saving-models]:
 2. saving just the model `state_dict`.
 
 
-We have opted for the second method because it is more portable.  The `pickle` method is sensitive to the Python environment and I had issues making sure that it would load correctly in the deployed function.
+We have opted for the second method because it is more portable, the `pickle` method is sensitive to the Python environment and folder structure.
 
 ```python
 torch.save(rnn.state_dict(), "data/char-rnn-classification.pt")

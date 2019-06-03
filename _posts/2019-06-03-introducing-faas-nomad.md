@@ -20,7 +20,7 @@ Early in the evolution of the OpenFaaS project, I decided to build a modular sys
 
 Back in February 2017, Nic Jackson from [Hashicorp](https://www.hashicorp.com) heard Alex speaking at the Cloud Native, London meet-up about the OpenFaaS architecture and went on to build [faas-nomad](https://github.com/hashicorp/faas-nomad). `faas-nomad` brings OpenFaaS Functions to the Hashicorp ecosystem.
 
-In 2018 Andrew Cornies from Tucows took over the maintenance of faas-nomad, and writes for us today. I like the simplicity of Nomad and well the faas-nomad project leverages the entire suite of Hashicorp products - from using Vagrant for the bootstrap, to Vault for secrets to Consul for service discovery.
+In 2018 Andrew Cornies from Tucows took over the maintenance of faas-nomad, and writes for us today. I like the simplicity of Nomad and how well the faas-nomad project leverages the entire suite of Hashicorp products - from using Vagrant for the bootstrap, to Vault for secrets to Consul for service discovery.
 
 > Author bio: [Andrew Cornies](http://acornies.com) is a principal engineer for Tucows Inc. Prior to that, between 2009 and a successful exit in 2012, he helped build up Rakuten Kobo to a world-class e-book seller. His experience includes full-stack web development, SRE/DevOps, multi-cloud tooling, config management as well as team leadership.
 

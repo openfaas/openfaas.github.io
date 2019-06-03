@@ -171,6 +171,8 @@ I really identify with the overall mission of OpenFaaS (Serverless Functions Mad
 
 If you already use Hashicorp tooling such as Nomad, Vault or Consul, then a great Serverless experience is only one step away with faas-nomad, and I'd love to help you out with your journey.
 
+See also: Alex's post on OpenFaaS extensibility: [The power of interfaces in OpenFaaS](https://blog.alexellis.io/the-power-of-interfaces-openfaas/).
+
 ## Get connected
 
 Now over to you to get connected with the community on Slack. Comments, questions and suggestions are all welcome.

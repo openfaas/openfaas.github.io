@@ -30,11 +30,31 @@ If necessary show acknowledgements to others who collaborated or gave feedback y
 
 #### Voice
 
+* Headings
+
 When using steps use the active/imperative voice for headings "Get started" vs "Getting started", "Configure the node" vs "Configuring the node" etc.
 
-#### Plain English
+#### Tone / style
 
-Write in plain English at all times, when a simpler word exists use it, avoid words derived from Latin when possible.
+* Be objective, avoid being "cute"
+
+Whilst using fun terms like "Boom!", "Fun and profit" and making jokes in text, can work well on a personal blog. The OpenFaaS blog and documentation should have a minimal use of this kind of "fun" or "cute" terms.
+
+* Quote your sources
+
+If you use a diagram or embed a quote from somewhere, make sure you give it [proper attribution](https://en.wikipedia.org/wiki/Attribution_(copyright)).
+
+* Opinion vs. facts
+
+Opinions should be presented as your own viewpoint. If you have data to back-up your position, this will help make your point credible.
+
+If you are stating a fact / objective data, you should also back this up with quotes, links, etc.
+
+* Plain English
+
+Write in plain English at all times, when a simpler word exists use it, avoid words derived from Latin when possible, avoid gerunds where an active verb can replace it.
+
+> For some additional recommendations see [this post](https://www.cs.uky.edu/~raphael/writing.html), by Raphael A. Finkel, University of Kentucky.
 
 #### Images
 

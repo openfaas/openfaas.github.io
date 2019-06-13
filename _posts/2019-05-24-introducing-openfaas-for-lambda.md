@@ -1,6 +1,6 @@
 ---
 title: Introducing OpenFaaS for AWS Lambda (faas-lambda)
-description: Learn how AWS Lambda and OpenFaaS can play well together with the new provider called faas-lambda. Ed Wilde shows how you can deploy functions to Kubernetes and AWS with the developer experience of OpenFaaS.
+description: Ed Wilde demonstrates how you can enjoy a developer-first experience on Kubernetes and AWS Lambda without the worry of vendor lock-in.
 date: 2019-06-13
 image: /images/faas-lambda/backdrop.jpg
 categories:
@@ -13,6 +13,14 @@ dark_background: true
 ---
 
 Learn how [AWS Lambda](https://aws.amazon.com/lambda/) and [OpenFaaS](https://github.com/openfaas/faas) can play well together with the new provider called faas-lambda. You'll learn how to deploy functions to [Kubernetes](https://kubernetes.io) and AWS with the same developer experience and workflow which is known and loved by the OpenFaaS community.
+
+Introduction by: [Alex Ellis](https://www.alexellis.io)
+
+> It was only a few months ago that I remember having lunch with Ed in a pub in the English country-side. We were throwing around ideas for a deeper integration between the AWS eco-system, and OpenFaaS. We wanted users to have more choice and to bring the OpenFaaS developer-experience to AWS customers. I'm excited to see how far Ed's got so far and I'm excited about what we've been able to spin out as new projects for the ecosystem.
+
+Over to Ed.
+
+## Outline
 
 I'll start by exploring some of the use-cases I see for running OpenFaaS functions on the AWS Lambda platform. Then I'll take a look at some of the new components written to make this possible and how they work together. To wrap up, I'll ask the community for feedback and input on the future of faas-lambda.
 
@@ -34,15 +42,17 @@ You may be wondering what value there is in combining OpenFaaS with AWS Lambda. 
 However, there is no reason you can't create, manage and run these function using OpenFaaS with it's enhanced developer experience.
 
 
-- **Free-tier and specialized hardware**
+- **Free-tier, specialized hardware and extended limits**
 
-  AWS comes with a free-tier for invocations at a certain duration/memory limit, which you could use to save on costs. When you hit the limits of AWS Lambda, you can break out into your own Kubernetes cluster and provide additional GPU support, iops, CPU and memory.
+  AWS comes with a free-tier for invocations at a certain duration/memory limit, which you could use to save on costs. When you hit the limits of AWS Lambda, you can break out into your own Kubernetes cluster and provide additional disk space, GPU support, iops, CPU and memory.
 
 Here's a clipping from my presentation at the [Serverless Practitioners Summit](https://www.openfaas.com/blog/meet-us-at-barcelona/) at KubeCon, Barcelona. It shows some of the differences between OpenFaaS on Kubernetes and AWS Lambda.
 
-![]()
+![](/images/faas-lambda/faas-lambda-compare.png)
 
 *Comparison AWS Lambda vs OpenFaaS with Kubernetes*
+
+The great news is that you no-longer have to pick between one, or the other. You can get the best of both worlds with a single, unified control-plane.
 
 ## Conceptual architecture
 
@@ -114,6 +124,8 @@ I had a quick design session with Alex and we came up with the idea for `faas-fe
 
 The `faas-federation` implements the same provider API that I used for faas-lambda and that is used by the core project for faas-netes (OpenFaaS on Kubernetes). So whenever an invocation is made or a deployment requested, faas-federation is in the hot-path and can act like a router, picking one path or the other.
 
+> We're also excited about using `faas-federation` for implementing an East/West split and for bridging edge-locations to a larger control plane. Imagine that your Raspberry Pi clusters can tap into extra compute in a central location.
+
 Whilst flying over to Chicago with Alex to present and run a workshop on Serverless Kubernetes, I wrote 90% of the code for a new provider called [faas-memory](https://github.com/openfaas-incubator/faas-memory). It allows any OpenFaaS platform developer or contributor to test against or develop against the OpenFaaS REST API whilst offline and without a real Kubernetes cluster.
 
 This is how simple the code was for the "create" handler for the in-memory provider:
@@ -173,7 +185,9 @@ Here are some of the projects we've talked about
 * [faas-netes](https://github.com/openfaas/faas-netes) - for Kubernetes (MIT)
 * faas-lambda (early preview)
 
-Please fill out this [this form](https://docs.google.com/forms/d/e/1FAIpQLSe9AfH-uCuK_tUeeRQWLe7_Ti-lbMF5iynwbdfszmB9NEttow/viewform) if you would like to participate in an early preview of faas-lambda.
+To register your interest and give feedback sign-up below:
+
+* [faas-lambda early preview](https://docs.google.com/forms/d/e/1FAIpQLSe9AfH-uCuK_tUeeRQWLe7_Ti-lbMF5iynwbdfszmB9NEttow/viewform))
 
 ### Get connected
 
@@ -182,3 +196,5 @@ Are you using OpenFaaS in production? [Join the end-user community](https://gith
 If you have comments, questions or suggestions or would like to join the community, then please [join us on OpenFaaS Slack](https://docs.openfaas.com/community/).
 
 You can follow [@openfaas on Twitter](https://twitter.com/openfaas/)
+
+Editor: [Alex Ellis](https://www.alexellis.io)

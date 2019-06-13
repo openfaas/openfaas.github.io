@@ -25,7 +25,7 @@ Between the two of us we came up with an idea to [make a function](https://githu
 
 ![v1 of the leaderboard](/images/single-page/leaderboard-v1.png)
 
-Use can use [this link](https://kenfdev.o6s.io/github-stats-page#/) to view the statistics of the OpenFaaS project, rather than a single component.
+User can use [this link](https://kenfdev.o6s.io/github-stats-page#/) to view the statistics of the OpenFaaS project, rather than a single component.
 
 Around a year and a half ago I started [OpenFaaS Cloud](https://docs.openfaas.com/openfaas-cloud/intro/) to provide a managed and automated OpenFaaS experience. One of my primary goals was to allow the community to build and deploy functions with HTTPS, without having to worry about managing or paying for a [Kubernetes](https://kubernetes.io) cluster. We have deployed Ken’s function to the Community Cluster and it’s publicly accessible. 
 

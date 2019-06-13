@@ -67,6 +67,9 @@ The provider implements a set REST API:
 
 You can use the [faas-provider SDK](https://github.com/openfaas/faas-provider) to build your own provider for any back-end, even an [in-memory datastore](https://github.com/openfaas-incubator/faas-memory) in a very short period of time.
 
+> To find out more about faas-provider read [Power of Interfaces in OpenFaaS](https://blog.alexellis.io/the-power-of-interfaces-openfaas/) by Alex.
+
+
 This interface is what inspired me to create faas-lambda.
 
 ![faas-lambda conceptual architecture](/images/faas-lambda/faas-lambda-provider.png)
@@ -172,6 +175,8 @@ Contributions to faas-memory and faas-provider are both welcome and the projects
 Here's a demo of it all put together. I'll use OpenFaaS to deploy, manage and invoke functions on both Kubernetes and AWS Lambda:
 
 {% include youtube.html id="Dv9BEQWnkRQ" %}
+
+Language support for Go, Node and Python is available and we will be adding more language support through the use of the [Lambda Custom Runtime](https://docs.aws.amazon.com/lambda/latest/dg/runtimes-custom.html). You'll have a chance to register interest below.
 
 ## What's next
 

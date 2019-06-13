@@ -8,6 +8,7 @@ categories:
   - aws
   - cloud
   - tutorial
+  - kubernetes
 author_staff_member: ed
 dark_background: true
 ---

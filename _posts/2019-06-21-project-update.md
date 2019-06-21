@@ -14,7 +14,7 @@ dark_background: true
 
 The founder Alex Ellis shares the OpenFaaS 2019 Project Update, case-studies, his personal highlights, and the roadmap for the year ahead.
 
-> In March 2019 [I left VMware](https://blog.alexellis.io/openfaas-bright-2019/) to continue developing OpenFaaS in full-time as an open-source project.
+> In March 2019 [I left VMware](https://blog.alexellis.io/openfaas-bright-2019/) to continue developing OpenFaaS full-time, as an open-source project.
 
 Since then I've had some personal highlights including [becoming a CNCF Ambassador](https://blog.alexellis.io/joining-the-cncf-ambassadors/). I launched a business called [OpenFaaS Ltd](https://www.openfaas.com/support/) to host and support the OpenFaaS project and brand. Through OpenFaaS Ltd I provide professional services to the community such as training, consultations, product evaluation, along with OSS & community strategy.
 

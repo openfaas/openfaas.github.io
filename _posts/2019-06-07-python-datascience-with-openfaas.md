@@ -13,7 +13,7 @@ author_staff_member: lucas
 dark_background: false
 ---
 
-Last month the OpenFaaS team was at [Kubecon Barcelona][kubecon-homepage], a frequent topic was deploying data science models to Kubernetes and, of course, can OpenFaaS help deploy models? In this post we will introduce a new function template aimed at Python data scientists and walk through a concrete example of deploying a [PyTorch][pytorch-homepage] model.
+Last month I was at [Kubecon Barcelona][kubecon-homepage] with with some of the OpenFaaS community, we were asked about deploying data science models to Kubernetes and, of course, can OpenFaaS help deploy models? In this post we will introduce a new function template aimed at Python data scientists and walk through a concrete example of deploying a [PyTorch][pytorch-homepage] model.
 
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Up bright and early? We&#39;re meeting for an OpenFaaS f2f with end-users, contributors and community. 10.20am outside the keynote hall. See you there? <a href="https://twitter.com/hashtag/serverless?src=hash&amp;ref_src=twsrc%5Etfw">#serverless</a> <a href="https://twitter.com/hashtag/community?src=hash&amp;ref_src=twsrc%5Etfw">#community</a> <a href="https://twitter.com/hashtag/faas?src=hash&amp;ref_src=twsrc%5Etfw">#faas</a> <a href="https://twitter.com/hashtag/microservices?src=hash&amp;ref_src=twsrc%5Etfw">#microservices</a> <a href="https://twitter.com/hashtag/gitops?src=hash&amp;ref_src=twsrc%5Etfw">#gitops</a> <a href="https://t.co/Af3BmXvaKl">pic.twitter.com/Af3BmXvaKl</a></p>&mdash; OpenFaaS (@openfaas) <a href="https://twitter.com/openfaas/status/1131450940807098368?ref_src=twsrc%5Etfw">May 23, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
@@ -48,10 +48,10 @@ Caution, this model was built on a relatively small data set and is intended to 
 
 ## Understanding the template
 
-### Why Conda
+### What is Conda?
 I have recently started to using the [Conda package manager][conda-homepage] for many of my own experiments with Python, especially when they involve Pandas and Numpy, because the install is very fast and environment management is fairly easy.  For function development and build, the speed is really nice. For this project it was also the easiest way to [install PyTorch][pytorch-install].  Finally, Conda also supports non-Python packages, e.g. `curl`, `yarn-js`, and `zeromq` are installable via Conda.
 
-### Setting up a non-root function
+### Set up a non-root function
 A best practice for deploying Docker images is to make sure that the user running your code is not privileged, this is also known as "non-root". These images tend to be much safer to deploy. Fortunately, OpenFaaS [makes it easy to enforce][of-force-non-root], even when the original image is not non-root by default.  When we build new templates, it is important that we consider non-root deployments as the default. For Python environments, Conda made this very easy.
 
 The first thing the Dockerfile does is create a new user and then setup and fix the permissions on some standard folders.  This will ensure that when we change users later, Conda and the function code will run smoothly. The `/opt/conda` folder is often used by Conda and the function code will eventually be put into `/root` (as is done in many of the core templates).
@@ -128,7 +128,7 @@ classify
 └── train.py
 ```
 
-## Training
+## Train the model
 Another point to note is the training data folder is also included here, `data/names` and a serialized model is also include `data/char-rnn-classification.pt`.
 
 This template is designed to run the training as part of the build process.  You can easily trigger the training using
@@ -201,12 +201,14 @@ This template uses Flask to power the background web server. The `handle` can re
 return json.dumps({"error": "No input provided"}), 400
 ```
 
+**Big models**: if your model file is very large and takes a few seconds to load, you can use the `com.openfaas.health.http.initialDelay` to extend the function healthcheck so that the function has enough time to load the file.  [Check the docs for and example.][of-stateless-microservices]
+
 ### Deployment
 This template is designed to bundle the pre-trained model into the final Docker image. This means that the deployment steps look like this
 
 ```bash
 cd classify && python train.py && cd ..
-faas-cli build classify --tag=sha
+faas-cli build classify
 ```
 
 This results in a completely self-contained Docker image that does not need access to a database or S3 during runtime. This provides several benefits:
@@ -227,7 +229,7 @@ faas-cli deploy --image=theaxer/classify:latest --name=classify
 
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Remember that Python 2 will reach end of life on 1/1/2020. For the impact on *your* project, see <a href="https://t.co/giiS9CNn8V">https://t.co/giiS9CNn8V</a></p>&mdash; Guido van Rossum (@gvanrossum) <a href="https://twitter.com/gvanrossum/status/1133496146700058626?ref_src=twsrc%5Etfw">May 28, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-You will not find a Python 2 template in the [pydatascience-template][pydata-template] repo because we are coming very quickly to the [end-of-life for Python 2][py2-eol].  If you are still using Python 2, the templates could be forked and modified, but please be careful. Most packages will start deprecating Python 2 support soon.
+I decided not to create a Python 2 template in the [pydatascience-template][pydata-template] repo because we are coming very quickly to the [end-of-life for Python 2][py2-eol].  If you are still using Python 2, the templates could be forked and modified, but please be careful. Most packages will start deprecating Python 2 support soon.
 
 
 ## Wrapping up
@@ -241,12 +243,11 @@ Data science is of course a popular topic these days and OpenFaaS can help [simp
 ### Going further
 Want to help improve the template, join our slack or open an [issue on Github][name-classifier-issues].
 
-You can use PyTorch's C++ frontend to deploy your serialized model as a C++ function.  There is also a [Go frontend][pytorch-golang] in progress.  The `pydatascience-template` is designed to be reusable for any data science library, but it would be interesting to see what kind of optimizations could be created using one of these other frontends for deployment.
-
 ### You may also like
 
 * [How to split large Python Functions across multiple files][multifile-blog-post]
 * [Introducing the Template Store for OpenFaaS][template-store-post]
+* [Accelerating the Journey of an AI algorithm to production with openfaas at BT][[kubecon-bt-journey]
 
 
 [conda-homepage]: https://docs.conda.io/projects/conda/en/latest/
@@ -271,5 +272,5 @@ You can use PyTorch's C++ frontend to deploy your serialized model as a C++ func
 [name-classifier-repo]: https://github.com/LucasRoesler/name-classifier
 [name-classifier-issues]: https://github.com/LucasRoesler/name-classifier/issues
 [classifier-impl]: https://github.com/LucasRoesler/name-classifier/blob/master/classify/core/model.py
-<!-- TODO -->
-[of-force-non-root]: FIND_LINK_FOR_OF_FORCE_NONROOT_USER
+[of-force-non-root]: https://github.com/openfaas/faas-netes/tree/master/chart/openfaas#configuration
+[of-stateless-microservices]: https://docs.openfaas.com/reference/workloads/#stateless-microservices

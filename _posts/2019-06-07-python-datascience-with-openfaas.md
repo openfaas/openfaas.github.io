@@ -1,7 +1,7 @@
 ---
 title: Serving Data Science Models with OpenFaaS
 description: "Lucas will build and deploy a name classification function using OpenFaaS and PyTorch"
-date: 2019-06-01
+date: 2019-06-28
 image: /images/pydatascience-template/artificial-neural-network-3501528_640.png
 categories:
   - python

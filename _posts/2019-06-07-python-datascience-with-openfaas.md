@@ -54,12 +54,11 @@ I have recently started to using the [Conda package manager][conda-homepage] for
 ### Set up a non-root function
 A best practice for deploying Docker images is to make sure that the user running your code is not privileged, this is also known as "non-root". These images tend to be much safer to deploy. Fortunately, OpenFaaS [makes it easy to enforce][of-force-non-root], even when the original image is not non-root by default.  When we build new templates, it is important that we consider non-root deployments as the default. For Python environments, Conda made this very easy.
 
-The first thing the Dockerfile does is create a new user and then setup and fix the permissions on some standard folders.  This will ensure that when we change users later, Conda and the function code will run smoothly. The `/opt/conda` folder is often used by Conda and the function code will eventually be put into `/root` (as is done in many of the core templates).
+The first thing the Dockerfile does is create a new user and then setup and fix the permissions on some standard folders.  This will ensure that when we change users later, Conda and the function code will run smoothly. The `/opt/conda` folder is often used by Conda and the function code will eventually be put into `/home/app` (as is done in many of the core templates).
 
 ```dockerfile
 RUN addgroup app && adduser app --system --ingroup app \
-    && mkdir -p /opt/conda && chown -R app /opt/conda \
-    && chown -R app /root && chmod -R go+rX /root
+    && mkdir -p /opt/conda && chown -R app /opt/conda
 
 ENV HOME /home/app
 ENV PATH=$HOME/conda/bin:$PATH
@@ -75,7 +74,7 @@ RUN apt-get update \
 Once the additional packages and watchdog are installed, we can switch to the non-root `app` user and finish the Python installation
 
 ```dockerfile
-WORKDIR /root/
+WORKDIR /home/app/
 USER app
 
 RUN bash /tmp/miniconda.sh -bfp $HOME/conda \
@@ -99,6 +98,7 @@ function
 │   ├── __init__.py
 │   └── utils.py
 ├── handler.py
+├── requirements.txt
 └── train.py
 ```
 
@@ -165,7 +165,7 @@ from torch.autograd import Variable
 
 from .core import const, model, utils
 
-FUNCTION_ROOT = os.environ.get("function_root", "/root/function/")
+FUNCTION_ROOT = os.environ.get("function_root", "/home/app/function/")
 
 # init model
 RNN = model.RNN(const.N_LETTERS, const.N_HIDDEN, const.N_CATEGORIES)
@@ -193,7 +193,7 @@ def handle(req: bytes) -> str:
     return json.dumps(output)
 ```
 
-When a function instance is instantiated, e.g. during scaling or deployment, this file is parsed and the model is loaded into memory. This will happen exactly once because the HTTP mode loads this handler as a very small background web sever.  The original forking mode in the watchdog would instead load this file for every invocation. When loading models, this creates additional latency.
+When a function instance is instantiated, e.g. during scaling or deployment, this file is parsed and the model is loaded into memory. This will happen exactly once because the HTTP mode loads this handler as a very small background web server.  The original forking mode in the watchdog would instead load this file for every invocation. When loading models, this creates additional latency.
 
 This template uses Flask to power the background web server. The `handle` can return any value that [Flask would accept][flask-return-values].  This provides a lot of flexibility to control the response. For example, you could instead set the error status code and body like this
 

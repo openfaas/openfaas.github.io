@@ -29,8 +29,12 @@ If you're an expert user of OpenFaaS, it can be tempting to work around any issu
 So rather than deferring to third-party blog posts, myths or out-dated content, I'm inviting you to come directly to the source.
 
 * [Join Slack](https://docs.openfaas.com/community)
+
 * [Follow @openfaas on Twitter](https://twitter.com/openfaas/)
+
 * [Star and watch openfaas/faas](https://github.com/openfaas/)
+
+Wanting to get updates, blogs and to connect with other professional users? [Join our LinkedIn Group - #TeamServerless](https://www.linkedin.com/groups/13670843/).
 
 ### 2. Join the End-user community
 
@@ -79,6 +83,12 @@ No matter how big or small, exciting or boring - real-world usage of OpenFaaS is
 The CfP deadline for KubeCon, San Diego is coming up fast. If you would like help, then please join Slack and let us know, or email me with the address given above. Subject to availability, we will help you draft, write and submit your paper. Once accepted, we can provide 1:1 feedback on the talk over Zoom.
 
 See also: [CfP / call for proposals](https://events.linuxfoundation.org/events/kubecon-cloudnativecon-north-america-2019/cfp/)
+
+* Case-study blog post
+
+A blog post outlining your case-study or architecture can make for a great way to share and promote your work.
+
+Here's a post from [IconScout](https://iconscout.com/) who use OpenFaaS to resize, process and distribute stock photography and icons: [How to resize your images on-the-fly](https://www.openfaas.com/blog/resize-images-on-the-fly/)
 
 ### 4. Sponsor the website
 

@@ -104,7 +104,7 @@ You can become a website sponsor and have your logo placed on [openfaas.com](htt
 
 ### 5. Subscribe to insider updates
 
-You can subscribe to insider updates from the founder and lead maintainer Alex Ellis through an individual [GitHub Sponsorship](https://github.com/users/alexellis/sponsors) starting from 5 USD / mo.
+You can subscribe to insider updates from the founder and lead maintainer Alex Ellis through an individual [GitHub Sponsorship](https://github.com/users/alexellis/sponsorship) starting from 5 USD / mo.
 
 Here are some of the benefits of being an insider:
 
@@ -119,7 +119,7 @@ Think of it like buying me a coffee. Cheers!
 
 GitHub have committed to [match the first 5000 USD of contributions](https://help.github.com/en/articles/about-github-sponsors) made through their program.
 
-[Sponsor alexellis](https://github.com/users/alexellis/sponsors) and become an insider today.
+[Become an insider](https://github.com/users/alexellis/sponsorship) today.
 
 ## Wrapping up
 
@@ -131,6 +131,6 @@ However you are using OpenFaaS, and at whatever stage of the journey, the commun
 
 * ⭐️ [Star and watch openfaas/faas](https://github.com/openfaas/faas)
 
-* 🍻 [Sponsor alexellis](https://github.com/users/alexellis/sponsors)
+* 🍻 [Sponsor alexellis](https://github.com/users/alexellis/sponsorship)
 
 <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Up bright and early? We&#39;re meeting for an OpenFaaS f2f with end-users, contributors and community. 10.20am outside the keynote hall. See you there? <a href="https://twitter.com/hashtag/serverless?src=hash&amp;ref_src=twsrc%5Etfw">#serverless</a> <a href="https://twitter.com/hashtag/community?src=hash&amp;ref_src=twsrc%5Etfw">#community</a> <a href="https://twitter.com/hashtag/faas?src=hash&amp;ref_src=twsrc%5Etfw">#faas</a> <a href="https://twitter.com/hashtag/microservices?src=hash&amp;ref_src=twsrc%5Etfw">#microservices</a> <a href="https://twitter.com/hashtag/gitops?src=hash&amp;ref_src=twsrc%5Etfw">#gitops</a> <a href="https://t.co/Af3BmXvaKl">pic.twitter.com/Af3BmXvaKl</a></p>&mdash; OpenFaaS (@openfaas) <a href="https://twitter.com/openfaas/status/1131450940807098368?ref_src=twsrc%5Etfw">May 23, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 

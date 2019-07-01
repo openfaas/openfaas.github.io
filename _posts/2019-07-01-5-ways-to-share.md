@@ -44,7 +44,7 @@ Joining the end-user community is free, and your company can optionally have the
 
 *Some of our end-user community in July 2019*
 
-Traction and adoption of OpenFaaS is growing fast.
+In [the 2019 Project Update](/blog/project-update/) I outlined the traction, production usage and adoption of OpenFaaS.
 
 * Over 17.8k GitHub stars
 * Over 210 contributors
@@ -70,7 +70,7 @@ We were thrilled to see 6 sessions accepted for KubeCon, Barcelona along with so
 
 * Watch past talks for inspiration
 
-Each talk link has a video uploaded that you can watch - from LivePerson, to BT to Contiamo: [OpenFaaS @ KubeCon Barcelona](/meet-us-at-barcelona/)
+Each talk link has a video uploaded that you can watch - from LivePerson, to BT to Contiamo: [OpenFaaS @ KubeCon Barcelona](/blog/meet-us-at-barcelona/)
 
 * Think about what problems you are solving
 

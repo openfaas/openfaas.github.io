@@ -7,19 +7,14 @@
 			}
 		}
 
-		.of-sponsor-logo-size-platinum img {
-			width: 250px;
-    	}
-		.of-sponsor-logo-size-gold img {
-			width: 125px;
-    	}
         .of-sponsor-logo {
     		display: -webkit-flex;
     		display: -ms-flex;
     		display: flex;
 
-    		justify-content: center;
-    	}
+			justify-content: center;
+	
+		}
 
 		.button {
             margin-top: $padding-step * 4;
@@ -49,7 +44,14 @@
 		}
 
 		figure {
-			max-width: 200px;
+			.of-sponsor-logo-size-gold {
+				width: 175px;
+				max-width: 175px;
+			}
+			.of-sponsor-logo-size-platinum {
+				max-width: 250px;
+				width: 250px;
+			}
 		}
 	}
 }

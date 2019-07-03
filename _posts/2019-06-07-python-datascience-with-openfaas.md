@@ -1,7 +1,7 @@
 ---
-title: Serving Data Science Models with OpenFaaS
-description: "Lucas will build and deploy a name classification function using OpenFaaS and PyTorch"
-date: 2019-06-28
+title: How to Serve Data Science Models with OpenFaaS
+description: "Lucas shows you how you can build and deploy a name classification function using OpenFaaS and PyTorch"
+date: 2019-07-04
 image: /images/pydatascience-template/artificial-neural-network-3501528_640.png
 categories:
   - python
@@ -9,6 +9,7 @@ categories:
   - examples
   - datascience
   - templates
+  - tutorial
 author_staff_member: lucas
 dark_background: false
 ---
@@ -234,21 +235,24 @@ I decided not to create a Python 2 template in the [pydatascience-template][pyda
 
 ## Wrapping up
 
-Data science is of course a popular topic these days and OpenFaaS can help [simplify, standardize, and speed up][kubecon-bt-journey] the deployment process for your team. This post introduces just one example of what a data science focused template could look like. If you are building and deploying data science models, let us know what you think through
+Data science is of course a popular topic these days and OpenFaaS can help [simplify, standardize, and speed up][kubecon-bt-journey] the deployment process for your team. This post introduces just one example of what a data science focused template could look like.
 
-* the [Slack community][of-slack]
-* or [Twitter][of-twitter].
+Have you struggled to package your machine-learning model for platforms like AWS Lambda? OpenFaaS functions don't have an arbitrary size limit and may provide an easier alternative for you.
 
+Connect with us to discuss further or to share what you've built.
+
+* Join OpenFaaS [Slack community][of-slack]
+* Follow @OpenFaaS on [Twitter][of-twitter].
 
 ### Going further
-Want to help improve the template, join our slack or open an [issue on Github][name-classifier-issues].
+
+Star or Fork the code for the [name-classifier on Github][name-classifier-repo].
 
 ### You may also like
 
 * [How to split large Python Functions across multiple files][multifile-blog-post]
 * [Introducing the Template Store for OpenFaaS][template-store-post]
 * [Accelerating the Journey of an AI algorithm to production with openfaas at BT][[kubecon-bt-journey]
-
 
 [conda-homepage]: https://docs.conda.io/projects/conda/en/latest/
 [flask-return-values]: http://flask.pocoo.org/docs/1.0/quickstart/#about-responses
@@ -270,7 +274,6 @@ Want to help improve the template, join our slack or open an [issue on Github][n
 [template-store-post]: /blog/template-store/
 [of-watchdog-homepage]: https://github.com/openfaas-incubator/of-watchdog
 [name-classifier-repo]: https://github.com/LucasRoesler/name-classifier
-[name-classifier-issues]: https://github.com/LucasRoesler/name-classifier/issues
 [classifier-impl]: https://github.com/LucasRoesler/name-classifier/blob/master/classify/core/model.py
 [of-force-non-root]: https://github.com/openfaas/faas-netes/tree/master/chart/openfaas#configuration
 [of-stateless-microservices]: https://docs.openfaas.com/reference/workloads/#stateless-microservices

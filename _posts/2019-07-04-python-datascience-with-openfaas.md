@@ -248,6 +248,8 @@ Connect with us to discuss further or to share what you've built.
 
 Star or Fork the code for the [name-classifier on Github][name-classifier-repo].
 
+OpenFaaS can support various machine learning frameworks beyond PyTorch, if you prefer [TensorFlow][tensorflow-homepage], checkout this [tensorflow-serving-openfaas example from Alex on Github][tensorflow-serving-example].
+
 ### You may also like
 
 * [How to split large Python Functions across multiple files][multifile-blog-post]
@@ -277,3 +279,5 @@ Star or Fork the code for the [name-classifier on Github][name-classifier-repo].
 [classifier-impl]: https://github.com/LucasRoesler/name-classifier/blob/master/classify/core/model.py
 [of-force-non-root]: https://github.com/openfaas/faas-netes/tree/master/chart/openfaas#configuration
 [of-stateless-microservices]: https://docs.openfaas.com/reference/workloads/#stateless-microservices
+[tensorflow-homepage]: https://www.tensorflow.org/
+[tensorflow-serving-example]: https://github.com/alexellis/tensorflow-serving-openfaas

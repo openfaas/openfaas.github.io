@@ -266,6 +266,8 @@ If you have any comments, questions or suggestions, then please connect with me 
 
 You can follow [@alexellisuk](https://twitter.com/alexellis) on Twitter for more blogs, videos, tips and tutorials
 
+### Want to automate everything?
+
 If you'd like a more automated experience than offered through the blog today, then why not check out [OpenFaaS Cloud](https://github.com/openfaas/openfaas-cloud)?
 
 OpenFaaS Cloud offers:

@@ -281,4 +281,6 @@ OpenFaaS Cloud offers:
 * deep integration with public and private repos on GitHub.com and GitLab
 * a personalized dashboard and login with OAuth2 to view your metrics and functions
 
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">&quot;OpenFaaS Cloud - Community Cluster&quot;<br><br>A SaaS solution built on OpenFaaS.<br><br>- Free sub-domain and endpoints<br>- TLS by default<br>- Login with GitHub<br>- No complex API or CLI needed, just push to git.<br><br>Apply for access today. 🏆<a href="https://t.co/IGuZGZiPT3">https://t.co/IGuZGZiPT3</a> <a href="https://twitter.com/hashtag/gitops?src=hash&amp;ref_src=twsrc%5Etfw">#gitops</a> <a href="https://twitter.com/hashtag/faasfriday?src=hash&amp;ref_src=twsrc%5Etfw">#faasfriday</a> <a href="https://t.co/pqIMzYsMbI">pic.twitter.com/pqIMzYsMbI</a></p>&mdash; OpenFaaS (@openfaas) <a href="https://twitter.com/openfaas/status/1144621477129379842?ref_src=twsrc%5Etfw">June 28, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
 You can [self-host in 100 seconds](https://www.youtube.com/watch?v=Sa1VBSfVpK0) or apply for access to the [Community Cluster](https://github.com/openfaas/community-cluster).

@@ -1,8 +1,8 @@
 ---
-title: "Grab Custom Domains for your Functions with FunctionIngress"
-description: With OpenFaaS, you get a URL for every function by convention which is great and suits many people. This guide shows you have to get a Custom Domain for your functions using the new FunctionIngress concept.
+title: "Grab free TLS & Custom Domains for your Functions with FunctionIngress"
+description: With OpenFaaS, you get a URL for every function by convention which is great and suits many people. This guide shows you have to get a Custom Domain along with a free TLS cert for your functions using the new FunctionIngress concept.
 date: 2019-07-29
-image: /images/2019-custom-domains-function-ingress/1.jpg
+image: /images/2019-custom-domains-function-ingress/background.jpg
 categories:
   - community
   - end-user
@@ -13,21 +13,25 @@ author_staff_member: alex
 dark_background: true
 ---
 
-Find out how you can expand beyond the default URL given to each function with FunctionIngress.
+Find out how you can expand beyond the default URL given to each function in OpenFaaS with the new FunctionIngress CRD.
 
 In this tutorial I'll show you how to use the new FunctionIngress CRD along with a new Kubernetes Operator to get Custom Domains for any OpenFaaS function deployed on Kubernetes.
 
-## Tutorial
-
 ### How it works
 
-First of all, we install the new Kubernetes Operator called "IngressOperator". This Operator is responsible for translating CRD entries called FunctionIngress into two separate resources in the cluster: an `Ingress` definition and a TLS Certficate. The TLS certificate is optional, but highly recommended.
+First of all, we install the new Kubernetes Operator called "IngressOperator". This Operator is responsible for translating CRD entries called FunctionIngress into two separate resources in the cluster: an `Ingress` definition and a TLS Certficate. The TLS `Certificate` is optional, and created by `cert-manager` by adding special annotations to the generated `Ingress` definition.
+
+## Tutorial
+
+To run through the tutorial, you will need to have some software set up already and a Kubernetes cluster with a public LoadBalancer service. If your Kubernetes services does not have a public LoadBalancer, install the `IngressController` using host ports.
 
 ### Pre-reqs
 
 * Kubernetes
 
 You need to have a Kubernetes cluster. I recommend using [DigitalOcean Kubernetes](https://www.digitalocean.com/) for an easy and cost-efficient set-up.
+
+[Get free credits](https://m.do.co/c/2962aa9e56a1)
 
 * helm
 
@@ -41,9 +45,11 @@ You'll need helm for most of the components we are using. If you are allergic to
 
 You should also install the OpenFaaS CLI using the instructions at [docs.openfaas.com](https://docs.openfaas.com/)
 
-* Nginx IngressController
+* The IngressController
 
-Traefik and Skipper are also supported, but we'll use Nginx for this tutorial. Install Nginx with the following:
+[Nginx](https://www.nginx.com), [Traefik](https://traefik.io) and Zalando's [Skipper](https://github.com/zalando/skipper) are currently supported, if you have a request for another controller, then [raise an issue](https://github.com/openfaas-incubator/ingress-operator/issues/).
+
+In this tutorial I'll be using Nginx, install with the following:
 
 ```
 helm install stable/nginx-ingress --name nginxingress --set rbac.create=true
@@ -51,13 +57,17 @@ helm install stable/nginx-ingress --name nginxingress --set rbac.create=true
 
 * cert-manager (optional)
 
-Using TLS is optional, but highly recommended, so I will show you how to set it up.
+Using TLS is optional, but highly recommended and I will be setting it up today.
 
-Use the [1.0 SSL for Kubernetes](https://docs.openfaas.com/reference/ssl/kubernetes-with-cert-manager/#10-ssl-for-the-gateway) documentation to set up cert-manager and an issuer. You can skip the steps for creating a `Certificate` and `Ingress` entry for the gateway.
+Follow the steps for "Install cert-manager" and "Configure cert-manager" from the [OpenFaaS documentation here](https://docs.openfaas.com/reference/ssl/kubernetes-with-cert-manager/#10-ssl-for-the-gateway).
+
+> Note: You can skip the steps for creating a `Certificate` and `Ingress` entry for the gateway.
 
 ### Deploy `IngressOperator`
 
-We'll now deploy the IngressOperator. I'll be [following instructions from the OpenFaaS documentation](https://docs.openfaas.com/reference/ssl/kubernetes-with-cert-manager/#20-ssl-and-custom-domains-for-functions).
+We'll now deploy the IngressOperator. You can star/fork, or read the [code of the project on GitHub](https://github.com/openfaas-incubator/ingress-operator).
+
+I'll be [following instructions from the OpenFaaS documentation](https://docs.openfaas.com/reference/ssl/kubernetes-with-cert-manager/#20-ssl-and-custom-domains-for-functions).
 
 ```sh
 git clone https://github.com/openfaas-incubator/ingress-operator
@@ -68,7 +78,7 @@ kubectl apply -f ./artifacts/operator-rbac.yaml
 kubectl apply -f ./artifacts/operator-amd64.yaml
 ```
 
-The above creates the CRD definition, RBAC roles and then deploys the Operator itself.
+The above creates: the CRD definition, RBAC roles and then deploys the Operator itself.
 
 ### Create a static website
 
@@ -116,10 +126,9 @@ We'll now create a DNS entry and then the custom hostname mapping and TLS certif
 
 ### Create a DNS A record for your sub-domain
 
-My testing domain is `myfaas.club` and it cost me a very minimal amount of money from [namecheap.com](https://namecheap.com/). I can create sub-domains for each function, or for any testing that I do. If you are familiar with DNS-management, then create an A record for the IP address the LoadBalancer created by Nginx.
+My testing domain is `myfaas.club` and it cost me a very minimal amount of money from [namecheap.com](https://namecheap.com/). I can create sub-domains for each function, or for any testing that I do. If you are familiar with DNS-management, then create an A record for the IP address of the LoadBalancer created by Nginx.
 
-```
-kubectl get svc -n default
+```sh
 
 kubectl get svc
 NAME                                         TYPE           CLUSTER-IP      EXTERNAL-IP       PORT(S)                      AGE
@@ -128,7 +137,7 @@ nginxingress-nginx-ingress-controller        LoadBalancer   10.245.169.18   178.
 
 You can see my external IP listed as `178.128.137.209`.
 
-As a DigitalOcean customer, I can now use the DigitalOcean UI or CLI to create a DNS A record for `178.128.137.209`. Here is an example using the `doctl` CLI:
+As a DigitalOcean customer, I can now use the DigitalOcean UI or CLI to create a DNS A record for `178.128.137.209`. Here is an example using the [doctl](https://github.com/digitalocean/doctl) CLI:
 
 ```sh
 doctl compute domain create my-homepage.myfaas.club --ip-address 178.128.137.209
@@ -137,11 +146,15 @@ Domain                     TTL
 my-homepage.myfaas.club    0
 ```
 
+Here's an example of what that may look like within the UI:
+
+![](/images/2019-custom-domains-function-ingress/create-dns-ui.png)
+
 ### Map the Custom Domain with a `FunctionIngress`
 
 Now we will map the Custom Domain to the function using a `FunctionIngress` definition.
 
-Save the following in a YAML file and then apply with `kubectl apply -f my-homepage-fni.yaml`
+Save the following in a YAML file `my-homepage-fni.yaml`:
 
 ```yaml
 apiVersion: openfaas.com/v1alpha2
@@ -160,11 +173,13 @@ spec:
       kind: "Issuer"
 ```
 
-I've called my FunctionIngress record `my-homepage-tls`.
+* For the `name` I used a convention of the function's name plus a suffix of `-tls` if using TLS.
 
-Edit the `domain` to point as your own DNS A record or sub-domain
+* Edit the `domain` to point as your own DNS A record or sub-domain
 
-For the `issuerRef`, you can use the `-staging` or `-prod` issuer which you set up earlier using the OpenFaaS docs.
+* For the `issuerRef`, you can use the `-staging` or `-prod` issuer which you set up earlier using the OpenFaaS docs.
+
+Now apply the file with `kubectl apply -f my-homepage-fni.yaml`
 
 ### Check what happened
 
@@ -215,9 +230,37 @@ You can also drill-down into your certificate to check that it's valid and when 
 
 ![](/images/2019-custom-domains-function-ingress/view-cert.png)
 
+#### Changing versions
+
+We can now create a dedicated URL for anything we deploy through OpenFaaS. There's nothing to stop you deploying multiple names for the same function to create an alias or versioned endpoint.
+
+If we were to deploy a new version of our function (`my-homepage-v2`), we could deploy a new `FunctionIngress` record, or simply edit the object in Kubernetes via `kubectl`. The result is that the `Ingress` record will be edited to point at the new function without deleting or re-issuing a new `Certificate`.
+
+```yaml
+apiVersion: openfaas.com/v1alpha2
+kind: FunctionIngress
+metadata:
+  name: my-homepage-tls
+  namespace: openfaas
+spec:
+  domain: "my-homepage.myfaas.club"
+  function: "my-homepage-v2"
+  ingressType: "nginx"
+  tls:
+    enabled: true
+    issuerRef:
+      name: "letsencrypt-prod"
+      kind: "Issuer"
+---
+```
+
 ## Connect & Learn
 
-I hope you enjoyed the tutorial. If you have any comments, questions or suggestions, then please connect with me and the OpenFaaS community on Slack:
+I hope you enjoyed the tutorial for the IngressOperator and FunctionIngress CRD. In the next post the community will show you how to combine this blog post with OpenFaaS Cloud and [a template](https://github.com/matipan/hugo-blog-function) for [Hugo](https://gohugo.io) to generate static websites from markdown. This would be great for hosting documentation, blogs and much more.
+
+The code is available to star/fork or browse on GitHub: [openfaas-incubator/ingress-operator](https://github.com/openfaas-incubator/ingress-operator).
+
+If you have any comments, questions or suggestions, then please connect with me and the OpenFaaS community on Slack:
 
 * [OpenFaaS Slack](https://slack.openfaas.io)
 

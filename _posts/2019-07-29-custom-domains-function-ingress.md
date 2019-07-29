@@ -21,6 +21,10 @@ In this tutorial I'll show you how to use the new FunctionIngress CRD along with
 
 First of all, we install the new Kubernetes Operator called "IngressOperator". This Operator is responsible for translating CRD entries called FunctionIngress into two separate resources in the cluster: an `Ingress` definition and a TLS Certficate. The TLS `Certificate` is optional, and created by `cert-manager` by adding special annotations to the generated `Ingress` definition.
 
+I built the IngressOperator to [automate some of the tasks end-users of the project were using to deploy pretty-URLs](https://github.com/openfaas/faas/issues/1082) for their static websites, APIs and functions with OpenFaaS. The first time I wrote about the Operator was in the [Insiders Update for 2019-07-05](https://gist.github.com/alexellis/70d26898291b398d1ffac1994ebe84b4).
+
+> Insiders Updates are exclusives updates containing my tutorials, projects, videos, links and industry info such as developments in Kubernetes. By [Becoming an Insider 👑](https://github.com/users/alexellis/sponsorship), you support my unpaid-OSS work and the OpenFaaS community. 🏆
+
 ## Tutorial
 
 To run through the tutorial, you will need to have some software set up already and a Kubernetes cluster with a public LoadBalancer service. If your Kubernetes services does not have a public LoadBalancer, install the `IngressController` using host ports.

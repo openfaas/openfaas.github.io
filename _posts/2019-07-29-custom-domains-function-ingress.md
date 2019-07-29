@@ -15,7 +15,7 @@ dark_background: true
 
 Find out how you can expand beyond the default URL given to each function in OpenFaaS with the new FunctionIngress CRD.
 
-In this tutorial I'll show you how to use the new FunctionIngress CRD along with a new Kubernetes Operator to get Custom Domains for any OpenFaaS function deployed on Kubernetes.
+In this tutorial I'll show you how to use the new FunctionIngress [Custom Resource Definition (CRD)](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) along with a new [Kubernetes Operator](https://coreos.com/operators/) to get Custom Domains for any OpenFaaS function deployed on Kubernetes.
 
 ### How it works
 

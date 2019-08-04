@@ -127,6 +127,12 @@ In simple terms OpenFaaS offers:
 * a native experience on Kubernetes
 * a dedicated community ready to help you, when you need it most
 
+You can interact with Functions using the UI, the CLI, or the REST API.
+
+<blockquote class="twitter-tweet" data-conversation="none"><p lang="en" dir="ltr">Forget <a href="https://twitter.com/hashtag/FaceApp?src=hash&amp;ref_src=twsrc%5Etfw">#FaceApp</a> and get yourself down to the Function Store 🍻 <a href="https://t.co/Dd95GM75MH">pic.twitter.com/Dd95GM75MH</a></p>&mdash; Alex Ellis (@alexellisuk) <a href="https://twitter.com/alexellisuk/status/1158120071530782721?ref_src=twsrc%5Etfw">August 4, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+*The OpenFaaS UI and two different functions from the Function Store*
+
 You get all of this and more without the overheads of starting out on your own. Who has time to build a cloud-native architecture for their team completely from scratch?
 
 [OpenFaaS.com](https://www.openfaas.com/) is hosted by [OpenFaaS Ltd](mailto:sales@openfaas.com) and developed by a [voluntary team of developers and experts](https://www.openfaas.com/team/).

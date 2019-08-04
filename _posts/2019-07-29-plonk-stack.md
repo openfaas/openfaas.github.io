@@ -249,14 +249,15 @@ OpenFaaS is an independent project, hosted by [OpenFaaS Ltd](mailto:sales@openfa
 
 [Become an OpenFaaS Insider today](https://www.openfaas.com/support/) through a sponsorship, starting at the cost of a coffee. You'll receive updates on all my OSS work, events, blogs, videos and news about the project.
 
-Connect with the community:
+* Connect with the community:
 
-* [Join Slack now](https://goo.gl/forms/SqpLSdyzVoOboRqs1)
-* [Contribute](https://docs.openfaas.com/contributing/get-started/)
-* [Sponsor on GitHub](https://www.openfaas.com/support/)
+    * [Join Slack now](https://goo.gl/forms/SqpLSdyzVoOboRqs1)
+    * [Contribute](https://docs.openfaas.com/contributing/get-started/)
+    * [Sponsor on GitHub](https://www.openfaas.com/support/)
 
-You can try OpenFaaS with helm with your favourite Kubernetes service, or on your laptop:
+Install OpenFaaS on your laptop, or your favourite Kubernetes service through the [helm chart](https://github.com/openfaas/faas-netes/blob/master/chart/openfaas/README.md).
+
+Of if you would prefer step-by-step instructions, you can start with [The Official OpenFaaS workshop](https://github.com/openfaas/workshop).
 
 <blockquote class="twitter-tweet" data-conversation="none"><p lang="en" dir="ltr">How can you get it? <a href="https://t.co/mlIEvS0uih">pic.twitter.com/mlIEvS0uih</a></p>&mdash; Alex Ellis (@alexellisuk) <a href="https://twitter.com/alexellisuk/status/1154385446069256192?ref_src=twsrc%5Etfw">July 25, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-If you'd like step-by-step instructions, you can start with [The Official OpenFaaS workshop](https://github.com/openfaas/workshop).

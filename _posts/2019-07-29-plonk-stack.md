@@ -14,13 +14,13 @@ author_staff_member: alex
 dark_background: true
 ---
 
-You've heard of LAMP, JAM, and MEAN, but what's the PLONK stack, and why should you be considering it for your Cloud Native Applications?
+You've heard of [LAMP](https://en.wikipedia.org/wiki/LAMP_(software_bundle)), [JAM](https://jamstack.org), and [MEAN](https://en.wikipedia.org/wiki/MEAN_(software_bundle)), but what's the PLONK stack, and why should you be considering it for your Cloud Native Applications?
 
 The PLONK stack combines the following Cloud Native technologies from the Cloud Native Landscape. In this blog post I'll walk you through each project and add details from my experience developing OpenFaaS with the community since 2016.
 
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Introducing the PLONK! stack.<br><br>Probably fits in less than 1GB of RAM when used with k3s. <a href="https://twitter.com/PrometheusIO?ref_src=twsrc%5Etfw">@PrometheusIO</a> <a href="https://twitter.com/linkerd?ref_src=twsrc%5Etfw">@linkerd</a> <a href="https://twitter.com/openfaas?ref_src=twsrc%5Etfw">@openfaas</a> <a href="https://twitter.com/nats_io?ref_src=twsrc%5Etfw">@nats_io</a> <a href="https://twitter.com/kubernetesio?ref_src=twsrc%5Etfw">@kubernetesio</a> <a href="https://twitter.com/CloudNativeFdn?ref_src=twsrc%5Etfw">@CloudNativeFdn</a> <a href="https://twitter.com/Rancher_Labs?ref_src=twsrc%5Etfw">@Rancher_Labs</a> <a href="https://t.co/TMTtu2oRup">pic.twitter.com/TMTtu2oRup</a></p>&mdash; Alex Ellis (@alexellisuk) <a href="https://twitter.com/alexellisuk/status/1154385264925650950?ref_src=twsrc%5Etfw">July 25, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-Out of the projects listed, four are CNCF-hosted. Of the CNFC projects, 2 are "graduated" and the other two are "incubating" and showing signs of graduation soon. In this post I'll explain what each of these CNCF projects lends to OpenFaaS, and how they can build a first-class FaaS or PaaS when combined.
+Out of the projects listed, four are hosted by the [Cloud Native Computing Foundation (CNCF)](https://www.cncf.io). Of the CNFC projects, 2 are "graduated" and the other two are "incubating" and showing signs of graduation soon. In this post I'll explain what each of these CNCF projects lends to OpenFaaS, and how they can build a first-class FaaS or PaaS when combined.
 
 ### The projects
 
@@ -170,7 +170,11 @@ NATS, just like Linkerd and OpenFaaS aims to be simple to install and operate.
 
 #### Kubernetes
 
-Before we talk about Kubernetes, let's explore how OpenFaaS started without it.
+According to [Wikipedia](https://en.wikipedia.org/wiki/Kubernetes):
+
+> Kubernetes is an open-source container-orchestration system for automating application deployment, scaling, and management. It was originally designed by Google, and is now maintained by the Cloud Native Computing Foundation.
+
+Before we talk in detail about Kubernetes, let's explore how OpenFaaS started without it.
 
 Many new users to OpenFaaS may not know the "origin story" of the project. I developed OpenFaaS in 2016 as I explored how to bring Serverless to containers. I was a Docker Captain back then and wanted to bring containers to new clustering system called *Docker Swarm*. The key difference between software like Docker Swarm and Kubernetes vs Docker containers, is that the former is declarative and the later is used imperatively. A declarative system says: "I want this, can you go off and do it for me?" and an imperative system says "Do exactly this, right now".
 

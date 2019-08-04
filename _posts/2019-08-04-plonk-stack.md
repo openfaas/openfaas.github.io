@@ -1,6 +1,6 @@
 ---
 title: "Introducing the PLONK Stack for Cloud Native Developers"
-description: You've heard of LAMP, JAM, and MEAN, but what's the PLONK stack, and why should you be considering it for your Cloud Native Applications?
+description: You've heard of LAMP, JAM, and MEAN, but what is the PLONK stack? And why should you be considering it for your Cloud Native Applications?
 date: 2019-08-04
 image: /images/2019-intro-plonk/map-reader.jpg
 categories:
@@ -14,7 +14,7 @@ author_staff_member: alex
 dark_background: true
 ---
 
-You've heard of [LAMP](https://en.wikipedia.org/wiki/LAMP_(software_bundle)), [JAM](https://jamstack.org), and [MEAN](https://en.wikipedia.org/wiki/MEAN_(software_bundle)), but what's the PLONK stack, and why should you be considering it for your Cloud Native Applications?
+You've heard of [LAMP](https://en.wikipedia.org/wiki/LAMP_(software_bundle)), [JAM](https://jamstack.org), and [MEAN](https://en.wikipedia.org/wiki/MEAN_(software_bundle)), but what is the PLONK stack? And why should you be considering it for your Cloud Native Applications?
 
 The PLONK stack combines the following Cloud Native technologies from the Cloud Native Landscape. In this blog post I'll walk you through each project and add details from my experience developing OpenFaaS with the community since 2016.
 

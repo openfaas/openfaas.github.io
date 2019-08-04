@@ -157,11 +157,14 @@ faas-cli store deploy figlet
 
 # Synchronous, or blocking
 
-curl http://gateway.example.com/function/figlet -d NATS
+curl http://gateway.example.com/function/figlet \
+  -d NATS
 
 # Asynchronous, or non-blocking:
 
-curl http://gateway.example.com/function/figlet -d NATS -H "X-Callback-Url: http://gateway.example.com/function/after-figlet"
+curl http://gateway.example.com/function/figlet \
+  -d NATS \
+  -H "X-Callback-Url: http://gateway.example.com/function/after-figlet"
 ```
 
 NATS, just like Linkerd and OpenFaaS aims to be simple to install and operate.
@@ -217,15 +220,16 @@ You can [get Kubernetes](https://kubernetes.io/) from your favourite cloud as a 
     <blockquote class="twitter-tweet" data-conversation="none"><p lang="en" dir="ltr">What does it get you? <a href="https://t.co/GrQCrYtKNr">pic.twitter.com/GrQCrYtKNr</a></p>&mdash; Alex Ellis (@alexellisuk) <a href="https://twitter.com/alexellisuk/status/1154385354755125248?ref_src=twsrc%5Etfw">July 25, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 * What comes after OpenFaaS?
+
     In late 2017 I started to design a distribution of OpenFaaS that shipped as a whole package including HTTPS, multi-user support, authz and CI/CD with GitHub and GitLab.
+
+    It's called OpenFaaS Cloud and is free and open-source. You can host your own using the [ofc-bootstrap tool](https://github.com/openfaas-incubator/ofc-bootstrap) or [request free access to the Community Cluster](https://github.com/openfaas/community-cluster/).
 
     <blockquote class="twitter-tweet" data-theme="light"><p lang="en" dir="ltr">&quot;OpenFaaS Cloud - Community Cluster&quot;<br><br>A SaaS solution built on OpenFaaS.<br><br>- Free sub-domain and endpoints<br>- TLS by default<br>- Login with GitHub<br>- No complex API or CLI needed, just push to git.<br><br>Apply for access today. 🏆<a href="https://t.co/IGuZGZiPT3">https://t.co/IGuZGZiPT3</a> <a href="https://twitter.com/hashtag/gitops?src=hash&amp;ref_src=twsrc%5Etfw">#gitops</a> <a href="https://twitter.com/hashtag/faasfriday?src=hash&amp;ref_src=twsrc%5Etfw">#faasfriday</a> <a href="https://t.co/pqIMzYsMbI">pic.twitter.com/pqIMzYsMbI</a></p>&mdash; OpenFaaS (@openfaas) <a href="https://twitter.com/openfaas/status/1144621477129379842?ref_src=twsrc%5Etfw">June 28, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     
-    It's called OpenFaaS Cloud and is free and open-source. You can host your own using the [ofc-bootstrap tool](https://github.com/openfaas-incubator/ofc-bootstrap) or [request free access to the Community Cluster](https://github.com/openfaas/community-cluster/).
-
     OpenFaaS Cloud is great for teams and for multi-user setups. You can even use it to host a SaaS, like we are doing with the Community Cluster.
 
-* But are you ready for Serverless?
+* But are you ready for "Serverless"?
 
     I often hear people say to me "we are not ready for Serverless". If you're ready for Kubernetes, then OpenFaaS gives you a lower barrier to entry, a stream-lined developer experience and a passionate community of real users. For me Serverless describes an approach to architecture, rather than some new magic that users can be "ready for", or not.
 
@@ -243,13 +247,13 @@ OpenFaaS is an independent project, hosted by [OpenFaaS Ltd](mailto:sales@openfa
 
 <blockquote class="twitter-tweet" data-conversation="none"><p lang="en" dir="ltr">Is there a practical way you can support the project? <a href="https://t.co/1aANvhY0uU">pic.twitter.com/1aANvhY0uU</a></p>&mdash; Alex Ellis (@alexellisuk) <a href="https://twitter.com/alexellisuk/status/1158065047098318848?ref_src=twsrc%5Etfw">August 4, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-Become an OpenFaaS Insider through a sponsorship, starting at the cost of a coffee. You'll receive updates on all my OSS work, events, blogs, videos and news about the project.
+[Become an OpenFaaS Insider today](https://www.openfaas.com/support/) through a sponsorship, starting at the cost of a coffee. You'll receive updates on all my OSS work, events, blogs, videos and news about the project.
 
 Connect with the community:
 
-* [Sponsor on GitHub](https://www.openfaas.com/support/)
 * [Join Slack now](https://goo.gl/forms/SqpLSdyzVoOboRqs1)
 * [Contribute](https://docs.openfaas.com/contributing/get-started/)
+* [Sponsor on GitHub](https://www.openfaas.com/support/)
 
 You can try OpenFaaS with helm with your favourite Kubernetes service, or on your laptop:
 

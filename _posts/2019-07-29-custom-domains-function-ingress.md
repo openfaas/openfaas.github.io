@@ -260,7 +260,7 @@ spec:
 
 ## Connect & Learn
 
-I hope you enjoyed the tutorial for the IngressOperator and FunctionIngress CRD. In the next post the community will show you how to combine this blog post with OpenFaaS Cloud and [a template](https://github.com/matipan/hugo-blog-function) for [Hugo](https://gohugo.io) to generate static websites from markdown. This would be great for hosting documentation, blogs and much more.
+I hope you enjoyed the tutorial for the IngressOperator and FunctionIngress CRD. In the next post the community will show you how to combine this blog post with OpenFaaS Cloud and [a template](https://github.com/matipan/openfaas-hugo-template) for [Hugo](https://gohugo.io) to generate static websites from markdown. This would be great for hosting documentation, blogs and much more.
 
 The code is available to star/fork or browse on GitHub: [openfaas-incubator/ingress-operator](https://github.com/openfaas-incubator/ingress-operator).
 

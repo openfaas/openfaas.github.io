@@ -1,4 +1,7 @@
-# platinum:
+platinum:
+- alt: "Rancher Labs"
+  url: https://rancher.com/
+  logo: rancher-logo-stacked-color.svg
 gold:
 - alt: "Civo: UK Cloud Hosting Platform"
   url: https://www.civo.com/promo

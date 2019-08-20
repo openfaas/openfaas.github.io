@@ -258,7 +258,7 @@ I'm going to go over two different ways you can get this same experience using O
 
 ### CI/CD with OpenFaaS Cloud
 
-[OpenFaaS Cloud](https://github.com/openfaas/openfaas-cloud) can offer you an automated experience, with a single push you can have your site deployed in seconds.  
+[OpenFaaS Cloud](https://github.com/openfaas/openfaas-cloud) offers you an integrated and automated experience, with a single push you can have your site deployed in seconds. You'll also get logs and metrics linked directly to your commit.
 
 If this sounds interesting to you check out the "one-click" [bootstrap tool](https://github.com/openfaas-incubator/ofc-bootstrap) to install OpenFaaS Cloud in less than 100 seconds or apply for an account on [The Community Cluster](https://github.com/openfaas/community-cluster) for free shared access.
 
@@ -351,7 +351,7 @@ Commit and push your changes and see how your function gets automatically built 
 
 ## Wrapping up
 
-Using a mixture of the new Hugo template, the Ingress Operator and either OpenFaaS Cloud, or GitLab we were able to host a static site with TLS and CI/CD in a very short period of time. You can use this to host any static site such as documentation, blog posts, and landing pages for websites.
+Using a mixture of the new Hugo template, the [IngressOperator](https://github.com/openfaas-incubator/ingress-operator) and either [OpenFaaS Cloud](https://github.com/openfaas/openfaas-cloud), or GitLab we were able to host a static site with TLS and CI/CD in a very short period of time. You can use this to host any static site such as documentation, blog posts, and landing pages for websites.
 
 I chose Hugo for today's blog post but you could create another template using your favourite tooling. When we were chatting about this blog post in the OpenFaaS Slack Community, someone suggested writing a template for [GatsbyJS](https://www.gatsbyjs.org). We would love to see that happen, and if you want to have a go, you can just fork my [Hugo template](https://github.com/matipan/openfaas-hugo-template) and update it.
 

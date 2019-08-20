@@ -15,9 +15,9 @@ dark_background: true
 
 Learn how you can migrate your Hugo static sites over to OpenFaaS including custom domains, TLS and CI/CD through OpenFaaS Cloud (or GitLab).
 
-You may be used to seeing OpenFaaS used to deploy functions. Each programming language has its own custom-built template, which contains the entrypoint, a Dockerfile, and a sample handler to edit.
+[OpenFaaS](https://www.openfaas.com/) is one of the most popular open-source platforms on the [CNCF Landscape](https://landscape.cncf.io/category=installable-platform&format=card-mode&grouping=category&sort=stars) for building and deploying functions and microservices on Kubernetes. It's likely that you are used to seeing OpenFaaS used only to deploy functions, but in this post we want to show you what is possible through the project's templating system.
 
-Users can create their own templates with OpenFaaS in a very short period of time and in this tutorial I will show the one I created for [Hugo](https://gohugo.io), a popular static site generator.
+Each programming language has its own custom-built template, which contains an entrypoint, a Dockerfile, and a sample handler to edit. Users can create their own templates with OpenFaaS in a very short period of time and in this tutorial I will show the one I created for [Hugo](https://gohugo.io), a popular static site generator.
 
 A note from Alex Ellis, OpenFaaS Founder:
 

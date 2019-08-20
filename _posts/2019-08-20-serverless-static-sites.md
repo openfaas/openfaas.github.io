@@ -19,9 +19,11 @@ You may be used to seeing OpenFaaS used to deploy functions. Each programming la
 
 Users can create their own templates with OpenFaaS in a very short period of time and in this tutorial I will show the one I created for [Hugo](https://gohugo.io), a popular static site generator.
 
-> A note from Alex Ellis, OpenFaaS Founder
+A note from Alex Ellis, OpenFaaS Founder:
 
-Now many people may associate "Serverless" only with SaaS products and cloud functions, but major players in the computing industry such as IBM, Red Hat, Pivotal and Google are all making an investment in Serverless 2.0. Serverless 2.0 is portable between any cloud or computer and is not subject to the limitations of SaaS products. Some users may perfectly happy with being locked into a single vendor and whatever the boundaries are, but for everyone else there's a new world. Find out more in my [Serverless Beyond the Hype video](https://www.youtube.com/watch?v=yOpYYYRuDQ0).
+> Now many people may associate "Serverless" only with SaaS products and cloud functions, but major players in the computing industry such as IBM, Red Hat, Pivotal and Google are all making an investment in Serverless 2.0. Serverless 2.0 is portable between any cloud or computer and is not subject to the limitations of SaaS products. Some users may perfectly happy with being locked into a single vendor and whatever the boundaries are, but for everyone else there's a new world. Find out more in my [Serverless Beyond the Hype video](https://www.youtube.com/watch?v=yOpYYYRuDQ0).
+
+> This tutorial is for users who may want to deploy any number of workloads including: microservices, blogs, functions, batch jobs, legacy HTTP servers, and static sites. We'll be using a Kubernetes service, which can cost as little as 15 USD / month and which has very little administration overheads once set up.
 
 ## Pre-reqs
 

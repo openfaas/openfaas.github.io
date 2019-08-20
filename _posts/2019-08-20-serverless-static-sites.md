@@ -19,6 +19,10 @@ You may be used to seeing OpenFaaS used to deploy functions. Each programming la
 
 Users can create their own templates with OpenFaaS in a very short period of time and in this tutorial I will show the one I created for [Hugo](https://gohugo.io), a popular static site generator.
 
+Did you know that you can run any Docker image on OpenFaaS as long as it follows the [workload contract](https://docs.openfaas.com/architecture/production/#workload-or-function-guidelines)? This makes OpenFaaS one of the easiest ways to run any containerised workload on Kubernetes.
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Do you want to deploy any of the following to Kubernetes?<br><br>💻 Static webpages<br>💻 Microservices<br>💻 Blogs - Ghost/Wordpress<br>💻 CLIs<br>💻 Functions<br><br>Get productive as quick as possible with <a href="https://twitter.com/openfaas?ref_src=twsrc%5Etfw">@OpenFaaS</a> on your own laptop or your favourite Kubernetes engine. <a href="https://t.co/bcD7493eUD">https://t.co/bcD7493eUD</a> <a href="https://t.co/2zZSeYRFbS">pic.twitter.com/2zZSeYRFbS</a></p>&mdash; OpenFaaS (@openfaas) <a href="https://twitter.com/openfaas/status/1162414762652835841?ref_src=twsrc%5Etfw">August 16, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
 ## Pre-reqs
 
 * Kubernetes
@@ -97,7 +101,7 @@ Templates in OpenFaaS are like a scaffold for an application, they lay down some
 
 Templates can then be shared through the [The Template Store](https://www.openfaas.com/blog/template-store/).
 
-Let's take a look at my template for Hugo static sites called [openfaas-hugo-template](https://github.com/matipan/openfaas-hugo-template). This template copies the contents of your Hugo site, builds it into the `public` directory and then uses a [very lightweight static server](https://gitlab.com/matipan/static-server) that serves the content and provides a health check that follows the standards from OpenFaaS.
+Let's take a look at my template for Hugo static sites called [openfaas-hugo-template](https://github.com/matipan/openfaas-hugo-template). This template copies the contents of your Hugo site, builds it into the `public` directory and then uses the OpenFaaS of-watchdog to serve the content. It also provides metrics and a health check for Kubernetes that follows the [OpenFaaS runtime contract](https://docs.openfaas.com/architecture/production/#workload-or-function-guidelines).
 
 ## Create a new Hugo site
 

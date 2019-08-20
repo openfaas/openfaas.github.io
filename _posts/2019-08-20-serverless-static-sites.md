@@ -127,7 +127,9 @@ export DOCKER_HUB_USER="your-hub-account"
 faas new --lang hugo example-site --prefix ${DOCKER_HUB_USER}
 ```
 
-This will create a folder called `example-site` and `example-site.yml`.
+This will create a folder called `example-site` where we will place the content for the site along with its configuration and any themes we may want.
+
+The `example-site.yml` file is called a *stack file* and can be used to configure the deployment on OpenFaaS.
 
 The following steps are based upon the [Hugo quick-start guide](https://gohugo.io/getting-started/quick-start/#step-2-create-a-new-site):
 
@@ -230,7 +232,7 @@ Now apply the file with `kubectl apply -f example-site-fni.yml`
 
 ## Check out your brand new site!
 
-After creating the `FunctionIngress` our IngressOperator will detect the recently created CRD and create a Kubernetes Ingress record. If you are using TLS this ingress will be decorated with annotations that the CertManager then detects and creates the TLS certificate for your site.
+After creating the `FunctionIngress` our IngressOperator will detect the recently created CRD and create a Kubernetes Ingress record. If you are using TLS this ingress will be decorated with annotations that the cert-manager then detects and creates the TLS certificate for your site.
 
 Check the ingress record:
 
@@ -255,7 +257,9 @@ Navigate to your domain and check out your new site:
 
 ![Example website deployed at my-site.matiaspan.dev](/images/2019-serverless-static-sites/hugo-example-site.png)
 
-## CI/CD
+You can now repeat the above for any other static-sites, microservices, functions, or endpoints that you want to deploy.
+
+## CI/CD (optional)
 
 * Continuous Integration - the act of building whatever is pushed into our Git repositories, continuously to become aware of any integration problems or regression in tests. This results in artifacts such as Docker images.
 * Continuous Delivery - the process of deploying new artifacts to production as soon as they become available.

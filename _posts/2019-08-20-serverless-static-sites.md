@@ -27,9 +27,7 @@ Did you know that you can run any Docker image on OpenFaaS as long as it follows
 
 * Kubernetes
 
-You need to have a Kubernetes cluster up & running. I would recommend [DigitalOcean](https://www.digitalocean.com/), it's cost-efficient and very easy to set-up.
-
-[Get free credits](https://m.do.co/c/2962aa9e56a1).
+You need to have a Kubernetes cluster up & running. I would recommend [DigitalOcean](https://www.digitalocean.com/), it's cost-efficient and very easy to set-up. [Get free credits](https://m.do.co/c/2962aa9e56a1).
 
 * [Install Helm](https://github.com/openfaas/faas-netes/blob/master/HELM.md)
 

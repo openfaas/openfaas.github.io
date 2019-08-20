@@ -15,7 +15,7 @@ dark_background: true
 
 Learn how you can migrate your Hugo static sites over to OpenFaaS including custom domains, TLS and CI/CD through OpenFaaS Cloud (or GitLab).
 
-[OpenFaaS](https://www.openfaas.com/) is one of the most popular open-source platforms on the [CNCF Landscape](https://landscape.cncf.io/category=installable-platform&format=card-mode&grouping=category&sort=stars) for building and deploying functions and microservices on Kubernetes. It's likely that you are used to seeing OpenFaaS used only to deploy functions, but in this post we want to show you what is possible through the project's templating system.
+[OpenFaaS](https://github.com/openfaas/faas) is one of the most popular open-source platforms on the [CNCF Landscape](https://landscape.cncf.io/category=installable-platform&format=card-mode&grouping=category&sort=stars) for building and deploying functions and microservices on Kubernetes. It's likely that you are used to seeing OpenFaaS used only to deploy functions, but in this post we want to show you what is possible through the project's templating system.
 
 Each programming language has its own custom-built template, which contains an entrypoint, a Dockerfile, and a sample handler to edit. Users can create their own templates with OpenFaaS in a very short period of time and in this tutorial I will show the one I created for [Hugo](https://gohugo.io), a popular static site generator.
 
@@ -23,7 +23,9 @@ A note from Alex Ellis, OpenFaaS Founder:
 
 > Now many people may associate "Serverless" only with SaaS products and cloud functions, but major players in the computing industry such as IBM, Red Hat, Pivotal and Google are all making an investment in Serverless 2.0. Serverless 2.0 is portable between any cloud or computer and is not subject to the limitations of SaaS products. Some users may perfectly happy with being locked into a single vendor and whatever the boundaries are, but for everyone else there's a new world. Find out more in my [Serverless Beyond the Hype video](https://www.youtube.com/watch?v=yOpYYYRuDQ0).
 
-> This tutorial is for users who may want to deploy any number of workloads including: microservices, blogs, functions, batch jobs, legacy HTTP servers, and static sites. We'll be using a Kubernetes service, which can cost as little as 15 USD / month and which has very little administration overheads once set up.
+> This tutorial is for users who may want to deploy any number of workloads including: microservices, blogs, functions, batch jobs, legacy HTTP servers, and static sites.
+
+> The goal of this tutorial *is not to show you that you need a Kubernetes cluster to run a static website*, it's to show what can be done with OpenFaaS and Kubernetes. You can set up a managed Kubernetes service for as little as 15 USD / mo and after following this tutorial, it will have very little administrative overhead. I'd also recommend you read the tutorial on how to build a complete [Serverless Single Page App](https://www.openfaas.com/blog/serverless-single-page-app/) to understand more behind the workflow and developer experience.
 
 ## Pre-reqs
 
@@ -374,5 +376,6 @@ Connect with us to discuss this blog post, or to share what you're building with
 
 ### You may also like
 
+* [How to build a Serverless Single Page App](https://www.openfaas.com/blog/serverless-single-page-app/)
 * [OpenFaaS Insiders](https://github.com/openfaas/faas/blob/master/BACKERS.md) - become an OpenFaaS Insider to get regular updates on new features, early access, tips and hints directly from the OpenFaaS Founder
 * [k3sup ("ketchup")](https://github.com/alexellis/k3sup) - the fastest way to create local, remote, or edge clusters with Kubernetes.

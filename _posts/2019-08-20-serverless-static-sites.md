@@ -361,3 +361,8 @@ Connect with us to discuss this blog post, or to share what you're building with
 
 * Join OpenFaaS [Slack community](https://docs.openfaas.com/community)
 * Follow @OpenFaaS on [Twitter](https://twitter.com/openfaas)
+
+### You may also like
+
+* [OpenFaaS Insiders](https://github.com/openfaas/faas/blob/master/BACKERS.md) - become an OpenFaaS Insider to get regular updates on new features, early access, tips and hints directly from the OpenFaaS Founder
+* [k3sup ("ketchup")](https://github.com/alexellis/k3sup) - the fastest way to create local, remote, or edge clusters with Kubernetes.

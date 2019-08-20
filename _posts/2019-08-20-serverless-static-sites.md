@@ -19,10 +19,6 @@ You may be used to seeing OpenFaaS used to deploy functions. Each programming la
 
 Users can create their own templates with OpenFaaS in a very short period of time and in this tutorial I will show the one I created for [Hugo](https://gohugo.io), a popular static site generator.
 
-Did you know that you can run any Docker image on OpenFaaS as long as it follows the [workload contract](https://docs.openfaas.com/architecture/production/#workload-or-function-guidelines)? This makes OpenFaaS one of the easiest ways to run any containerised workload on Kubernetes.
-
-<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Do you want to deploy any of the following to Kubernetes?<br><br>💻 Static webpages<br>💻 Microservices<br>💻 Blogs - Ghost/Wordpress<br>💻 CLIs<br>💻 Functions<br><br>Get productive as quick as possible with <a href="https://twitter.com/openfaas?ref_src=twsrc%5Etfw">@OpenFaaS</a> on your own laptop or your favourite Kubernetes engine. <a href="https://t.co/bcD7493eUD">https://t.co/bcD7493eUD</a> <a href="https://t.co/2zZSeYRFbS">pic.twitter.com/2zZSeYRFbS</a></p>&mdash; OpenFaaS (@openfaas) <a href="https://twitter.com/openfaas/status/1162414762652835841?ref_src=twsrc%5Etfw">August 16, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
 ## Pre-reqs
 
 * Kubernetes
@@ -358,6 +354,12 @@ Commit and push your changes and see how your function gets automatically built 
 Using a mixture of the new Hugo template, the Ingress Operator and either OpenFaaS Cloud, or GitLab we were able to host a static site with TLS and CI/CD in a very short period of time. You can use this to host any static site such as documentation, blog posts, and landing pages for websites.
 
 I chose Hugo for today's blog post but you could create another template using your favourite tooling. When we were chatting about this blog post in the OpenFaaS Slack Community, someone suggested writing a template for [GatsbyJS](https://www.gatsbyjs.org). We would love to see that happen, and if you want to have a go, you can just fork my [Hugo template](https://github.com/matipan/openfaas-hugo-template) and update it.
+
+Did you know that you can run any Docker image on OpenFaaS as long as it follows the [workload contract](https://docs.openfaas.com/architecture/production/#workload-or-function-guidelines)? This makes OpenFaaS one of the easiest ways to run any containerised workload on Kubernetes.
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Do you want to deploy any of the following to Kubernetes?<br><br>💻 Static webpages<br>💻 Microservices<br>💻 Blogs - Ghost/Wordpress<br>💻 CLIs<br>💻 Functions<br><br>Get productive as quick as possible with <a href="https://twitter.com/openfaas?ref_src=twsrc%5Etfw">@OpenFaaS</a> on your own laptop or your favourite Kubernetes engine. <a href="https://t.co/bcD7493eUD">https://t.co/bcD7493eUD</a> <a href="https://t.co/2zZSeYRFbS">pic.twitter.com/2zZSeYRFbS</a></p>&mdash; OpenFaaS (@openfaas) <a href="https://twitter.com/openfaas/status/1162414762652835841?ref_src=twsrc%5Etfw">August 16, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+### Connect with us
 
 Connect with us to discuss this blog post, or to share what you're building with OpenFaaS.
 

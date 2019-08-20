@@ -19,7 +19,7 @@ Learn how you can migrate your Hugo static sites over to OpenFaaS including cust
 
 Each programming language has its own custom-built template, which contains an entrypoint, a Dockerfile, and a sample handler to edit. Users can create their own templates with OpenFaaS in a very short period of time and in this tutorial I will show the one I created for [Hugo](https://gohugo.io), a popular static site generator.
 
-A note from Alex Ellis, OpenFaaS Founder:
+A note from [Alex Ellis, OpenFaaS Founder](https://www.openfaas.com/team/):
 
 > Now many people may associate "Serverless" only with SaaS products and cloud functions, but major players in the computing industry such as IBM, Red Hat, Pivotal and Google are all making an investment in Serverless 2.0. Serverless 2.0 is portable between any cloud or computer and is not subject to the limitations of SaaS products. Some users may perfectly happy with being locked into a single vendor and whatever the boundaries are, but for everyone else there's a new world. Find out more in my [Serverless Beyond the Hype video](https://www.youtube.com/watch?v=yOpYYYRuDQ0).
 

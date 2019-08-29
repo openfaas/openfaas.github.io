@@ -2,7 +2,7 @@
 title: "Five security tips for OpenFaaS on Kubernetes"
 description: Project founder Alex Ellis will walk you through 5 different security features and configurations for OpenFaaS on Kubernetes
 date: 2019-08-29
-image: /images/2019/five-security-tips/background.jpg
+image: /images/2019-five-security-tips/background.jpg
 categories:
   - security
   - kubernetes

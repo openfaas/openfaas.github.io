@@ -31,11 +31,13 @@ Authentication plugins can be built by anyone. The project has provided two, whi
 ![OAuth2 with OIDC in OpenFaaS](https://user-images.githubusercontent.com/6358735/57385738-e319ab00-71aa-11e9-8aa2-9cbb9e250cde.png)
 *Diagram by OpenFaaS Ltd*
 
-Whatever plugin you decide to use, it's highly recommended, if not essential that you also enable TLS when accepting requests from external, untrusted networks. Some users may even want to use TLS within an air-gapped environment.
+Whatever plugin you decide to use, it's not just highly recommended, but essential that you also enable TLS when accepting requests from external, untrusted networks. Some users may even want to use TLS within an air-gapped environment.
 
 > Note: OpenFaaS is designed to be a modular component, that can run anywhere easily. [OpenFaaS Cloud](https://https://docs.openfaas.com/openfaas-cloud/intro/) is a complete platform that ships with both TLS and OAuth2 out of the box.
 
 Compare: [OpenFaaS vs OpenFaaS Cloud](https://docs.openfaas.com/openfaas-cloud/intro/)
+
+The community has proposed a feature to install OpenFaaS using the `faas-cli`. If this was completed, it could move us closer to being able to install TLS by default. The main drawback with this approach, is that it depends on users having a valid domain name available for use. If you'd like to see this or help work on it, then [comment on the issue](https://github.com/openfaas/faas-cli/issues/612).
 
 See also: [Authentication in OpenFaaS](https://docs.openfaas.com/reference/authentication/)
 

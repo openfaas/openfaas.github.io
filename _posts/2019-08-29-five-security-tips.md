@@ -4,8 +4,7 @@ description: Project founder Alex Ellis will walk you through 5 different securi
 date: 2019-08-29
 image: /images/2019/five-security-tips/background.jpg
 categories:
-  - community
-  - ingress
+  - security
   - kubernetes
 author_staff_member: alex
 dark_background: true

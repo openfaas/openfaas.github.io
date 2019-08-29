@@ -223,7 +223,11 @@ The OpenFaaS values are: developers-first, operationally-simple and community-ce
 
 We have provided guides, free online training workshops, and tutorials to help developers get a basic level of security, and then a production-readiness guide for administrators and SREs to start building a solid production environment.
 
-The core value of being community-centrics means that suggestions, feedback and feature requests are welcomed. The more context about your use-case that you can provide, the better.
+Here's a Tweet thread that I published today, to try to summarise our approach:
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">The OpenFaaS philosophy is to make the experience easy for developers and operators.<br><br>Deploying a helm chart is not deploying to production.<br><br>A production readiness guide exists to help those new to Kubernetes get ready.<a href="https://t.co/iuJRhG2DtL">https://t.co/iuJRhG2DtL</a></p>&mdash; Alex Ellis (@alexellisuk) <a href="https://twitter.com/alexellisuk/status/1166974977612156928?ref_src=twsrc%5Etfw">August 29, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+The core value of being community-centric means that suggestions, feedback and feature requests are welcomed. The more context about your use-case that you can provide, the better.
 
 Now there are already several dozen OpenFaaS users in our end-user community, but many more who couldn't share their logo, or who can't talk publicly about what software they use.
 

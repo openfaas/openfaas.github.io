@@ -6,5 +6,5 @@ twitter_username: acornies
 github_username: acornies
 linkedin_username: acornies
 webpage: http://acornies.com/
-blurb: Member of <a href="https://twitter.com/openfaas">@openfaas</a>. Principal Engineer <a href="https://twitter.com/tucows">@tucows</a>.
+blurb: faas-nomad maintainer. Principal Engineer <a href="https://twitter.com/tucows">@tucows</a>.
 ---

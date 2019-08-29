@@ -2,7 +2,7 @@
 title: "Five security tips for OpenFaaS on Kubernetes"
 description: Project founder Alex Ellis will walk you through 5 different security features and configurations for OpenFaaS on Kubernetes
 date: 2019-08-29
-image: /images/2019-serverless-static-sites/background.jpg
+image: /images/2019/five-security-tips/background.jpg
 categories:
   - community
   - ingress
@@ -15,7 +15,7 @@ Project founder Alex Ellis will walk you through 5 different security features a
 
 I started [OpenFaaS](https://github.com/openfaas/faas) in late 2016 as a side-project with an aim to bring the Serverless experience to developers anywhere, whatever platform they were using. The corner-stone for this initial work was the container image and Docker to help orchestrate and build fault-tolerant, highly-available and secure clusters. Fast forward to 2019 and the community now has over 240 contributors and we've built a solid story for Serverless on Kubernetes.
 
-I'll walk you through some concepts and features that can make OpenFaaS even more robust.
+I'll walk you through some concepts and features that can make your deployment of OpenFaaS even more robust.
 
 ## 1. Authentication
 

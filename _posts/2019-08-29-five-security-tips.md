@@ -29,7 +29,7 @@ There are three modes of authentication available for the administrative endpoin
 Authentication plugins can be built by anyone. The project has provided two, which cover the needs of the current users. If you have additional needs or requirements, please do get in touch, or write your own.
 
 ![OAuth2 with OIDC in OpenFaaS](https://user-images.githubusercontent.com/6358735/57385738-e319ab00-71aa-11e9-8aa2-9cbb9e250cde.png)
-*Diagram by OpenFaaS Ltd*
+*Diagram by Alex Ellis, OpenFaaS Ltd*
 
 Whatever plugin you decide to use, it's not just highly recommended, but essential that you also enable TLS when accepting requests from external, untrusted networks. Some users may even want to use TLS within an air-gapped environment.
 

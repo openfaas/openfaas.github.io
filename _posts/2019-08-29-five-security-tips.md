@@ -37,8 +37,6 @@ Whatever plugin you decide to use, it's not just highly recommended, but essenti
 
 Compare: [OpenFaaS vs OpenFaaS Cloud](https://docs.openfaas.com/openfaas-cloud/intro/)
 
-The community has proposed a feature to install OpenFaaS using the `faas-cli`. If this was completed, it could move us closer to being able to install TLS by default. The main drawback with this approach, is that it depends on users having a valid domain name available for use. If you'd like to see this or help work on it, then [comment on the issue](https://github.com/openfaas/faas-cli/issues/612).
-
 See also: [Authentication in OpenFaaS](https://docs.openfaas.com/reference/authentication/)
 
 Forgot your password? [Find it here](https://docs.openfaas.com/deployment/troubleshooting/)
@@ -58,6 +56,8 @@ Rather than force developers to set up or configure TLS, we give them the option
 ![TLS](https://raw.githubusercontent.com/stefanprodan/openfaas-flux/master/docs/screens/openfaas-operator.png)
 *Diagram by Stefan Prodan, showing OpenFaaS with TLS provided by cert-manager*
 
+See the following guides to set up TLS:
+
 * [Set up TLS for OpenFaaS on Kubernetes](https://docs.openfaas.com/reference/ssl/kubernetes-with-cert-manager/)
 * [Production readiness guide](https://docs.openfaas.com/architecture/production/)
 
@@ -66,6 +66,10 @@ Once configured for your OpenFaaS Gateway, all traffic is encrypted with TLS bet
 > Note: OpenFaaS is designed to be a modular component, that can run anywhere easily. [OpenFaaS Cloud](https://https://docs.openfaas.com/openfaas-cloud/intro/) is a complete platform that ships with both TLS and OAuth2 out of the box.
 
 Compare: [OpenFaaS vs OpenFaaS Cloud](https://docs.openfaas.com/openfaas-cloud/intro/)
+
+Can we make things better?
+
+The community has proposed a feature to install OpenFaaS using the `faas-cli`. If this was completed, it could move us closer to being able to install TLS by default. The main drawback with this approach, is that it depends on users having a valid domain name available for use. If you'd like to see this or help work on it, then [comment on the issue](https://github.com/openfaas/faas-cli/issues/612).
 
 ### 2.1 Mutual TLS (mTLS)
 

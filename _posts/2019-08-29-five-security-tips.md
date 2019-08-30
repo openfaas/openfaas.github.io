@@ -86,6 +86,16 @@ mTLS is not free and comes at a cost. The project community currently prefers Li
 See also: [Linkerd2 & OpenFaaS Hands-on Lab](https://github.com/openfaas-incubator/openfaas-linkerd2)
 See also: [Istio on GKE with OpenFaaS](https://github.com/stefanprodan/istio-gke/blob/master/docs/openfaas/00-index.md)
 
+When you combine the existing stack in OpenFaaS of Prometheus, NATS and Kubernetes with Linkerd, you get: PLONK.
+
+* P - Prometheus - timeseries and metrics
+* L - LetsEncrypt and/or Linkerd - TLS, mTLS and service mesh
+* O - OpenFaaS - run any microservice or function, your next generation of PaaS
+* N - NATS - asynchronous messaging for background processing
+* K - Kubernetes, where would we be without it for portable, scalable compute?
+
+Read my blog post: [Introducing the PLONK Stack for Cloud Native Developers](https://www.openfaas.com/blog/plonk-stack/) to find out more.
+
 ### 3. Kubernetes authentication and CRDs vs. OpenFaaS REST API
 
 OpenFaaS can also rely on Kubernetes features such as role-based authentication control and the existing Kubernetes authentication strategy. This means that you can give developers very granular access to the `Function` CRD, just like any other Kubernetes object.

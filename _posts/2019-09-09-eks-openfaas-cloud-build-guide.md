@@ -486,6 +486,16 @@ Do you want to see a real-world example of what you can build? Check out my blog
 
 Contributions are also welcome to [ofc-bootstrap](https://github.com/openfaas-incubator/ofc-bootstrap), such as [adding support for AWS ECR](https://github.com/openfaas/openfaas-cloud/issues/504).
 
+### Thank you to my sponsor
+
+Building, testing, and writing up this tutorial and the associated user guide would normally mean losing 2-3 days of earnings. Fortunately one of the clients of OpenFaaS Ltd decided to commission and sponsor this work.
+
+I want to say a huge thank you to [DX - Dialog eXe AS](https://dx.no). Dialog eXe AS are one of the leading brands in Norway for e-ticket sales.
+
+Individuals and companies are welcomed to sponsor my OSS work on an ongoing basis through GitHub. I created a program called Insiders Updates, or the Insider Track which includes regular updates from me over email covering all my OSS work, news, events, and early access to new projects. This means you are paying for a subscription, rather than making a donation. GitHub also match the amounts over the first year.
+
+* [Become an *Insider* today](https://github.com/users/alexellis/sponsorship) 🏆
+
 ### Connect with the community
 
 Connect with us to discuss this blog post, or to share what you're building with OpenFaaS.
@@ -494,8 +504,6 @@ Connect with us to discuss this blog post, or to share what you're building with
 * Follow @OpenFaaS on [Twitter](https://twitter.com/openfaas)
 
 ### You may also like
-
-* [OpenFaaS Insiders](https://github.com/openfaas/faas/blob/master/BACKERS.md) - become an OpenFaaS Insider to get regular updates on new features, early access, tips and hints directly from the OpenFaaS Founder
 
 * [k3sup ("ketchup")](https://github.com/alexellis/k3sup) - the fastest way to create local, remote, or edge clusters with Kubernetes.
 

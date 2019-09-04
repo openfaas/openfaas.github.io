@@ -492,6 +492,8 @@ Building, testing, and writing up this tutorial and the associated user guide wo
 
 I want to say a huge thank you to [DX - Dialog eXe AS](https://dx.no). Dialog eXe AS are one of the leading brands in Norway for e-ticket sales.
 
+**Insider Track subscription**
+
 Individuals and companies are welcomed to sponsor my OSS work on an ongoing basis through GitHub. I created a program called Insiders Updates, or the Insider Track which includes regular updates from me over email covering all my OSS work, news, events, and early access to new projects. This means you are paying for a subscription, rather than making a donation. GitHub also match the amounts over the first year.
 
 * [Become an *Insider* today](https://github.com/users/alexellis/sponsorship) 🏆

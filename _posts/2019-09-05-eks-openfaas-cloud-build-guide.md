@@ -490,7 +490,7 @@ Contributions are also welcome to [ofc-bootstrap](https://github.com/openfaas-in
 
 ### Thank you to OpenFaaS Ltd
 
-I want to say a thank you to [OpenFaaS Ltd](https://www.openfaas.com/support) and [DX - Dialog eXe AS](https://dx.no) who commissioned this work through a joint commercial project. Dialog eXe AS are one of the leading brands in Norway for e-ticket sales.
+I want to say a thank you to [OpenFaaS Ltd](https://www.openfaas.com/support) and [DX - Dialog eXe AS](https://dx.no) who commissioned this tutorial through a joint commercial project. Dialog eXe AS are one of the leading brands in Norway for e-ticket sales.
 
 **Insider Track subscription**
 

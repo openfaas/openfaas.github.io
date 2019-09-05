@@ -486,11 +486,9 @@ Do you want to see a real-world example of what you can build? Check out my blog
 
 Contributions are also welcome to [ofc-bootstrap](https://github.com/openfaas-incubator/ofc-bootstrap), such as [adding support for AWS ECR](https://github.com/openfaas/openfaas-cloud/issues/504).
 
-### Thank you to my sponsor
+### Thank you to OpenFaaS Ltd
 
-Building, testing, and writing up this tutorial and the associated user guide would normally mean losing 2-3 days of earnings. Fortunately one of the clients of OpenFaaS Ltd decided to commission and sponsor this work.
-
-I want to say a huge thank you to [DX - Dialog eXe AS](https://dx.no). Dialog eXe AS are one of the leading brands in Norway for e-ticket sales.
+I want to say a thank you to [OpenFaaS Ltd](https://www.openfaas.com/support) and [DX - Dialog eXe AS](https://dx.no) who commissioned this work through a joint commercial project. Dialog eXe AS are one of the leading brands in Norway for e-ticket sales.
 
 **Insider Track subscription**
 

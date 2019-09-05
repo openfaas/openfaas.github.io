@@ -1,7 +1,7 @@
 ---
 title: "Build your own OpenFaaS Cloud with AWS EKS"
 description: Learn how to build your own OpenFaaS Cloud on AWS using Amazon Elastic Kubernetes Service (EKS) to bring Serverless with GitOps to your team.
-date: 2019-09-04
+date: 2019-09-05
 image: /images/2019-aws-ofc/background.jpg
 categories:
   - security

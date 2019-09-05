@@ -361,7 +361,7 @@ Edit `registry: ` in `init.yaml` and set it to your registry, note the final `/`
 
 Now that we have configured AWS and the integration with our source-control management system, we can configure how OpenFaaS Cloud will operate.
 
-#### Set up your ACL
+#### Set up your Access Control List (ACL)
 
 OpenFaaS Cloud uses a list of usernames to validate logins and incoming build requests from the source control system.
 

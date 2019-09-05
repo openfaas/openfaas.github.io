@@ -136,12 +136,14 @@ I'll be using `eu-central-1`.
 
 You will now configure the following with the link below:
 
-* Install AWS CLI with Python
-* Configure AWS CLI
+* Install AWS CLI with Python (optional)
+* Configure AWS CLI (optional)
 * Install eksctl with [brew](https://brew.sh/)
 * Then stop and skip *Create Your Amazon EKS Cluster and Worker Nodes*
 
-Task: [Install aws-cli & eksctl](https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html)
+> Whilst the `aws-cli` is optional for using eksctl, it's likely you will need this or have it configured already.
+
+Task: [Install eksctl](https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html)
 
 Check eksctl:
 

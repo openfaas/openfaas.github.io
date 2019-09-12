@@ -247,6 +247,10 @@ You can [get Kubernetes](https://kubernetes.io/) from your favourite cloud as a 
 
     It's hard to sum up 3-years of R&D, community interaction, events, blog posts, tutorials, and workshops, but the end result looks something like: PLONK. I hope you'll kick the tyres with OpenFaaS if you haven't already, or if you tried it some time ago, will come back and see how much it's improved.
 
+#### Share this post on Twitter
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">&quot;Introducing the PLONK Stack for Cloud Native Developers&quot;<a href="https://twitter.com/PrometheusIO?ref_src=twsrc%5Etfw">@PrometheusIO</a><a href="https://twitter.com/linkerd?ref_src=twsrc%5Etfw">@linkerd</a> <a href="https://twitter.com/letsencrypt?ref_src=twsrc%5Etfw">@letsencrypt</a> <a href="https://twitter.com/openfaas?ref_src=twsrc%5Etfw">@openfaas</a> <a href="https://twitter.com/nats_io?ref_src=twsrc%5Etfw">@nats_io</a><a href="https://twitter.com/nginx?ref_src=twsrc%5Etfw">@nginx</a> <a href="https://twitter.com/CloudNativeFdn?ref_src=twsrc%5Etfw">@CloudNativeFdn</a> <a href="https://twitter.com/kubernetesio?ref_src=twsrc%5Etfw">@kubernetesio</a> <a href="https://t.co/Vsn0wpIjTb">https://t.co/Vsn0wpIjTb</a></p>&mdash; Alex Ellis (@alexellisuk) <a href="https://twitter.com/alexellisuk/status/1171793016568156162?ref_src=twsrc%5Etfw">September 11, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
 #### Get involved
 
 OpenFaaS is an independent project, hosted by [OpenFaaS Ltd](mailto:sales@openfaas.com). If you would like to support the project you can become a backer or sponsor through GitHub's new Sponsorship program.

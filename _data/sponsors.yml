@@ -1,4 +1,7 @@
 platinum:
+- alt: "DigitalOcean"
+  url: https://digitalocean.com/
+  logo: digitalocean.svg
 - alt: "Rancher Labs"
   url: https://rancher.com/
   logo: rancher-logo-stacked-color.svg

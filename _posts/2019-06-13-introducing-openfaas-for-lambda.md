@@ -189,11 +189,11 @@ Here are some of the projects we've talked about
 * [faas-federation](https://github.com/openfaas-incubator/faas-federation) - provider router (MIT)
 * [faas-provider](https://github.com/openfaas/faas-provider) - provider SDK (MIT)
 * [faas-netes](https://github.com/openfaas/faas-netes) - for Kubernetes (MIT)
-* faas-lambda (early preview)
+* faas-lambda - early preview
 
 To register your interest and give feedback sign-up below:
 
-* [faas-lambda early preview](https://docs.google.com/forms/d/e/1FAIpQLSe9AfH-uCuK_tUeeRQWLe7_Ti-lbMF5iynwbdfszmB9NEttow/viewform))
+* [faas-lambda early preview](https://docs.google.com/forms/d/e/1FAIpQLSe9AfH-uCuK_tUeeRQWLe7_Ti-lbMF5iynwbdfszmB9NEttow/viewform)
 
 ### Get connected
 

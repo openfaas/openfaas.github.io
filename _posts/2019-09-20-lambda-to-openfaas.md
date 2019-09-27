@@ -1,7 +1,7 @@
 ---
 title: "Migrate Your AWS Lambda Functions to OpenFaaS"
 description: Burton explains the steps for migrating an existing AWS Lambda function to OpenFaaS
-date: 2019-09-10
+date: 2019-09-30
 image: /images/lambda-to-openfaas/birds.jpg
 categories:
   - Lambda
@@ -15,7 +15,7 @@ AWS announced the Lambda feature at [re:Invent 2014](https://www.youtube.com/wat
 
 In his talk [Welcome to Serverless 2.0](https://www.youtube.com/watch?v=JvXm-oHi5Mg), Alex Ellis describes a new standard for serverless functions: the ["Serverless 2.0 runtime contract"](https://docs.openfaas.com/reference/workloads/). This makes your functions completely portable and removes many of the limitations of the previous generation of serverless functions.
 
-In this post, we'll walk through the steps taken to migrate existing AWS Lambda functions to OpenFaaS compatible functions in order to allow easier local testing, familiar development process, and the freedom to use any number of other cloud providers without any code changes. We won't be moving all of the infrastructure, only the functions. We'll keep the DynamoDB table as well as the IAM roles/permissions to access that data.
+In this post, we'll walk through the steps taken to migrate existing AWS Lambda functions to OpenFaaS compatible functions in order to allow easier local testing, familiar development process, and the freedom to use any number of other cloud providers without any code changes. I'll show you how to migrate the compute to OpenFaaS, whilst continuing to use AWS services such as DynamoDB.
 
 Let's see what it takes to upgrade your AWS Lambda functions to OpenFaaS and Serverless 2.0 using OpenFaaS
 

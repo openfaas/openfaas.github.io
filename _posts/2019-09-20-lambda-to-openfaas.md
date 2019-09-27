@@ -11,24 +11,23 @@ author_staff_member: burton
 dark_background: false
 ---
 
-AWS introduced the world to the idea of serverless architecture back in 2014 with the announcement of Lambda. The idea was that you could upload a zip file containing your code logic, and AWS would manage the infrastructure behind the scenes, billing you only for the time the code was being executed.
+AWS announced the Lambda feature at [re:Invent 2014](https://www.youtube.com/watch?v=9eHoyUVo-yg). The idea was that you could upload a zip file containing your code logic, and AWS would manage the infrastructure behind the scenes. They would then bill you only for the time the code was being executed.
 
-In his talk [Welcome to Serverless 2.0](https://www.youtube.com/watch?v=JvXm-oHi5Mg), Alex Ellis described the new standard for serverless functions: Docker/OCI images exposing a port for execution, deployed to a Kubernetes cluster. This makes your functions completely portable and removes many of the limitations of the previous generation of serverless functions.
+In his talk [Welcome to Serverless 2.0](https://www.youtube.com/watch?v=JvXm-oHi5Mg), Alex Ellis describes a new standard for serverless functions: the ["Serverless 2.0 runtime contract"](https://docs.openfaas.com/reference/workloads/). This makes your functions completely portable and removes many of the limitations of the previous generation of serverless functions.
 
-In this post, We'll walk through the steps taken to migrate existing AWS Lambda functions to OpenFaaS compatible functions in order to allow easier local testing, familiar development process, and the freedom to use any number of other cloud providers without any code changes. We won't be moving all of the infrastructure, only the functions. We'll keep the DynamoDB table as well as the IAM roles/permissions to access that data.
+In this post, we'll walk through the steps taken to migrate existing AWS Lambda functions to OpenFaaS compatible functions in order to allow easier local testing, familiar development process, and the freedom to use any number of other cloud providers without any code changes. We won't be moving all of the infrastructure, only the functions. We'll keep the DynamoDB table as well as the IAM roles/permissions to access that data.
 
-Without further ado, let's see what it takes to upgrade your AWS Lambda functions to OpenFaaS and Serverless 2.0 using OpenFaaS!
+Let's see what it takes to upgrade your AWS Lambda functions to OpenFaaS and Serverless 2.0 using OpenFaaS
 
 ## Prerequisites
 
-- Existing AWS Lambda functions (optional)
+- An existing AWS Lambda functions (optional)
   - For the tutorial, we'll be using the Lambda function in this [Github repository](https://github.com/burtonr/lambda-openfaas-blog)
 - OpenFaaS 
   - Check the documentation for [how to deploy to Kubernetes](https://docs.openfaas.com/deployment/kubernetes/)
 - OpenFaaS CLI
   - Check the documentation for [installation instructions](https://docs.openfaas.com/cli/install/)
-- IDE, or other text editor
-  - I recommend [Visual Studio Code](https://code.visualstudio.com/)
+- A text editor, I recommend [VS Code](https://code.visualstudio.com/)
 
 ## Getting Started
 
@@ -45,13 +44,13 @@ exports.handler = async (event) => {
 };
 ```
 
-Similarly, when you create a new function with the OpenFaaS CLI and the `node10-express` template, sample code is provided as shown here:
+Let's examine the example for OpenFaaS. When you create a new function with the OpenFaaS CLI and the `node10-express` template, sample code is provided as shown here:
 ```js
 "use strict"
 
 module.exports = (event, context) => {
     let err;
-    const result =             {
+    const result = {
         status: "You said: " + JSON.stringify(event.body)
     };
     context
@@ -60,15 +59,17 @@ module.exports = (event, context) => {
 }
 ```
 
-At a quick glance, the two function samples are very similar. The main difference is in the invocation parameters. OpenFaaS passes in the `context` object which is used to provide additional context to the result. The context includes the properties `status`, `succeed`, `error`, and others that make discovering functionality and managing the response of the function easy without having to dig through pages of documentation.
+At a glance, the two function samples are very similar. The main difference is in the invocation parameters. OpenFaaS passes in the `context` object which is used to provide additional context to the result. The context includes the properties `status`, `succeed`, `error`, and others that make discovering functionality and managing the response of the function easy without having to dig through pages of documentation.
 
 As you can see, migrating the sample function from Lambda to OpenFaaS would be as easy as adding the `context` object to the invocation, and moving the values from the inline `response` object to the OpenFaaS included `context` object properties.
+
+> You can see the documentation and other examples for the node10-express template [here](https://github.com/openfaas-incubator/node10-express-template).
 
 Next, we'll work through a real-world Lambda function that includes IAM permissions to access a DynamoDB table.
 
 ## AWS Lambda
 
-The Lambda functions we'll be migrating are part of a URL shortener. One function creates and stores the shortened URL in DynamoDB, and the other function is responsible for looking up the destination URL, and redirecting the browser.
+The Lambda functions we'll be migrating are part of a URL shortener. One function creates and stores the shortened URL in DynamoDB, and the other function is responsible for looking up the destination URL, and redirecting the browser. We've separated the operations between two functions so that the creation of the short URLs can be placed inside a private network in order to restrict who can create new shortened links.
 
 Let's have a look at the `shortener` function which creates and stores the shortened URLs:
 

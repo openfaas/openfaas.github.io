@@ -198,8 +198,15 @@ npm install aws-sdk
 
 > View the complete `package.json` file on [Github](https://github.com/burtonr/lambda-openfaas-blog/blob/master/openfaas/shortener/package.json)
 
-#### Use secrets
-As mentioned in the introduction, we're only migrating the functions at this time. This means that we will need to be able to use that same IAM account for access to the DynamoDB table. Since we want this function to be portable, we'll need to be able to use our AWS Access Key ID and AWS Secret Access Key associated with the same IAM account that our Lambda function was using.
+#### Accessing DynamoDB
+As mentioned in the introduction, we're only migrating the functions at this time. This means that we will need to be able to use that same IAM account for access to the DynamoDB table. There are two options available for using the existing IAM account that has permissions to access the data stored in the DynamoDB table. 
+- Create an Access Key ID and Secret Access Key, store them as secrets, and pass them into the AWS SDK configuration. 
+    - This allows the function to be run on any Kubernetes cluster that the secrets are stored. 
+- Use an [IAM Service Account](https://aws.amazon.com/blogs/opensource/introducing-fine-grained-iam-roles-service-accounts/)
+    - This requires running the function on an AWS EKS cluster
+
+###### Use secrets
+If we want this function to be able to run on any Kubernetes cluster, we'll need to be able to use our AWS Access Key ID and AWS Secret Access Key associated with the same IAM account that our Lambda function was using.
 
 > To learn more about DynamoDB, follow the [Getting Started with DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GettingStartedDynamoDB.html) guide on AWS
 
@@ -245,6 +252,23 @@ functions:
 _file source: [openfaas/stack.yml](https://github.com/burtonr/lambda-openfaas-blog/blob/master/openfaas/stack.yml)_
 
 > Read more about [Unifying Secrets with OpenFaaS](/blog/unified-secrets)
+
+###### EKS IAM Service Account
+Using the AWS Elastic Kubernetes Service (EKS), you are able to assign an IAM role to a Kubernetes ServiceAccount. With OpenFaaS, you can assign that ServiceAccount to your function by adding an annotation to the function definition yaml file.
+
+We won't go into the details of creating a Service Account, or how to add the IAM role here. That is well defined in the AWS blog [Introducing Fine-Grained IAM Roles for Service Accounts](https://aws.amazon.com/blogs/opensource/introducing-fine-grained-iam-roles-service-accounts/).
+
+Below is the additions that would need to be added to the function's yaml file:
+```yaml
+functions:
+  shortener:
+    lang: node10-express
+    ...
+    annotations:
+      com.openfaas.serviceaccount: "iamserviceaccount"
+```
+_file source: [openfaas/stack.yml](https://github.com/burtonr/lambda-openfaas-blog/blob/master/openfaas/stack.yml)_
+
 
 #### Code Differences
 Below is a picture of what the differences for the "shortener" function look like as seen from a `git diff` (here, using VSCode)

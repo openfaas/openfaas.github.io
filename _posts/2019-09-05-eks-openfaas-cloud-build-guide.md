@@ -169,10 +169,11 @@ This will configure a minimum availability of `2` worker nodes and up to `4` nod
 
 > Note: the `--node-ami auto` flag will likely use *Amazon Linux 2* for the worker OS. Some OpenFaaS users prefer to package their own AMIs and specify this, so that they are in full control of OS patches.
 
-
 I would say that it can be hard to size and specify the correct AWS worker type without some experience of your workload. OpenFaaS Cloud will be mostly idle between builds, so I'm going to use the `t3.medium` type, but you are free to customise your workers.
 
 > See also: [M5 vs. T3: How to Choose the Right Amazon EC2 Instance](https://blog.cloudability.com/ec2-m5-vs-t3/) from Cloudability.
+
+> See also: [a great alternative is to use the cluster.yaml file to define the cluster]((https://eksctl.io/usage/creating-and-managing-clusters/))
 
 The provisioning step will take between 10 and 15 minutes.
 

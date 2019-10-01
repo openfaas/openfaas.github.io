@@ -237,7 +237,7 @@ You can create a domain starting from around 2 USD with [Namecheap.com](https://
 
 We will configure our DNS entries, after provisioning OpenFaaS Cloud. This is because we need to get the IP address of the `LoadBalancer` which exposes Nginx to the public Internet.
 
-Later we will create the following DNS A records:
+Later we will create the following DNS CNAME records:
 
 * `*.cloudnative.space` - a wildcard domain to access user functions
 * `auth.system.cloudnative.space` - the auth domain

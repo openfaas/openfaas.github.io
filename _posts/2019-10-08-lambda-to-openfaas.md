@@ -367,18 +367,18 @@ Additionally, this means that developers are able to test their functions by dep
 
 To further expand the portability, we could migrate the database to MongoDB for a full OSS stack! An example of this can be found on [Alex's Repository](https://github.com/alexellis/mongodb-function)
 
-### Connect With the Community
+### Connect with the community
 
   * [Join Slack now](https://goo.gl/forms/SqpLSdyzVoOboRqs1)
   * [Start your first contribution](https://docs.openfaas.com/contributing/get-started/)
   * [Become and OpenFaaS Insider via GitHub Sponsors](https://insiders.openfaas.io/)
 
-### For More Information 
+### Related reading 
 
-Learn the features of OpenFaaS in the [workshop](https://docs.openfaas.com/tutorials/workshop/)
+* Learn the features of OpenFaaS in the [workshop](https://docs.openfaas.com/tutorials/workshop/)
 
-Learn how AWS Lambda and OpenFaaS can play well together with [faas-lambda](/blog/introducing-openfaas-for-lambda)
+* Learn how AWS Lambda and OpenFaaS can play well together with [faas-lambda](/blog/introducing-openfaas-for-lambda)
 
-[Build your own OpenFaaS Cloud with AWS EKS](/blog/eks-openfaas-cloud-build-guide)
+* [Build your own OpenFaaS Cloud with AWS EKS](/blog/eks-openfaas-cloud-build-guide)
 
-[TLS & Custom Domains for your Functions](/blog/custom-domains-function-ingress/)
+* [TLS & Custom Domains for your Functions](/blog/custom-domains-function-ingress/)

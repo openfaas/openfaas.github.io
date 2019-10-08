@@ -1,15 +1,18 @@
 ---
-title: "Migrate Your AWS Lambda Functions to OpenFaaS"
-description: Burton explains the steps for migrating an existing AWS Lambda function to OpenFaaS
-date: 2019-09-30
+title: "Migrate Your AWS Lambda Functions to Kubernetes with OpenFaaS"
+description: Burton explains the steps for migrating an existing AWS Lambda function to OpenFaaS and Kubernetes to gain portability and additional functionality.
+date: 2019-10-08
 image: /images/lambda-to-openfaas/birds.jpg
 categories:
-  - Lambda
+  - lambda
+  - aws
   - tutorial
-  - examples
+  - migration
 author_staff_member: burton
 dark_background: false
 ---
+
+In this tutorial, Burton explains the steps for migrating an existing AWS Lambda function to OpenFaaS and Kubernetes to gain portability and additional functionality.
 
 AWS announced the Lambda feature at [re:Invent 2014](https://www.youtube.com/watch?v=9eHoyUVo-yg). The idea was that you could upload a zip file containing your code logic, and AWS would manage the infrastructure behind the scenes. They would then bill you only for the time the code was being executed.
 

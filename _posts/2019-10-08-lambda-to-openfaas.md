@@ -48,6 +48,7 @@ exports.handler = async (event) => {
 ```
 
 Let's examine the example for OpenFaaS. When you create a new function with the OpenFaaS CLI and the `node10-express` template, sample code is provided as shown here:
+
 ```js
 "use strict"
 
@@ -148,30 +149,38 @@ All of this setup and configuration outside of the function code means that the 
 
 ## OpenFaaS
 
-#### Create the New Function
+### Create the New Function
+
 First, let's set an environment variable that OpenFaaS CLI will use to prefix the image names with our registry (Docker Hub) username
-```shell
+
+```sh
 export DOCKER_USER="<your username>"
 ```
 
 Pull the Node.js + Express.js template to build from it:
-```shell
+
+```sh
 $ faas-cli template store pull node10-express
 ```
+
 Now, create the new "shortener" function:
-```shell
+
+```sh
 $ faas-cli new shortener --lang node10-express
 ```
+
 This will create a `shortener.yml` file, and a directory with the same name containing the sample function code to work from. The `--prefix` flag will add your registry name to the image so that the image can be pushed
 
 OpenFaaS uses the convention of having a `stack.yml` file that contains all of the function definitions to operate on. You can use the `--yaml` or `-f` flags to provide a differently named file, but for this post, we'll rename the generated yml file making the remainder of the commands simpler.
 
 When we create the "redirector" function, we can pass the `--append` flag to automatically add the new function's definition to the existing file.
-```shell
+
+```sh
 $ faas-cli new redirector --lang node10-express --append stack.yml
 ```
 
 The resulting `stack.yml` file will look something like this:
+
 ```yaml
 functions:
   shortener:
@@ -185,7 +194,8 @@ functions:
 ```
 _file source: [openfaas/stack.yml](https://github.com/burtonr/lambda-openfaas-blog/blob/master/openfaas/stack.yml)_
 
-#### Migrate the Function Code
+### Migrate the Function Code
+
 Copy the code from our Lambda function. Everything below the line: `exports.handler = function (event, context, callback) {`
 
 and paste it in to the `handler.js` file, replacing everything below the line: `module.exports = (event, context) => {`
@@ -195,20 +205,23 @@ You'll also need to copy over the `require` lines, and any `const` you've define
 > The complete function code is available to view on [Github](https://github.com/burtonr/lambda-openfaas-blog/blob/master/openfaas/shortener/handler.js)
 
 Since we want this new function to be portable, we'll need to add the `aws-sdk` to our dependencies in the `package.json` file by running the following command:
-```shell
+
+```sh
 npm install aws-sdk
 ```
 
 > View the complete `package.json` file on [Github](https://github.com/burtonr/lambda-openfaas-blog/blob/master/openfaas/shortener/package.json)
 
-#### Accessing DynamoDB
+### Accessing DynamoDB
+
 As mentioned in the introduction, we're only migrating the functions at this time. This means that we will need to be able to use that same IAM account for access to the DynamoDB table. There are two options available for using the existing IAM account that has permissions to access the data stored in the DynamoDB table. 
 - Create an Access Key ID and Secret Access Key, store them as secrets, and pass them into the AWS SDK configuration. 
     - This allows the function to be run on any Kubernetes cluster that the secrets are stored. 
 - Use an [IAM Service Account](https://aws.amazon.com/blogs/opensource/introducing-fine-grained-iam-roles-service-accounts/)
     - This requires running the function on an AWS EKS cluster
 
-###### Use secrets
+### Use secrets
+
 If we want this function to be able to run on any Kubernetes cluster, we'll need to be able to use our AWS Access Key ID and AWS Secret Access Key associated with the same IAM account that our Lambda function was using.
 
 > To learn more about DynamoDB, follow the [Getting Started with DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GettingStartedDynamoDB.html) guide on AWS
@@ -218,12 +231,14 @@ First, you'll need to create a user in AWS with the role that the Lambda functio
 Download and save each of the access keys in separate files (with no new lines). We'll read from those files when creating the secrets to ensure that they aren't exposed in any history or logs.
 
 Now, create Kubernetes Secrets for each of those values. You could use the `kubectl create secret ...` command, but to keep with the portability that comes with OpenFaaS, we'll use the OpenFaaS CLI:
-```shell
+
+```sh
 $ faas-cli secret create shorturl-dynamo-key --from-file=./access-key-id
 $ faas-cli secret create shorturl-dynamo-secret --from-file=./secret-access-key
 ```
 
 To access these secrets in the function, add the following lines:
+
 ```javascript
 let accessKeyId = fs.readFileSync("/var/openfaas/secrets/shorturl-dynamo-key").toString()
 let secretKey = fs.readFileSync("/var/openfaas/secrets/shorturl-dynamo-secret").toString()
@@ -231,6 +246,7 @@ let secretKey = fs.readFileSync("/var/openfaas/secrets/shorturl-dynamo-secret").
 _file source: [/openfaas/shortener/handler.js](https://github.com/burtonr/lambda-openfaas-blog/blob/master/openfaas/shortener/handler.js#L32)_
 
 Pass them into the AWS SDK configuration so that the DynamoDB `DocumentClient` will have access to the table:
+
 ```javascript
 AWS.config.update({
     region: 'us-west-1',
@@ -240,9 +256,11 @@ AWS.config.update({
     }
 });
 ```
+
 _file source: [/openfaas/shortener/handler.js](https://github.com/burtonr/lambda-openfaas-blog/blob/master/openfaas/shortener/handler.js#L32)_
 
 Finally, we'll add the secrets to the function's `yml` file so that the function will be given the appropriate permissions to read the secret values
+
 ```yaml
 functions:
   shortener:
@@ -256,7 +274,8 @@ _file source: [openfaas/stack.yml](https://github.com/burtonr/lambda-openfaas-bl
 
 > Read more about [Unifying Secrets with OpenFaaS](/blog/unified-secrets)
 
-###### EKS IAM Service Account
+### A note on the IAM Service Account in EKS
+
 Using the AWS Elastic Kubernetes Service (EKS), you are able to assign an IAM role to a Kubernetes ServiceAccount. With OpenFaaS, you can assign that ServiceAccount to your function by adding an annotation to the function definition yaml file.
 
 We won't go into the details of creating a Service Account, or how to add the IAM role here. That is well defined in the AWS blog [Introducing Fine-Grained IAM Roles for Service Accounts](https://aws.amazon.com/blogs/opensource/introducing-fine-grained-iam-roles-service-accounts/).
@@ -273,7 +292,8 @@ functions:
 _file source: [openfaas/stack.yml](https://github.com/burtonr/lambda-openfaas-blog/blob/master/openfaas/stack.yml)_
 
 
-#### Code Differences
+### Code differences
+
 Below is a picture of what the differences for the "shortener" function look like as seen from a `git diff` (here, using VSCode)
 
 ![Function Code Diff](/images/lambda-to-openfaas/code-diff.png)
@@ -287,7 +307,7 @@ Below is a picture of what the differences for the "shortener" function look lik
 
 If you look at the `git diff --stat` output, we actually removed more code than we added!
 
-```shell
+```sh
  1 file changed, 35 insertions(+), 37 deletions(-)
 ```
 
@@ -295,38 +315,42 @@ Also, notice that the AWS credentials are not in the code directly, so this func
 
 > Because of the changes made to configuring the aws-sdk and reading secrets, this migrated code will no longer run on Lambda
 
-#### Build and Deploy
+### Build and Deploy
+
 Now that our function code is migrated, it's time to build and deploy it!
 
 Both of these can be accomplished with the `faas-cli` tool. Optionally, with [OpenFaaS Cloud](https://docs.openfaas.com/openfaas-cloud/), this can all happen automatically when the changes are pushed to Github or GitLab.
 
 - Ensure your CLI is logged in to your cluster
-```shell
+```sh
 $ echo $PASSWORD | faas-cli login --password-stdin
 ```
 
 - Now, we're ready to build and deploy the container images.
-```shell
+```sh
 $ faas-cli up
 ```
 
 > The `up` command combines the `build`, `push`, and `deploy` commands into one cohesive operation.
 
 
-#### Invoking the Function
+### Invoking the Function
+
 Now that your function has been deployed, it is available to be called via HTTP. OpenFaaS makes the functions available through the gateway URL
 
-```shell
+```sh
 $ curl -d '{"url": "https://something.com/"}' http://127.0.0.1:8080/function/shortener
 ```
 
 You can also invoke a function using the `faas-cli`
-```shell
+
+```sh
 $ echo '{ "url": "https://something.com/" }' | faas-cli invoke shortener
 ```
 
 Additionally, it is possible to call a function asynchronously by adjusting the URL route slightly by replacing `/function/` with `/async-function/`
-```shell
+
+```sh
 $ curl -d '{"url": "https://something.com/"}' http://127.0.0.1:8080/async-function/shortener
 ```
 
@@ -336,19 +360,21 @@ This will return an immediate `202 Accepted` response and the function will be e
 
 
 ## Wrapping Up
+
 We've migrated our function code from being restricted to only deployable on AWS Lambda infrastructure to being completely portable by using OpenFaaS. 
 
 Additionally, this means that developers are able to test their functions by deploying to a local Kubernetes cluster using Docker for Windows, Docker for Mac, [microk8s](https://johnmccabe.net/technology/projects/openfaas-on-microk8s/), or [KinD](https://blog.alexellis.io/be-kind-to-yourself/)
 
 To further expand the portability, we could migrate the database to MongoDB for a full OSS stack! An example of this can be found on [Alex's Repository](https://github.com/alexellis/mongodb-function)
 
-#### Connect With the Community
+### Connect With the Community
 
   * [Join Slack now](https://goo.gl/forms/SqpLSdyzVoOboRqs1)
-  * [Contribute](https://docs.openfaas.com/contributing/get-started/)
-  * [Sponsor on GitHub](https://www.openfaas.com/support/)
+  * [Start your first contribution](https://docs.openfaas.com/contributing/get-started/)
+  * [Become and OpenFaaS Insider via GitHub Sponsors](https://insiders.openfaas.io/)
 
-## For More Information 
+### For More Information 
+
 Learn the features of OpenFaaS in the [workshop](https://docs.openfaas.com/tutorials/workshop/)
 
 Learn how AWS Lambda and OpenFaaS can play well together with [faas-lambda](/blog/introducing-openfaas-for-lambda)

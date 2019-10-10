@@ -12,7 +12,7 @@ dark_background: true
 
 Learn how to build your own OpenFaaS Cloud on AWS using Amazon Elastic Kubernetes Service (EKS) to bring Serverless with GitOps to your team.
 
-You may be [familiar with OpenFaaS](https://www.openfaas.com/), but what is [OpenFaaS Cloud](https://docs.openfaas.com/openfaas-cloud/)? OpenFaaS Cloud (OFC) is a complete serverless platform for Kubernetes including CI/CD, authentication, TLS, and multi-user support.
+You may be [familiar with OpenFaaS](https://www.openfaas.com/), but what is [OpenFaaS Cloud](https://docs.openfaas.com/openfaas-cloud/intro/)? OpenFaaS Cloud (OFC) is a complete serverless platform for Kubernetes including CI/CD, authentication, TLS, and multi-user support.
 
 > You can think of it like an opinionated distribution or product built upon OpenFaaS.
 
@@ -472,7 +472,7 @@ There is a New User Guide for OpenFaaS Cloud which shows you how to link your fi
 
 * [Run through the New User Guide now](https://docs.openfaas.com/openfaas-cloud/user-guide/)
 
-You can deploy functions in any language by using [OpenFaaS templates](https://www.openfaas.com/blog/template-store/), or a Dockerfile as per [Lab 3 of the OpenFaaS workshop](https://github.com/openfaas/workshop/blob/master/lab3.md#custom-binaries-as-functions-optional-exercise). You can even deploy pre-built Docker images such as [this example with kubesec.io)[https://github.com/teamserverless/kubesec].
+You can deploy functions in any language by using [OpenFaaS templates](https://www.openfaas.com/blog/template-store/), or a Dockerfile as per [Lab 3 of the OpenFaaS workshop](https://github.com/openfaas/workshop/blob/master/lab3.md#custom-binaries-as-functions-optional-exercise). You can even deploy pre-built Docker images such as [this example with kubesec.io](https://github.com/teamserverless/kubesec).
 
 ## Wrapping up
 

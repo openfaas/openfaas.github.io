@@ -5,6 +5,9 @@ platinum:
 - alt: "Rancher Labs"
   url: https://rancher.com/
   logo: rancher-logo-stacked-color.svg
+- alt: "DX"
+  url: https://dx.no/
+  logo: dx.png
 gold:
 - alt: "Civo: UK Cloud Hosting Platform"
   url: https://www.civo.com/promo

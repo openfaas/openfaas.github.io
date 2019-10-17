@@ -24,7 +24,7 @@ Let's see what it takes to upgrade your AWS Lambda functions to OpenFaaS and Ser
 
 ## Prerequisites
 
-- An existing AWS Lambda functions (optional)
+- An existing AWS Lambda function
   - For the tutorial, we'll be using the Lambda function in this [Github repository](https://github.com/burtonr/lambda-openfaas-blog)
 - OpenFaaS 
   - Check the documentation for [how to deploy to Kubernetes](https://docs.openfaas.com/deployment/kubernetes/)
@@ -151,7 +151,7 @@ All of this setup and configuration outside of the function code means that the 
 
 ### Create the New Function
 
-First, let's set an environment variable that OpenFaaS CLI will use to prefix the image names with our registry (Docker Hub) username
+First, let's set an environment variable that we will use with OpenFaaS CLI to prefix the image names with our registry (Docker Hub) username
 
 ```sh
 export DOCKER_USER="<your username>"
@@ -166,7 +166,9 @@ $ faas-cli template store pull node10-express
 Now, create the new "shortener" function:
 
 ```sh
-$ faas-cli new shortener --lang node10-express
+$ faas-cli new shortener \
+    --lang node10-express \
+    --prefix $DOCKER_USER
 ```
 
 This will create a `shortener.yml` file, and a directory with the same name containing the sample function code to work from. The `--prefix` flag will add your registry name to the image so that the image can be pushed
@@ -176,7 +178,9 @@ OpenFaaS uses the convention of having a `stack.yml` file that contains all of t
 When we create the "redirector" function, we can pass the `--append` flag to automatically add the new function's definition to the existing file.
 
 ```sh
-$ faas-cli new redirector --lang node10-express --append stack.yml
+$ faas-cli new redirector \
+    --lang node10-express \
+    --append stack.yml
 ```
 
 The resulting `stack.yml` file will look something like this:
@@ -233,15 +237,21 @@ Download and save each of the access keys in separate files (with no new lines).
 Now, create Kubernetes Secrets for each of those values. You could use the `kubectl create secret ...` command, but to keep with the portability that comes with OpenFaaS, we'll use the OpenFaaS CLI:
 
 ```sh
-$ faas-cli secret create shorturl-dynamo-key --from-file=./access-key-id
-$ faas-cli secret create shorturl-dynamo-secret --from-file=./secret-access-key
+$ faas-cli secret create shorturl-dynamo-key \
+    --from-file=./access-key-id
+$ faas-cli secret create shorturl-dynamo-secret \
+    --from-file=./secret-access-key
 ```
 
 To access these secrets in the function, add the following lines:
 
 ```javascript
-let accessKeyId = fs.readFileSync("/var/openfaas/secrets/shorturl-dynamo-key").toString()
-let secretKey = fs.readFileSync("/var/openfaas/secrets/shorturl-dynamo-secret").toString()
+let accessKeyId = 
+  fs.readFileSync("/var/openfaas/secrets/shorturl-dynamo-key")
+    .toString()
+let secretKey = 
+  fs.readFileSync("/var/openfaas/secrets/shorturl-dynamo-secret")
+    .toString()
 ```
 _file source: [/openfaas/shortener/handler.js](https://github.com/burtonr/lambda-openfaas-blog/blob/master/openfaas/shortener/handler.js#L32)_
 
@@ -339,19 +349,24 @@ $ faas-cli up
 Now that your function has been deployed, it is available to be called via HTTP. OpenFaaS makes the functions available through the gateway URL
 
 ```sh
-$ curl -d '{"url": "https://something.com/"}' http://127.0.0.1:8080/function/shortener
+$ curl -d \
+    '{"url": "https://something.com/"}' \
+    http://127.0.0.1:8080/function/shortener
 ```
 
 You can also invoke a function using the `faas-cli`
 
 ```sh
-$ echo '{ "url": "https://something.com/" }' | faas-cli invoke shortener
+$ echo '{ "url": "https://something.com/" }' \
+    | faas-cli invoke shortener
 ```
 
 Additionally, it is possible to call a function asynchronously by adjusting the URL route slightly by replacing `/function/` with `/async-function/`
 
 ```sh
-$ curl -d '{"url": "https://something.com/"}' http://127.0.0.1:8080/async-function/shortener
+$ curl -d \
+    '{"url": "https://something.com/"}' \
+    http://127.0.0.1:8080/async-function/shortener
 ```
 
 This will return an immediate `202 Accepted` response and the function will be executed in the background.

@@ -1,3 +1,6 @@
+# No Diamond sponsor yet
+# diamond:
+
 platinum:
 - alt: "DigitalOcean"
   url: https://digitalocean.com/
@@ -8,9 +11,14 @@ platinum:
 - alt: "DX"
   url: https://dx.no/
   logo: dx.png
+- alt: "CTO Advisor"
+  url: https://www.thectoadvisor.com
+  logo: cto-advisor.png
 gold:
 - alt: "Civo: UK Cloud Hosting Platform"
   url: https://www.civo.com/promo
   logo: civo.svg
+
+# These tiers are not shown on the homepage
 # silver:
 # bronze:

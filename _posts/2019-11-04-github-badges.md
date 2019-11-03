@@ -56,7 +56,9 @@ Whatever text you enter in the URL will be read by `shields.io` to generate data
 
 You can pick one of the pre-made examples from [shields.io](https://shields.io/), and that may cover your needs, but when you need more, you can build an endpoint to return your own.
 
-I decided to build a badge that would show how many features a GitHub repo is using from a bot I maintain called Derek. Derek is modular and comes with around a dozen commands and features to help companies manage community and GitHub.
+![Derek](https://camo.githubusercontent.com/cf0edcdaf482b61b065bde6ce7744f7fc3164d69/68747470733a2f2f7062732e7477696d672e636f6d2f6d656469612f44506f344f7972577341414f6b5f692e706e67)
+
+I decided to build a badge that would show how many features a GitHub repo is using from a bot I maintain called [Derek](https://github.com/alexellis/derek). Derek is modular and comes with around a dozen commands and features to help companies manage community and GitHub.
 
 Here's a summary of what Derek can do once installed on your GitHub repo or organisation:
 
@@ -65,6 +67,16 @@ Here's a summary of what Derek can do once installed on your GitHub repo or orga
 * `pr_description_required` - inform users that they need to fill in a PR description, when they fail to do so
 * `hacktoberfest` - close spam PRs and inform users how to contribute constructively
 *  `release_notes` - scan merged PRs since the last release and update the release notes automatically
+
+All of Derek's features are designed to automate and save you time as an OSS maintainer.
+
+Here's an example of the `dco_check` feature in action, which saved one of the maintainers from contacting the person submitting the PR to ask them to sign-off their code. They got the message from Derek and fixed it before we even got to it:
+
+![DCO check in action](https://user-images.githubusercontent.com/6358735/29704343-542a36da-8971-11e7-871e-da30c8e86cae.png)
+
+The new release notes feature is in action below, too:
+
+![Release notes](https://pbs.twimg.com/media/EIXCl7fW4AASAnk?format=jpg&name=medium)
 
 Derek's configuration file sits at the top level of any enabled GitHub repo just like a `.travis.yml` or other configuration file.
 
@@ -278,12 +290,12 @@ Now that you have a worked-example, you can go on to customise the code and buil
 
 I often have the need to embed a YouTube video in a newsletter, but I can never remember the secret URL to get a thumbnail from the video, which YouTube.com provides. What about writing a function that would look up the YouTube URL and then redirect? That is something you could probably write in 15 minutes and then host for free on The Community Cluster. You'd have a public URL with TLS and full CI/CD all for free.
 
-Rajat Jindal from Proofpoint has written two bots which he hosts on The Community Cluster:
+[Rajat Jindal](https://twitter.com/rajatjindal1983) from Proofpoint has written two bots which he hosts on The Community Cluster:
 
 * [Good First Issue Bot](https://www.openfaas.com/blog/good-first-issue/) - helping new contributors to find issues on repos from Google, Microsoft, Jetstack, and many more
 * [translatethread.com](https://translatethread.com) - a Twitter bot which translates entire threads using an OpenFaaS function and then commits the generated HTML into a repository for Netlify to deploy.
 
-Tarun Mangukiya from [Iconscout](https://iconscout.com) made a version of his image resize available on The Community Cluster for free use too:
+[Tarun Mangukiya](https://twitter.com/TarunMangukiya) from [Iconscout](https://iconscout.com) made a version of his image resize available on The Community Cluster for free use too:
 
 * [How to resize your images on-the-fly with OpenFaaS](https://www.openfaas.com/blog/resize-images-on-the-fly/)
 
@@ -293,14 +305,13 @@ OpenFaaS Official functions:
 
 * [HTTPS short-URLs](https://github.com/openfaas/cloud-functions/blob/master/stack.yml) - we built a number of short/pretty-URLs for the community to use for joining Slack, Zoom calls and for [becoming an OpenFaaS Insider](https://insiders.openfaas.io/)
 
-The cloud company Civo.com has an OpenFaaS function on The Community Cluster which filters Twitter mentions and then forwards them onto their Slack community so that the team can engage better with their own community:
+The UK-based cloud company [Civo.com](https://civo.com/) has an OpenFaaS function on The Community Cluster which filters Twitter mentions and then forwards them onto their Slack community so that the team can engage better with their own community:
 
 * [Civo Twitter Filter](https://github.com/civo/openfaas-functions)
 
 This is just scratching the surface of what can be done. OpenFaaS can provide a quick and easy way for you to host anything including microservices, integrations, APIs, or even static sites.
 
-
-Get started today
+Get started today:
 
 * Apply for [access to The Community Cluster](https://github.com/openfaas/community-cluster/)
 * [Deploy OpenFaaS on Kubernetes](https://docs.openfaas.com/deployment/kubernetes/)

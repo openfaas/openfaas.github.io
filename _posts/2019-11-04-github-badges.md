@@ -5,8 +5,9 @@ date: 2019-11-03
 image: /images/2019-github-badges/blue-sky-flowers.jpg
 categories:
   - github
-  - golang
-  - go
+  - nodejs
+  - bots
+  - derek
 author_staff_member: alex
 dark_background: true
 

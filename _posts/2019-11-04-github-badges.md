@@ -291,6 +291,10 @@ Now that you have a worked-example, you can go on to customise the code and buil
 
 I often have the need to embed a YouTube video in a newsletter, but I can never remember the secret URL to get a thumbnail from the video, which YouTube.com provides. What about writing a function that would look up the YouTube URL and then redirect? That is something you could probably write in 15 minutes and then host for free on The Community Cluster. You'd have a public URL with TLS and full CI/CD all for free.
 
+## Case-studies
+
+Here are a number of case-studies from The Community Cluster:
+
 [Rajat Jindal](https://twitter.com/rajatjindal1983) from Proofpoint has written two bots which he hosts on The Community Cluster:
 
 * [Good First Issue Bot](https://www.openfaas.com/blog/good-first-issue/) - helping new contributors to find issues on repos from Google, Microsoft, Jetstack, and many more

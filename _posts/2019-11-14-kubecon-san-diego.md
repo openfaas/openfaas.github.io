@@ -36,7 +36,7 @@ There's also a talk from [Ed Wilde](https://twitter.com/ewilde), from an OpenFaa
 
 It's great to see so many talks from the project being given over the course of a week.
 
-[Stefan Prodan](https://twitter.com/stefanprodan/), from the OpenFaaS community is also going to be giving two talks on Flux, a Continuous Deployment project created at Weaveworks: [Intro to Flux](https://kccncna19.sched.com/event/Uai2/intro-flux-stefan-prodan-weaveworks-alexis-richardson-weaveworks?iframe=no&w=100%&sidebar=yes&bg=no), [Flux Deep Dive](https://events19.linuxfoundation.org/events/kubecon-cloudnativecon-north-america-2019/schedule/).
+[Stefan Prodan](https://twitter.com/stefanprodan/), from the OpenFaaS community is also going to be giving two talks on Flux, a Continuous Deployment project created at [Weaveworks](https://weave.works): [Intro to Flux](https://kccncna19.sched.com/event/Uai2/intro-flux-stefan-prodan-weaveworks-alexis-richardson-weaveworks?iframe=no&w=100%&sidebar=yes&bg=no), [Flux Deep Dive](https://events19.linuxfoundation.org/events/kubecon-cloudnativecon-north-america-2019/schedule/).
 
 ## Meet with me in person
 

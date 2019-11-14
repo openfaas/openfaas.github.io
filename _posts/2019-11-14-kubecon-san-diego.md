@@ -1,7 +1,7 @@
 ---
 title: "Meet us at KubeCon San Diego!"
 description: Meet the members of the OpenFaaS community at KubeCon North America, held in San Diego this November 2019. Hear talks on OpenFaaS from users and the Project Lead.
-date: 2019-11-03
+date: 2019-11-14
 image: /images/san-diego-bg.jpg
 categories:
   - serverless

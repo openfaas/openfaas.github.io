@@ -71,7 +71,7 @@ This case-study is about [OpenFaaS Cloud](https://github.com/openfaas/openfaas-c
 
 > With help from OpenFaaS Ltd, we have been able to move forward faster with the transformation of our platform adopting both AWS and Kubernetes with EKS. It has been a brilliant experience, how we can both "lift and shift" legacy code and incrementally migrate our microservices too using the "strangler pattern". The ease of use and focus on developer-community has meant we can be part of the development process of OpenFaaS Cloud. 
 
-> With OpenFaaS cloud we have started to migrate both our legacy PHP applications by adding Dockerfiles and our newer .NET 3.0 microservices which we deployed to AWS EKS. We also funded the development of AWS ECR support for OpenFaaS Cloud and are proud to be able to give back to the community wherever possible, such as through our Platinum homepage sponsorship.
+> By adopting OpenFaaS Cloud we have been able to begin migrating both our legacy PHP applications with our existing Dockerfiles, and our newer .NET 3.0 microservices which we deployed to AWS EKS. We also funded the development of AWS ECR support for OpenFaaS Cloud and are proud to be able to give back to the community wherever possible, such as through our Platinum homepage sponsorship.
 
 If you'd like to know more, you'll find Christian on Slack or you can ask me at KubeCon.
 

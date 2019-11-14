@@ -73,7 +73,7 @@ This case-study is about [OpenFaaS Cloud](https://github.com/openfaas/openfaas-c
 
 > By adopting OpenFaaS Cloud we have been able to begin migrating both our legacy PHP applications with our existing Dockerfiles, and our newer .NET 3.0 microservices which we deployed to AWS EKS. We also funded the development of AWS ECR support for OpenFaaS Cloud and are proud to be able to give back to the community wherever possible, such as through our Platinum homepage sponsorship.
 
-If you'd like to know more, you'll find Christian on Slack or you can ask me at KubeCon.
+If you'd like to know more, you'll find Christian on Slack or you can find me next week.
 
 ## Couldn't make it to San Diego? How about Amsterdam?
 

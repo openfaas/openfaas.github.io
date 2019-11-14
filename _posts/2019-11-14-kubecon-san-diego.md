@@ -56,7 +56,7 @@ Are you looking for something different? Feel free to reach out to see if OpenFa
 
 ### Case-study - OpenFaaS Ltd & DX, Norway with OpenFaaS cloud
 
-DX, who are also a Platinum homepage sponsor are one of the leading companies for point of sale (POS) solutions for Cinemas and venues all across Norway. Here are a few words from DX co-founder, [Christian Sakshaug](https://github.com/csakshaug):
+[DX](https://dx.no/), who are also a Platinum homepage sponsor are one of the leading companies for point of sale (POS) solutions for Cinemas and venues all across Norway. Here are a few words from DX co-founder, [Christian Sakshaug](https://github.com/csakshaug):
 
 > With help from OpenFaaS Ltd, we have been able to move forward faster with the transformation of our platform adopting both AWS and Kubernetes with EKS. It has been a brilliant experience, how we can both "lift and shift" legacy code and incrementally migrate our microservices too using the "strangler pattern". The ease of use and focus on developer-community has meant we can be part of the development process of OpenFaaS Cloud. 
 

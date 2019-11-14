@@ -25,15 +25,18 @@ Whether you're going to be at KubeCon, or fighting off a case of "Fear of Missin
 
 It'd be great to see you attend one or more of our sessions over the course of the week, where you will have a chance to meet me in person and to hear what kind of problems companies are solving with OpenFaaS. I'll of course have swag, whilst stocks last.
 
-| Day | Event name and description                                          | Speaker      | Location | Date        | Time      |
-|-----|----------------------------------------------------------------|--------------|----------|-------------|-----------|
-| Saturday | [Still waiting for IPv6? Get ingress to any Kubernetes cluster with inlets @ Cloud Native Rejekts](https://cfp.cloud-native.rejekts.io/cloud-native-rejekts-na-2019/talk/377BS9/) | Alex Ellis | San Diego | 16-Nov-2019 | 16.30pm |
-| Monday | [Getting Beyond FaaS: The PLONK Stack for Kubernetes Developers - Serverless Summit @ KubeCon](https://spsna19.sched.com/event/Wb2n/getting-beyond-faas-the-plonk-stack-for-kubernetes-developers-alex-ellis-openfaas-ltd) | Alex Ellis | San Diego, USA | 18-Nov-2019 | 11.20 |
-| Monday | [Painless Serverless Function Development In Kubernetes - Serverless Summit @ KubeCon](https://spsna19.sched.com/event/Wb2t/painless-serverless-function-development-in-kubernetes-ramiro-berrelleza-okteto) | Ramiro Berrelleza | San Diego, USA | 18-Nov-2019 | 13.20 | Saturday | 
-| Tuesday | [How we moved from JIRA to GitHub for fun and profit using Serverless @ Goto](https://gotocph.com/2019/sessions/1016) | Edward Wilde | Copenhagen, Denmark | 19-Nov-2019 |  15.50 |
-| Wednesday | [OpenFaaS Cloud + Linkerd: A Secure, Multi-Tenant Serverless Platform @ KubeCon 2019](https://kccncna19.sched.com/event/Uabn/openfaas-cloud-linkerd-a-secure-multi-tenant-serverless-platform-charles-pretzer-buoyant-alex-ellis-openfaas-ltd) | Charles Pretzer & Alex Ellis | San Diego, USA | 20-Nov-2019 | 15.20 |
+| Day | Event name and description                                          | Speaker 
+|-----|----------------------------------------------------------------|--------------
+| Sat. 16th | [Still waiting for IPv6? Get ingress to any Kubernetes cluster with inlets @ Cloud Native Rejekts](https://cfp.cloud-native.rejekts.io/cloud-native-rejekts-na-2019/talk/377BS9/) | Alex Ellis
+| Mon. 18th | [Getting Beyond FaaS: The PLONK Stack for Kubernetes Developers - Serverless Summit @ KubeCon](https://spsna19.sched.com/event/Wb2n/getting-beyond-faas-the-plonk-stack-for-kubernetes-developers-alex-ellis-openfaas-ltd) | Alex Ellis
+| Mon. 18th | [Painless Serverless Function Development In Kubernetes - Serverless Summit @ KubeCon](https://spsna19.sched.com/event/Wb2t/painless-serverless-function-development-in-kubernetes-ramiro-berrelleza-okteto) | Ramiro Berrelleza |
+| Wed. 20th | [OpenFaaS Cloud + Linkerd: A Secure, Multi-Tenant Serverless Platform @ KubeCon 2019](https://kccncna19.sched.com/event/Uabn/openfaas-cloud-linkerd-a-secure-multi-tenant-serverless-platform-charles-pretzer-buoyant-alex-ellis-openfaas-ltd) | Charles Pretzer & Alex Ellis |
 
-I've also listed Ed Wilde's event at Goto Copenhagen, it's great to see so many talks from the project being given over the course of a week.
+There's also a talk from [Ed Wilde](https://twitter.com/ewilde), from an OpenFaaS end-user company (Form3): [How we moved from JIRA to GitHub for fun and profit using Serverless @ Goto, Copenhagen, Denmark](https://gotocph.com/2019/sessions/1016)
+
+It's great to see so many talks from the project being given over the course of a week.
+
+[Stefan Prodan](https://twitter.com/stefanprodan/), from the OpenFaaS community is also going to be giving two talks on Flux, a Continuous Deployment project created at Weaveworks: [Intro to Flux](https://kccncna19.sched.com/event/Uai2/intro-flux-stefan-prodan-weaveworks-alexis-richardson-weaveworks?iframe=no&w=100%&sidebar=yes&bg=no), [Flux Deep Dive](https://events19.linuxfoundation.org/events/kubecon-cloudnativecon-north-america-2019/schedule/).
 
 ## Meet with me in person
 
@@ -82,11 +85,14 @@ The OpenFaaS community values are: developers-first, operational simplicity, and
 
 * [Join us on OpenFaaS Slack](https://docs.openfaas.com/community/)
 * [Find out how to contribute](https://docs.openfaas.com/contributing/get-started/)
-* Try deploying your own free endpoints on the free [OpenFaaS Cloud, Community Cluster](https://docs.openfaas.com/openfaas-cloud/user-guide/)
+
+Try deploying your own free endpoints on the free Community Cluster:
+
+* Find out more: [OpenFaaS Cloud, Community Cluster](https://docs.openfaas.com/openfaas-cloud/user-guide/)
 
 If contributing code, docs, and community support isn't something you have time for, you can still make a difference as an individual. Help me reach 200 GitHub Sponsors by 1st Jan 2020 - [funds from GitHub Sponsors contribute towards my time](https://insiders.openfaas.io/) spent maintaining and building features, and giving technical support to the community.
 
-<blockquote class="twitter-tweet"><p lang="en" dir="ltr">These (rare) emails are a great encouragement for me. In return I write regular updates to everyone who sponsors my OSS work, whatever they can afford.<br><br>Sponsor if you want to show support, not because you run my stuff in prod. <a href="https://t.co/Fh6gLfOoyB">pic.twitter.com/Fh6gLfOoyB</a></p>&mdash; Alex Ellis (@alexellisuk) <a href="https://twitter.com/alexellisuk/status/1193972422359371776?ref_src=twsrc%5Etfw">November 11, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>s
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">These (rare) emails are a great encouragement for me. In return I write regular updates to everyone who sponsors my OSS work, whatever they can afford.<br><br>Sponsor if you want to show support, not because you run my stuff in prod. <a href="https://t.co/Fh6gLfOoyB">pic.twitter.com/Fh6gLfOoyB</a></p>&mdash; Alex Ellis (@alexellisuk) <a href="https://twitter.com/alexellisuk/status/1193972422359371776?ref_src=twsrc%5Etfw">November 11, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 Checkout our latest tutorials and labs:
 

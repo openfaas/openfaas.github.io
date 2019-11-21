@@ -138,7 +138,7 @@ function postRequest() {
 		});
 
 		fs.writeFile('js/contributors.js', generateTemplate(resp.byLogin), 'utf8', () => {
-			console.log('Contributors.js file generated');
+			console.log('js/contributors.js file generated');
 		});
 	}).catch(err => {
 		console.log(err);

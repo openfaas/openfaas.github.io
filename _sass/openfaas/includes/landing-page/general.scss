@@ -54,9 +54,13 @@
             padding-bottom: $padding-step * 8;
         }
 
-        &.call-to-action {
+        &.call-to-action-cards {
             padding-top: $padding-step * 8;
+        }
+
+        &.call-to-action-community {
             padding-bottom: $padding-step * 8;
+
         }
 
         .column {

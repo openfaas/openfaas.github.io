@@ -13,7 +13,7 @@ author_staff_member: alex
 dark_background: true
 
 ---
-We share our highlights from the OpenFaaS community and friends at KubeCon, San Diego including [OpenFaaS Cloud](https://github.com/openfaas/openfaas-cloud/), [Flux](https://github.com/fluxcd) from [Weaveworks](https://www.weave.works), Dive from [Buoyant](https://buoyant.io) and [k3s](https://k3s.io) going GA.
+We share our highlights from the OpenFaaS community and friends at KubeCon, San Diego including [OpenFaaS Cloud](https://github.com/openfaas/openfaas-cloud/), [Flux](https://github.com/fluxcd) from [Weaveworks](https://www.weave.works), [Okteto](https://okteto.com), Dive from [Buoyant](https://buoyant.io) and [k3s](https://k3s.io) going GA.
 
 ## Saturday @ Cloud Native Rejekts
 
@@ -57,7 +57,7 @@ You can watch my talk where I explore the difference between FaaS and Serverless
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/NckMekZXRt8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-[Ramiro from Okteto](https://www.linkedin.com/in/ramiroberrelleza/) gave a talk on accelerating the "hot reload" experience for Kubernetes pods and applied that to OpenFaaS.
+[Ramiro](https://www.linkedin.com/in/ramiroberrelleza/) gave a talk on accelerating the "hot reload" experience for Kubernetes pods and applied that to OpenFaaS. He used his platform called [Okteto](https://okteto.com), check it out if you could benefit from a live development experience for your applications on Kubernetes.
 
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Looking forward to a demo of this! <a href="https://twitter.com/hashtag/kubecon?src=hash&amp;ref_src=twsrc%5Etfw">#kubecon</a> <a href="https://twitter.com/oktetohq?ref_src=twsrc%5Etfw">@oktetohq</a> <a href="https://twitter.com/openfaas?ref_src=twsrc%5Etfw">@openfaas</a> <a href="https://t.co/gGHmNFNGoy">pic.twitter.com/gGHmNFNGoy</a></p>&mdash; Alex Ellis (@alexellisuk) <a href="https://twitter.com/alexellisuk/status/1196540671231791104?ref_src=twsrc%5Etfw">November 18, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
@@ -97,7 +97,7 @@ Some OpenFaaS users like Istio and others prefer the simplicity of Linkerd. Whic
 
 Our friends at Weaveworks announced that the Flux project (an incubating project of the CNCF), would merge with the Argo Project developed at Intuit.
 
-The GitOps panel Stefan was part of was so popular that the room had to be moved to the main stage, how about that?!
+[Stefan Prodan](https://stefanprodan.com) who is also an OpenFaaS contributor spoke in a panel on GitOps. The session was so popular that it had to be moved to the main stage, how about that?! Watch the video here: [Panel: GitOps User Stories](https://www.youtube.com/watch?v=ogw6_Y3WBQs)
 
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Three years of <a href="https://twitter.com/openfaas?ref_src=twsrc%5Etfw">@openfaas</a> and <a href="https://twitter.com/hashtag/teamserverless?src=hash&amp;ref_src=twsrc%5Etfw">#teamserverless</a> 😎 <a href="https://t.co/4lnb7qZY0C">pic.twitter.com/4lnb7qZY0C</a></p>&mdash; Alex Ellis (@alexellisuk) <a href="https://twitter.com/alexellisuk/status/1197206927094112256?ref_src=twsrc%5Etfw">November 20, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 

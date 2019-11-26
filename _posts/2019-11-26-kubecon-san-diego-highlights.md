@@ -141,6 +141,12 @@ Checkout the GitHub repo for issues and to [get started](https://k3sup.dev).
 
 ## That's a wrap
 
+I had a great time at the event, learned a lot, made lots of new connections and learned about new use-cases for OpenFaaS. My last highlight was this research from [EMA Research](https://twitter.com/TorstenVolk) that showed OpenFaaS in the top 5 Kubernetes technologies of the year.
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Awesome to see <a href="https://twitter.com/openfaas?ref_src=twsrc%5Etfw">@OpenFaaS</a> as the 4th top Kubernetes Component in this research. <a href="https://twitter.com/hashtag/TeamServerless?src=hash&amp;ref_src=twsrc%5Etfw">#TeamServerless</a> <a href="https://t.co/s1lRxLU7nn">https://t.co/s1lRxLU7nn</a></p>&mdash; Alex Ellis (@alexellisuk) <a href="https://twitter.com/alexellisuk/status/1197061893690552320?ref_src=twsrc%5Etfw">November 20, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+If you use or are a contributor to the project, you should feel proud.
+
 The next KubeCon event will be [KubeCon EU, Amsterdam](https://events19.linuxfoundation.org/events/kubecon-cloudnativecon-europe-2020/) in 2020.
 
 If you'd like to submit a paper to the Serverless Practioner's Summit or to KubeCon about OpenFaaS, inlets, k3sup, or something else related to these technologies, feel free to get in touch via [alex@openfaas.com](mailto:alex@openfaas.com).

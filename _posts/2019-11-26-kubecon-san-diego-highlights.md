@@ -51,7 +51,7 @@ The second pre-conference I attended was the [Serverless Practitioners Summit](h
 
 Keep an eye out for the CfP for Amsterdam, these talks do not count against your quota for the main event and can be a great way to mix with subject-matter experts and end-users too.
 
-### Beyond than FaaS - The PLONK Stack for Kubernetes Developers
+### Getting Beyond FaaS - The PLONK Stack for Kubernetes Developers
 
 You can watch my talk where I explore the difference between FaaS and Serverless, and introduce a stack for developers to build out application on Kubernetes.
 
@@ -61,7 +61,7 @@ You can watch my talk where I explore the difference between FaaS and Serverless
 
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Looking forward to a demo of this! <a href="https://twitter.com/hashtag/kubecon?src=hash&amp;ref_src=twsrc%5Etfw">#kubecon</a> <a href="https://twitter.com/oktetohq?ref_src=twsrc%5Etfw">@oktetohq</a> <a href="https://twitter.com/openfaas?ref_src=twsrc%5Etfw">@openfaas</a> <a href="https://t.co/gGHmNFNGoy">pic.twitter.com/gGHmNFNGoy</a></p>&mdash; Alex Ellis (@alexellisuk) <a href="https://twitter.com/alexellisuk/status/1196540671231791104?ref_src=twsrc%5Etfw">November 18, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-You can [watch his recording here](https://www.youtube.com/watch?v=Yx1nGH2zh0k) and I'm looking forward to collaborating more with the team.
+You can [watch his recording here](https://www.youtube.com/watch?v=Yx1nGH2zh0k) and I'm looking forward to collaborating with the team more.
 
 ## KubeCon 🌮
 
@@ -71,7 +71,7 @@ The North American event this year saw an estimated 12k attendees, making this t
 
 There were so many concurrent sessions and tracks that scrolling through the agenda for one day could take a few minutes - this isn't your 2014 KubeCon. I imagine this will continue to grow in the coming years. Personally, I spent most of my time in the "hallway track", the expo area, having ad-hoc meetings and attending the keynotes. I did manage to catch a few breakout sessions.
 
-I was excited to see the Open Source team at Intel running a serverless demo at their booth. I asked what they used to built it and they told me it was powered by OpenFaaS.
+I was excited to see the Open Source team at Intel running a serverless demo at their booth. I asked what they used to build it, and they told me it was powered by OpenFaaS. The underlying model is being served by TensorFlow [using a similar technique to this](https://github.com/alexellis/tensorflow-serving-openfaas).
 
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Great to see <a href="https://twitter.com/openfaas?ref_src=twsrc%5Etfw">@openfaas</a> used in the <a href="https://twitter.com/intel?ref_src=twsrc%5Etfw">@intel</a> booth for machine learning. <a href="https://t.co/xv4JAn4tBQ">pic.twitter.com/xv4JAn4tBQ</a></p>&mdash; Alex Ellis (@alexellisuk) <a href="https://twitter.com/alexellisuk/status/1196949307804372992?ref_src=twsrc%5Etfw">November 20, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 

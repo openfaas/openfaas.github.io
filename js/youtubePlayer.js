@@ -1,7 +1,7 @@
 /*--------------Initialize youtube api--------------*/
 /*--------------------------------------------------*/
 
-var videoId = 'yOpYYYRuDQ0';
+var videoId = 'LQa8-JvIeWA';
 var playerControl = document.getElementById('yt-player-play');
 var sampleVideo = document.getElementById('sample-video');
 var play = null;

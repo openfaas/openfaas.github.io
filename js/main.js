@@ -56,7 +56,7 @@ function initNavToggler() {
 /*------------Init youtube player modal-------------*/
 /*--------------------------------------------------*/
 
-var videoId = 'yOpYYYRuDQ0';
+var videoId = 'LQa8-JvIeWA';
 function initVideoModal() {
     var triggers = document.querySelectorAll('.start-demo-video');
 

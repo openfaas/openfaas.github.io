@@ -5,5 +5,5 @@ image_path: /images/author/john.png
 twitter_username: mccabejohn
 github_username: johnmccabe
 webpage: https://johnmccabe.net
-blurb: Member. Community <a href="https://twitter.com/openfaas">@openfaas</a>.
+blurb: Staff Engineer at Proofpoint
 ---

@@ -10,9 +10,12 @@ core:
   - ed
 
 members:
-  - andrew
-  - martin
-  - ken
-  - john
-  - matias
   - vivek
+  - martin
+  - andrew
+  - john
+
+former_members:
+  - ken
+  - matias
+  - zeerorg

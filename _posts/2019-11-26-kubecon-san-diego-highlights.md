@@ -65,7 +65,7 @@ You can [watch his recording here](https://www.youtube.com/watch?v=Yx1nGH2zh0k) 
 
 ## KubeCon 🌮
 
-The North American event this year saw an estimated 12k attendees, making this the largest tech event I've been a part of so far. I was also attending as a CNFC Ambassador for the first time - our main perk was being given a cape to wear!
+The North American event this year saw an estimated 12k attendees, making this the largest tech event I've been a part of so far. I was also attending as a [CNFC Ambassador](https://www.cncf.io/people/ambassadors/) for the first time - our main perk was being given a cape to wear!
 
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Looking serious at <a href="https://twitter.com/hashtag/KubeCon?src=hash&amp;ref_src=twsrc%5Etfw">#KubeCon</a> <a href="https://twitter.com/LachlanEvenson?ref_src=twsrc%5Etfw">@LachlanEvenson</a> <a href="https://twitter.com/alexellisuk?ref_src=twsrc%5Etfw">@alexellisuk</a> <a href="https://t.co/QIZhMeqgw5">pic.twitter.com/QIZhMeqgw5</a></p>&mdash; Tamao Nakahara @ KubeCon (@mewzherder) <a href="https://twitter.com/mewzherder/status/1197634178004602880?ref_src=twsrc%5Etfw">November 21, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 

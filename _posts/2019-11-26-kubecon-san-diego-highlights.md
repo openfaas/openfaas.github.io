@@ -151,5 +151,7 @@ The next KubeCon event will be [KubeCon EU, Amsterdam](https://events19.linuxfou
 
 If you'd like to submit a paper to the Serverless Practioner's Summit or to KubeCon about OpenFaaS, inlets, k3sup, or something else related to these technologies, feel free to get in touch via [alex@openfaas.com](mailto:alex@openfaas.com).
 
+> OpenFaaS Insiders: all GitHub Sponsors at every tier get access to regular email updates on all news, blog posts, tutorials, new features, and security updates. [Subscribe now](https://insiders.openfaas.io/) and help me hit my goal of 200 sponsors by 2020.
+
 You can connect with the community via the [OpenFaaS Slack](https://slack.openfaas.io/) where we have channels for `#k3sup`, `#inlets`, `#openfaas` and `#openfaascloud`. Looking forward to seeing you there, [on Twitter](https://twitter.com/alexellisuk) or in Amsterdam.
 

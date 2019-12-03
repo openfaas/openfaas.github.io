@@ -19,6 +19,8 @@ In this tutorial I'll show you how to build an ASP.NET Core API that you can dep
 
 ASP.NET Core provides a high-performance, lean, and portable runtime that enterprises can use to build robust APIs. The .NET team has worked hard to provide upgrade paths for companies with existing codebases and where that isn't an option, the familiar language can mean that moving code across from legacy code-bases can be done piecemeal.
 
+<img src="https://github.com/openfaas/media/raw/master/OpenFaaS_logo_stacked_opaque.png" width="150px"/>&nbsp;<img src="/images/2019-asp-net-core/netcore.png" width="150px"/>
+
 Kubernetes is the de-facto platform for cloud deployments, but has a significant learning-curve and is hard to get right. [OpenFaaS](https://openfaas.com/) provides a developer-focused abstraction on top of Kubernetes so that you only have to care about building your code and don't need to spend weeks learning Kubernetes and then keeping up with every change.
 
 > What did you just say? "We're not ready for Serverless yet"? "We're still trying to learn all the ins and outs of Kubernetes" That's reason OpenFaaS was created and exists today, to push these details down the stack so that your team doesn't have to care about them. OpenFaaS provides a cloud native stack for applications developers read more about [The PLONK Stack](https://blog.alexellis.io/getting-started-with-the-plonk-stack-and-serverless/)

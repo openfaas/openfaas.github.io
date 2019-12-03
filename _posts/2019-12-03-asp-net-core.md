@@ -13,13 +13,13 @@ author_staff_member: alex
 dark_background: true
 
 ---
-In this tutorial I'll show you how to build an ASP.NET Core API that you can deploy to Kubernetes easily using OpenFaaS. We'll be using steps from the official tutorial provided by the .NET team and explaining any custom steps taken along the way.
+In this tutorial I'll show you how to build an ASP.NET Core API that you can deploy to [Kubernetes](https://kubernetes.io/) easily using [OpenFaaS](https://openfaas.com/). We'll be using steps from the official tutorial provided by the [.NET team](https://devblogs.microsoft.com/dotnet/) and explaining any custom steps taken along the way.
 
 # Why is OpenFaaS + ASP.NET Core a good combination?
 
 ASP.NET Core provides a high-performance, lean, and portable runtime that enterprises can use to build robust APIs. The .NET team has worked hard to provide upgrade paths for companies with existing codebases and where that isn't an option, the familiar language can mean that moving code across from legacy code-bases can be done piecemeal.
 
-Kubernetes is the de-facto platform for cloud deployments, but has a significant learning-curve and is hard to get right. OpenFaaS provides a developer-focused abstraction on top of Kubernetes so that you only have to care about building your code and don't need to spend weeks learning Kubernetes and then keeping up with every change.
+Kubernetes is the de-facto platform for cloud deployments, but has a significant learning-curve and is hard to get right. [OpenFaaS](https://openfaas.com/) provides a developer-focused abstraction on top of Kubernetes so that you only have to care about building your code and don't need to spend weeks learning Kubernetes and then keeping up with every change.
 
 > What did you just say? "We're not ready for Serverless yet"? "We're still trying to learn all the ins and outs of Kubernetes" That's reason OpenFaaS was created and exists today, to push these details down the stack so that your team doesn't have to care about them. OpenFaaS provides a cloud native stack for applications developers read more about [The PLONK Stack](https://blog.alexellis.io/getting-started-with-the-plonk-stack-and-serverless/)
 
@@ -31,7 +31,7 @@ The complete code example is [available on GitHub](https://github.com/alexellis/
 
 ### Setup OpenFaaS
 
-It's assumed that you already have Kubernetes and OpenFaaS set up, but if you do not then k3d, KinD, and minikube can make good local options. I like working with remote clusters since they don't affect the battery life of my laptop, or the CPU/memory of my desktop and are always ready. A good option for a cheap remote cluster may be [DigitalOcean.com](https://digitalocean.com) or [Civo.com](https://civo.com/).
+It's assumed that you already have Kubernetes and OpenFaaS set up, but if you do not then [k3d](https://github.com/rancher/k3d), [KinD](https://kind.sigs.k8s.io), and [minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/) can make good local options. I like working with remote clusters since they don't affect the battery life of my laptop, or the CPU/memory of my desktop and are always ready. A good option for a cheap remote cluster may be [DigitalOcean.com](https://digitalocean.com) or [Civo.com](https://civo.com/).
 
 I'll provide two resources for you to get started:
 
@@ -442,7 +442,7 @@ See also: [Lab 4: Inject configuration through environmental variables](https://
 
 In a short period of time we were able to deploy an ASP.NET Core application using .NET 3.0 or 2.x to Kubernetes, have it scale out and build into an immutable Docker image. OpenFaaS made this task much simpler than it would have been if we'd tried to program directly against Kubernetes.
 
-If you aren't quite convinced yet, then watch my KubeCon talk on the PLONK Stack that combines OpenFaaS with Kubernetes and several other CNCF projects like Prometheus and NATS to create a platform for application developers.
+If you aren't quite convinced yet, then watch my KubeCon talk on the PLONK Stack that combines [OpenFaaS](https://openfaas.com/) with Kubernetes and several other CNCF projects like [Prometheus](https://prometheus.io) and [NATS](https://nats.io/) to create a platform for application developers.
 
 * Video: [More than FaaS - Introduction to The PLONK Stack @ KubeCon](https://blog.alexellis.io/getting-started-with-the-plonk-stack-and-serverless/)
 

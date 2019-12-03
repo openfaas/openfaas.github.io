@@ -432,6 +432,12 @@ You may find that for various reasons you need to support .NET Core 2.0, 2.1, 2.
 
 That's fine, you can create different templates or you can just specify the runtime for each service in the `Dockerfile` we created earlier.
 
+* 12-factor configuration
+
+You can apply 12-factor configuration through the `environment` section of your OpenFaaS stack.yml file.
+
+See also: [Lab 4: Inject configuration through environmental variables](https://github.com/openfaas/workshop/blob/master/lab4.md)
+
 ## Wrapping up
 
 In a short period of time we were able to deploy an ASP.NET Core application using .NET 3.0 or 2.x to Kubernetes, have it scale out and build into an immutable Docker image. OpenFaaS made this task much simpler than it would have been if we'd tried to program directly against Kubernetes.

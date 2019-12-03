@@ -2,7 +2,7 @@
 title: "Build ASP.NET Core APIs with Kubernetes and OpenFaaS"
 description: In this tutorial I'll show you how to build an ASP.NET Core API that you can deploy to Kubernetes easily using OpenFaaS.
 date: 2019-12-03
-image: /images/2019-kubecon-san-diego/background.jpg
+image: /images/2019-asp-net-core/background.jpg
 categories:
   - serverless
   - paas

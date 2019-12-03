@@ -249,7 +249,7 @@ You should see the image built successfully, but we need to make a couple of add
 
 * Add the OpenFaaS watchdog
 
-The OpenFaaS API expects Docker images to conform to a [runtime workload contract](https://docs.openfaas.com/reference/workloads/), we can either implement that in our code by changing the HTTP port and adding a health-check, or by using the OpenFaaS watchdog component.
+The OpenFaaS API expects Docker images to conform to a [runtime workload contract](https://docs.openfaas.com/reference/workloads/), we can either implement that in our code by changing the HTTP port and adding a health-check, or by using the [OpenFaaS watchdog component](https://docs.openfaas.com/architecture/watchdog/).
 
 ```Dockerfile
 FROM openfaas/of-watchdog:0.7.2 as watchdog
@@ -418,7 +418,9 @@ Official Template: false
 
 * Auto-scaling
 
-OpenFaaS has built-in auto-scaling rules based upon requests per second, and support for Kubernetes HPAv2 also.
+OpenFaaS has built-in auto-scaling rules based upon requests per second, and support for [Kubernetes HPAv2 also](https://docs.openfaas.com/tutorials/kubernetes-hpa/).
+
+[![OpenFaaS workflow](https://github.com/openfaas/faas/blob/master/docs/of-workflow.png?raw=true)](https://docs.openfaas.com/architecture/stack/)
 
 Try [Lab 9 of the OpenFaaS workshop](https://github.com/openfaas/workshop#lab-9---advanced-feature---auto-scaling), where you can learn how to test auto-scaling for your new ASP.NET Core application.
 

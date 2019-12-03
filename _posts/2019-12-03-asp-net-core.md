@@ -23,7 +23,7 @@ ASP.NET Core provides a high-performance, lean, and portable runtime that enterp
 
 Kubernetes is the de-facto platform for cloud deployments, but has a significant learning-curve and is hard to get right. [OpenFaaS](https://openfaas.com/) provides a developer-focused abstraction on top of Kubernetes so that you only have to care about building your code and don't need to spend weeks learning Kubernetes and then keeping up with every change.
 
-> What did you just say? "We're not ready for Serverless yet"? "We're still trying to learn all the ins and outs of Kubernetes" That's reason OpenFaaS was created and exists today, to push these details down the stack so that your team doesn't have to care about them. OpenFaaS provides a cloud native stack for applications developers read more about [The PLONK Stack](https://blog.alexellis.io/getting-started-with-the-plonk-stack-and-serverless/)
+> What did you just say? "We're not ready for Serverless yet"? "We're still trying to learn all the ins and outs of Kubernetes" That's reason OpenFaaS was created and exists today, to push these details down the stack so that your team doesn't have to care about them. OpenFaaS provides a cloud native stack for applications developers. Read more about [The PLONK Stack](https://blog.alexellis.io/getting-started-with-the-plonk-stack-and-serverless/)
 
 ## Pre-reqs
 
@@ -44,7 +44,7 @@ I'll provide two resources for you to get started:
 
 Head over to the following site and download .NET Core for your OS, 2.2 will also work if that's what you're currently using:
 
-https://dotnet.microsoft.com/download/dotnet-core/3.0
+[.NET Core 3.0 download page](https://dotnet.microsoft.com/download/dotnet-core/3.0)
 
 I recommend you download the installer and the SDK.
 

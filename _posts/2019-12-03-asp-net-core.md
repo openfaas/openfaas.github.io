@@ -154,14 +154,14 @@ docker --version
 We'll simply use the example [from the tutorial](https://dotnet.microsoft.com/learn/aspnet/microservice-tutorial/docker-file), but edit it for the name we picked:
 
 ```Dockerfile
-FROM mcr.microsoft.com/dotnet/core/sdk:3.0 AS build
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
 WORKDIR /src
 COPY openfaas-api.csproj .
 RUN dotnet restore
 COPY . .
 RUN dotnet publish -c release -o /app
 
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.0
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
 WORKDIR /app
 COPY --from=build /app .
 ENTRYPOINT ["dotnet", "openfaas-api.dll"]
@@ -256,14 +256,14 @@ The OpenFaaS API expects Docker images to conform to a [runtime workload contrac
 ```Dockerfile
 FROM openfaas/of-watchdog:0.7.2 as watchdog
 
-FROM mcr.microsoft.com/dotnet/core/sdk:3.0 AS build
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
 WORKDIR /src
 COPY openfaas-api.csproj .
 RUN dotnet restore
 COPY . .
 RUN dotnet publish -c release -o /app
 
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.0
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
 WORKDIR /app
 COPY --from=build /app .
 COPY --from=watchdog /fwatchdog /usr/bin/fwatchdog
@@ -432,7 +432,7 @@ You can learn how to securely manage APIs and secrets using the [lessons in Lab 
 
 * Versioning of .NET runtimes
 
-You may find that for various reasons you need to support .NET Core 2.0, 2.1, 2.2 and even 3.0 all at the same time.
+You may find that for various reasons you need to support .NET Core 2.0, 2.1, 2.2 and even 3.1 all at the same time.
 
 That's fine, you can create different templates or you can just specify the runtime for each service in the `Dockerfile` we created earlier.
 
@@ -444,7 +444,7 @@ See also: [Lab 4: Inject configuration through environmental variables](https://
 
 ## Wrapping up
 
-In a short period of time we were able to deploy an ASP.NET Core application using .NET 3.0 or 2.x to Kubernetes, have it scale out and build into an immutable Docker image. OpenFaaS made this task much simpler than it would have been if we'd tried to program directly against Kubernetes.
+In a short period of time we were able to deploy an ASP.NET Core application using .NET 3.1 or 2.x to Kubernetes, have it scale out and build into an immutable Docker image. OpenFaaS made this task much simpler than it would have been if we'd tried to program directly against Kubernetes.
 
 If you aren't quite convinced yet, then watch my KubeCon talk on the PLONK Stack that combines [OpenFaaS](https://openfaas.com/) with Kubernetes and several other CNCF projects like [Prometheus](https://prometheus.io) and [NATS](https://nats.io/) to create a platform for application developers.
 

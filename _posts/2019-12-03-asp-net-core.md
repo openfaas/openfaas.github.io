@@ -40,11 +40,11 @@ I'll provide two resources for you to get started:
 * [OpenFaaS Deployment on Kubernetes](https://docs.openfaas.com/deployment/kubernetes/) - start here if you're confident with deploying Kubernetes
 * [OpenFaaS step-by-step workshop](https://github.com/openfaas/workshop) - start here if Docker and Kubernetes are brand new to you
 
-### Install .NET Core 3.0
+### Install .NET Core 3.1
 
 Head over to the following site and download .NET Core for your OS, 2.2 will also work if that's what you're currently using:
 
-[.NET Core 3.0 download page](https://dotnet.microsoft.com/download/dotnet-core/3.0)
+[.NET Core 3.1 download page](https://dotnet.microsoft.com/download/dotnet-core/3.1)
 
 I recommend you download the installer and the SDK.
 

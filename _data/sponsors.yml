@@ -1,4 +1,5 @@
-# No Diamond sponsor yet
+# The exclusive Diamond sponsor spot is still available
+
 # diamond:
 
 platinum:
@@ -14,6 +15,9 @@ platinum:
 - alt: "CTO Advisor"
   url: https://www.thectoadvisor.com
   logo: cto-advisor.png
+- alt: "Akash"
+  url: https://akash.network
+  logo: akash.svg
 gold:
 - alt: "Civo: UK Cloud Hosting Platform"
   url: https://www.civo.com/promo

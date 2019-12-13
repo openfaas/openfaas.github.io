@@ -47,6 +47,12 @@ Manage all your deployments for your GitHub org or user in one place and get qui
 
 Get detailed information and metrics, including how many replicas are being scaled out across the cluster. Grab a badge for your GitHub repo and see what commit you're currently running.
 
+**Runtime logs page**
+
+![Runtime logs page](/images/eks-openfaas-cloud/runtime-logs.png)
+
+You can access the runtime logs of your functions within the UI for faster debugging and better developer feedback.
+
 **Build logs page**
 
 ![Build logs page](https://docs.openfaas.com/images/openfaas-cloud/welcome-11.png)
@@ -341,19 +347,21 @@ The easiest registry to use is the [Docker Hub](https://hub.docker.com/), the ca
 
 You can also [install your own self-hosted registry](https://github.com/alexellis/k8s-tls-registry) for private Docker images. Note: you can self-host a registry on a single-node, or in a different cluster all together if you wish.
 
-> Note: using AWS ECR is beyond the scope of this tutorial. Contributions are welcome, see also: [OFC: adding support for AWS ECR](https://github.com/openfaas/openfaas-cloud/issues/504).
+> Note: using AWS ECR is beyond the scope of this tutorial. See here for info: [OFC: configuring AWS ECR](https://github.com/openfaas-incubator/ofc-bootstrap#prepare-your-docker-registry-if-using-aws-ecr).
 
-When you've decided which works for you, check your Docker Desktop or Docker client settings to make sure the password is *not* stored in the keychain.
+Now log in, using ofc-bootstrap like indicated below:
 
-![](/images/2019-aws-ofc/no-key-chain-storage.png)
-
-Now log in, and check the `~/.docker/config.json` file, the credentials should be encoded in base64.
-
-My registry is `registry.on-k3s.dev` and my user is: `ofcuser`, therefore I ran:
+My registry is `registry.on-k3s.dev` my user is: `ofcuser` and my password is: `my-password`, therefore I ran:
 
 ```sh
-docker login registry.on-k3s.dev --username ofcuser
+ofc-bootstrap registry-login --server registry.on-k3s.dev \ 
+--username ofcuser \
+--password my-password
 ```
+
+Check the `credentials/config.json` file, the credentials should be encoded in base64.
+
+If you are using Dockerhub you can exclude the `--server` flag
 
 This file will be read from `ofc-bootstrap` automatically.
 
@@ -393,7 +401,7 @@ You're now ready to run `ofc-bootstrap`. Check over the `init.yaml` file to make
 Now run it:
 
 ```sh
-ofc-bootstrap -yaml init.yaml
+ofc-bootstrap apply -f init.yaml
 ```
 
 Keep an eye on the logs and look out for any errors that may have occurred during the installation.
@@ -486,7 +494,7 @@ So if you would like to try OpenFaaS Cloud for development, but want to save on 
 
 Do you want to see a real-world example of what you can build? Check out my blog post on how to create a [Serverless Single Page App (SPA) with OFC, Postgres, Go and Vue.js](https://www.openfaas.com/blog/serverless-single-page-app/). You may also like [goodfirstissue bot](https://github.com/rajatjindal/goodfirstissue) which runs on The Community Cluster and is in active use by Google, CNCF (helm) and Jetstack.
 
-Contributions are also welcome to [ofc-bootstrap](https://github.com/openfaas-incubator/ofc-bootstrap), such as [adding support for AWS ECR](https://github.com/openfaas/openfaas-cloud/issues/504).
+Contributions are also welcome to [ofc-bootstrap](https://github.com/openfaas-incubator/ofc-bootstrap)
 
 ### Thank you to OpenFaaS Ltd
 

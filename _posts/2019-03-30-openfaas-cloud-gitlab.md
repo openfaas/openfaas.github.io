@@ -212,14 +212,30 @@ If you are using GCP or AWS to manage DNS then see the [README.md file](https://
 
 #### Authenticate to your registry
 
-* Open the Docker Desktop settings and make sure you have “Store my credentials in a key-chain” set to false
-* Now run `docker login` and login with your Docker Hub account
+Since automatic CI/CD is built-into OFC, it needs somewhere to store container images.
 
+The easiest registry to use is the [Docker Hub](https://hub.docker.com/), the caveat is that the images will be public, but this can be changed at a later date.
 If you don't have an account you can sign-up at: [https://hub.docker.com](https://hub.docker.com)
 
-Edit `init.yaml` and set `registry:` to `docker.io/ofctest/` replacing `ofctest` with your username on the Docker Hub. You can also create an organization through the Docker Hub so that your images are kept in one place.
+You can also [install your own self-hosted registry](https://github.com/alexellis/k8s-tls-registry) for private Docker images. Note: you can self-host a registry on a single-node, or in a different cluster all together if you wish.
 
-Private registries are also supported but outside of the scope of this post.
+> Note: using AWS ECR is beyond the scope of this tutorial. See here for info: [OFC: configuring AWS ECR](https://github.com/openfaas-incubator/ofc-bootstrap#prepare-your-docker-registry-if-using-aws-ecr).
+
+Now log in, using ofc-bootstrap.
+
+Im using Dockerhub, my user is: `ofctest` and my password is: `my-password`, therefore I ran:
+
+```sh
+ofc-bootstrap registry-login --username ofctest \
+--password my-password
+```
+
+note: if you are using a self-hosted registry, you can pass the `--server` flag to pass your registry url to the command.
+
+
+Check the `credentials/config.json` file, the credentials should be encoded in base64.
+
+Edit `init.yaml` and set `registry:` to `docker.io/ofctest/` replacing `ofctest` with your username on the Docker Hub. You can also create an organization through the Docker Hub so that your images are kept in one place.
 
 #### Configure your CUSTOMERS ACL
 

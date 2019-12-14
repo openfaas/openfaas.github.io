@@ -1,0 +1,147 @@
+.hero {
+	.call-to-action {
+        background-color: white;
+		.cards-wrapper {
+			display: -webkit-flex;
+			display: -ms-flex;
+			display: flex;
+
+			justify-content: space-between;
+
+			.card {
+				display: -webkit-flex;
+				display: -ms-flex;
+				display: flex;
+
+				flex-direction: column;
+
+				flex-basis: 45%;
+
+				align-items: center;
+
+				min-height: 420px;
+
+				padding: $padding-step 0 $padding-step * 2;
+				background: $of-grey-darker-bis;
+
+				box-shadow: none;
+
+				border-radius: 10px;
+
+				&-content {
+					display: -webkit-flex;
+					display: -ms-flex;
+					display: flex;
+
+					flex-direction: column;
+					flex-grow: 1;
+
+					align-items: center;
+				}
+
+
+				&-logo {
+					margin-bottom: 20px;
+
+					figure {
+						max-width: 98px;
+					}
+				}
+
+				.button {
+					height: auto;
+
+					padding: 15px 20px;
+
+					border-radius: 7px;
+
+					font-size: 20px;
+					font-weight: 400;
+				}
+			}
+		}
+
+		.cta-button {
+			display: -webkit-flex;
+			display: -ms-flex;
+			display: flex;
+
+			justify-content: space-around;
+
+			height: auto;
+
+			border: none;
+
+			text-align: left;
+			font-size: 18px;
+			white-space: pre-wrap;
+			color: $of-text-grey;
+			font-weight: 600;
+
+			background: transparent;
+
+			&:hover {
+				span {
+					color: $primary;
+				}
+			}
+
+			span {
+				padding-left: $padding-step;
+			}
+		}
+	}
+}
+
+
+@media (max-width: 1080px) {
+    .cards-wrapper {
+        margin: 0 $padding-step;
+    }
+}
+
+@media (max-width: 840px) {
+	.hero {
+		.call-to-action {
+			.cards-wrapper {
+				margin: 0 $padding-step;
+
+				flex-direction: column;
+
+				align-items: center;
+
+				.card {
+					margin-bottom: $padding-step;
+					max-width: 400px;
+
+					a.button {
+						font-size: 17px;
+					}
+				}
+			}
+			.cta-button {
+				width: 300px;
+			    margin: 0 auto;
+			    justify-content: flex-start;
+			}
+		}
+	}
+}
+
+@media (max-width: 1280px) {
+	.hero {
+		.call-to-action {
+			.cta-button {
+				height: 100%;
+
+				img {
+					max-width: 55px;
+				}
+
+				span {
+					font-size: 15px;
+				}
+			}
+		}
+	}
+}

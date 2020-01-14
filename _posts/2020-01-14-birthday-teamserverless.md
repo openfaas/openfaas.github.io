@@ -1,6 +1,6 @@
 ---
 title: "OpenFaaS 3rd Birthday Celebrations"
-description: I look back over the past 3 years as we celebrate the OpenFaaS birthday again and look to the future
+description: As we celebrate the 3rd OpenFaaS Birthday, I look back over the past three years and towards a 2020 vision
 date: 2020-01-14
 image: /images/2020-01-14-birthday-teamserverless/cake.png
 categories:
@@ -14,7 +14,7 @@ dark_background: true
 
 ---
 
-I look back over the past 3 years as we celebrate the OpenFaaS birthday again and look to the future
+As we celebrate the 3rd OpenFaaS Birthday, I look back over the past three years and towards a 2020 vision
 
 ## We're 3!
 

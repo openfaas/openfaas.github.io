@@ -1,6 +1,6 @@
 ---
 title: "OpenFaaS 3rd Birthday Celebrations"
-description: We celebrated our 3rd Birthday with a special TeamServerless webinar for the community and a SWAG contest
+description: I look back over the past 3 years as we celebrate the OpenFaaS birthday again and look to the future
 date: 2020-01-14
 image: /images/2020-01-14-birthday-teamserverless/cake.png
 categories:
@@ -14,11 +14,11 @@ dark_background: true
 
 ---
 
-We celebrated our 3rd Birthday with a special TeamServerless webinar for the community and a SWAG contest
+I look back over the past 3 years as we celebrate the OpenFaaS birthday again and look to the future
 
 ## We're 3!
 
-I started OpenFaaS with [a single commit back in 2016](https://github.com/openfaas/faas/commit/d94cfeb660705028b6c101412a03519a8164712d). Since its inception the community of users and contributors has grown at a steady rate. Join me in this blog post to celebrate the 3rd birthday of OpenFaaS. I'll give a short history of the project, share the recording of our online webinar for the community and share the winners of our SWAG contest.
+I started OpenFaaS with [a single commit back in 2016](https://github.com/openfaas/faas/commit/d94cfeb660705028b6c101412a03519a8164712d). Since its inception the community of users and contributors has grown at a steady rate. Join me in this blog post to celebrate the 3rd birthday of OpenFaaS. I'll give a short history of the project, share our online celebration, talk about the future and congratulate the SWAG contest winners. You'll also get a few links at the end on how to get involved in time for our next birthday.
 
 ![](/images/2020-01-14-birthday-teamserverless/stats.jpg)
 

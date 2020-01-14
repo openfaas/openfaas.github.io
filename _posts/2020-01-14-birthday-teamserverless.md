@@ -111,7 +111,7 @@ Here's a couple of our happy customers with their hoodies shipped all the way to
 
 As you'll hear at the end of the video, I'm inviting you to help us drive the roadmap for OpenFaaS. I'll be compiling a 2020 vision along and spending time with the OpenFaaS Members and Core team to condense that down into a roadmap and a "compass bearing".
 
-After getting some initial feedback we're considering SDKs for the OpenFaaS REST API to enable enterprise teams to integrate with ease, request-signing from asynchronous invocations and event-triggers to enable non-repudiation for fintech and banking customers, an API for long-running batch-jobs, and improvements to OpenFaaS Cloud's bootstrap process.
+After getting some initial feedback we're considering SDKs for the OpenFaaS REST API to enable enterprise teams to integrate with ease, request-signing from asynchronous invocations and event-triggers to enable non-repudiation for fintech and banking customers, an API for long-running batch-jobs, and improvements to OpenFaaS Cloud's bootstrap process. We'll also continue to explore [faasd](https://github.com/alexellis/faasd) which combines [containerd](https://containerd.io) and CNI to build an efficient and fast functions platform without the need for Kubernetes and clustering.
 
 OpenFaaS Ltd is now hosting the project, covering any costs, providing commercial support, and building commercial add-ons for enterprise users.
 

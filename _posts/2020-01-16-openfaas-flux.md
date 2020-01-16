@@ -1,7 +1,7 @@
 ---
 title: "Applying GitOps to OpenFaaS with Flux Helm Operator"
 description: In this tutorial I'll show you how to set up a GitOps workflow for OpenFaaS with FluxCD and Helm v3.
-date: 2020-01-11
+date: 2020-01-16
 image: /images/2020-openfaas-flux/background.jpg
 categories:
   - serverless

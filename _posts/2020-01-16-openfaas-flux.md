@@ -22,7 +22,7 @@ You'll be installing OpenFaaS and deploy functions on a Kubernetes cluster in a 
 GitOps is a way to do Continuous Delivery, it works by using Git as a source of truth for declarative infrastructure and workloads. In practice this means using `git push` instead of `kubectl apply/delete` or `helm install/upgrade`. 
 
 Flux is a GitOps operator for Kubernetes that keeps your cluster state is sync with a Git repository.
-Flux was create at [Weaveworks](https://weave.works) and is now a [CNCF sandbox project](https://www.cncf.io/sandbox-projects/).
+Flux was created at [Weaveworks](https://weave.works) and is now a [CNCF sandbox project](https://www.cncf.io/sandbox-projects/).
 Because Flux is pull based and also runs inside Kubernetes, you don't have to expose the cluster credentials outside your production environment.
 Once you enable Flux on your cluster any changes in your production environment are done via pull request with rollback and audit logs provided by Git. 
 

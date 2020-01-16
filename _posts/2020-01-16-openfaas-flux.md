@@ -408,7 +408,7 @@ fluxctl sync --k8s-fwd-ns fluxcd
 
 Flux will apply the sealed secret on your cluster and sealed-secrets controller will then decrypt it into a Kubernetes secret.
 
-![SealedSecrets](https://github.com/fluxcd/helm-operator-get-started/blob/master/diagrams/flux-helm-operator-sealed-secrets.png)
+![SealedSecrets](https://raw.githubusercontent.com/fluxcd/helm-operator-get-started/master/diagrams/flux-helm-operator-sealed-secrets.png)
 
 You can read more about secrets management on the OpenFaaS docs [website](https://docs.openfaas.com/reference/secrets/).
 

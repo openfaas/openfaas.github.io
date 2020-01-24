@@ -31,7 +31,9 @@ When building a function I want the same things that I want when building any ot
 
 Starts to sound a lot like the type of problems that we are working on at Okteto no?
 
-> For the more visually oriented, I gave talk on the same topic as part of the Serverless Summit during Kubecon 2019. The recording [is available on youtube](https://www.youtube.com/watch?v=Yx1nGH2zh0k).
+For the more visually oriented, I gave talk on the same topic as part of the Serverless Summit during KubeCon, San Diego, 2019. The recording [is available on youtube](https://www.youtube.com/watch?v=Yx1nGH2zh0k).
+
+{% include youtube.html id="Yx1nGH2zh0k" %}
 
 # Enter OpenFaaS
 

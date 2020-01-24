@@ -1,9 +1,10 @@
 ---
 title: "Painless Serverless Development with Kubernetes, OpenFaaS and Okteto"
-description: In this tutorial Ramiro explains how you can use Kubernetes, OpenFaaS and Okteto to streamline function development.
-date: 2020-01-22
+description: In this tutorial Ramiro from Okteto explains how you can use Kubernetes, OpenFaaS and Okteto to streamline function development.
+date: 2020-01-24
 image: /images/2020-01-24-painless-serverless-development/cover.jpg
 categories:
+  - guest
   - serverless
   - kubernetes
   - okteto

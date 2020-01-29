@@ -470,6 +470,10 @@ In a short period of time we were able to build a function and a Vert.x service 
 
 #### So what does OpenFaaS offer over "vanilla Kubernetes"?
 
+When deployed to Kubernetes, OpenFaaS offers an application stack just like MEAN, LAMP or JAMStack, you can watch my video [from KubeCon on the PLONK stack](https://www.youtube.com/watch?v=NckMekZXRt8) which goes into a bit more detail.
+
+Here's an overview from 10,000ft:
+
 * community-supported and (for customers, commercially-supported) templates for popular languages, optimized and hand-tuned
 * a template store ecosystem to find community templates, see `faas-cli template store list`
 * optional auto-scaling from 0 to many and back down to zero again

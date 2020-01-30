@@ -298,14 +298,11 @@ Here's what our basic Handler.java file looks like with the Vert.x template:
 ```java
 package com.openfaas.function;
 
-import io.vertx.core.http.HttpServerResponse;
 import io.vertx.ext.web.RoutingContext;
-import io.vertx.ext.web.handler.BodyHandler;
 import io.vertx.core.json.JsonObject;
 
-public class Handler implements BodyHandler {
+public class Handler implements io.vertx.core.Handler<RoutingContext> {
 
-  @Override
   public void handle(RoutingContext routingContext) {
     routingContext.response()
       .putHeader("content-type", "application/json;charset=UTF-8")
@@ -314,26 +311,6 @@ public class Handler implements BodyHandler {
           .put("status", "ok")
           .encodePrettily()
       );
-  }
-
-  @Override
-  public BodyHandler setBodyLimit(long bodyLimit) {
-    return null;
-  }
-
-  @Override
-  public BodyHandler setUploadsDirectory(String uploadsDirectory) {
-    return null;
-  }
-
-  @Override
-  public BodyHandler setMergeFormAttributes(boolean mergeFormAttributes) {
-    return null;
-  }
-
-  @Override
-  public BodyHandler setDeleteUploadedFilesOnEnd(boolean deleteUploadedFilesOnEnd) {
-    return null;
   }
 }
 ```
@@ -359,10 +336,8 @@ import io.vertx.ext.web.client.HttpRequest;
 import io.vertx.ext.web.client.WebClient;
 import io.vertx.ext.web.client.WebClientOptions;
 
+public class Handler implements io.vertx.core.Handler<RoutingContext> {
 
-public class Handler implements BodyHandler {
-
-  @Override
   public void handle(RoutingContext routingContext) {
 
     WebClientOptions options = new WebClientOptions();
@@ -404,26 +379,6 @@ public class Handler implements BodyHandler {
 
         }
       });
-  }
-
-  @Override
-  public BodyHandler setBodyLimit(long bodyLimit) {
-    return null;
-  }
-
-  @Override
-  public BodyHandler setUploadsDirectory(String uploadsDirectory) {
-    return null;
-  }
-
-  @Override
-  public BodyHandler setMergeFormAttributes(boolean mergeFormAttributes) {
-    return null;
-  }
-
-  @Override
-  public BodyHandler setDeleteUploadedFilesOnEnd(boolean deleteUploadedFilesOnEnd) {
-    return null;
   }
 }
 ```
@@ -496,3 +451,5 @@ Find out more about OpenFaaS and Vert.x
 * [Get started with the OpenFaaS workshop](htttps://github.com/openfaas/workshop/) - 12 self-paced labs for setting up a Kubernetes cluster with OpenFaaS locally or in the cloud.
 * Read the [Vert.x docs](https://vertx.io/docs/)
 * Read the code for the [OpenFaaS Java11 templates](https://github.com/openfaas/templates)
+
+> Acknowledgements: Thank you to [Paulo Lopes](https://github.com/pmlopes) from the Vert.x project for his input and guidance for this blog post and for the OpenFaaS Java templates.

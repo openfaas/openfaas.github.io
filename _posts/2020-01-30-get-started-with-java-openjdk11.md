@@ -264,6 +264,7 @@ In the example above I used the `jq` utility to format the output, it looks like
       "quoteText": "Notice that the stiffest tree is most easily cracked, while the bamboo or willow survives by bending with the wind.",
       "quoteAuthor": "Bruce Lee"
     }
+  ]
 }
 ```
 
@@ -492,6 +493,6 @@ Perhaps next you'd like to move to a managed Kubernetes service, or add a TLS ce
 
 Find out more about OpenFaaS and Vert.x
 
-* [Get started with the OpenFaaS workshop](htttps://github.com/openfaas/templates/) - 12 self-paced labs for setting up a Kubernetes cluster with OpenFaaS locally or in the cloud.
+* [Get started with the OpenFaaS workshop](htttps://github.com/openfaas/workshop/) - 12 self-paced labs for setting up a Kubernetes cluster with OpenFaaS locally or in the cloud.
 * Read the [Vert.x docs](https://vertx.io/docs/)
 * Read the code for the [OpenFaaS Java11 templates](https://github.com/openfaas/templates)

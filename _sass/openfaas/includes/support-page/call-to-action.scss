@@ -112,15 +112,15 @@
 
 				.card {
 					margin-bottom: $padding-step;
-					max-width: 400px;
+					max-width: 100%;
 
 					a.button {
 						font-size: 17px;
+                        max-width: 100%;
 					}
 				}
 			}
 			.cta-button {
-				width: 300px;
 			    margin: 0 auto;
 			    justify-content: flex-start;
 			}

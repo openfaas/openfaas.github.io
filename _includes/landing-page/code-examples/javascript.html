@@ -1,0 +1,20 @@
+<div id="Javascript" class="tabcontent">
+<pre><code class="language-shell">$ faas-cli template store pull node10-express
+$ faas-cli new --lang node10-express javascript-fn
+</code></pre>
+<div class="has-text-grey-darker has-text-weight-light">
+    handler.js
+</div>
+    <pre><code class="language-python">"use strict"
+
+module.exports = (event, context) => {
+    let err;
+    const result =             {
+        status: "You said: " + JSON.stringify(event.body)
+    };
+
+    context
+        .status(200)
+        .succeed(result);
+}</code></pre>
+</div>

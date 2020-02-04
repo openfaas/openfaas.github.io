@@ -1,43 +1,50 @@
-<!-- <div class="container code-samples">
+<div class="container code-samples">
     <div class="columns">
         <div class="column is-8 is-offset-2">
-            <div class="tabs is-boxed is-fullwidth">
-                <ul>
-                    <li class="tab-selector is-active">
-                        <a>
-                            <span>Go</span>
-                        </a>
-                    </li>
-                    <li class="tab-selector">
-                        <a>
-                            <span>Java</span>
-                        </a>
-                    </li>
-                    <li class="tab-selector">
-                        <a>
-                            <span>Python</span>
-                        </a>
-                    </li>
-                    <li class="tab-selector">
-                        <a>
-                            <span>C#</span>
-                        </a>
-                    </li>
-                    <li class="tab-selector">
-                        <a>
-                            <span>Ruby</span>
-                        </a>
-                    </li>
-                    <li class="tab-selector">
-                        <a>
-                            <span>+</span>
-                        </a>
-                    </li>
-                </ul>
+            <div class="is-fullwidth">
+                <!-- Tab links -->
+                <div class="tab">
+                    <button class="tablinks" onclick="openCode(event, 'Go')" id="defaultOpen">Go</button>
+                    <button class="tablinks" onclick="openCode(event, 'Java')">Java</button>
+                    <button class="tablinks" onclick="openCode(event, 'Javascript')">Javascript</button>
+                    <button class="tablinks" onclick="openCode(event, 'Python')">Python</button>
+                </div>
             </div>
-            <div class="code-samples-preview">
-                some code
-            </div>
+
+            {% include landing-page/code-examples/java.html %}
+            {% include landing-page/code-examples/go.html %}
+            {% include landing-page/code-examples/python.html %}
+            {% include landing-page/code-examples/javascript.html %}
+
         </div>
     </div>
-</div> -->
+</div>
+
+<script>
+    function openCode(evt, cityName) {
+        // Declare all variables
+        var i, tabcontent, tablinks;
+
+        // Get all elements with class="tabcontent" and hide them
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+
+        // Get all elements with class="tablinks" and remove the class "active"
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+
+        // Show the current tab, and add an "active" class to the button that opened the tab
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+
+</script>
+<script>
+    // Get the element with id="defaultOpen" and click on it
+    document.getElementById("defaultOpen").click();
+</script>
+</script>

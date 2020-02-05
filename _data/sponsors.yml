@@ -6,10 +6,10 @@ platinum:
 - alt: "DigitalOcean"
   url: https://digitalocean.com/
   logo: digitalocean.svg
-# Expired Jan 2020
-# - alt: "Rancher Labs"
-#   url: https://rancher.com/
-#   logo: rancher-logo-stacked-color.svg
+# Expires: Feb 2021
+- alt: "Rancher Labs"
+  url: https://rancher.com/
+  logo: rancher-logo-stacked-color.svg
 - alt: "DX"
   url: https://dx.no/
   logo: dx.png

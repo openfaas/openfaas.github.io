@@ -3,27 +3,26 @@
 # diamond:
 
 platinum:
-- alt: "DigitalOcean"
-  url: https://digitalocean.com/
-  logo: digitalocean.svg
-# Expires: Feb 2021
-- alt: "Rancher Labs"
-  url: https://rancher.com/
-  logo: rancher-logo-stacked-color.svg
-- alt: "DX"
-  url: https://dx.no/
-  logo: dx.png
-- alt: "CTO Advisor"
-  url: https://www.thectoadvisor.com
-  logo: cto-advisor.png
-- alt: "Akash"
-  url: https://akash.network
-  logo: akash.svg
+  - alt: "DigitalOcean"
+    url: https://digitalocean.com/
+    logo: digitalocean.svg
+  # Expires: Feb 2021
+  - alt: "Rancher Labs"
+    url: https://rancher.com/
+    logo: rancher-logo-stacked-color.svg
+  - alt: "DX"
+    url: https://dx.no/
+    logo: dx.png
+  - alt: "CTO Advisor"
+    url: https://www.thectoadvisor.com
+    logo: cto-advisor.png
+  - alt: "Akash"
+    url: https://akash.network
+    logo: akash.svg
 gold:
-- alt: "Civo: UK Cloud Hosting Platform"
-  url: https://www.civo.com/promo
-  logo: civo.svg
-
+  - alt: "Civo: UK Cloud Hosting Platform"
+    url: https://www.civo.com/promo
+    logo: civo.svg
 # These tiers are not shown on the homepage
 # silver:
 # bronze:

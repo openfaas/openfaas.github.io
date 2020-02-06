@@ -1,0 +1,14 @@
+<div id="Bash" class="tabcontent">
+<pre><code class="language-shell">$ faas-cli template store pull bash-streaming
+$ faas-cli new --lang golang-http bash-streaming
+</code></pre>
+<div class="has-text-grey-darker has-text-weight-light">
+    handler.sh
+</div>
+    <pre><code class="language-bash">#!/bin/sh
+for i in $(seq 1 100)
+do
+    sleep 0.001
+    echo "Hello" $i
+done</code></pre>
+</div>

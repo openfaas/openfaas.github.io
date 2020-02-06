@@ -1,20 +1,19 @@
 <div id="Javascript" class="tabcontent">
-<pre><code class="language-shell">$ faas-cli template store pull node10-express
-$ faas-cli new --lang node10-express javascript-fn
+<pre><code class="language-shell">$ faas-cli new --lang node12 javascript-fn
 </code></pre>
 <div class="has-text-grey-darker has-text-weight-light">
     handler.js
 </div>
     <pre><code class="language-javascript">"use strict"
 
-module.exports = (event, context) => {
-    let err;
-    const result =             {
-        status: "You said: " + JSON.stringify(event.body)
-    };
+module.exports = async (event, context) => {
+  let err;
+  const result =             {
+    status: "Received input: " + JSON.stringify(event.body)
+  };
 
-    context
-        .status(200)
-        .succeed(result);
+  return context
+  .status(200)
+  .succeed(result);
 }</code></pre>
 </div>

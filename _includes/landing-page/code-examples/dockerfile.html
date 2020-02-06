@@ -1,0 +1,24 @@
+<div id="Dockerfile" class="tabcontent">
+<pre><code class="language-shell">$ faas-cli new --lang dockerfile sha512sum
+</code></pre>
+<div class="has-text-grey-darker has-text-weight-light">
+    Dockerfile
+</div>
+    <pre><code class="language-dockerfile">FROM openfaas/classic-watchdog:0.18.1 as watchdog
+FROM alpine:3.11
+RUN mkdir -p /home/app
+
+COPY --from=watchdog /fwatchdog /usr/bin/fwatchdog
+RUN chmod +x /usr/bin/fwatchdog
+
+RUN addgroup -S app && adduser app -S -G app # Add non root user
+RUN chown app /home/app
+WORKDIR /home/app
+
+# Populate example here - i.e. "cat", "sha512sum" or "node index.js"
+ENV fprocess="sha512sum"
+ENV write_debug="false"
+
+USER app
+CMD ["fwatchdog"]</code></pre>
+</div>

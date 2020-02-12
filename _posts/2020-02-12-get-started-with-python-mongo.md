@@ -324,7 +324,9 @@ So what's next?
 * accepting user input - we may want to parse the input that the user sends, and use that dynamic content for the insert
 * query and insert - what if we could both insert and query data? One way we can do that is by looking at the HTTP method, whether the user sent a GET or a PUT/POST
 
-Let's try that out, then I'll hand it back over to you. My goal is to equip you with some basics, so that you can go on to do what you do best, and write your own Python.
+Let's try that out, then I'll hand it back over to you.
+
+> My goal is to equip you with some basics, so that you can go on to do what you do best, and write your own Python.
 
 We are using a "classic" OpenFaaS template which abstracts away and hides the HTTP details giving a pure-functional approach, you can also use Flask and the [python3-http template](https://github.com/openfaas-incubator/python-flask-template) if you prefer [a microservice style](https://www.openfaas.com/blog/stateless-microservices/).
 
@@ -403,7 +405,7 @@ In a short period of time we were able to build a function with Python and and a
 
 #### So what does OpenFaaS offer over "vanilla Kubernetes"?
 
-When deployed to Kubernetes, OpenFaaS offers an application stack just like MEAN, LAMP or JAMStack, you can watch my video [from KubeCon on the PLONK stack](https://www.youtube.com/watch?v=NckMekZXRt8) which goes into a bit more detail.
+> When deployed to Kubernetes, OpenFaaS offers an application stack just like MEAN, LAMP or JAMStack, you can watch my video [from KubeCon on the PLONK stack](https://www.youtube.com/watch?v=NckMekZXRt8) which goes into a bit more detail.
 
 Here's an overview from 10,000ft:
 

@@ -3,16 +3,16 @@
 		&.intro {
 			background: white;
 
-			padding-top: $padding-step * 4;
-			padding-bottom: $padding-step * 4;
+			padding-top: $padding-step * 2;
+			padding-bottom: $padding-step * 2;
 		}
 
 		&.team-wrapper {
-			padding-top: $padding-step * 4;
-			padding-bottom: $padding-step * 4;
+			padding-top: $padding-step * 2;
+			padding-bottom: $padding-step * 2;
 
 			.column > .title {
-				padding-bottom: $padding-step * 4;
+				padding-bottom: $padding-step * 2;
 			}
 		}
 	}
@@ -32,8 +32,8 @@
 		display: -ms-flex;
 		display: flex;
 
-		min-width: 200px;
-		flex-basis: 200px;
+		min-width: 120px;
+		flex-basis: 120px;
 
 		flex-direction: column;
 
@@ -54,7 +54,7 @@
 
 			color: $grey-darker;
 
-			padding: 0 20px;
+			padding: 0 5px;
 
             margin: 10px 0;
 
@@ -100,8 +100,8 @@
             padding-top: $padding-step;
 
             img {
-                width: 200px;
-                height: 200px;
+                width: 120px;
+                height: 120px;
 
                 border-radius: 50%;
 

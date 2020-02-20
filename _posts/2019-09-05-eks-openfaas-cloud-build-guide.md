@@ -347,7 +347,7 @@ The easiest registry to use is the [Docker Hub](https://hub.docker.com/), the ca
 
 You can also [install your own self-hosted registry](https://github.com/alexellis/k8s-tls-registry) for private Docker images. Note: you can self-host a registry on a single-node, or in a different cluster all together if you wish.
 
-> Note: using AWS ECR is beyond the scope of this tutorial. See here for info: [OFC: configuring AWS ECR](https://github.com/openfaas-incubator/ofc-bootstrap#prepare-your-docker-registry-if-using-aws-ecr).
+> Note: using AWS ECR is beyond the scope of this tutorial. See here for info: [OFC: configuring AWS ECR](https://github.com/openfaas-incubator/ofc-bootstrap/blob/master/USER_GUIDE.md#prepare-your-docker-registry-if-using-aws-ecr).
 
 Now log in, using ofc-bootstrap like indicated below:
 

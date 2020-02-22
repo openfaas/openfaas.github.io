@@ -1,4 +1,5 @@
-# Lists are sorted on surname
+# Active members listed in the file by level of contribution
+
 founders:
   - alex
 
@@ -13,6 +14,7 @@ members:
   - martin
   - ed
 
+# Listed for several months, GitHub and leaderboard shows former contributors permanently
 former_members:
   - john
   - ken

@@ -11,12 +11,10 @@ core:
 members:
   - vivek
   - martin
-  - andrew
-  - john
   - alistair
 
 former_members:
+  - andrew
+  - john
   - richard
   - ken
-  - matias
-  - rishabh

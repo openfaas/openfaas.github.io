@@ -1,9 +1,6 @@
 - name: About
   class: navbar-item
   link: /
-- name: Team
-  class: navbar-item
-  link: /team/
 - name: Blog
   class: navbar-item
   link: /blog/
@@ -12,6 +9,9 @@
   link: https://docs.openfaas.com/
 - name: Video Demo
   class: navbar-item start-demo-video
+- name: Team
+  class: navbar-item
+  link: /team/
 - name: Support
   class: navbar-item
   link: /support/

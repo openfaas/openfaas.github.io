@@ -2,23 +2,32 @@
 layout: default
 ---
 
-<div class="full">
-<section class="hero">
-	<div class="inner-hero text-container">
-		<div class="hero-text-container">
-			<h1>The latest news</h1>
-			<p class="subtext">Hear the latest progress on Frisco and tips on making life long friends.</p>
+<section class="hero is-primary is-small">
+	<div class="hero-body has-text-centered intro">
+		<h1 class="title is-size-3 is-size-2-desktop has-text-grey-darker">
+			The latest news
+		</h1>
+		<h1 class="title is-size-5 is-size-4-desktop has-text-grey-darker has-text-weight-light">
+			Archive of posts with {{ page.type }} '{{ page.title }}'
+		</h1>
+	</div>
+
+	<div class="hero-body grey">
+		<div class="container">
+			{% for post in page.posts %}
+			<li class="blog-post">
+				<h1 class="title is-size-4 is-size-3-desktop has-text-weight-light">
+					<a href="{% include relative-src.html src=post.url %}">{{ post.title }}</a>
+				</h1>
+				{% include blog-page/post-title.html post=post %}
+				<div class="post-preview">
+					{{ post.excerpt }}
+					<a class="button is-outlined is-large is-primary" href="{% include relative-src.html src=post.url %}">
+						Read More
+					</a>
+				</div>
+			</li>
+			{% endfor %}
 		</div>
 	</div>
 </section>
-
-<section>
-	<div class="text-container">
-		<p class="change-category">You're currently looking at advice categorised under <strong>{{ page.title }}</strong>. <a href="{{ site.baseurl }}/blog/">View all posts</a> instead.</p>
-
-		<ul class="blog-posts">
-			{% include list-posts.html posts=page.posts %}
-		</ul>
-	</div>
-</section>
-</div>

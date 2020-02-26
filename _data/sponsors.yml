@@ -23,6 +23,10 @@ gold:
 - alt: "Civo: UK Cloud Hosting Platform"
   url: https://www.civo.com/promo
   logo: civo.svg
+# For 4 months from Feb
+- alt: "MSB: Kubernetes training that works."
+  url: https://www.msb.com
+  logo: msb.png
 
 # These tiers are not shown on the homepage
 # silver:

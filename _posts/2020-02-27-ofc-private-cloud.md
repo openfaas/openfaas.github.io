@@ -14,7 +14,7 @@ dark_background: true
 
 ---
 
-In this post I want to show you how to create your own private cloud with OpenFaaS Cloud.
+In this post I want to show you how to create your own private cloud with [OpenFaaS Cloud](https://github.com/openfaas/openfaas-cloud).
 
 After the setup is complete, you can invite your team who will use their GitHub or GitLab accounts to log into a personal dashboard. CI/CD is built-in along with TLS, logging, encrypted secrets, DNS, and governance. Through a wildcard TLS certificate and DNS entry, each user and organization will receive their own sub-domain.
 
@@ -22,13 +22,11 @@ As the administrator, you'll be defining a policy for which features are availab
 
 With your private cloud you'll be able to deploy microservices, APIs, blogs, wikis, functions and more, whatever conforms to the [OpenFaaS workload definition](https://docs.openfaas.com/reference/workloads/).
 
-## Pre-reqs
+## Pre-requisites
 
 * A private or public Kubernetes cluster with at least 3x nodes with 4GB RAM and 2vCPU each
 
 > Note: if you are planning on using k3s, then you should see the [notes in the user-guide about disabling Traefik](https://github.com/openfaas-incubator/ofc-bootstrap/blob/master/USER_GUIDE.md)
-
-* Local tooling: kubectl, faas-cli, etc
 
 * An account with DigitalOcean, AWS, GCP or Cloudflare for automatic DNS configuration and TLS
 
@@ -36,9 +34,13 @@ With your private cloud you'll be able to deploy microservices, APIs, blogs, wik
 
 * A [GitHub.com](https://github.com/) account
 
+Installed below:
+
+* Local tooling: kubectl, faas-cli, [ofc-bootstrap](https://github.com/openfaas-incubator/ofc-bootstrap) etc
+
 ## An overview
 
-The tool that we use to configure OpenFaaS Cloud (OFC) is ofc-bootstrap.
+The tool that we use to configure OpenFaaS Cloud (OFC) is [ofc-bootstrap](https://github.com/openfaas-incubator/ofc-bootstrap).
 
 ![ofc-bootstrap tooling](https://github.com/openfaas-incubator/ofc-bootstrap/raw/master/docs/ofc-bootstrap.png)
 

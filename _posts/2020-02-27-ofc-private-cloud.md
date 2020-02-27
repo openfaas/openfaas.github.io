@@ -4,11 +4,13 @@ description: Create your own private cloud with OpenFaaS Cloud for your team to 
 date: 2020-02-27
 image: /images/2020-02-27-ofc-private-cloud/private-cloud-servers.jpg
 categories:
-  - serverless
-  - functions
-  - community
-  - support
+  - microservices
   - kubernetes
+  - serverless
+  - cloud
+  - governance
+  - functions
+  - gitops
 author_staff_member: alex
 dark_background: true
 

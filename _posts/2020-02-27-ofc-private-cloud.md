@@ -50,15 +50,15 @@ The tool that we use to configure OpenFaaS Cloud (OFC) is [ofc-bootstrap](https:
 
 The core components installed are:
 
-* OpenFaaS - to host your functions and endpoints
-* OpenFaaS Cloud - CI/CD pipeline
+* [OpenFaaS](https://github.com/openfaas/faas) - to host your functions and endpoints
+* [OpenFaaS Cloud](https://github.com/openfaas/openfaas-cloud) - CI/CD pipeline
 * OpenFaaS Cloud - multi-user dashboard
 * OpenFaaS Cloud - edge-auth and edge-router for OAuth2 support and multi-user routing
-* SealedSecrets - to encrypt secrets for your repos
-* BuildKit - to build Docker images for your repos
-* Minio - for build log storage
-* Nginx-Ingress - to act as the IngressController for Kubernetes
-* cert-manager - to issue TLS certificates
+* [SealedSecrets](https://github.com/bitnami-labs/sealed-secrets) - to encrypt secrets for your repos
+* [buildkit](https://github.com/moby/buildkit) - to build Docker images for your repos
+* [Minio](https://min.io) - for build log storage
+* [Nginx-Ingress](https://kubernetes.github.io/ingress-nginx/) - to act as the IngressController for Kubernetes
+* [cert-manager](https://cert-manager.io) - to issue TLS certificates
 
 The installation takes between 50-100s, but most of the time is going to be spent in configuring the GitHub integration, security, TLS and DNS.
 
@@ -81,13 +81,13 @@ These instructions are also available in the [user guide](https://github.com/ope
 
 * [Download kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 
-* Download the OpenFaaS CLI
+* Download the [OpenFaaS CLI](https://github.com/openfaas/faas-cli)
 
 ```bash
 curl -sSL https://cli.openfaas.com | sudo sh
 ```
 
-* Download Helm 3
+* Download [Helm 3](https://helm.sh)
 
 ```bash
 https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | sudo bash

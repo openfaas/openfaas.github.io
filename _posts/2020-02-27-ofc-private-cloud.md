@@ -24,7 +24,7 @@ With your private cloud you'll be able to deploy microservices, APIs, blogs, wik
 
 ## Pre-requisites
 
-* A private or public Kubernetes cluster with at least 3x nodes with 4GB RAM and 2vCPU each
+* A private or public Kubernetes cluster with Intel architecture (ARM is not supported at this time) with at least 3x nodes with 4GB RAM and 2vCPU each
 
 > Note: if you are planning on using k3s, then you should see the [notes in the user-guide about disabling Traefik](https://github.com/openfaas-incubator/ofc-bootstrap/blob/master/USER_GUIDE.md)
 

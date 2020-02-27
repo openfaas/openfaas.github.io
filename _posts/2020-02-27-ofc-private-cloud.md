@@ -167,31 +167,6 @@ secrets:
   - name: private-key
     value: |
       -----BEGIN RSA PRIVATE KEY-----
-      MIIEpQIBAAKCAQEAyyPA60IQIET9dBbk8K3ukJwHQgoirQVuyo5EHktw7v5ziBZP
-      dKNBt/MvN8tlg+32y2KghlVmt4HjxTHsJkApXEUGZNTOx1TSftwgA1yyBNumF/hU
-      A/Y+fRNNm2x4P19t01cczPV91keEsKBBfoY1HIV1mXSSQbiHbO9F4UYGIbkjA76b
-      pv+nYdQOanCaU0aFikCZMDhVcgpJYVyV4Qsq545N3j5/TduKBjac0NHMBY3xqAxB
-      0YmqVth/M0WFeXg6/N4SvFspHbawmZoQuoQJWf6MgRQLeb6K+/0dv94FtVfkVUy3
-      5P7RVmb2ETlSsY+SbPYA1FwiF9WL3mo0oakoHwIDAQABAoIBACuiIWUnComz5/EQ
-      ndposc6UBScVQD+D5DlT96O+NqLPOwenKyf1jT8y2BiW8tY0vgcPx0UzgN2347HO
-      uFe6/mdYWDg+UbAVMyWWqLWwKnjKqVGKwJkdQmzhQZE56lZKbC+yDXik3oOxVvoN
-      YiQINc5LiGgO1v+Q4F3ww0TRIq4JUQji38w5QdS8tnG9vWc5waGN+5aIYpJCvRWR
-      VKar16KMCfCUZmtAZ96aYy9lcxMqRFtebRen0Xq41Vt04QwJXqlAakDCh9dG2Li2
-      XExUp3JBj6hHwpz4Tqelb80KtH1T/4BDEfoII23BCsgdDkZUVOAl/nWCipSrws8y
-      s7qvwSECgYEA9xg7vR3pSBA/1Qn9VVUjPfa2TuxhGT7cbcE6UtlmwJi1c590oR5K
-      ADALxBvcQGBdDTWZ7p3olJQhaURg2Hxlh1XNUrFGOx/PQiDVURy8WvNl1XE6Stvk
-      KUQT9qSiLszOLljixA6cDA5psvUYt5+hmyUumBnU//yis5AQwInLL7ECgYEA0nX6
-      jhkwmFle6ybe+xGJ/rgCcLyO0V2L0S5t6QwIwiNHtCKO5EjLlb+A2bqtFcpyfzIc
-      Cy9SI3HRzIxzJseZez9Z3Zwr0IQsuBPIKs70egcRJG79lIVuXZKqL43UrjnySB8a
-      DvNRMeNb+09XWxX0rDgkQRMcQRc/AJ/d2L51GM8CgYEAxWbpytNLnFPG+yao6fRD
-      XGxuBy1XATk0FsbpFmkyaqlVRRLdtR4ilnXL4Jc1ZYTWsgfhez1SIukYrCWBjVIM
-      Not4phiT+AYYqUbbxJpFbA/JijSUElwLsl/95uxt2R+rlGFUgLb/Oa6GCP9ACOqR
-      zAVvbPouLXgib3untnofBnECgYEAl12xAchOMhR89wVy9AIOTLvNTYXf9eag66bH
-      +AfmuLIlHQKJ4NgWTDJ6mp3vZK/BH4hLsSOsoL940/Pj0e1WjtTmbkOnI4Ycn5vi
-      qB9GqAkzJBALo2lAEl6sthz87P3SKlrsI/qN2CKcgifzPRiSa9bJBGCZPptYfbt9
-      FCkPEPMCgYEAgK2Qi+yvFbmS/LTYnV0cDxIr3GvRKPfdmO9n5msoPduzDGR3npvM
-      2r3oaRN2CXoVuCYy3GVoECAybKjuoluhlsnDu3nQzEz4YN8oN/yYtnlVY0SZJcGW
-      PEb0htpEt5wq0tZ/tjMy2mpBgBZ6vFFIMTfRjWzaefW9+yLTbSh+gaM=
       -----END RSA PRIVATE KEY-----
   namespace: openfaas-fn
   filters:
@@ -272,7 +247,7 @@ Now edit the overrides file:
     - "default"
 ```
 
-By default OFC will read the list of customers from a HTTPS URL, but since we have overridden this, let's configure the boostrap tool to use the Kubernetes secret.
+By default OFC will read the list of customers from a HTTPS URL, but since we have overridden this, let's configure the bootstrap tool to use the Kubernetes secret.
 
 Add the following to your overrides file:
 
@@ -305,11 +280,7 @@ For instance, if I deployed a webhook receiver called `stripe-payment` to a GitH
 
 https://alexellis.ofc.example.com/stripe-payment
 
-So called, pretty URLs are also available through the [ingress-operator project](https://github.com/openfaas-incubator/ingress-operator), so that if we wanted we could add a custom domain like:
-
-```bash
-stripe.example.com
-```
+So called, *pretty URLs* are also available through the [ingress-operator project](https://github.com/openfaas-incubator/ingress-operator), so that if we wanted we could add a custom domain like: `stripe.example.com`
 
 Decide whether you are going to use AWS Route53, GCP Cloud DNS, DigitalOcean, or Cloudflare for DNS, then configure your user account [as per the cert-manager docs](https://cert-manager.io/docs/configuration/acme/dns01/). We will be using the DNS01 ACME challenge, so that we can obtain a wildcard certificate for all our team's functions.
 
@@ -332,25 +303,25 @@ If you look at the `example.init.yaml` file you'll see a section with secrets fo
 Default location:
 
 ```yaml
-  - name: "digitalocean-dns"
-    files:
-      - name: "access-token"
-        value_from: "~/Downloads/do-access-token"
-    filters:
-      - "do_dns01"
-    namespace: "cert-manager"
+- name: "digitalocean-dns"
+  files:
+    - name: "access-token"
+      value_from: "~/Downloads/do-access-token"
+  filters:
+    - "do_dns01"
+  namespace: "cert-manager"
 ```
 
 You may want to customise it as follows:
 
 ```yaml
-  - name: "digitalocean-dns"
-    files:
-      - name: "access-token"
-        value_from: "credentials/do-access-token"
-    filters:
-      - "do_dns01"
-    namespace: "cert-manager"
+- name: "digitalocean-dns"
+  files:
+    - name: "access-token"
+      value_from: "credentials/do-access-token"
+  filters:
+    - "do_dns01"
+  namespace: "cert-manager"
 ```
 
 ## Deploy your OpenFaaS Cloud
@@ -366,6 +337,74 @@ ofc-bootstrap apply \
 ```
 
 You can now monitor the progress as a series of helm charts are installed, secrets are created and templated Kubernetes YAML files are applied.
+
+Here's the full example of my overrides file:
+
+```yaml
+secrets:
+- name: github-webhook-secret
+  literals:
+  - name: github-webhook-secret
+    value: cb539f01e7f06e0dbc60bc1c532ac4b3cb77d6e2
+  namespace: openfaas-fn
+  filters:
+  - scm_github
+- name: private-key
+  literals:
+  - name: private-key
+    value: |
+      -----BEGIN RSA PRIVATE KEY-----
+      -----END RSA PRIVATE KEY-----
+  namespace: openfaas-fn
+  filters:
+  - scm_github
+- name: "of-client-secret"
+  literals:
+    - name: of-client-secret
+      value: "4c8246da512c296861b7cd499a32f8194ca8945c"
+  filters:
+    - "auth"
+  namespace: "openfaas"
+- name: "of-customers"
+  files:
+    - name: "of-customers"
+      value_from: "credentials/CUSTOMERS"
+  namespace: "openfaas"
+  filters:
+    - "default"
+- name: "customers"
+  files:
+    - name: "customers"
+      value_from: "credentials/CUSTOMERS"
+  namespace: "openfaas-fn"
+  filters:
+    - "default"
+- name: "digitalocean-dns"
+  files:
+    - name: "access-token"
+      value_from: "credentials/do-access-token"
+  filters:
+    - "do_dns01"
+  namespace: "cert-manager"
+
+root_domain: ofc.example.com
+github:
+  app_id: "55667"
+
+oauth:
+  client_id: 8219a0399a231b94175f
+
+enable_oauth: true
+
+slack:
+  url: http://slack.com/secret-url-goes-here
+
+tls: true
+tls_config:
+  dns_service: digitalocean
+  issuer_type: "staging"
+  email: "your@email.com"
+```
 
 ## Post-install
 
@@ -415,7 +454,21 @@ We have now deployed a private cloud using OpenFaaS cloud, we can invite our tea
 
 Everything we have deployed is stateless, and is running on Open Source software from the CNCF landscape, this means that disaster recover is easy, just run `ofc-bootstrap` against a cluster, and `git push`.
 
-Do you want to try OpenFaaS Cloud before installing it yourself? Apply for free access to the [OpenFaaS Cloud Community Cluster](https://github.com/openfaas/community-cluster/)
+### Get OFC even quicker than that
 
-Or install OFC for local development by skipping TLS and OAuth, this reduces the time to around 15 minutes: [OpenFaaS Cloud for Development](https://blog.alexellis.io/openfaas-cloud-for-development/)
+Do you want to try OpenFaaS Cloud before installing it yourself?
 
+Apply for free access to the [OpenFaaS Cloud Community Cluster](https://github.com/openfaas/community-cluster/)
+
+Or install OFC for local development by skipping TLS and OAuth, this reduces the time to around 15 minutes:
+
+[OpenFaaS Cloud for Development](https://blog.alexellis.io/openfaas-cloud-for-development/)
+
+### Source code / GitHub
+
+You can fork/star/browse the code on GitHub:
+
+* [ofc-bootstrap](https://github.com/openfaas-incubator/ofc-bootstrap)
+* [openfaas-cloud](https://github.com/openfaas/openfaas-cloud)
+
+We also have a video recording from KubeCon covering some customer case-studies and community projects that are running on OpenFaaS Cloud: [OpenFaaS Cloud + Linkerd: A Secure, Multi-Tenant Serverless Platform - Charles Pretzer & Alex Ellis](https://www.youtube.com/watch?v=sD7hCwq3Gw0)

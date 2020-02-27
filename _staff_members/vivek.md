@@ -5,5 +5,5 @@ image_path: /images/author/vivek.png
 github_username: viveksyngh
 twitter_username: viveksyngh
 linkedin_username: viveksyngh
-blurb: Community <a href="https://twitter.com/openfaas">@openfaas</a>.
+blurb: Contributor <a href="https://twitter.com/openfaas">@openfaas</a>.
 ---

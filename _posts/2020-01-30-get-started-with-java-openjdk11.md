@@ -34,16 +34,16 @@ We'll first of all get OpenFaaS installed using the easiest way possible. Then w
 
 Make sure that you have the Kubernetes CLI ([kubectl](https://kubernetes.io/docs/reference/kubectl/overview/)) available.
 
-Download `k3sup`, which is an installer for helm charts for any Kubernetes cluster. We will install OpenFaaS using `k3sup app install` and [the OpenFaaS helm chart](https://github.com/openfaas/faas-netes/tree/master/chart/openfaas):
+Download [arkade](https://get-arkade.dev/), which is an installer for helm charts for any Kubernetes cluster. We will install OpenFaaS using `arkade install` and [the OpenFaaS helm chart](https://github.com/openfaas/faas-netes/tree/master/chart/openfaas):
 
 ```sh
-curl -sSLf https://get.k3sup.dev | sudo sh
+curl -sSLf https://dl.get-arkade.dev | sudo sh
 ```
 
 Now install openfaas:
 
 ```sh
-k3sup app install openfaas \
+arkade install openfaas \
   --helm3
 ```
 
@@ -53,10 +53,10 @@ You can also customise values from the helm chart's README by passing in `--set`
 Install openfaas
 
 Usage:
-  k3sup app install openfaas [flags]
+  arkade install openfaas [flags]
 
 Examples:
-  k3sup app install openfaas --loadbalancer
+  arkade install openfaas --loadbalancer
 
 Flags:
   -a, --basic-auth                    Enable authentication (default true)
@@ -82,7 +82,7 @@ At the end of the installation you'll get instructions for how to:
 * port-forward the gateway to your local machine
 * and to log-in using `faas-cli login`
 
-If you lose this information just type in `k3sup app info openfaas` at any time.
+If you lose this information just type in `arkade info openfaas` at any time.
 
 ### Example 1) The `java11` function
 
@@ -418,7 +418,7 @@ curl http://127.0.0.1:8080/function/github-release-finder ; echo
 }
 ```
 
-As an extension to the task, why don't you edit the environment section of your `github-release-finder.yml` file and select a different repo like `alexellis/k3sup`, or the main Kubernetes repo. 
+As an extension to the task, why don't you edit the environment section of your `github-release-finder.yml` file and select a different repo like `alexellis/arkade`, or the main Kubernetes repo. 
 
 ### Wrapping up
 
@@ -443,7 +443,7 @@ Feel free to [join us on Slack](https://slack.openfaas.io/) and to follow [@open
 
 Perhaps next you'd like to move to a managed Kubernetes service, or add a TLS certificate and a custom domain to your OpenFaaS functions?
 
-* [Get TLS for OpenFaaS the easy way with k3sup](https://blog.alexellis.io/tls-the-easy-way-with-openfaas-and-k3sup/)
+* [Get TLS for OpenFaaS the easy way with arkade](https://blog.alexellis.io/tls-the-easy-way-with-openfaas-and-k3sup/)
 * [Deploy OpenFaaS on Amazon EKS](https://aws.amazon.com/blogs/opensource/deploy-openfaas-aws-eks/)
 
 Find out more about OpenFaaS and Vert.x

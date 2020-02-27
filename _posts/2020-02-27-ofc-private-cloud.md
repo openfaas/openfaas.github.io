@@ -14,7 +14,7 @@ dark_background: true
 
 ---
 
-In this post I want to show you how to create your own private cloud with [OpenFaaS Cloud](https://github.com/openfaas/openfaas-cloud).
+In this post I want to show you how to create your own private cloud with [OpenFaaS Cloud](https://github.com/openfaas/openfaas-cloud) and Kubernetes.
 
 After the setup is complete, you can invite your team who will use their GitHub or GitLab accounts to log into a personal dashboard. CI/CD is built-in along with TLS, logging, encrypted secrets, DNS, and governance. Through a wildcard TLS certificate and DNS entry, each user and organization will receive their own sub-domain.
 

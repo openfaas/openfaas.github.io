@@ -464,6 +464,8 @@ Or install OFC for local development by skipping TLS and OAuth, this reduces the
 
 [OpenFaaS Cloud for Development](https://blog.alexellis.io/openfaas-cloud-for-development/)
 
+Are you an EKS user? We have a specific guide for you that covers IAM, Route53, and role management: [Build your own OpenFaaS Cloud with AWS EKS](https://www.openfaas.com/blog/eks-openfaas-cloud-build-guide/)
+
 ### Source code / GitHub
 
 You can fork/star/browse the code on GitHub:

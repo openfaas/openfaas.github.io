@@ -30,9 +30,9 @@ We have both OpenFaaS and [inlets](https://inlets.dev/) t-shirts available for s
 
 > If you would like to place a bulk order, feel free to email [sales@openfaas.com](mailto:sales@openfaas.com) for a discount on shipping. All bulk orders come with a shipment of free SWAG - stickers, magnets, and other goodies.
 
-![OpenFaaS and inlets t-shirts](/images/2020-swag-store/tees.jpg)
+![OpenFaaS and inlets t-shirts & hoodies](/images/2020-swag-store/tees.jpg)
 
-* Order your shirt today on [https://gumroad.com/openfaas](https://gumroad.com/openfaas)
+* Order your shirt today on [https://store.openfaas.com/](https://store.openfaas.com/)
 
 ### Inlets PRO available for purchase
 

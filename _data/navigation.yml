@@ -4,11 +4,14 @@
 - name: Blog
   class: navbar-item
   link: /blog/
+- name: Store
+  class: navbar-item
+  link: https://store.openfaas.com/
 - name: Docs
   class: navbar-item
   link: https://docs.openfaas.com/
-- name: Video Demo
-  class: navbar-item start-demo-video
+#- name: Video Demo
+#  class: navbar-item start-demo-video
 - name: Team
   class: navbar-item
   link: /team/

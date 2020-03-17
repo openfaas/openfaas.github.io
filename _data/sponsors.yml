@@ -20,9 +20,10 @@ platinum:
   url: https://akash.network
   logo: akash.svg
 gold:
-- alt: "Civo: UK Cloud Hosting Platform"
-  url: https://www.civo.com/promo
-  logo: civo.svg
+# Cancelled due to Coronavirus :-/
+#- alt: "Civo: UK Cloud Hosting Platform"
+#  url: https://www.civo.com/promo
+#  logo: civo.svg
 # For 4 months from Feb
 - alt: "MSB: Kubernetes training that works."
   url: https://www.msb.com

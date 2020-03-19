@@ -254,7 +254,7 @@ OpenFaaS can support various machine learning frameworks beyond PyTorch, if you 
 
 * [How to split large Python Functions across multiple files][multifile-blog-post]
 * [Introducing the Template Store for OpenFaaS][template-store-post]
-* [Accelerating the Journey of an AI algorithm to production with openfaas at BT][[kubecon-bt-journey]
+* [Accelerating the Journey of an AI algorithm to production with openfaas at BT][kubecon-bt-journey]
 
 [conda-homepage]: https://docs.conda.io/projects/conda/en/latest/
 [flask-return-values]: http://flask.pocoo.org/docs/1.0/quickstart/#about-responses

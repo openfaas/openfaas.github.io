@@ -170,12 +170,21 @@ We finished up by sharing the issue link the the live stream audience, then [wat
 
 ![View Emojis](/images/2020-03-30-managed-services-serverless/view-emojis.png)
 
+# Watch the Live Stream
+
+If you enjoyed these demos, watch the full live stream to hear Alex and I dive into the implementation details of Crossplane and OpenFaaS. Alex also answers questions such as "What is it like to build software for multiple platforms?" and "How do you organically grow an open source community?".
+
+{% include youtube.html id="XphQgB87U-s" %}
+
 # Wrapping Up
+
+The demos in this post illustrate the benefits of standardizing on the Kubernetes API as Crossplane and OpenFaaS were able to natively share connection information using the common Kubernetes `Secret` format. They also demonstrated the separation of concern and portability that Crossplane strives for, isolating the configuration and provisioning of managed services into two distinct operations.
 
 Bringing together Crossplane and OpenFaaS creates the easiest path for deploying both your code and your managed services on Kubernetes. These two demos show interesting use-cases, but the beautiful thing about both projects is that they are built to be extensible. Whether you are building new OpenFaaS [function triggers](https://docs.openfaas.com/reference/triggers/), adding support for a [new managed service](https://crossplane.io/docs/v0.9/contributing/services_developer_guide.html) on Crossplane, or just bringing the two projects together to get your application up and running, feel free to [reach out](https://twitter.com/hasheddan) to me directly.
 
 Otherwise, bring your thoughts, questions, and feedback to one of our many forums:
 - [Crossplane Slack](https://slack.crossplane.io/)
+- [OpenFaaS Slack](https://slack.openfaas.io)
 - [Open an Issue](https://github.com/crossplane/crossplane/issues/new/choose)
 - [Join our Community Meeting](https://docs.google.com/document/d/1q_sp2jLQsDEOX7Yug6TPOv7Fwrys6EwcF5Itxjkno7Y/edit?usp=sharing)
 - [Tune in to The Binding Status](https://www.youtube.com/playlist?list=PL510POnNVaaYFuK-B_SIUrpIonCtLVOzT)

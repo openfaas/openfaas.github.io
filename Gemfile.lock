@@ -259,8 +259,6 @@ DEPENDENCIES
   github-pages
   html-proofer
   jekyll-archives
-  jekyll-paginate
-  jekyll-sitemap
 
 BUNDLED WITH
    2.0.2

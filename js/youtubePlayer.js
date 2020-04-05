@@ -16,7 +16,7 @@ function onPlayerReady(event) {
 
 function playVideo() {
     landingPlayer.playVideo();
-    landingPlayer.a.classList.add('playing');
+    landingPlayer.f.classList.add('playing');
     sampleVideo.classList.add('is-hidden');
     playerControl.classList.add('is-hidden');
 }

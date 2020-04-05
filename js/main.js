@@ -114,7 +114,7 @@ function onYouTubeIframeAPIReady() {
             playerVars: { 'autoplay': 0, 'controls': 1 },
             events: {
                 'onReady': function(e) {
-                    e.target.a.parentElement.classList.add('ready')
+                    e.target.f.parentElement.classList.add('ready')
                 },
                 'onError': function(err) { console.log(err);}
             }
@@ -126,7 +126,7 @@ function onYouTubeIframeAPIReady() {
         playerVars: { 'autoplay': 0, 'controls': 1 },
         events: {
             'onReady': function(e) {
-                e.target.a.classList.add('ready')
+                e.target.f.classList.add('ready')
             },
             'onError': function(err) { console.log(err);}
         }

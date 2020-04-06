@@ -5,7 +5,6 @@ founders:
 
 core:
   - lucas
-  - burton
   - stefan
 
 members:
@@ -16,6 +15,7 @@ members:
 
 # Listed for several months, GitHub and leaderboard shows former contributors permanently
 former_members:
+  - burton
   - ed
   - richard
   - john

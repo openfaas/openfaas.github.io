@@ -10,9 +10,10 @@ platinum:
 - alt: "Rancher Labs"
   url: https://rancher.com/
   logo: rancher-logo-stacked-color.svg
-- alt: "DX"
-  url: https://dx.no/
-  logo: dx.png
+# Cancelled due to Cornavirus.
+#- alt: "DX"
+#  url: https://dx.no/
+#  logo: dx.png
 - alt: "CTO Advisor"
   url: https://www.thectoadvisor.com
   logo: cto-advisor.png
@@ -20,7 +21,7 @@ platinum:
   url: https://akash.network
   logo: akash.svg
 gold:
-# Cancelled due to Coronavirus :-/
+# Cancelled due to Coronavirus
 #- alt: "Civo: UK Cloud Hosting Platform"
 #  url: https://www.civo.com/promo
 #  logo: civo.svg

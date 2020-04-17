@@ -19,7 +19,7 @@ In this post Alex will introduce OpenFaaS' newest project: faasd. faasd brings t
 
 From the first iteration of OpenFaaS in 2016 (then called "faas"), portability and openness were two driving values for the project and community. They've guided us ever since, and as the industry consolidated around Kubernetes, we added support in the project. That was back in May 2017.
 
-<img src="https://raw.githubusercontent.com/openfaas/media/master/OpenFaaS_Magnet_3_1_png.png" width=400 alt="Workshop logo">
+<img src="https://raw.githubusercontent.com/openfaas/media/master/OpenFaaS_Magnet_3_1_png.png" width="400" alt="Workshop logo">
 
 The [faas-provider](https://github.com/openfaas/faas-provider) SDK allowed us to do this and was extracted from the core project shortly after adding support for Kubernetes. We've had a number of other community providers, but this is the one with the most traction today.
 
@@ -43,7 +43,9 @@ Imagine if you needed "just a few functions" written in something like Golang or
 
 ![k3s logo](https://img.stackshare.io/service/10432/logo-k3s.png)
 
-So what about [k3s](https://k3s.io/)? I'm a big fan of Darren's work with k3s and I believe he was able to get so much interest in the project simply by inferring that it would be easier to use. It turns out that k3s nailed the bootstrap process and has dramatically reduced the memory footprint vs [kubeadm](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/), but it's still upstream Kubernetes and it does not intrinsically make Day 2 operations go away.
+So what about [k3s](https://k3s.io/)? I'm a big fan of Darren's work with k3s and I believe he was able to get so much interest in the project simply by inferring that it would be easier to use.
+
+It turns out that k3s nailed the bootstrap process and has dramatically reduced the memory footprint vs [kubeadm](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/), but it's still upstream Kubernetes and it does not intrinsically make the day to day any easier.
 
 ## Enter faasd
 
@@ -66,31 +68,28 @@ faasd is for anyone who wants to create an API, function, or microservice.
 
 Parity with OpenFaaS on Kubernetes:
 
-* [OpenFaaS workloads interface](https://docs.openfaas.com/reference/workloads/)
-* [REST API](https://docs.openfaas.com/architecture/gateway/#swagger)
-* private Docker registries
-* scale from zero 
-* scale to zero
-* [async invocations](https://docs.openfaas.com/reference/triggers/#async-nats-streaming)
-* Prometheus metrics
-* logs
-* secrets
-* multi-arch - for both Intel and ARM
-* faas-cli support
-* Function Store and Template Store support
-* compatible with CI and TLS solutions
+* ✅ [OpenFaaS workloads interface](https://docs.openfaas.com/reference/workloads/)
+* ✅ [REST API](https://docs.openfaas.com/architecture/gateway/#swagger)
+* ✅ private Docker registries
+* ✅ scale to and from zero
+* ✅ [async invocations](https://docs.openfaas.com/reference/triggers/#async-nats-streaming)
+* ✅ Prometheus metrics
+* ✅ logs
+* ✅ secrets
+* ✅ multi-arch - for both Intel and ARM
+* ✅ faas-cli support
+* ✅ Function Store and Template Store support
+* ✅ compatible with CI and TLS solutions
 
 Differences from Kubernetes:
 
-* low memory footprint
-* almost immediate scale from zero
+* ✅ low memory footprint
+* ✅ almost immediate scale from zero
 * no clustering as of yet, use HA instead
 * no HTTP healthcheck support yet
 * no commercial OIDC / OAuth2 support
 
-Another difference is that "scale from zero" is much faster. On a Dell XPS with a small, pre-pulled image unpausing an existing task took 0.19s and starting a task for a killed function took 0.39s.
-
-> There may be further optimizations to be gained. It's very difficult to get Kubernetes anywhere near these sorts of cold-start speeds.
+On a Dell XPS with a small, pre-pulled image unpausing an existing function took only 0.19s and a cold start only took 0.39s, without further optimization. It's very difficult to get anywhere near these sorts of cold-start speeds with Kubernetes
 
 As far as HA is concerned, you can deploy faasd in redundancy. You can integrate with CI systems, and you can get TLS by installing a reverse proxy like Caddy or Nginx.
 

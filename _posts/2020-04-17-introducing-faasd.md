@@ -2,7 +2,7 @@
 title: "Meet faasd - portable Serverless without the complexity of Kubernetes"
 description: "In this post Alex will introduce OpenFaaS' newest project: faasd - faasd brings the benefits of a portable Serverless experience without needing to learn and operate Kubernetes"
 date: 2020-04-17
-image: /images/2020-function-cors/light-45072.jpg
+image: /images/2020-02-27-ofc-private-cloud/private-cloud-servers.jpg
 categories:
   - microservices
   - kubernetes

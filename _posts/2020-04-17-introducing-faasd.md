@@ -21,7 +21,6 @@ From the first iteration of OpenFaaS in 2016 (then called "faas"), portability a
 
 <img src="https://raw.githubusercontent.com/openfaas/media/master/OpenFaaS_Magnet_3_1_png.png" width=400 alt="Workshop logo">
 
-
 The [faas-provider](https://github.com/openfaas/faas-provider) SDK allowed us to do this and was extracted from the core project shortly after adding support for Kubernetes. We've had a number of other community providers, but this is the one with the most traction today.
 
 > It's my belief that Kubernetes is the best way to run OpenFaaS in production for everything from edge deployments to large scale platforms.
@@ -127,6 +126,16 @@ There's multiple ways to deploy faasd, pick whichever suits your needs. The core
 
 OpenFaaS is best run on Kubernetes, but this does come with a learning curve and for some teams, an ongoing maintenance cost. faasd presents a new option for teams that want to start out with Serverless and keep it both open-source and portable too.
 
+We hope that faasd could provide a way for us to deprecate support for Docker Swarm, which is currently made available via [faas-swarm](https://github.com/openfaas/faas-swarm).
+
+> If you're using OpenFaaS with Swarm in production, I'd strongly suggest that you get in touch to discuss your requirements: [support@openfaas.com](mailto:support@openfaas.com).
+
+* For production use and scale-out - use OpenFaaS on Kubernetes or k3s
+* For local development and edge/Raspberry Pi - use OpenFaaS on k3s or Kubernetes
+* Small teams / no-clustering: use faasd
+
+Read more on the [deployment page](https://docs.openfaas.com/deployment/)
+
 ### You're not on your own!
 
 Finally, if you do run into technical issues with OpenFaaS and you need support, do feel free to join the Slack community and ask away.
@@ -137,4 +146,4 @@ Finally, if you do run into technical issues with OpenFaaS and you need support,
 
 * Get a head-start with OpenFaaS with our [Official Workshop](https://github.com/openfaas/workshop).
 * [Join Slack now](https://slack.openfaas.io)
-* [Sponsor OpenFaaS on GitHub](https://www.openfaas.com/support/) and support our work
+* [Buy support or an Insiders Subscription OpenFaaS on GitHub](https://www.openfaas.com/support/) and support our work

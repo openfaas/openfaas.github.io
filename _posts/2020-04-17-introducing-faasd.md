@@ -19,7 +19,7 @@ In this post Alex will introduce OpenFaaS' newest project: faasd. faasd brings t
 
 From the first iteration of OpenFaaS in 2016 (then called "faas"), portability and openness were two driving values for the project and community. They've guided us ever since, and as the industry consolidated around Kubernetes, we added support in the project. That was back in May 2017.
 
-<img src="https://raw.githubusercontent.com/openfaas/media/master/OpenFaaS_Magnet_3_1_png.png" width="400" alt="Workshop logo">
+<img src="https://raw.githubusercontent.com/openfaas/media/master/OpenFaaS_Magnet_3_1_png.png" width="400" alt="Workshop logo" />
 
 The [faas-provider](https://github.com/openfaas/faas-provider) SDK allowed us to do this and was extracted from the core project shortly after adding support for Kubernetes. We've had a number of other community providers, but this is the one with the most traction today.
 
@@ -105,7 +105,7 @@ From [the Deployment docs](https://docs.openfaas.com/deployment/)
 * Teams may also find faasd useful for local development before deploying to Kubernetes.
 * Teams who feel that they could benefit from functions and microservices, but who do not have the bandwidth to learn about Kubernetes may prefer this option.
 
-Mehdi Yedes recently put together a tutorial for the kind of use-case for which we designed faasd. He also [walked through installing faasd to a Raspberry Pi](https://myedes.io/serverless-on-raspberrypi/) as an edge device, which can make a good alternative to using [k3s](https://k3s.io/).
+[Mehdi Yedes](https://twitter.com/mehyedes) recently put together a tutorial for the kind of use-case for which we designed faasd. He also [walked through installing faasd to a Raspberry Pi](https://myedes.io/serverless-on-raspberrypi/) as an edge device, which can make a good alternative to using [k3s](https://k3s.io/).
 
 * [Tracking Stripe Payments with Slack and faasd](https://myedes.io/stripe-serverless-webhook-faasd/)
 

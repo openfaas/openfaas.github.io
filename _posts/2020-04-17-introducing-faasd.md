@@ -33,7 +33,7 @@ After several years of working with Kubernetes and similar technology, I've beco
 
 We'll often hear cries of "But there's servers in serverless!" and this tends to come not from the Cloud Native community, but from users of managed services like AWS Lambda, Heroku and similar.
 
-![Meme](/images/2020-faasd-intro/meme.jpg)
+<img src="/images/2020-faasd-intro/meme.jpg" width="300" alt="Meme">
 
 We all know that "cloud" was never a literal term, it's abstract and there are no actual computers floating in the sky. Perhaps they've not even used technology like Docker yet?
 

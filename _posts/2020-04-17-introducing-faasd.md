@@ -23,7 +23,7 @@ From the first iteration of OpenFaaS in 2016 (then called "faas"), portability a
 
 The [faas-provider](https://github.com/openfaas/faas-provider) SDK allowed us to do this and was extracted from the core project shortly after adding support for Kubernetes. We've had a number of other community providers, but this is the one with the most traction today.
 
-> It's my belief that Kubernetes is the best way to run OpenFaaS in production for everything from edge deployments to large scale platforms.
+> It's my current opinion that Kubernetes is the best way to run OpenFaaS in production for everything from the edge to the very largest deployments.
 
 After several years of working with Kubernetes and similar technology, I've become numb to its complexities and that makes me a bad judge of whether it's easy to use or not. OpenFaaS aims to abstract away the repetitive nature of YAML files and to add value through its API and ecosystem.
 
@@ -123,17 +123,19 @@ There's multiple ways to deploy faasd, pick whichever suits your needs. The core
 
 ## Wrapping up
 
-OpenFaaS is best run on Kubernetes, but this does come with a learning curve and for some teams, an ongoing maintenance cost. faasd presents a new option for teams that want to start out with Serverless and keep it both open-source and portable too.
-
-We hope that faasd could provide a way for us to deprecate support for Docker Swarm, which is currently made available via [faas-swarm](https://github.com/openfaas/faas-swarm).
-
-> If you're using OpenFaaS with Swarm in production, I'd strongly suggest that you get in touch to discuss your requirements: [support@openfaas.com](mailto:support@openfaas.com).
+OpenFaaS is best run on Kubernetes, but this does come with a learning curve and for some teams, an ongoing maintenance cost. Whilst Kubernetes is great for scaling up and scaling out, scaling down can be just as important, and that's where faasd comes into its own.  faasd presents a new option for teams that want to start out with Serverless and keep it both open-source and portable too.
 
 * For production use and scale-out - use OpenFaaS on Kubernetes or k3s
 * For local development and edge/Raspberry Pi - use OpenFaaS on k3s or Kubernetes
 * Small teams / no-clustering: use faasd
 
-Read more on the [deployment page](https://docs.openfaas.com/deployment/)
+Read more on the [OpenFaaS deployment page](https://docs.openfaas.com/deployment/)
+
+Are you still using Docker Swarm in production?
+
+We hope that faasd could provide a way for us to deprecate support for Docker Swarm, which is currently made available via [faas-swarm](https://github.com/openfaas/faas-swarm).
+
+> If you're using OpenFaaS with Swarm in production, I'd strongly suggest that you get in touch to discuss your requirements: [support@openfaas.com](mailto:support@openfaas.com).
 
 ### You're not on your own!
 

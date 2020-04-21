@@ -1,5 +1,5 @@
 ---
-title: "Cloud Native Tools for Developers Webinar"
+title: "Cloud Native Tools for Developers Webinar Recap"
 description: There's some debate on what "Cloud Native" means, in this post we explore tools used in a recent webinar that make Kubernetes easy for developers.
 date: 2020-04-21
 image: /images/2020-cloud-native-tools-webinar/traefik-router.png

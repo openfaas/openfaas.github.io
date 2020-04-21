@@ -1,8 +1,8 @@
 ---
 title: "Continuous Deployment of your OpenFaaS Cloud"
 description: Learn how you can Continuously Deploy new versions of OpenFaaS Cloud using ofc-bootstrap.
-date: 2020-04-21
-image: /images/2020-04-21-ofc-bootstrap-pipeline/cloud-background.jpg
+date: 2020-04-22
+image: /images/2020-04-22-ofc-bootstrap-pipeline/cloud-background.jpg
 categories:
   - kubernetes
   - serverless

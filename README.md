@@ -62,7 +62,9 @@ Place all images in a sub-folder `./images/<post-name>`
 
 * Add a background post
 
-Each post should have a background photo picked from free stock photography or provided with a Creative Commons license. Do not pull images in from Google without checking that the usage / license is valid first. Crop the background to a width of 1500 pixels. Use JPEG and aim for 200Kb size when exporting (increase compression)
+Each post should have a background photo picked from free stock photography or provided with a Creative Commons license. Do not pull images in from Google without checking that the usage / license is valid first. Crop the background to a width of 1600 pixels. Use JPEG and aim for 200Kb-280Kb in size when exporting (increase compression)
+
+You can decrease the size further by limiting the "quality" of the JPEG from 100% to something lower.
 
 * In-post images and screenshots
 

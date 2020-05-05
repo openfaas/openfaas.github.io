@@ -101,7 +101,7 @@ Around 12 months ago today we announced the [OpenFaaS Function Store](https://bl
 
 <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">In 42 seconds <a href="https://twitter.com/alexellisuk?ref_src=twsrc%5Etfw">@alexellisuk</a> demos the most powerful feature of FaaS. The function store. This is what the future and the now looks like. An open source ecosystem of functions. <a href="https://t.co/ix3ER4b7Jn">pic.twitter.com/ix3ER4b7Jn</a></p>&mdash; Kenny Bastani (@kennybastani) <a href="https://twitter.com/kennybastani/status/1064881269153116167?ref_src=twsrc%5Etfw">November 20, 2018</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
 
-The OpenFaaS core contributors provide support for the *official* templates in the [openfaas/templates](https://github.com/openfaas/templates/) GitHub repo, but there are a growing number of third-party, experimental or opinionated templates which we wanted to make available without breaking the existing experience.
+The OpenFaaS Core Team provides support for the *official* templates in the [openfaas/templates](https://github.com/openfaas/templates/) GitHub repo, but there are a growing number of third-party, experimental or opinionated templates which we wanted to make available without breaking the existing experience.
 
 Examples of the community's favourite templates include: [Node.js 10 with Express.js](https://github.com/openfaas-incubator/node10-express-template), [Python 2.7 & 3 with Flask](https://github.com/openfaas-incubator/python-flask-template) and until recently the unofficial PHP template. We've now merged the PHP template into the [official set](https://github.com/openfaas/templates/).
 

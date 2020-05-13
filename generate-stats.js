@@ -1,5 +1,6 @@
 const https = require('https');
 const fs = require('fs');
+
 const maxRetry = 3;
 let retries = 0;
 
@@ -37,7 +38,7 @@ function httpsPost({body, ...options}) {
 					try {
 						body = JSON.parse(body);
 					} catch (e) {
-						console.log('Failed to parse reponse, retrying...');
+						console.log('Failed to parse response, retrying...');
 						if (retries < maxRetry) {
 							retries += 1;
 							console.log('Attempt ' + retries);
@@ -84,11 +85,10 @@ function generateTemplate(data) {
 
 		function userTemplate(userData) {
 			var link = 'https://github.com/' + userData[0];
-			var img = '<img src="' + link + '.png">';
-			var figure = '<figure class="image">' + img + '</figure>';
-			var a = '<a href="' + link + '">' + figure + '</a>';
+			var img = '<img alt="'+userData[0]+'" src="' + link + '.png">';
+			var figure = '<a id="'+userData[0]+'"><figure class="image">' + img + '</figure></a>';
 
-			return a;
+			return figure;
 		}
 
 		shuffle(contributors);
@@ -117,7 +117,7 @@ function generateTemplate(data) {
 }
 
 function postRequest() {
-	console.log('Fetching data.....');
+	console.log('Fetching data from kenfdev.o6s.io/github-stats via POST.');
 
 	httpsPost({
 		hostname: 'kenfdev.o6s.io',

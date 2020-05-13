@@ -21,7 +21,7 @@ kramdown:
 logo: /siteicon.png
 description: OpenFaaS - Serverless Functions Made Simple
 author:
-  name:
+  name: OpenFaaS Ltd
   email:
   twitter:
     username: openfaas
@@ -86,11 +86,6 @@ defaults:
   -
     scope:
       path: "team"
-    values:
-      layout: "default"
-  -
-    scope:
-      path: "donate"
     values:
       layout: "default"
   -

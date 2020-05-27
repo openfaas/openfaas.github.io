@@ -1,8 +1,8 @@
 ---
-title: Keep your functions running to schedule with the cron-connector.
+title: Keep your functions running to schedule with the cron-connector
 description: "In this post Martin will show you how to schedule your functions with the cron-connector, for regular tasks and scheduled jobs"
-date: 2020-05-14
-image: /images/2020-05-14-schedule-your-functions/accuracy-alarm-clock-analogue-business.jpg
+date: 2020-05-27
+image: /images/2020-05-27-schedule-your-functions/accuracy-alarm-clock-analogue-business.jpg
 categories:
   - cron
   - kubernetes

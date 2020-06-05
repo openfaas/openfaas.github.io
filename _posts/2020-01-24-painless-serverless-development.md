@@ -74,6 +74,8 @@ faas login --password $GATEWAY_PASSWORD --gateway=$GATEWAY_URL
 Let's go ahead and initialize our function. For this post we're going to be using golang, so we are going to pull the `go-http` template:
 
 ```console
+mkdir my-function
+cd my-function
 faas template pull https://github.com/openfaas-incubator/golang-http-template
 ```
 
@@ -122,7 +124,7 @@ URL: https://openfaas-ingress-rberrelleza.cloud.okteto.net/function/hello
 
 You can use `faas` to call the function directly from the command line:
 ```console
-faas invoke hello -f hello.yml
+faas-cli invoke hello -f hello.yml
 ```
 
 ```console
@@ -137,7 +139,7 @@ Normally, when you're developing your function you'll have to go through the fol
 - Make changes to your function.
 - Run your unit tests (you do write unit tests right?).
 - Build and deploy your function.
-- `faas invoke` it to validate things end to end.
+- `faas-cli invoke` it to validate things end to end.
 
 That flow probably takes about a minute or two. Which doesn't sound to bad right? Not until you have to go through that cycle 10-20 times while battling a particularly gnarly bug. At that point you're going to be spending more time looking at the build logs in your terminal than writing your function.
 
@@ -153,14 +155,11 @@ Let's launch our remote development environment. Open a shell, go to the folder 
 ```yaml
 # The name tells Okteto to replace the function named 'hello' with the dev environment
 name: hello                  
-image: okteto/golang-http-template
+image: okteto/golang-middleware-template:0.1.1
 command:
 - bash
-workdir: /home/app/handler
-mountpath: /home/app/handler/function
-volumes:
-# This makes the go build cache persistent across development environments
-- /home/app/.cache/go-build/ 
+workdir: /home/app
+mountpath: /home/app/function
 securityContext:
   # the user and group that OpenFaaS functions run as
   runAsUser:  12000
@@ -172,9 +171,8 @@ securityContext:
     - SYS_PTRACE
 environment:
   # overrides the one set by openfaas, enabling build and run
-  - fprocess=go run main.go
+  - fprocess=go run /home/app/main.go
 forward:
-- 8080:8080
 - 2345:2345
 ```
 
@@ -182,9 +180,9 @@ The `okteto.yml` file holds the configuration of your development environment. I
 
 In this case, the manifest is telling Okteto to create an environment environment with:
 - `okteto/golang-http-template` as the container, which already has the go runtime, the debugger, [fwatchdog](https://docs.openfaas.com/architecture/watchdog/) and a few other tools installed.
-- `/home/app/handler` as the working directory.
-- Your function code automatically synchronized at `/home/app/handler/function`
-- Automatic port-forwarding for ports `8080` (the function) and `2345` (the go debugger).
+- `/home/app` as the working directory.
+- Your function code automatically synchronized at `/home/app/function`
+- Automatic port-forwarding for `2345` (the go debugger).
 - OpenFaaS' [fwatchdog process](https://docs.openfaas.com/architecture/watchdog/) configured to build and launch our function when handling the request.
 
 Since we are launching our development environment in Okteto Cloud, we need to get our credentials. Go back to your browser, log in into [https://cloud.okteto.com](https://cloud.okteto.com), and click on the credentials button on the left to download your kubeconfig.
@@ -197,8 +195,9 @@ export KUBECONFIG=$HOME/Downloads/okteto-kube.config
 
 > The Okteto CLI works with any Kubernetes cluster, local or remote. If you are not using Okteto Cloud, you can either use your current context, or set `KUBECONFIG` to point to your cluster's configuration.
 
-And launch your development environment:
+Open a new console, navigate to your function's code and launch your development environment:
  ```console
+ cd function
  okteto up
  ```
 
@@ -208,10 +207,10 @@ And launch your development environment:
     Namespace: rberrelleza
     Name:      hello
     Forward:   2345 -> 2345
-               8080 -> 8080
 ```
 
-Once `okteto up` finishes provisioning your development environment, you'll be dropped into a remote shell open. Start the function by running the command below:
+Once `okteto up` finishes provisioning your development environment, you'll be dropped into a remote shell. Start the function by starting the [OpenFaaS watchdog](https://docs.openfaas.com/architecture/watchdog/) process with the command below:
+
 ```console
 okteto> fwatchdog
 ```
@@ -226,14 +225,43 @@ Forking - go [run main.go]
 2020/01/22 03:43:48 Listening on port: 8080
 ```
 
+Call the function directly from the command line to make sure everything works. 
+
+```console
+faas-cli invoke hello -f hello.yml
+```
+
+```console
+Reading from STDIN - hit (Control + D) to stop.
+hello
+Hello world, input was: hello
+```
+
 Open `function/handler.go` in your local IDE, and change the return message:
 ```go
 w.Write([]byte(fmt.Sprintf("Hello world from Okteto, your input was: %s", string(input))))
 ```
 
-Go back to the remote shell and stop and start the `fwatchdog` process. Then call the function again from your local shell:
+Go back to the remote shell, press `CTRL + C` to stop `fwatchdog`, and start it again:
+
+```console
+okteto> fwatchdog
 ```
-faas invoke hello -f hello.yml
+
+```console
+Forking - go [run main.go]
+2020/01/22 03:44:35 Started logging stderr from function.
+2020/01/22 03:44:35 Started logging stdout from function.
+2020/01/22 03:44:35 OperationalMode: http
+2020/01/22 03:44:35 Timeouts: read: 10s, write: 10s hard: 10s.
+2020/01/22 03:44:35 Metrics listening on port: 8081
+2020/01/22 03:44:35 Listening on port: 8080
+```
+
+And call the function from your local console:
+
+```
+faas-cli invoke hello -f hello.yml
 ```
 
 ```
@@ -241,6 +269,8 @@ Reading from STDIN - hit (Control + D) to stop.
 hello
 Hello world from Okteto, your input was: hello
 ```
+
+Notice how the input of the function changed to match the new version of the code. This is because okteto automatically synchronizes any code changes between your local and remote environments as soon as they happen.
 
 With this approach, we were able to **validate our changes end to end directly in OpenFaaS**. You don't need to run docker-compose or minikube locally, write mocks, build containers over and over and no need to redeploy functions. Just write you code, save it and invoke the function.
 
@@ -289,14 +319,14 @@ Open the repo we created in VSCode, and create a `.vscode/launch.json` file with
 }
 ```
 
-This configuration is telling VSCode to attach to a debugger in `127.0.0.1:2345`. In our case, this is the port that Okteto is automatically forwarding to our development environment in Okteto Cloud.
+This configuration is telling VSCode to attach to a debugger in `127.0.0.1:2345`. This is the port that Okteto is automatically forwarding to our development environment in Okteto Cloud.
 
 Open the function code, add a breakpoint in `function/handler.go` line 10, and press `F5` to start the debugging session.
 
-Now go back to the local shell and call the hello function via the `faas invoke` command. Write `hello` and press (Control + D) to send the request.
+Now go back to the local shell and call the hello function via the `faas-cli invoke` command. Write `hello` and press (Control + D) to send the request.
 
 ```
-faas invoke hello -f hello.yml
+faas-cli invoke hello -f hello.yml
 ```
 
 ```

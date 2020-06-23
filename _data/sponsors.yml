@@ -21,9 +21,11 @@ platinum:
 # - alt: "CTO Advisor"
 #   url: https://www.thectoadvisor.com
 #   logo: cto-advisor.png
-- alt: "Akash"
-  url: https://akash.network
-  logo: akash.svg
+
+# Expired
+# - alt: "Akash"
+#   url: https://akash.network
+#   logo: akash.svg
 
 gold:
 # Cancelled due to Coronavirus

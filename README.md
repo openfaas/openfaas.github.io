@@ -32,7 +32,50 @@ If necessary show acknowledgements to others who collaborated or gave feedback y
 
 * Headings
 
-When using steps use the active/imperative voice for headings "Get started" vs "Getting started", "Configure the node" vs "Configuring the node" etc.
+When using steps use the active/imperative voice for headings.
+
+Good:
+
+* "Get started"
+* "Configure the node"
+
+Bad:
+
+* "Getting started"
+* "Configuring the node"
+
+#### Use Plain English
+
+English is widely spoken, but is not the first language of all readers. This publication also covers many technical topics, you may be an expert, but your readers are unlikely to be, so consider both of these when you write your article. 
+
+Write in plain English at all times, when a simpler word exists use it, avoid words derived from Latin when possible, avoid gerunds where an active verb can replace it.
+
+If you are writing an article, then your voice should be coming across, and your experience. That is why you are writing the post - try to avoid using passive tense or statements, where you can use a sentence that starts with `I`.
+
+Before:
+
+* In any production service, logs are a critical component of observability and debuggability of the system
+
+After:
+
+* Logs are critical to observing and debugging systems once in production.
+* Logs are critical to observing and debugging production systems.
+
+Use short sentences:
+
+Before: 
+
+* This should ease your debugging experience with functions and the combination with Grafana also opens some additional possibilities, for example you can start creating dashboards for your functions that combine Prometheus metrics _and_ logs on the same screen by using the [new logs panel
+
+After: 
+
+* The combination of Loki and Grafana make it even easier to debug functions than before. You can even create dashboards that combine function metrics and logs in one place.
+
+For some additional recommendations see:
+
+* [This post](https://www.cs.uky.edu/~raphael/writing.html), by Raphael A. Finkel, University of Kentucky.
+
+* And [Before & After]http://www.plainenglish.co.uk/campaigning/examples/before-and-after.html] from plainenglish.co.uk
 
 #### Tone / style
 
@@ -40,21 +83,15 @@ When using steps use the active/imperative voice for headings "Get started" vs "
 
 Whilst using fun terms like "Boom!", "Fun and profit" and making jokes in text, can work well on a personal blog. The OpenFaaS blog and documentation should have a minimal use of this kind of "fun" or "cute" terms.
 
-* Quote your sources
-
-If you use a diagram or embed a quote from somewhere, make sure you give it [proper attribution](https://en.wikipedia.org/wiki/Attribution_(copyright)).
-
 * Opinion vs. facts
 
-Opinions should be presented as your own viewpoint. If you have data to back-up your position, this will help make your point credible.
+Opinions should be presented as your own viewpoint. If you have data to back-up your position, this will help make your point credible. If you have no data, then make sure the reader understands this by relating to yourself `I believe that ..`, `I found it easier to ..`
 
 If you are stating a fact / objective data, you should also back this up with quotes, links, etc.
 
-* Plain English
+* Quote your sources
 
-Write in plain English at all times, when a simpler word exists use it, avoid words derived from Latin when possible, avoid gerunds where an active verb can replace it.
-
-> For some additional recommendations see [this post](https://www.cs.uky.edu/~raphael/writing.html), by Raphael A. Finkel, University of Kentucky.
+Beware of copyright laws. If you use a diagram or embed a quote from somewhere, make sure you give it [proper attribution](https://en.wikipedia.org/wiki/Attribution_(copyright)).
 
 #### Images
 

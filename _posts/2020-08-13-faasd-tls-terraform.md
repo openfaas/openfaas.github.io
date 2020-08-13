@@ -331,5 +331,5 @@ The OpenFaaS [Slack workspace](https://slack.openfaas.io/) is a good place to co
 
 See other posts from the community on faasd:
 
-* [OpenFaaS with TLS via Faasd and Terraform on Openstack](https://markopolo123.github.io/posts/openfaas-openstack/) and 
-* [Tracking Stripe Payments with Slack and faasd](https://myedes.io/stripe-serverless-webhook-faasd/)
+* [OpenFaaS with TLS via Faasd and Terraform on Openstack by Mark Sharpley](https://markopolo123.github.io/posts/openfaas-openstack/)
+* [Tracking Stripe Payments with Slack and faasd by Mehdi Yedes](https://myedes.io/stripe-serverless-webhook-faasd/)

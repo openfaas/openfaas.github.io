@@ -119,7 +119,10 @@ At this point, in the background Caddy will be trying to create a TLS certificat
 The next step is to check that everything worked, you can verify this with the `faas-cli login` command, using the output from `terraform output`
 
 ```bash
-faas-cli login -g https://faasd.example.com/ -p 6b1be68a8feba552c11beb2eeb7fcc7edee4627f
+# Prefix with two spaces, to prevent tracking in your bash
+# history, or save to a file and use cat.
+  echo 6b1be68a8feba552c11beb2eeb7fcc7edee4627f | faas-cli \
+    login -g https://faasd.example.com/ --password-stdin
 
 Calling the OpenFaaS server to validate the credentials...
 credentials saved for admin https://faasd.example.com
@@ -256,7 +259,8 @@ unauthorized
 Try to add your key:
 
 ```bash
-curl -i -H "Authorization: Bearer: $(cat token.txt)" https://faasd.example.com/function/private-api
+curl -i -H "Authorization: Bearer: $(cat token.txt)" \
+  https://faasd.example.com/function/private-api
 
 authorized
 ```

@@ -19,6 +19,8 @@ In this post, you'll provision a DigitalOcean Droplet using Terraform, once it's
 
 Before we start the tutorial, let's start with a bit more background. faasd is a slimmed-down distribution of OpenFaaS that can run on a single virtual-machine, is easy to automate, and has almost no need for maintenance. It's not that OpenFaaS needed a diet, it was just that to even run a single function, you required a whole Kubernetes cluster, and some people were understandably put off by that idea.
 
+> [Read my introduction to faasd](https://www.openfaas.com/blog/introducing-faasd/)
+
 If all you need is a few functions, webhook-receivers, or web pages, then why run a 3-5 node Kubernetes cluster, when you can run a single 5-10 USD VPS instead?
 
 This tutorial will use a combination of Terraform and cloud-init to setup a new host on [DigitalOcean](https://m.do.co/c/8d4e75e9886f), however it is not limited to any one provider. If your favourite cloud provider supports cloud-init and has a Terraform module, then with a few tweaks, you can deploy faasd there too. You can even deploy faasd manually, if you so wish.
@@ -27,10 +29,10 @@ A TLS certificate will be provided by [LetsEncrypt](https://letsencrypt.org), us
 
 ### Overview
 
-Before you start, you'll need to run through the pre-reqs
+Before you start, you'll need to run through the pre-requisites:
 
 * To [create an account on DigitalOcean](https://m.do.co/c/8d4e75e9886f) for this tutorial
-* To generate an API key/token and save it somewhere on your computer
+* To generate an API key/token and save it somewhere on your computer using the DigitalOcean dashboard
 * To register a domain - [namecheap](https://www.namecheap.com) and [Google Domains](https://domains.google.com/) are both cheap and easy to use
 * Install [Docker](https://www.docker.com/) to build and push local images
 * Install [faas-cli](https://docs.openfaas.com/tutorials/cli-with-node/#get-the-cli)

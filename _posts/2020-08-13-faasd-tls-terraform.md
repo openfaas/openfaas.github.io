@@ -2,7 +2,7 @@
 title: "Bring a lightweight Serverless experience to DigitalOcean with Terraform and faasd"
 description: "In this post, you'll provision a DigitalOcean Droplet using Terraform, once it's up and running, a TLS certificate will be installed and you can start deploying code with faasd"
 date: 2020-08-13
-image: /images/2020-02-27-ofc-private-cloud/private-cloud-servers.jpg
+image: /images/2020-08-13-faasd-tls-terraform/vintage-palm.jpg
 categories:
   - microservices
   - serverless

@@ -30,7 +30,7 @@ arkade has evolved since it was first created to install OpenFaaS, to now instal
 
 It then gained the ability to install CLIs such as `faas-cli` and `kubectl` which are relatively easy to find, but when you need 3-5 of these over the course of a short tutorial, break the flow.
 
-During development, Kubernetes clusters can be treated as ephemeral and tools like Kind and k3d make it easy to use them that way. Now if you're anything like us, then you may be re-creating a cluster several times per day to test a PR or change to your project. arkade is built for developers to rapidly get a working system with whatever they need. You can use it in production, or in a pipeline, but you may find that a GitOps style more suitable using a tool like [ArgoCD](https://argoproj.github.io/argo-cd/) or [Flux](https://fluxcd.io).
+Now if you're anything like us, then you will be re-creating a cluster several times per day or per week to test a PR or change to your project, you may even be creating a cluster in a CI job to test each incoming commit. arkade is built for developers to rapidly get a working system with whatever they need. You can use it in production, or in a pipeline, but you may find that a GitOps style more suitable using a tool like [ArgoCD](https://argoproj.github.io/argo-cd/) or [Flux](https://fluxcd.io).
 
 ### Helm 2 - insecure by default
 

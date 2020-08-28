@@ -11,7 +11,7 @@ right_links:
     social_icon: Twitter
     new_window: true
   - name:
-    link: https://github.com/openfaas/faas
+    link: https://github.com/openfaas
     social_icon: GitHub
     new_window: true
   - name: 

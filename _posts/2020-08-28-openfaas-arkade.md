@@ -1,8 +1,8 @@
 ---
-title: "Why did the OpenFaaS community build arkade?"
+title: "Why did the OpenFaaS community build arkade and what's in it for you?"
 description: "The OpenFaaS community is building a tool for Kubernetes developers, learn how it can help you install OpenFaaS, along with complementary CLIs and applications to your cluster"
 date: 2020-08-13
-image: /images/2020-openfaas/arkade/briana.jpg
+image: /images/2020-openfaas-arkade/briana.jpg
 categories:
   - kubernetes
   - developers
@@ -14,7 +14,7 @@ dark_background: true
 
 The OpenFaaS community is building a tool for Kubernetes developers, learn how it can help you install OpenFaaS, along with complementary CLIs and applications to your cluster
 
-<img src="docs/arkade-logo-sm.png" alt="arkade logo" width="300" height="300">
+<img src="https://raw.githubusercontent.com/alexellis/arkade/master/docs/arkade-logo-sm.png" alt="arkade logo" width="300" height="300">
 
 > arkade - "Your one-stop CLI for Kubernetes"
 

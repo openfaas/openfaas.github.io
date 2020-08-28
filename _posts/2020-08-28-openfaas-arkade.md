@@ -30,15 +30,19 @@ arkade has evolved since it was first created to install OpenFaaS, to now instal
 
 It then gained the ability to install CLIs such as `faas-cli` and `kubectl` which are relatively easy to find, but when you need 3-5 of these over the course of a short tutorial, break the flow.
 
+During development, Kubernetes clusters can be treated as ephemeral and tools like Kind and k3d make it easy to use them that way. Now if you're anything like us, then you may be re-creating a cluster several times per day to test a PR or change to your project. arkade is built for developers to rapidly get a working system with whatever they need. You can use it in production, or in a pipeline, but you may find that a GitOps style more suitable using a tool like [ArgoCD](https://argoproj.github.io/argo-cd/) or [Flux](https://fluxcd.io).
+
 ### Helm 2 - insecure by default
 
 Since around 2017, OpenFaaS was packaged with a [helm](https://helm.sh) chart, and back in those days, you used to have to install a very insecure component to your cluster ([Tiller](https://v2.helm.sh/docs/install/)), which ran in a kind of "God mode." If someone accessed Tiller, and it was very easy to do so, then it would be game over. This wasn't just a problem for OpenFaaS, but for any other helm chart you wanted to install.
 
 Fortunately DevOps professionals had identified a series of 3-5 additional steps that meant you could avoid using Tiller. This involved: fetching a compressed archive and then running a "template" command, which generated plain YAML files, which could be applied using `kubectl`. In addition to these commands, one had to add the specific helm chart repository, synchronise it and do a few other tasks like creating namespaces.
 
-I wrote some code to automate all of this and packaged in a tool called `k3sup` as `k3sup app install openfaas`. The short story is that many users were confused about the `k3sup` and its link to `k3s` naming and so this code was spun out into a new project called `arkade`. This is the same reason that `arkade` is not hosted in the openfaas organisation. Many users adopting Kubernetes could benefit from a platform like OpenFaaS that makes it very simple to get an endpoint up and running without worrying about boiler-plate code, however my fear is that if arkade lived in the openfaas organisation on GitHub, folks would dismiss it as being exclusively for or part of OpenFaaS, which it is not.
+I wrote some code to automate all of this and packaged in a tool called `k3sup` as `k3sup app install openfaas`. The short story is that many users were confused about the `k3sup` and its link to `k3s` naming and so this code was spun out into a new project called `arkade`.
 
-> Note: we recently removed the code to support Helm2 and YAML templating, because Helm 3 arrived and made installation more secure, and easier to use. The Helm 3 binary can still template YAML, but we have not seen much demand for it.
+> This is the same reason that `arkade` is not hosted in the openfaas organisation. Many users adopting Kubernetes could benefit from a platform like OpenFaaS that makes it very simple to get an endpoint up and running without worrying about boiler-plate code, however my fear is that if arkade lived in the openfaas organisation on GitHub, folks would dismiss it as being exclusively for or part of OpenFaaS, which it is not.
+
+We recently removed the code to support Helm2 and YAML templating, because Helm 3 arrived and made installation more secure, and easier to use. The Helm 3 binary can still template YAML, but we have not seen much demand for it.
 
 ### Who's building arkade?
 

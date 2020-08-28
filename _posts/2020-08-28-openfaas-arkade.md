@@ -16,7 +16,7 @@ The OpenFaaS community is building a tool for Kubernetes developers, learn how i
 
 <img src="https://raw.githubusercontent.com/alexellis/arkade/master/docs/arkade-logo-sm.png" alt="arkade logo" width="300" height="300">
 
-> arkade - "Your one-stop CLI for Kubernetes"
+> [arkade](https://get-arkade.dev) - "Your one-stop CLI for Kubernetes"
 
 ## Solving pain
 
@@ -57,6 +57,8 @@ Why arkade? It's very difficult to come up with naming, and we wanted to have so
 One of the main reasons to use a helm chart over plain Kubernetes manifest files is that they can be updated, fine-tuned, and edited by passing in a series of `--set` commands, or by editing a supplementary YAML file. Why would you do that? Well Kubernetes is a system designed to offer many configuration options, and users tend to need to do things like change the way networking works, alter security settings, or to update a container image when deploying.
 
 Let's say we wanted to install Postgresql? The typical approach goes like this: open Google, type in "Postgresql chart", see 3-5 options - one that looks semi-official, one that's from Bitnami, one from Red Hat, two or three from hobbyists. You roll the dice, and pick one. Then you have to add its helm chart repo, synchronise, and trawl the README file for all the various `--set` options.
+
+> Note: you can find a list of apps via `arkade install --help`
 
 Some charts come with fairly good defaults, but up until recently, something you always had to change for local Kubernetes was whether persistence was enabled. In addition, you may also need to override any networking settings that create a LoadBalancer, these don't tend to work on a local cluster.
 
@@ -181,6 +183,8 @@ arkade get faas-cli
 
 And we're done. Whatever your OS or CPU architecture, the correct and latest binary will be downloaded.
 
+> Tip: find a complete list of apps via `arkade get --help`
+
 ### Composite apps
 
 Sometimes installing a single app doesn't add much value over the traditional approach, in which case you may be better off using what you know. arkade does help when you find that you need 4-5 apps in a short period of time, or for a tutorial. We write many tutorials in the community and some of us even do it for a day-job. This is where arkade comes into its own.
@@ -246,6 +250,19 @@ Looking forward, arkade will continue to be maintained by the OpenFaaS community
 * Do you want to view the code?
 
 [View the code on GitHub](https://get-arkade.dev)
+
+Try it out today:
+
+```bash
+# Note: you can also run without `sudo` and move the binary yourself
+curl -sLS https://dl.get-arkade.dev | sudo sh
+
+arkade --help
+ark --help  # a handy alias
+
+# Windows users with Git Bash
+curl -sLS https://dl.get-arkade.dev | sh
+```
 
 You'll also find SWAG for OpenFaaS, k3sup, inlets and arkade in our OpenFaaS Store.
 

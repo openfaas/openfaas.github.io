@@ -237,10 +237,12 @@ Looking forward, arkade will continue to be maintained by the OpenFaaS community
 
 [View the code on GitHub](https://get-arkade.dev)
 
-What about commercial apps? There has been interest from commercial companies that want to have their app listed. We've come up with a way for them to differentiate their offerings through Sponsored Apps. Find out more about [Sponsored Apps in the readme](https://get-arkade.dev).
+You'll also find SWAG for OpenFaaS, k3sup, inlets and arkade in our OpenFaaS Store.
 
 <img src="https://cdn.shopify.com/s/files/1/0340/9739/7895/products/mockup-ea71d220_1024x1024@2x.jpg?v=1589366177" width="250">
 
-You'll also find SWAG for OpenFaaS, k3sup, inlets and arkade in our OpenFaaS Store.
+[Buy your own SWAG today](https://store.openfaas.com)
 
-* [Buy your own SWAG today](https://store.openfaas.com)
+What about commercial apps? One of the lessons we've learned as a community about Open Source, is just how much effort it takes to sustain a project where everything's given away for free. Commercial users are often not interested or willing to contribute through sponsorships, support, consulting, or paid development. Now there has been interest from commercial companies that want to have their app listed. We've come up with a way for them to differentiate their offerings through Sponsored Apps.
+
+Find out about [Sponsored Apps](https://get-arkade.dev)

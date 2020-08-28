@@ -24,7 +24,7 @@ The popular essay [Cathedral and the Bazaar](http://www.catb.org/~esr/writings/c
 
 arkade has evolved since it was first created to install OpenFaaS, to now install 3 dozen different applications using their preferred installation method.
 
-* OpenFaaS - helm3
+* OpenFaaS - [helm3](https://helm.sh)
 * Linkerd - its own CLI
 * Portainer - a static YAML manifest file
 
@@ -32,7 +32,7 @@ It then gained the ability to install CLIs such as `faas-cli` and `kubectl` whic
 
 ### Helm 2 - insecure by default
 
-Since around 2017, OpenFaaS was packaged with a helm chart, and back in those days, you used to have to install a very insecure component to your cluster (Tiller), which ran in a kind of "God mode." If someone accessed Tiller, and it was very easy to do so, then it would be game over. This wasn't just a problem for OpenFaaS, but for any other helm chart you wanted to install.
+Since around 2017, OpenFaaS was packaged with a [helm](https://helm.sh) chart, and back in those days, you used to have to install a very insecure component to your cluster ([Tiller](https://v2.helm.sh/docs/install/)), which ran in a kind of "God mode." If someone accessed Tiller, and it was very easy to do so, then it would be game over. This wasn't just a problem for OpenFaaS, but for any other helm chart you wanted to install.
 
 Fortunately DevOps professionals had identified a series of 3-5 additional steps that meant you could avoid using Tiller. This involved: fetching a compressed archive and then running a "template" command, which generated plain YAML files, which could be applied using `kubectl`. In addition to these commands, one had to add the specific helm chart repository, synchronise it and do a few other tasks like creating namespaces.
 

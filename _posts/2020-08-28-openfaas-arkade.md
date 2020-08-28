@@ -38,7 +38,15 @@ Fortunately DevOps professionals had identified a series of 3-5 additional steps
 
 I wrote some code to automate all of this and packaged in a tool called `k3sup` as `k3sup app install openfaas`. The short story is that many users were confused about the `k3sup` and its link to `k3s` naming and so this code was spun out into a new project called `arkade`. This is the same reason that `arkade` is not hosted in the openfaas organisation. Many users adopting Kubernetes could benefit from a platform like OpenFaaS that makes it very simple to get an endpoint up and running without worrying about boiler-plate code, however my fear is that if arkade lived in the openfaas organisation on GitHub, folks would dismiss it as being exclusively for or part of OpenFaaS, which it is not.
 
-The OpenFaaS community is working on several tools and projects, and I've enjoyed seeing contributors starting out with one tool and then helping out on something completely different. Within the community you'll find us working on openfaas, arkade, [inlets](https://inlets.dev) - Cloud Native Tunnel, [k3sup](https://k3sup.dev) - k3s installer over SSH and [Derek](https://github.com/alexellis/derek) - reducing maintainer fatigue, to find out more about each, checkout the [pinned projects on my GitHub account](https://github.com/alexellis/).
+> Note: we recently removed the code to support Helm2 and YAML templating, because Helm 3 arrived and made installation more secure, and easier to use. The Helm 3 binary can still template YAML, but we have not seen much demand for it.
+
+### Who's building arkade?
+
+The OpenFaaS community is working on several tools and projects, and I've enjoyed seeing contributors starting out with one tool and then helping out on something completely different.
+
+Within the community you'll find us working on openfaas, arkade, [inlets](https://inlets.dev) - Cloud Native Tunnel, [k3sup](https://k3sup.dev) - k3s installer over SSH and [Derek](https://github.com/alexellis/derek) - reducing maintainer fatigue, to find out more about each, checkout the [pinned projects on my GitHub account](https://github.com/alexellis/).
+
+arkade is being "seeded" by the OpenFaaS community, but we are now seeing PRs and issues from upstream projects like cert-manager and Istio. This, along with the mounting number of downloads, GitHub stars, and blog posts is encouraging us to keep pressing on.
 
 ### What's in a name?
 
@@ -230,6 +238,8 @@ Find out more on the [inlets PRO landing page](https://inlets.dev/), there's als
 arkade was written to make the life of developers easier, it can install many different applications, which may involve using Helm, kubectl, or an additional CLI. It gives helpful usage information, and tries to prevent you doing things you shouldn't, like installing an application to your Raspberry Pi cluster that isn't built for ARM CPUs. It makes the tedious task of downloading dozens of CLIs much quicker.
 
 Looking forward, arkade will continue to be maintained by the OpenFaaS community and is accepting PRs and suggestions. It evolved to solve a clear pain-point, and as we approach 1000 stars on GitHub, it has proven useful to the community so far.
+
+> If you have questions or comments, then please feel free to see the [README](https://get-arkade.dev)), or direct them to the `#general` channel over on the [OpenFaaS Slack Workspace](https://slack.openfaas.io/).
 
 * Have you got an app that you'd like to see?
 * Is there a CLI that you often use with a Kubernetes cluster?

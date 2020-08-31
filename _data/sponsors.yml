@@ -1,7 +1,7 @@
 # The exclusive Diamond sponsor spot is still available
-
 # diamond:
 
+# Expires: Sep 2020
 platinum:
 - alt: "DigitalOcean"
   url: https://digitalocean.com/
@@ -12,31 +12,7 @@ platinum:
   url: https://rancher.com/
   logo: rancher-logo-stacked-color.svg
 
-# Cancelled due to Cornavirus.
-#- alt: "DX"
-#  url: https://dx.no/
-#  logo: dx.png
-
-# Expired
-# - alt: "CTO Advisor"
-#   url: https://www.thectoadvisor.com
-#   logo: cto-advisor.png
-
-# Expired
-# - alt: "Akash"
-#   url: https://akash.network
-#   logo: akash.svg
-
-gold:
-# Cancelled due to Coronavirus
-#- alt: "Civo: UK Cloud Hosting Platform"
-#  url: https://www.civo.com/promo
-#  logo: civo.svg
-
-# For 4 months from Feb (valid until end of June)
-- alt: "MSB: Kubernetes training that works."
-  url: https://www.msb.com
-  logo: msb.png
+# gold:
 
 # These tiers are not shown on the homepage
 # silver:

@@ -1,6 +1,6 @@
 ---
 title: "Enable Single Sign-on (SSO) for OpenFaaS with Okta and OpenID Connect"
-description: "Learn how to enable Single Sign-on (SSO) for OpenFaaS with Okta and OpenID Connect."
+description: "Bring enterprise authentication and Single Sign-on (SSO) to OpenFaaS with Okta and OpenID Connect"
 date: 2020-09-16
 image: /images/2020-09-oidc-okta/concentrate.jpg
 categories:
@@ -14,13 +14,13 @@ dark_background: true
 
 ---
 
-Learn how to enable Single Sign-on (SSO) for OpenFaaS with Okta and OpenID Connect.
+Bring enterprise authentication and Single Sign-on (SSO) to OpenFaaS with Okta and OpenID Connect
 
 ## Enterprise authentication 
 
 OpenID Connect is a common standard that builds upon OAuth2 to enable authentication to services and applications. Solutions like [Okta](https://www.okta.com) can be used to enable Single Sign-On across a number of third-party and in-house applications. This reduces the burden on IT administrators - fewer requests to reset passwords, fewer employees will share credentials and policy can enforced in one place.
 
-In this tutorial, I'll show you how to setup Okta and OpenFaaS with the OIDC / OAuth2 authentication module. The OIDC auth module for OpenFaaS is a commercial add-on included in our [OpenFaaS Premium Subscription](https://www.openfaas.com/support).
+In this tutorial, I'll show you how to setup Okta and [OpenFaaS with the OIDC / OAuth2 authentication module](https://docs.openfaas.com/reference/authentication/). The OIDC auth module for OpenFaaS is a commercial add-on included in our [OpenFaaS Premium Subscription](https://www.openfaas.com/support).
 
 If you don't have an active [OpenFaaS Premium Subscription](https://www.openfaas.com/support), then you will need to apply for a trial key here: [Apply for a 14-day trial](https://forms.gle/mFmwtoez1obZzm286).
 

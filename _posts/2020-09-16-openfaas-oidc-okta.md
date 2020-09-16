@@ -2,7 +2,7 @@
 title: "Enable Single Sign-on (SSO) for OpenFaaS with Okta and OpenID Connect"
 description: "Learn how to enable Single Sign-on (SSO) for OpenFaaS with Okta and OpenID Connect."
 date: 2020-09-16
-image: /images/2020-openfaas-arkade/briana.jpg
+image: /images/2020-09-oidc-okta/concentrate.jpg
 categories:
   - kubernetes
   - developers
@@ -24,7 +24,7 @@ In this tutorial, I'll show you how to setup Okta and OpenFaaS with the OIDC aut
 
 If you don't have an active [OpenFaaS Premium Subscription](https://www.openfaas.com/support), then you will need to apply for a trial key here: [Apply for a 14-day trial](https://forms.gle/mFmwtoez1obZzm286).
 
-## Overview
+## Tutorial overview
 
 * Create a developer account with Okta
 * Register a domain or DNS sub-zone
@@ -33,8 +33,6 @@ If you don't have an active [OpenFaaS Premium Subscription](https://www.openfaas
 * Setup OpenFaaS with TLS, Ingress and the auth plugin
 * Configure your DNS
 * Test out logging into OpenFaaS with Okta
-
-## Tutorial
 
 ### Create a developer account with Okta
 
@@ -80,7 +78,7 @@ curl -s https://${yourOktaDomain}/oauth2/${authServerId}/.well-known/openid-conf
 
 If you pipe the result to `jq`, or save it as JSON and format it, you'll see the important URLs that OpenFaaS needs:
 
-```json
+```
 {
   "issuer": "https://dev-624219.okta.com/oauth2/default",
   "authorization_endpoint": "https://dev-624219.okta.com/oauth2/default/v1/authorize",
@@ -100,6 +98,8 @@ export PROVIDER=""              # Set this to "azure" if using Azure AD.
 export LICENSE=""
 export OAUTH_CLIENT_SECRET=""
 export OAUTH_CLIENT_ID=""
+export ROOT_DOMAIN="oauth.openfaas.pro"
+export yourOktaDomain=$dev-624219.okta.com
 
 arkade install openfaas \
   --set oauth2Plugin.enabled=true \
@@ -107,13 +107,13 @@ arkade install openfaas \
   --set oauth2Plugin.license=$LICENSE \
   --set oauth2Plugin.insecureTLS=false \
   --set oauth2Plugin.scopes="openid profile email" \
-  --set oauth2Plugin.jwksURL=https://dev-624219.okta.com/oauth2/default/v1/keys \
-  --set oauth2Plugin.tokenURL=https://dev-624219.okta.com/oauth2/default/v1/token \
-  --set oauth2Plugin.audience=https://gw.oauth.openfaas.pro \
-  --set oauth2Plugin.authorizeURL=https://dev-624219.okta.com/oauth2/default/v1/authorize \
-  --set oauth2Plugin.welcomePageURL=https://gw.oauth.openfaas.pro \
-  --set oauth2Plugin.cookieDomain=.oauth.openfaas.pro \
-  --set oauth2Plugin.baseHost=https://auth.oauth.openfaas.pro \
+  --set oauth2Plugin.jwksURL=https://$yourOktaDomain/oauth2/default/v1/keys \
+  --set oauth2Plugin.tokenURL=https://$yourOktaDomain/oauth2/default/v1/token \
+  --set oauth2Plugin.audience=https://gw.$ROOT_DOMAIN \
+  --set oauth2Plugin.authorizeURL=https://$yourOktaDomain/oauth2/default/v1/authorize \
+  --set oauth2Plugin.welcomePageURL=https://gw.$ROOT_DOMAIN \
+  --set oauth2Plugin.cookieDomain=.$ROOT_DOMAIN \
+  --set oauth2Plugin.baseHost=https://auth.$ROOT_DOMAIN \
   --set oauth2Plugin.clientSecret=$OAUTH_CLIENT_SECRET \
   --set oauth2Plugin.clientID=$OAUTH_CLIENT_ID
 ```

@@ -5,9 +5,9 @@ date: 2020-09-16
 image: /images/2020-09-oidc-okta/concentrate.jpg
 categories:
   - kubernetes
-  - developers
-  - tools
   - oauth2
+  - security
+  - sso
   - oidc
 author_staff_member: alex
 dark_background: true
@@ -20,7 +20,7 @@ Learn how to enable Single Sign-on (SSO) for OpenFaaS with Okta and OpenID Conne
 
 OpenID Connect is a common standard that builds upon OAuth2 to enable authentication to services and applications. Solutions like [Okta](https://www.okta.com) can be used to enable Single Sign-On across a number of third-party and in-house applications. This reduces the burden on IT administrators - fewer requests to reset passwords, fewer employees will share credentials and policy can enforced in one place.
 
-In this tutorial, I'll show you how to setup Okta and OpenFaaS with the OIDC auth plugin. The OIDC auth plugin for OpenFaaS is a commercial add-on included in our [OpenFaaS Premium Subscription](https://www.openfaas.com/support).
+In this tutorial, I'll show you how to setup Okta and OpenFaaS with the OIDC / OAuth2 authentication module. The OIDC auth module for OpenFaaS is a commercial add-on included in our [OpenFaaS Premium Subscription](https://www.openfaas.com/support).
 
 If you don't have an active [OpenFaaS Premium Subscription](https://www.openfaas.com/support), then you will need to apply for a trial key here: [Apply for a 14-day trial](https://forms.gle/mFmwtoez1obZzm286).
 
@@ -30,7 +30,7 @@ If you don't have an active [OpenFaaS Premium Subscription](https://www.openfaas
 * Register a domain or DNS sub-zone
 * Create an App in Okta
 * Collect OIDC URLS, IDs and credentials
-* Setup OpenFaaS with TLS, Ingress and the auth plugin
+* Setup OpenFaaS with TLS, Ingress and the authentication module
 * Configure your DNS
 * Test out logging into OpenFaaS with Okta
 
@@ -263,6 +263,12 @@ nodeinfo                      	0              	1
 ```
 
 When you need to use a token from CI, we provide instructions for the `clients_credentials` flow in the OpenFaaS documentation (referenced in the summary).
+
+Now you can invite your team and co-workers to collaborate with you and build serverless functions.
+
+Use the User panel to add new users to Okta, or if they are already in your Okta account, setup a new OpenFaaS Group and add them to that.
+
+![Adding a new user](add-user.png)
 
 ## Wrapping up
 

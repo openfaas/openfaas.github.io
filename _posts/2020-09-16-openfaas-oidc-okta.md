@@ -268,7 +268,7 @@ Now you can invite your team and co-workers to collaborate with you and build se
 
 Use the User panel to add new users to Okta, or if they are already in your Okta account, setup a new OpenFaaS Group and add them to that.
 
-![Adding a new user](add-user.png)
+![Adding a new user](/images/2020-09-oidc-okta/add-user.png)
 
 ## Wrapping up
 

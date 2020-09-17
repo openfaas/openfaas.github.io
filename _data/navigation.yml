@@ -7,6 +7,9 @@
 - name: Store
   class: navbar-item
   link: https://store.openfaas.com/
+- name: Consulting
+  class: navbar-item
+  link: /consulting/
 - name: Docs
   class: navbar-item
   link: https://docs.openfaas.com/

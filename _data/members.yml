@@ -9,12 +9,12 @@ core:
 members:
   - alistair
   - vivek
-  - stefan
   - utsav
 
 # Listed for several months, GitHub and leaderboard shows former contributors permanently
 former_members:
   - martin
+  - stefan
 
   # - burton
   # - ed

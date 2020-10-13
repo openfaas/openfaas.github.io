@@ -82,8 +82,7 @@ A workflow can be composed of multiple steps, each executing a particular action
 There are many published [Actions](https://github.com/marketplace?type=actions) that provide nice wrappers for common actions and tools making them easier to use, but we can also use any published Docker image. The OpenFaaS team already publishes an image for `faas-cli` that is ready to use for any workflow.
 
 Our workflow is a simple linear process:
-`Checkout` -> `Pull Templates` -> `Shrink-wrap a Docker context` -> `OpenFaaS Login` -> `Docker Login` -> `Docker Buildx Setup` -> `Build & Push Function` -> `Deploy to OpenFaaS`
-
+![flow](/images/2020-10-github-actions/flow.jpg)
 In the root directory of the project run:
 
 ```sh
@@ -108,6 +107,10 @@ jobs:
         name: Checkout
         uses: actions/checkout@v2
       -
+        name: Define ENV VARS
+        id: define_env
+        run:  echo "::set-output name=github-sha-short::$(echo $GITHUB_SHA | cut -c 1-7)"
+      -
         name: Pull template
         uses: docker://openfaas/faas-cli:latest-root
         with:
@@ -121,7 +124,8 @@ jobs:
         name: Login to OpenFaaS Gateway
         uses: docker://openfaas/faas-cli:latest-root
         with:
-          args: login -p {% raw %}${{ secrets.OPENFAAS_GATEWAY_PASSWD }}{% endraw %} -g {% raw %}${{ secrets.OPENFAAS_GATEWAY }}{% endraw %}
+          args: login -p {% raw %}${{ secrets.OPENFAAS_GATEWAY_PASSWD }}{% endraw %} \
+                      -g {% raw %}${{ secrets.OPENFAAS_GATEWAY }}{% endraw %}
       -
         name: Login to DockerHub
         if: success()
@@ -139,12 +143,12 @@ jobs:
           context: ./build/hello/
           file: ./build/hello/Dockerfile
           push: true
-          tags: utsavanand2/hello:latest
+          tags: utsavanand2/hello:latest-{% raw %}${{ steps.define_env.outputs.github-sha-short }}{% endraw %}
       - 
-        name: Deploying the OpenFaaS function
+        name: Deploy the function
         uses: docker://openfaas/faas-cli:latest-root
         with:
-          args: deploy -f hello.yml       
+          args: deploy -f hello.yml --tag sha  
 ```
 
 > Note: replace the `DOCKER_USERNAME` from the image tag name with your own.
@@ -153,6 +157,10 @@ Since GitHub Actions requires us to use a Docker image that has a root user invo
 
 The faas-cli:latest-root image has the faas-cli installed as the entrypoint, so everything set in args is passed to the faas-cli.
 This will work with any of the faas-cli root tags, you can pin to any specific version of faas-cli, for example: `openfaas/faas-cli:0.12.14-root`.
+
+We're also using using the second step in the workflow to get a short seven characters long SHA of the git commit to tag our Docker image with in the `Build and Push the OpenFaaS function` step of the workflow.
+In the last step of the build `Deploy the function` we're using the arg `--tag sha` which will call the OpenFaaS API Gateway for it to expect an image with the tag `latest-${7 char long commit SHA}`.
+This explains the tag we're using in the `Build and Push the OpenFaaS function` step as well.
 
 ### Add secrets to your GitHub repo for the build
 
@@ -207,7 +215,7 @@ The two changes are to set up an emulation tool for Linux called [qemu](https://
           file: ./build/hello/Dockerfile
           push: true
           platforms: linux/amd64,linux/arm64,linux/arm/v7
-          tags: utsavanand2/hello:latest
+          tags: utsavanand2/hello:latest-{% raw %}${{ steps.define_env.outputs.github-sha-short }}{% endraw %}
 ```
 
 You can see the full workflow YAML file supporting multi-arch builds here: [main.yml](https://github.com/utsavanand2/hello/blob/multi-arch/.github/workflows/main.yml):

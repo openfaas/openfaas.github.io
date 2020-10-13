@@ -1,8 +1,8 @@
 ---
-title: "Deploy your functions to OpenFaaS with Github Actions"
-description: "Bring CI/CD to your OpenFaaS deployment with Github Actions."
-date: 2020-10-08
-image: /images/2020-10-08-openfaas-functions-with-github-actions/lego.jpg
+title: "Build and deploy OpenFaaS functions with GitHub Actions"
+description: "Build and deploy functions to OpenFaaS anywhere with GitHub Actions and multi-arch images"
+date: 2020-10-13
+image: /images/2020-10-github-actions/lego.jpg
 categories:
   - faas-netes
   - faasd
@@ -13,66 +13,76 @@ author_staff_member: utsav
 dark_background: true
 ---
 
-Learn how to bring CI-CD to your OpenFaaS functions with Github Actions
+Build and deploy functions to OpenFaaS anywhere with GitHub Actions and multi-arch images
 
-## Who should read this?
+## Introduction: automating function updates
 
-OpenFaaS was created to have the freedom to run serverless functions anywhere, be it on a Raspberry Pi, in a data center, or the cloud. This started with faas-swarm to run on Docker Swarm and faas-netes to run on Kubernetes. faas-netes is the current recommendation for running OpenFaaS in production.
-If you're not a large team, or just someone who doesn't want to deal with the complexities that comes with Kubernetes then you're much better off with faasd.
+OpenFaaS was created to have the freedom to run serverless functions anywhere you want, whether that be within your on-premises environment, on AWS, or even on a Raspberry Pi in your home. Whichever way you're running OpenFaaS, you won't get far without a way to build and deploy functions, and at small scale, you may be doing this manually.
 
-But whatever shape or form you're running OpenFaaS as, if you want more automation for how your functions are built and deployed with Github Actions, this will be a good read for you.
+When you're ready to level-up your operations, and update functions after each commit is pushed, or each Pull Request is merged, then build systems like GitLab CI, Travis, CircleCI and GitHub Actions become essentials parts of your infrastructure.
 
-In this tutorial, we'll see how we can get OpenFaaS functions up and running with Github Actions on a faas-netes deployment running on GKE, but the same approach is valid for all forms of OpenFaaS as it exists today whether it is faas-netes or faasd, running either in the cloud or on your desk.
+Over the past few years this has meant installing Docker on the build system, and running the `docker` command to build an image, push it to a registry, and to then deploy it. Recently advancements in cross-compilation and the newer container builder `buildkit` means we can build images for multiple platforms with ease, so that an image can be deployed to an AWS Graviton instance with an ARM processor, and to a regular EC2 node using a `x86_64` (Intel) processor.
 
+So in this tutorial I'll show you how to build and deploy functions anywhere using GitHub Actions and multi-arch images that can run on a cloud instance, or on your Raspberry Pi homelab.
 
-## Prerequisites
+### Prerequisites
 
-* An OpenFaaS deployment that is accessible from the internet
+Kubernetes is our recommendation for teams running at scale, but [faasd](https://www.openfaas.com/blog/faasd-tls-terraform/) provides a suitable alternative for smaller teams.
 
-Get started with the official documentation [here](https://docs.openfaas.com/deployment/)
+* An OpenFaaS deployment using Kubernetes or faasd
+
+  You can deploy OpenFaaS [here](https://docs.openfaas.com/deployment/)
+
+* Publicly accessible network OpenFaaS gateway
+
+  Your OpenFaaS gateway should be accessible from the Internet and have TLS enabled for security. If you are running behind a firewall, or at home then checkout the [inlets-operator project](https://docs.inlets.dev/) to make your OpenFaaS gateway accessible from the Internet.
 
 * faas-cli
 
-faas-cli is a command line tool used to interact with OpenFaaS, from deploying your functions to viewing logs.
-Follow the installation instructions [here](https://docs.openfaas.com/cli/install/)
+  faas-cli is a command line tool used to interact with OpenFaaS, from deploying your functions to viewing logs.
+  Follow the installation instructions [here](https://docs.openfaas.com/cli/install/)
 
-> You can follow along with the code used in this tutorial from this [repo](https://github.com/utsavanand2/hello)
+> All code samples are available in this repo: [github.com/utsavanand2/hello](https://github.com/utsavanand2/hello)
 
+### Create a function using the Golang template
 
-## Create an OpenFaaS function
+Create a repository on GitHub called `hello` and clone it.
 
-I'm going to create and deploy a Golang function for this tutorial.
+I'm going to create and deploy a Golang function for this tutorial using the `golang-http` template, which closely resembles a HTTP handler in Go's standard library.
 
-```sh
-# create a new directory for our project
-mkdir hello
-# pull golang-http templates
+```bash
+# Change the directory into the repository
+cd hello
+
+# Pull golang-http templates
 faas-cli template store pull golang-http
-# create a new function with faas-cli
+
+# Create a new function with faas-cli
 faas-cli new hello --lang golang-http
 ```
 
 If you look into the root directory of the project, faas-cli has created two additional files:
 
-```
+```bash
 ./hello/handler.go
 ./hello.yml
 ```
 
 The content of our handler looks something like this:
-![./hello/handler.go](/images/2020-10-08-openfaas-functions-with-github-actions/handler-go.jpg)
+![./hello/handler.go](/images/2020-10-github-actions/handler-go.jpg)
 
 The YAML file is used to configure the deployment and the build and runtime environment of the function
-![./hello.yml](/images/2020-10-08-openfaas-functions-with-github-actions/hello-yaml.jpg)
+![./hello.yml](/images/2020-10-github-actions/hello-yaml.jpg)
 
-## Setup a workflow file for Github Actions
+### Setup a workflow file for GitHub Actions
 
-[Github Action workflows](https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/introduction-to-github-actions) is one of the many core components of Github Actions that lets users add an automated workflow that executes on an event, and can be used to test, build and deploy our code.
+[GitHub Action workflows](https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/introduction-to-github-actions) is one of the many core components of GitHub Actions that lets users add an automated workflow that executes on an event, and can be used to test, build and deploy our code.
+
 A workflow can be composed of multiple steps, each executing a particular action.
 There are many published [Actions](https://github.com/marketplace?type=actions) that provide nice wrappers for common actions and tools making them easier to use, but we can also use any published Docker image. The OpenFaaS team already publishes an image for `faas-cli` that is ready to use for any workflow.
 
 Our workflow is a simple linear process:
-`Checkout` -> `Pull Templates` -> `ShrinkWrap Build` -> `OpenFaaS Login` -> `Docker Login` -> `Docker Buildx Setup` -> `Build & Push Function` -> `Deploy to OpenFaaS`
+`Checkout` -> `Pull Templates` -> `Shrink-wrap a Docker context` -> `OpenFaaS Login` -> `Docker Login` -> `Docker Buildx Setup` -> `Build & Push Function` -> `Deploy to OpenFaaS`
 
 In the root directory of the project run:
 
@@ -137,59 +147,43 @@ jobs:
           args: deploy -f hello.yml       
 ```
 
-> Note: Replace the Docker UserID from the image tag name with your own.
+> Note: replace the `DOCKER_USERNAME` from the image tag name with your own.
 
-Since Github Actions requires us to use a Docker image that has a root user invoking the commands using the Docker action, so we're using the root variant of the faas-cli Docker image. Read more about it [here](https://docs.github.com/en/free-pro-team@latest/actions/creating-actions/dockerfile-support-for-github-actions#user)
+Since GitHub Actions requires us to use a Docker image that has a root user invoking the commands using the Docker action, so we're using the root variant of the faas-cli Docker image. Read more about it [here](https://docs.github.com/en/free-pro-team@latest/actions/creating-actions/dockerfile-support-for-github-actions#user)
 
 The faas-cli:latest-root image has the faas-cli installed as the entrypoint, so everything set in args is passed to the faas-cli.
 This will work with any of the faas-cli root tags, you can pin to any specific version of faas-cli, for example: `openfaas/faas-cli:0.12.14-root`.
 
-## Create and configure a Github Repo with Github Actions
+### Add secrets to your GitHub repo for the build
 
-Initialize a git repo in the root directory of the project
+Add the following secrets and their values to the repo for GitHub Actions to build push and deploy your OpenFaaS functions. Make sure that the secret names correspond with the GitHub workflow YAML file as defined above in the previous section.
 
-```sh
-# Initialize a git repo
-git init
-# Add a remote
-git remote add origin https://github.com/<Your-Github-Username>/hello.git
-# Stage and commit your changes
-git add .
-git commit -m "Initial Commit"
-```
+![secrets](/images/2020-10-github-actions/secrets.jpg)
 
-Create a Github Repo named hello and add the following secrets and their values to the repo for Github Actions to build push and deploy your OpenFaaS functions. Make sure that the secret names correspond with the Github workflow YAML file as defined above in the previous section.
+Now trigger a build by editing one of the files and running `git push`.
 
-![secrets](/images/2020-10-08-openfaas-functions-with-github-actions/secrets.jpg)
-
-## Push the repo to Github to trigger Github Actions
-
-```sh
-git push -u origin master
-```
-
-## Check the status of your Github Actions build
+### Check the status of your GitHub Actions build
 
 Under the `Actions` tab we can check the status of the workflow
 
-![workflow](/images/2020-10-08-openfaas-functions-with-github-actions/workflow.jpg)
+![workflow](/images/2020-10-github-actions/workflow.jpg)
 
 Since we have successfully built and deployed our functions let's invoke it with curl.
 
-## Invoke the function with curl
+### Invoke the function with curl
 
 ```sh
 export OPENFAAS_GATEWAY=<The OPENFAAS_GATEWAY of your OpenFaaS deployment>
 curl http://$OPENFAAS_GATEWAY/function/hello
 ```
 
-![curl](/images/2020-10-08-openfaas-functions-with-github-actions/curl.jpg)
+![curl](/images/2020-10-github-actions/curl.jpg)
 
 ## Take it further
 
 You can take this to the next level by leveraging multi-arch builds with Docker's [Buildx](https://docs.docker.com/buildx/working-with-buildx/) and the golang-http-templates which now support multi-arch builds. This means that you can deploy the same function to architectures like arm, arm64 of amd64 from a single build.
 
-Just add a step to setup `QEMU` and pass a `platforms` key in the build step, making the last few steps concerned with Docker look something like this:
+The two changes are to set up an emulation tool for Linux called [qemu](https://www.qemu.org/) and to provide a list of desired architectures for the images.
 
 ```yaml
       -
@@ -216,12 +210,16 @@ Just add a step to setup `QEMU` and pass a `platforms` key in the build step, ma
           tags: utsavanand2/hello:latest
 ```
 
-You can checkout the workflow YAML supporting multi-arch builds [here](https://github.com/utsavanand2/hello/blob/multi-arch/.github/workflows/main.yml):
+You can see the full workflow YAML file supporting multi-arch builds here: [main.yml](https://github.com/utsavanand2/hello/blob/multi-arch/.github/workflows/main.yml):
 
+### Join the community
 
+Have you got questions, comments, or suggestions? Join the community on [Slack](https://slack.openfaas.io).
 
-## Acknowledgements
+Would you like help setting up your OpenFaaS installation, or someone to call when things don't quite go to plan? [Our Premium Subscription plan](https://www.openfaas.com/support/) gives you a say in the project roadmap, a support contact, and access to Enterprise-grade authentication with OIDC.
 
-Special Thanks to [Lucas Rosler](https://twitter.com/TheAxeR) and [Alex Ellis](https://twitter.com/alexellisuk) for all the precious advice and helping me out with making faas-cli more portable for CI environments than ever before.
+### Acknowledgements
+
+Special Thanks to [Lucas Rosler](https://twitter.com/TheAxeR) and [Alex Ellis](https://twitter.com/alexellisuk) for all guidance and for merging changes into OpenFaaS to better support this workflow.
 
 Thanks to [Dan Burton](https://unsplash.com/@single_lens_reflex) for the background picture.

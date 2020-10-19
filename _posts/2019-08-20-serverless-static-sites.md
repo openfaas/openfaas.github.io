@@ -307,7 +307,13 @@ We won't be using our previous function anymore so remove it:
 faas-cli remove example-site
 ```
 
-Try creating a new blog post with: `Hugo new posts/my-first-post.md`. Remember to run that command inside the folder of your Hugo site, not the root folder of the project.  
+Try creating a new blog post with:
+
+```bash
+hugo new posts/my-first-post.md
+```
+
+Remember to run that command inside the folder of your Hugo site, not the root folder of the project.  
 
 Commit and push your changes again, after OpenFaaS Cloud does its thing you will be able to see your new changes deployed.
 

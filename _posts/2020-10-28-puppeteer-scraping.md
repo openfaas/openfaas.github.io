@@ -68,11 +68,11 @@ What are the features we can leverage from OpenFaaS?
 * Trigger the invocations from cron, or events like Kafka and NATS
 * Get rate, error and duration (RED) metrics from Prometheus, and view them in Grafana
 
-You can deploy OpenFaaS to Kubernetes or on a small VM using the faasd project. The faasd project doesn't require Kubernetes and uses the containerd project.
+You can deploy OpenFaaS to Kubernetes or on a small VM using the [faasd project](https://github.com/openfaas/faasd). The faasd project doesn't require [Kubernetes](https://kubernetes.io) and uses the [containerd project](https://containerd.io).
 
 * Docs: [Deploy OpenFaaS](https://docs.openfaas.com/deployment/)
 
-For the impatient, our arkade tool can get you up and running in less than 5 minutes
+For the impatient, our [arkade tool](https://get-arkade.dev) can get you up and running in less than 5 minutes. You'll just need to have [Docker](https://docker.com/) installed on your computer.
 
 ```bash
 curl -sLS https://get-arkade.dev | sh
@@ -81,6 +81,8 @@ sudo mv arkade /usr/local/bin/
 arkade get kind
 arkade get kubectl
 arkade get faas-cli
+
+kind create cluster
 
 arkade install openfaas
 ```

@@ -251,7 +251,7 @@ Would you like help to set up your OpenFaaS installation, or someone to call whe
 
 ### References
 
-* https://medium.com/ibm-cloud/diving-into-kubernetes-mutatingadmissionwebhook-6ef3c5695f74
-* https://blog.alexellis.io/get-started-with-openfaas-and-kind/
-* https://github.com/morvencao/kube-mutating-webhook-tutorial
-* https://github.com/developer-guy/admission-webhook-example-with-openfaas
+* [https://medium.com/ibm-cloud/diving-into-kubernetes-mutatingadmissionwebhook-6ef3c5695f74](https://medium.com/ibm-cloud/diving-into-kubernetes-mutatingadmissionwebhook-6ef3c5695f74)
+* [https://blog.alexellis.io/get-started-with-openfaas-and-kind/](https://blog.alexellis.io/get-started-with-openfaas-and-kind/)
+* [https://github.com/morvencao/kube-mutating-webhook-tutorial](https://github.com/morvencao/kube-mutating-webhook-tutorial)
+* [https://github.com/developer-guy/admission-webhook-example-with-openfaas](https://github.com/developer-guy/admission-webhook-example-with-openfaas)

@@ -75,15 +75,23 @@ You can deploy OpenFaaS to Kubernetes or on a small VM using the [faasd project]
 For the impatient, our [arkade tool](https://get-arkade.dev) can get you up and running in less than 5 minutes. You'll just need to have [Docker](https://docker.com/) installed on your computer.
 
 ```bash
+# Get arkade, and move it to $PATH
 curl -sLS https://get-arkade.dev | sh
 sudo mv arkade /usr/local/bin/
 
-arkade get kind
+# Run Kubernetes locally
+arkade get kind 
+
+# Kubernetes CLI
 arkade get kubectl
+
+# OpenFaaS CLI
 arkade get faas-cli
 
+# Create a cluster
 kind create cluster
 
+# Install openfaas
 arkade install openfaas
 ```
 

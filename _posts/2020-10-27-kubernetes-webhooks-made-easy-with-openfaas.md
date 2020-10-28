@@ -35,6 +35,7 @@ Webhook Admission Server is just plain http server that adhere to Kubernetes API
 * Kubernetes API -> Webhook (w/TLS) -> OpenFaaS Gateway (w/HTTP) -> OpenFaaS Function
 
 ![Workflow](/images/2020-10-27-k8s-validatingwebhook-openfaas/admission-controller-phases.png)
+> Credit: [https://kubernetes.io/blog/2019/03/21/a-guide-to-kubernetes-admission-controllers/](https://kubernetes.io/blog/2019/03/21/a-guide-to-kubernetes-admission-controllers/)
 
 Supporting TLS for external webhook server is also required because admission is a high security operation. As part of the process, we need to create a TLS certificate signed by the Kubernetes CA to secure the communication between the webhook server and apiserver.
 

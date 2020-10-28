@@ -2,7 +2,7 @@
 title: "Kubernetes Webhooks made easy with OpenFaaS"
 description: "In this post you'll learn how to write Kubernetes Admission webhooks using OpenFaaS functions"
 date: 2020-10-27
-image: /images/2020-10-27-k8s-validatingwebhook-openfaas/admission-controller-phases.png
+image: /images/2020-10-27-k8s-validatingwebhook-openfaas/puzzle.jpg
 categories:
   - arkade
   - kubectl
@@ -26,13 +26,15 @@ Admission webhooks are HTTP callbacks that receive admission requests and do som
 Using OpenFaaS in this design, we can focus on our core logic more than designing the microservice itself and simply create application without being worry about how to build and deploy. 
 
 ## The Scenario
-Let's assume, in our company, we have some requirements that we must meet while deploying applications onto the Kubernetes cluster. We need to set some required labels to our Kubernetes manifest. Unless we specify the required labels our request will reject. 
+Let's assume, in our company, we have some requirements that we must meet while deploying applications onto the Kubernetes cluster. We need to set some required labels to our Kubernetes manifest. Unless we specify the required labels our request will reject.
 
 So, in order to apply those requirements to the Kubernetes cluster to ensure the best practices, we can use Kubernetes [ValidatingAdmissionWebhook](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#validatingadmissionwebhook) and [OpenFaaS](https://www.openfaas.com) together. Since ValidatingAdmissionWebhooks intercepts requests to the apiserver, OpenFaaS functions includes a little code to check required labels and determines the request either allowed or not.
 
 Webhook Admission Server is just plain http server that adhere to Kubernetes API. For each Pod create request to the apiserver(I said Pod because we specify which kind of resources that we consider while registering our webhook to the apiserver using [ValidatingWebhookConfiguration](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/#validatingwebhookconfiguration-v1-admissionregistration-k8s-io) resource) the ValidatingAdmissionWebhook sends an admissionReview([API](https://github.com/kubernetes/kubernetes/blob/release-1.19/pkg/apis/admission/types.go) for reference) to the relevant webhook admission server. The webhook admission server gathers information like object, oldobject, and userInfo from admissionReview's AdmissionRequest and sends AdmissionRequest to the serverless function through the OpenFaaS Gateway. The function checks the required labels exist on Pod and determines the request either valid or not and then sends back the AdmissionResponse whose Allowed and Result fields are filled with the admission decision to the webhook admission server then the webhook admission servers sends back a admissionReview to the apiserver.
 
 * Kubernetes API -> Webhook (w/TLS) -> OpenFaaS Gateway (w/HTTP) -> OpenFaaS Function
+
+![Workflow](/images/2020-10-27-k8s-validatingwebhook-openfaas/admission-controller-phases.png)
 
 Supporting TLS for external webhook server is also required because admission is a high security operation. As part of the process, we need to create a TLS certificate signed by the Kubernetes CA to secure the communication between the webhook server and apiserver.
 

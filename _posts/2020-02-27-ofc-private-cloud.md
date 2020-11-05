@@ -28,7 +28,7 @@ With your private cloud you'll be able to deploy microservices, APIs, blogs, wik
 
 * A private or public Kubernetes cluster with Intel architecture (ARM is not supported at this time) with at least 3x nodes with 4GB RAM and 2vCPU each
 
-> Note: if you are planning on using k3s, then you should see the [notes in the user-guide about disabling Traefik](https://github.com/openfaas-incubator/ofc-bootstrap/blob/master/USER_GUIDE.md)
+> Note: if you are planning on using k3s, then you should see the [notes in the user-guide about disabling Traefik](https://github.com/openfaas/ofc-bootstrap/blob/master/USER_GUIDE.md)
 
 * An account with DigitalOcean, AWS, GCP or Cloudflare for automatic DNS configuration and TLS
 
@@ -38,13 +38,13 @@ With your private cloud you'll be able to deploy microservices, APIs, blogs, wik
 
 Installed below:
 
-* Local tooling: kubectl, faas-cli, [ofc-bootstrap](https://github.com/openfaas-incubator/ofc-bootstrap) etc
+* Local tooling: kubectl, faas-cli, [ofc-bootstrap](https://github.com/openfaas/ofc-bootstrap) etc
 
 ## An overview
 
-The tool that we use to configure OpenFaaS Cloud (OFC) is [ofc-bootstrap](https://github.com/openfaas-incubator/ofc-bootstrap).
+The tool that we use to configure OpenFaaS Cloud (OFC) is [ofc-bootstrap](https://github.com/openfaas/ofc-bootstrap).
 
-![ofc-bootstrap tooling](https://github.com/openfaas-incubator/ofc-bootstrap/raw/master/docs/ofc-bootstrap.png)
+![ofc-bootstrap tooling](https://github.com/openfaas/ofc-bootstrap/raw/master/docs/ofc-bootstrap.png)
 
 > Note: that helm3 is now used, without Tiller.
 
@@ -71,13 +71,13 @@ Clone ofc-bootstrap and then install its CLI:
 ```bash
 mkdir -p ~/dev/
 cd ~/dev/
-git clone https://github.com/openfaas-incubator/ofc-bootstrap
+git clone https://github.com/openfaas/ofc-bootstrap
 cd ofc-bootstrap
 
-curl -sLSf https://raw.githubusercontent.com/openfaas-incubator/ofc-bootstrap/master/get.sh | sudo sh
+curl -sLSf https://raw.githubusercontent.com/openfaas/ofc-bootstrap/master/get.sh | sudo sh
 ```
 
-These instructions are also available in the [user guide](https://github.com/openfaas-incubator/ofc-bootstrap/blob/master/USER_GUIDE.md).
+These instructions are also available in the [user guide](https://github.com/openfaas/ofc-bootstrap/blob/master/USER_GUIDE.md).
 
 * [Download kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 
@@ -274,7 +274,7 @@ slack:
 
 You can add additional overrides for the various features made available in example.init.yaml, including memory and CPU limits.
 
-See the [ofc-boostrap user-guide](https://github.com/openfaas-incubator/ofc-bootstrap/blob/master/USER_GUIDE.md) or the `example.init.yaml` file for more.
+See the [ofc-boostrap user-guide](https://github.com/openfaas/ofc-bootstrap/blob/master/USER_GUIDE.md) or the `example.init.yaml` file for more.
 
 ## Configure TLS and DNS
 
@@ -474,7 +474,7 @@ Are you an EKS user? We have a specific guide for you that covers IAM, Route53, 
 
 You can fork/star/browse the code on GitHub:
 
-* [ofc-bootstrap](https://github.com/openfaas-incubator/ofc-bootstrap)
+* [ofc-bootstrap](https://github.com/openfaas/ofc-bootstrap)
 * [openfaas-cloud](https://github.com/openfaas/openfaas-cloud)
 
 We also have a video recording from KubeCon covering some customer case-studies and community projects that are running on OpenFaaS Cloud: [OpenFaaS Cloud + Linkerd: A Secure, Multi-Tenant Serverless Platform - Charles Pretzer & Alex Ellis](https://www.youtube.com/watch?v=sD7hCwq3Gw0)

@@ -79,7 +79,7 @@ Under the hood, OpenFaaS Cloud (OFC) will orchestrate OpenFaaS and Kubernetes to
 
 ## Start the tutorial
 
-I developed a tool along with the community called [ofc-bootstrap](https://github.com/openfaas-incubator/ofc-bootstrap) which installs all the requisite components like blocks of lego into a Kubernetes cluster. When you're finished you get a URL and can start linking both public and private repositories to enjoy automatic CI/CD. Within a few moments your endpoint will be accessible and published on the Internet.
+I developed a tool along with the community called [ofc-bootstrap](https://github.com/openfaas/ofc-bootstrap) which installs all the requisite components like blocks of lego into a Kubernetes cluster. When you're finished you get a URL and can start linking both public and private repositories to enjoy automatic CI/CD. Within a few moments your endpoint will be accessible and published on the Internet.
 
 Today we'll set up a Kubernetes cluster on AWS using `eksctl` and then after configuring a GitHub App for GitHub.com, we'll populate ofc-bootstrap's `init.yaml` file and run the tool. Configuring AWS and GitHub will take the majority of the time today, and if you're configuring these systems for the first time, it may take you a little longer.
 
@@ -87,7 +87,7 @@ Once you've prepared your AWS environment and GitHub configuration, the tool tak
 
 ### Overview of OpenFaaS Cloud components 
 
-![](https://raw.githubusercontent.com/openfaas-incubator/ofc-bootstrap/master/docs/ofc-bootstrap.png)
+![](https://raw.githubusercontent.com/openfaas/ofc-bootstrap/master/docs/ofc-bootstrap.png)
 
 `ofc-bootstrap` provides an opinionated configuration of OpenFaaS Cloud.
 
@@ -114,7 +114,7 @@ Official documentation exists for some of the tools we will use in this tutorial
 * Clone the repository
 
 ```sh
-git clone https://github.com/openfaas-incubator/ofc-bootstrap
+git clone https://github.com/openfaas/ofc-bootstrap
 cd ofc-bootstrap
 ```
 
@@ -347,7 +347,7 @@ The easiest registry to use is the [Docker Hub](https://hub.docker.com/), the ca
 
 You can also [install your own self-hosted registry](https://github.com/alexellis/k8s-tls-registry) for private Docker images. Note: you can self-host a registry on a single-node, or in a different cluster all together if you wish.
 
-> Note: using AWS ECR is beyond the scope of this tutorial. See here for info: [OFC: configuring AWS ECR](https://github.com/openfaas-incubator/ofc-bootstrap/blob/master/USER_GUIDE.md#prepare-your-docker-registry-if-using-aws-ecr).
+> Note: using AWS ECR is beyond the scope of this tutorial. See here for info: [OFC: configuring AWS ECR](https://github.com/openfaas/ofc-bootstrap/blob/master/USER_GUIDE.md#prepare-your-docker-registry-if-using-aws-ecr).
 
 Now log in, using ofc-bootstrap like indicated below:
 
@@ -414,7 +414,7 @@ For me the Plan executed in around 127 seconds (connecting from the UK) to an AW
 
 If the installation didn't work as expected try the following guides:
 
-* ofc-bootstrap README [troubleshooting section](https://github.com/openfaas-incubator/ofc-bootstrap).
+* ofc-bootstrap README [troubleshooting section](https://github.com/openfaas/ofc-bootstrap).
 
 * Troubleshooting guide for OpenFaaS Cloud in the [OpenFaaS docs](https://docs.openfaas.com/openfaas-cloud/self-hosted/troubleshoot/)
 
@@ -494,7 +494,7 @@ So if you would like to try OpenFaaS Cloud for development, but want to save on 
 
 Do you want to see a real-world example of what you can build? Check out my blog post on how to create a [Serverless Single Page App (SPA) with OFC, Postgres, Go and Vue.js](https://www.openfaas.com/blog/serverless-single-page-app/). You may also like [goodfirstissue bot](https://github.com/rajatjindal/goodfirstissue) which runs on The Community Cluster and is in active use by Google, CNCF (helm) and Jetstack.
 
-Contributions are also welcome to [ofc-bootstrap](https://github.com/openfaas-incubator/ofc-bootstrap)
+Contributions are also welcome to [ofc-bootstrap](https://github.com/openfaas/ofc-bootstrap)
 
 ### Thank you to OpenFaaS Ltd
 

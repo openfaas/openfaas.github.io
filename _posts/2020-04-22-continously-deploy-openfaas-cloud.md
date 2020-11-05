@@ -41,18 +41,18 @@ easier and allow for tooling such as [FluxCD](https://github.com/fluxcd) to do s
 
 To follow along you will need the following things:
 
-* [ofc-bootstrap](https://github.com/openfaas-incubator/ofc-bootstrap/blob/master/USER_GUIDE.md#get-ofc-bootstrap) installed (Instructions in link)
+* [ofc-bootstrap](https://github.com/openfaas/ofc-bootstrap/blob/master/USER_GUIDE.md#get-ofc-bootstrap) installed (Instructions in link)
 * A [Keybase account](https://keybase.io/) (optional, but highly recommended for keeping secrets encrypted)
-* A Domain (We use `ofc.example.com`, replace this with your domain) managed by one of the [supported providers](https://github.com/openfaas-incubator/ofc-bootstrap/blob/master/USER_GUIDE.md#credentials-and-dependent-systems) (We are using AWS Route35)
+* A Domain (We use `ofc.example.com`, replace this with your domain) managed by one of the [supported providers](https://github.com/openfaas/ofc-bootstrap/blob/master/USER_GUIDE.md#credentials-and-dependent-systems) (We are using AWS Route35)
 * A set of credentials for AWS for ECR and Route53. (One for each)
- * the [ofc-bootstrap](https://github.com/openfaas-incubator/ofc-bootstrap) github repository checked out.
+ * the [ofc-bootstrap](https://github.com/openfaas/ofc-bootstrap) github repository checked out.
 
 ### Installing OpenFaaS Cloud
 
-The recommended installation method for OpenFaaS Cloud (OFC) is [ofc-bootstrap](https://github.com/openfaas-incubator/ofc-bootstrap/issues). 
+The recommended installation method for OpenFaaS Cloud (OFC) is [ofc-bootstrap](https://github.com/openfaas/ofc-bootstrap/issues). 
 It's a CLI that automates most of the configuration and installation of the OFC core components.
 
-![ofc-bootstrap](https://github.com/openfaas-incubator/ofc-bootstrap/raw/master/docs/ofc-bootstrap.png)
+![ofc-bootstrap](https://github.com/openfaas/ofc-bootstrap/raw/master/docs/ofc-bootstrap.png)
 
 > ofc-bootstrap packages a number of primitives such as an IngressController, a way to obtain certificates from LetsEncrypt, the OpenFaaS Cloud components, OpenFaaS itself and Minio for build log storage. Each component is interchangeable.
 
@@ -149,7 +149,7 @@ echo "admin" > credentials/basic-auth-user
 ofc-bootstrap registry-login --ecr --account-id <AWS_ACCOUNT_ID> --region <AWS_REGION>
 ```
 
-We are also using a `customers` file rather than a public url. This was released in version [0.9.2](https://github.com/openfaas-incubator/ofc-bootstrap/releases/tag/0.9.2)
+We are also using a `customers` file rather than a public url. This was released in version [0.9.2](https://github.com/openfaas/ofc-bootstrap/releases/tag/0.9.2)
 of `ofc-bootstrap` so make sure you are up to date to support these settings.
 
 ```bash

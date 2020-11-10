@@ -81,7 +81,11 @@ We have made OpenFaaS as easy as possible to deploy on a single VM or on a Kuber
 
   This is the standard option we recommend for production usage. Through the use of containers and Kubernetes, OpenFaaS can be deployed and run at scale on any cloud.
 
+  Many cloud providers have their own managed Kubernetes services which means it's trivial to get a working cluster. You just click a button and deploy OpenFaaS, then you can start deploying functions. The DigitalOcean and Linode Kubernetes services are particularly economic.
+
 ### Deploy Kubernetes and OpenFaaS on your computer
+
+In this post we'll be running Kubernetes on your laptop, meaning that you don't have to spend any money on public cloud to start trying things out. The tutorial should take you less than 15-30 minutes to try.
 
 For the impatient, our [arkade tool](https://get-arkade.dev) can get you up and running in less than 5 minutes. You'll just need to have [Docker](https://docker.com/) installed on your computer.
 

@@ -52,12 +52,11 @@ So I wanted to see if the experience would be any better with OpenFaaS. So I set
 
 Typical tasks involve logging into a portal and taking screenshots. Anecdotally, when I ran a simple test to navigate to a blog and take a screenshot, this took 15.5s in AWS Lambda, but only 1.6s running locally within OpenFaaS on my laptop. I was also able to build and test the function locally, the same way as in the cloud.
 
-
 ## Walkthrough
 
 We'll now walk through the steps to set up a function with Node.js and Puppeteer, so that you can adapt an example and try out your existing tests that you may have running on AWS Lambda.
 
-### Deploy OpenFaaS
+### OpenFaaS features for web-scraping
 
 What are the features we can leverage from OpenFaaS?
 
@@ -68,9 +67,21 @@ What are the features we can leverage from OpenFaaS?
 * Trigger the invocations from cron, or events like Kafka and NATS
 * Get rate, error and duration (RED) metrics from Prometheus, and view them in Grafana
 
-You can deploy OpenFaaS to Kubernetes or on a small VM using the [faasd project](https://github.com/openfaas/faasd). The faasd project doesn't require [Kubernetes](https://kubernetes.io) and uses the [containerd project](https://containerd.io).
+### OpenFaaS deployment options
 
-* Docs: [Deploy OpenFaaS](https://docs.openfaas.com/deployment/)
+We have made OpenFaaS as easy as possible to deploy on a single VM or on a Kubernetes cluster.
+
+* [faasd](https://github.com/openfaas/faasd)
+  
+  Deploy to a single VM if you are new to containers and just want to kick the tires whilst keeping costs low. This is also ideal if you only have a few functions, or are worried about needing to learn Kubernetes.
+
+  See also: [Bring a lightweight Serverless experience to DigitalOcean with Terraform and faasd](https://www.openfaas.com/blog/faasd-tls-terraform/)
+
+* [OpenFaaS on Kubernetes](https://docs.openfaas.com/deployment/)
+
+  This is the standard option we recommend for production usage. Through the use of containers and Kubernetes, OpenFaaS can be deployed and run at scale on any cloud.
+
+### Deploy Kubernetes and OpenFaaS on your computer
 
 For the impatient, our [arkade tool](https://get-arkade.dev) can get you up and running in less than 5 minutes. You'll just need to have [Docker](https://docker.com/) installed on your computer.
 

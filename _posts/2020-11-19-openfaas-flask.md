@@ -62,6 +62,10 @@ def handle(req):
     return "Hi" + str(req)
 ```
 
+If you have dependencies, just put them into a requirements.txt file.
+
+For native dependencies change from `python3-flask` which uses Alpine Linux to `python3-flask-debian`.
+
 Return a HTTP code:
 
 ```python
@@ -76,9 +80,36 @@ def handle(req):
     return "request accepted", 201, {"Content-Type":"binary/octet-stream"}
 ```
 
-If you have dependencies, just put them into a requirements.txt file.
+To work with the HTTP request's headers such as the Method, Path or QueryString, you can switch over to the `python3-http` template:
 
-For native dependencies change from `python3-flask` which uses Alpine Linux to `python3-flask-debian`.
+```bash
+export OPENFAAS_PREFIX=alexellis2
+export FN="http-headers"
+
+faas-cli new --lang python3-flask $FN
+```
+
+Edit `./http-headers/handler.py`:
+
+```python
+def handle(event, context):
+    if event.method == 'GET':
+        return {
+            "statusCode": 200,
+            "body": "GET request"
+        }
+    else:
+        return {
+            "statusCode": 405,
+            "body": "Method not allowed"
+        }
+```
+
+You could also add a switch statement and work with the path.
+
+Depending on how much control you want over the HTTP headers you can choose between the `python3-flask` and `python3-http` templates.
+
+See also: [the template README](https://github.com/openfaas/python-flask-template)
 
 ### Running an existing Flask app
 

@@ -1,19 +1,18 @@
 ---
 title: "Build a Flask microservice with OpenFaaS"
-description: "Which is better Flask or serverless-style Python functions? Why not have both with OpenFaaS."
+description: "Which is better Flask or serverless-style Python functions? Why not have both?"
 date: 2020-11-19
 image: /images/2020-11-flask/background.jpg
 categories:
- - automation
- - scraping
- - nodejs
- - chrome
+ - kubernetes
+ - python
+ - flask
 author_staff_member: alex
 dark_background: true
 
 ---
 
-Which is better Flask or serverless-style Python functions? Why not have both with OpenFaaS.
+Which is better Flask or serverless-style Python functions? Why not have both?
 
 ## Introduction
 
@@ -21,7 +20,7 @@ OpenFaaS has several popular Python templates for users including some that use 
 
 [Flask](https://flask.palletsprojects.com/en/1.1.x/) is a HTTP microservices framework for Python.
 
-> This post is written for existing OpenFaaS users, if you're new then you should try deploying OpenFaaS and following a tutorial to get a feel for how everything works. Why not start with this course? [Introduction to Serverless course by the LinuxFoundation](https://www.openfaas.com/blog/introduction-to-serverless-linuxfoundation/)
+> This post is written for existing OpenFaaS users, if you're new then you should [try deploying OpenFaaS](https://docs.openfaas.com/deployment/) and following a tutorial to get a feel for how everything works. Why not start with this course? [Introduction to Serverless course by the LinuxFoundation](https://www.openfaas.com/blog/introduction-to-serverless-linuxfoundation/)
 
 ### OpenFaaS workloads and templates
 

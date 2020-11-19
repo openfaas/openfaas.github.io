@@ -129,14 +129,14 @@ We'll create a Dockerfile which creates a non-root user and adds the OpenFaaS wa
 Edit `flask-service/Dockerfile`:
 
 ```Dockerfile
-FROM openfaas/of-watchdog:0.7.7 as watchdog
-FROM python:3.7-slim-buster
+FROM --platform=${TARGETPLATFORM:-linux/amd64} openfaas/of-watchdog:0.7.7 as watchdog
+FROM --platform=${TARGETPLATFORM:-linux/amd64} python:3.7-slim-buster
 
 COPY --from=watchdog /fwatchdog /usr/bin/fwatchdog
 RUN chmod +x /usr/bin/fwatchdog
 
-# For native modules
-RUN apt-get -qy update && apt-get -qy install gcc make
+# Uncomment if you want to use native modules
+#RUN apt-get -qy update && apt-get -qy install gcc make
 
 # Add non root user
 RUN addgroup --system app && adduser app --system --ingroup app
@@ -238,6 +238,20 @@ get users
 curl http://127.0.0.1:8080/function/flask-service/user/alex
 get profile
 ```
+
+### Multi-arch and ARM
+
+If you want to publish a multi-arch image to use with your AWS Graviton server or Raspberry Pi along with Intel machines, you can use the new `faas-cli publish` command:
+
+```bash
+faas-cli publish \
+  --platforms linux/amd64,linux/arm64,linux/arm/7 \
+  -f flask-service.yml
+```
+
+If you want to use a specific version in your stack YAML file then you can also use a tracking tag like `:latest` with `--extra-tag latest`
+
+Then simply run `faas-cli deploy` and specify the gateway for your OpenFaaS gateway. Kubernetes or [faasd](https://github.com/openfaas/faasd) will automatically pull the correct image for the node.
 
 ### Going to production with REST-style URLs
 

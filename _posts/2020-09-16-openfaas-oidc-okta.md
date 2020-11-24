@@ -99,7 +99,7 @@ export LICENSE=""
 export OAUTH_CLIENT_SECRET=""
 export OAUTH_CLIENT_ID=""
 export ROOT_DOMAIN="oauth.openfaas.pro"
-export yourOktaDomain=$dev-624219.okta.com
+export yourOktaDomain="dev-624219.okta.com"
 
 arkade install openfaas \
   --set oauth2Plugin.enabled=true \

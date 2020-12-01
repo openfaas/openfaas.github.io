@@ -66,7 +66,7 @@ Through OpenFaaS Ltd I've worked with several new clients including:
 
 * [Civo](https://civo.com) - helped design and launch a managed k3s service #KUBE100 and build K8s-focused brand & content - [First Impressions of 'Managed K3s' - rancher.com](https://rancher.com/blog/2019/first-impressions-managed-k3s/)
 * [Rancher Labs](https://rancher.com) - built content and tooling to enable adoption of k3s [k3sup](https://k3sup.dev/)
-* [Packet](https://packethost.com) - [IoT drones project](https://github.com/packet-labs/iot) built with MQTT, OpenFaaS, Grafana, Postgresql and a drone simulator to show the value of edge compute and the [5G Sprint Curiosity](https://business.sprint.com/5g/) network
+* [Equinix Metal](https://metal.equinix.com/) - [IoT drones project](https://github.com/packet-labs/iot) built with MQTT, OpenFaaS, Grafana, Postgresql and a drone simulator to show the value of edge compute and the [5G Sprint Curiosity](https://business.sprint.com/5g/) network
 * [DX](https://w.dx.no/) - implementation, R&D, and ongoing commercial support of OpenFaaS Cloud for monolith and green/brown-field microservices at scale
 * [Humio](https://www.humio.com/) - DX feedback and product marketplace design for enterprise index-free logging product
 

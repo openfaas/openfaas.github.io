@@ -1,11 +1,7 @@
 # The exclusive Diamond sponsor spot is still available
 # diamond:
 
-# Expires: Sep 2020
 platinum:
-# - alt: "DigitalOcean"
-#   url: https://digitalocean.com/
-#   logo: digitalocean.svg
 
 # Expires: Feb 2021
 - alt: "Rancher Labs"
@@ -13,7 +9,3 @@ platinum:
   logo: rancher-logo-stacked-color.svg
 
 # gold:
-
-# These tiers are not shown on the homepage
-# silver:
-# bronze:

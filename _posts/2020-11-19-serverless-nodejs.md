@@ -24,7 +24,7 @@ This week we saw [AWS announce some changes to their AWS Lambda product](https:/
 
 In 2018 Google released their [Cloud Run](https://aws.amazon.com/blogs/aws/new-for-aws-lambda-container-image-support/) product, and made a very different choice to what we'd seen before. They decided to run container images and to make the interface as generic and portable as possible. To run a container on Cloud Run, it simply needs to serve HTTP traffic on port 8080. By some happy co-incidence, that was also how we designed OpenFaaS to work back in 2016 (to accept HTTP requests on a given port).
 
-In this post we'll explore what a Serverless node.js function looks like and how that compares to using something like Express.js or Next.js. At the end I'll also link you to similar posts I've written for Golang, C# and Python. I'll also explain some of the benefits of using OpenFaaS over doing everything yourself, manually.
+In this post we'll explore what a Serverless node.js function looks like and how that compares to using something like Express.js or Next.js. At the end I'll also link you to similar posts I've written for Golang HTTP servers, C# with ASP.NET and Python with Flask. I'll also explain some of the benefits of using OpenFaaS over doing everything yourself, manually.
 
 ### Option 1 - a Node.js "function"
 

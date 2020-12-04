@@ -238,13 +238,17 @@ For more see the docs: [TLS and custom domains for functions](https://docs.openf
 
 We've now explored two ways to write serverless Node.js applications - the first used a function handler, which meant we could forget about Dockerfiles and HTTP frameworks. The second example introduced some repetition and overhead with us having to manage a Dockerfile for each service, however this approach makes it easy to run existing services.
 
-So why use OpenFaaS?
+### So why use OpenFaaS?
 
 You now know how to create a portable function that can be shipped in a container image. It can be run on Google Cloud Run if you need a managed experience, or for around 5-10 USD / mo with a VPS using [faasd](http://github.com/openfaas/faasd), or on your [Kubernetes cluster using the OpenFaaS helm chart](https://docs.openfaas.com/deployment/).
 
 Your portable application can be invoked via HTTP, which is one of the most common use-cases we see, or through an event. OpenFaaS [supports a number of event triggers](https://docs.openfaas.com/reference/triggers/) out of the box, and we provide [an SDK](https://github.com/openfaas/connector-sdk) that you can use to connect to your own data-sources.
 
 OpenFaaS also comes with a UI for an overview of your system, a queue for asynchronous invocations, scale to zero to lower resource consumption, metrics collection to monitor your services, easy secrets management and a REST API that can be used to deploy new versions of your functions.
+
+* You're invited to our [4th Birthday celebration on 14th December](https://github.com/openfaas/faas/issues/1592) 🎂
+
+### Taking it further
 
 You can learn more about OpenFaaS using the LinuxFoundation's course: [Introduction to Serverless on Kubernetes](https://www.openfaas.com/blog/introduction-to-serverless-linuxfoundation/).
 

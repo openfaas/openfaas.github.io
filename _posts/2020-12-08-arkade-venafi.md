@@ -74,12 +74,11 @@ Through the Venafi development fund, we also added support for:
 * [Kong Inc's Ingress Controller](https://konghq.com/solutions/kubernetes-ingress/)
 * [Nginx Inc's IngressController](https://github.com/nginxinc/kubernetes-ingress)
 
-
 Run the following commands to install each app:
 
 ```bash
-arkade cert-manager
-arkade nginx-inc
+arkade install cert-manager
+arkade install nginx-inc
 arkade install openfaas
 arkade install openfaas-ingress \
   --domain gateway.example.com \
@@ -94,8 +93,8 @@ You will have TLS available at https://gateway.example.com
 If you want to use Kong which was also added as part of the project, just change to the following:
 
 ```bash
-arkade cert-manager
-arkade kong-ingress
+arkade install cert-manager
+arkade install kong-ingress
 arkade install openfaas
 arkade install openfaas-ingress \
   --domain gateway.example.com \
@@ -260,7 +259,7 @@ openfaas-gateway   True    openfaas-gateway   13m
 
 For production usage, you will want to change `example.com` to your company's domain name.
 
-You can install other applications with OpenFaaS, then use the [instructions from the cert-manager documentation](https://cert-manager.io/docs/tutorials/venafi/venafi/) to add an Ingress record for them.
+You can install other applications with arkade such as Istio, ArgoCD, and GitLab and then use the [instructions from the cert-manager documentation](https://cert-manager.io/docs/tutorials/venafi/venafi/) to add an Ingress record for them.
 
 ### TLS with TPP
 
@@ -279,7 +278,6 @@ Usage:
   arkade venafi install tpp-issuer [flags]
 
 Examples:
-  arkade venafi install cloud-issuer
   arkade venafi install tpp-issuer --help
 
 Flags:

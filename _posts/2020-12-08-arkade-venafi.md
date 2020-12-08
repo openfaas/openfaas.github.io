@@ -18,9 +18,9 @@ Venafi provides Machine Identity for the enterprise, learn how to try it out wit
 
 Today we are announcing the availability of the Venafi Sponsored Apps for arkade.
 
-[Venafi](https://venafi.com) provides Machine Identity to enterprise companies and is the primary sponsor of the CNCF project [cert-manager](https://cert-manager.io/). Machine Identity solutions allow for businesses to have finer-grain control over policy, governance, and the lifecycle of certificates.
+* [Venafi](https://venafi.com) provides Machine Identity to enterprise companies and is the primary sponsor of the CNCF project [cert-manager](https://cert-manager.io/). Machine Identity solutions allow for businesses to have finer-grain control over policy, governance, and the lifecycle of certificates.
 
-[arkade](https://get-arkade.dev/) is a portable [Kubernetes](https://kubernetes.io/) marketplace which can be used with any cloud or local Kubernetes distribution to install apps like the Kubernetes Dashboard, [Istio](https://istio.io/), [OpenFaaS](https://www.openfaas.com/) and [Minio](https://min.io).
+* [arkade](https://get-arkade.dev/) is a portable [Kubernetes](https://kubernetes.io/) marketplace which can be used with any cloud or local Kubernetes distribution to install apps like the Kubernetes Dashboard, [Istio](https://istio.io/), [OpenFaaS](https://www.openfaas.com/) and [Minio](https://min.io). arkade is developed by OpenFaaS Ltd, the host company for OpenFaaS.
 
 Each application is fully automated, and can be installed with a single command such as `arkade install cert-manager`. The `arkade get` command also provides a rapid way to download a number of DevOps CLIs like: `kubectl`, `kops` and `terraform`.
 
@@ -32,7 +32,7 @@ Each application is fully automated, and can be installed with a single command 
 
 The initiative's aim is to make it as easy as possible for operators to set up Machine Identity on a Kubernetes cluster using Venafi's two products for issuing TLS certificates.
 
-The first product is cloud-based and called Venafi Cloud (or DevOps Accelerate). The second is called Venafi Trust Protection (TPP) which can be self-hosted on premises and tends to be used with an enterprise-grade Certificate Authority (CA) such as Active Directory.
+The first product is cloud-based and called [Venafi Cloud (or DevOps Accelerate)](https://www.venafi.com/platform/trust-authority). The second is called [Venafi Trust Protection (TPP)](https://www.venafi.com/platform/trust-authority) which can be self-hosted on premises and tends to be used with an enterprise-grade [Certificate Authority (CA)](https://en.wikipedia.org/wiki/Certificate_authority) such as [Active Directory](https://en.wikipedia.org/wiki/Active_Directory).
 
 ## The technical walk-through
 
@@ -303,11 +303,18 @@ To summarise, we now have the following new commands for Venafi's two cert-manag
 
 ```bash
 arkade venafi
-arkade venafi install APP
+arkade venafi install cloud-issuer
+arkade venafi install tpp-issuer
+
 arkade venafi info APP
 ```
 
-And two new community apps: `nginx-inc` and `kong-ingress`.
+And two new community apps:
+
+```bash
+arkade install nginx-inc
+arkade install kong-ingress
+```
 
 It's now over to you to try out OpenFaaS with cert-manager and one of the issuers we showed in the tutorial. Please do try out the new apps and let us know what you think.
 

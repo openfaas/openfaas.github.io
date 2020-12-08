@@ -1,7 +1,7 @@
 ---
 title: "Announcing Venafi Sponsored Apps for Arkade"
 description: "Venafi provides Machine Identity for the enterprise, learn how to try it out with OpenFaaS using the new Sponsored App"
-date: 2020-12-02
+date: 2020-12-08
 image: /images/2020-12-venafi/background.jpg
 categories:
  - kubernetes

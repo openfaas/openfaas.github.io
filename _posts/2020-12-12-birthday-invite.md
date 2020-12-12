@@ -15,6 +15,14 @@ dark_background: true
 
 Join our 4th Birthday celebrating for an update on 2020, what's coming in 2021 and how to build your own private cloud with Raspberry Pis.
 
+# Register if you haven't already
+
+* Date & time: 18th December 2020 1700-1800 GMT
+* Location: Zoom
+* Bonus: new Core contributor announced, prize draw and 2021 plans
+
+[Register now](https://github.com/openfaas/faas/issues/1592)
+
 # Introduction
 
 This year has been a tough one for many people, including the OpenFaaS community, however with the support of our contributors, customers, sponsors and contributors, we've been able to stay in the game.
@@ -50,6 +58,14 @@ OpenFaaS Cloud is built using OpenFaaS functions - from the new dashboard, to th
 We'll mention both in our Birthday update along with much more!
 
 ## Your birthday invite
+
+## Register if you haven't already
+
+* Date & time: 18th December 2020 1700-1800 GMT
+* Location: Zoom
+* Bonus: new Core contributor announced, prize draw and 2021 plans
+
+[Register now](https://github.com/openfaas/faas/issues/1592)
 
 We'll be holding a prize draw, which is optional when signing up for your place on the 18th December.
 

@@ -1,6 +1,6 @@
 ---
 title: "You're invited to our 4th Birthday!"
-description: "Join our 4th Birthday celebrating for an update on 2020, what's coming in 2021 and how to build your own private cloud with Raspberry Pis"
+description: "Join our 4th Birthday celebration for an update on 2020, what's coming in 2021 and how to build your own private cloud with Raspberry Pis"
 date: 2020-12-12
 image: /images/2020-12-12-birthday/background.jpg
 categories:
@@ -13,7 +13,7 @@ dark_background: true
 
 ---
 
-Join our 4th Birthday celebrating for an update on 2020, what's coming in 2021 and how to build your own private cloud with Raspberry Pis.
+Join our 4th Birthday celebration for an update on 2020, what's coming in 2021 and how to build your own private cloud with Raspberry Pis.
 
 # Register if you haven't already
 

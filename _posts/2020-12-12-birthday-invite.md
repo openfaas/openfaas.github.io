@@ -84,7 +84,7 @@ The agenda will include:
 
 As part of our 2020 experiences we moved all of our CI from Travis to GitHub Actions, and whilst we were there we made all of our templates and projects multi-arch. Meaning that the containers will run on Intel and ARM computers without any changes.
 
-> As a side benefit, it means you'll be able to run OpenFaaS on your new Apple M1!
+> As a side benefit, it means you'll be able to run OpenFaaS on your new Apple M1! You may need [Docker Desktop from Docker's new Developer Preview](https://www.docker.com/community/get-involved/developer-preview)
 
 Running OpenFaaS Cloud on a Raspberry Pi was never one of our goals for the project. It was meant to be for companies and teams, it's designed for collaboration and ease of use.
 

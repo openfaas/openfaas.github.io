@@ -15,13 +15,15 @@ dark_background: true
 
 Join our 4th Birthday celebration for an update on 2020, what's coming in 2021 and how to build your own private cloud with Raspberry Pis.
 
-# Register if you haven't already
+# Watch the stream now on YouTube
 
 * Date & time: 18th December 2020 1700-1800 GMT
-* Location: Zoom
+* Location: YouTube Live
 * Bonus: new Core contributor announced, prize draw and 2021 plans
 
-[Register now](https://github.com/openfaas/faas/issues/1592)
+Tune-into the stream:
+
+{% include youtube.html id="eDDtlcAa6-U" %}
 
 # Introduction
 

@@ -52,7 +52,7 @@ Your logo on openfaas.com 🏆
 
 ![sponsors](/images/2020-swag-store/sponsors-logos.png)
 
-Become a sponsor of openfaas.com and connect your brand to one of the fastest-growing developer communities with over 20k GitHub stars and dozens of well-known end-users. Find out more in the [Sponsorship prospectus](https://github.com/openfaas/faas/blob/master/BACKERS.md).
+Become a sponsor of openfaas.com and connect your brand to one of the fastest-growing developer communities with over 20k GitHub stars and dozens of well-known end-users. Find out more in the [support and sponsorship packages](https://openfaas.com/support).
 
 Email [sales@openfaas.com](mailto:sales@openfaas.com) to ask about how to sponsor by invoice through OpenFaaS Ltd.
 

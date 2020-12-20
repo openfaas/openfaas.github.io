@@ -59,7 +59,7 @@ If you'd like to meet with me person to find out how OpenFaaS Ltd could be of he
 
 You can also read about commercial &amp; professional support packages which are designed to help you adopt Cloud Native with ease. There's also some unique opportunities to sponsor OpenFaaS.com for companies, associate your brand with one of the fastest-growing Open Source Kubernetes communities.
 
-* [Support, Services, and Sponsorship Packages](https://github.com/openfaas/faas/blob/master/BACKERS.md)
+* [Support, Services, and Sponsorship Packages](https://openfaas.com/support)
 
 Are you looking for something different? Feel free to reach out to see if OpenFaaS Ltd can be of help.
 

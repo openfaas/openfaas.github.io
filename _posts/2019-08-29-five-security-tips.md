@@ -266,5 +266,4 @@ Connect with us to discuss this blog post, or to share what you're building with
 ### You may also like
 
 * [How to build a Serverless Single Page App](https://www.openfaas.com/blog/serverless-single-page-app/)
-* [OpenFaaS Insiders](https://github.com/openfaas/faas/blob/master/BACKERS.md) - become an OpenFaaS Insider to get regular updates on new features, early access, tips and hints directly from the OpenFaaS Founder
 * [k3sup ("ketchup")](https://github.com/alexellis/k3sup) - the fastest way to create local, remote, or edge clusters with Kubernetes.

@@ -38,7 +38,7 @@ Assuming you have a VM set up you now need to circulate that within your team an
 
 Running a VM or having to build native modules for a different set of shared modules or OS target during CI/CD is problematic and will mean a complicated build environment is needed to apply software delivery best practices. Once a working pipeline is set up the zip files will need to be versioned and stored in a separate artifact store making even more work. This artifact must be uploaded to S3 using tooling such as the AWS CLI which means credential management is also required.
 
-There are many tools which exist to try to address these problems such as [Serverless CLI](https://serverless.com/framework/docs/providers/aws/cli-reference/), [Docker Lambda](https://github.com/lambci/docker-lambda#build-examples) and [Apex](http://apex.run).
+There are many tools which exist to try to address these problems such as [Serverless CLI](https://serverless.com/framework/docs/providers/aws/cli-reference/), [Docker Lambda](https://github.com/lambci/docker-lambda#build-examples) and [Apex](https://apex.sh/up/).
 
 One of the things the frameworks and tools above cannot help with is the package size limit enforced by cloud functions providers. At time of writing [Google Cloud Functions](https://cloud.google.com/functions/quotas) shows a 100MB compressed limit and 500MB uncompressed limit for source code, libraries and artifacts. This may suit many of the smaller functions teams need, but when it doesnt then there's really nowhere to go with this.
 

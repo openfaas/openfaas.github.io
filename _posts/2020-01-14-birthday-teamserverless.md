@@ -123,9 +123,9 @@ The first three products are:
 
     The plugin provides OIDC Connect / OAuth2 authentication for the gateway UI, CLI, and for CI/CD. It comes with first-class support for Auth0 and GitLab IDPs and has been used by some early customers to integrate with LDAP.
 
-* [inlets-pro](https://github.com/inlets/inlets-pro-pkg/blob/master/docs/caddy-tutorial.md)
+* [inlets-pro](https://inlets.dev)
 
-    [Inlets PRO]((https://github.com/inlets/inlets-pro-pkg/blob/master/docs/caddy-tutorial.md)) builds upon the success of [inlets](https://inlets.dev/), the open-source tunnel for HTTP/s traffic enabling companies to tunnel and proxy L4 TCP traffic such as databases, TLS, and SSH.
+    [Inlets PRO](https://inlets.dev) builds upon the success of [inlets](https://github.com/inlets/), the open-source tunnel for HTTP/s traffic enabling companies to tunnel and proxy L4 TCP traffic such as databases, TLS, and SSH.
 
 The aim of commercial software is to contribute towards the huge R&D costs involved in running a project like OpenFaaS which has been adopted by dozens of companies in production. The first two products have a clear enterprise target market and don't take functionality away or restrict the experience for community developers. We will continue to support multi-arch Docker images expanding automation and support for ARMHF and ARM64.
 
@@ -163,4 +163,4 @@ Your input and feedback is welcome. Please join the community Slack workspace an
 
 * [OpenFaaS Slack](https://slack.openfaas.io)
 
-Finally, feel free to reach out if you need help with any cloud native problems you're trying to solve, or if you could use an external perspective on what you're building from OpenFaaS Ltd: [alex@openfaas.com](mailto:alex@openfaas.com). If you'd like to amplify your brand in 2020, then check out the [Sponsorship prospectus for OpenFaaS.com](https://github.com/openfaas/faas/blob/master/BACKERS.md).
+Finally, feel free to reach out if you need help with any cloud native problems you're trying to solve, or if you could use an external perspective on what you're building from OpenFaaS Ltd: [alex@openfaas.com](mailto:alex@openfaas.com). If you'd like to amplify your brand in 2020, then check out the [support and sponsorship options](https://openfaas.com/support).

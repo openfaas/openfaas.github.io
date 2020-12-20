@@ -141,13 +141,7 @@ If you want the best of both worlds, then we have enabled a temporary area for y
 
 ## What next?
 
-Throughout the development of OpenFaaS we are always looking for ways to improve security and tighten controls. We've done this by switching to non-root users where possible for all OpenFaaS core services and the official templates. All core OpenFaaS services are uploaded to both the Docker Hub and to [Quay.io by CoreOS](https://quay.io) where continuous vulnerability and CVE scanning runs to give you peace of mind when you deploy your functions to production.
-
-![](/images/read-only/scanned-by-quay.png)
-
-*Pictured: OpenFaaS API Gateway passing vulnerability scanning.*
-
-See also: [OpenFaaS official images on Quay.io](openfaas/faas: OpenFaaS - Serverless Functions Made Simple for Docker & Kubernetes)
+Throughout the development of OpenFaaS we are always looking for ways to improve security and tighten controls. We've done this by switching to non-root users where possible for all OpenFaaS core services and the official templates.
 
 > In future posts you will learn about NetworkPolicy and how to enable isolated multi-team and multi-environment installations of OpenFaaS, so make sure to subscribe to the RSS feed with [Feedly](https://feedly.com/i/discover/sources/search/feed/https%3A%2F%2Fwww.openfaas.com%2Fblog%2F) and follow [@openfaas on Twitter](https://twitter.com/openfaas).
 

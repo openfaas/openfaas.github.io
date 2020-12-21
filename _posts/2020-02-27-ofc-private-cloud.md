@@ -46,7 +46,7 @@ The tool that we use to configure OpenFaaS Cloud (OFC) is [ofc-bootstrap](https:
 
 ![ofc-bootstrap tooling](https://github.com/openfaas/ofc-bootstrap/raw/master/docs/ofc-bootstrap.png)
 
-> Note: that helm3 is now used, without Tiller.
+> arkade automates kubectl and helm to deploy the above components
 
 The core components installed are:
 
@@ -155,7 +155,7 @@ ofc-bootstrap create-github-app \
 
 > Note: If you don't want to use TLS, you can specify `--insecure` to use HTTP URLs
 
-After running this command you will be redirected to GitHub, where a GitHub app will be created for you, and then YAML will be printed out which you can save into your overrides file `ofc.example.com.yaml`.
+After running this command you will be redirected to GitHub, where a GitHub app will be created for you, and then YAML will be printed out on the terminal which you can save into your overrides file `ofc.example.com.yaml`.
 
 ```yaml
 secrets:

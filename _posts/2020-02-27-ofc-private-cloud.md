@@ -24,6 +24,8 @@ As the administrator, you'll be defining a policy for which features are availab
 
 With your private cloud you'll be able to deploy microservices, APIs, blogs, wikis, functions and more, whatever conforms to the [OpenFaaS workload definition](https://docs.openfaas.com/reference/workloads/).
 
+> Updated December 2020: updated diagram to show that Helm 3 and arkade are used to install all required software from charts to CLIs used by ofc-bootstrap. OpenFaaS Cloud now also works on Raspberry Pi and ARM64, see the final links for more.
+
 ## Pre-requisites
 
 * A private or public Kubernetes cluster with Intel architecture (ARM is not supported at this time) with at least 3x nodes with 4GB RAM and 2vCPU each
@@ -448,15 +450,15 @@ Everything we have deployed is stateless, and is running on Open Source software
 
 ### Get OFC even quicker than that
 
-Do you want to try OpenFaaS Cloud before installing it yourself?
-
-Apply for free access to the [OpenFaaS Cloud Community Cluster](https://github.com/openfaas/community-cluster/)
+You can request an expert installation for evaluation, or for production use. Just [contact us](https://openfaas.com/support) and let us know which option you prefer.
 
 Or install OFC for local development by skipping TLS and OAuth, this reduces the time to around 15 minutes:
 
 [OpenFaaS Cloud for Development](https://blog.alexellis.io/openfaas-cloud-for-development/)
 
 Are you an EKS user? We have a specific guide for you that covers IAM, Route53, and role management: [Build your own OpenFaaS Cloud with AWS EKS](https://www.openfaas.com/blog/eks-openfaas-cloud-build-guide/)
+
+As of December 2020 - OpenFaaS Cloud can also be used on a Raspberry Pi, find out how in [the OpenFaaS 4th Birthday call](https://www.youtube.com/watch?v=eDDtlcAa6-U)
 
 ### Source code / GitHub
 

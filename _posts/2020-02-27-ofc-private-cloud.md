@@ -79,19 +79,7 @@ curl -sLSf https://raw.githubusercontent.com/openfaas/ofc-bootstrap/master/get.s
 
 These instructions are also available in the [user guide](https://github.com/openfaas/ofc-bootstrap/blob/master/USER_GUIDE.md).
 
-* [Download kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
-
-* Download the [OpenFaaS CLI](https://github.com/openfaas/faas-cli)
-
-```bash
-curl -sSL https://cli.openfaas.com | sudo sh
-```
-
-* Download [Helm 3](https://helm.sh)
-
-```bash
-https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | sudo bash
-```
+> Note: You no longer need to install additional CLIs. ofc-bootstrap will download its own copies of kubectl, faas-cli, helm and kubeseal.
 
 ## Create an overrides file
 

@@ -16,23 +16,25 @@ The OpenFaaS community is building a tool for Kubernetes developers, learn how i
 
 <a href="https://get-arkade.dev"><img src="https://raw.githubusercontent.com/alexellis/arkade/master/docs/arkade-logo-sm.png" alt="arkade logo" width="300" height="300"></a>
 
-> [arkade](https://get-arkade.dev) - "Your one-stop CLI for Kubernetes"
+> [arkade](https://get-arkade.dev) - Portable Kubernetes marketplace
 
 ## Solving pain
 
 The popular essay [Cathedral and the Bazaar](http://www.catb.org/~esr/writings/cathedral-bazaar/cathedral-bazaar/) was written over 20 years ago by author and then open source activist Eric Steven Raymond. In it, he contrasts the development of proprietary software within a corporation (the cathedral) to that of an open-source model (the bazaar). One of the key points he makes is that most open-source software starts when a developer has an itch they need to scratch or finds a pain-point that they can solve.
 
-[arkade](https://get-arkade.dev) has evolved since it was first created to install OpenFaaS, to now install 3 dozen different applications using their preferred installation method.
+[arkade](https://get-arkade.dev) has evolved since it was first created to install OpenFaaS, to now install 40 different applications using their preferred installation method.
 
 * OpenFaaS - [helm3](https://helm.sh)
 * Linkerd - its own CLI
 * Portainer - a static YAML manifest file
 
-It then gained the ability to install CLIs such as `faas-cli` and `kubectl` which are relatively easy to find, but when you need 3-5 of these over the course of a short tutorial, break the flow.
+It then gained the ability to install CLIs such as `faas-cli`, `terraform`, `kubectx`, `helm` and `kubectl` which are relatively easy to find, but when you need 3-5 of these over the course of a short tutorial, it breaks the flow.
+
+> I once gave a workshop on OpenFaaS for new Kubernetes users, and it took them 1.5h-2h just to install a few CLIs and start a managed cluster on DigitalOcean. This tool makes that whole workflow much, much faster.
 
 Now if you're anything like us, then you will be re-creating a cluster several times per day or per week to test a PR or change to your project, you may even be creating a cluster in a CI job to test each incoming commit. arkade is built for developers to rapidly get a working system with whatever they need. You can use it in production, or in a pipeline, but you may find that a GitOps style more suitable using a tool like [ArgoCD](https://argoproj.github.io/argo-cd/) or [Flux](https://fluxcd.io).
 
-> ⭐️Star/fork [arkade](https://get-arkade.dev) on GitHub
+> ⭐️ Star/fork [arkade](https://get-arkade.dev) on GitHub
 
 ### Helm 2 - insecure by default
 

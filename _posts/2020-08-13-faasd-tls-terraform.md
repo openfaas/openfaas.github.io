@@ -59,6 +59,8 @@ git clone https://github.com/openfaas/faasd
 cd faasd/docs/bootstrap/digitalocean-terraform
 ```
 
+> Make sure that you're using [Terraform 0.12.0](https://www.terraform.io/downloads.html), and not 0.13.0 or newer. If you ignore this instruction, don't complain if it doesn't work for you :-)
+
 Now run:
 
 ```

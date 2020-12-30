@@ -126,6 +126,13 @@ And here's my demo rig used at KubeCon for my session on [Kubernetes on Raspberr
 
 <blockquote class="twitter-tweet" data-conversation="none"><p lang="en" dir="ltr">My demo rig for today. <a href="https://t.co/r6McGawHaU">pic.twitter.com/r6McGawHaU</a></p>&mdash; Alex Ellis (@alexellisuk) <a href="https://twitter.com/alexellisuk/status/1329881233770369025?ref_src=twsrc%5Etfw">November 20, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
+### Thank you to our sponsors
+
+<blockquote class="twitter-tweet" data-partner="tweetdeck"><p lang="en" dir="ltr">As we close out the year, we wanted to say thank you to <a href="https://twitter.com/Rancher_Labs?ref_src=twsrc%5Etfw">@Rancher_Labs</a> for Sponsoring the OpenFaaS homepage this year.<br><br>And to those who sponsored the homepage last year, including <a href="https://twitter.com/CivoCloud?ref_src=twsrc%5Etfw">@CivoCloud</a>, <a href="https://twitter.com/CTOAdvisor?ref_src=twsrc%5Etfw">@CTOAdvisor</a> and <a href="https://twitter.com/digitalocean?ref_src=twsrc%5Etfw">@digitalocean</a> 🙏<a href="https://t.co/bcD7493eUD">https://t.co/bcD7493eUD</a> <a href="https://t.co/XrlUk6pkFU">pic.twitter.com/XrlUk6pkFU</a></p>&mdash; OpenFaaS (@openfaas) <a href="https://twitter.com/openfaas/status/1344325977917288449?ref_src=twsrc%5Etfw">December 30, 2020</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+Thank you to [Rancher Labs](https://rancher.com) for sponsoring the homepage, to everyone who has [sponsored me directly](https://github.com/sponsors/alexellis) and to [RateHub.ca](https://ratehub.ca) for [sponsoring OpenFaaS](https://github.com/sponsors/openfaas/) as an end-user.
+
 ## Wrapping up
 
 We hope that you can join us! Everyone who attends will get early access to the deployment instructions for OpenFaaS Cloud on their Raspberry Pi, and a bill of materials.

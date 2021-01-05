@@ -302,6 +302,104 @@ faas-cli invoke screenshot-page \
 
 Now open `screenshot.png` and check the result.
 
+
+### Produce homepage banners and social sharing images
+
+You can also produce homepage banners and social sharing images by rendering HTML locally, and then saving a screenshot.
+
+Unlike a SaaS service, you'll have no month fees to pay, and get unlimited use, you can also customise the code and trigger it however you like.
+
+The execution time is very quick at under 0.5s per image and could be made faster by preloading the Chromium browser and re-using it. if you cache the images to `/tmp/` or save them to a CDN, you'll have single-digit latency.
+
+```bash
+# Set to your Docker Hub account or registry address
+export OPENFAAS_PREFIX=alexellis2
+
+faas-cli new --lang puppeteer-node12 banner-gen --prefix $OPENFAAS_PREFIX
+```
+
+Edit `./banner-gen/handler.js`
+
+
+```js
+'use strict'
+const assert = require('assert')
+const puppeteer = require('puppeteer')
+const fs = require('fs');
+const fsPromises = fs.promises;
+
+module.exports = async (event, context) => {
+  let browser = await puppeteer.launch({
+    args: [
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+      '--disable-dev-shm-usage'
+    ]
+  })
+
+  const browserVersion = await browser.version()
+  console.log(`Started ${browserVersion}`)
+  let page = await browser.newPage()
+
+  let title = "Set your title"
+  let avatar = "https://avatars2.githubusercontent.com/u/6358735?s=160&amp;v=4"
+
+  console.log("query",event.query)
+
+  if(event.query) {
+    if(event.query.url) {
+      url = event.query.url
+    }
+    if(event.query.avatar) {
+      avatar = event.query.avatar
+    }
+    if(event.query.title) {
+      title = event.query.title
+    }
+  }
+
+  let html = `<html><body><h2>TITLE</h2><img src="AVATAR" alt="Avatar" width="120px" height="120px" /></body></html>`
+  html = html.replace("TITLE", title)
+  html = html.replace("AVATAR", avatar)
+
+  await page.setContent(html)
+  await page.setViewport({ width: 1720, height: 460 });
+  await page.screenshot({ path: `/tmp/page.png` })
+
+  let data = await fsPromises.readFile("/tmp/page.png")
+
+  await browser.close()
+  return context
+    .status(200)
+    .headers({"Content-type": "image/png"})
+    .succeed(data)
+}
+```
+
+Deploy the function:
+
+```bash
+faas-cli up -f banner-gen.yml
+```
+
+Example usage:
+
+```bash
+
+curl -G "http://127.0.0.1:8080/function/generate-banner" \
+ --data-urlencode "avatar=https://avatars2.githubusercontent.com/u/6358735?s=160&amp;v=4" \
+ --data-urlencode "title=Time for your favourite website to get social banners" \
+ -o out.png
+```
+
+Note that the inputs are URLEncoded for the querystring. You can also use the `event.body` if you wish to access the function programmatically, instead of from a browser.
+
+This is an example image generated for my [GitHub Sponsors page](https://github.com/sponsors/alexellis) which uses a different HTML template, that's loaded from disk.
+
+![Generated image](https://github.com/alexellis/alexellis/blob/master/sponsor-today.png?raw=true)
+
+HTML: [sponsor-cta.html](https://github.com/alexellis/alexellis/blob/master/sponsor-cta.html)
+
 ### Deploy a Grafana dashboard
 
 We can observe the RED metrics from our functions using the built-in Prometheus UI, or we can deploy Grafana and access the OpenFaaS dashboard.

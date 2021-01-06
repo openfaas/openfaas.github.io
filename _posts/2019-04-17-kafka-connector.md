@@ -13,9 +13,11 @@ dark_background: true
 
 In this post I will show you how you can build subscriptions between your OpenFaaS functions and your Apache Kafka topics. I'll be using Kubernetes to show you around, but the connector-sdk works with any OpenFaaS provider.
 
-OpenFaaS is solving real problems for our [end-user community](https://docs.openfaas.com/#users-of-openfaas), many of whom are now relying on the project to in production and for core services. The [kafka-connector](https://github.com/openfaas-incubator/kafka-connector) was created to help those users integrate their existing systems with their functions.
+OpenFaaS is solving real problems for our [end-user community](https://docs.openfaas.com/#users-of-openfaas), many of whom are now relying on the project to in production and for core services. The OpenFaaS PRO kafka-connector was created to help commercial users integrate functions into their existing systems.
 
 OpenFaaS functions and microservices are accessible over HTTP endpoints via the Gateway service, but let's explore how other events can be used to trigger our functions.
+
+This tutorial describes the Kafka connector which is part of the OpenFaaS PRO bundle. [Find out more](https://openfaas.com/support/)
 
 ## Apache Kafka
 
@@ -62,8 +64,8 @@ A development version of Apache Kafka has been made available so that you can ge
 * Clone the repository:
 
  ```bash
-$ git clone https://github.com/openfaas-incubator/kafka-connector && \
-  cd kafka-connector/yaml/kubernetes
+$ git clone https://github.com/openfaas/faas-netes/ && \
+  cd contrib/kafka-testing
 ```
 
 * Apply the Broker files:
@@ -77,8 +79,17 @@ $ kubectl apply -f kafka-broker-dep.yml,kafka-broker-svc.yml
 ```bash
 $ kubectl apply -f zookeeper-dep.yaml,zookeeper-svc.yaml
 ```
+
 ## Deploy the connector with helm
 
+Create the required secret with your OpenFaaS PRO license code:
+
+```bash
+$ kubectl create secret generic \
+    -n openfaas \
+    openfaas-license \
+    --from-file license=$HOME/OPENFAAS_LICENSE
+```
 Add the OpenFaaS charts repository:
 
 ```sh
@@ -92,14 +103,14 @@ $ helm upgrade kafka-connector openfaas/kafka-connector \
     --install \
     --namespace openfaas \
     --set topics="payment-received" \
-    --set broker_host="kafka" \
-    --set print_response="true" \
-    --set print_response_body="true"
+    --set brokerHost="kafka" \
+    --set printResponse="true" \
+    --set printResponseBody="true"
 ```
 
 * Set the `topics` to the topics you want to subscribe to as a comma separated list without separating spaces
 
-* If you deployed Kafka to a remote location or a different namespace or port then just update the `broker_host` value.
+* If you deployed Kafka to a remote location or a different namespace or port then just update the `brokerHost` value.
 
 > Note: if you do not want to install tiller on your cluster, then you can make use of `helm template` to generate YAML files
 
@@ -208,6 +219,30 @@ Hello, Go. You said: Kafka and go
 ...
 ```
 
+## Dealing with high-load / long-running functions
+
+If you're either dealing with very high-load or long-running functions, there is a way to release pressure and defer the executions of your functions. This uses OpenFaaS' built-in asynchronous invocation mode.
+
+Just install the chart again, but this time add:
+
+```
+--set asyncInvocation=true
+```
+
+In this mode, work is consumed immediately from Kafka, and then buffered in the built-in NATS queue in OpenFaaS, to be executed by the queue-worker.
+
+See the logs of the queue worker as it executes your requests:
+
+```bash
+kubectl logs -n openfaas deploy/queue-worker
+```
+
+Alternatively, you can update the `upstreamTimeout` value to something longer than the default and keep the existing behaviour:
+
+```
+--set upstreamTimeout=1m
+```
+
 ## Wrapping up
 
 There are multiple real world examples where an event-driven approach with Apache Kafka can help integrate your existing tools and applications, and to extend functionality of existing systems without risking any regression.
@@ -216,7 +251,9 @@ Let me give you an example. Suppose that whenever a new customers signs-up and c
 
 We could publish their data on a topic such as: `customer-signup`. With an event-driven approach using OpenFaaS and the kafka-connector we can now broadcast a message on the `customer-signup` topic and then process it in a number of ways by using different functions. I.e. to check their credit score, update a lead in SalesForce and or even schedule a welcome pack in the post. So at any time you can extend the workflow of tasks for a `customer-signup` message by just defining a new function and giving it an annotation of `topic: customer-signup`.
 
-Now that I've shown you how to connect to Kafka and explored a real-world use-case, it's over to you to try it out and let us know what you think through the [Slack community](https://docs.openfaas.com/community) or [Twitter](https://twitter.com/openfaas).
+Now that I've shown you how to connect to Kafka and explored a real-world use-case, it's over to you to try it.
+
+You can use your existing OpenFaaS PRO license, or apply for a 14-day trial: [Find out more](https://openfaas.com/support/)
 
 ## Going further
 
@@ -236,4 +273,4 @@ $ kubectl delete deploy/kafka-broker -n openfaas && \
   helm delete --purge kafka-connector
 ```
 
-Editor(s): [Alex Ellis](https://www.alexellis.io/) & [Richard Gee](https://twitter.com/rgee0)
+Editor(s): [Alex Ellis](https://www.alexellis.io/)

@@ -84,7 +84,7 @@ When you generate a new function using `faas-cli new` this is the handler you ge
 
 module.exports = (event, context) => {
     let err;
-    const result =             {
+    const result = {
         status: "You said: " + JSON.stringify(event.body)
     };
 

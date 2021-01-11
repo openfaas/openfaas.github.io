@@ -272,7 +272,7 @@ I'm going to go over two different ways you can get this same experience using O
 
 [OpenFaaS Cloud](https://github.com/openfaas/openfaas-cloud) offers you an integrated and automated experience, with a single push you can have your site deployed in seconds. You'll also get logs and metrics linked directly to your commit.
 
-If this sounds interesting to you check out the "one-click" [bootstrap tool](https://github.com/openfaas-incubator/ofc-bootstrap) to install OpenFaaS Cloud in less than 100 seconds or apply for an account on [The Community Cluster](https://github.com/openfaas/community-cluster) for free shared access.
+If this sounds interesting to you check out the "one-click" [bootstrap tool](https://github.com/openfaas/ofc-bootstrap) to install OpenFaaS Cloud in less than 100 seconds or apply for an account on [The Community Cluster](https://github.com/openfaas/community-cluster) for free shared access.
 
 In OpenFaaS Cloud by default we limit the templates that the users can use. This means we need to add the Hugo template before being able to deploy a function. To do this, edit the `git-tar` deployment in the `openfaas-fn` namespace and add the Hugo template URL `https://github.com/matipan/openfaas-hugo-template` to the `custom_templates` environment variable.
 

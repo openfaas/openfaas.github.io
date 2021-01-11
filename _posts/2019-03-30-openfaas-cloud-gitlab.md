@@ -108,11 +108,11 @@ The `ofc-bootstrap` tool is used to install OpenFaaS Cloud in a single click. Yo
 ```
 mkdir -p ~/dev/ofc/
 cd ~/dev/ofc/
-git clone https://github.com/openfaas-incubator/ofc-bootstrap
+git clone https://github.com/openfaas/ofc-bootstrap
 cd ~/dev/ofc/ofc-bootstrap
 ```
 
-Now fetch the latest release from: [GitHub](https://github.com/openfaas-incubator/ofc-bootstrap/releases) and save it in `/usr/local/bin/`. If you're on MacOS download "ofc-bootstrap-darwin" and save it as "ofc-bootstrap".
+Now fetch the latest release from: [GitHub](https://github.com/openfaas/ofc-bootstrap/releases) and save it in `/usr/local/bin/`. If you're on MacOS download "ofc-bootstrap-darwin" and save it as "ofc-bootstrap".
 
 Run `chmod +x /usr/local/bin/ofc-bootstrap`
 
@@ -208,7 +208,7 @@ If using DigitalOcean, save an access token to:
 
 `ofc-boostrap` will pass the token onto `cert-manager` as a Kubernetes secret.
 
-If you are using GCP or AWS to manage DNS then see the [README.md file](https://github.com/openfaas-incubator/ofc-bootstrap).
+If you are using GCP or AWS to manage DNS then see the [README.md file](https://github.com/openfaas/ofc-bootstrap).
 
 #### Authenticate to your registry
 
@@ -219,7 +219,7 @@ If you don't have an account you can sign-up at: [https://hub.docker.com](https:
 
 You can also [install your own self-hosted registry](https://github.com/alexellis/k8s-tls-registry) for private Docker images. Note: you can self-host a registry on a single-node, or in a different cluster all together if you wish.
 
-> Note: using AWS ECR is beyond the scope of this tutorial. See here for info: [OFC: configuring AWS ECR](https://github.com/openfaas-incubator/ofc-bootstrap/blob/master/USER_GUIDE.md#prepare-your-docker-registry-if-using-aws-ecr).
+> Note: using AWS ECR is beyond the scope of this tutorial. See here for info: [OFC: configuring AWS ECR](https://github.com/openfaas/ofc-bootstrap/blob/master/USER_GUIDE.md#prepare-your-docker-registry-if-using-aws-ecr).
 
 Now log in, using ofc-bootstrap.
 

@@ -229,7 +229,7 @@ You can [get Kubernetes](https://kubernetes.io/) from your favourite cloud as a 
 
     In late 2017 I started to design a distribution of OpenFaaS that shipped as a whole package including HTTPS, multi-user support, authz and CI/CD with GitHub and GitLab.
 
-    It's called OpenFaaS Cloud and is free and open-source. You can host your own using the [ofc-bootstrap tool](https://github.com/openfaas-incubator/ofc-bootstrap) or [request free access to the Community Cluster](https://github.com/openfaas/community-cluster/).
+    It's called OpenFaaS Cloud and is free and open-source. You can host your own using the [ofc-bootstrap tool](https://github.com/openfaas/ofc-bootstrap) or [request free access to the Community Cluster](https://github.com/openfaas/community-cluster/).
 
     <blockquote class="twitter-tweet" data-theme="light"><p lang="en" dir="ltr">&quot;OpenFaaS Cloud - Community Cluster&quot;<br><br>A SaaS solution built on OpenFaaS.<br><br>- Free sub-domain and endpoints<br>- TLS by default<br>- Login with GitHub<br>- No complex API or CLI needed, just push to git.<br><br>Apply for access today. 🏆<a href="https://t.co/IGuZGZiPT3">https://t.co/IGuZGZiPT3</a> <a href="https://twitter.com/hashtag/gitops?src=hash&amp;ref_src=twsrc%5Etfw">#gitops</a> <a href="https://twitter.com/hashtag/faasfriday?src=hash&amp;ref_src=twsrc%5Etfw">#faasfriday</a> <a href="https://t.co/pqIMzYsMbI">pic.twitter.com/pqIMzYsMbI</a></p>&mdash; OpenFaaS (@openfaas) <a href="https://twitter.com/openfaas/status/1144621477129379842?ref_src=twsrc%5Etfw">June 28, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     

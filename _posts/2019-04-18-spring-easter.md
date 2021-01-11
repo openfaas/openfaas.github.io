@@ -121,7 +121,7 @@ Here's a demo of the OpenFaaS Cloud flow in action:
 
 Form: [Request access now](https://forms.gle/8e6ZXJKMcDHpV6Xu6)
 
-If you're experienced with OpenFaaS, then perhaps you'd like to stand-up your own OpenFaaS Cloud with the [ofc-bootstrap tool](https://github.com/openfaas-incubator/ofc-bootstrap)? It takes around 100 seconds to deploy to a Kubernetes service such as [DigitalOcean Kubernetes](https://www.digitalocean.com/products/kubernetes/) or [Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine/). You'll get the same experience as with the Community Cluster including automatic TLS and support for GitHub.com or GitLab self-hosted.
+If you're experienced with OpenFaaS, then perhaps you'd like to stand-up your own OpenFaaS Cloud with the [ofc-bootstrap tool](https://github.com/openfaas/ofc-bootstrap)? It takes around 100 seconds to deploy to a Kubernetes service such as [DigitalOcean Kubernetes](https://www.digitalocean.com/products/kubernetes/) or [Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine/). You'll get the same experience as with the Community Cluster including automatic TLS and support for GitHub.com or GitLab self-hosted.
 
 ## Wrapping up
 

@@ -379,7 +379,7 @@ Edit certinfo and add the secret to the function definition:
 
 ```sh
 cat << EOF | tee functions/templates/certinfo.yaml
-apiVersion: openfaas.com/v1alpha2
+apiVersion: openfaas.com/v1
 kind: Function
 metadata:
   name: certinfo
@@ -466,7 +466,7 @@ Edit the generated YAML so that Flux can use Helm to control the version and lab
 
 ```sh
 cat << EOF | tee functions/templates/myfn.yaml
-apiVersion: openfaas.com/v1alpha2
+apiVersion: openfaas.com/v1
 kind: Function
 metadata:
   name: myfn

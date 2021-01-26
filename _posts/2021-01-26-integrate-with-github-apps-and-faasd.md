@@ -15,7 +15,7 @@ In this guide, we are going to demonstrate how to build your own GitHub App to g
 
 With [56 million developers on the platform and 85 million repositories](https://www.theverge.com/2018/6/18/17474284/microsoft-github-acquisition-developer-reaction), integrating with GitHub is not just fun, it's essential. Some companies have even built integrations so good, [that GitHub bought them](https://techcrunch.com/2019/09/18/github-acquires-code-analysis-tool-semmle/) and made them part of the core platform. This has happened multiple times.
 
-> Even faster than that. When we reached out to GitHub for comment, [Martin Woodward, Director of DevRel](https://twitter.com/martinwoodward) told us that this year they saw 60 million new repositories created.
+> Even faster than that. When we reached out to GitHub for comment, [Martin Woodward, Director of DevRel](https://twitter.com/martinwoodward) told us that [this year they saw 60 million new repositories created](https://octoverse.github.com/).
 
 So why is it that so many of you are doing it wrong? Many of you are still using OAuth apps which are considered legacy and have scopes which are far too broad. Many more of you are taking extreme risks by using Personal Access Tokens (PATs), most of which can do anything to your account and repositories.
 

@@ -21,6 +21,8 @@ So why is it that so many of you are doing it wrong? Many of you are still using
 
 In this guide, we are going to develop a [GitHub App](https://docs.github.com/en/free-pro-team@latest/developers/apps) using Go, then we deploy it as a serverless function to make use of [faasd](https://github.com/openfaas/faasd) which is a lightweight & portable faas engine. We are also going to do this demo on our local environment, so we should open our function which runs on our local environment to the Internet so Github can send events to our function. In order to do that we use inlets-pro which provides secure TCP/L4 tunnels.
 
+> If you are a Kubernetes or K3s user and want to follow along, you can do so and switch out faasd and inletsctl, for the [inlets-operator for Kubernetes](https://github.com/inlets/inlets-operator) and your local cluster. Everything else will work the same.
+
 A GitHub App acts on its own behalf, taking actions via the API directly using its own identity, which means you don't need to maintain a bot or service account as a separate user. GitHub Apps can be installed directly on organizations and user accounts and granted access to specific repositories. They come with built-in webhooks and narrow, specific permissions. When you set up your GitHub App, you can select the repositories you want it to access. For example, in this guide we are going to develop a Github App that respond or close the comments for your repositories that you installed Github App for.
 
 Two examples that make thorough use of GitHub Apps are below:
@@ -118,10 +120,13 @@ Also, *do not forget to request permissions to Read & Write the repository's iss
 Finally, we registered our application.
 ![github-app](/images/2021-01-15-github-application-using-go-and-inlets-pro/app.png)
   
-## Get up and running with your own faasd installation on your Mac
+## Get up and running with your own faasd installation on your computer with multipass
+
+[Multipass](https://multipass.run) is a tool that not enough developers are using. It's 2020's answer to VirtualBox and Docker Desktop in one. You just run a few commands and get a Linux host with Ubuntu pre-installed. The best part is that it supports cloud-init scripts too.
+
 In order to get up and running with your own faasd installation on your Mac you can use multipass.For more details you can follow the [link](https://github.com/openfaas/faasd/blob/master/docs/MULTIPASS.md).
 
-Let's start our Ubuntu VM with multipass.First, we need a cloud-config.txt to set up faasd while bootstrapping VM.
+Let's start our Ubuntu VM with multipass. First, we need a cloud-config.txt to set up faasd while bootstrapping VM.
 
 ```bash
 $ curl -sSLO \

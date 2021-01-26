@@ -318,6 +318,16 @@ In a very short period of time, using standard infrastructure automation tools w
 
 If you want to remove your host, just run `terraform destroy`, but at ~5 USD / mo, you may as well keep it up and keep learning.
 
+## Announcing "Serverless For Everyone Else"
+
+![faasd ebook and workshop](https://pbs.twimg.com/media/EshzOvLUYAUbCxw?format=jpg&name=medium)
+
+I've released my first eBook and video workshop called "Serverless For Everyone Else", in the book I cover how to build your own self-hosted Serverless Functions without needing AWS IAM or Kubernetes. It can run on commodity hardware like a Raspberry Pi or DigitalOcean Droplet.
+
+In the labs you'll learn how to deploy faasd, how to use the OpenFaaS UI, CLI and REST API (via `curl`). The book then chances pace into hands-on labs with Node.js where you get to build out functions to query HTTP APIs, add npm modules, configure behaviour with environment variables and then add secrets. To top if off, you write a small CRUD API with Postgresql - all on the same host. The second half of the book concentrates on operational concerns like setting up TLS, or a HTTPS tunnel when you're running behind a firewall and gives detailed instructions on monitoring your functions.
+
+[Check it out on Gumroad](https://gumroad.com/l/serverless-for-everyone-else)
+
 ### Taking it further
 
 There are many other OpenFaaS templates for different languages, and faasd can even run regular containers, as long as they accept HTTP traffic on port 8080.

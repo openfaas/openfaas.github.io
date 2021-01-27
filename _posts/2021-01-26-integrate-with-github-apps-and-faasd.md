@@ -1,5 +1,5 @@
 ---
-title: "You're doing it wrong. Integrate with GitHub the right way GitHub Apps"
+title: "How to integrate with GitHub the right way with GitHub Apps"
 description: "In this guide, we are going to demonstrate how to build your own GitHub App to get a fine-grained integration with GitHub's API and to act on the behalf of its users."
 tags: inlets-pro inletsctl go github-application faasd raspberry-pi
 author_staff_member: developer-guy

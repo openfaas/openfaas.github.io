@@ -4,7 +4,6 @@ description: "In this guide, we are going to demonstrate how to build your own G
 tags: inlets-pro inletsctl go github-application faasd raspberry-pi
 author_staff_member: developer-guy
 dark_background: true
-image: /images/2021-01-15-github-application-using-go-and-inlets-pro/faasd-issue-bot.png
 date: 2021-01-26
 
 ---
@@ -24,6 +23,8 @@ So why is it that so many of you are doing it wrong? Many of you are still using
 In this guide, we are going to develop a [GitHub App](https://docs.github.com/en/free-pro-team@latest/developers/apps) using Go, then we deploy it as a serverless function to make use of [faasd](https://github.com/openfaas/faasd) which is a lightweight & portable faas engine. We are also going to do this demo on our local environment, so we should open our function which runs on our local environment to the Internet so Github can send events to our function. In order to do that we use inlets-pro which provides secure TCP/L4 tunnels.
 
 > If you are a Kubernetes or K3s user and want to follow along, you can do so and switch out faasd and inletsctl, for the [inlets-operator for Kubernetes](https://github.com/inlets/inlets-operator) and your local cluster. Everything else will work the same.
+
+![overview](/images/2021-01-15-github-application-using-go-and-inlets-pro/faasd-issue-bot.png)
 
 A GitHub App acts on its own behalf, taking actions via the API directly using its own identity, which means you don't need to maintain a bot or service account as a separate user. GitHub Apps can be installed directly on organizations and user accounts and granted access to specific repositories. They come with built-in webhooks and narrow, specific permissions. When you set up your GitHub App, you can select the repositories you want it to access. For example, in this guide we are going to develop a Github App that respond or close the comments for your repositories that you installed Github App for.
 

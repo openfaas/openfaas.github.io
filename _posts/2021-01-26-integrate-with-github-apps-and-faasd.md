@@ -4,6 +4,7 @@ description: "In this guide, we are going to demonstrate how to build your own G
 tags: inlets-pro inletsctl go github-application faasd raspberry-pi
 author_staff_member: developer-guy
 dark_background: true
+image: /images/2021-01-15-github-application-using-go-and-inlets-pro/githubpic.jpg
 date: 2021-01-26
 
 ---

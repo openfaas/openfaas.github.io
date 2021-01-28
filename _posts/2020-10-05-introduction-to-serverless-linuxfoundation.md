@@ -2,7 +2,7 @@
 title: "New Serverless on Kubernetes Course by the LinuxFoundation"
 description: "Did you know that there's a new free course by the LinuxFoundation introducing Serverless on Kubernetes?"
 date: 2020-09-16
-image: /images/2020-09-oidc-okta/concentrate.jpg
+image: /images/2020-10-introduction-to-serverless/background.jpg
 categories:
   - kubernetes
   - oauth2

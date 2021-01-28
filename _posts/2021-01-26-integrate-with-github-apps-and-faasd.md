@@ -309,14 +309,6 @@ You could develop a bot, an integration, a linter as a service, integrate a mach
 
 Do you already have a preferred way to deploy and run HTTP servers which isn't faasd? We're OK with that and want you to know that what you learned here about inlets and GitHub Apps can apply whether you run with a Docker container or just deploy a binary directly to a server. 
 
-### Want to learn more about use-cases and faasd?
-
-There is a new eBook and video workshop from Alex, the founder of OpenFaaS and faasd.
-
-<blockquote class="twitter-tweet"><p lang="en" dir="ltr">I&#39;ve just published: &quot;Serverless for Everyone Else&quot; on <a href="https://twitter.com/gumroad?ref_src=twsrc%5Etfw">@gumroad</a> <br><br>Automate your workflow with the official guide to faasd - a minimalist&#39;s approach to severless functions.<a href="https://twitter.com/hashtag/serverless?src=hash&amp;ref_src=twsrc%5Etfw">#serverless</a> <a href="https://twitter.com/hashtag/faas?src=hash&amp;ref_src=twsrc%5Etfw">#faas</a> <a href="https://twitter.com/hashtag/ebook?src=hash&amp;ref_src=twsrc%5Etfw">#ebook</a> <a href="https://twitter.com/hashtag/learn?src=hash&amp;ref_src=twsrc%5Etfw">#learn</a> <a href="https://twitter.com/hashtag/nodejs?src=hash&amp;ref_src=twsrc%5Etfw">#nodejs</a> <a href="https://t.co/hGCbV8OTEj">https://t.co/hGCbV8OTEj</a></p>&mdash; Alex Ellis (@alexellisuk) <a href="https://twitter.com/alexellisuk/status/1350079792612339715?ref_src=twsrc%5Etfw">January 15, 2021</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-If you get a copy before the end of January on the DevOps PRO tier, you'll get the eBook, a Grafana dashboard and a free upgrade to the 50 minute video workshop.
-
 # References
 
 Other GitHub Apps:

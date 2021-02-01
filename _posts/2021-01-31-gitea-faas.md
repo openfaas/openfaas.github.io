@@ -23,9 +23,12 @@ In this post we will walk through building a simple bot to label pull-requests.
 
 ## Pre-requisites
 
-For the purposes of this guide we'll create a local virtual machine and install faasd on it, but these instructions can be extended to use a Digital Ocean Droplet, or even a Raspberry Pi. The tutorial should take you less than 15-30 minutes to try.
+For the purposes of this guide we'll create a local virtual machine and install faasd on it, but these instructions can be extended to use TLS on an [Digital Ocean Droplet](https://www.openfaas.com/blog/faasd-tls-terraform/), or even a [Raspberry Pi](https://blog.alexellis.io/faasd-for-lightweight-serverless/). The tutorial should take you less than 15-30 minutes to try.
 
-### Create a Virtual Machine and install faasd
+* https://www.openfaas.com/blog/faasd-tls-terraform/
+* https://blog.alexellis.io/faasd-for-lightweight-serverless/
+
+### Create a Virtual Machine
 
 [Multipass](https://multipass.run) is a lightweight virtual machine runner, think docker-compose but for ubuntu virtual machines. We'll use this to get a virtual machine with faasd up and running quickly.
 
@@ -35,20 +38,10 @@ For the purposes of this guide we'll create a local virtual machine and install 
 brew install multipass
 ## or, on Linux, you can install using the snap command
 snap install multipass
-
-# Get VM Bootstrap instructions
-wget https://raw.githubusercontent.com/openfaas/faasd/master/cloud-config.txt
-
-# Generate a key for SSH-ing into your VM
-ssh-keygen -t rsa -b 4096 -C "faasd" -f $PWD/faasd_ssh
-
-# Add your local key to the cloud-init file
-awk "NR==4 {\$0=\"  - $(cat faasd_ssh.pub)\"} { print }" cloud-config.txt > tmp
-mv tmp cloud-config.txt
+# For windows, you'll need to use the installer found on multipass.run
 
 # Run a local VM
 multipass launch \
-  --cloud-init cloud-config.txt \
   --name faasd
 
 # Verify your VM has been started
@@ -57,9 +50,22 @@ multipass info faasd
 
 ### Connect faas-cli to your faasd install
 
-Now that faasd is up and running, we'll need to login into the gateway with the `faas-cli`.
+Now that faasd is up and running, we'll need to install faasd, and login into the gateway with the `faas-cli`.
 
 ```bash
+# Connect to VM
+multipass exec faasd bash
+
+# Clone
+git clone https://github.com/openfaas/faasd.git
+
+# Install faasd
+cd faasd
+sh hack/install.sh
+
+# Now exit the VM
+exit
+
 # Install faas-cli on your host machine
 curl -sSLf https://cli.openfaas.com | sh
 
@@ -81,41 +87,77 @@ faas-cli list
 Next we'll need to install Gitea it up and running. This example uses the bleeding edge nightly version, but for production use you may wish to use the current stable version of Gitea.
 
 ```bash
-# SSH into your VM
-ssh -i ./faasd_ssh ubuntu@$VM_IP
+# Connect to your VM as root
+multipass exec faasd sudo bash
 
-# Download Gitea nightly version
-wget https://dl.gitea.io/gitea/master/gitea-master-linux-amd64
-mv gitea-master-linux-amd64 gitea
-chmod +x gitea
-
-# Create base Gitea configuration
-cat >/home/ubuntu/app.ini <<EOL
-RUN_USER = ubuntu
+# Add Gitea configuration
+mkdir -p /var/snap/gitea/common/{conf,data}/
+cat >/var/snap/gitea/common/conf/app.ini <<EOL
+RUN_USER=root
 [server]
 DOMAIN = $(hostname -I | awk '{print$1}')
 DISABLE_SSH=true
 [database]
 DB_TYPE = sqlite3
-PATH = /home/ubuntu/gitea.db
+PATH = /var/snap/gitea/common/data/gitea.db
 [security]
 INSTALL_LOCK = true
 [oauth2]
 ENABLE=false
 EOL
 
+# Use snap to install Gitea
+snap install gitea
+
 # Create Gitea database
-./gitea --config $(pwd)/app.ini migrate
+gitea migrate
 
 # Create a Gitea user
 export GITEA_PASSWORD="TEMPOPENFAASPASSWORD"
-./gitea --config $(pwd)/app.ini admin user create --admin --name gitea_admin --password $GITEA_PASSWORD --email gitea_admin@example.com
+gitea admin create-user --admin --name gitea_admin --password $GITEA_PASSWORD --email gitea_admin@example.com
 
-# Run Gitea
-screen -d -m ./gitea --config $(pwd)/app.ini web
-
-# Exit out of the SSH connection
+# Exit out of your VM
 exit
+```
+
+### Optionally install OpenFaaS and Gitea on a Kubernetes Cluster
+
+`faasd` is great for single node installations, but if you are planning on scaling up to multiple servers you can install OpenFaaS and Gitea on a kubernetes cluster.
+
+```bash
+# Get arkade, and move it to $PATH
+curl -sLS https://dl.get-arkade.dev | sh
+sudo mv arkade /usr/local/bin/
+
+# Fetch Kubernetes tools to run locally
+arkade get kind
+
+# OpenFaaS CLI
+arkade get faas-cli
+
+# Create a cluster - if you already have a kubernetes cluster somewhere you can skip this step
+kind create cluster
+
+# Install OpenFaaS
+arkade install openfaas
+
+# Install Gitea
+arkade install gitea
+```
+
+Next, you'll need to portforward both Gitea, and OpenFaaS, as well as login into the OpenFaaS gateway with faas-cli
+
+```bash
+# Forward the OpenFaaS gateway to your machine
+kubectl rollout status -n openfaas deploy/gateway
+kubectl port-forward -n openfaas svc/gateway 8080:8080 &
+
+# If basic auth is enabled, you can now log into your gateway:
+PASSWORD=$(kubectl get secret -n openfaas basic-auth -o jsonpath="{.data.basic-auth-password}" | base64 --decode; echo)
+echo -n $PASSWORD | faas-cli login --username admin --password-stdin
+
+# Forward the Gitea application to your machine
+kubectl -n default port-forward svc/gitea-http 3000:3000 &
 ```
 
 ### Sign into Gitea and create test repo
@@ -346,4 +388,4 @@ Now that we’ve seen how to create a simple bot using faasd, from here we can b
 
 ### Taking it further
 
-For a production ready OpenFaaS function that supports automation in Gitea you can view the [Gitea/Buildkite connector](https://github.com/techknowlogick/gitea-buildkite-connector). 
+For a production ready OpenFaaS function that supports automation in Gitea you can view the [Gitea/Buildkite connector](https://github.com/techknowlogick/gitea-buildkite-connector), or build upon the above [LGTMBot function](https://github.com/techknowlogick/faas-lgtmbot).

@@ -128,7 +128,7 @@ Finally, we registered our application.
 
 [Multipass](https://multipass.run) is a tool that not enough developers are using. It's 2020's answer to VirtualBox and Docker Desktop in one. You just run a few commands and get a Linux host with Ubuntu pre-installed. The best part is that it supports cloud-init scripts too.
 
-In order to get up and running with your own faasd installation on your Mac you can use multipass.For more details you can follow the [link](https://github.com/openfaas/faasd/blob/master/docs/MULTIPASS.md).
+In order to get up and running with your own faasd installation on your Mac you can use multipass. For more details you can follow the [link](https://github.com/openfaas/faasd/blob/master/docs/MULTIPASS.md).
 
 Let's start our Ubuntu VM with multipass. First, we need a cloud-config.txt to set up faasd while bootstrapping VM.
 
@@ -139,7 +139,7 @@ $ curl -sSLO \
 
 Then, we need to update the SSH key to match your own, edit cloud-config.txt:
 
-```
+```bash
 $ ssh-keygen -t rsa -b 4096 -C "developerguyn@gmail.com" -f $PWD/id_rsa
 ```
 

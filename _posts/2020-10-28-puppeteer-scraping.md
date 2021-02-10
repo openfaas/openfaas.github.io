@@ -17,7 +17,7 @@ Learn how to scrape webpages using Puppeteer and Serverless Functions built with
 
 ## Introduction to web testing and scraping
 
-In this post I'll introduce you Puppeteer and show you how to use it to automate and scrape websites using OpenFaaS functions.
+In this post I'll introduce you [Puppeteer](https://pptr.dev/) and show you how to use it to automate and scrape websites using OpenFaaS functions.
 
 There's two main reasons you may want to automate a web browser:
 * to run compliance and end-to-end tests against your application

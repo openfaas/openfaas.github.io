@@ -193,6 +193,19 @@ To learn more about developer marketing and developer experience, feel free to r
 
 If you are happy to learn and experiment on your own, then you may also like: [Traction: How Any Startup Can Achieve Explosive Customer Growth](https://amzn.to/3tQInFQ). I got a lot out of this and it helped me formalise some of the things I'd learned through experience.
 
+Over the past 18 months, I've written up about [my own personal journey of building an independent software business](https://kubernetespodcast.com/episode/116-independent-open-source/) and community.
+
+You can get free access to all my articles and updates in my [Premium Subscription Portal via GitHub](https://faasd.exit.openfaas.pro/function/trove) such as:
+
+* 29th Jan 2021 - Serverless use-cases, bonus live-stream, inlets PRO at work and social sharing tips
+* 23rd Jan 2021 - Be Your Own Boss and OpenFaaS 2021 vision
+* 12st Nov 2020 - KubeCon and learning to engage with 4MAT
+* 6th Nov 2020 - Unexpected work, the top of Hacker News, and books for the weekend
+* 6th June 2020 - do you want a quiet or crowded community?
+* 15th May - How to make PRs and influence maintainers
+* 14th Mar 2020 - Open Source is not a zero-sum game
+* 9th May 2020 - Upping your game, The Cathedral and The Bazaar
+
 ### Generating social sharing images
 
 You can also generate your own social sharing images [through OpenFaaS](https://www.openfaas.com/blog/puppeteer-scraping/). From as little as 5-10 USD / mo you can host a function that can be used to generate social media images with the [faasd project](https://github.com/openfaas/faasd). We have even started to see community members doing just that.

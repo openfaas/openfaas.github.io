@@ -56,7 +56,7 @@ function initNavToggler() {
 /*------------Init youtube player modal-------------*/
 /*--------------------------------------------------*/
 
-var videoId = 'LQa8-JvIeWA';
+var videoId = 'ZnZJXI377ak';
 function initVideoModal() {
     var triggers = document.querySelectorAll('.start-demo-video');
 
@@ -109,7 +109,7 @@ function initVideoModal() {
 
 function onYouTubeIframeAPIReady() {
     if (document.body.className === 'landing-page') {
-        landingPlayer = new YT.Player('yt-player-iframe', {
+        document.landingPlayer = new YT.Player('yt-player-iframe', {
             videoId: videoId,
             playerVars: { 'autoplay': 0, 'controls': 1 },
             events: {
@@ -140,7 +140,6 @@ function initYoutubePlayerApi() {
     tag.src = "https://www.youtube.com/iframe_api";
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 }
-
 
 /*------------Init scripts on pageload--------------*/
 /*--------------------------------------------------*/

@@ -1,7 +1,7 @@
 /*--------------Initialize youtube api--------------*/
 /*--------------------------------------------------*/
 
-var videoId = 'LQa8-JvIeWA';
+var videoId = 'ZnZJXI377ak';
 var playerControl = document.getElementById('yt-player-play');
 var sampleVideo = document.getElementById('sample-video');
 var play = null;
@@ -10,15 +10,17 @@ var stop = null;
 // landingPlayer is initialized in main.js and set as global variable
 
 function onPlayerReady(event) {
-    console.log('here')
+    console.log('Video player ready')
     event.target.playVideo();
 }
 
 function playVideo() {
-    landingPlayer.playVideo();
-    landingPlayer.f.classList.add('playing');
-    sampleVideo.classList.add('is-hidden');
-    playerControl.classList.add('is-hidden');
+    if(document.landingPlayer) {
+        document.landingPlayer.playVideo();
+        document.landingPlayer.f.classList.add('playing');
+        sampleVideo.classList.add('is-hidden');
+        playerControl.classList.add('is-hidden');
+    }
 }
 
 function initYoutubePlayer() {

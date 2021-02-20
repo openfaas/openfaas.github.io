@@ -1,5 +1,5 @@
 ---
-title: "Exploring Serverless Use-cases From Companies and the Community"
+title: "Exploring Serverless Use-cases from Companies and the Community"
 description: "Understand Serverless use-cases in this fireside chat with Alex Ellis from OpenFaaS and David McKay from Equinix Metal"
 date: 2021-02-19
 image: /images/2021-02-stream/background.jpg

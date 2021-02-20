@@ -107,7 +107,7 @@ covid_forecast <- function(region, cases, window, last) {
   ## time series: daily new cases
   y <- pmax(0, diff(x$rawdata[[cases]]))
   ## dates
-  z <- as.Date(x$rawdata$date)
+  z <- as.Date(x$rawdata$date[-1])
   ## trim time series according to last date
   if (!missing(last)) {
     last <- min(max(z), as.Date(last))
@@ -135,16 +135,17 @@ function(region, cases, window, last) {
 }
 ```
 
-The R script loads the forecast package, defines the `covid_forecast` function with three arguments:
+The R script loads the forecast package, defines the `covid_forecast` function with 4 arguments:
 
 - `region`: a region slug value for the API endpoint in global data set (see [available values](https://hub.analythium.io/covid-19/api/v1/regions/)),
 - `cases`: one of `"confirmed"` or `"deaths"`,
-- `windows`: a positive integer giving the forecast horizon in days.
+- `windows`: a positive integer giving the forecast horizon in days,
+- `last`: last day (`"YYYY-MM-DD"` date format) of the time series to consider.
 
 The function gives the following output in R:
 
 ```R
-covid_forecast("canada-combined", cases="confirmed", window=4)
+covid_forecast("canada-combined", cases="confirmed", window=4, last="2021-02-18")
 # $Date
 # [1] "2021-02-19" "2021-02-20" "2021-02-21" "2021-02-22"
 # $`Point Forecast`
@@ -159,25 +160,25 @@ covid_forecast("canada-combined", cases="confirmed", window=4)
 # [1] 4646.033 4670.894 4705.710 4750.596
 ```
 
-The result of the call is a list with six elements, all elements are vectors of length 4 which is our time window. The `Date` element gives the days of the forecast, the `Point Forecast` is the expected value of the prediction, whereas the lower (`Lo`) and upper (`Hi`) prediction intervals represent the uncertainty around the point forecast. The 80% interval (within the `Lo 80` and `Hi 80` bound) and the 95% interval means that the 80% or 95% of the future observations will fall inside that range, respectively. The following plot combines the historical daily case counts and the 14-day forecast for Canada. The point forecast is the blue line, the 80% and 95% forecast intervals are the shaded areas:
+The result of the call is a list with six elements, all elements are vectors of length 4 which is our time window. The `Date` element gives the days of the forecast, the `Point Forecast` is the expected value of the prediction, whereas the lower (`Lo`) and upper (`Hi`) prediction intervals represent the uncertainty around the point forecast. The 80% interval (within the `Lo 80` and `Hi 80` bound) and the 95% interval means that the 80% or 95% of the future observations will fall inside that range, respectively.
 
-![COVID-19 Canada](/images/2021-02-r/covid-canada-2021-02-19.png)
+The following plot combines the historical daily case counts and the 30-day forecast for Canada. The point forecast is the white line, the 80% and 95% forecast intervals are the blue shaded areas. I made two forecasts, the first on December 1st, 2020, the second on February 18th, 2021:
+
+![COVID-19 Canada](/images/2021-02-r/covid-canada-2021-02-18.png)
 
 The last part of the script defines the Plumber endpoint `/` for a GET request. One of the nicest features of Plumber is that it allows you to create a web API by [decorating the R source code](https://www.rplumber.io/articles/quickstart.html) with special `#*` comments. These annotations will tell Plumber how to handle the requests, what kind of parsers and formatters to use, etc. The current setup will treat the function arguments as URL parameters. The default content type for the response is JSON, thus we do not need to specify it.
 
 ```R
 #* COVID
 #* @get /
-function(region, cases, window) {
-  if (missing(cases))
-    cases <- "confirmed"
-  if (missing(window))
-    window <- 14
-  covid_forecast(region, cases, as.numeric(window))
+function(region, cases, window, last) {
+  if (!missing(window))
+    window <- as.numeric(window)
+  covid_forecast(region, cases, window, last)
 }
 ```
 
-Adding default values as part of the handle function arguments makes some of the URL parameters optional. In this case, we need to treat missing parameters as `missing()`. We also need to remember that URL form encoded parameters will be of character type, thus checking type and making appropriate type conversions is necessary (i.e. `as.numeric()` for the `window` argument passed to `covid_forecast`).
+The `covid_forecast` arguments can be missing except for region. This makes the corresponding URL parameters optional. We have to remember that URL form encoded parameters will be of character type, thus checking type and making appropriate type conversions is necessary (i.e. `as.numeric()` for the `window` argument).
 
 ### Build, push, and deploy the function
 
@@ -194,10 +195,11 @@ curl -X GET -G \
   $OPENFAAS_URL/function/covid-forecast \
   -d region=canada-combined \
   -d cases=confirmed \
-  -d window=4
+  -d window=4 \
+  - last=2021-02-18
 ```
 
-Or simply by visiting the URL `$OPENFAAS_URL/function/covid-forecast?region=canada-combined&window=4`. The output should be something like this (depending on the day you make the request):
+Or simply by visiting the URL `$OPENFAAS_URL/function/covid-forecast?region=canada-combined&window=4&last=2021-02-18`. The output should be something like this (depending on the day you make the request):
 
 ```bash
 {
@@ -209,13 +211,6 @@ Or simply by visiting the URL `$OPENFAAS_URL/function/covid-forecast?region=cana
     "Hi 95":[4646.0329,4670.8941,4705.7104,4750.596]
 }
 ```
-
-Only the `region` parameter is mandatory, the the other two defaults to
-`cases="confirmed"` and `window=14`.
-`OPENFAAS_URL/function/covid-forecast?region=us` will be the same as
-`OPENFAAS_URL/function/covid-forecast?region=us&window=14`.
-
-The time series itself that was the basis for the forecast, along with the forecast and the associated uncertainty (prediction intervals) for the US would look like the this:
 
 ### Wrapping up
 

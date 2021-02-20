@@ -161,7 +161,7 @@ covid_forecast("canada-combined", cases="confirmed", window=4)
 
 The result of the call is a list with six elements, all elements are vectors of length 4 which is our time window. The `Date` element gives the days of the forecast, the `Point Forecast` is the expected value of the prediction, whereas the lower (`Lo`) and upper (`Hi`) prediction intervals represent the uncertainty around the point forecast. The 80% interval (within the `Lo 80` and `Hi 80` bound) and the 95% interval means that the 80% or 95% of the future observations will fall inside that range, respectively. The following plot combines the historical daily case counts and the 14-day forecast for Canada. The point forecast is the blue line, the 80% and 95% forecast intervals are the shaded areas:
 
-![COVID-19 Canada](covid-canada-2021-02-19.png)
+![COVID-19 Canada](/images/2021-02-r/covid-canada-2021-02-19.png)
 
 The last part of the script defines the Plumber endpoint `/` for a GET request. One of the nicest features of Plumber is that it allows you to create a web API by [decorating the R source code](https://www.rplumber.io/articles/quickstart.html) with special `#*` comments. These annotations will tell Plumber how to handle the requests, what kind of parsers and formatters to use, etc. The current setup will treat the function arguments as URL parameters. The default content type for the response is JSON, thus we do not need to specify it.
 
@@ -216,8 +216,6 @@ Only the `region` parameter is mandatory, the the other two defaults to
 `OPENFAAS_URL/function/covid-forecast?region=us&window=14`.
 
 The time series itself that was the basis for the forecast, along with the forecast and the associated uncertainty (prediction intervals) for the US would look like the this:
-
-![COVID-19 US](covid-us-2021-02-19.png)
 
 ### Wrapping up
 

@@ -3,9 +3,9 @@
 
 platinum:
 
-# Expires: Feb 2021
-- alt: "Rancher Labs"
-  url: https://rancher.com/
-  logo: rancher-logo-stacked-color.svg
+# Expired: Feb 2021
+#- alt: "Rancher Labs"
+#  url: https://rancher.com/
+#  logo: rancher-logo-stacked-color.svg
 
 # gold:

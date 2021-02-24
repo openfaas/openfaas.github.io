@@ -224,7 +224,7 @@ You can see the full workflow YAML file supporting multi-arch builds here: [main
 
 Have you got questions, comments, or suggestions? Join the community on [Slack](https://slack.openfaas.io).
 
-Would you like help setting up your OpenFaaS installation, or someone to call when things don't quite go to plan? [Our Premium Subscription plan](https://www.openfaas.com/support/) gives you a say in the project roadmap, a support contact, and access to Enterprise-grade authentication with OIDC.
+Would you like help setting up your OpenFaaS installation, or someone to call when things don't quite go to plan? [Our PRO Subscription plan](https://www.openfaas.com/support/) gives you a say in the project roadmap, a support contact, and access to Enterprise-grade authentication with OIDC.
 
 ### Acknowledgements
 

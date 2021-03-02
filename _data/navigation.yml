@@ -4,9 +4,9 @@
 - name: Blog
   class: navbar-item
   link: /blog/
-- name: Store
+- name: eBooks
   class: navbar-item
-  link: https://store.openfaas.com/
+  link: https://gumroad.com/l/serverless-for-everyone-else
 - name: Consulting
   class: navbar-item
   link: /consulting/

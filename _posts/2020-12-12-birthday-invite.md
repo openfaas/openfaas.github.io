@@ -98,11 +98,9 @@ We'll be sending out SWAG and some surprise gifts. To participate in the prize d
 
 ![SWAG](https://pbs.twimg.com/media/EoEunmKXMAERUiT?format=jpg&name=small)
 
-We also have a commemorative coffee and tea mug available for you [in the store](https://store.openfaas.com/) with a special design by contributor [Utsav Anand](https://openfaas.com/team). I personally like the "EST 2016" decal and 8-bit design.
+We also have a commemorative coffee and tea mug available for you in the store with a special design by contributor [Utsav Anand](https://openfaas.com/team). I personally like the "EST 2016" decal and 8-bit design.
 
-<a href="https://store.openfaas.com/products/openfaas-4th-birthday-celebration-mug"><img src="https://cdn.shopify.com/s/files/1/0340/9739/7895/products/mockup-a83e8509_1024x1024@2x.jpg?v=1606569983" width="80%"></a>
-
-> [OpenFaaS 4th Birthday Celebration Mug](https://store.openfaas.com/products/openfaas-4th-birthday-celebration-mug)
+<img src="https://cdn.shopify.com/s/files/1/0340/9739/7895/products/mockup-a83e8509_1024x1024@2x.jpg?v=1606569983" width="80%">
 
 ### The big demo we're preparing for you
 

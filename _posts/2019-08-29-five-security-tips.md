@@ -37,7 +37,7 @@ Whatever plugin you decide to use, it's not just highly recommended, but essenti
 
 Compare: [OpenFaaS vs OpenFaaS Cloud](https://docs.openfaas.com/openfaas-cloud/intro/)
 
-See also: [Authentication in OpenFaaS](https://docs.openfaas.com/reference/authentication/)
+See also: [Authentication in OpenFaaS](https://docs.openfaas.com/reference/authentication/) and [Single Sign-on for OpenFaaS Pro](https://docs.openfaas.com/openfaas-pro/oidc-oauth2.md)
 
 Forgot your password? [Find it here](https://docs.openfaas.com/deployment/troubleshooting/)
 

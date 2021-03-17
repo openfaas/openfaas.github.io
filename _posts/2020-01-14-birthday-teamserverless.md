@@ -119,7 +119,7 @@ The first three products are:
 
 * [Commercial support](https://github.com/openfaas/faas/blob/master/BACKERS.md#sponsor-plus-packages) which offers backlog and PR prioritization, support via e-mail, and implementation of OpenFaaS / OpenFaaS Cloud.
 
-* [OIDC / OAuth2 plugin](https://docs.openfaas.com/reference/authentication/#oauth2-support-in-the-api-gateway-commercial-add-on)
+* [OIDC / OAuth2 plugin](https://docs.openfaas.com/openfaas-pro/oidc-oauth2.md)
 
     The plugin provides OIDC Connect / OAuth2 authentication for the gateway UI, CLI, and for CI/CD. It comes with first-class support for Auth0 and GitLab IDPs and has been used by some early customers to integrate with LDAP.
 

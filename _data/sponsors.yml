@@ -1,11 +1,14 @@
-# The exclusive Diamond sponsor spot is still available
+# Get in touch to hear more about sponsorship options and how we 
+# can help you increase your developer brand.
+# https://openfaas.com/consulting/
+
 # diamond:
 
 platinum:
-
-# Expired: Feb 2021
-#- alt: "Rancher Labs"
-#  url: https://rancher.com/
-#  logo: rancher-logo-stacked-color.svg
+# Expires 1 Apr 2021
+- alt: "Waylay"
+  url: https://waylay.io/
+  logo: waylay.png
 
 # gold:
+

@@ -35,9 +35,25 @@ We have [previously looked at FluxCD with OpenFaaS](https://www.openfaas.com/blo
 
 You can read more about ArgoCD on the [project homepage](https://argoproj.github.io/argo-cd/).
 
-## Introducing the OpenFaaS Operator
+## Tutorial
 
-The normal installation of OpenFaaS uses its REST API to create functions using the CLI, REST API or UI. It also has a mode called "operator mode" where a Custom Resource can be used with `kubectl` to apply and deploy functions.
+In this section, we are going to create two application for ArgoCD, first one is OpenFaaS Operator, the second one is the repository that holds OpenFaaS functions manifest files.
+
+ArgoCD can work against Kubernetes manifests in a various ways including kustomize, ksonnet, jsonnet, as well as other plugins which can generate YAML files that Kubernetes can apply. Today, we will be using a Helm chart and YAML manifests.
+
+We will use the OpenFaaS [Helm Chart](https://github.com/openfaas/faas-netes) to deploy OpenFaaS and its Operator. Once OpenFaaS Operator is deployed, we can use the _Custom Resource_ called _"Function"_ in order to define our OpenFaaS functions like any other Kubernetes resources such as Deployment, Pod etc.
+
+In the second part, we'll to use plain manifests to deploy OpenFaaS functions. A dedicated chart can also be created for deploying functions.
+
+### Conceptual architecture
+ 
+![Conceptual architecture](/images/2021-04-08-bring-gitops-to-your-openfaas-functions-with-argocd/conceptual.jpg)
+
+> Conceptual architecture: ArgoCD monitoring two repositories and deploying OpenFaaS along with a set of functions
+
+### A recap on the OpenFaaS Operator
+
+We need to use the Operator, because Argo can only apply Kubernetes YAML files, and cannot use the OpenFaaS REST API at this time. The normal installation of OpenFaaS uses its REST API to create functions using the CLI, REST API or UI. It also has a mode called "operator mode" where a Custom Resource can be used with `kubectl` to apply and deploy functions.
 
 ```yaml
 apiVersion: openfaas.com/v1
@@ -57,23 +73,6 @@ declarative manner. The operator implements a control loop that tries to match t
 functions, defined as a collection of custom resources, with the actual state of your cluster.
 
 To get more detail please refer to this [link](https://blog.alexellis.io/introducing-the-openfaas-operator/).
-
-## Tutorial
-
-In this section, we are going to create two application for ArgoCD, first one is OpenFaaS Operator, the second one is the repository that holds OpenFaaS functions manifest files.
-
-ArgoCD can work against Kubernetes manifests in a various ways:
-
-* kustomize applications
-* helm charts
-* ksonnet applications
-* jsonnet files
-* Plain directory of YAML/json manifests
-* Any custom config management tool configured as a config management plugin
-
-So, we are going to use the OpenFaaS [Helm Chart](https://github.com/openfaas/faas-netes) to deploy OpenFaaS and ist Operator. Once OpenFaaS Operator is deployed, we can use the _Custom Resource_ called _"Function"_ in order to define our OpenFaaS functions like any other Kubernetes resources such as Deployment, Pod etc.
-
-In the second part, we'll to use plain manifests to deploy OpenFaaS functions. A dedicated chart can also be created for deploying functions.
 
 ### Prerequisites
 

@@ -374,8 +374,8 @@ support contact, and access to Enterprise-grade authentication with OIDC.
 
 ### Acknowledgements
 
-* Special Thanks to [Alex Ellis](https://twitter.com/alexellisuk) for all guidance and for merging changes into OpenFaaS to better support this workflow.
-* Special Thanks to [Furkan Türkal](https://twitter.com/furkanturkaI) for all the support.
+* [Alex Ellis](https://twitter.com/alexellisuk) for guidance, editing and providing the diagrams.
+* [Furkan Türkal](https://twitter.com/furkanturkaI) for all the support.
 
 ### References
 

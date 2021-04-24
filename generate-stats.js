@@ -79,9 +79,10 @@ function generateTemplate(data) {
 
 		var rowsString = '';
 
-		function filter(array) {
-			return array.filter(function(value, index, arr) { 
-				return value.length && !exclude.includes(value[0]);
+		function filterContributors(arr) {
+			return arr.filter(function(value, index, arr) {
+				var userid = value[0] 
+				return exclude.includes(userid) == false
 			});
 		}
 
@@ -101,7 +102,8 @@ function generateTemplate(data) {
 			return figure;
 		}
 
-		shuffle(filter(contributors));
+		var filtered = filterContributors(contributors);
+		shuffle(filtered);
 
 		function buildRows(rowSet) {
             rows.forEach(r => {

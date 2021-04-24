@@ -69,11 +69,21 @@ function generateTemplate(data) {
 		USE generate-stats.js for adjustments.
 		------------------------*/
 		var contributors = ${JSON.stringify(Object.entries(data))};
+		
+		// Certain users may have inappropriate or offense imagery for their profile picture
+		var exclude = ["mjallday"]
+
         var userRows;
 		var rows = [14, 14, 14, 14]; // users/row;
 		var maxRowSize = rows.slice().sort().reverse()[0];
 
 		var rowsString = '';
+
+		function filter(array) {
+			return array.filter(function(value, index, arr){ 
+				return !exclude.includes(value);
+			});
+		}
 
 		function shuffle(array) {
 			for (let i = array.length - 1; i > 0; i--) {
@@ -91,7 +101,7 @@ function generateTemplate(data) {
 			return figure;
 		}
 
-		shuffle(contributors);
+		shuffle(filter(contributors));
 
 		function buildRows(rowSet) {
             rows.forEach(r => {

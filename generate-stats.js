@@ -71,7 +71,7 @@ function generateTemplate(data) {
 		var contributors = ${JSON.stringify(Object.entries(data))};
 		
 		// Certain users may have inappropriate or offense imagery for their profile picture
-		var exclude = ["mjallday"]
+        var exclude = ["mjallday"]
 
         var userRows;
 		var rows = [14, 14, 14, 14]; // users/row;

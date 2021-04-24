@@ -16,8 +16,8 @@ var maxRowSize = rows.slice().sort().reverse()[0];
 var rowsString = '';
 
 function filter(array) {
-	return array.filter(function(value, index, arr){ 
-		return !exclude.includes(value);
+	return array.filter(function(value, index, arr) { 
+		return value.length && !exclude.includes(value[0]);
 	});
 }
 

@@ -5,10 +5,15 @@
 # diamond:
 
 platinum:
-# Expires 1 Apr 2021
+# Expires 1 April 2021 - 12 mo
 - alt: "Waylay"
   url: https://waylay.io/
   logo: waylay.png
+
+# Expires 4 November 2021 - 6 mo only
+- alt: "Linode"
+  url: https://linode.com/
+  logo: linode.svg
 
 # gold:
 

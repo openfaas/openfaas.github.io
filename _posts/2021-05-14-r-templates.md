@@ -1,8 +1,8 @@
 ---
 title: "Functions for data science with R templates for OpenFaaS"
 description: "Let's bring R to the cloud! Use the power of R for data science serverless-style."
-date: 2021-02-26
-image: /images/2021-03-r/background.jpg
+date: 2021-05-14
+image: /images/2021-05-r/background.jpg
 categories:
  - kubernetes
  - r
@@ -49,7 +49,7 @@ The template naming follows the pattern `rstats-<base_image>-<server_framework>`
 
 R has an ever increasing number of server frameworks available. There are templates for the following frameworks (R packages): [httpuv](https://CRAN.R-project.org/package=httpuv), [plumber](https://www.rplumber.io/), [fiery](https://CRAN.R-project.org/package=fiery), [beakr](https://CRAN.R-project.org/package=beakr), [ambiorix](https://ambiorix.john-coene.com/). Each of these frameworks have their own pros and cons for building standalone applications. But for our serverless purposes, the most important aspect of picking one comes down to support and ease of use.
 
-In this post I focus on the [plumber](https://www.rplumber.io/) R package and the `rstats-base-plumber` template. Plumber is one of the oldest of these frameworks. It has gained popularity, corporate adoption, and there are many [examples](https://github.com/rstudio/plumber/tree/master/inst/plumber) and tutorials out there to get you get started.
+In this post I focus on the [plumber](https://www.rplumber.io/) R package and the `rstats-base-plumber` template. Plumber is one of the oldest of these frameworks. It has gained popularity, corporate adoption, and there are many [examples](https://github.com/rstudio/plumber/tree/master/inst/plumber) and tutorials out there to get you started.
 
 ### Make a new function
 
@@ -74,13 +74,13 @@ The `covid-forecast.yml` is the stack file used to configure functions (read mor
 
 ### Time series forecast
 
-I will use [exponential smoothing](https://en.wikipedia.org/wiki/Exponential_smoothing) as a time series forecasting method. The method needs a _time series_ data, that is a series of numeric values collected at some interval. I use here daily updated COVID-19 case counts. The [data source](https://github.com/CSSEGISandData/COVID-19) is the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University. The flat files provided by the CSSE are further processed to provide a JSON API (read more about the [API](https://blog.analythium.io/data-integration-and-automated-updates-for-web-applications/) and its [endpoints](https://github.com/analythium/covid-19#readme), or explore the data interactively [here](https://hub.analythium.io/covidapp/)).
+I will use [exponential smoothing](https://en.wikipedia.org/wiki/Exponential_smoothing) as a time series forecasting method. The method needs _time series_ data, that is a series of numeric values collected at some interval. I use here daily updated COVID-19 case counts. The [data source](https://github.com/CSSEGISandData/COVID-19) is the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University. The flat files provided by the CSSE are further processed to provide a JSON API (read more about the [API](https://blog.analythium.io/data-integration-and-automated-updates-for-web-applications/) and its [endpoints](https://github.com/analythium/covid-19#readme), or explore the data interactively [here](https://hub.analythium.io/covidapp/)).
 
 ### Customize the function
 
-The `covid-forecast/handler.R` contains the actual R code implementing the function logic. You'll see an example for that below. The dependencies required by the handler need to be added to the `covid-forecast/DESCRIPTION` file. Read more about how the dependencies specified in the `DESCRIPTION` file are installed [here](https://github.com/analythium/openfaas-rstats-templates#customize-your-function).
+The `covid-forecast/handler.R` contains the actual R code implementing the function logic. You'll see an example for that below. The dependencies required by the handler need to be added to the `covid-forecast/DESCRIPTION` file. See how the dependencies specified in the `DESCRIPTION` file are installed [here](https://github.com/analythium/openfaas-rstats-templates#customize-your-function).
 
-> See [worked examples](https://github.com/analythium/openfaas-rstats-examples) for different use cases. Read more about the [structure of the templates](template/README.md) if advanced tuning is required, e.g. by editing the `Dockerfile`, etc.
+> See [worked examples](https://github.com/analythium/openfaas-rstats-examples) for different use cases. Read more about the [structure of the templates](https://github.com/analythium/openfaas-rstats-templates/tree/master/template#r-rstats-templates-for-openfaas) if advanced tuning is required, e.g. by editing the `Dockerfile`, etc.
 
 Add the forecast R package to the `covid-forecast/DESCRIPTION` file:
 
@@ -147,7 +147,7 @@ The R script loads the forecast package, defines the `covid_forecast` function w
 
 - `region`: a region slug value for the API endpoint in global data set (see [available values](https://hub.analythium.io/covid-19/api/v1/regions/)),
 - `cases`: one of `"confirmed"` or `"deaths"`,
-- `windows`: a positive integer giving the forecast horizon in days,
+- `window`: a positive integer giving the forecast horizon in days,
 - `last`: last day (`"YYYY-MM-DD"` date format) of the time series to consider.
 
 The function gives the following output in R:
@@ -172,7 +172,7 @@ The result of the call is a list with six elements, all elements are vectors of 
 
 The following plot combines the historical daily case counts and the 30-day forecast for Canada. The point forecast is the white line, the 80% and 95% forecast intervals are the blue shaded areas. I made two forecasts, the first on December 1st, 2020, the second on February 18th, 2021:
 
-![COVID-19 Canada](/images/2021-03-r/covid-canada-2021-02-18.png)
+![COVID-19 Canada](/images/2021-05-r/covid-canada-2021-02-18.png)
 
 The last part of the script defines the Plumber endpoint `/` for a GET request. One of the nicest features of Plumber is that you can create a web API by [decorating the R source code](https://www.rplumber.io/articles/quickstart.html) with special `#*` comments. These annotations will tell Plumber how to handle the requests, what kind of parsers and formatters to use, etc. The current setup will treat the function arguments as URL parameters. The default content type for the response is JSON, thus we do not need to specify it.
 

@@ -1,7 +1,7 @@
 ---
 title: "Functions for data science with R templates for OpenFaaS"
-description: "Let's bring R to the cloud! Use the power of R for data science serverless-style."
-date: 2021-05-14
+description: "Learn how to combine the power of R with Serverless for data science."
+date: 2021-05-12
 image: /images/2021-05-r/background.jpg
 categories:
  - kubernetes
@@ -11,11 +11,13 @@ author_staff_member: peter
 dark_background: true
 ---
 
-Let's bring R to the cloud! Use the power of R for data science serverless-style.
+Learn how to combine the power of R with Serverless for data science.
 
 ## Introduction
 
-In this post first I will introduce you to the [R](https://www.r-project.org/) templates for OpenFaaS, then I will build a function that pulls data from a COVID-19 API, fits a time series model to the data, and makes a forecast for the future case counts.
+> This is a guest post by Peter Solymos. Peter reached out to me after becoming an OpenFaaS Sponsor. He wanted to help other data-scientists like himself understand the value of combining R with functions in the cloud. Hope you enjoy the post and feel free to reach out to us via [OpenFaaS Slack](https://slack.openfaas.io/) with comments, questions and suggestions.
+
+In this post I will introduce you to the [R](https://www.r-project.org/) templates for OpenFaaS, then I will build a function that pulls data from a COVID-19 API, fits a time series model to the data, and makes a forecast for the future case counts.
 
 > This post is written for existing OpenFaaS users, if you're new then you should [try deploying OpenFaaS](https://docs.openfaas.com/deployment/) and following a tutorial to get a feel for how everything works. Why not start with this course? [Introduction to Serverless course by the LinuxFoundation](https://www.openfaas.com/blog/introduction-to-serverless-linuxfoundation/)
 
@@ -32,7 +34,8 @@ Besides the interactive data wrangling use cases, R is also a capable scripting 
 Use the [`faas-cli`](https://github.com/openfaas/faas-cli) and pull R templates:
 
 ```bash
-faas-cli template pull https://github.com/analythium/openfaas-rstats-templates
+faas-cli template pull \
+  https://github.com/analythium/openfaas-rstats-templates
 ```
 
 Now `faas-cli new --list` should give you a list with the available R/rstats templates to choose from (rstats refers to the #rstats Twitter hashtag used for R related posts). The templates differ with respect to the Docker base image, the OpenFaaS watchdog type, and the server framework used.
@@ -56,17 +59,24 @@ In this post I focus on the [plumber](https://www.rplumber.io/) R package and th
 Let's define a few variables then use `faas-cli new` to create a new function called `covid-forecast` based on the `rstats-base-plumber` template:
 
 ```bash
-export OPENFAAS_PREFIX="" # Populate with your Docker Hub username
-export OPENFAAS_URL="http://174.138.114.98:8080" # Populate with your OpenFaaS URL
+# Populate with your registry prefix or Docker Hub username
+export OPENFAAS_PREFIX=""
 
-faas-cli new --lang rstats-base-plumber covid-forecast --prefix=$OPENFAAS_PREFIX
+# Populate with your OpenFaaS URL
+export OPENFAAS_URL="http://174.138.114.98:8080" 
+
+faas-cli new --lang rstats-base-plumber \
+  covid-forecast --prefix=$OPENFAAS_PREFIX
 ```
 
 Your folder now should contain the following files:
 
 ```bash
+# ls
+
 covid-forecast/handler.R
 covid-forecast/DESCRIPTION
+
 covid-forecast.yml
 ```
 
@@ -96,7 +106,7 @@ VersionedPackages:
 
 Change the `covid-forecast/handler.R` file:
 
-```R
+```
 library(forecast)
 
 covid_forecast <- function(region, cases, window, last) {
@@ -152,7 +162,7 @@ The R script loads the forecast package, defines the `covid_forecast` function w
 
 The function gives the following output in R:
 
-```R
+```
 covid_forecast("canada-combined", cases="confirmed", window=4, last="2021-02-18")
 # $Date
 # [1] "2021-02-19" "2021-02-20" "2021-02-21" "2021-02-22"
@@ -176,7 +186,7 @@ The following plot combines the historical daily case counts and the 30-day fore
 
 The last part of the script defines the Plumber endpoint `/` for a GET request. One of the nicest features of Plumber is that you can create a web API by [decorating the R source code](https://www.rplumber.io/articles/quickstart.html) with special `#*` comments. These annotations will tell Plumber how to handle the requests, what kind of parsers and formatters to use, etc. The current setup will treat the function arguments as URL parameters. The default content type for the response is JSON, thus we do not need to specify it.
 
-```R
+```
 #* COVID
 #* @get /
 function(region, cases, window, last) {
@@ -207,7 +217,9 @@ curl -X GET -G \
   - last=2021-02-18
 ```
 
-Or simply by visiting the URL `$OPENFAAS_URL/function/covid-forecast?region=canada-combined&window=4&last=2021-02-18`. The output should be something like this:
+Or simply by visiting the URL `$OPENFAAS_URL/function/covid-forecast?region=canada-combined&window=4&last=2021-02-18`.
+
+The output should be something like this:
 
 ```bash
 {

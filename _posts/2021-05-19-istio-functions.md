@@ -1,6 +1,6 @@
 ---
-title: "Learn how to integrate Istio service mesh with your Functions"
-description: "Learn how to enable Istio for OpenFaaS to take advantage of Mutual TLS and the Istio Gateway"
+title: "Learn how Istio can provide a service mesh for your functions"
+description: "Learn how to enable Istio for your OpenFaaS functions to take advantage of Mutual TLS and more"
 date: 2021-05-12
 image: /images/2021-05-istio/background.jpg
 categories:
@@ -13,7 +13,7 @@ dark_background: true
 
 ---
 
-Learn how to enable Istio for OpenFaaS to take advantage of Mutual TLS and the Istio Gateway
+Learn how to enable Istio for your OpenFaaS functions to take advantage of Mutual TLS and more
 
 ## Introduction
 

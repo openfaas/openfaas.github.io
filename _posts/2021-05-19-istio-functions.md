@@ -25,6 +25,10 @@ A service mesh can be used to apply policies to network communication, encrypt t
 
 [Istio](https://istio.io) is one of the most popular service meshes available for use with Kubernetes and with help from the team at Google, we've recently updated the support and documentation for using Istio with OpenFaaS.
 
+![Istio architecture diagram](https://istio.io/latest/docs/ops/deployment/architecture/arch.svg)
+
+> [Istio's mesh](https://istio.io/latest/docs/ops/deployment/architecture/) created by injecting Envoy proxies into each Pod to encapsulate networking
+
 The value for users is:
 * Providing more advanced and flexible policy than Kubernetes' NetworkPolicies
 * Encrypting traffic between all OpenFaaS components and functions for "zero trust"

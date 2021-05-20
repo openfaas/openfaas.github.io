@@ -10,6 +10,7 @@ core:
 members:
   - vivek
   - utsav
+  - developer-guy
 
 # Listed for several months, GitHub and leaderboard shows former contributors permanently
 former_members:

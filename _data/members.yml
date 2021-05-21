@@ -10,15 +10,15 @@ core:
 members:
   - vivek
   - utsav
-  - developer-guy
+  - batuhan
+  - nitishkumar
 
 # Listed for several months, GitHub and leaderboard shows former contributors permanently
 former_members:
   - martin
   - stefan
-
-  # - burton
-  # - ed
-  # - richard
-  # - john
-  # - ken
+  - richard
+  - ed
+  - burton
+  - john
+  - ken

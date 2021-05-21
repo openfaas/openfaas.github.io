@@ -2,7 +2,7 @@
 title: "How to integrate with GitHub the right way with GitHub Apps"
 description: "In this guide, we are going to demonstrate how to build your own GitHub App to get a fine-grained integration with GitHub's API and to act on the behalf of its users."
 tags: inlets-pro inletsctl go github-application faasd raspberry-pi
-author_staff_member: developer-guy
+author_staff_member: batuhan
 dark_background: true
 image: /images/2021-01-15-github-application-using-go-and-inlets-pro/githubpic.jpg
 date: 2021-01-26

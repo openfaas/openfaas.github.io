@@ -10,7 +10,7 @@ categories:
 - gitops
 - openfaas-operator
 - helm
-author_staff_member: developer-guy
+author_staff_member: batuhan
 dark_background: true
 
 ---

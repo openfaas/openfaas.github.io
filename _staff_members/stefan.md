@@ -5,5 +5,5 @@ image_path: /images/author/stefan.png
 twitter_username: stefanprodan
 github_username: stefanprodan
 webpage: https://stefanprodan.com/
-blurb: Members Team <a href="https://twitter.com/openfaas">@openfaas</a>. DX Engineer <a href="https://twitter.com/weaveworks">@weaveworks</a>.
+blurb: Former Core team. DX Engineer <a href="https://twitter.com/weaveworks">@weaveworks</a>.
 ---

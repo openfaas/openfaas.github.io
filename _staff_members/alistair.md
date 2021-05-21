@@ -6,5 +6,5 @@ github_username: Waterdrips
 twitter_username: alistair_hey
 linkedin_username: alistair-hey
 webpage: https://blog.heyal.co.uk/about
-blurb: Members Team <a href="https://twitter.com/openfaas">@openfaas</a>. Cloud Native and DevOps Consultant <a href="mailto:sales@heyal.co.uk">@Heyal Solutions Ltd</a>.
+blurb: Core Team <a href="https://twitter.com/openfaas">@openfaas</a>. Developer at <a href="https://www.form3.tech">Form3</a>.
 ---

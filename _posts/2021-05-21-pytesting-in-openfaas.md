@@ -1,7 +1,7 @@
 ---
-title: "Testing Python Functions with Pytest"
-description: "Just because you can test in Prod doesn't mean you have to"
-date: 2021-05-15
+title: "Test OpenFaaS Python Functions using Pytest"
+description: "In this post we show you how to integrate Pytest into your OpenFaaS workflow. When you use the python-flask-template these tests are automatically integrated into the build process and your CI/CD workflow."
+date: 2021-05-28
 image: /images/2021-05-pytesting/conor-samuel-K5BFXOsFp7g-unsplash.jpg
 categories:
   - python
@@ -15,11 +15,12 @@ author_staff_member: lucas
 dark_background: false
 ---
 
-Last month we made testing in the python-flask template much easier, baking in [`tox`](https://tox.readthedocs.io/) and [`pytest`](https://docs.pytest.org/en/6.2.x/). This means you can focus on implementing your functions _and_ tests and let OpenFaaS handle the rest!
+Just because you can test in Prod doesn't mean you have to.
+[Last month](https://github.com/openfaas/python-flask-template/pull/42) we made testing in the [`python-flask` template](https://github.com/openfaas/python-flask-template) much easier, baking in [`tox`](https://tox.readthedocs.io/) and [`pytest`](https://docs.pytest.org/en/6.2.x/). This means you can focus on implementing your functions _and_ tests and let OpenFaaS handle the rest; build, test, and deploy your Python functions with a single command `faas-cli up`!
 
 ## Introduction
 
-In this post we are going to build a _very small_ calculator function and then write a few tests that show how we can ensure our calculator works _before_ we deploy it.  We will show you how to run the tests locally during development and then show how this is integrated into the OpenFaaS build flow so that you you can run the tests automatically  in your CI/CD flows with a single command.
+In this post we are going to build a _very small_ calculator function and then write a few tests that show how we can ensure our calculator works _before_ we deploy it.  We will show you how to run the tests locally during development and then show how this is integrated into the OpenFaaS build flow so that you you can run the tests automatically in your CI/CD flows with a single command.
 
 ### Setup the project
 
@@ -328,4 +329,4 @@ Do you have any tips and tricks for testing in Python?  [Let us know on Twitter 
 
 Would you like to keep learning? The Python 3 template is a core part of the new [Introduction to Serverless course by the LinuxFoundation](https://www.openfaas.com/blog/introduction-to-serverless-linuxfoundation/)
 
-Python not your language of choice and you would like to have automated testing in _your_ favorite languge template? Checkout out the implementation in the [`python3-flask` template](https://github.com/openfaas/python-flask-template/blob/12db680950b42c7cfcc7d21ba036bd1397d62eb7/template/python3-flask/Dockerfile#L45-L49) and let us know how to adapt it to your favorite [template](https://github.com/openfaas/templates/tree/master/template).
+Python not your language of choice, the [Go](https://github.com/openfaas/templates/blob/6b8c6082ffb98bd4e951b11509508e99c769bce1/template/go/Dockerfile#L35), [Node12](https://github.com/openfaas/templates/blob/6b8c6082ffb98bd4e951b11509508e99c769bce1/template/node12/Dockerfile#L44), and the [Node14](https://github.com/openfaas/templates/blob/6b8c6082ffb98bd4e951b11509508e99c769bce1/template/node14/Dockerfile#L44) templates also have testing integrated into the build process.  Would like to have automated testing in _your_ favorite language template? Checkout out the implementation in the [`python3-flask` template](https://github.com/openfaas/python-flask-template/blob/12db680950b42c7cfcc7d21ba036bd1397d62eb7/template/python3-flask/Dockerfile#L45-L49) and let us know how to adapt it to your favorite [template](https://github.com/openfaas/templates/tree/master/template).

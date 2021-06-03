@@ -1,7 +1,7 @@
 ---
 title: "Learn how to manage your functions with kubectl"
 description: "Learn an alternative to the OpenFaaS API for managing your serverless functions"
-date: 2021-05-12
+date: 2021-06-03
 image: /images/2021-06-kubectl-functions/background.jpg
 categories:
  - enterprise

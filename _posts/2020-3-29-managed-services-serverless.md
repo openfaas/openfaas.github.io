@@ -48,7 +48,7 @@ Now that we have an idea of the value that Crossplane provides when used alongsi
 We [started](https://youtu.be/XphQgB87U-s?t=1521) the demo by installing Crossplane with [arkade](https://github.com/alexellis/arkade), the simplest way to get Crossplane up and running in your Kubernetes cluster.
 
 ```console
-arkade install crossplane --helm3
+arkade install crossplane
 ```
 
 We followed up by installing the Crossplane [AWS Provider](https://github.com/crossplane/provider-aws) and supplying credentials for Crossplane to communicate with the AWS API. You can find documentation on how to do this for your cloud provider of choice in the Crossplane [documentation](https://crossplane.io/docs/v0.9/configure.html). After that, we created an AWS `S3BucketClass` resource in our cluster. This is a custom resource type that Crossplane provides to allow an infrastructure administrator to define configuration for an [Amazon S3 bucket](https://aws.amazon.com/s3/) that is available for use by developers. This class exposes the same fields that you would find in the AWS console, or when using any infrastructure as code tool. Our configuration for this demo looks as follows:

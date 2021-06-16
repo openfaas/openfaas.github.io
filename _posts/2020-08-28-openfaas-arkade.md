@@ -91,7 +91,6 @@ Flags:
       --direct-functions              Invoke functions directly from the gateway (default true)
       --function-pull-policy string   Pull policy for functions (default "Always")
       --gateways int                  Replicas of gateway (default 1)
-      --helm3                         Use helm3, if set to false uses helm2 (default true)
   -h, --help                          help for openfaas
       --ingress-operator              Get custom domains and Ingress records via the ingress-operator component
   -l, --load-balancer                 Add a loadbalancer

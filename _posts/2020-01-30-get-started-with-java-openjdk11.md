@@ -43,8 +43,7 @@ curl -sSLf https://dl.get-arkade.dev | sudo sh
 Now install openfaas:
 
 ```sh
-arkade install openfaas \
-  --helm3
+arkade install openfaas
 ```
 
 You can also customise values from the helm chart's README by passing in `--set`, for instance, or by using a user-friendly flag shown below:
@@ -64,7 +63,6 @@ Flags:
       --direct-functions              Invoke functions directly from the gateway (default true)
       --function-pull-policy string   Pull policy for functions (default "Always")
       --gateways int                  Replicas of gateway (default 1)
-      --helm3                         Use helm3 instead of the default helm2
   -h, --help                          help for openfaas
   -l, --load-balancer                 Add a loadbalancer
   -n, --namespace string              The namespace for the core services (default "openfaas")

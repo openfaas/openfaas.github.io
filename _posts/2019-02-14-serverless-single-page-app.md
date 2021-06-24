@@ -217,6 +217,8 @@ Each function is automatically secured with HTTPS to encrypt traffic.
 
 ### Read the code
 
+> OpenFaaS is written in Go. Checkout my new book [Everyday Go](https://gumroad.com/l/everyday-golang) for practical tips and hands-on examples to gain experience quickly or to level-up.
+
 You can find the code for all three functions in the following GitHub repo. Fork or star the repo and share with your network.
 
 * [alexellis/leaderboard-app](https://github.com/alexellis/leaderboard-app)

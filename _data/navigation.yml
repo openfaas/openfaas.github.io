@@ -6,7 +6,7 @@
   link: /blog/
 - name: eBooks
   class: navbar-item
-  link: https://gumroad.com/l/serverless-for-everyone-else
+  link: https://openfaas.gumroad.com/
 - name: Consulting
   class: navbar-item
   link: /consulting/

@@ -9,12 +9,12 @@ core:
 
 members:
   - vivek
-  - utsav
   - batuhan
   - nitishkumar
 
 # Listed for several months, GitHub and leaderboard shows former contributors permanently
 former_members:
+  - utsav
   - martin
   - stefan
   - richard

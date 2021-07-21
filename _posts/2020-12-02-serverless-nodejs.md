@@ -156,7 +156,7 @@ RUN chown app:app -R /home/app && chmod 777 /tmp
 
 USER app
 
-CMD ["node index.js"]
+CMD ["node", "index.js"]
 ```
 
 Now let's initialise a new npm package and add express.js:

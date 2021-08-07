@@ -1,8 +1,8 @@
 ---
 title: "Upgrade your OpenFaaS deployments to Flux v2"
 description: "The original version of Flux is widely used, but in maintenance mode. Learn how to upgrade to Flux v2"
-date: 2021-07-22    
-image: /images/2021-07-22-flux/earth.jpg
+date: 2021-08-07    
+image: /images/2021-08-07-flux/earth.jpg
 categories:
 - arkade
 - kubectl
@@ -343,6 +343,19 @@ keep the cluster state in-sync with the Git repository. We have seen how adding 
 and how removing something from the cluster (with a kubectl delete on our Functions) will cause Flux to add these items back in when
 it reconciles.
 
+# Future Work
+
+At this point we have only really explored how to setup and deploy our first sample functions. This is a good first step on our 
+GitOps journey. However, this example won't get you very far towards to coveted "Continuous Delivery" (where changes make their way straight to
+production after passing various testing and validation steps)
+
+To achieve a more advanced setup where new versions of our services make it onto the cluster automatically we can use another
+pair of Git Ops ToolKit components called the [Image Automation Controllers](https://fluxcd.io/docs/components/image/).
+
+These components scan an Image repository, like Dockerhub, and when new tags are found they can update your Git repository 
+and change the deployed version of the component. 
+
+This new change is then reconciled by the components we have installed in this tutorial and cause a new version to be deployed.
 
 ## Further reading
 

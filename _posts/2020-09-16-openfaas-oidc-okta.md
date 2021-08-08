@@ -102,20 +102,20 @@ export ROOT_DOMAIN="oauth.openfaas.pro"
 export yourOktaDomain="dev-624219.okta.com"
 
 arkade install openfaas \
-  --set oauth2Plugin.enabled=true \
-  --set oauth2Plugin.provider=$PROVIDER \
-  --set oauth2Plugin.license=$LICENSE \
-  --set oauth2Plugin.insecureTLS=false \
-  --set oauth2Plugin.scopes="openid profile email" \
-  --set oauth2Plugin.jwksURL=https://$yourOktaDomain/oauth2/default/v1/keys \
-  --set oauth2Plugin.tokenURL=https://$yourOktaDomain/oauth2/default/v1/token \
-  --set oauth2Plugin.audience=https://gw.$ROOT_DOMAIN \
-  --set oauth2Plugin.authorizeURL=https://$yourOktaDomain/oauth2/default/v1/authorize \
-  --set oauth2Plugin.welcomePageURL=https://gw.$ROOT_DOMAIN \
-  --set oauth2Plugin.cookieDomain=.$ROOT_DOMAIN \
-  --set oauth2Plugin.baseHost=https://auth.$ROOT_DOMAIN \
-  --set oauth2Plugin.clientSecret=$OAUTH_CLIENT_SECRET \
-  --set oauth2Plugin.clientID=$OAUTH_CLIENT_ID
+  --set oidcAuthPlugin.enabled=true \
+  --set oidcAuthPlugin.provider=$PROVIDER \
+  --set oidcAuthPlugin.license=$LICENSE \
+  --set oidcAuthPlugin.insecureTLS=false \
+  --set oidcAuthPlugin.scopes="openid profile email" \
+  --set oidcAuthPlugin.jwksURL=https://$yourOktaDomain/oauth2/default/v1/keys \
+  --set oidcAuthPlugin.tokenURL=https://$yourOktaDomain/oauth2/default/v1/token \
+  --set oidcAuthPlugin.audience=https://gw.$ROOT_DOMAIN \
+  --set oidcAuthPlugin.authorizeURL=https://$yourOktaDomain/oauth2/default/v1/authorize \
+  --set oidcAuthPlugin.welcomePageURL=https://gw.$ROOT_DOMAIN \
+  --set oidcAuthPlugin.cookieDomain=.$ROOT_DOMAIN \
+  --set oidcAuthPlugin.baseHost=https://auth.$ROOT_DOMAIN \
+  --set oidcAuthPlugin.clientSecret=$OAUTH_CLIENT_SECRET \
+  --set oidcAuthPlugin.clientID=$OAUTH_CLIENT_ID
 ```
 
 If you're using a GitOps tool or helm to install OpenFaaS, then the above options can be written into your `values.yaml` file instead. The `clientSecret` is a confidential value, so don't commit this to a public repo.
@@ -124,7 +124,7 @@ For instance:
 
 ```yaml
 ...
-oauth2Plugin:
+oidcAuthPlugin:
   enabled: true
   jwksURL: https://dev-624219.okta.com/oauth2/default/v1/keys
 ...

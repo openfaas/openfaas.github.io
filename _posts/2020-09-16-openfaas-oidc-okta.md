@@ -42,7 +42,7 @@ Head over to [developer.okta.com](https://developer.okta.com) and create a devel
 
 You will need to register a domain, or to setup a sub-zone if you already own a domain.
 
-I'll be using the zone `.oauth.openfaas.pro` and then adding two entries later on in a later step.
+I'll be using the zone `.oauth.example.com` and then adding two entries later on in a later step.
 
 [Google Domains](https://domains.google.com) provide a cost-effective option.
 
@@ -50,10 +50,10 @@ I'll be using the zone `.oauth.openfaas.pro` and then adding two entries later o
 
 We will have two URLs for OpenFaaS:
 
-* `gw.oauth.openfaas.pro` - the OpenFaaS gateway
-* `auth.oauth.openfaas.pro` - the OpenFaaS OIDC connector
+* `gw.oauth.example.com` - the OpenFaaS gateway
+* `auth.oauth.example.com` - the OpenFaaS OIDC connector
 
-You will note that we are using the second domain here: `auth.oauth.openfaas.pro`
+You will note that we are using the second domain here: `auth.oauth.example.com`
 
 A valid redirect domain of `http://127.0.0.1:31111/oauth/callback` is also required if you plan to use the `faas-cli` to authenticate to OpenFaaS.
 
@@ -98,7 +98,7 @@ export PROVIDER=""              # Set this to "azure" if using Azure AD.
 export LICENSE=""
 export OAUTH_CLIENT_SECRET=""
 export OAUTH_CLIENT_ID=""
-export ROOT_DOMAIN="oauth.openfaas.pro"
+export ROOT_DOMAIN="oauth.example.com"
 export yourOktaDomain="dev-624219.okta.com"
 
 arkade install openfaas \
@@ -148,39 +148,13 @@ arkade install cert-manager
 
 Install OpenFaaS using `install.sh`. Note that if you have got a setting wrong, you can edit install.sh and run it again at any time.
 
-Create a TLS and Ingress record for the gateway:
+Create a TLS and Ingress record for the gateway and the OIDC provider:
 
 ```bash
 arkade install openfaas-ingress \
- --email alex@oauth.openfaas.pro \
- --domain gw.oauth.openfaas.pro
-```
-
-We need one more Ingress record for the OIDC provider, but arkade can't do that for us yet.
-
-Export the gateway's YAML file, edit the domain and name and apply it again:
-
-```bash
-kubectl get -n openfaas ingress/openfaas-gateway -o yaml \
-  --export > oauth2-plugin.yaml
-```
-
-Edit `oauth2-plugin.yaml`
-
-Change the name from `openfaas-gateway` to `oauth2-plugin`, domain to `auth.oauth.openfaas.pro`, the host to `oidc`, and the secretName to `oauth2-plugin`.
-
-Alternatively use `sed`:
-
-```bash
-sed -ie s/openfaas-gateway/oauth2-plugin/g oauth2-plugin.yaml
-sed -ie s/gw./auth./g oauth2-plugin.yaml
-sed -ie s/gateway/oauth2-plugin/g oauth2-plugin.yaml
-```
-
-Apply the changed file, forcing the namespace to `openfaas`:
-
-```bash
-kubectl apply -f oauth2-plugin -n openfaas
+ --email alex@oauth.example.com \
+ --domain gw.oauth.example.com \
+ --oauth2-plugin-domain auth.oauth.example.com
 ```
 
 ### Configure your DNS
@@ -195,10 +169,10 @@ kubectl get svc ingress-nginx-controller
 
 If you have an IP address showing under `EXTERNAL-IP`, then create two A records for the two subdomains. If you see a DNS record, as per AWS EKS, then create a CNAME for them instead.
 
-* `gw.oauth.openfaas.pro`
-* `auth.oauth.openfaas.pro`
+* `gw.oauth.example.com`
+* `auth.oauth.example.com`
 
-Check that the DNS entries have propagated using `ping -c 1 gw.oauth.openfaas.pro`
+Check that the DNS entries have propagated using `ping -c 1 gw.oauth.example.com`
 
 In a few moments you should see both certificates created:
 
@@ -215,7 +189,7 @@ We have now configured a Kubernetes cluster with an IngressController, cert-mana
 Head over to the gateway's UI in a browser:
 
 ```
-https://gw.oauth.openfaas.pro
+https://gw.oauth.example.com
 ```
 
 > Note: If you're seeing a certificate error and the "Kubernetes Ingress Controller Fake Certificate" CA, then you need to go back to the previous step and double-check everything. Even if the DNS configuration is correct, it can take a few minutes for the certificate to be issued.
@@ -235,7 +209,7 @@ export CLIENT_ID="0oazbx89opTdXdOql4x6"
 faas-cli auth \
   --client-id $CLIENT_ID \
   --auth-url https://dev-624219.okta.com/oauth2/default/v1/authorize \
-  --gateway https://gw.oauth.openfaas.pro \
+  --gateway https://gw.oauth.example.com \
   --grant implicit-id
 ```
 
@@ -244,20 +218,20 @@ faas-cli auth \
 ```bash
 Starting local token server on port 31111
 
-credentials saved for https://gw.oauth.openfaas.pro
+credentials saved for https://gw.oauth.example.com
 
 Example usage:
   # Use an explicit token
-  faas-cli list --gateway "https://gw.oauth.openfaas.pro" --token "REDACTED"
+  faas-cli list --gateway "https://gw.oauth.example.com" --token "REDACTED"
 
   # Use the saved token
-  faas-cli list --gateway "https://gw.oauth.openfaas.pro"
+  faas-cli list --gateway "https://gw.oauth.example.com"
 ```
 
 Then you can use `faas-cli` from your machine using the token:
 
 ```bash
-faas-cli list --gateway "https://gw.oauth.openfaas.pro"
+faas-cli list --gateway "https://gw.oauth.example.com"
 Function                      	Invocations    	Replicas
 nodeinfo                      	0              	1    
 ```

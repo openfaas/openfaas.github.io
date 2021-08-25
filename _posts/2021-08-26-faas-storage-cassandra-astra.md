@@ -8,6 +8,7 @@ categories:
  - database
  - functions
  - dbaas
+ - sponsored
 author_staff_member: alex
 dark_background: true
 
@@ -514,6 +515,8 @@ I've been learning about Cassandra and Astra DB for a few weeks now and feel muc
 What about the cost? Datastax is calling this database a "Serverless database" because of consumption pricing coupled with the ability to scale out or down based on demand. All this is done without the user having to think about operations or server management.
 
 The free credit coupled with not having to pay for idle means that many users will not be paying the usual 15-35 USD / month per database seen with other offerings.
+
+Disclosure: Datastax is a client of OpenFaaS Ltd, this is a sponsored article but the opinions and views expressed are my own.
 
 Here are some additional links for taking things further.
 

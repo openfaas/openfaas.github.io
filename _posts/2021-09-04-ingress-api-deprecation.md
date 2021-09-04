@@ -28,6 +28,7 @@ The most likely place you will run into Ingress issues is while installing an ap
 
 This means you can create a helper to determine the correct Ingress version to use, like this
 
+{% raw %}
 ```handlebars
 {{- define "openfaas.ingress.apiVersion" -}}
   {{- if and (.Capabilities.APIVersions.Has "networking.k8s.io/v1") (semverCompare ">= 1.19.x" .Capabilities.KubeVersion.Version -}}
@@ -39,12 +40,15 @@ This means you can create a helper to determine the correct Ingress version to u
   {{- end -}}
 {{- end -}}
 ```
+{% endraw %}
 
 Which you can then use like this
 
+{% raw %}
 ```yaml
 apiVersion: {{ include "openfaas.ingress.apiVersion" . }}
 ```
+{% endraw %}
 
 This means that, if your Kubernetes cluster has `networking.k8s.io/v1` and is version 1.19+, it will use `networking.k8s.io/v1`, if not and your cluster supports `networking.k8s.io/v1beta1`, then use that, and finally, fall back to the default `extensions/v1beta1`.
 

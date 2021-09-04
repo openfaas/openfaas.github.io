@@ -1,7 +1,7 @@
 # ----
 # Site
 
-remote_theme: CloudCannon/frisco-jekyll-template
+remote_theme: CloudCannon/frisco-jekyll-template@main
 
 title: OpenFaaS - Serverless Functions Made Simple
 url: "https://www.openfaas.com"
@@ -45,6 +45,7 @@ plugins:
   - jekyll-paginate
   - jekyll-archives
   - jekyll-redirect-from
+  - jekyll-remote-theme
 
 exclude:
   - Gemfile

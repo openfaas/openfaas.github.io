@@ -1,7 +1,7 @@
 ---
 title: "Gracefully handling Kubernetes API deprecations: The Tale of Two Ingresses."
 description: "Learn how OpenFaaS uses the Kubernetes Discovery API to provide backwards compatibility for Ingress on all Kubernetes versions."
-date: 2021-09-04
+date: 2021-09-08
 image: /images/2021-09-ingress/annie-spratt-kZO9xqmO_TA-unsplash-1600.jpg
 categories:
  - kubernetes

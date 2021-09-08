@@ -153,6 +153,10 @@ if capabilities.Has("networking.k8s.io/v1") {
 
 Just like the Helm chart, the final result is very simple and can be used to check for _any_ resource kind in the cluster, including CRDs.
 
+### Wrapping up
+
+The change in the Ingress API, and our work to make that backwards compatible for OpenFaaS users goes to show how challenging it can be to maintain Kubernetes integrations. We hope that the technique and approach here could be useful to you today, with your own controllers, or provide a new approach for any future deprecations you need to handle.
+
 ### Join the community
 
 OpenFaaS is an open source project, you can support it via GitHub as an individual or corporation:

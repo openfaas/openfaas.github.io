@@ -153,11 +153,6 @@ if capabilities.Has("networking.k8s.io/v1") {
 
 Just like the Helm chart, the final result is very simple and can be used to check for _any_ resource kind in the cluster, including CRDs.
 
-
-## Wrapping up
-
-TBD <!-- help -->
-
 ### Join the community
 
 OpenFaaS is an open source project, you can support it via GitHub as an individual or corporation:

@@ -66,6 +66,8 @@ I was pleasantly surprised to see a console for CQL built into the UI, where you
 The cyclists example is from the [Datastax Enterprise docs](https://docs.datastax.com/en/dse/5.1/cql/examples/cycling/doc/cyclingks.html), insert the following statements into the console:
 
 ```sql
+// Keyspace creation is done via UI in the case of Astra DB
+// (use this command on Cassandra instead)
 CREATE KEYSPACE IF NOT EXISTS cycling
 WITH replication = {
   'class' : 'SimpleStrategy',
@@ -89,23 +91,23 @@ You can switch keyspace with the `use KEYSPACE;` command such as `use cycling;`
 ```sql
 // Insert a cyclist record record
 INSERT INTO cycling.cyclist_name (
-  id
-  lastname
+  id,
+  lastname,
   firstname
 ) VALUES (
+  uuid(),
   'Froome',
-  'Chris',
-  uuid()
+  'Chris'
 );
 
 INSERT INTO cycling.cyclist_name (
-  id
-  lastname
+  id,
+  lastname,
   firstname
 ) VALUES (
+  uuid(),
   'Ellis',
-  'Alex',
-  uuid()
+  'Alex'
 );
 ```
 
@@ -179,9 +181,6 @@ faas-cli secret create astra-clientsecret \
 faas-cli secret create astra-secure-connect \
 --from-file astra-secure-connect
 
-kubectl create secret generic -n openfaas-fn astra-secure-connect \
---from-file astra-secure-connect
-
 ```
 
 > The `astra-secure-connect` secret is a binary file, and whilst writing this blog post I learned that the OpenFaaS CLI and API didn't support binary secrets, so I made the necessary changes. You'll need a recent version of OpenFaaS and faas-cli (0.13.13) or newer.
@@ -234,8 +233,8 @@ npm install --save cassandra-driver
 Now deploy the function, and invoke it:
 
 ```bash
-faas-cli up -f cycling.yml
 cd ..
+faas-cli up -f cycling.yml
 ```
 
 Once the function is deployed, you can check if it's ready with:
@@ -337,7 +336,7 @@ functions:
     environment:
       ASTRA_DB_ID: 991f9b02-8fff-4d03-bc93-cfebbe1d41cc
       ASTRA_DB_REGION: eu-central-1
-      ASTRA_DB_APPLICATION_TOKEN: functions
+      ASTRA_DB_KEYSPACE: functions
     secrets:
     - astra-token
 ```
@@ -433,15 +432,6 @@ There's three ways to use the function:
 3) Use the `?url=` query parameter to fetch a specific URL.
 
 In production, you'll also want to add authentication to the submission endpoint. You can learn how with my Serverless For Everyone Else eBook listed at the end of the article. Here, I just want to focus on getting you connected and getting/putting documents into Astra DB.
-
-Check the table is empty:
-
-```bash
-$ curl -s http://127.0.0.1:8080/function/weekly-newsletter | jq
-
-{
-}
-```
 
 Create a new link:
 

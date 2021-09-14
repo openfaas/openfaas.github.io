@@ -537,6 +537,8 @@ Why not take things further? Add the ability to the function to look up the link
 
 ## Wrapping up
 
+You can find the code examples from this article on GitHub: [openfaas/astradb-openfaas](https://github.com/openfaas/astradb-openfaas). Feel free to fork the repository and adapt it to your own needs.
+
 I've been learning about Cassandra and Astra DB for a few weeks now and feel much more comfortable understanding where to use it. The native Cassandra driver is convenient and means I can use a familiar SQL query language. The add-ons provided by Stargate bring additional options for: REST, Document access and GraphQL.
 
 What about the cost? Datastax is calling this database a "Serverless database" because of consumption pricing coupled with the ability to scale out or down based on demand. All this is done without the user having to think about operations or server management.

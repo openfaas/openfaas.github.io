@@ -180,7 +180,6 @@ faas-cli secret create astra-clientsecret \
 
 faas-cli secret create astra-secure-connect \
 --from-file astra-secure-connect
-
 ```
 
 > The `astra-secure-connect` secret is a binary file, and whilst writing this blog post I learned that the OpenFaaS CLI and API didn't support binary secrets, so I made the necessary changes. You'll need a recent version of OpenFaaS and faas-cli (0.13.13) or newer.
@@ -319,7 +318,7 @@ We'll need a mix of confidential and non-confidential configuration information 
 
 Open a browser, navigate to [DataStax Astra DB](https://dtsx.io/2VYD4I4).
 
-Create a new keyspace called "functions", then copy the *Cluster ID* of your database and the *Database region*, these are also available on the *Connect* page.
+Create a new keyspace called "functions" in the UI, then copy the *Cluster ID* of your database and the *Database region*, these are also available on the *Connect* page.
 
 Now populate the `weekly-newsletter.yml` file with the following contents:
 
@@ -345,7 +344,7 @@ Note that the astra-token is considered confidential and must not be shared, for
 
 ```bash
 faas-cli secret create astra-token \
---from-file astra-token --trim
+  --from-file astra-token --trim
 ```
 
 Our JSON document will look like this, save it as `sample.json`:
@@ -389,20 +388,40 @@ module.exports = async (event, context) => {
       status(200).
       succeed(createdLink);
   } else if(event.query.url) {
+    try {
       let links = await linksCollection.find({ url: { $eq: event.query.url } });
       return context.
         status(200).
         succeed(links);
+    } catch (err) {
+      if(err.stack.includes("Request failed with status code 404")) {
+        return context.
+          status(200).
+          succeed({});
+      } else {
+        console.error(err);
+        return context.
+          status(500).
+          fail("Unable to query database");
+      }
+    }
   }
 
   let links;
   try {
     // Default with no url querystring
     links = await linksCollection.find({});
-  } catch(e) {
-    console.error(e);
-
-    return context.status(500).fail("Unable to connect to database");
+  } catch(err) {
+    if(err.stack.includes("Request failed with status code 404")) {
+      return context.
+        status(200).
+        succeed({});
+    } else {
+     console.error(err);
+     return context.
+      status(500).
+      fail("Unable to query database");
+    }
   }
 
   return context.
@@ -410,6 +429,8 @@ module.exports = async (event, context) => {
     succeed(links);
 }
 ```
+
+Note that when performing a `find()` operation with the Astra SDK, you will receive a 404 error if the collection is empty or hasn't been created yet. In this instance, the function returns an empty set of results.
 
 Now install the required npm module:
 
@@ -430,6 +451,22 @@ There's three ways to use the function:
 1) Send a HTTP POST with a JSON body, containing a link to the article.
 2) Access the root path to list all URLs that have been submitted.
 3) Use the `?url=` query parameter to fetch a specific URL.
+
+As discussed earlier, we've added logic that will allow the function to return an empty set of links even when the collection doesn't exist in Astra DB yet. You can try it with the following `curl` statement:
+
+```bash
+$ curl -s
+ http://127.0.0.1:8080/function/weekly-newsletter | jq
+{}
+```
+
+If you run into an error, just type in the following to check for a syntax error or issue with a secret:
+
+```bash
+faas-cli logs weekly-newsletter
+```
+
+If that shows nothing, but it still isn't working, there's a `kubectl get events` command we list in the [OpenFaaS troubleshooting documentation](https://docs.openfaas.com/deployment/troubleshooting/) that will more than likely pinpoint the issue.
 
 In production, you'll also want to add authentication to the submission endpoint. You can learn how with my Serverless For Everyone Else eBook listed at the end of the article. Here, I just want to focus on getting you connected and getting/putting documents into Astra DB.
 

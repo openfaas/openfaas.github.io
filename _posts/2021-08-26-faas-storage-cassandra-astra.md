@@ -135,7 +135,7 @@ Next let's create an OpenFaaS function using the node.js template, currently the
 ```bash
 # Update with your Docker Hub username, or ghcr.io/username
 # if using GitHub's container registry
-export OPENFAAS_PREFIX="alexellis"
+export OPENFAAS_PREFIX="alexellis2"
 
 faas-cli new --lang node14 \
   cycling
@@ -154,7 +154,7 @@ functions:
   cycling:
     lang: node14
     handler: ./cycling
-    image: alexellis/cycling:latest
+    image: alexellis2/cycling:0.1.0
     secrets:
     - astra-clientid
     - astra-clientsecret
@@ -430,7 +430,7 @@ module.exports = async (event, context) => {
 }
 ```
 
-Note that when performing a `find()` operation with the Astra SDK, you will receive a 404 error if the collection is empty or hasn't been created yet. In this instance, the function returns an empty set of results.
+Note that when performing a `find()` operation with the Astra SDK, you will receive a 404 error if the collection hasn't been created yet. Astra DB creates collections when the first record is inserted. In this instance, the function returns an empty set of results.
 
 Now install the required npm module:
 

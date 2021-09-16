@@ -12,7 +12,7 @@ platinum:
 
 # Expires 4 November 2021 - 6 mo only
 - alt: "Linode"
-  url: https://linode.com/
+  url: https://www.linode.com/openfaas
   logo: linode.svg
 
 # gold:

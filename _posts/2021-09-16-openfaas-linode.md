@@ -126,7 +126,7 @@ kubectl config set-context linode-openfaas
 kubectl get node -o wide
 ```
 
-If you want to install a specific version or the latest version of K3s, see the `k3sup install --help` command which explains how to specify a version or channel. Channels correspond to a conceptual version such as "stable" or "testing".
+If you want to install a specific version or the latest version of K3s, see the `k3sup install --help` command which explains how to specify a version (`--k3s-version`) or channel (`--k3s-channel`). Channels correspond to a conceptual version such as `stable` or `latest`.
 
 After installation, you'll be able to switch to the next context to use `kubectl` remotely:
 
@@ -158,9 +158,9 @@ You can now use `faas-cli` against your cluster using port-forwarding the OpenFa
 
 Or continue with the tutorial to install a TLS certificate and map it to a custom sub-domain.
 
-### Configure an IngressController and TLS certificate
+### Configure an Ingress Controller and TLS certificate
 
-K3s ships with the [Traefik](https://traefik.io) IngressController built-in, you can change this to ingress-nginx or an alternative if you wish.
+K3s ships with the [Traefik](https://traefik.io) [Ingress Controller](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/) built-in, you can change this to ingress-nginx or an alternative if you wish. The [K3sup readme](https://k3sup.dev/) has notes on how to avoid installing K3s' default extras such as Traefik.
 
 Install cert-manager which will obtain TLS certificates for your installation:
 

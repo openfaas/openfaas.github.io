@@ -225,6 +225,8 @@ We didn't create a K3s cluster with multiple nodes today, but K3s and K3sup supp
 
 [Linode](https://www.linode.com/openfaas) reminds me of other developer clouds, but the marketing team told me that they see their platform being used for multi-cloud deployments. That would mean that a company may deploy both to AWS and Linode, or GCP and Linode. I found their UI easy to use and fast to provision a Kubernetes cluster with K3s. They also have a managed Kubernetes service called LKE which you could try in a similar way for a multi-node cluster and a managed control-plane.
 
+Disclosure: Linode sponsored the OpenFaaS homepage for 6 months. Other cloud providers are available.
+
 ### Getting in touch and supporting our work
 
 Do you have questions, comments or suggestions? Why not [join us in the OpenFaaS Slack community](https://slack.openfaas.io)?

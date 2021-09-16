@@ -40,7 +40,7 @@ You've heard of API gateways like Kong and AWS' API Gateway, but have you ever h
 
 > [The high level overview of Astra DB benefits](https://www.datastax.com/products/datastax-astra) vs. self-hosted Cassandra.
 
-Sign up for a free account on the [Astra DB website](https://dtsx.io/2VYD4I4register?utm_source=openfaas&utm_medium=referral&utm_campaign=node-webapp&utm_term=backend-devplay&utm_content=serverless-storage-functions-openfaas), then create a new database in the cloud provider and region of your choice. Let's say that you pick *eu-central-1* on AWS, which will deploy Astra DB to the Datastax AWS account, not your own. They manage everything for you, just like any other managed database you may have used.
+Sign up for a free account on the [Astra DB website](https://dtsx.io/2VYD4I4), then create a new database in the cloud provider and region of your choice. Let's say that you pick *eu-central-1* on AWS, which will deploy Astra DB to the Datastax AWS account, not your own. They manage everything for you, just like any other managed database you may have used.
 
 ![Create your database](/images/2021-08-astra/create-db.jpg)
 
@@ -161,7 +161,7 @@ functions:
     - astra-secure-connect
 ```
 
-Next visit the [Astra DB portal](https://dtsx.io/2VYD4I4register?utm_source=openfaas&utm_medium=referral&utm_campaign=node-webapp&utm_term=backend-devplay&utm_content=serverless-storage-functions-openfaas) to create an *Application Token*. Click on "Token Management" then select the role of: *R/W Svc Acct* and *Generate Token*.
+Next visit the [Astra DB portal](https://dtsx.io/2VYD4I4) to create an *Application Token*. Click on "Token Management" then select the role of: *R/W Svc Acct* and *Generate Token*.
 
 ![Service account](/images/2021-08-astra/svc-account.jpg)
 

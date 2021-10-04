@@ -1,4 +1,3 @@
-
 ## Description
 <!--- Describe your changes in detail -->
 
@@ -16,8 +15,8 @@ See the [README.md](README.md)
 
 - [ ] New blog post
 - [ ] Updating an existing blog post
-- [ ] Updating part of the page page
-- [ ] Adding a new web-page
+- [ ] Updating part of an existing page
+- [ ] Adding a new page
 
 ## Checklist:
 

@@ -264,7 +264,7 @@ A complete user-guide for Derek's functionality is available here: [Derek's user
 
 GitHub Apps provide a much more granular (secure) way to integrate with GitHub than using personal access tokens. So even if you are not planning on deploying or trying out Derek, we have a guide on how you can write your own GitHub bots with OpenFaaS: [How to integrate with GitHub the right way with GitHub Apps](https://www.openfaas.com/blog/integrate-with-github-apps-and-faasd/).
 
-Derek is Open Source, so you can help to improve the project. Pull requests are also accepted, but please raise an issue first to discuss and propose any ideas or improvements that you have in mind.
+Derek is Open Source and there's been [30 people who've contributed so far](https://github.com/alexellis/derek/graphs/contributors). That means that you can also help to improve the project either to learn more about GitHub and bots, or for your own use. Pull requests are also accepted, but please raise an issue first to discuss and propose any ideas or improvements that you have in mind. The [contributing guide](https://github.com/alexellis/derek/blob/master/CONTRIBUTING.md) is deliberately short and sweet.
 
 New customers can kick the tires with bare-metal hosts from Equinix Metal by using code: `johngage` for 200 USD of credit. 
 

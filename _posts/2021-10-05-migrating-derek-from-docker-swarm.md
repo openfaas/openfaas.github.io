@@ -230,6 +230,8 @@ There's also a certification tool to prove that each provider is compliant with 
 
 So deploying Derek was simply a case of creating the two required secrets: a private key for the GitHub App integration and a shared webhook secret from GitHub. Then cloning the Derek repo, and running: `faas-cli deploy`.
 
+> Did you know? There is also a Work In Progress (WIP) [terraform provider for the OpenFaaS REST API](https://github.com/Waterdrips/terraform-provider-openfaas/tree/waterdrips-secrets-provider). If you'd like to help with it, let us know on [OpenFaaS Slack](https://slack.openfaas.io/).
+
 The final step for moving over was to update the GitHub App so that it sent its webhooks to the new domain name.
 
 If you ran the example and want to remove the resources allocated by terraform, you can run `terraform destroy -var-file=main.tfvars`.

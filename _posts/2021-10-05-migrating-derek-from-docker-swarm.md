@@ -12,13 +12,15 @@ dark_background: true
 
 ---
 
-It was time to migrate our GitHub bot from Docker Swarm to faasd. Here's how and why we did it including Terraform that you can try out for yourself and some credit for bare-metal cloud.
+It was time to migrate our GitHub bot from Docker Swarm to faasd. Here's how and why we did it including the Terraform we used that you can try out for yourself. There's also some credit that you can use to try out the bare-metal from Equinix Metal cloud where we host Derek.
 
 ## Introduction
 
-The story of OpenFaaS goes back to 2016 when I was learning more about serverless functions. I cut my teeth on AWS Lambda by writing functions for different Alexa skills, but something didn't feel right. I wanted to be able to run functions in containers on my own hardware and with Lambda that option just wasn't available. I felt locked-in and restricted by the limits, zip files and general workflow of the platform.
+The story of OpenFaaS goes back to 2016 when I was learning more about serverless functions. I cut my teeth on AWS Lambda by writing functions for different [Alexa skills](https://www.amazon.com/alexa-skills/), but something didn't feel right. I wanted to be able to run functions in containers on my own hardware and with Lambda that option just wasn't available. I felt locked-in and restricted by the limits, zip files and general workflow of the platform.
 
-What did I do about it? I went about creating a prototype that eventually became OpenFaaS. I knew that it needed to be open source and that community contributions were important, but I quickly found myself having to explain the same things over and over again. That's the moment that Derek was born.
+What did I do about it? I went about creating a prototype that eventually became OpenFaaS. I knew that it needed to be open source and that community contributions were important, but I quickly found myself having to explain the same things over and over again.
+
+> That was the moment I realised I needed to create Derek. He has a human name so that he's more relatable.
 
 ![An example of Derek's governance feature for the DCO](https://user-images.githubusercontent.com/6358735/29704343-542a36da-8971-11e7-871e-da30c8e86cae.png)
 

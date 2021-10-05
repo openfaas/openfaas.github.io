@@ -70,7 +70,7 @@ I'll now show you how to set up faasd on Equinix Metal's bare-metal platform. If
 
 We're using [Johan Sieben's module for faasd and Equinix Metal](https://github.com/jsiebens/terraform-equinix-faasd). It abstracts and automates the installation of faasd using cloud-init and will return the URL and username/password for OpenFaaS after the machine is provisioned.
 
-There is also an example for DigitalOcean in the [faasd repository](https://github.com/openfaas/faasd/tree/master/docs/bootstrap).
+There is also an example for [DigitalOcean](https://m.do.co/c/2962aa9e56a1) in the [faasd repository](https://github.com/openfaas/faasd/tree/master/docs/bootstrap).
 
 * Create an account on Equinix Metal, you'll also create a project, so note down the project ID. Projects are the logical separation used on the platform and are required for API calls.
 * Run `export PROJECT_ID="..."` so that you can use it later on.
@@ -239,6 +239,8 @@ If you ran the example and want to remove the resources allocated by terraform, 
 You can try out Derek on your repos by becoming a sponsor for OpenFaaS, then sending a Pull Request to add your organisation or repository to the "CUSTOMERS" file.
 
 A complete user-guide for Derek's functionality is available here: [Derek's user-guide](https://github.com/alexellis/derek/blob/master/USER_GUIDE.md)
+
+> Derek is Open Source, so you can help to improve the project. Pull requests are also accepted, but please raise an issue first to discuss and propose any ideas or improvements that you have in mind.
 
 GitHub Apps provide a much more granular (secure) way to integrate with GitHub than using personal access tokens. So even if you are not planning on deploying or trying out Derek, we have a guide on how you can write your own GitHub bots with OpenFaaS: [How to integrate with GitHub the right way with GitHub Apps](https://www.openfaas.com/blog/integrate-with-github-apps-and-faasd/).
 

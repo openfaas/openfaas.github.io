@@ -12,7 +12,7 @@ author_staff_member: richard
 dark_background: true
 ---
 
-This article will demonstrate how to have an [OpenFaaS](https://www.openfaas.com/) instance up and running on a [DigitalOcean](https://www.digitalocean.com/) droplet in around 5 minutes through an [Ansible](https://www.ansible.com/) playbook. You can pick either Kubernetes or Docker Swarm in the tutorial. 
+This article will demonstrate how to have an [OpenFaaS](https://www.openfaas.com/) instance up and running on a [DigitalOcean](https://m.do.co/c/2962aa9e56a1) droplet in around 5 minutes through an [Ansible](https://www.ansible.com/) playbook. You can pick either Kubernetes or Docker Swarm in the tutorial. 
 
 ![DigitalOcean Logo](/images/deploy-digitalocean-ansible/digital_ocean.svg)
 
@@ -40,7 +40,7 @@ $ curl -sSL get.docker.com | sh
 ```
 
 ## DigitalOcean account
-In order to deploy onto [DigitalOcean](https://www.digitalocean.com/) the reader must have an account and enable API access by generating an API key. 
+In order to deploy onto [DigitalOcean](https://m.do.co/c/2962aa9e56a1) the reader must have an account and enable API access by generating an API key. 
 > A DigitalOcean account with $100/60 days of credit can be  [created here](https://m.do.co/c/2962aa9e56a1) - $100 is enough to try out this post and much more besides.
 
 ### Create and upload an SSH key

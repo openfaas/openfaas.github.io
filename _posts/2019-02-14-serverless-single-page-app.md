@@ -177,13 +177,13 @@ At runtime OpenFaaS secrets are made available via `/var/openfaas/secrets/<name>
 
 * Postgres
 
-In this example I am using [Postgres 10](https://www.postgresql.org/docs/10/index.html) hosted on [DigitalOcean](https://www.digitalocean.com/) using the new DBaaS service. It costs around 15 USD at time of writing and gives a node which can accept 22 concurrent connections and has 1GB RAM, 10GB storage.
+In this example I am using [Postgres 10](https://www.postgresql.org/docs/10/index.html) hosted on [DigitalOcean](https://m.do.co/c/2962aa9e56a1) using the new DBaaS service. It costs around 15 USD at time of writing and gives a node which can accept 22 concurrent connections and has 1GB RAM, 10GB storage.
 
 You can read the DigitalOcean press-release here: [Announcing Managed Databases starting with Postgres](https://blog.digitalocean.com/announcing-managed-databases-for-postgresql)
 
 ![](/images/single-page/do-postgres-cluster.png)
 
-If you are following along then head over to your [DigitalOcean dashboard](https://www.digitalocean.com/) or use these [free credits](https://m.do.co/c/8d4e75e9886f) to sign-up today and provision your Postgres instance. Take a note of all the parameters needed to connect and secure your database.
+If you are following along then head over to your [DigitalOcean dashboard](https://m.do.co/c/2962aa9e56a1) or use these [free credits](https://m.do.co/c/8d4e75e9886f) to sign-up today and provision your Postgres instance. Take a note of all the parameters needed to connect and secure your database.
 
 When running locally, you can just [install Postgres with helm](https://github.com/helm/charts/tree/master/stable/postgresql) and then update the hostname to use in-cluster DNS.
 

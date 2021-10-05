@@ -33,7 +33,7 @@ The complete code example is [available on GitHub](https://github.com/alexellis/
 
 ### Setup OpenFaaS
 
-It's assumed that you already have Kubernetes and OpenFaaS set up, but if you do not then [k3d](https://github.com/rancher/k3d), [KinD](https://kind.sigs.k8s.io), and [minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/) can make good local options. I like working with remote clusters since they don't affect the battery life of my laptop, or the CPU/memory of my desktop and are always ready. A good option for a cheap remote cluster may be [DigitalOcean.com](https://digitalocean.com) or [Civo.com](https://civo.com/).
+It's assumed that you already have Kubernetes and OpenFaaS set up, but if you do not then [k3d](https://github.com/rancher/k3d), [KinD](https://kind.sigs.k8s.io), and [minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/) can make good local options. I like working with remote clusters since they don't affect the battery life of my laptop, or the CPU/memory of my desktop and are always ready. A good option for a cheap remote cluster may be [DigitalOcean.com](https://m.do.co/c/2962aa9e56a1) or [Civo.com](https://civo.com/).
 
 I'll provide two resources for you to get started:
 

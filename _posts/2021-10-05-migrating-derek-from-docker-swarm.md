@@ -2,11 +2,13 @@
 title: "Derek says goodbye to Docker Swarm"
 description: "It was time to migrate our GitHub bot from Docker Swarm to faasd. Here's how we did it."
 date: 2021-10-05
-image: /images/2021-06-kubectl-functions/background.jpg
+image: /images/2021-10-derek/automation.jpg
 categories:
  - faasd
+ - github
+ - automation
  - bot
- - opensource
+ - golang
 author_staff_member: alex
 dark_background: true
 

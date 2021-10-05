@@ -70,6 +70,8 @@ I'll now show you how to set up faasd on Equinix Metal's bare-metal platform. If
 
 We're using [Johan Sieben's module for faasd and Equinix Metal](https://github.com/jsiebens/terraform-equinix-faasd). It abstracts and automates the installation of faasd using cloud-init and will return the URL and username/password for OpenFaaS after the machine is provisioned.
 
+There is also an example for DigitalOcean in the [faasd repository](https://github.com/openfaas/faasd/tree/master/docs/bootstrap).
+
 * Create an account on Equinix Metal, you'll also create a project, so note down the project ID. Projects are the logical separation used on the platform and are required for API calls.
 * Run `export PROJECT_ID="..."` so that you can use it later on.
 * Create a Personal API key and save it
@@ -229,6 +231,8 @@ There's also a certification tool to prove that each provider is compliant with 
 So deploying Derek was simply a case of creating the two required secrets: a private key for the GitHub App integration and a shared webhook secret from GitHub. Then cloning the Derek repo, and running: `faas-cli deploy`.
 
 The final step for moving over was to update the GitHub App so that it sent its webhooks to the new domain name.
+
+If you ran the example and want to remove the resources allocated by terraform, you can run `terraform destroy -var-file=main.tfvars`.
 
 ## Taking it further
 

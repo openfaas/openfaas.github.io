@@ -29,11 +29,20 @@ What did I do about it? I went about creating a prototype that eventually became
 * He can validate the Developer Certificate of Origin (DCO) is present and correct
 * He can allow a list of curators to add labels, close PRs, issues and assign reviewers using slash commands
 * He can mark PRs as invalid if someone deletes the PR template or decides to send a PR with "(no description)"
+* He can print out canned messages like `/msg: slack` to print the URL to join your community or `/msg: sponsor` when you've gone the extra mile for a user and want to suggest that they support your work
 * He generates detailed release notes with each commit and PR so that everyone gets credit
+
+> A complete user-guide for Derek's functionality is available here: [Derek's user-guide](https://github.com/alexellis/derek/blob/master/USER_GUIDE.md)
 
 Basically, he's there to make my life easier and less repetitive. I also found that it deflected negative user responses away from me and towards Derek, and he has a thicker skin than I do, so everyone was a winner.
 
+Derek started as a project to help me and the OpenFaaS community, but now other maintainers are using Derek and similar tools to help them too. 
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Huge fan of letting robots do repetitive tasks for me ❤️🤖 <a href="https://t.co/dRvpfrENZ0">https://t.co/dRvpfrENZ0</a> <a href="https://t.co/aYjiOdExSp">https://t.co/aYjiOdExSp</a></p>&mdash; Ramiro Berrelleza (@rberrelleza) <a href="https://twitter.com/rberrelleza/status/1234947813206716421?ref_src=twsrc%5Etfw">March 3, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
 The [Okteto team use Derek](https://twitter.com/openfaas/status/1234940996959506434/) to create their release notes. Rather than having to integrate a GitHub Action to every one of your repositories, or run a language-specific tool like Goreleaser, Derek works on any public or private repository and every language.
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Derek (<a href="https://twitter.com/derekapp?ref_src=twsrc%5Etfw">@derekapp</a>). He’ll do your release notes too.</p>&mdash; Richard Gee (@rgee0) <a href="https://twitter.com/rgee0/status/1392348709900402694?ref_src=twsrc%5Etfw">May 12, 2021</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 If you want to customise the format, you can fork the code and tune to your liking. As we'll see later on, Derek can run on a very modest VM with faasd and is easy to automate with Terraform.
 
@@ -44,9 +53,9 @@ Over time Derek's had contributions from various members of the OpenFaaS communi
 
 ### Why are we saying goodbye to Docker Swarm?
 
-So I launched a managed service for Derek and offered it for free to the community. Since Derek dates back to 2016, [Equinix Metal (then Packet)](https://equinixmetal.com/) gave me a bare-metal server to run it on and I installed Docker Swarm there which was one of the supported platforms for OpenFaaS at the time.
+So I launched a managed service for Derek and offered it for free to the community. Since Derek dates back to 2016, [Equinix Metal (then Packet)](https://equinixmetal.com/) gave me a bare-metal server to run it on and I installed [Docker Swarm](https://docs.docker.com/engine/swarm/) there which was one of the supported platforms for OpenFaaS at the time.
 
-Things change quickly in the industry, and I am sure that some people even consider containers and [Docker](https://docker.com) to be a legacy technology at this point. Docker Swarm was Docker's play for orchestrating containers over networks of Docker hosts. For various reasons, Google's Kubernetes project became dominant and pushed out Docker Swarm and the other more established technologies like [Apache Mesos](http://mesos.apache.org/).
+Things change quickly in the industry, and I am sure that some people even consider containers and [Docker](https://docker.com) to be a legacy technology at this point. Docker Swarm was Docker's play for orchestrating containers over networks of Docker hosts. For various reasons, Google's [Kubernetes](https://kubernetes.io/) project became dominant and pushed out Docker Swarm and the other more established technologies like [Apache Mesos](http://mesos.apache.org/).
 
 I'm sure that there are still customers on Docker Swarm, and the fact that this week Derek was happily working way is probably a proof point for that. For the OpenFaaS project, which receives no funding or revenue from end-user companies, maintaining code to support Docker Swarm and Kubernetes created too much of an overhead. It was clear that our energies were better focused on where the industry was heading.
 
@@ -68,7 +77,7 @@ I'll now show you how to set up faasd on Equinix Metal's bare-metal platform. If
 
 ### Bootstrap faasd with terraform
 
-We're using [Johan Sieben's module for faasd and Equinix Metal](https://github.com/jsiebens/terraform-equinix-faasd). It abstracts and automates the installation of faasd using cloud-init and will return the URL and username/password for OpenFaaS after the machine is provisioned.
+We're using [Johan Siebens' module for faasd and Equinix Metal](https://github.com/jsiebens/terraform-equinix-faasd). It abstracts and automates the installation of faasd using cloud-init and will return the URL and username/password for OpenFaaS after the machine is provisioned.
 
 There is also an example for [DigitalOcean](https://m.do.co/c/2962aa9e56a1) in the [faasd repository](https://github.com/openfaas/faasd/tree/master/docs/bootstrap).
 
@@ -104,7 +113,7 @@ ufw_enabled = true
 
 The `project` field needs to be the name of the project as seen via the CLI or API, you can run `metal project get` to see a list of projects.
 
-When I used to operate Derek on Docker Swarm, I used nginx and cert-bot to provide a reverse proxy, caching and a TLS certificate. With faasd we found it easier to use Caddy v2, so Johan's automation script will set that up for us automatically, if we will out the `domain` and `email` fields.
+When I used to operate Derek on Docker Swarm, I used nginx and cert-bot to provide a reverse proxy, caching and a TLS certificate. With faasd we found it easier to use [Caddy v2](https://caddyserver.com/), so Johan's automation script will set that up for us automatically, if we will out the `domain` and `email` fields.
 
 I've picked the cheapest host `c3.small.x86`, but there are plans for developer pricing on the Equinix Metal roadmap. Follow them on Twitter if you want to keep up to date with news.
 
@@ -230,6 +239,13 @@ There's also a certification tool to prove that each provider is compliant with 
 
 So deploying Derek was simply a case of creating the two required secrets: a private key for the GitHub App integration and a shared webhook secret from GitHub. Then cloning the Derek repo, and running: `faas-cli deploy`.
 
+[![Adding a label to an issue with a slash-command](/images/2021-10-derek/added.png)](https://github.com/openfaas/org-tester/issues/26)
+
+> Adding a label to an issue with a slash-command
+
+![Derek's first response after the migration](/images/2021-10-derek/migrated.png)
+> Derek's first response after the migration
+
 > Did you know? There is also a Work In Progress (WIP) [terraform provider for the OpenFaaS REST API](https://github.com/Waterdrips/terraform-provider-openfaas/tree/waterdrips-secrets-provider). If you'd like to help with it, let us know on [OpenFaaS Slack](https://slack.openfaas.io/).
 
 The final step for moving over was to update the GitHub App so that it sent its webhooks to the new domain name.
@@ -238,17 +254,19 @@ If you ran the example and want to remove the resources allocated by terraform, 
 
 ## Taking it further
 
+<blockquote class="twitter-tweet" data-conversation="none"><p lang="en" dir="ltr">The new <a href="https://twitter.com/hashtag/k3sup?src=hash&amp;ref_src=twsrc%5Etfw">#k3sup</a> sticker and <a href="https://twitter.com/hashtag/arkade?src=hash&amp;ref_src=twsrc%5Etfw">#arkade</a> - <a href="https://twitter.com/derekapp?ref_src=twsrc%5Etfw">@derekapp</a> gains his own magnet.<br><br>What should i do with them? <a href="https://t.co/EGaIT8L1wj">pic.twitter.com/EGaIT8L1wj</a></p>&mdash; Alex Ellis (@alexellisuk) <a href="https://twitter.com/alexellisuk/status/1296435131520028673?ref_src=twsrc%5Etfw">August 20, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
 You can try out Derek on your repos by becoming a sponsor for OpenFaaS, then sending a Pull Request to add your organisation or repository to the "CUSTOMERS" file.
 
 A complete user-guide for Derek's functionality is available here: [Derek's user-guide](https://github.com/alexellis/derek/blob/master/USER_GUIDE.md)
 
-> Derek is Open Source, so you can help to improve the project. Pull requests are also accepted, but please raise an issue first to discuss and propose any ideas or improvements that you have in mind.
-
 GitHub Apps provide a much more granular (secure) way to integrate with GitHub than using personal access tokens. So even if you are not planning on deploying or trying out Derek, we have a guide on how you can write your own GitHub bots with OpenFaaS: [How to integrate with GitHub the right way with GitHub Apps](https://www.openfaas.com/blog/integrate-with-github-apps-and-faasd/).
+
+Derek is Open Source, so you can help to improve the project. Pull requests are also accepted, but please raise an issue first to discuss and propose any ideas or improvements that you have in mind.
 
 New customers can kick the tires with bare-metal hosts from Equinix Metal by using code: `johngage` for 200 USD of credit. 
 
-### You may also like
+### Taking it further
 
 You may also like ["The Internet is my computer"](https://blog.alexellis.io/the-internet-is-my-computer/) where I show you how to deploy a cloud IDE to Equinix Metal that you can access from anywhere, with more RAM than you're ever likely to need.
 

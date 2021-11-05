@@ -1,7 +1,7 @@
 ---
 title: "Improving long-running jobs for OpenFaaS users"
-description: "Alex explores recent changes that makes OpenFaaS more practical for long running tasks."
-date: 2021-10-05
+description: "Alex explores recent changes that makes OpenFaaS more practical for your long running tasks."
+date: 2021-11-05
 image: /images/2021-06-kubectl-functions/background.jpg
 categories:
  - jobs
@@ -12,7 +12,7 @@ dark_background: true
 
 ---
 
-Alex explores recent changes that makes OpenFaaS more practical for long running tasks
+Alex explores recent changes that makes OpenFaaS more practical for your long running tasks.
 
 ## Introduction
 
@@ -22,6 +22,8 @@ Having spoken to users and explored problems they've faced since 2016, I've seen
 
 The key learning for me was that one size does not fit all, and whilst some teams such as IconScout did actually [want to transform images into different sizes](https://www.openfaas.com/blog/resize-images-on-the-fly/), it was not the only way the platform was being used. In 2017, a community collaborated with us [to build a Twitter bot](https://blog.alexellis.io/openfaas-colorisebot-comes-to-kubecon/) that ran a machine learning model to bring colour back to black and white photos.
 
+Using standard nodes in a GKE cluster meant each invocation took 7-8 seconds, so we scheduled it as an asynchronous invocation.
+
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">.<a href="https://twitter.com/alexellisuk?ref_src=twsrc%5Etfw">@alexellisuk</a> look at 0:40 of this video from major french newspaper LeMonde : don&#39;t see something familiar ? <a href="https://twitter.com/hashtag/docker?src=hash&amp;ref_src=twsrc%5Etfw">#docker</a> &amp; <a href="https://twitter.com/hashtag/openfaas?src=hash&amp;ref_src=twsrc%5Etfw">#openfaas</a> powa :) /cc <a href="https://twitter.com/laurentgrangeau?ref_src=twsrc%5Etfw">@laurentgrangeau</a> <a href="https://t.co/t2c0aaPrYg">https://t.co/t2c0aaPrYg</a></p>&mdash; Adrien Blind (@AdrienBlind) <a href="https://twitter.com/AdrienBlind/status/933027888307240960?ref_src=twsrc%5Etfw">November 21, 2017</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 BT and LivePerson both gave talks at KubeCon to talk about problems that they solved with OpenFaaS. For BT, it was about packaging Machine Learning models for collaboration and shipping as a product that customers could use. For LivePerson, it was about giving their customers a way to extend their chat bot software with custom hooks. At KubeCon, Simon demonstrated how a low chat rating for a customer service rep might trigger an email.
@@ -29,9 +31,17 @@ BT and LivePerson both gave talks at KubeCon to talk about problems that they so
 * [Accelerating the Journey of an AI Algorithm to Production with OpenFaaS - Joost Noppen, BT PLC & Alex Ellis, OpenFaaS Ltd](https://kccnceu19.sched.com/event/MPeF/accelerating-the-journey-of-an-ai-algorithm-to-production-with-openfaas-joost-noppen-bt-plc-alex-ellis-openfaas-ltd)
 * [How LivePerson is Tailoring its Conversational Platform Using OpenFaaS - Simon Pelczer, LivePerson & Ivana Yovcheva, VMware](https://kccnceu19.sched.com/event/MPeR/how-liveperson-is-tailoring-its-conversational-platform-using-openfaas-simon-pelczer-liveperson-ivana-yovcheva-vmware)
 
-When people hear about OpenFaaS for the first time, they often ask me: "Why wouldn't we just use cloud functions?" and this is a valid and important question. Most of you should be using cloud functions, and not thinking about running something yourself. If you want to integrate one AWS service with another, then you absolutely should use AWS Lambda, it's the right tool for the job.
+BT's invocations were long running and heavyweight, whilst LivePerson's were often very short-lived since they needed to complete within a chat context, but would generate spikes in load on the platform.
 
-But quite often, cloud functions fall short for any number of reasons such as: limited function upload size, lack of source control integration. One area that is important to Kevin Lindsay from [Surge](https://workwithsurge.com/) is having a workflow for functions that matches their tightly-tuned software development lifecycle for Kubernetes applications. Their OpenFaaS functions simply become another Custom Resource and helm chart to manage, rather than the completely orthogonal suite of tools that they would need for AWS Lambda.
+> When people hear about OpenFaaS for the first time, they often ask me: "Why wouldn't we just use cloud functions?" and this is a valid and important question.
+> 
+> Most of you should be using cloud functions, and not thinking about running something yourself. If you want to integrate one AWS service with another, then you absolutely should use AWS Lambda, it's the right tool for the job.
+
+But quite often, cloud functions fall short for any number of reasons such as: limited function upload size, lack of source control integration. One area that is important to Kevin Lindsay from [Surge](https://workwithsurge.com/) is having a workflow for functions that matches their tightly-tuned software development lifecycle for Kubernetes applications deployed to AWS EKS. Their OpenFaaS functions simply become another Custom Resource and helm chart to manage, rather than the completely orthogonal suite of tools that they would need for AWS Lambda.
+
+OpenFaaS functions are packaged in container images and run as normal Pods using HTTP for the input and output. This makes it easier to debug them than cloud solutions.
+
+Kevin's team simply stand up a local cluster with [KinD](https://kind.sigs.k8s.io/docs/user/quick-start/) an can test their work end-to-end before moving it to a live staging environment on the cloud.
 
 ## What changed and why did we need it?
 

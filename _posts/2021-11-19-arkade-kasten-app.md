@@ -1,7 +1,7 @@
 ---
 title: "Announcing The Kasten App for Arkade"
 description: "Alex walks you through the new Arkade app for Kasten's Data Protection solution for Kubernetes"
-date: 2021-11-17
+date: 2021-11-19
 image: /images/2021-11-kasten/background.jpg
 categories:
  - arkade

@@ -18,7 +18,7 @@ Learn how to invoke your functions from Kafka events with Aiven's managed servic
 
 ## Introduction
 
-In this post I'll show you how to invoke your functions using [Aiven's](https://aiven.io) managed Kafka service and the OpenFaaS PRO connector. A sample function and setup are included, so you can follow along with a free trial, or your existing [Aiven](https://aiven.io) account.
+In this post I'll show you how to invoke your functions using [Aiven's](https://aiven.io) managed Kafka service and the OpenFaaS Pro connector. A sample function and setup are included, so you can follow along with a free trial, or your existing [Aiven](https://aiven.io) account.
 
 We've seen demand for an [Apache Kafka](https://kafka.apache.org/) integration from end-user companies of varying size and spend. In some microservice architectures, Kafka is considered the backbone through which all messages can be exchanged, to give a decoupled architecture. If a new client signs up, a message may be published to the "onboarding" topic, causing an email service and provisioning service to detect the event and set up new database records, followed by a welcome email.
 
@@ -27,7 +27,7 @@ We've seen demand for an [Apache Kafka](https://kafka.apache.org/) integration f
 
 One of the benefits of a serverless approach is being able to focus on writing small chunks of code that can execute and scale independently. The Kafka Connector subscribes to a set list of topics, and then monitors functions for the `topic` annotation and uses it to dispatch messages to functions.
 
-I first learned of [Aiven](https://aiven.io) from [RateHub](https://ratehub.ca), an OpenFaaS PRO customer and [GitHub sponsor](https://github.com/sponsors/openfaas). They provide a set of managed services including Apache Kafka. RateHub's CTO Chris Richards told me that his team prefer managed services so that they can focus on their customers' needs instead of running infrastructure.
+I first learned of [Aiven](https://aiven.io) from [RateHub](https://ratehub.ca), an OpenFaaS Pro customer and [GitHub sponsor](https://github.com/sponsors/openfaas). They provide a set of managed services including Apache Kafka. RateHub's CTO Chris Richards told me that his team prefer managed services so that they can focus on their customers' needs instead of running infrastructure.
 
 ![Provision managed services](/images/2021-08-kafka-aiven/provision.png)
 
@@ -51,7 +51,7 @@ Click the "Enable Kafka REST" button, so that we can trigger a test message from
 
 ### Setup OpenFaaS
 
-It is possible to use OpenFaaS PRO features with [faasd](http://github.com/openfaas/faasd), but this tutorial will use Kubernetes - i.e. self-hosted, managed Kubernetes, K3s or OpenShift.
+It is possible to use OpenFaaS Pro features with [faasd](http://github.com/openfaas/faasd), but this tutorial will use Kubernetes - i.e. self-hosted, managed Kubernetes, K3s or OpenShift.
 
 You should already have [OpenFaaS installed](https://docs.openfaas.com/deployment/), and Docker on your system to build new functions.
 
@@ -86,7 +86,7 @@ kubectl create secret generic \
     --from-file broker-key=./broker-key.txt
 ```
 
-And create a secret for your OpenFaaS PRO license:
+And create a secret for your OpenFaaS Pro license:
 
 ```bash
 kubectl create secret generic \
@@ -259,7 +259,7 @@ See also: [async functions](https://docs.openfaas.com/reference/async/)
 
 ## Wrapping up
 
-We've now set up a managed Kafka broker using Aiven and configured OpenFaaS PRO to dispatch messages on a set topic to our functions. I've written up a short FAQ, but you can also reach out if you would like to talk or get help.
+We've now set up a managed Kafka broker using Aiven and configured OpenFaaS Pro to dispatch messages on a set topic to our functions. I've written up a short FAQ, but you can also reach out if you would like to talk or get help.
 
 * Is this secure? Aiven uses TLS Client Certificates which is probably the more secure option out of this and SASL authentication.
 
@@ -269,11 +269,11 @@ We've now set up a managed Kafka broker using Aiven and configured OpenFaaS PRO 
 
 * If you have functions which are long-running, you can have them run in the background using the `asyncInvoke` setting for the Kafka connector, with this in place, all messages are dispatched to OpenFaaS' built-in NATS queue for processing when there is capacity available.
 
-* What about retries? If you enable the `asyncInvoke` behaviour of the connector, and are an OpenFaaS PRO customer, then messages can be retried with an exponential back-off.
+* What about retries? If you enable the `asyncInvoke` behaviour of the connector, and are an OpenFaaS Pro customer, then messages can be retried with an exponential back-off.
 
 * What if I use [Confluent Cloud](https://www.confluent.co.uk/confluent-cloud/) or self-hosted Apache Kafka? You can also use SALS authentication if you're a [Confluent Cloud](https://www.confluent.co.uk/confluent-cloud/) customer, or bypass authentication if you run Kafka on a private network and are self-hosting the service.
 
-Do you have questions or comments? You can take OpenFaaS PRO for a spin and find out about [its other features here](https://docs.openfaas.com/openfaas-pro/introduction/).
+Do you have questions or comments? You can take OpenFaaS Pro for a spin and find out about [its other features here](https://docs.openfaas.com/openfaas-pro/introduction/).
 
 ### Join the community
 

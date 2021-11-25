@@ -369,7 +369,7 @@ nodeinfo-7c564f4744-l6kfd   1/1     Running   0          101s
 Have you got questions, comments, or suggestions? Join the community on [Slack](https://slack.openfaas.io).
 
 Would you like help to set up your OpenFaaS installation, or someone to call when things don't quite go to
-plan? [Our OpenFaaS PRO Subscription plan](https://www.openfaas.com/support/) gives you a say in the project roadmap, a
+plan? [Our OpenFaaS Pro Subscription plan](https://www.openfaas.com/support/) gives you a say in the project roadmap, a
 support contact, and access to Enterprise-grade authentication with OIDC.
 
 ### Acknowledgements

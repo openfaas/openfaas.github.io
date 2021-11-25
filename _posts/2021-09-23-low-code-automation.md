@@ -58,7 +58,7 @@ The last two questions are incredibly important to us. When we select a particul
 
 When we were in the process of selecting a serverless component for our platform, we followed the same process. We ran benchmarks, looked at how easy it is to integrate such components in our stack, looked at how strong the community is and found OpenFaaS checking all of these boxes. Finally I was ready to call [Alex](https://twitter.com/alexellisuk/).
 
-> After an open and frank discussion, we were absolutely committed to building healthy and sound commercial relations with OpenFaaS. We purchased [OpenFaaS PRO licenses](https://openfaas.com/support/) and decided to become a [platinum sponsor](https://openfaas.com/). 
+> After an open and frank discussion, we were absolutely committed to building healthy and sound commercial relations with OpenFaaS. We purchased [OpenFaaS Pro licenses](https://openfaas.com/support/) and decided to become a [platinum sponsor](https://openfaas.com/). 
 
 ## Try Waylay IO for free and discover what you can do!
 

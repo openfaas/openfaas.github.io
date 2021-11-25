@@ -13,11 +13,11 @@ dark_background: true
 
 In this post I will show you how you can build subscriptions between your OpenFaaS functions and your Apache Kafka topics. I'll be using Kubernetes to show you around, but the connector-sdk works with any OpenFaaS provider.
 
-OpenFaaS is solving real problems for our [end-user community](https://docs.openfaas.com/#users-of-openfaas), many of whom are now relying on the project to in production and for core services. The OpenFaaS PRO kafka-connector was created to help commercial users integrate functions into their existing systems.
+OpenFaaS is solving real problems for our [end-user community](https://docs.openfaas.com/#users-of-openfaas), many of whom are now relying on the project to in production and for core services. The OpenFaaS Pro kafka-connector was created to help commercial users integrate functions into their existing systems.
 
 OpenFaaS functions and microservices are accessible over HTTP endpoints via the Gateway service, but let's explore how other events can be used to trigger our functions.
 
-This tutorial describes the Kafka connector which is part of the OpenFaaS PRO bundle. [Find out more](https://openfaas.com/support/)
+This tutorial describes the Kafka connector which is part of the OpenFaaS Pro bundle. [Find out more](https://openfaas.com/support/)
 
 ## Apache Kafka
 
@@ -82,7 +82,7 @@ $ kubectl apply -f zookeeper-dep.yaml,zookeeper-svc.yaml
 
 ## Deploy the connector with helm
 
-Create the required secret with your OpenFaaS PRO license code:
+Create the required secret with your OpenFaaS Pro license code:
 
 ```bash
 $ kubectl create secret generic \
@@ -253,7 +253,7 @@ We could publish their data on a topic such as: `customer-signup`. With an event
 
 Now that I've shown you how to connect to Kafka and explored a real-world use-case, it's over to you to try it.
 
-You can use your existing OpenFaaS PRO license, or apply for a 14-day trial: [Find out more](https://openfaas.com/support/)
+You can use your existing OpenFaaS Pro license, or apply for a 14-day trial: [Find out more](https://openfaas.com/support/)
 
 ## Going further
 

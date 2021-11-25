@@ -245,7 +245,7 @@ In the example I used a single function, however, you could register more than o
 
 Have you got questions, comments, or suggestions? Join the community on [Slack](https://slack.openfaas.io).
 
-Would you like help to set up your OpenFaaS installation, or someone to call when things don't quite go to plan? [Our OpenFaaS PRO Subscription plan](https://www.openfaas.com/support/) gives you a say in the project roadmap, a support contact, and access to Enterprise-grade authentication with OIDC.
+Would you like help to set up your OpenFaaS installation, or someone to call when things don't quite go to plan? [Our OpenFaaS Pro Subscription plan](https://www.openfaas.com/support/) gives you a say in the project roadmap, a support contact, and access to Enterprise-grade authentication with OIDC.
 
 ### Acknowledgements
 

@@ -78,7 +78,7 @@ curl -s https://${yourOktaDomain}/oauth2/${authServerId}/.well-known/openid-conf
 
 If you pipe the result to `jq`, or save it as JSON and format it, you'll see the important URLs that OpenFaaS needs:
 
-```
+```json
 {
   "issuer": "https://dev-624219.okta.com/oauth2/default",
   "authorization_endpoint": "https://dev-624219.okta.com/oauth2/default/v1/authorize",
@@ -207,10 +207,11 @@ You can also log into OpenFaaS using the CLI for use on your laptop using the `f
 ```bash
 export CLIENT_ID="0oazbx89opTdXdOql4x6"
 faas-cli auth \
+  --grant code
   --client-id $CLIENT_ID \
   --auth-url https://dev-624219.okta.com/oauth2/default/v1/authorize \
+  --token-url https://dev-624219.okta.com/oauth2/default/v1/token \
   --gateway https://gw.oauth.example.com \
-  --grant implicit-id
 ```
 
 > Note: some OIDC providers like Azure Active Directory require "localhost" instead of 127.0.0.1 to be given for this flow. You can provide `--redirect-host=localhost` when using Azure.

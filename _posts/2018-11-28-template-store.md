@@ -166,4 +166,6 @@ We looked at some of the drawbacks and technical challenges faced by developers 
 
 To get started today update your CLI with `brew` or `curl` utility script over at [https://github.com/openfaas/faas-cli](https://github.com/openfaas/faas-cli).
 
-For questions, comments and suggestions follow us on [Twitter @openfaas](https://twitter.com/openfaas) and join the [Slack community](https://docs.openfaas.com/community).
+Do you have questions, comments or suggestions? Tweet to [@openfaas](https://twitter.com/openfaas).
+
+> Want to support our work? You can become a sponsor as an individual or a business via GitHub Sponsors with tiers to suit every budget and benefits for you in return. [Check out our GitHub Sponsors Page](https://github.com/sponsors/openfaas/)

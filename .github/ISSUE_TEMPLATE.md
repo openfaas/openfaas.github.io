@@ -8,7 +8,3 @@ What's wrong?
 
 Let us know more below:
 
-
-## Do you want to chat to us about this issue?
-
-Head over to Slack https://slack.openfaas.io/

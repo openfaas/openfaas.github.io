@@ -309,4 +309,6 @@ Going back to Sid's original ask, we've deployed a stateless microservice writte
 
 We've now deployed both a simple hello-world Sinatra service and a more complete guestbook example using MySQL, ebs views, Bootstrap and Sinatra. It's over to you to start simplifying your developer workflow with OpenFaaS - whether you want to use FaaS Functions or just make it easier to manage your microservices.
 
-For questions, comments and suggestions follow us on [Twitter @openfaas](https://twitter.com/openfaas) and join the [Slack community](https://docs.openfaas.com/community).
+Do you have questions, comments or suggestions? Tweet to [@openfaas](https://twitter.com/openfaas).
+
+> Want to support our work? You can become a sponsor as an individual or a business via GitHub Sponsors with tiers to suit every budget and benefits for you in return. [Check out our GitHub Sponsors Page](https://github.com/sponsors/openfaas/)

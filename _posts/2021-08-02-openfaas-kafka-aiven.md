@@ -285,4 +285,7 @@ Chat with the community:
 
 * Browse the [OpenFaaS documentation](https://docs.openfaas.com)
 * Follow [OpenFaaS on Twitter](https://twitter.com/openfaas)
-* Join [OpenFaaS Slack](https://slack.openfaas.io)
+
+Do you have questions, comments or suggestions? Tweet to [@openfaas](https://twitter.com/openfaas).
+
+> Want to support our work? You can become a sponsor as an individual or a business via GitHub Sponsors with tiers to suit every budget and benefits for you in return. [Check out our GitHub Sponsors Page](https://github.com/sponsors/openfaas/)

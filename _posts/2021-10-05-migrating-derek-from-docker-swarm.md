@@ -250,7 +250,7 @@ So deploying Derek was simply a case of creating the two required secrets: a pri
 ![Derek's first response after the migration](/images/2021-10-derek/migrated.png)
 > Derek's first response after the migration
 
-> Did you know? There is also a Work In Progress (WIP) [terraform provider for the OpenFaaS REST API](https://github.com/Waterdrips/terraform-provider-openfaas/tree/waterdrips-secrets-provider). If you'd like to help with it, let us know on [OpenFaaS Slack](https://slack.openfaas.io/).
+> Did you know? There is also a Work In Progress (WIP) [terraform provider for the OpenFaaS REST API](https://github.com/Waterdrips/terraform-provider-openfaas/tree/waterdrips-secrets-provider).
 
 The final step for moving over was to update the GitHub App so that it sent its webhooks to the new domain name.
 

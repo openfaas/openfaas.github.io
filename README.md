@@ -22,7 +22,7 @@ Embed conceptual diagram, video or picture to help make case.
 
 * Call to action
 
-Point to Slack/Docs/GitHub or something else.
+Point to Docs/GitHub or something else.
 
 * Acknowledgements
 

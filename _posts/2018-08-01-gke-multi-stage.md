@@ -420,9 +420,8 @@ _12._ Promote the function to production
 kubectl -n openfaas-prod-fn apply -f myfn-k8s.yaml
 ```
 
-In a future post I will show how you can monitor your functions with Prometheus and Grafana and 
-how to take that forward with a managed solution like [Weave Cloud](https://www.weave.works).
+In a future post I will show how you can monitor your functions with Prometheus and Grafana and how to take that forward with a managed solution like [Weave Cloud](https://www.weave.works).
 
-If you have questions or comments about this tutorial please join the #kubernetes channel on 
-[OpenFaaS Slack](https://docs.openfaas.com/community/) where I'll be happy to answer your questions..
+Do you have questions, comments or suggestions? Tweet to [@openfaas](https://twitter.com/openfaas).
 
+> Want to support our work? You can become a sponsor as an individual or a business via GitHub Sponsors with tiers to suit every budget and benefits for you in return. [Check out our GitHub Sponsors Page](https://github.com/sponsors/openfaas/)

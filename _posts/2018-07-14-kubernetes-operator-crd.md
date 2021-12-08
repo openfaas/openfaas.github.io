@@ -96,7 +96,7 @@ The `faas-netes` project has the most active use and we will continue to support
 
 * Who should use the new Operator?
 
-Please try the new Operator in your development environment. The community would like your feedback on GitHub, Slack or Twitter.
+Please try the new Operator in your development environment. The community would like your feedback on GitHub or Twitter.
 
 Use the Operator if using CRDs is an important use-case for your project.
 
@@ -126,16 +126,6 @@ Access to `kubectl` and the `function` CRD gives more power to those who need it
 
 The helm chart has been re-published so follow the brief README here to get installed and upgraded today: [https://github.com/openfaas/faas-netes/tree/master/chart/openfaas](https://github.com/openfaas/faas-netes/tree/master/chart/openfaas)
 
-## Join the community
+Do you have questions, comments or suggestions? Tweet to [@openfaas](https://twitter.com/openfaas).
 
-Within the OpenFaaS Slack community there are several key channels that are great for working with Kubernetes such as `#kubernetes`.
-
-Here are some of the channels you could join after [signing-up](https://docs.openfaas.com/community/):
-
-In OpenFaaS any programming language or binary is supported, but templates make them easy to consume via `faas cli new`, so join `#templates` and help us build the next set of templates for JVM-based languages.
-
-`#arm-and-pi`
-
-Building a cool Raspberry Pi Cluster or just struggling? Join this channel for help from the community and to share ideas and photos of your inventions.
-
-Join `#contributors` to start giving back to Open Source and to become a part of the project. [Get started here](https://docs.openfaas.com/contributing/get-started/)
+> Want to support our work? You can become a sponsor as an individual or a business via GitHub Sponsors with tiers to suit every budget and benefits for you in return. [Check out our GitHub Sponsors Page](https://github.com/sponsors/openfaas/)

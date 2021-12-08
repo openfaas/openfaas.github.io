@@ -162,9 +162,6 @@ The change in the Ingress API, and our work to make that backwards compatible fo
 OpenFaaS is an open source project, you can support it via GitHub as an individual or corporation:
 
 * Become an individual or corporate [Sponsor on GitHub](https://github.com/sponsors/openfaas)
-
-Chat with the community:
-
 * Browse the [OpenFaaS documentation](https://docs.openfaas.com)
-* Follow [OpenFaaS on Twitter](https://twitter.com/openfaas)
-* Join [OpenFaaS Slack](https://slack.openfaas.io)
+
+Tweet to [@openfaas](https://twitter.com/openfaas) with your comments, questions and suggestions.

@@ -243,9 +243,9 @@ In the example I used a single function, however, you could register more than o
 
 ### Join the community
 
-Have you got questions, comments, or suggestions? Join the community on [Slack](https://slack.openfaas.io).
+Do you have questions, comments or suggestions? Tweet to [@openfaas](https://twitter.com/openfaas).
 
-Would you like help to set up your OpenFaaS installation, or someone to call when things don't quite go to plan? [Our OpenFaaS Pro Subscription plan](https://www.openfaas.com/support/) gives you a say in the project roadmap, a support contact, and access to Enterprise-grade authentication with OIDC.
+> Want to support our work? You can become a sponsor as an individual or a business via GitHub Sponsors with tiers to suit every budget and benefits for you in return. [Check out our GitHub Sponsors Page](https://github.com/sponsors/openfaas/)
 
 ### Acknowledgements
 

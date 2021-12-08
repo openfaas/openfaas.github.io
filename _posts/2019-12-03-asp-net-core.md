@@ -450,8 +450,4 @@ If you aren't quite convinced yet, then watch my KubeCon talk on the PLONK Stack
 
 * Video: [More than FaaS - Introduction to The PLONK Stack @ KubeCon](https://blog.alexellis.io/getting-started-with-the-plonk-stack-and-serverless/)
 
-Your input and feedback is welcome. Please join the community Slack workspace and bring any comments, questions or suggestions that you may have.
-
-* [OpenFaaS Slack](https://slack.openfaas.io)
-
 Finally, feel free to reach out if you need help with any cloud native problems you're trying to solve, or if you could use an external perspective on what you're building from OpenFaaS Ltd: [alex@openfaas.com](mailto:alex@openfaas.com).

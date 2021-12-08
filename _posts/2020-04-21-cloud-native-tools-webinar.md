@@ -507,8 +507,9 @@ custom domain. They will all be secured with the TLS certificate we got from Let
 
 ## Over to you!
 
-Join the discussion with the OpenFaaS and inlets community on [Slack](https://slack.openfaas.io)
+Why not [get started at the beginning with the workshop](https://github.com/openfaas/workshop/)?
 
-Follow [@openfaas](https://twitter.com/openfaas) on Slack
+Do you have questions, comments or suggestions? Tweet to [@openfaas](https://twitter.com/openfaas).
 
-Or just [get started at the beginning with the workshop](https://github.com/openfaas/workshop/)
+> Want to support our work? You can become a sponsor as an individual or a business via GitHub Sponsors with tiers to suit every budget and benefits for you in return. [Check out our GitHub Sponsors Page](https://github.com/sponsors/openfaas/)
+

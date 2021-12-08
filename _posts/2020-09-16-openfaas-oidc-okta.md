@@ -262,5 +262,4 @@ You can contact me at [alex@openfaas.com](mailto:alex@openfaas.com)
 See also:
 
 * [Multiple namespace support](https://docs.openfaas.com/reference/namespaces/)
-* [Join the Slack community](https://slack.openfaas.io/)
 * [Authentication documentation](https://docs.openfaas.com/reference/authentication/)

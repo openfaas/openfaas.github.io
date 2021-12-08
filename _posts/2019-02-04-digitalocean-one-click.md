@@ -197,7 +197,9 @@ Taking it further we could look at how to configure a domain name to point at th
 
 #### Get in touch
 
-For questions, comments and suggestions follow us on [Twitter @openfaas](https://twitter.com/openfaas) and join the [Slack community](https://docs.openfaas.com/community).
+Do you have questions, comments or suggestions? Tweet to [@openfaas](https://twitter.com/openfaas).
+
+> Want to support our work? You can become a sponsor as an individual or a business via GitHub Sponsors with tiers to suit every budget and benefits for you in return. [Check out our GitHub Sponsors Page](https://github.com/sponsors/openfaas/)
 
 #### Contribute
 

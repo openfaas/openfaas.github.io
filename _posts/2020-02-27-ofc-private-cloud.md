@@ -440,8 +440,6 @@ You can pay an engineer from OpenFaaS Ltd to setup OpenFaaS Cloud on your prefer
 
 See [the troubleshooting guide in our docs](https://docs.openfaas.com/openfaas-cloud/self-hosted/troubleshoot/)
 
-Ask for assistance in #openfaas-cloud [on Slack](https://slack.openfaas.io/)
-
 ## Wrapping up
 
 We have now deployed a private cloud using OpenFaaS cloud, we can invite our team and users, who will each have their own dashboard to monitor and manage functions or microservices. 

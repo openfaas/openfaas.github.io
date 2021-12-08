@@ -186,5 +186,7 @@ Finally, if you do run into technical issues with OpenFaaS and you need support,
 ### Connect with the community
 
 * Get a head-start with OpenFaaS with our [Official Workshop](https://github.com/openfaas/workshop).
-* [Join Slack now](https://slack.openfaas.io)
-* [Sponsor OpenFaaS on GitHub](https://www.openfaas.com/support/) and support our work
+
+Do you have questions, comments or suggestions? Tweet to [@openfaas](https://twitter.com/openfaas).
+
+> Want to support our work? You can become a sponsor as an individual or a business via GitHub Sponsors with tiers to suit every budget and benefits for you in return. [Check out our GitHub Sponsors Page](https://github.com/sponsors/openfaas/)

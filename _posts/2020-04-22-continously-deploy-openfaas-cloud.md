@@ -404,6 +404,5 @@ create base and override files.
 
 If you have other solutions, or would like to help us test the new helm chart, please connect with the community.
 
-* Join us on [on Slack](https://slack.openfaas.io/) and the `#openfaas-cloud` channel to chat more
 * [Create your own private cloud with OpenFaaS Cloud](https://www.openfaas.com/blog/ofc-private-cloud/)
 * Apply for free access to the managed [Community Cluster](https://github.com/openfaas/community-cluster)

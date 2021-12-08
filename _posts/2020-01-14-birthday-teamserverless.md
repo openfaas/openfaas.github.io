@@ -159,8 +159,4 @@ Are you already an OpenFaaS user? Do you need CI/CD and somewhere to host your f
 
 ## Join our community
 
-Your input and feedback is welcome. Please join the community Slack workspace and bring any comments, questions or suggestions that you may have.
-
-* [OpenFaaS Slack](https://slack.openfaas.io)
-
-Finally, feel free to reach out if you need help with any cloud native problems you're trying to solve, or if you could use an external perspective on what you're building from OpenFaaS Ltd: [alex@openfaas.com](mailto:alex@openfaas.com). If you'd like to amplify your brand in 2020, then check out the [support and sponsorship options](https://openfaas.com/support).
+Feel free to reach out if you need help with any cloud native problems you're trying to solve, or if you could use an external perspective on what you're building from OpenFaaS Ltd: [alex@openfaas.com](mailto:alex@openfaas.com). If you'd like to amplify your brand in 2020, then check out the [support and sponsorship options](https://openfaas.com/support).

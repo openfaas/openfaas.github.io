@@ -341,7 +341,3 @@ Instead of getting back a response immediately, the debugger will stop on the br
 I've found that this workflow really accelerates my everyday development. I have two commands to get my entire development environment up and running (`faas up` and `okteto up`) and once coding I can stay in "flow" for longer periods, which makes me a lot more productive. 
 
 If you are building functions today, I'd encourage you to try out this workflow and [let me know](https://twitter.com/rberrelleza) what you think about it and how we can improve it.
-
-If you have any comments, questions or suggestions, please join us on Slack at:
-* [OpenFaaS Slack #kubernetes](https://slack.openfaas.io)
-* [Kubernetes Slack #okteto](https://slack.k8s.io)

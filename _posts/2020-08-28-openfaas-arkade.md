@@ -250,8 +250,6 @@ Find out more on the [inlets PRO landing page](https://inlets.dev/), there's als
 
 Looking forward, arkade will continue to be maintained by the OpenFaaS community and is accepting PRs and suggestions. It evolved to solve a clear pain-point, and as we approach 1000 stars on GitHub, it has proven useful to the community so far.
 
-> If you have questions or comments, then please feel free to see the [README](https://get-arkade.dev)), or direct them to the `#general` channel over on the [OpenFaaS Slack Workspace](https://slack.openfaas.io/).
-
 * Have you got an app that you'd like to see?
 * Is there a CLI that you often use with a Kubernetes cluster?
 * Do you want to view the code?

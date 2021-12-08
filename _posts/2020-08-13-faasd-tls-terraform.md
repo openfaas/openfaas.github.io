@@ -339,8 +339,6 @@ You can learn more about OpenFaaS at:
 * In the docs: [docs.openfaas.com](https://docs.openfaas.com)
 * On the blog: [openfaas.com/blog](https://openfaas.com/blog)
 
-The OpenFaaS [Slack workspace](https://slack.openfaas.io/) is a good place to connect with the community. You can ask questions, get involved, and contribute if you want to.
-
 See other posts from the community on faasd:
 
 * [OpenFaaS with TLS via Faasd and Terraform on Openstack by Mark Sharpley](https://markopolo123.github.io/posts/openfaas-openstack/)

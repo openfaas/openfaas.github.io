@@ -68,7 +68,7 @@ Chapter 8 is where things get turned-up a notch: Operating Serverless, by the en
 * Add TLS for link-level encryption for OpenFaaS and your functions.
 * Discuss strategies for versioning your functions, and for advanced HTTP routing.
 
-You can get help along the way from the [OpenFaaS Docs](https://docs.openfaas.com) and from the community via [OpenFaaS Slack](https://slack.openfaas.io/).
+You can get help along the way from the [OpenFaaS Docs](https://docs.openfaas.com) or from [commercial support](https://openfaas.com/support/)
 
 ### What are people saying about it?
 
@@ -96,6 +96,6 @@ If you're using OpenFaaS within your team, company or product, then join dozens
 
 If you have any other training needs, or want to talk about adopting Cloud and Kubernetes, feel free to contact me at [alex@openfaas.com](mailto:alex@openfaas.com).
 
-Connect via:
-* [The OpenFaaS Slack community](https://slack.openfaas.io/)
-* [The OpenFaaS LinkedIn group](https://www.linkedin.com/groups/13670843/)
+Do you have questions, comments or suggestions? Tweet to [@openfaas](https://twitter.com/openfaas).
+
+> Want to support our work? You can become a sponsor as an individual or a business via GitHub Sponsors with tiers to suit every budget and benefits for you in return. [Check out our GitHub Sponsors Page](https://github.com/sponsors/openfaas/)

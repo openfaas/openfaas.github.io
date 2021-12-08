@@ -344,7 +344,7 @@ Here the [arkade tool](https://get-arkade.dev/) created by the OpenFaaS communit
 
 In this post we've shown how to add unit tests to your Python functions and how to run those tests in your local development and CI environments.
 
-Do you have any tips and tricks for testing in Python?  [Let us know on Twitter @openfaas](https://twitter.com/openfaas) or join us on [on Slack](https://slack.openfaas.io/) to chat more.
+Do you have any tips and tricks for testing in Python?  [Let us know on Twitter @openfaas](https://twitter.com/openfaas).
 
 Would you like to keep learning? The Python 3 template is a core part of the new [Introduction to Serverless course by the LinuxFoundation](https://www.openfaas.com/blog/introduction-to-serverless-linuxfoundation/)
 

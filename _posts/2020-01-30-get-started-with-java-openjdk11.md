@@ -435,8 +435,6 @@ Here's an overview from 10,000ft:
 * the ability to ship functions or services, without worrying about all the Kubernetes YAML files that would normally be a concern
 * a welcoming and helpful community of developers, sponsors, and end-users with over 2.5k members and 20k GitHub stars
 
-Feel free to [join us on Slack](https://slack.openfaas.io/) and to follow [@openfaas](https://twitter.com/openfaas) on Twitter.
-
 ### Try this next
 
 Perhaps next you'd like to move to a managed Kubernetes service, or add a TLS certificate and a custom domain to your OpenFaaS functions?

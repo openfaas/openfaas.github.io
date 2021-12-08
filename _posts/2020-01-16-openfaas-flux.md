@@ -532,5 +532,4 @@ To further strengthen the security of your clusters, you can enable [GPG commit 
 to prevent Flux from applying unauthorized changes.
 
 If you have any comments, questions or suggestions, please join us on Slack at:
-* [OpenFaaS Slack #kubernetes](https://slack.openfaas.io)
 * [CNCF Slack #flux](https://slack.cncf.io/)

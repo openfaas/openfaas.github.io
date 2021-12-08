@@ -82,8 +82,4 @@ Simply send a Pull Request to [ADOPTERS.md for OpenFaaS](https://github.com/open
 
 ## Join our community
 
-Your input and feedback is welcome. Please join the community Slack workspace and bring any comments, questions or suggestions that you may have.
-
-* [OpenFaaS Slack](https://slack.openfaas.io)
-
-Finally, feel free to reach out if you need help with any cloud native problems you're trying to solve, or if you could use an external perspective on what you're building from OpenFaaS Ltd: [alex@openfaas.com](mailto:alex@openfaas.com). 
+Feel free to reach out if you need help with any cloud native problems you're trying to solve, or if you could use an external perspective on what you're building from OpenFaaS Ltd: [alex@openfaas.com](mailto:alex@openfaas.com). 

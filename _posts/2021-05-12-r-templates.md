@@ -15,7 +15,7 @@ Learn how to combine the power of R with Serverless for data science.
 
 ## Introduction
 
-> Intro by [Alex Ellis](https://twitter.com/alexellisuk): "This is a guest post by Peter Solymos. Peter reached out to me after becoming an OpenFaaS Sponsor. He wanted to help other data-scientists like himself understand the value of combining R with functions in the cloud. Hope you enjoy the post and feel free to reach out to us via [OpenFaaS Slack](https://slack.openfaas.io/) with comments, questions and suggestions."
+> Intro by [Alex Ellis](https://twitter.com/alexellisuk): "This is a guest post by Peter Solymos. Peter reached out to me after becoming an OpenFaaS Sponsor. He wanted to help other data-scientists like himself understand the value of combining R with functions in the cloud. Hope you enjoy the post and feel free to reach out to us via [Twitter](https://twitter.com/openfaas)
 
 In this post I will introduce you to the [R](https://www.r-project.org/) templates for OpenFaaS, then I will build a function that pulls data from a COVID-19 API, fits a time series model to the data, and makes a forecast for the future case counts.
 

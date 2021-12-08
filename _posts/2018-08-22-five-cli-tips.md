@@ -159,7 +159,7 @@ I hope you've enjoyed my list of top 5 productivity boosts for the CLI. If you w
 <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">From the hands-on workshop today at <a href="https://twitter.com/DevNetCreate?ref_src=twsrc%5Etfw">@DevNetCreate</a> - engineers and students learning how to build functions with Python and <a href="https://twitter.com/Docker?ref_src=twsrc%5Etfw">@Docker</a> <a href="https://t.co/k8Owa5h5iC">https://t.co/k8Owa5h5iC</a> <a href="https://t.co/UtuEwyYXlI">pic.twitter.com/UtuEwyYXlI</a></p>&mdash; OpenFaaS (@openfaas) <a href="https://twitter.com/openfaas/status/984270331094315008?ref_src=twsrc%5Etfw">April 12, 2018</a></blockquote>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-Do you have your own tips? It'd be great to hear them over on [Twitter @openfaas](https://twitter.com/openfaas) or in the [Slack community](https://docs.openfaas.com/community).
+Do you have questions, comments or suggestions? Tweet to [@openfaas](https://twitter.com/openfaas).
 
-Curious about who is using OpenFaaS in production? Check out the list of companies that have let us know so far over at [https://docs.openfaas.com/](https://docs.openfaas.com/).
+> Want to support our work? You can become a sponsor as an individual or a business via GitHub Sponsors with tiers to suit every budget and benefits for you in return. [Check out our GitHub Sponsors Page](https://github.com/sponsors/openfaas/)
 

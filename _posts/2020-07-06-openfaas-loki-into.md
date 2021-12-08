@@ -240,6 +240,5 @@ In this post we have shown how you can use Loki and OpenFaaS together so that yo
 
 If you have other ideas or hacks with Grafana, or would like to help us add another logs provider for your favorite aggregator (e.g. ELK), please connect with the community.
 
-* Join us on [on Slack](https://slack.openfaas.io/) to chat more
 * Read [the docs](https://docs.openfaas.com/architecture/logs-provider/) on the Logs Provider interface and checkout [the example in the provider repo](https://github.com/openfaas/faas-provider/tree/master/logs)
 * If you have any suggests or issues with Loki let us know on the [`openfaas-loki` repo](https://github.com/LucasRoesler/openfaas-loki)

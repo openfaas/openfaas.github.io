@@ -297,7 +297,7 @@ permissions:
 
 Then provide the steps for the job:
 
-```yaml
+```
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -322,7 +322,7 @@ jobs:
           echo ::set-output name=repo_owner::$(echo ${{ github.repository_owner }} |
           tr '[:upper:]' '[:lower:]')
       - name: Docker Login
-        run: > 
+        run: >
           echo ${{secrets.GITHUB_TOKEN}} | 
           docker login ghcr.io --username 
           ${{ steps.get_repo_owner.outputs.repo_owner }} 
@@ -360,7 +360,7 @@ So if you are only deploying your function to a Raspberry Pi with a 32-bit OS, j
 
 You'll notice that the last step in the file does a deployment. If you don't want builds to get deployed automatically, then you can put this into a separate file that gets run only when you do a release in the GitHub repository, splitting out CI and CD steps.
 
-```yaml
+```
       - name: Login
         run: >
           echo ${{secrets.OPENFAAS_PASSWORD}} | 

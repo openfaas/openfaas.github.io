@@ -297,7 +297,9 @@ permissions:
 
 Then provide the steps for the job:
 
-```
+```yaml
+{% raw %} 
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -344,6 +346,7 @@ jobs:
           OWNER="${{ steps.get_repo_owner.outputs.repo_owner }}"
           TAG="${{ github.sha }}"
           faas-cli deploy --gateway ${{secrets.OPENFAAS_URL}}
+{% endraw %} 
 ```
 
 The first few steps set up Docker with buildx, so that it can cross-compile containers for different systems, this can be skipped if you only want to deploy to cloud or Intel-compatible faasd instances.
@@ -360,7 +363,8 @@ So if you are only deploying your function to a Raspberry Pi with a 32-bit OS, j
 
 You'll notice that the last step in the file does a deployment. If you don't want builds to get deployed automatically, then you can put this into a separate file that gets run only when you do a release in the GitHub repository, splitting out CI and CD steps.
 
-```
+```yaml
+{% raw %}
       - name: Login
         run: >
           echo ${{secrets.OPENFAAS_PASSWORD}} | 
@@ -370,6 +374,7 @@ You'll notice that the last step in the file does a deployment. If you don't wan
           OWNER="${{ steps.get_repo_owner.outputs.repo_owner }}"
           TAG="${{ github.sha }}"
           faas-cli deploy --gateway ${{secrets.OPENFAAS_URL}}
+{% endraw %} 
 ```
 
 Now run the following:

@@ -1,3 +1,5 @@
+@import "contributors.scss";
+
 .hero {
 	.hero-body {
 		&.intro {
@@ -17,6 +19,7 @@
 		}
 	}
 }
+
 .card.team.member {
 	display: -webkit-flex;
 	display: -ms-flex;

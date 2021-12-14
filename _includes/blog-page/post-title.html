@@ -1,8 +1,8 @@
-<h2 class="subtitle has-text-grey-darker">
+<div class="subtitle has-text-grey-darker">
 	<span class="post-date is-pulled-right">{{ include.post.date | date: "%B %d, %Y" }}</span>
 	{% for category in include.post.categories %}
 		<span class="tag">
 			{{ category | capitalize }}
 		</span>
 	{% endfor %}
-</h2>
+</div>

@@ -21,16 +21,12 @@ image: https://source.unsplash.com/MqJX_8EaStM/2000x1322?a=.png
         {% include team-page/team-members.html type="Project Lead" members=site.data.members.founders %}
     </div>
 
-    <div class="hero-body grey-whiter team-wrapper core-contributors">
-        {% include team-page/team-members.html type="Core Team" members=site.data.members.core %}
-    </div>
-
     <div class="hero-body grey team-wrapper git-members">
-        {% include team-page/team-members.html type="GitHub Members" members=site.data.members.members %}
+        {% include team-page/team-members.html type="Active Contributors" members=site.data.members.contributors %}
     </div>
 
     <div class="hero-body grey team-wrapper former-members">
-        {% include team-page/team-members.html type="Former Members (emeritus)" members=site.data.members.former_members %}
+        {% include team-page/team-members.html type="Emeritus Contributors" members=site.data.members.former_contributors %}
     </div>
 
 

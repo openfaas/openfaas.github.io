@@ -9,7 +9,11 @@
         }
 
     }
+
 	.hero {
+			background-color: white;
+			background: white;
+
 		&.cover {
 			position: relative;
 
@@ -37,6 +41,8 @@
 				}
 
 				.hero-blog-content {
+					background: white;
+
 					padding-bottom: 0rem;
 					.content {
 						font-size: 20px;

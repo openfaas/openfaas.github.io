@@ -3,17 +3,15 @@
 founders:
   - alex
 
-core:
+contributors:
   - lucas
-  - alistair
-
-members:
-  - vivek
   - nitishkumar
+  - vivek
+  - alistair
   - yankee
 
 # Listed for several months, GitHub and leaderboard shows former contributors permanently
-former_members:
+former_contributors:
   - utsav
   - martin
   - stefan

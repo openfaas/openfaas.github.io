@@ -59,25 +59,12 @@ For this tutorial we will use Kubernetes. I have chosen minikube for my own loca
 
 ## Deploy Apache Kafka
 
-A development version of Apache Kafka has been made available so that you can get this tutorial up and running in a few minutes. You can also customise the connector to use your existing Kafka deployment.
+A development version of Apache Kafka has been made available so that you can get this tutorial up and running in a few minutes. You can also customise the connector to use your existing deployment of Kafka or to use a managed provider.
 
-* Clone the repository:
-
- ```bash
-$ git clone https://github.com/openfaas/faas-netes/ && \
-  cd contrib/kafka-testing
-```
-
-* Apply the Broker files:
+For a self-hosted version, you can use Confluent's chart:
 
 ```bash
-$ kubectl apply -f kafka-broker-dep.yml,kafka-broker-svc.yml
-```
-
-* Apply the Zookeeper files:
-
-```bash
-$ kubectl apply -f zookeeper-dep.yaml,zookeeper-svc.yaml
+arkade install kafka
 ```
 
 ## Deploy the connector with helm
@@ -88,22 +75,25 @@ Create the required secret with your OpenFaaS Pro license code:
 $ kubectl create secret generic \
     -n openfaas \
     openfaas-license \
-    --from-file license=$HOME/OPENFAAS_LICENSE
+    --from-file license=$HOME/.openfaas/LICENSE
 ```
 Add the OpenFaaS charts repository:
 
 ```sh
 $ helm repo add openfaas https://openfaas.github.io/faas-netes/
+$ helm repo update
 ```
 
 Install the Kafka Connector with default values:
 
 ```bash
+$ export BROKER_HOST=cp-helm-charts-cp-kafka-headless.default:9092
+
 $ helm upgrade kafka-connector openfaas/kafka-connector \
     --install \
     --namespace openfaas \
     --set topics="payment-received" \
-    --set brokerHost="kafka" \
+    --set brokerHost="$BROKER_HOST" \
     --set printResponse="true" \
     --set printResponseBody="true"
 ```
@@ -112,22 +102,11 @@ $ helm upgrade kafka-connector openfaas/kafka-connector \
 
 * If you deployed Kafka to a remote location or a different namespace or port then just update the `brokerHost` value.
 
-> Note: if you do not want to install tiller on your cluster, then you can make use of `helm template` to generate YAML files
-
 We have now deployed the following components:
 
 * Zookeeper
 * Broker Host with Producer
 * kafka-connector
-
-Before we proceed, make sure you have all the components running:
-
-```bash
-$ kubectl get pods -n openfaas | grep -E 'kafka|zookeeper'
-kafka-broker-544fbccd48-p6pgr     1/1     Running            3          3m
-kafka-connector-5d9f447f5-5drv7   1/1     Running            0          4m
-zookeeper-699f568f6f-6b4n2        1/1     Running            0          3m
-```
 
 ## Subscribe to a topic
 
@@ -138,8 +117,13 @@ In order to consume topics via the connector we need to apply an annotation with
 * Create a new function in Go
 
 ```sh
-$ faas-cli new kafka-message --lang=go --prefix=<your_dockerhub_username>
-$ mv kafka-message.yml stack.yml
+# Replace with your container registry or Docker Hub account:
+$ export OPENFAAS_PREFIX=docker.io/alexellis2
+
+# Create a function in Go
+$ faas-cli new email-receipt \
+  --lang=go
+$ mv email-receipt.yml stack.yml
 ```
 
 > We also renamed the function's YAML file to  `stack.yml` (the default)
@@ -154,12 +138,27 @@ provider:
   gateway: http://127.0.0.1:8080
 
 functions:
-  kafka-message:
+  email-receipt:
     lang: go
-    handler: ./kafka-message
-    image: <your_dockerhub_username>/kafka-message:latest
+    handler: ./email-receipt
+# ...
     annotations:
       topic: payment-received
+```
+
+Edit the handler.go file:
+
+```go
+package function
+
+import (
+	"fmt"
+)
+
+// Handle a serverless request
+func Handle(req []byte) string {
+	return fmt.Sprintf("Email customer in response to event: %s", string(req))
+}
 ```
 
 Build, Push and Deploy the function with single command:
@@ -168,7 +167,7 @@ Build, Push and Deploy the function with single command:
 $ faas-cli up
 ```
 
-The kafka-connector will now rebuild its topic map and detect that the "kafka-message" function wants to be invoked with messages published on the `payment-received` topic.
+The kafka-connector will now rebuild its topic map and detect that the "email-receipt" function wants to be invoked with messages published on the `payment-received` topic.
 
 You can see the response of the function in two places: the function’s logs and in the connector's logs. This is configurable in the helm chart.
 
@@ -176,26 +175,7 @@ You can see the response of the function in two places: the function’s logs an
 
 Lets proceed by opening two terminals, one will be used to check the output of the function and the other will create messages on the topic.
 
-In the first terminal get the producer's name:
-
-```bash
-$ PRODUCER=$(kubectl get pods -l=component=kafka-broker -n openfaas -o jsonpath="{.items[*].metadata.name}")
-```
-
-Then open a shell session inside the Broker pod to connect with the producer:
-
-```bash
-$ kubectl exec $PRODUCER -ti -n openfaas \
-    --tty \
-    --stdin \
-    -- /opt/kafka_2.12-0.11.0.1/bin/kafka-console-producer.sh \
-    --broker-list kafka:9092 \
-    --topic payment-received
-```
-
-In the second terminal follow the Kafka Connector's logs:
-
-Follow the logs with this command:
+In the first terminal follow the Kafka Connector's logs:
 
 ```bash
 $ kubectl logs deploy/kafka-broker -n openfaas \
@@ -203,15 +183,69 @@ $ kubectl logs deploy/kafka-broker -n openfaas \
     --follow
 ```
 
-In the first terminal write the message you would like your function to receive and check the output from the logs.
+In the second terminal, deploy a client for Kafka to produce messages:
+
+```bash
+$ kubectl apply -f - <<EOF
+    apiVersion: v1
+    kind: Pod
+    metadata:
+      name: kafka-client
+      namespace: default
+    spec:
+      containers:
+      - name: kafka-client
+        image: confluentinc/cp-enterprise-kafka:6.1.0
+        command:
+          - sh
+          - -c
+          - "exec tail -f /dev/null"
+EOF
+
+pod/kafka-client created
+```
+
+Connect to the pod and produce messages on the topic:
+
+```bash
+# Connect to a shell within the pod:
+
+kubectl exec -it kafka-client -- /bin/bash
+
+# Create the topic
+kafka-topics \
+  --zookeeper cp-helm-charts-cp-zookeeper-headless:2181 \
+  --topic payment-received \
+  --create --partitions 1 \
+  --replication-factor 1 --if-not-exists
+
+# Create a message
+MESSAGE="`date -u`"
+
+# Produce a test message to the topic
+echo "$MESSAGE" | kafka-console-producer --broker-list \
+  cp-helm-charts-cp-kafka-headless:9092 \
+  --topic payment-received
+```
+
+You'll now see your messages being sent to the payment-received topic and then the function being invoked.
 
 ```
-...
+OpenFaaS kafka-connector PRO    Version: 0.6.0-rc3      Commit: 3784d5f35d1b6e090e37f211d6af1e51136ff9d6
+
+2021/12/15 09:56:34 Licensed to: alex <alex@openfaas.com>, expires: 77 day(s)
+2021/12/15 09:56:34 Broker: cp-helm-charts-cp-kafka-headless.default:9092       Topic: [payment-received]
+Gateway: http://gateway.openfaas:8080
+Rebuild interval: 30.000000s
+Use TLS: false
+Use SASL: false
+2021/12/15 09:56:34 Binding to topics: [payment-received]
+
 
 2019/04/09 18:37:10 Syncing topic map
-2019/04/09 18:37:12 Invoke function: kafka-message
+2019/04/09 18:37:12 Invoke function: email-receipt
 [#4] Received on [payment-received,0]: 'Kafka and go'
-[200] payment-received => kafka-message
+[200] payment-received => email-receipt
 Hello, Go. You said: Kafka and go
 
 2019/04/09 18:37:13 Syncing topic map
@@ -255,22 +289,16 @@ Now that I've shown you how to connect to Kafka and explored a real-world use-ca
 
 You can use your existing OpenFaaS Pro license, or apply for a 14-day trial: [Find out more](https://openfaas.com/support/)
 
+If you would like to remove the Kafka-connector, use helm to delete it:
+
+```bash
+$ helm delete --purge kafka-connector
+```
+
 ## Going further
 
 The kafka-connector implements the [Connector SDK](https://github.com/openfaas-incubator/connector-sdk), checkout the SDK written in Go for how you can start connecting your own events and triggers.
 
 Other examples include the [Cron Connector](https://github.com/zeerorg/cron-connector) and the [vCenter Connector](https://github.com/openfaas-incubator/vcenter-connector). You can view the other [triggers here](https://docs.openfaas.com/reference/triggers/).
-
-## Remove the components
-
-If you would like to remove the components off your cluster just run the following command:
-
-```bash
-$ kubectl delete deploy/kafka-broker -n openfaas && \
-  kubectl delete svc/kafka -n openfaas && \
-  kubectl delete deploy/zookeeper -n openfaas && \
-  kubectl delete svc/zookeeper -n openfaas && \
-  helm delete --purge kafka-connector
-```
 
 Editor(s): [Alex Ellis](https://www.alexellis.io/)

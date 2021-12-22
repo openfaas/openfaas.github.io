@@ -15,6 +15,12 @@ dark_background: true
 
 Build and deploy functions to OpenFaaS anywhere with GitHub Actions and multi-arch images
 
+## Notice
+
+This article is now considered out of date.
+
+For a tested GitHub Action that is also: multi-function and multi-architecture, see: [Serverless for Everyone Else](https://store.openfaas.com/l/serverless-for-everyone-else).
+
 ## Introduction: automating function updates
 
 OpenFaaS was created to have the freedom to run serverless functions anywhere you want, whether that be within your on-premises environment, on AWS, or even on a Raspberry Pi in your home. Whichever way you're running OpenFaaS, you won't get far without a way to build and deploy functions, and at small scale, you may be doing this manually.

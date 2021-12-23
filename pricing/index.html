@@ -4,18 +4,34 @@ description: Learn about our Support and Subscriptions for OpenFaaS
 image: https://www.openfaas.com/images/pexels-fauxels-3183150.jpg
 ---
 
-<section class="hero pricing">
+<main class="pricing">
 
-    <div class="hero-body has-text-centered intro">
-        {% include pricing-page/pricing-title.html %}
-    </div>
+    <!-- Pricing Cards -->
+    <section class="hero">
+        <div class="hero-body has-text-centered intro">
+            {% include pricing-page/pricing-cards-title.html %}
+        </div>
+        <div class="hero-body white">
+            {% include pricing-page/pricing-cards.html %}
+        </div>
+    </section>
+    
+    <!-- Pricing Comparison table -->
+    <!-- 
+        <section class="hero">
+            <div class="hero-body has-text-centered intro">
+                {% include pricing-page/pricing-table-title.html %}
+            </div>
+            <div class="hero-body white">
+                {% include pricing-page/pricing-table.html %}
+            </div>
+        </section>
+     -->
 
-    <div class="hero-body white call-to-action is-spaced-bottom">
-        {% include pricing-page/pricing-cards.html %}
-    </div>
+    <section class="hero">
+        <div class="hero grey-darker-bis is-spaced-bottom">
+            {% include pricing-page/pricing-poc.html %}
+        </div>
+    </section>
 
-    <div class="hero grey-darker-bis is-spaced-bottom">
-        {% include pricing-page/pricing-poc.html %}
-    </div>
-
-</section>
+</main>

@@ -122,11 +122,13 @@ Here's our solution for the cold-start problem: don't have one.
 
 What do I mean?
 
-Think about it. Where do you see coldstarts? On massive SaaS-style cloud provider products, where hundreds of thousands of functions lay idle - potentially for days at a time.
+Think about it. Where do you see coldstarts? On massive SaaS-style cloud provider products like [AWS Lambda](https://mikhail.io/serverless/coldstarts/aws/), where hundreds of thousands of functions lay idle - potentially for days at a time.
 
 You are not Google or Amazon Web Services, so you do not have the same constraints as they do. You don't need to run 200,000 mostly idle functions for thousands of different customers and bill them per second for their compute time.
 
-OpenFaaS from day 1 ran a minimum of 1 replica of every function, always. You could set this minimum number higher if you wished, but it was at least 1.
+Now don't get me wrong, cloud functions can be incredibly convenient and are a good choice for many people. OpenFaaS is built for those who value simplicity and need portability, greater flexibility and an intuitive developer experience.
+
+OpenFaaS from day 1 ran a minimum of 1 replica of every function, always. You could set this minimum number higher if you wished, but it was at least 1. Scaling to zero wasn't something that users talked to us about for quite some time, so we didn't prioritise it.
 
 In 2018 one of our customers was running up a large bill on Google Cloud, and asked if we could introduce automated scale to zero. We did that, but made it optional, so you could have tight control over which functions were going to incur a coldstart.
 

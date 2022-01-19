@@ -112,7 +112,6 @@ Here are a number of examples showing the use-case with concrete examples:
 Cold starts occur at two times during your function's lifecycle:
 
 1) Initial deployment
-
     The function is deployed for the first time, and must go through the lifecycle we outlined in the introduction. This can be slow because it involves pulling an image from a remote registry, unpacking it, and having it pass a health check.
 
 2) During horizontal scaling
@@ -120,7 +119,7 @@ Cold starts occur at two times during your function's lifecycle:
 
 Here's our solution for the cold-start problem: don't have one.
 
-What do I mean?
+*What do I mean?*
 
 Think about it. Where do you see coldstarts? On massive SaaS-style cloud provider products like [AWS Lambda](https://mikhail.io/serverless/coldstarts/aws/), where hundreds of thousands of functions lay idle - potentially for days at a time.
 
@@ -186,12 +185,15 @@ It's [now 5 years since we started OpenFaaS](https://www.youtube.com/watch?v=Qzw
 
 In 2022, our of-watchdog gives us a standard interface for making containers more efficient for handling functions. It can serve requests in a round-trip in less than 1ms and handle high concurrency within each container (replica) in your cluster. The [cold-start is optional](https://docs.openfaas.com/openfaas-pro/scale-to-zero/), and where you opt-in to have one, we have ways to mitigate its impact and "hide it" from your users.
 
+Scaling your functions down to a minimum replica count or to zero replicas when not in use, can save you money over time - by reducing the total amount of nodes you need in your cluster. There are a few other tricks we'd be happy to share with you about running OpenFaaS in Production and saving on cloud costs.
+
 In the future, as Kubernetes becomes more adept at starting containers quickly, OpenFaaS will be able to leverage that work too.
 
 If you'd like to learn more about the project and community, check out:
 
-* [OpenFaaS Highlights from 2021](https://www.openfaas.com/blog/highlights-2021/)
+* [My OpenFaaS Highlights from 2021](https://www.openfaas.com/blog/highlights-2021/)
 * [Serverless For Everyone Else (OpenFaaS handbook)](https://gumroad.com/l/serverless-for-everyone-else)
+* [Check out OpenFaaS Pro - OpenFaaS for production](https://docs.openfaas.com/openfaas-pro/introduction/)
 * [Fork/star the of-watchdog on GitHub](https://github.com/openfaas/of-watchdog)
 
 Or reach out to talk to us [on Twitter](https://twitter.com/openfaas/) [or via email](https://www.openfaas.com/support/).

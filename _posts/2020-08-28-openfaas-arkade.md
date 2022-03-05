@@ -260,13 +260,13 @@ Try it out today:
 
 ```bash
 # Note: you can also run without `sudo` and move the binary yourself
-curl -sLS https://dl.get-arkade.dev | sudo sh
+curl -sLS https://get.arkade.dev | sudo sh
 
 arkade --help
 ark --help  # a handy alias
 
 # Windows users with Git Bash
-curl -sLS https://dl.get-arkade.dev | sh
+curl -sLS https://get.arkade.dev | sh
 ```
 
 What about commercial apps? One of the lessons we've learned as a community about Open Source, is just how much effort it takes to sustain a project where everything's given away for free. Commercial users are often not interested or willing to contribute through sponsorships, support, consulting, or paid development. Now there has been interest from commercial companies that want to have their app listed. We've come up with a way for them to differentiate their offerings through Sponsored Apps.

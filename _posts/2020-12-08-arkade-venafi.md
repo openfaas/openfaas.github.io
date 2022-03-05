@@ -47,7 +47,7 @@ For Windows users, you can use [Git Bash](https://git-scm.com/downloads) to get 
 The CLI tools can be downloaded through arkade's `get` command:
 
 ```bash
-curl -SLs https://dl.get-arkade.dev | sh
+curl -SLs https://get.arkade.dev | sh
 
 # For MacOS and Linux users:
 sudo mv arkade /usr/local/bin/

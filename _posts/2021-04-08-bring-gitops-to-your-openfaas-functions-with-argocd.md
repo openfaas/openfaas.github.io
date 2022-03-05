@@ -82,7 +82,7 @@ Once we have arkade, we can create a cluster and install ArgoCD. If you prefer, 
 
   ```bash
   # Run with or without sudo
-  $ curl -sLS https://dl.get-arkade.dev | sudo sh
+  $ curl -sLS https://get.arkade.dev | sudo sh
   ```
 
 * KinD (Kubernetes in Docker) v0.10.0

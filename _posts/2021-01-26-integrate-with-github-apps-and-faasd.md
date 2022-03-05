@@ -188,7 +188,7 @@ In order to do that, first, we need to pull the corresponding function template 
 We need to install "faas-cli" tool for that but we need to install arkade first because arkade is the marketplace for our favourite devops CLIs.
 
 ```bash
-$ curl -sLS https://dl.get-arkade.dev | sudo sh
+$ curl -sLS https://get.arkade.dev | sudo sh
 ```
 
 Then, let's install our faas-cli tool.

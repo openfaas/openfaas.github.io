@@ -139,7 +139,7 @@ having to maintain a values.yaml file, you can use flags. You'll see examples of
 Install `arkade`:
 
 ```sh
-curl -sLS https://dl.get-arkade.dev | sh
+curl -sLS https://get.arkade.dev | sh
 chmod +x arkade
 sudo install arkade
 
@@ -363,7 +363,7 @@ You could summarise the commands as follows:
 # Install our tools
 curl -sLS https://get.k3sup.dev | sh
 sudo install k3sup /usr/local/bin/
-curl -sLS https://dl.get-arkade.dev | sudo sh
+curl -sLS https://get.arkade.dev | sudo sh
 
 # Set our environment variables
 export MASTER_IP=178.128.162.180

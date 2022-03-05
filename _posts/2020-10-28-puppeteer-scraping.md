@@ -91,7 +91,7 @@ For the impatient, our [arkade tool](https://get-arkade.dev) can get you up and 
 
 ```bash
 # Get arkade, and move it to $PATH
-curl -sLS https://dl.get-arkade.dev | sh
+curl -sLS https://get.arkade.dev | sh
 sudo mv arkade /usr/local/bin/
 
 # Run Kubernetes locally

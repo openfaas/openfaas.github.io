@@ -126,7 +126,7 @@ exit
 
 ```bash
 # Get arkade, and move it to $PATH
-curl -sLS https://dl.get-arkade.dev | sh
+curl -sLS https://get.arkade.dev | sh
 sudo mv arkade /usr/local/bin/
 
 # Fetch Kubernetes tools to run locally

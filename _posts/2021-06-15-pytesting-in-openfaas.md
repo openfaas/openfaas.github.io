@@ -3,7 +3,7 @@ title: "Learn how to unit-test your OpenFaaS Functions using Pytest"
 description: "Lucas will show you how to test OpenFaaS functions written in Python with the Pytest framework"
 
 date: 2021-06-15
-image: /images/2021-06-pytesting/conor-samuel-K5BFXOsFp7g-unsplash.jpg
+image: /images/2021-06-pytesting/background.jpg
 categories:
   - python
   - flask

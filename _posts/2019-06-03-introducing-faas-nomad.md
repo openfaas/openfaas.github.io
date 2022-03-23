@@ -2,7 +2,7 @@
 title: "Introducing Serverless with Hashicorp Nomad, Consul, and Vault"
 description: Learn how to deploy Serverless Functions on Hashicorp Nomad, Consul, and Vault with faas-nomad, a provider maintained by Andrew Cornies.
 date: 2019-06-03
-image: /images/openfaas-on-nomad/ian-dooley-407846-unsplash-nomad.jpg
+image: /images/openfaas-on-nomad/nomad.jpg
 categories:
   - nomad
   - vault

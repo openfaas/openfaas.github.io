@@ -53,6 +53,8 @@ function initNavToggler() {
     });
 }
 
+initNavToggler();
+
 /*------------Init youtube player modal-------------*/
 /*--------------------------------------------------*/
 

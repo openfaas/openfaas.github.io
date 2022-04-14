@@ -8,7 +8,7 @@ categories:
 - go
 - faas
 - http
-- RESrest
+- rest
 author_staff_member: alex
 dark_background: true
 
@@ -607,12 +607,6 @@ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiaHR0cDovLzEyNy4wLjAuMTo4MDgwL2Z
 ## Wrapping up and taking things further
 
 The main changes that benefitted us with Go 1.18 was the ability to use Go workspaces to fix the local development workflow. That said, it's also given us a chance to walk through various patterns for using Go with OpenFaaS and I hope you've found that useful.
-
-### We'll show you how it works - live!
-
-On Friday 15th April at 12:00 BST I'll be demoing these techniques and changes with Lucas on YouTube, subscribe & remind so that you can attend or get a notification when the recording goes live afterwards.
-
-{% include youtube.html id="u7lAmTqKPvE" %}
 
 ### Did you learn something?
 

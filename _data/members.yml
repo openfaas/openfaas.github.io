@@ -6,16 +6,18 @@ founders:
 contributors:
   - lucas
   - nitishkumar
-  - vivek
-  - alistair
-  - yankee
+  - czekus
+  - han
+  - richard
 
 # Listed for several months, GitHub and leaderboard shows former contributors permanently
 former_contributors:
+  - vivek
+  - alistair
+  - yankee
   - utsav
   - martin
   - stefan
-  - richard
   - ed
   - burton
   - john

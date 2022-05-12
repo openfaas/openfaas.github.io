@@ -1,6 +1,6 @@
 ---
 title: "How to process your data the resilient way with back pressure"
-description: "Alex explains to use back pressure with your OpenFaaS functions to make sure all your data gets processed."
+description: "Alex explains how to use back pressure with your OpenFaaS functions to make sure all your data gets processed."
 date: 2022-05-12
 image: /images/2022-react-app/pen-design.jpg
 categories:
@@ -14,7 +14,7 @@ dark_background: true
 
 ---
 
-Alex explains to use back pressure with your OpenFaaS functions to make sure all your data gets processed.
+Alex explains how to use back pressure with your OpenFaaS functions to make sure all your data gets processed.
 
 As I've spoken to customers and community users of OpenFaaS, I've noticed a common theme. Users want to process large amounts of data through a number of functions and get results out the other end.
 
@@ -34,13 +34,13 @@ I'll set out to explain why setting limits is important in a distributed system,
 
 I started creating OpenFaaS in 2016 for three primary reasons: I wanted to run code in any language or runtime, be able to deploy it on any server or cloud, and to be able to set my own limits for timeouts, function size, and event sources for integrations.
 
-OpenFaaS gives you the ability to pick and choose a timeout that makes sense for your workload, instead of being fixed at 60 seconds. For asynchronous requests, there's a default limit for the payload size, however you can also change that.
+OpenFaaS gives you the flexibility to pick and choose a timeout that makes sense for your workload, instead of being fixed at 60 seconds. For asynchronous requests, there's a default limit for the payload size, however you can also change that.
 
 So if we can pick our limit, why even have one?
 
 Limits are important for understanding how a system will behave and how it can break, and even when we don't set limit explicitly, there may be some implicit ones which we are not aware of.
 
-Let's say that you configured a function to a limit of 1GB of RAM available for processing requests. You then load it with 1,000,000 requests. It's likely that it will break in correlation to the [ulimit](https://ss64.com/bash/ulimit.html) which is set up on the host. ulimits control how many processes can be started and how many files can be opened.
+Let's say that you configured a function to a limit of 1GB of RAM available for processing requests. You then load it with 1,000,000 requests. It's likely that it will break in correlation to the [ulimit](https://ss64.com/bash/ulimit.html) which is set up on the host. The ulimit values control how many processes can be started and how many files can be opened.
 
 A request to an OpenFaaS function uses at least one file descriptor up, which means if we have a descriptor limit of 1024, we will be able to handle somewhere between 1 and 1024 connections concurrently. We then need to bear in mind the RAM limit that has been set, and which we may encounter first.
 
@@ -58,7 +58,7 @@ What if we have a downstream legacy API? [Simon Emms implemented OpenFaaS at HM 
 
 When applied to computer science, back pressure says that at some point we may have saturated the system or the network.
 
-There's three strategies we could apply:
+There are three strategies we could apply:
 
 * Stop producing or slow the producing of load on the system
 * Cache, save, or buffer requests
@@ -68,7 +68,7 @@ OpenFaaS functions can be invoked synchronously or asynchronously over HTTP, or 
 
 One pattern we may want to consider is rate-limiting, which you will encounter if you start writing an application against a popular REST API like Twitter or GitHub. The HTTP code you will receive could be: "429 Too Many Requests" along with an optional header with an estimated time in the future when you should retry the work. This puts the onus on the producer to cache, buffer, or drop requests.
 
-The OpenFaaS Asynchronous system implements a buffer where by any request that is made via an asynchronous URL is published to a NATS queue. This is a form of buffering, and can shield a system from spikes in traffic. NATS Streaming has a default limit of 1,000,000 messages and around 1 GB of disk space, these values can be set higher if required. We need to bear in mind that the NATS queue is not infinite, and what could happen if it was saturated.
+The OpenFaaS Asynchronous system implements a buffer whereby any request that is made via an asynchronous URL is published to a NATS queue. This is a form of buffering, and can shield a system from spikes in traffic. NATS Streaming has a default limit of 1,000,000 messages and around 1 GB of disk space, these values can be set higher if required. We need to bear in mind that the NATS queue is not infinite, and what could happen if it was saturated.
 
 Finally, dropping of messages could happen at any component of the system: the gateway, the queue, the function, or an API that the function calls. When the Twitter API returns an error due to a rate-limit, this is a form of "dropping".
 

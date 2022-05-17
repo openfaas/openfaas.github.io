@@ -98,7 +98,17 @@ The output should be as follows, and if you need it again run `terraform output`
 ```
 droplet_ip = 165.232.76.94
 gateway_url = https://faasd.example.com/
-login_cmd = faas-cli login -g https://faasd.example.com/ -p 6b1be68a8feba552c11beb2eeb7fcc7edee4627f
+login_cmd = <sensitive>
+password = <sensitive>
+```
+
+The `terraform output` command can also be used to view the sensitive output data.
+
+```
+terraform output login_cmd
+faas-cli login -g https://faasd.example.com/ -p 6b1be68a8feba552c11beb2eeb7fcc7edee4627f
+
+terraform output password
 password = 6b1be68a8feba552c11beb2eeb7fcc7edee4627f
 ```
 
@@ -120,7 +130,7 @@ At this point, in the background Caddy will be trying to create a TLS certificat
 
 ### Check that it worked
 
-The next step is to check that everything worked, you can verify this with the `faas-cli login` command, using the output from `terraform output`
+The next step is to check that everything worked, you can verify this with the `faas-cli login` command, using the output from `terraform output login_cmd`
 
 ```bash
 # Prefix with two spaces, to prevent tracking in your bash

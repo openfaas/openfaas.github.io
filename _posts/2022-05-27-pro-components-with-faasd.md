@@ -360,8 +360,12 @@ When you look at the function detail of the user-fn in the dashboard you should 
 
 
 # Wrapping up
+We looked at some of the OpenFaaS Pro components and how they can be used at the edge with faasd. I showed you how to setup the kafka-connector on faasd and how to use functions to consume messages from Kafka topics. While [OpenFaaS Pro](https://www.openfaas.com/support/) comes with a lot of features you might want when running in production, the base version of faasd is a great way to get started. You can use it to deploy microservices, run long running task in the background with async functions or trigger functions from any kind of event. For more insights and tutorials on what you can do with faasd take a look at the following resources:
+- [Serverless For Everyone Else](https://openfaas.gumroad.com/l/serverless-for-everyone-else)
+- [Build at the Edge with OpenFaaS and GitHub Actions](https://www.openfaas.com/blog/edge-actions/)
+- [Build a Serverless appliance with faasd](https://blog.alexellis.io/deploy-serverless-faasd-with-cloud-init/)
 
-If running OpenFaaS on Kubernetes is not an option for you because your devices have limited resources or you want to avoid the complexity of running and managing Kubernetes, faasd can be the perfect alternative. It supports most of the OpenFaaS features and can be extended with OpenFaaS Pro features. 
+Using faasd to run OpenFaaS can be useful if you want to avoid the complexity of running and managing Kubernetes or when you just don't need clustering capabilities. However, running Kubernetes at the edge is now also a possibility. [The LinuxFoundation](https://www.linuxfoundation.org/) even has a course: [Introduction to Kubernetes on Edge with k3s](https://training.linuxfoundation.org/training/introduction-to-kubernetes-on-edge-with-k3s-lfs156x/). OpenFaaS offers you the same experience and features, whether you choose to use Kubernetes with [K3s](https://k3s.io/) or [faasd](https://github.com/openfaas/faasd).
 
 Running the [OpenFaaS Pro](https://www.openfaas.com/support/) components requires a license key. If you are already a pro customer you can go ahead an try out all the [OpenFaaS Pro](https://www.openfaas.com/support/) components on faasd. If your are new to OpenFaaS or OpenFaaS Pro you can always [reach out to talk to us](https://www.openfaas.com/support/).
 

@@ -12,9 +12,9 @@ author_staff_member: han
 In this post Han shows how the OpenFaaS Pro components can be used with faasd.
 
 ## What is faasd?
-Faasd is the lightweight option to run OpenFaas. It does not require Kubernetes but uses containerd and runc instead. Beacause of this you can run faasd almost anywhere.
+faasd is the lightweight option to run OpenFaaS. It does not require Kubernetes but uses containerd and runc instead. Beacause of this you can run faasd almost anywhere.
 
-Faasd comes with all the core components from the OpenFaaS stack. It has a REST management api and ui dashboard. It comes with a queue system built around NATS for asynchronous invocations and has built in Prometheus monitoring.
+faasd comes with all the core components from the OpenFaaS stack. It has a REST management api and ui dashboard. It comes with a queue system built around NATS for asynchronous invocations and has built in Prometheus monitoring.
 
 While this is already a strong set of features, if you are using faasd in production you might want to extend its feature set with some of the OpenFaaS Pro components. These features include:
 - An extended UI dashboard
@@ -24,18 +24,17 @@ While this is already a strong set of features, if you are using faasd in produc
 - Single Sign-On
 
 ## Why faasd?
-Faasd uses containerd directly, this eliminates the need to learn and operate Kubernetes. Leaving out Kubernetes also has the advantage that faasd can be deployed on devices that have limited resources. This makes it ideal for use at the edge, on IoT devices and in industrial or airgapped environments.
+faasd uses containerd directly, this eliminates the need to learn and operate Kubernetes. Leaving out Kubernetes also has the advantage that faasd can be deployed on devices that have limited resources. This makes it ideal for use at the edge, on IoT devices and in industrial or airgapped environments.
 
-Faasd works well for the same kind of use-cases as OpenFaaS on Kubernetes. It gives you a universal API to deploy microservices or functions written in any language [using our templates or by creating your own](https://docs.openfaas.com/cli/templates/#templates). Some of these use-cases may include:
+faasd works well for the same kind of use-cases as OpenFaaS on Kubernetes. It gives you a universal API to deploy microservices or functions written in any language [using our templates or by creating your own](https://docs.openfaas.com/cli/templates/#templates). Some of these use-cases may include:
 
 - An integration for a data-feed from third-parties.
-- An API written in Pyhton, ASP.net, Node.js or any other language.
+- An API written in go, Python, Dot net Core, Node.js or any other language.
 - Running batch jobs.
 - Receiving webhooks.
-- 
 
 ## Getting started
-The official guide to faasd, [Serverless For Everyone Else](https://openfaas.gumroad.com/l/serverless-for-everyone-else) is the best way te learn about faasd and OpenFaaS.
+The official guide to faasd, [Serverless For Everyone Else](https://openfaas.gumroad.com/l/serverless-for-everyone-else) is the best way to learn about faasd and OpenFaaS.
 
 There are also some tutorials that show you how to deploy faasd on different platforms:
 
@@ -45,12 +44,12 @@ There are also some tutorials that show you how to deploy faasd on different pla
 ## Deploying additional services on faasd
 By default faasd runs a stack of services that make up the core of OpenFaaS. It uses a subset of directives from the [compose-spec](https://compose-spec.io/) to define these services in a docker-compose.yaml file. You can extend this file to deploy additional services.
 
-> The book, [Serverless For Everyone Else](https://openfaas.gumroad.com/l/serverless-for-everyone-else), has a complete chapter on how to add additional services and containers to faasd. It includes examples for running Grafana, Potgresql, Influxdb and Redis.
+> The book, [Serverless For Everyone Else](https://openfaas.gumroad.com/l/serverless-for-everyone-else), has a complete chapter on how to add additional services and containers to faasd. It includes examples for running Grafana, PotgresSQL, Influxdb and Redis.
 
 In order to run the pro components, an [OpenFaaS Pro license](https://www.openfaas.com/support/) is required. This license file will have to be created on the faasd host at `/var/lib/faasd/secrets/openfaas-license`.
 
 ## The dashboard
-OpenFaaS recently released a new UI Dashboard. The dashboard offers you a nice visual way te discover deployed functions. It alows you to see the deployed functions per namespace and shows you the total invocation count and replica count of each function along with some other metadata.
+OpenFaaS recently released a new UI Dashboard. The dashboard offers you a nice visual way to discover deployed functions. It enables you to see the deployed functions per namespace and shows you the total invocation count and replica count of each function along with some other rich metadata.
 
 ![An overview of functions](/images/2022-05-faasd-pro/functions-overview.png)
 > An overview of functions
@@ -146,7 +145,7 @@ faas-idler:
       - CAP_NET_RAW
 ```
 
-One of the strenghts of faasd compared to OpenFaaS on Kubernetes is its sub second cold-start time. On Kubernetes scaling up form zero can take a couple of seconds. Faasd directly uses containerd which significantly reduces this cold start period.
+One of the strengths of faasd compared to OpenFaaS on Kubernetes is its sub-second cold start time. On Kubernetes scaling up from zero can take a couple of seconds. In comparison, faasd uses containerd directly, which significantly reduces this cold start period.
 
 We can deploy the figlet function from the OpenFaaS store and add the required label.  
 ```
@@ -176,7 +175,7 @@ real    0m0.085s
 ```
 
 ## Retrying requests
-It is possible to limit the amount of concurrent request that your function can process. This can be usfull when you are running memory intensive tasks and want to prevent overloading the function. Limiting requests can be done by setting `max_inflight` on the function. When a function cannot accept any more connections it will return a http status code 429. You could handle these types of errors by implementing your own retry machnism which but that would probabily be a tedious process. OpenFaaS Pro comes with an upgraded queue-worker that will retry messages a number of times using an exponential back-off arlgorithm. The pro queue-worker will retry messages a set number of times before dropping them. 
+It is possible to limit the number of concurrent requests that your function can process. This can be useful when you are running memory intensive tasks and want to prevent overloading the function. Limiting requests can be done by setting `max_inflight` on the function. When a function cannot accept any more connections it will return a http status code 429. You could handle these types of errors by implementing your own retry mechanism which but that would probably be a time consuming and tedious process. OpenFaaS Pro offers an upgraded queue-worker that will retry messages a number of times using an exponential back-off algorithm. The pro queue-worker will retry messages a set number of times before dropping them. 
 
 The queue-worker can be configured to retry requests for different http status codes. That way it is not only useful for retrying 429 codes but can also be used to retry failed requests to downstream APIs.
 
@@ -241,7 +240,7 @@ Once you have your account setup we recommend you to run through their getting s
 ### Configuring the connector
 After you completed the tutorial and have your kafka cluster setup, we can move on and configure the kafka-connector on faasd.
 
-The kafka-connector will need to authenticate to your cluster. It will need to have access to the api key and secret you created earlier to do this. Save your api key to a file `/var/lib/faasd/secrets/broker-username` and the secret to `/var/lib/faasd/secrets/broker-password`. Faasd will mount both files into the container running the kafka-connector.
+The kafka-connector will need to authenticate to your cluster. It will need to have access to the api key and secret you created earlier to do this. Save your api key to a file `/var/lib/faasd/secrets/broker-username` and the secret to `/var/lib/faasd/secrets/broker-password`. faasd will mount both files into the container running the kafka-connector.
 
 Edit `/var/lib/faasd/docker-compose.yaml` and add the configuration for the kafka-connector:
 ```yaml
@@ -349,7 +348,7 @@ We can now build and deploy the function.
 faas-cli up -f user-fn.yml
 ```
 
-When you look at the function detail of the user-fn it the dashboard you should see that the function is being invoked successfully. The logs of the kafka-connector can also help to see if the function is consuming messages.
+When you look at the function detail of the user-fn in the dashboard you should see that the function is being invoked successfully. The logs of the kafka-connector can also help to see if the function is consuming messages.
 
 ![Logs of the kafka connector that show messages being consumed by the user-fn function](/images/2022-05-faasd-pro/kafka-connector-logs.png)
 > Logs of the kafka connector that show messages being consumed by the user-fn function.
@@ -359,6 +358,7 @@ When you look at the function detail of the user-fn it the dashboard you should 
 
 
 # Wrapping up
+
 If running OpenFaaS on Kubernetes is not an option for you because your devices have limited resources or you want to avoid the complexity of running and managing Kubernetes, faasd can be the perfect alternative. It supports most of the OpenFaaS features and can be extended with OpenFaaS Pro features. 
 
 Running the [OpenFaaS Pro](https://www.openfaas.com/support/) components requires a license key. If you are already a pro customer you can go ahead an try out all the [OpenFaaS Pro](https://www.openfaas.com/support/) components on faasd. If your are new to OpenFaaS or OpenFaaS Pro you can always [reach out to talk to us](https://www.openfaas.com/support/).

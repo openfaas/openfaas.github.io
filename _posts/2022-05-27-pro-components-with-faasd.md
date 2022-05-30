@@ -3,13 +3,15 @@ title: "The Event-driven Edge with OpenFaaS"
 description: "Learn how OpenFaaS can be used to deploy event-driven applications at the edge"
 date: 2022-05-27
 categories:
-  - Faasd
-  - Configuration
-  - Kafka
+  - edge
+  - faasd
+  - configuration
+  - kafka
 author_staff_member: han
 ---
 
 Learn how OpenFaaS can be used to deploy event-driven applications at the edge.
+
 
 ## What is faasd?
 faasd is the lightweight option to run OpenFaaS. It does not require Kubernetes but uses containerd and runc instead. Beacause of this you can run faasd almost anywhere.

@@ -295,14 +295,14 @@ kafka-connector:
     image: ghcr.io/openfaasltd/kafka-connector:0.6.1
     environment:
       - gateway_url=http://gateway:8080
-      - topics=faas-request
+      - topics=user.signup
       - print_response=true
       - print_response_body=true
       - print_request_body=false
       - asynchronous_invocation=false
       - basic_auth=true
       - secret_mount_path=/run/secrets
-      - broker_host=kf-kafka:9092
+      - broker_host=pkc-5r697.europe-west1.gcp.confluent.cloud:9092
       - upstream_timeout=2m
       - rebuild_interval=30s
       - content_type=text/plain
@@ -363,6 +363,7 @@ Jinja2
 
 Now we can edit the function handler `./user-fn/handler.py`:
 
+{% raw %} 
 ```python
 from jinja2 import Template
 import json
@@ -375,6 +376,7 @@ def handle(req):
     res = t.render(id=input["userid"], time=input["registertime"], gender=input["gender"])
     return res 
 ```
+{% endraw %} 
 
 Before we deploy our function we will add an annotation for the `user.signup` topic so that the function is invoked for any message received.
 

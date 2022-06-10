@@ -15,9 +15,9 @@ author_staff_member: han
 Learn how to package and deploy your OpenFaaS functions with Helm.
 
 ## Introduction
-We got some questions from our users who asked us how they can provide configuration options when they deploy functions. This can be useful if you want to update the image tag for a new version of a function. Or, if you want to set common configuration values like limits or environment variables across functions without having to maintain multiple versions of your function stack files.
+After speaking to various customers about how to set up CI/CD with OpenFaaS, we wanted to share a couple of patterns that we've seen work well.
 
-In this post we'll explore how to package functions with Helm, and a simpler alternative too.
+This article will focus on how to set dynamic data like an image tag or a git SHA, we'll also show you how to set specific configuration for functions in one place without having to resort to editing things in multiple places.
 
 ## The OpenFaaS Operator
 The easiest way to deploy functions right now is by using the `faas-cli` commands. The CLI uses the OpenFaaS REST API to deploy functions. In modern production environments you might want to use a GitOps approach to deploy build artefacts from your Continuous Integration pipeline to your cluster.

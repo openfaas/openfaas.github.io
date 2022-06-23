@@ -69,6 +69,8 @@ Then you'll receive a JSON response with the logs, and the final image name:
 
 In this section we show how to prepare a tar archive that we can then use to invoke the builder with `curl`.
 
+You'll need to have set up the - [Function Builder API Helm chart](https://github.com/openfaas/faas-netes/tree/master/chart/pro-builder), and have read the instructions to verify that it's configured correctly.
+
 ### Create the build context
 
 We will start by creating a test function using the node17 template.
@@ -111,12 +113,11 @@ echo -n '{"image": "ttl.sh/openfaas-image:1h"}' > ./build/com.openfaas.docker.co
 
 > The syntax `:1h` will make the image expire and be deleted after one hour, in production, you'll be using your own registry such as the Docker Hub, GHCR or GCR.io, etc, with authentication enabled.
 
-Alternatively, you can use the Docker Hub or any other registry by prefixing `docker.io` for instance: `docker.io/functions/hello-word:0.1.0`.
+Alternatively, you can use the Docker Hub or any other registry by prefixing `docker.io` for instance, if you were the owner of the "functions" account, you may write something like this: `docker.io/functions/hello-word:0.1.0`.
 
 ```bash
 echo -n '{"image": "docker.io/'$DOCKER_USER'/hello-world:0.1.0"}' > ./build/com.openfaas.docker.config
 ```
-
 
 In addition to the image property the config file also supports defining additional build arguments that will be passed to the build.
 
@@ -178,9 +179,17 @@ After a few seconds, the API will return a JSON result with the result from the 
 
 ```
 {
-  "logs": [ "Output from buildkit", "Another log line" ],
-  "imageName": "docker.io/functions/hello-world:0.1.0",
-  "status": "success"
+    "log": [
+        "v: 2022-06-23T09:10:12Z [ship 15/16] RUN npm test 0.35s",
+        "v: 2022-06-23T09:10:13Z [ship 16/16] WORKDIR /home/app/",
+        "v: 2022-06-23T09:10:13Z [ship 16/16] WORKDIR /home/app/ 0.09s",
+        "v: 2022-06-23T09:10:13Z exporting to image",
+        "s: 2022-06-23T09:11:06Z pushing manifest for ttl.sh/openfaas-image:1h@sha256:b077f553245c09d789980d081d33d46b93a23c24a5ec0a9c3c26be2c768db93e 0",
+        "s: 2022-06-23T09:11:09Z pushing manifest for ttl.sh/openfaas-image:1h@sha256:b077f553245c09d789980d081d33d46b93a23c24a5ec0a9c3c26be2c768db93e 0",
+        "v: 2022-06-23T09:10:13Z exporting to image 5.18s"
+    ],
+    "image": "ttl.sh/openfaas-image:1h",
+    "status": "success"
 }
 ```
 
@@ -305,7 +314,7 @@ kubectl port-forward \
 Run the Python script
 ```bash
 python3 python-request/build.py \
-    --image docker.io/functions/hello-world:0.1.0 \
+    --image ttl.sh/openfaas-image:1h \
     --handler ./hello-world \
     --lang node17
 ```
@@ -325,7 +334,7 @@ export HOST=http://127.0.0.1:8080
 export PASSWORD="" # OpenFaaS REST API password
 export FUNCTION_NAME="hello-world"
 
-export IMAGE=docker.io/functions/hello-world:0.1.0 
+export IMAGE=ttl.sh/openfaas-image:1h 
 
 curl -s \
   --data-binary \

@@ -29,7 +29,7 @@ We'll show you how to use the builder using `curl` which will give you everythin
 
 See the docs: [OpenFaaS Function Builder API](https://docs.openfaas.com/openfaas-pro/builder/)
 
-Code examples with: [Node and Python](https://github.com/welteki/openfaas-function-builder-api-examples)
+Code examples for: [Node.js, PHP and Python](https://github.com/openfaas/function-builder-examples)
 
 ## How to call the Function Builder API
 
@@ -214,7 +214,7 @@ OpenFaaS Pro users can also correlate the RAM and CPU usage of the builders, to 
 
 We showed you how to prepare a tar archive and invoke the builder using curl. In this part we walk through a code example to do the same thing using Python code.
 
-> The complete Python example, along with examples for other languages, is [available on GitHub](https://github.com/welteki/openfaas-function-builder-api-examples).
+> The complete Python example, along with examples for other languages, is [available on GitHub](https://github.com/openfaas/function-builder-examples).
 
 ### Prepare the build context
 
@@ -296,10 +296,10 @@ Finally we use the [requests](https://requests.readthedocs.io/en/latest/) librar
 
 ### Run the script
 
-Clone the [examples repo](https://github.com/welteki/openfaas-function-builder-api-examples) to get the complete build script.
+Clone the [examples repo](https://github.com/openfaas/function-builder-examples) to get the complete build script.
 
 ```bash
-git clone https://github.com/welteki/openfaas-function-builder-api-examples --depth=1
+git clone https://github.com/openfaas/function-builder-examples --depth=1
 cd openfaas-function-builder-api-examples
 ```
 
@@ -350,12 +350,12 @@ The [eBook Serverless For Everyone Else](https://gumroad.com/l/serverless-for-ev
 
 We walked you through two examples to show you the tasks that need to be preformed to invoke the Function Builder API and build a container image. The first example was with curl and ttl.sh, so that you can try out the approach quickly, to see what it's like. Then we put together some more examples for different languages, you can find them on GitHub:
 
-- [Function Builder API Examples](https://github.com/welteki/openfaas-function-builder-api-examples)
+- [Function Builder API Examples - Node.js, Python and PHP](https://github.com/openfaas/function-builder-examples)
 
 You'll find more detailed instructions in the documentation and in the Helm chart:
 
-- [Docs: Function Builder API](https://docs.openfaas.com/openfaas-pro/builder/)
-- [Function Builder API Helm chart](https://github.com/openfaas/faas-netes/tree/master/chart/pro-builder)
+- [Docs: Function Builder API](https://docs.openfaas.com/openfaas-pro/builder/) - for general usage
+- [Function Builder API Helm chart](https://github.com/openfaas/faas-netes/tree/master/chart/pro-builder) - for installation and troubleshooting
 
 OpenFaaS uses OCI-format for functions, and whilst the focus of this post was on building functions, the Function Builder API can be used to create any container image from a valid Docker context. You could even use it to build the core services that make up OpenFaaS itself, or the rest of your application.
 

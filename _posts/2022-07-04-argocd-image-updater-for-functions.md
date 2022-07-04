@@ -15,7 +15,9 @@ We show how to automate updating your OpenFaaS Functions using Argo CD and its I
 
 ## Introduction
 
-In this tutorial we'll set up [Argo CD](https://argoproj.github.io/cd/), install OpenFAaS and manage a number of functions using the [app-of-apps pattern](https://argo-cd.readthedocs.io/en/stable/operator-manual/cluster-bootstrapping/). Then we'll show you how to deploy and configure the [Argo CD Image Updater](https://argocd-image-updater.readthedocs.io/en/stable/) to update your functions as new container images get published from your CI pipeline.
+In this tutorial we'll set up [Argo CD](https://argoproj.github.io/cd/), install OpenFaaS and manage a number of functions using the [app-of-apps pattern](https://argo-cd.readthedocs.io/en/stable/operator-manual/cluster-bootstrapping/). Then we'll show you how to deploy and configure the [Argo CD Image Updater](https://argocd-image-updater.readthedocs.io/en/stable/) to update your functions as new container images get published from your CI pipeline.
+
+> Did you know? Argo CD is one of the Cloud Native Computing Foundation's (CNCF) projects for Continuous Delivery and was originally developed at Intuit. Another popular option is Flux, which we covered in a previous article: [Upgrade to Flux v2 to keep OpenFaaS up to date](https://www.openfaas.com/blog/upgrade-to-fluxv2-openfaas/).
 
 ### How it works
 

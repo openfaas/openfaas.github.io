@@ -10,16 +10,19 @@ categories:
 - enterprise
 - gitops
 author_staff_member: han
+author_staff_member_editor: alex
 ---
 
 Learn how to package and deploy your OpenFaaS functions with Helm.
 
 ## Introduction
+
 After speaking to various customers about how to set up CI/CD with OpenFaaS, we wanted to share a couple of patterns that we've seen work well.
 
 This article will focus on how to set dynamic data like an image tag or a git SHA, we'll also show you how to set specific configuration for functions in one place without having to resort to editing things in multiple places.
 
 ## The OpenFaaS Operator
+
 The easiest way to deploy functions right now is by using the `faas-cli` commands. The CLI uses the OpenFaaS REST API to deploy functions. In modern production environments you might want to use a GitOps approach to deploy build artefacts from your Continuous Integration pipeline to your cluster.
 
 At this time, two of the most popular open-source projects for GitOps are [ArgoCD](https://argo-cd.readthedocs.io/en/stable/) and [Flux](https://fluxcd.io/). Both of these projects are designed to apply Kubernetes YAML files and can not directly interact with the OpenFaaS REST API.

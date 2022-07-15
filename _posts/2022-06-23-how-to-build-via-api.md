@@ -9,6 +9,7 @@ categories:
 - kubernetes
 - oci
 author_staff_member: han
+author_staff_member_editor: alex
 ---
 
 We show you how to build functions programmatically with the OpenFaaS Function Builder API.

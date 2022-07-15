@@ -9,6 +9,7 @@ categories:
   - eventdriven
   - kafka
 author_staff_member: han
+author_staff_member_editor: alex
 ---
 
 Learn how OpenFaaS can be used to deploy event-driven functions at the edge.

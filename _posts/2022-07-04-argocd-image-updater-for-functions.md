@@ -9,6 +9,7 @@ categories:
 - kubernetes
 image: /images/2022-07-argocd-image-updater/background.png
 author_staff_member: han
+author_staff_member_editor: alex
 ---
 
 We show how to automate updating your OpenFaaS Functions using Argo CD and its Image Updater

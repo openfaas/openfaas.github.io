@@ -140,6 +140,7 @@ The applications Chart has templates for two Argo CD applications. The openfaas-
 The functions Chart is also pictured here, it is used by the openfaas-functions app. As mentioned in the prerequisites, you can checkout our [tutorial on how to package functions with helm](https://www.openfaas.com/blog/howto-package-functions-with-helm/) to create this Chart.
 
 The openfaas-operator application template for installing OpenFaaS CE:
+{% raw %}
 ```yaml
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -166,8 +167,11 @@ spec:
     automated:
       selfHeal: true
 ```
+{% endraw %}
 
 To deploy as an OpenFaaS Pro customer you have to add some additional Helm parameters:
+
+{% raw %}
 ```yaml
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -198,6 +202,7 @@ spec:
     automated:
       selfHeal: true
 ```
+{% endraw %}
 
 Don't forget to create the required secret with your [OpenFaaS Pro license](https://www.openfaas.com/support/)
 ```bash
@@ -211,7 +216,7 @@ kubectl create secret generic \
 
 
 The template for the openfaas-functions application:
-
+{% raw %}
 ```yaml
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -229,6 +234,7 @@ spec:
     automated:
       selfHeal: true
 ```
+{% endraw %}
 
 We made the destination server configurable. In the default `values.yaml` it is set to the application's K8s API server address, `https://kubernetes.default.svc`. This address should be used when deploying to the same cluster that Argo CD is running in. You can refer to the [Argo CD docs](https://argo-cd.readthedocs.io/en/stable/getting_started/#5-register-a-cluster-to-deploy-apps-to-optional) for more details on registering another cluster to deploy apps to.
 ```yaml
@@ -286,6 +292,7 @@ The Kubernetes resource of our openfaas-functions applications must be annotated
 
 We need to update the openfaas-functions application template and add the following annotations:
 
+{% raw %}
 ```yaml
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -306,6 +313,7 @@ spec:
     automated:
       selfHeal: true
 ```
+{% endraw %}
 
 The annotation `argocd-image-updater.argoproj.io/image-list` is used to specify a list of images that should be considered for updates. It should be a comma separated list of image specifications.
 

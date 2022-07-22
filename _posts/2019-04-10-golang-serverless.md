@@ -130,7 +130,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/openfaas-incubator/go-function-sdk"
+	handler "github.com/openfaas/templates-sdk/go-http"
 )
 
 // Handle a function invocation
@@ -146,7 +146,7 @@ func Handle(req handler.Request) (handler.Response, error) {
 }
 ```
 
-See also: [golang-http README](https://github.com/openfaas-incubator/golang-http-template) for examples of how to use a database connection and HTTP paths.
+See also: [golang-http README](https://github.com/openfaas/golang-http-template) for examples of how to use a database connection and HTTP paths.
 
 ## Golang Microservice
 

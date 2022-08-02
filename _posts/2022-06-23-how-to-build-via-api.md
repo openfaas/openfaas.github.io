@@ -30,7 +30,7 @@ We'll show you how to use the builder using `curl` which will give you everythin
 
 See the docs: [OpenFaaS Function Builder API](https://docs.openfaas.com/openfaas-pro/builder/)
 
-Code examples for: [Node.js, PHP and Python](https://github.com/openfaas/function-builder-examples)
+Code examples for: [Node.js, Go, PHP and Python](https://github.com/openfaas/function-builder-examples)
 
 ## How to call the Function Builder API
 
@@ -351,7 +351,7 @@ The [eBook Serverless For Everyone Else](https://gumroad.com/l/serverless-for-ev
 
 We walked you through two examples to show you the tasks that need to be preformed to invoke the Function Builder API and build a container image. The first example was with curl and ttl.sh, so that you can try out the approach quickly, to see what it's like. Then we put together some more examples for different languages, you can find them on GitHub:
 
-- [Function Builder API Examples - Node.js, Python and PHP](https://github.com/openfaas/function-builder-examples)
+- [Function Builder API Examples - Node.js, Go, PHP and Python](https://github.com/openfaas/function-builder-examples)
 
 You'll find more detailed instructions in the documentation and in the Helm chart:
 

@@ -1,15 +1,13 @@
 <div id="Python" class="tabcontent">
-<pre><code class="language-shell">$ faas-cli new --lang python3 python3-fn
-
+<pre><code class="language-shell">$ faas-cli template store pull python3-http
+$ faas-cli new --lang python3-http python3-fn
 </code></pre>
 <div class="has-text-grey-darker has-text-weight-light">
     main.py
 </div>
-    <pre><code class="language-python">def handle(req):
-    """handle a request to the function
-    Args:
-        req (str): request body
-    """
-
-    return req</code></pre>
+    <pre><code class="language-python">def handle(event, context):
+    return {
+        "statusCode": 200,
+        "body": "Hello from OpenFaaS!"
+}</code></pre>
 </div>

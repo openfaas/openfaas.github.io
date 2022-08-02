@@ -1,5 +1,5 @@
 <div id="Javascript" class="tabcontent">
-<pre><code class="language-shell">$ faas-cli new --lang node12 javascript-fn
+<pre><code class="language-shell">$ faas-cli new --lang node17 javascript-fn 
 </code></pre>
 <div class="has-text-grey-darker has-text-weight-light">
     handler.js
@@ -12,7 +12,7 @@ module.exports = async (event, context) => {
   };
 
   return context
-  .status(200)
-  .succeed(result);
+    .status(200)
+    .succeed(result);
 }</code></pre>
 </div>

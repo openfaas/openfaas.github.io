@@ -37,7 +37,7 @@ I'd even written a library to display stock count as a number of dots on a tiny 
 
 Eventually, as you can see from the screenshot, there was so much supply that I clearly didn't need to run the domain anymore.
 
-In this post I'll show you how to build a function with Golang to send alerts to Discord whenever a Raspberry Pi is found in stock. You can deploy OpenFaaS with faasd to a Raspberry Pi you already have, or to a VM.
+In this post I'll show you how to build a function with Golang to send alerts to Discord whenever a Raspberry Pi is found in stock. You can deploy OpenFaaS with faasd to a Raspberry Pi you already have, or to a VM such as [a 1-2GB Linode](https://www.linode.com/openfaas?utm_source=openfaas&utm_medium=web&utm_campaign=sponsorship).
 
 And when rpilocator.com is no longer required, perhaps you can use the approach outlined here to write integrations and alerts at work for GitLab, BitBucket, and other internal I.T. systems with important data.
 

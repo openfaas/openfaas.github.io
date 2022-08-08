@@ -49,10 +49,10 @@ The rpilocator.com website shows us stock levels, and has various filters, so ho
 
 In order of efficiency and maintainability:
 
-1) Check for a REST API, and use it, subject to any rate limits parsing the output with [json.Unmarshal](https://pkg.go.dev/encoding/json)
-2) Check for an RSS feed, which we can parse with [encoding/xml](https://pkg.go.dev/encoding/xml)
-3) Assuming a server-side rendered page, download the HTML using [http.Get](https://pkg.go.dev/net/http) and look for strings
-4) Scrape the webpage using a [Puppeteer function written in Node.js](https://www.openfaas.com/blog/puppeteer-scraping/)
+1. Check for a REST API, and use it, subject to any rate limits parsing the output with [json.Unmarshal](https://pkg.go.dev/encoding/json)
+2. Check for an RSS feed, which we can parse with [encoding/xml](https://pkg.go.dev/encoding/xml)
+3. Assuming a server-side rendered page, download the HTML using [http.Get](https://pkg.go.dev/net/http) and look for strings
+4. Scrape the webpage using a [Puppeteer function written in Node.js](https://www.openfaas.com/blog/puppeteer-scraping/)
 
 Fortunately, whilst there is no REST API, I did find an RSS feed. Looking over its data, it contains alerts with a date and time, but can't be used to query whether there is stock or not.
 

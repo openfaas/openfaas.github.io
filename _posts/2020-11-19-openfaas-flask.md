@@ -86,7 +86,7 @@ To work with the HTTP request's headers such as the Method, Path or QueryString,
 export OPENFAAS_PREFIX=alexellis2
 export FN="http-headers"
 
-faas-cli new --lang python3-flask $FN
+faas-cli new --lang python3-http $FN
 ```
 
 Edit `./http-headers/handler.py`:

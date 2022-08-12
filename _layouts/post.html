@@ -74,10 +74,10 @@ layout: page
 
 		<div class="blog-navigation">
 			{% if page.previous.url %}
-				<a class="prev" href="{% include relative-src.html src=page.previous.url %}">&laquo; {{ page.previous.title }}</a>
+				<a class="prev" href="{% include relative-src.html src=page.previous.url %}">&laquo; {{ page.previous.title }}</a>&nbsp;
 			{% endif %}
 			{% if page.next.url %}
-				<a class="next" href="{% include relative-src.html src=page.next.url %}">{{ page.next.title }}&nbsp;&raquo;</a>
+				&nbsp;<a class="next" href="{% include relative-src.html src=page.next.url %}">{{ page.next.title }}&nbsp;&raquo;</a>
 			{% endif %}
 		</div>
 

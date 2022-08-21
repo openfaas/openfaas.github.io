@@ -72,12 +72,12 @@ layout: page
 		</div>
 		{% endif %}
 
-		<div class="blog-navigation">
+		<div class="blog-navigation columns">
 			{% if page.previous.url %}
-				<a class="prev" href="{% include relative-src.html src=page.previous.url %}">&laquo; {{ page.previous.title }}</a>&nbsp;
+				<a class="prev column" href="{% include relative-src.html src=page.previous.url %}">&laquo; {{ page.previous.title }}</a>
 			{% endif %}
 			{% if page.next.url %}
-				&nbsp;<a class="next" href="{% include relative-src.html src=page.next.url %}">{{ page.next.title }}&nbsp;&raquo;</a>
+				<a class="next column" href="{% include relative-src.html src=page.next.url %}">{{ page.next.title }}&raquo;</a>
 			{% endif %}
 		</div>
 

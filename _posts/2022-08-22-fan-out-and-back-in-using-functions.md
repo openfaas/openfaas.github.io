@@ -1,6 +1,6 @@
 ---
-title: "How to process large amounts of data with OpenFaaS functions"
-description: "We show you how to use a fan out and fan in pattern to process large amounts of data in parallel."
+title: "Exploring the Fan out and Fan in pattern with OpenFaaS"
+description: "Learn how to fan out requests to OpenFaaS functions to process them in parallel at scale, before consolidating the results by fanning back in again."
 date: 2022-08-22
 image: /images/2022-fan-out-and-back-in-using-functions/background.jpg
 categories:
@@ -8,7 +8,6 @@ categories:
 - dataprocessing
 - bigdata
 author_staff_member: han
-
 ---
 
 We show you how to use a fan out and fan in pattern to process large amounts of data in parallel.

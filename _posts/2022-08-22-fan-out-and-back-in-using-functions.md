@@ -23,19 +23,28 @@ In some cases we want to be notified when a group of asynchronous function invoc
 ## Implementing a fan-out/fan-in pattern in OpenFaaS.
 In this section we are going to show you how this pattern can be implemented with OpenFaaS through a relatable use-case. A common big data scenario is batch processing of a data set. In this scenario data is retrieved from a storage system and then processed by parallelized jobs. The results of each individual job is persisted in some kind of data store where it can later be retrieved for further processing when the batch is completed.
 
-In this example we are going to process a CSV file containing URLs to images on Wikipedia. For each URL in the data set we want to run the Inception model and get back image categorizations through machine learning. The inception model can classify what's in a photo based upon a training set made up of objects and animals. As a final processing step we will combine all the individual result into a single output.
+In this example we are going to process a CSV file containing URLs to images on Wikipedia. For each URL in the data set we want to run the Inception model and get back image categorizations through machine learning. The inception model can classify what's in a photo based upon a training set made up of objects and animals. As a final processing step we will combine all the individual results into a single output.
 
 ![](/images/2022-fan-out-and-back-in-using-functions/fan-out-in-example.png)
-> Fan-out/fin-in pattern with OpenFaaS functions
+> Fan-out/fan-in pattern with OpenFaaS functions
 
 You can find the [full example on GitHub](https://github.com/welteki/openfaas-fan-in-example)
 
 ### Fan-out
 S3 will be used as the data store throughout this example. The source files are retrieved from an S3 and the final result will be uploaded to the same bucket. To run this example yourself you will need to create an Amazon S3 bucket.
 
-The first part of the workflow will consist of two functions. The `creat-batch` function is responsible for initializing the workflow. It accepts the name of CSV file stored in an S3 bucket as input. The function will retrieve the CSV file containing the image URLs and invoke the second function, `run-model` for each URL in the file.
+The functions need access to AWS credentials in order to use the bucket. The `faas-cli` can be used to define these secrets.
+```bash
+echo $aws_access_key_id | faas-cli secret create s3-key
+echo $aws_secret_access_key | faas-cli secret create s3-secret
+```
+
+> You can checkout the documentation for more info on [how to use secrets within your functions](https://docs.openfaas.com/reference/secrets/).
+
+The first part of the workflow will consist of two functions. The `creat-batch` function is responsible for initializing the workflow. It accepts the name of a CSV file stored in an S3 bucket as input. The function will retrieve the CSV file containing the image URLs and invoke the second function, `run-model` for each URL in the file.
 
 The `run-model` function is responsible for calling the machine learning model, in this case the `inception` function, and uploading the result to S3.
+
 
 The handler of the `create-batch` functions:
 
@@ -83,7 +92,26 @@ def handle(event, context):
     }
 ```
 
-The function invokes run-model asynchronously. This decouples the HTTP transaction between the caller and the function. The invocation is added to a queue and runs in the background. This allows us to run the invocations in parallel.
+At the start of the function the S3 credentials are read and the name of the bucket is passed in using an env variable. Make sure the correct secrets and env variables are added to the `stack.yaml` configuration for each function.
+
+```yaml
+functions:
+  create-batch:
+    lang: python3-http-debian
+    handler: ./create-batch
+    image: welteki2/create-batch:latest
+    environment:
+      -  s3_bucket: of-demo-inception-data
+    secrets:
+      - redis-password
+      - s3-key
+      - s3-secret
+```
+
+The function then reads the name of the CSV file from the body and that file name is used to retrieve the input data from S3. We then iterate over each row in the input CSV file and invoke the `run-model` function for each URL in the file.
+
+
+Note that `run-model` is invoked asynchronously. This decouples the HTTP transaction between the caller and the function. The request is added to a queue and picked up by the queue-worker to run it in the background. This allows us to run the multiple invocations in parallel.
 
 > The parallelism of a batch job can be controlled by changing the number of tasks the queue-worker runs at once. See our[ official documentation](https://docs.openfaas.com/reference/async/#parallelism) for more details on how to do this. 
 

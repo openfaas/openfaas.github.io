@@ -115,7 +115,6 @@ Note that `run-model` is invoked asynchronously. This decouples the HTTP transac
 
 > The parallelism of a batch job can be controlled by changing the number of tasks the queue-worker runs at once. See our[ official documentation](https://docs.openfaas.com/reference/async/#parallelism) for more details on how to do this. 
 
-
 The handler for the `run-model` function:
 
 ```python
@@ -172,6 +171,20 @@ The `run-model` function invokes the `inception` function synchronously and stor
 To be able to fan-in and get notified when all the asynchronous invocations for a batch have finished we need some state to keep track of the progress. A counter can be used to keep track of the work that has been completed. Each time an asynchronous invocation finishes the counter is decremented. When the counter reaches zero the final function in the workflow can be called.
 
 We are going to use a Redis key to store this state for each batch. It has a `DECR` command to atomically decrement a value and it returns the new key value at the end.
+
+[arkade](https://github.com/alexellis/arkade) offers you a convenient way to deploy Redis:
+
+```bash
+arkade install redis
+```
+
+After the installation is completed, fetch the password and create a secret for it so that it can be used within our functions.
+
+```bash
+export REDIS_PASSWORD=$(kubectl get secret --namespace redis redis -o jsonpath="{.data.redis-password}" | base64 --decode)
+
+echo $REDIS_PASSWORD | faas-cli secret create redis-password
+```
 
 We need to create a Redis connection in the `create-batch` and `run-model` functions that they can use to initialize and update the counter.
 

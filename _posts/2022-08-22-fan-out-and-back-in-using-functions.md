@@ -12,12 +12,13 @@ author_staff_member: han
 
 We show you how to use a fan out and fan in pattern to process large amounts of data in parallel.
 
-We're increasingly hearing that OpenFaaS functions are convenient for ingesting, transforming and processing large amounts of data. A common pattern used when processing large amounts of data is to break down an expensive task into smaller sub tasks that can be executed in parallel. This fan-out pattern is already available in OpenFaaS through asynchronous functions. With the async feature, invocations are queued up and processed as and when there's capacity.
+We're increasingly hearing that OpenFaaS functions are convenient for ingesting, transforming and processing large amounts of data. Functions are a natural fit for processing data because they're short-lived, stateless, efficient and can scale out to processing large amounts of data in parallel.
+
+A common pattern used when processing large amounts of data is to break down an expensive task into smaller sub tasks that can be executed in parallel. This fan-out pattern is already available in OpenFaaS through asynchronous functions. With the async feature, invocations are queued up and processed as and when there's capacity.
 
 > Our post, [How to process your data the resilient way with back pressure ](https://www.openfaas.com/blog/limits-and-backpressure/), shows how OpenFaaS can be used to process a dataset as quickly as possible, without losing any of the records.
 
 In some cases we want to be notified when a group of asynchronous function invocations completes and collect the result from each individual invocation. We need to fan-in again. Fanning in requires a bit more code. We will show how this can be implemented with OpenFaaS functions.
-
 
 ## Implementing a fan-out/fan-in pattern in OpenFaaS.
 In this section we are going to show you how this pattern can be implemented with OpenFaaS through a relatable use-case. A common big data scenario is batch processing of a data set. In this scenario data is retrieved from a storage system and then processed by parallelized jobs. The results of each individual job is persisted in some kind of data store where it can later be retrieved for further processing when the batch is completed.

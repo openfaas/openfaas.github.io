@@ -20,18 +20,18 @@ A common pattern used when processing large amounts of data is to break down an 
 
 In some cases we want to be notified when a group of asynchronous function invocations completes and collect the result from each individual invocation. We need to fan-in again. Fanning in requires a bit more code. We will show how this can be implemented with OpenFaaS functions.
 
-## Implementing a fan-out/fan-in pattern in OpenFaaS.
+## Implement a fan-out/fan-in pattern in OpenFaaS.
 In this section we are going to show you how this pattern can be implemented with OpenFaaS through a relatable use-case. A common big data scenario is batch processing of a data set. In this scenario data is retrieved from a storage system and then processed by parallelized jobs. The results of each individual job is persisted in some kind of data store where it can later be retrieved for further processing when the batch is completed.
 
 In this example we are going to process a CSV file containing URLs to images on Wikipedia. For each URL in the data set we want to run the Inception model and get back image categorizations through machine learning. The inception model can classify what's in a photo based upon a training set made up of objects and animals. As a final processing step we will combine all the individual results into a single output.
 
-![](/images/2022-fan-out-and-back-in-using-functions/fan-out-in-example.png)
+![Fan-out/fan-in pattern with OpenFaaS functions](/images/2022-fan-out-and-back-in-using-functions/fan-out-in-example.png)
 > Fan-out/fan-in pattern with OpenFaaS functions
 
 You can find the [full example on GitHub](https://github.com/welteki/openfaas-fan-in-example)
 
 ### Fan-out
-S3 will be used as the data store throughout this example. The source files are retrieved from an S3 and the final result will be uploaded to the same bucket. To run this example yourself you will need to create an Amazon S3 bucket.
+S3 will be used as the data store throughout this example. The input files are retrieved from an S3 bucket, results of invocations and the final result will be uploaded to the same bucket. To run this example yourself you will need to create an [Amazon S3 bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/GetStartedWithS3.html).
 
 The functions need access to AWS credentials in order to use the bucket. The `faas-cli` can be used to define these secrets.
 ```bash
@@ -45,6 +45,29 @@ The first part of the workflow will consist of two functions. The `creat-batch` 
 
 The `run-model` function is responsible for calling the machine learning model, in this case the `inception` function, and uploading the result to S3.
 
+We will use the `python3-http` template for both functions:
+
+```bash
+# Get the python3-flask template from the store
+faas-cli template store pull python3-flask
+
+# Scaffold the functions
+faas-cli new create-batch --lang python3-http-debian
+mv create-batch.yml stack.yml
+faas-cli new run-model --lang python3-http -f stack.yml
+```
+
+Note that we use `python3-http-debian` for the `create-batch` function. [pandas](https://pypi.org/project/pandas/) will be used to process the CSV file. The pandas pip module requires a native build toolchain. It is advisable to use the debian version of the template for native dependencies.
+
+All dependencies have to be put into the `requirements.txt` file.
+
+The `requirements.txt` file for the `create-batch` function:
+
+```
+requests
+pandas
+smart_open[s3]
+```
 
 The handler of the `create-batch` functions:
 
@@ -115,6 +138,13 @@ Note that `run-model` is invoked asynchronously. This decouples the HTTP transac
 
 > The parallelism of a batch job can be controlled by changing the number of tasks the queue-worker runs at once. See our[ official documentation](https://docs.openfaas.com/reference/async/#parallelism) for more details on how to do this. 
 
+The `requirements.txt` file for the `run-mode` function:
+
+```
+requests
+smart_open[s3]
+```
+
 The handler for the `run-model` function:
 
 ```python
@@ -167,7 +197,7 @@ def handle(event, context):
 
 The `run-model` function invokes the `inception` function synchronously and store the result, along with some metadata like the batch id, call id, and status, as a json file in S3. The result is stored in a folder named after the batch id. This makes it easy to retrieve all results for a certain batch. The metadata can be useful for for debugging or when processing the data in a later step. 
 
-## Fan-in
+### Fan-in
 To be able to fan-in and get notified when all the asynchronous invocations for a batch have finished we need some state to keep track of the progress. A counter can be used to keep track of the work that has been completed. Each time an asynchronous invocation finishes the counter is decremented. When the counter reaches zero the final function in the workflow can be called.
 
 We are going to use a Redis key to store this state for each batch. It has a `DECR` command to atomically decrement a value and it returns the new key value at the end.
@@ -217,7 +247,6 @@ secrets:
 ```
 
 Don't forget to add `redis` to the `requirements.txt` for your functions.
-
 
 The `create-batch` function can now be updated to count the number of URLs in the CSV file and initialize a Redis key for `batchId` with that value. 
 ```python

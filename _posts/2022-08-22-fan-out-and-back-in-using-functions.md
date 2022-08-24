@@ -81,9 +81,9 @@ import boto3
 
 from smart_open import open
 
-def handle(event, context):
-    bucketName = os.getenv('s3_bucket')
-    
+s3Client = None
+
+def initS3():
     with open('/var/openfaas/secrets/s3-key', 'r') as s:
         s3Key = s.read()
     with open('/var/openfaas/secrets/s3-secret', 'r') as s:
@@ -93,10 +93,20 @@ def handle(event, context):
         aws_access_key_id=s3Key,
         aws_secret_access_key=s3Secret,
     )
+    
+    return session.client('s3')
+
+def handle(event, context):
+    global s3Client
+
+    if s3Client == None:
+        s3Client = initS3()
+    
+    bucketName = os.getenv('s3_bucket')
 
     batchFile = event.body.decode()
     s3URL = 's3://{}/{}'.format(bucketName, batchFile)
-    with open(s3URL, 'rb', transport_params={'client': session.client('s3')}) as f:
+    with open(s3URL, 'rb', transport_params={'client': s3Client }) as f:
         records = pd.read_csv(f)
 
     batchId = str(uuid.uuid4())
@@ -131,14 +141,13 @@ functions:
       - s3-secret
 ```
 
-The function then reads the name of the CSV file from the body and that file name is used to retrieve the input data from S3. We then iterate over each row in the input CSV file and invoke the `run-model` function for each URL in the file.
+The S3 client is created and stored in global variable upon the first request. Creating a S3 client in the handler for each request is quite an expensive operation. By initializing it once and assigning it to a global variable it can be reused between function invocations. The first version if this example did not reuse the clients. By moving them to the outer scope we managed to reduce the average call duration of the `run-model` function by 1s.
 
-
-Note that `run-model` is invoked asynchronously. This decouples the HTTP transaction between the caller and the function. The request is added to a queue and picked up by the queue-worker to run it in the background. This allows us to run the multiple invocations in parallel.
+The function then reads the name of the CSV file from the body and that file name is used to retrieve the input data from S3. We then iterate over each row in the input CSV file and invoke the `run-model` function for each URL in the file. Note that `run-model` is invoked asynchronously. This decouples the HTTP transaction between the caller and the function. The request is added to a queue and picked up by the queue-worker to run it in the background. This allows us to run the multiple invocations in parallel.
 
 > The parallelism of a batch job can be controlled by changing the number of tasks the queue-worker runs at once. See our[ official documentation](https://docs.openfaas.com/reference/async/#parallelism) for more details on how to do this. 
 
-The `requirements.txt` file for the `run-mode` function:
+The `requirements.txt` file for the `run-model` function:
 
 ```
 requests
@@ -155,7 +164,27 @@ import boto3
 
 from smart_open import open
 
+s3Client = None
+
+def initS3():
+    with open('/var/openfaas/secrets/s3-key', 'r') as s:
+        s3Key = s.read()
+    with open('/var/openfaas/secrets/s3-secret', 'r') as s:
+        s3Secret = s.read()
+
+    session = boto3.Session(
+        aws_access_key_id=s3Key,
+        aws_secret_access_key=s3Secret,
+    )
+    
+    return session.client('s3')
+
 def handle(event, context):
+    global s3Client
+
+    if s3Client == None:
+        s3Client = initS3()
+
     bucketName = os.getenv('s3_bucket')
 
     with open('/var/openfaas/secrets/s3-key', 'r') as s:
@@ -186,7 +215,7 @@ def handle(event, context):
 
     fileName = '{}/{}.json'.format(batchId, callId)
     s3URL = "s3://{}/{}".format(bucketName, fileName)
-    with open(s3URL, 'w', transport_params={'client': session.client('s3')}) as fout:
+    with open(s3URL, 'w', transport_params={'client': s3Client }) as fout:
         json.dump(taskResult, fout)
 
     return {
@@ -221,17 +250,30 @@ We need to create a Redis connection in the `create-batch` and `run-model` funct
 The following code creates a connection to Redis using redis-py:
 
 ```python
-redisHostname = os.getenv('redis_hostname')
-redisPort = os.getenv('redis_port')
+redisClient = None
 
-with open('/var/openfaas/secrets/redis-password', 'r') as s:
-    redisPassword = s.read()
+def initRedis():
+    redisHostname = os.getenv('redis_hostname')
+    redisPort = os.getenv('redis_port')
 
-r = redis.Redis(
-    host=redisHostname,
-    port=redisPort,
-    password=redisPassword,
-)
+    with open('/var/openfaas/secrets/redis-password', 'r') as s:
+        redisPassword = s.read()
+
+    return redis.Redis(
+        host=redisHostname,
+        port=redisPort,
+        password=redisPassword,
+    )
+```
+
+Initialize the redis client in the function handler:
+
+```python
+def handle(event, context):
+    global redisClient
+
+    if redisClient == None:
+        redisClient = initRedis()
 ```
 
 Update the stack.yaml for the functions to add the Redis environment variables and secret: 
@@ -239,7 +281,7 @@ Update the stack.yaml for the functions to add the Redis environment variables a
 environment:
     s3_bucket: of-demo-inception-data
     redis_hostname: "redis-master.redis.svc.cluster.local"
-    redis_port: 637
+    redis_port: 6379
 secrets:
     - s3-key
     - s3-secret
@@ -345,9 +387,9 @@ This function retrieves the batch id from the http headers and uses it to iterat
 ## Conclusion
 We showed how a map/reduce pattern can be implemented with OpenFaaS. A created a workflow to process a CSV file containing Wikipedia URLs. Our goal was to run an AI model for each URL. We split the input into many sub tasks to process them in parallel. This fan out part is supported in OpenFaaS through asynchronous functions. We started an asynchronous request for each URL, that in turn invoked the machine learning model. After all the requests completed their results were combined into a single output. This fanning in required some state. We used a redis key to keep track of the batch progress.
 
-The example we showed here is a minimal example that can be used a starting point. It can be further improved and adapted for more specific use cases.
+The example we showed here is a minimal example that can be used as a starting point. It can be further improved and adapted for more specific use cases.
 
-- The processing can be made more resilient by retrying a sub task before marling it as failed.
+- The processing can be made more resilient by retrying a sub task before marking it as failed.
 - A function that returns some info on the batch progress can be added.
 
 See also:

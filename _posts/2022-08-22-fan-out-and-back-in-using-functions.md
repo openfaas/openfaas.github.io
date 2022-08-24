@@ -20,6 +20,18 @@ A common pattern used when processing large amounts of data is to break down an 
 
 In some cases we want to be notified when a group of asynchronous function invocations completes and collect the result from each individual invocation. We need to fan-in again. Fanning in requires a bit more code. We will show how this can be implemented with OpenFaaS functions.
 
+## The fan-out pattern
+Fan-out can be used to split a larger task or batch of tasks into smaller sub tasks. The processing of each sub task is deferred to another function. These functions can run in parallel to complete all tasks as quickly and efficiently as possible.
+
+![fan-out conceptual diagram](/images/2022-fan-out-and-back-in-using-functions/fan-out.png)
+> Diagram of fan-out with functions
+
+## The fan-in pattern
+The fan-in pattern can be applied if you need to wait for all sub tasks to complete before moving on to the next processing step. It can be used to collect and combine the result from each individual sub task.
+
+![fan-in conceptual diagram](/images/2022-fan-out-and-back-in-using-functions/fan-in.png)
+> Diagram of fan-in with functions
+
 ## Implement a fan-out/fan-in pattern in OpenFaaS.
 In this section we are going to show you how this pattern can be implemented with OpenFaaS through a relatable use-case. A common big data scenario is batch processing of a data set. In this scenario data is retrieved from a storage system and then processed by parallelized jobs. The results of each individual job is persisted in some kind of data store where it can later be retrieved for further processing when the batch is completed.
 

@@ -347,8 +347,13 @@ import boto3
 from smart_open import s3
 from smart_open import open
 
-def handle(event, context):
-    bucketName = os.getenv('s3_bucket')
+s3Client = None
+s3Key = None
+s3Secret = None
+bucketName = os.getenv('s3_bucket')
+
+def initS3():
+    global s3Key, s3Secret
 
     with open('/var/openfaas/secrets/s3-key', 'r') as s:
         s3Key = s.read()
@@ -359,6 +364,14 @@ def handle(event, context):
         aws_access_key_id=s3Key,
         aws_secret_access_key=s3Secret,
     )
+
+    return session.client('s3')
+
+def handle(event, context):
+    global s3Client
+    
+    if s3Client == None:
+        s3Client = initS3()
 
     batchId = event.headers.get('X-Batch-Id')
 
@@ -386,7 +399,7 @@ def handle(event, context):
 
     fileName = 'output.json'
     s3URL = "s3://{}/{}/{}".format(bucketName, batchId, fileName)
-    with open(s3URL, 'w', transport_params={'client': session.client('s3')}) as fout:
+    with open(s3URL, 'w', transport_params={'client': s3Client }) as fout:
         json.dump(summary, fout)
     
     return {

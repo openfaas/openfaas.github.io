@@ -368,7 +368,7 @@ def handle(event, context):
 
     summary = {
         'batchId': batchId,
-        'failed: {
+        'failed': {
             'count': len(failed),
             'results': failed
         },
@@ -406,6 +406,7 @@ Some additional instructions to try out this workflow yourself can be found in [
 ![The result of running a batch with 500 urls.](https://camo.githubusercontent.com/bf0c1ad67f4044aba17e38e4a584c1e4d5ff417da5865d140d4457c66c113598/68747470733a2f2f7062732e7477696d672e636f6d2f6d656469612f4661684d3572435645414553616d663f666f726d61743d6a7067266e616d653d6d656469756d)
 
 > Pictured: The result of running a batch with 500 urls. On the left, the queue-worker metrics. On the right, the S3 console with the individual function results and the `output.json` with the combined results. 
+
 See also:
 - [How to process your data the resilient way with back pressure](https://www.openfaas.com/blog/limits-and-backpressure/)
 

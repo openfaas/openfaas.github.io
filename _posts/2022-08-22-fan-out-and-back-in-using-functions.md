@@ -466,6 +466,11 @@ Some additional instructions to try out this workflow yourself can be found in [
 
 > Pictured: The result of running a batch with 500 urls. On the left, the queue-worker metrics. On the right, the S3 console with the individual function results and the `output.json` with the combined results.
 
+### Further work
+The example was written using python because it is often used for data science and machine learning projects, but this pattern can be implemented in any language. Wether you want to use Go, Java, C# or any other language. [The template store](https://docs.openfaas.com/cli/templates/) has templates for many different languages.
+
+Functions are a natural fit for processing data. As we see more people use MapReduce with OpenFaaS we may consider building a generic component to help implement this pattern.
+
 If you’d like to talk to us about anything we covered in this blog post: [feel free to reach out](https://www.openfaas.com/support/)
 
 We also run a [Weekly Office Hours call](https://docs.openfaas.com/community/#weekly-office-hours) that you’re welcome to join.

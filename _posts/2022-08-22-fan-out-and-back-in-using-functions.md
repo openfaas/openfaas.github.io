@@ -394,13 +394,18 @@ The function retrieves the batch id from the http headers and uses it to iterate
 > When processing a large batch this function can take a while to complete. Make sure that your timeouts are configured correctly for both your function and the OpenFaaS core components. See: [Expanding timeouts](https://docs.openfaas.com/tutorials/expanded-timeouts/)
 
 ## Conclusion
-We showed how a map/reduce pattern can be implemented with OpenFaaS. A created a workflow to process a CSV file containing Wikipedia URLs. Our goal was to run an AI model for each URL. We split the input into many sub tasks to process them in parallel. This fan out part is supported in OpenFaaS through asynchronous functions. We started an asynchronous request for each URL, that in turn invoked the machine learning model. After all the requests completed their results were combined into a single output. This fanning in required some state. We used a redis key to keep track of the batch progress.
+We showed how a map/reduce pattern can be implemented with OpenFaaS. A workflow was created to process a CSV file containing Wikipedia URLs. Our goal was to run an machine learning model for each URL. To do this as quickly and efficiently as possible the input was split into many sub tasks that we could run in parallel. This fan out part is supported in OpenFaaS through asynchronous functions. After all the sub tasks completed their results were combined into a single output. This fanning in required some state. We used a redis key to keep track of the batch progress.
 
-The example we showed here is a minimal example that can be used as a starting point. It can be further improved and adapted for more specific use cases.
+The example we created here is a minimal example that can be used as a starting point. It can be further improved and adapted for more specific use cases.
 
 - The processing can be made more resilient by retrying a sub task before marking it as failed.
-- A function that returns some info on the batch progress can be added.
+- A function that collects and returns info on the batch progress can be added.
 
+Some additional instructions to try out this workflow yourself can be found in [the README for this example](https://github.com/welteki/openfaas-fan-in-example#readme) on GitHub.
+
+![The result of running a batch with 500 urls.](https://camo.githubusercontent.com/bf0c1ad67f4044aba17e38e4a584c1e4d5ff417da5865d140d4457c66c113598/68747470733a2f2f7062732e7477696d672e636f6d2f6d656469612f4661684d3572435645414553616d663f666f726d61743d6a7067266e616d653d6d656469756d)
+
+> Pictured: The result of running a batch with 500 urls. On the left, the queue-worker metrics. On the right, the S3 console with the individual function results and the `output.json` with the combined results. 
 See also:
 - [How to process your data the resilient way with back pressure](https://www.openfaas.com/blog/limits-and-backpressure/)
 

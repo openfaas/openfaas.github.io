@@ -10,7 +10,7 @@ categories:
 author_staff_member: han
 ---
 
-We show you how to use a fan out and fan in pattern to process large amounts of data in parallel.
+Learn how to fan out requests to OpenFaaS functions to process them in parallel at scale, before consolidating the results by fanning back in again.
 
 We're increasingly hearing that OpenFaaS functions are convenient for ingesting, transforming and processing large amounts of data. Functions are a natural fit for processing data because they're short-lived, stateless, efficient and can scale out to processing large amounts of data in parallel.
 
@@ -53,7 +53,7 @@ echo $aws_secret_access_key | faas-cli secret create s3-secret
 
 > You can checkout the documentation for more info on [how to use secrets within your functions](https://docs.openfaas.com/reference/secrets/).
 
-The first part of the workflow will consist of two functions. The `creat-batch` function is responsible for initializing the workflow. It accepts the name of a CSV file stored in an S3 bucket as input. The function will retrieve the CSV file containing the image URLs and invoke the second function, `run-model` for each URL in the file.
+The first part of the workflow will consist of two functions. The `creat-batch` function is responsible for initializing the workflow. It accepts the name of a CSV file stored in an S3 bucket as input. The function will retrieve the CSV file containing image URLs and invoke the second function, `run-model` for each URL in the file.
 
 The `run-model` function is responsible for calling the machine learning model, in this case the `inception` function, and uploading the result to S3.
 
@@ -111,24 +111,29 @@ def initS3():
 def handle(event, context):
     global s3Client
 
+    # Initialize an S3 client upon first invocation
     if s3Client == None:
         s3Client = initS3()
     
     bucketName = os.getenv('s3_bucket')
 
+    # Get the data set from S3
     batchFile = event.body.decode()
     s3URL = 's3://{}/{}'.format(bucketName, batchFile)
     with open(s3URL, 'rb', transport_params={'client': s3Client }) as f:
         records = pd.read_csv(f)
 
     batchId = str(uuid.uuid4())
+    batchSize = len(records)
 
+    # Fan-out by invoking the run-model function asynchronously
     for index, col in records.iterrows():
         headers = { 'X-Batch-Id': batchId }
         res = requests.post('http://gateway.openfaas:8080/async-function/run-model', data=col['url'], headers=headers)
 
     response = {
         'batch_id': batchId,
+        'batch_size': batchSize
     }
 
     return {
@@ -148,16 +153,15 @@ functions:
     environment:
       -  s3_bucket: of-demo-inception-data
     secrets:
-      - redis-password
       - s3-key
       - s3-secret
 ```
 
-The S3 client is created and stored in global variable upon the first request. Creating a S3 client in the handler for each request is quite an expensive operation. By initializing it once and assigning it to a global variable it can be reused between function invocations. The first version if this example did not reuse the clients. By moving them to the outer scope we managed to reduce the average call duration of the `run-model` function by 1s.
+The S3 client is created and stored in a global variable upon the first request. Creating a S3 client in the handler for each request is quite an expensive operation. By initializing it once and assigning it to a global variable it can be reused between function invocations. The first version if this example did not reuse the clients. By moving them to the outer scope we managed to reduce the average call duration of the `run-model` function by 1s.
 
 The function then reads the name of the CSV file from the body and that file name is used to retrieve the input data from S3. We then iterate over each row in the input CSV file and invoke the `run-model` function for each URL in the file. Note that `run-model` is invoked asynchronously. This decouples the HTTP transaction between the caller and the function. The request is added to a queue and picked up by the queue-worker to run it in the background. This allows us to run the multiple invocations in parallel.
 
-> The parallelism of a batch job can be controlled by changing the number of tasks the queue-worker runs at once. See our[ official documentation](https://docs.openfaas.com/reference/async/#parallelism) for more details on how to do this. 
+> The parallelism of a batch job can be controlled by changing the number of tasks the queue-worker runs at once. See our [official documentation](https://docs.openfaas.com/reference/async/#parallelism) for more details on how to do this. 
 
 The `requirements.txt` file for the `run-model` function:
 
@@ -193,25 +197,17 @@ def initS3():
 
 def handle(event, context):
     global s3Client
-
+    
+    # Initialize an S3 client upon first invocation
     if s3Client == None:
         s3Client = initS3()
 
     bucketName = os.getenv('s3_bucket')
 
-    with open('/var/openfaas/secrets/s3-key', 'r') as s:
-        s3Key = s.read()
-    with open('/var/openfaas/secrets/s3-secret', 'r') as s:
-        s3Secret = s.read()
-
-    session = boto3.Session(
-        aws_access_key_id=s3Key,
-        aws_secret_access_key=s3Secret,
-    )
-
     batchId = event.headers.get('X-Batch-Id')
     url = event.body.decode()
 
+    # Run the machine learning model and store the result in S3
     res = requests.get("http://gateway.openfaas:8080/function/inception", data=url)
 
     callId = res.headers.get('X-Call-Id')
@@ -249,7 +245,7 @@ We are going to use a Redis key to store this state for each batch. It has a `DE
 arkade install redis
 ```
 
-After the installation is completed, fetch the password and create a secret for it so that it can be used within our functions.
+After the installation is completed, fetch the password and create a secret for it so that it can be used within the functions.
 
 ```bash
 export REDIS_PASSWORD=$(kubectl get secret --namespace redis redis -o jsonpath="{.data.redis-password}" | base64 --decode)
@@ -257,7 +253,7 @@ export REDIS_PASSWORD=$(kubectl get secret --namespace redis redis -o jsonpath="
 echo $REDIS_PASSWORD | faas-cli secret create redis-password
 ```
 
-We need to create a Redis connection in the `create-batch` and `run-model` functions that they can use to initialize and update the counter.
+We need to create a Redis client in the `create-batch` and `run-model` functions that they can use to initialize and update the counter.
 
 The following code creates a connection to Redis using redis-py:
 
@@ -312,7 +308,8 @@ with open(s3URL, 'rb', transport_params={'client': session.client('s3')}) as f:
 batchId = str(uuid.uuid4())
 batchSize = len(records)
 
-r.set(batchId, batchSize)
+# Initialize a counter in Redis
+redisClient.set(batchId, batchSize)
 
 for index, col in records.iterrows():
     headers = { 'X-Batch-Id': batchId }
@@ -323,7 +320,7 @@ In the `run-model` function we need to decrement this counter every time an invo
 
 ```python
 
-remainingWork = r.decr(batchId)
+remainingWork = redisClient.decr(batchId)
 
 if remainingWork == 0:
     headers = { 'X-Batch-Id': batchId }
@@ -359,7 +356,7 @@ def handle(event, context):
 
     batchId = event.headers.get('X-Batch-Id')
 
-    results = []
+    passed = []
     failed = []
     
     for key, content in s3.iter_bucket(bucketName, prefix=batchId + '/', workers=30, aws_access_key_id=s3Key, aws_secret_access_key=s3Secret):
@@ -367,22 +364,22 @@ def handle(event, context):
         if (data['status'] == 'error'):
             failed.append({ 'url': data['url'], 'result': data['result'] })
         else:
-            results.append({ 'url': data['url'], 'result': data['result'] })
+            passed.append({ 'url': data['url'], 'result': data['result'] })
 
     summary = {
         'batchId': batchId,
-        'failures': {
+        'failed: {
             'count': len(failed),
             'results': failed
         },
-        'results': {
-            'count': len(results),
-            'results': results,
+        'passed': {
+            'count': len(passed),
+            'results': passed,
         }
     }
 
-    fileName = '{}.json'.format(batchId)
-    s3URL = "s3://{}/{}".format(bucketName, fileName)
+    fileName = 'output.json'
+    s3URL = "s3://{}/{}/{}".format(bucketName, batchId, fileName)
     with open(s3URL, 'w', transport_params={'client': session.client('s3')}) as fout:
         json.dump(summary, fout)
     
@@ -392,7 +389,7 @@ def handle(event, context):
     }
 ```
 
-This function retrieves the batch id from the http headers and uses it to iterate over the S3 Bucket's Contents. All results for the specific batch are retrieved and the result is added to the summary. As a final step the summary file is uploaded to the S3 bucket.
+The function retrieves the batch id from the http headers and uses it to iterate over the S3 Bucket's Contents. All results for the specific batch are read and added to the summary. As a final step the summary file called `output.json` is uploaded to the output folder for the batch.
 
 > When processing a large batch this function can take a while to complete. Make sure that your timeouts are configured correctly for both your function and the OpenFaaS core components. See: [Expanding timeouts](https://docs.openfaas.com/tutorials/expanded-timeouts/)
 

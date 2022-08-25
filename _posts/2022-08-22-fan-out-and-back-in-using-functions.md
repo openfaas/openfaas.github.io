@@ -14,7 +14,7 @@ Learn how to fan out requests to OpenFaaS functions to process them in parallel 
 
 We're increasingly hearing that OpenFaaS functions are convenient for ingesting, transforming and processing large amounts of data. Functions are a natural fit for processing data because they're short-lived, stateless, efficient and can scale out to processing large amounts of data in parallel.
 
-A common pattern used when processing large amounts of data is to break down an expensive task into smaller sub tasks that can be executed in parallel. This fan-out pattern is already available in OpenFaaS through asynchronous functions. With the async feature, invocations are queued up and processed as and when there's capacity.
+A common pattern used when processing large amounts of data is to break down an expensive task into smaller sub tasks that can be executed in parallel. This fan-out pattern is already available in OpenFaaS through asynchronous functions. With the async feature, invocations are queued up and processed as and when there's capacity available.
 
 > In a previous article, we showed you how to process large amounts of data both asynchronously and reliably with the fan-out pattern: [How to process your data the resilient way with back pressure ](https://www.openfaas.com/blog/limits-and-backpressure/).
 
@@ -39,7 +39,7 @@ To fan-in, some kind of shared storage, like a database, a Redis key or an S3 bu
 > Diagram of fan-in with functions
 
 ## Implement a fan-out/fan-in pattern in OpenFaaS.
-In this section we are going to show you how this pattern can be implemented with OpenFaaS through a relatable use-case. A common big data scenario is batch processing of a data set. In this scenario data is retrieved from a storage system and then processed by parallelized jobs. The results of each individual job is persisted in some kind of data store where it can later be retrieved for further processing when the batch is completed.
+In this section we are going to show you how this pattern can be implemented with OpenFaaS through a relatable use-case. A common big data scenario is batch processing of a data set. In this scenario data is retrieved from a storage system and then processed by parallelized jobs. The result of each individual job is persisted in some kind of data store where it can later be retrieved for further processing when the batch is completed.
 
 In this example we are going to process a CSV file containing URLs to images on Wikipedia. For each URL in the data set we want to run the Inception model and get back image categorizations through machine learning. The inception model can classify what's in a photo based upon a training set made up of objects and animals. As a final processing step we will combine all the individual results into a single output.
 
@@ -59,11 +59,11 @@ echo $aws_secret_access_key | faas-cli secret create s3-secret
 
 > You can checkout the documentation for more info on [how to use secrets within your functions](https://docs.openfaas.com/reference/secrets/).
 
-The first part of the workflow will consist of two functions. The `creat-batch` function is responsible for initializing the workflow. It accepts the name of a CSV file stored in an S3 bucket as input. The function will retrieve the CSV file containing image URLs and invoke the second function, `run-model` for each URL in the file.
+The first part of the workflow will consist of two functions. The `create-batch` function is responsible for initializing the workflow. It accepts the name of a CSV file stored in an S3 bucket as input. The function will retrieve the CSV file containing image URLs and invoke the second function, `run-model` for each URL in the file.
 
 The `run-model` function is responsible for calling the machine learning model, in this case the `inception` function, and uploading the result to S3.
 
-We will use the `python3-http` template for both functions:
+We will use the `python3-http` template for both functions. It is available from the `python3-flask` store template:
 
 ```bash
 # Get the python3-flask template from the store
@@ -148,7 +148,7 @@ def handle(event, context):
     }
 ```
 
-At the start of the function the S3 credentials are read and the name of the bucket is passed in using an env variable. Make sure the correct secrets and env variables are added to the `stack.yaml` configuration for each function.
+At the start of the function the S3 credentials are read, and the name of the bucket is passed in using an env variable. Make sure the correct secrets and env variables are added to the `stack.yaml` configuration for each function.
 
 ```yaml
 functions:
@@ -163,7 +163,7 @@ functions:
       - s3-secret
 ```
 
-The S3 client is created and stored in a global variable upon the first request. Creating a S3 client in the handler for each request is quite an expensive operation. By initializing it once and assigning it to a global variable it can be reused between function invocations. The first version if this example did not reuse the clients. By moving them to the outer scope we managed to reduce the average call duration of the `run-model` function by 1s.
+The S3 client is created and stored in a global variable upon the first request. Creating a S3 client in the handler for each request is quite an expensive operation. By initializing it once and assigning it to a global variable it can be reused between function invocations. The first version of this example did not reuse the clients. By moving them to the outer scope we managed to reduce the average call duration of the `run-model` function by 1s.
 
 The function then reads the name of the CSV file from the body and that file name is used to retrieve the input data from S3. We then iterate over each row in the input CSV file and invoke the `run-model` function for each URL in the file. Note that `run-model` is invoked asynchronously. This decouples the HTTP transaction between the caller and the function. The request is added to a queue and picked up by the queue-worker to run it in the background. This allows us to run the multiple invocations in parallel.
 
@@ -238,7 +238,7 @@ def handle(event, context):
     }
 ```
 
-The `run-model` function invokes the `inception` function synchronously and store the result, along with some metadata like the batch id, call id, and status, as a json file in S3. The result is stored in a folder named after the batch id. This makes it easy to retrieve all results for a certain batch. The metadata can be useful for for debugging or when processing the data in a later step. 
+The `run-model` function invokes the `inception` function synchronously and stores the result, along with some metadata like the batch id, call id, and status, as a json file in S3. The result is stored in a folder named after the batch id. This makes it easy to retrieve all results for a certain batch. The metadata can be useful for for debugging or when processing the data in a later step. 
 
 ### Fan-in
 To be able to fan-in and get notified when all the asynchronous invocations for a batch have finished we need some state to keep track of the progress. A counter can be used to keep track of the work that has been completed. Each time an asynchronous invocation finishes the counter is decremented. When the counter reaches zero the final function in the workflow can be called.
@@ -290,7 +290,7 @@ def handle(event, context):
         redisClient = initRedis()
 ```
 
-Update the stack.yaml for the functions to add the Redis environment variables and secret: 
+Update the s`tack.yaml` for the functions to add the Redis environment variables and secret: 
 ```yaml
 environment:
     s3_bucket: of-demo-inception-data
@@ -458,7 +458,7 @@ A sample of the `output.json` for a batch with 1000 URLs:
 ## Conclusion
 We set out to show how the MapReduce pattern could be implemented with OpenFaaS, first by fanning out requests, using the built-in asynchronous system and queue-worker, then by fanning back in again by using shared storage.
 
-We created this example as a starting point, so that you can try it out in a short period of time, then adapt it to your own functions or machine learning models. OpenFaaS doesn't have any one component called a "workflow engine", but what we've shown you here and in a previous post [Back pressure](https://www.openfaas.com/blog/limits-and-backpressure/), shows that you can orchestrate functions in a powerful way.
+We created this example as a starting point, so that you can try it out in a short period of time, then adapt it to your own functions or machine learning models. OpenFaaS doesn't have any one component called a "workflow engine", but what we've shown you here and in a previous post [Back pressure](https://www.openfaas.com/blog/limits-and-backpressure/), is that you can orchestrate functions in a powerful way.
 
 Some additional instructions to try out this workflow yourself can be found in [the README for this example](https://github.com/welteki/openfaas-fan-in-example#readme) on GitHub.
 

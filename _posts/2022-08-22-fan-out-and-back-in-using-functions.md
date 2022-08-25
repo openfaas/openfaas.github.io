@@ -16,18 +16,24 @@ We're increasingly hearing that OpenFaaS functions are convenient for ingesting,
 
 A common pattern used when processing large amounts of data is to break down an expensive task into smaller sub tasks that can be executed in parallel. This fan-out pattern is already available in OpenFaaS through asynchronous functions. With the async feature, invocations are queued up and processed as and when there's capacity.
 
-> Our post, [How to process your data the resilient way with back pressure ](https://www.openfaas.com/blog/limits-and-backpressure/), shows how OpenFaaS can be used to process a dataset as quickly as possible, without losing any of the records.
+> In a previous article, we showed you how to process large amounts of data both asynchronously and reliably with the fan-out pattern: [How to process your data the resilient way with back pressure ](https://www.openfaas.com/blog/limits-and-backpressure/).
 
-In some cases we want to be notified when a group of asynchronous function invocations completes and collect the result from each individual invocation. We need to fan-in again. Fanning in requires a bit more code. We will show how this can be implemented with OpenFaaS functions.
+The MapReduce pattern was popularised by Hadoop, which specialises in processing large batches of data. One dataset or task is split into many others, which can be worked on in parallel over a large distributed network of computers, that's the map step. The reduce step is where the results are combined to make sense of them.
+
+We've seen customers making use of OpenFaaS in this way, so we wanted to show you how we think it can be done without making any changes to OpenFaaS itself.
 
 ## The fan-out pattern
 Fan-out can be used to split a larger task or batch of tasks into smaller sub tasks. The processing of each sub task is deferred to another function. These functions can run in parallel to complete all tasks as quickly and efficiently as possible.
+
+> The fan-out pattern is already supported in OpenFaaS through the [asynchronous invocation system](https://docs.openfaas.com/reference/async/)
 
 ![fan-out conceptual diagram](/images/2022-fan-out-and-back-in-using-functions/fan-out.png)
 > Diagram of fan-out with functions
 
 ## The fan-in pattern
 The fan-in pattern can be applied if you need to wait for all sub tasks to complete before moving on to the next processing step. It can be used to collect and combine the result from each individual sub task.
+
+To fan-in, some kind of shared storage, like a database, a Redis key or an S3 bucket is required for tracking progress of the individual sub tasks.
 
 ![fan-in conceptual diagram](/images/2022-fan-out-and-back-in-using-functions/fan-in.png)
 > Diagram of fan-in with functions
@@ -394,21 +400,15 @@ The function retrieves the batch id from the http headers and uses it to iterate
 > When processing a large batch this function can take a while to complete. Make sure that your timeouts are configured correctly for both your function and the OpenFaaS core components. See: [Expanding timeouts](https://docs.openfaas.com/tutorials/expanded-timeouts/)
 
 ## Conclusion
-We showed how a map/reduce pattern can be implemented with OpenFaaS. A workflow was created to process a CSV file containing Wikipedia URLs. Our goal was to run an machine learning model for each URL. To do this as quickly and efficiently as possible the input was split into many sub tasks that we could run in parallel. This fan out part is supported in OpenFaaS through asynchronous functions. After all the sub tasks completed their results were combined into a single output. This fanning in required some state. We used a redis key to keep track of the batch progress.
+We set out to show how the MapReduce pattern could be implemented with OpenFaaS, first by fanning out requests, using the built-in asynchronous system and queue-worker, then by fanning back in again by using shared storage.
 
-The example we created here is a minimal example that can be used as a starting point. It can be further improved and adapted for more specific use cases.
-
-- The processing can be made more resilient by retrying a sub task before marking it as failed.
-- A function that collects and returns info on the batch progress can be added.
+We created this example as a starting point, so that you can try it out in a short period of time, then adapt it to your own functions or machine learning models. OpenFaaS doesn't have any one component called a "workflow engine", but what we've shown you here and in a previous post [Back pressure](https://www.openfaas.com/blog/limits-and-backpressure/), shows that you can orchestrate functions in a powerful way.
 
 Some additional instructions to try out this workflow yourself can be found in [the README for this example](https://github.com/welteki/openfaas-fan-in-example#readme) on GitHub.
 
 ![The result of running a batch with 500 urls.](https://camo.githubusercontent.com/bf0c1ad67f4044aba17e38e4a584c1e4d5ff417da5865d140d4457c66c113598/68747470733a2f2f7062732e7477696d672e636f6d2f6d656469612f4661684d3572435645414553616d663f666f726d61743d6a7067266e616d653d6d656469756d)
 
-> Pictured: The result of running a batch with 500 urls. On the left, the queue-worker metrics. On the right, the S3 console with the individual function results and the `output.json` with the combined results. 
-
-See also:
-- [How to process your data the resilient way with back pressure](https://www.openfaas.com/blog/limits-and-backpressure/)
+> Pictured: The result of running a batch with 500 urls. On the left, the queue-worker metrics. On the right, the S3 console with the individual function results and the `output.json` with the combined results.
 
 If you’d like to talk to us about anything we covered in this blog post: [feel free to reach out](https://www.openfaas.com/support/)
 

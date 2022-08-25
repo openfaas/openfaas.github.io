@@ -399,6 +399,62 @@ The function retrieves the batch id from the http headers and uses it to iterate
 
 > When processing a large batch this function can take a while to complete. Make sure that your timeouts are configured correctly for both your function and the OpenFaaS core components. See: [Expanding timeouts](https://docs.openfaas.com/tutorials/expanded-timeouts/)
 
+A sample of the `output.json` for a batch with 1000 URLs:
+
+```
+{
+    "batchId": "0edb0a1f-5be5-4e94-9fd7-23ee6e823e1e",
+    "batchStarted": "1661430334.4237344",
+    "batchCompleted": "1661430507.6409442",
+    "failed": {
+        "count": 26,
+        "results": [
+            {
+                "url": "https://upload.wikimedia.org/wikipedia/commons/5/52/Japan_Guam_Landing_1941.gif",
+                "statusCode": 400,
+                "result": "bad image mime type image/gif"
+            },
+
+        ....
+
+        ]
+    },
+    "passed": {
+        "count": 974,
+        "results": [
+            {
+                "url": "https://upload.wikimedia.org/wikipedia/commons/b/b0/1923._Esen_duncan.jpg",
+                "statusCode": 200,
+                "result": [
+                    {
+                        "name": "suit",
+                        "score": "0.30214"
+                    },
+                    {
+                        "name": "bow_tie",
+                        "score": "0.12600212"
+                    },
+                    {
+                        "name": "lab_coat",
+                        "score": "0.10206755"
+                    },
+                    {
+                        "name": "Windsor_tie",
+                        "score": "0.07296498"
+                    },
+                    {
+                        "name": "microphone",
+                        "score": "0.04056441"
+                    }
+                ]
+            },
+
+            ....
+
+        ],
+    }
+```
+
 ## Conclusion
 We set out to show how the MapReduce pattern could be implemented with OpenFaaS, first by fanning out requests, using the built-in asynchronous system and queue-worker, then by fanning back in again by using shared storage.
 

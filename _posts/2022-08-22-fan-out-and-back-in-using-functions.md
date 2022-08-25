@@ -59,7 +59,7 @@ echo $aws_secret_access_key | faas-cli secret create s3-secret
 
 > You can checkout the documentation for more info on [how to use secrets within your functions](https://docs.openfaas.com/reference/secrets/).
 
-The first part of the workflow will consist of two functions. The `create-batch` function is responsible for initializing the workflow. It accepts the name of a CSV file stored in an S3 bucket as input. The function will retrieve the CSV file containing image URLs and invoke the second function, `run-model` for each URL in the file.
+The first part of the workflow will consist of two functions. The `create-batch` function is responsible for initialising the workflow. It accepts the name of a CSV file stored in an S3 bucket as input. The function will retrieve the CSV file containing image URLs and invoke the second function, `run-model` for each URL in the file.
 
 The `run-model` function is responsible for calling the machine learning model, in this case the `inception` function, and uploading the result to S3.
 
@@ -75,7 +75,7 @@ mv create-batch.yml stack.yml
 faas-cli new run-model --lang python3-http -f stack.yml
 ```
 
-Note that we use `python3-http-debian` for the `create-batch` function. [pandas](https://pypi.org/project/pandas/) will be used to process the CSV file. The pandas pip module requires a native build toolchain. It is advisable to use the debian version of the template for native dependencies.
+Note that we use `python3-http-debian` for the `create-batch` function. [pandas](https://pypi.org/project/pandas/) will be used to process the CSV file. The pandas pip module requires a native build toolchain. It is advisable to use the Debian version of the template for native dependencies.
 
 All dependencies have to be put into the `requirements.txt` file.
 
@@ -117,7 +117,7 @@ def initS3():
 def handle(event, context):
     global s3Client
 
-    # Initialize an S3 client upon first invocation
+    # Initialise an S3 client upon first invocation
     if s3Client == None:
         s3Client = initS3()
     
@@ -163,7 +163,7 @@ functions:
       - s3-secret
 ```
 
-The S3 client is created and stored in a global variable upon the first request. Creating a S3 client in the handler for each request is quite an expensive operation. By initializing it once and assigning it to a global variable it can be reused between function invocations. The first version of this example did not reuse the clients. By moving them to the outer scope we managed to reduce the average call duration of the `run-model` function by 1s.
+The S3 client is created and stored in a global variable upon the first request. Creating a S3 client in the handler for each request is quite an expensive operation. By initialising it once and assigning it to a global variable it can be reused between function invocations. The first version of this example did not reuse the clients. By moving them to the outer scope we managed to reduce the average call duration of the `run-model` function by 1s.
 
 The function then reads the name of the CSV file from the body and that file name is used to retrieve the input data from S3. We then iterate over each row in the input CSV file and invoke the `run-model` function for each URL in the file. Note that `run-model` is invoked asynchronously. This decouples the HTTP transaction between the caller and the function. The request is added to a queue and picked up by the queue-worker to run it in the background. This allows us to run the multiple invocations in parallel.
 
@@ -204,7 +204,7 @@ def initS3():
 def handle(event, context):
     global s3Client
     
-    # Initialize an S3 client upon first invocation
+    # Initialise an S3 client upon first invocation
     if s3Client == None:
         s3Client = initS3()
 
@@ -238,7 +238,7 @@ def handle(event, context):
     }
 ```
 
-The `run-model` function invokes the `inception` function synchronously and stores the result, along with some metadata like the batch id, call id, and status, as a json file in S3. The result is stored in a folder named after the batch id. This makes it easy to retrieve all results for a certain batch. The metadata can be useful for for debugging or when processing the data in a later step. 
+The `run-model` function invokes the `inception` function synchronously and stores the result, along with some metadata like the batch id, call id, and status, as a json file in S3. The result is stored in a folder named after the batch id. This makes it easy to retrieve all results for a certain batch. The metadata can be useful for debugging or when processing the data in a later step. 
 
 ### Fan-in
 To be able to fan-in and get notified when all the asynchronous invocations for a batch have finished we need some state to keep track of the progress. A counter can be used to keep track of the work that has been completed. Each time an asynchronous invocation finishes the counter is decremented. When the counter reaches zero the final function in the workflow can be called.
@@ -259,7 +259,7 @@ export REDIS_PASSWORD=$(kubectl get secret --namespace redis redis -o jsonpath="
 echo $REDIS_PASSWORD | faas-cli secret create redis-password
 ```
 
-We need to create a Redis client in the `create-batch` and `run-model` functions that they can use to initialize and update the counter.
+We need to create a Redis client in the `create-batch` and `run-model` functions that they can use to initialise and update the counter.
 
 The following code creates a connection to Redis using redis-py:
 
@@ -399,7 +399,37 @@ The function retrieves the batch id from the http headers and uses it to iterate
 
 > When processing a large batch this function can take a while to complete. Make sure that your timeouts are configured correctly for both your function and the OpenFaaS core components. See: [Expanding timeouts](https://docs.openfaas.com/tutorials/expanded-timeouts/)
 
-A sample of the `output.json` for a batch with 1000 URLs:
+### Process a batch
+You can find some CSV files containing links to Wikipedia images in the [data folder on GitHub](https://github.com/welteki/openfaas-fan-in-example/tree/main/data)
+
+The `create-batch` function looks for the input files in the S3 bucket. Upload them to your S3 bucket.
+
+```bash
+aws s3 cp data/batch-1000.csv s3://of-demo-inception-data/data/batch-1000.csv
+```
+
+Invoke the function `create-batch` with the name of the source file you want to start processing.
+```bash
+curl -i  http://127.0.0.1:8080/function/create-batch -d data/batch-1000.csv
+
+HTTP/1.1 201 Created
+Content-Type: text/html; charset=utf-8
+Date: Wed, 17 Aug 2022 15:19:56 GMT
+Server: waitress
+X-Call-Id: 4121651e-8bd4-470a-8ad3-70ecd68b8194
+X-Duration-Seconds: 0.387640
+X-Start-Time: 1660749596315319961
+Content-Length: 69
+
+{"batch_id": "0edb0a1f-5be5-4e94-9fd7-23ee6e823e1e", "batch_size": 1000}%  
+```
+
+I ran these batches in a k3d cluster on my local machine and configured the queue-worker to run a maximum of ten parallel invocations. Processing this batch took around 3m20s.
+
+![The S3 console shows a batch folder with all the results and the output summary.](/images/2022-fan-out-and-back-in-using-functions/s3-console.png)
+> The S3 console shows a batch folder with all the results and the output summary.
+
+A sample of the `output.json`:
 
 ```
 {
@@ -455,19 +485,23 @@ A sample of the `output.json` for a batch with 1000 URLs:
     }
 ```
 
+OpenFaaS emits a number of metrics to help optimise these kinds of workflows and track down issues. We have a number of Grafana dashboards available to visualise these metrics.
+
+![Grafana dashboard showing the inception function being scaled up while processing a batch of a 1000 URLs.](/images/2022-fan-out-and-back-in-using-functions/openfaas-metrics.png)
+> Grafana dashboard showing the inception function being scaled up while processing a batch of a 1000 URLs.
+
+These metrics helped me diagnose some unexpected behaviour during the initial testing of this workflow. The cpu scaling target for the inception function was set to low. Because this function is cpu intensive and the machine learning model is downloaded when the function is started, the scaling target would be exceeded and the autoscaler would scale up the function. This caused a feedback loop resulting in the the function being scaled up and down without there being any actual invocations.
+
+![> Grafana dashboard showing the queue-worker burn through the 1000 messages created by the `create-batch` function.](/images/2022-fan-out-and-back-in-using-functions/queue-worker-metrics.png)
+> Grafana dashboard showing the queue-worker burn through the 1000 messages created by the `create-batch` function.
+
 ## Conclusion
 We set out to show how the MapReduce pattern could be implemented with OpenFaaS, first by fanning out requests, using the built-in asynchronous system and queue-worker, then by fanning back in again by using shared storage.
 
 We created this example as a starting point, so that you can try it out in a short period of time, then adapt it to your own functions or machine learning models. OpenFaaS doesn't have any one component called a "workflow engine", but what we've shown you here and in a previous post [Back pressure](https://www.openfaas.com/blog/limits-and-backpressure/), is that you can orchestrate functions in a powerful way.
 
-Some additional instructions to try out this workflow yourself can be found in [the README for this example](https://github.com/welteki/openfaas-fan-in-example#readme) on GitHub.
-
-![The result of running a batch with 500 urls.](https://camo.githubusercontent.com/bf0c1ad67f4044aba17e38e4a584c1e4d5ff417da5865d140d4457c66c113598/68747470733a2f2f7062732e7477696d672e636f6d2f6d656469612f4661684d3572435645414553616d663f666f726d61743d6a7067266e616d653d6d656469756d)
-
-> Pictured: The result of running a batch with 500 urls. On the left, the queue-worker metrics. On the right, the S3 console with the individual function results and the `output.json` with the combined results.
-
 ### Further work
-The example was written using python because it is often used for data science and machine learning projects, but this pattern can be implemented in any language. Wether you want to use Go, Java, C# or any other language. [The template store](https://docs.openfaas.com/cli/templates/) has templates for many different languages.
+The example was written using python because it is often used for data science and machine learning projects, but this pattern can be implemented in any language. Whether you want to use Go, Java, C# or any other language. [The template store](https://docs.openfaas.com/cli/templates/) has templates for many different languages.
 
 Functions are a natural fit for processing data. As we see more people use MapReduce with OpenFaaS we may consider building a generic component to help implement this pattern.
 

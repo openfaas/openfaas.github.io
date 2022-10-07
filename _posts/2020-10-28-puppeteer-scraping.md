@@ -118,8 +118,11 @@ The `arkade info openfaas` command will print out everything you need to log in 
 # Set to your Docker Hub account or registry address
 export OPENFAAS_PREFIX=alexellis2
 
-faas-cli template pull https://github.com/alexellis/openfaas-puppeteer-template
-faas-cli new --lang puppeteer-node12 scrape-title --prefix $OPENFAAS_PREFIX
+faas-cli template store pull puppeteer-nodelts
+faas-cli new \
+  scrape-title \
+  --lang puppeteer-node12 \
+  --prefix $OPENFAAS_PREFIX
 ```
 
 Let's get the title of a webpage passed in via a JSON HTTP body, then return the result as JSON.

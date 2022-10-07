@@ -48,15 +48,18 @@ The second function, `gen-pdf`, is used to initialize the workflow. It can be in
 
 First of all, let's just recap on how to create a function with a headless web browser, so we can do automation testing, image/PDF generation and for scraping websites.
 
-We will create a function using the `puppeteer-node12` template and name this function `page-to-pdf`
+We will create a function using the `puppeteer-nodelts` template and name this function `page-to-pdf`
 
 ```bash
 
 # Set to your Docker Hub account or registry address
 export OPENFAAS_PREFIX=""
 
-faas-cli template pull https://github.com/alexellis/openfaas-puppeteer-template
-faas-cli new --lang puppeteer-node12 page-to-pdf --prefix $OPENFAAS_PREFIX
+faas-cli template store pull puppeteer-nodelts
+
+faas-cli new \
+  --lang puppeteer-nodelts page-to-pdf \
+  --prefix $OPENFAAS_PREFIX
 ```
 
 You can now edit `./page-to-pdf/handler.js` and make it return a PDF.
@@ -308,7 +311,7 @@ provider:
   gateway: http://127.0.0.1:8080
 functions:
   page-to-pdf:
-    lang: puppeteer-node12
+    lang: puppeteer-nodelts
     handler: ./page-to-pdf
     image: welteki2/page-to-pdf:latest
     environment:
@@ -362,7 +365,7 @@ provider:
   gateway: http://127.0.0.1:8080
 functions:
   page-to-pdf:
-    lang: puppeteer-node12
+    lang: puppeteer-nodelts
     handler: ./page-to-pdf
     image: welteki2/page-to-pdf:latest
     environment:
@@ -397,7 +400,7 @@ The graph for the invocation rate shows how there initially are a lot of 429 res
 
 ## Conclusion
 
-A platform like AWS Lambda is purpose built for running functions at scale, albeit within limits that some teams find restrictive. We often hear that the costs can be prohibitive for large-scale usage, and one large company recently contacted us to tell us they were saving 60,000 USD per year, over the past 3 years by switching to OpenFaaS.
+A platform like AWS Lambda is purpose built for running functions at scale and can be very convenient if you have a lot of expertise with AWS already. One of the things we hear from customers is that they can find the timeouts and amount of retries possible restrictive. We also hear that the costs can be prohibitive for large-scale usage. One large company recently contacted us to tell us that had saved 60,000 USD per year, over the past 3 years by switching to OpenFaaS.
 
 This blog post was written to show Kubernetes users that it is possible to autoscaling based upon requests, to limit concurrency in an intelligent way, and to scale out a task like PDF generation.
 

@@ -1,7 +1,7 @@
 ---
 title: "How to access the Kubernetes API from a function"
 description: "We'll show you how to access any part of the Kubernetes API from a function securely, with a granular ServiceAccount."
-date: 2022-10-13
+date: 2022-10-14
 image: /images/2022-access-k8s-from-functions/background.png
 categories:
 - golang
@@ -26,11 +26,83 @@ faas-cli template store pull golang-middleware
 faas-cli new get-events --lang golang-middleware
 ```
 
+Processes in containers can access the Kubernetes apiserver. They are authenticated as a particular Service Account to do so. We will have to create some RBAC Roles and a ServiceAccount for our function.
+
+Here is a ServiceAccount and ClusterRole that can be used to list events for different namespaces:
+
+```yaml
+# SA
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: fn-events
+  namespace: openfaas-fn
+---
+
+# ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app: openfaas
+  name: fn-events
+rules:
+- apiGroups: [""]
+  resources: ["events"]
+  verbs:
+  - list
+
+# ClusterRoleBinding
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  labels:
+    app: openfaas
+  name: fn-events
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: fn-events
+subjects:
+  - kind: ServiceAccount
+    name: fn-events
+    namespace: openfaas-fn
+---
+```
+
+Functions can only assume a ServiceAccount in the namespace in which they are deployed. The `fn-events` ServiceAccount is created in the `openfaas-fn` namespace. This is the default namespace used for OpenFaaS functions.
+
+> Learn more about [RBAC Authorization](https://kubernetes.io/docs/reference/access-authn-authz/rbac/) and [Service Accounts](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/) in the Kubernetes documentation.
+
+You can assign a ServiceAccount to a function by adding the annotation `com.openfaas.serviceaccount` in the functions `stack.yaml` file. 
+
+```yaml
+functions:
+  get-events:
+    lang: golang-middleware
+    handler: ./get-events
+    image: welteki2/get-events:0.1.1
+    annotations:
+      com.openfaas.serviceaccount: fn-events
+```
+
 > You can check out this blog post by Alex for [a deep dive into Golang for OpenFaaS functions](https://www.openfaas.com/blog/golang-deep-dive/)
 
 We are using the kubernetes client package for Go to access data and resources in the cluster. The function first creates a new clientset with an in-cluster configuration. The clientset is then used to list the events for a specific namespace.
 
 The namespace can be passed in as the request body. If no namespace is passed in we list the events for the `openfaas-fn` namespace.
+
+Add the required dependencies for the function:
+
+```bash
+cd get-events
+
+go get "k8s.io/apimachinery/pkg/apis/meta/v1"
+go get "k8s.io/client-go/kubernetes" 
+```
+
+Edit the function handler `./get-events/handler.go`:
 
 ```golang
 package function
@@ -116,69 +188,7 @@ func getClientset() (*kubernetes.Clientset, error) {
 }
 ```
 
-Processes in containers can access the Kubernetes apiserver. They are authenticated as a particular Service Account to do so. 
-We will have to create some RBAC Roles and a ServiceAccount for our function.
-
-Here is a ServiceAccount and ClusterRole that can be used to list events for different namespaces:
-
-```yaml
-# SA
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: fn-events
-  namespace: openfaas-fn
----
-
-# ClusterRole
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
-metadata:
-  labels:
-    app: openfaas
-  name: fn-events
-rules:
-- apiGroups: [""]
-  resources: ["events"]
-  verbs:
-  - list
-
-# ClusterRoleBinding
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
-metadata:
-  labels:
-    app: openfaas
-  name: fn-events
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: fn-events
-subjects:
-  - kind: ServiceAccount
-    name: fn-events
-    namespace: openfaas-fn
----
-```
-
-Functions can only assume a ServiceAccount in the namespace in which they are deployed. The `fn-events` ServiceAccount is created in the `openfaas-fn` namespace. This is the default namespace used for OpenFaaS functions.
-
-> Learn more about [RBAC Authorization](https://kubernetes.io/docs/reference/access-authn-authz/rbac/) and [Service Accounts](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/) in the Kubernetes documentation.
-
-You can assign a ServiceAccount to a function by adding the annotation `com.openfaas.serviceaccount` in the functions `stack.yaml` file. 
-
-```yaml
-functions:
-  get-events:
-    lang: golang-middleware
-    handler: ./get-events
-    image: welteki2/get-events:0.1.1
-    annotations:
-      com.openfaas.serviceaccount: fn-events
-```
-
-Deploy the function and invoke it with `curl`:
+Deploy the function and invoke it with `curl`. This should return a formatted list of events for a namespace.
 
 ```bash
 export OPENFAAS_URL="http://127.0.0.1:8080"
@@ -204,6 +214,7 @@ LAST SEEN           TYPE   REASON OBJECT                      MESSAGE
 ```
 
 ## Trigger workloads on a schedule
+
 Depending on the workload you are running in your function you might want to trigger it on a timed-basis. OpenFaaS has support for this through the [cron event-connector](https://docs.openfaas.com/reference/cron/#kubernetes).
 
 You can deploy the cron-connector with [arkade](https://github.com/alexellis/arkade).
@@ -229,8 +240,19 @@ functions:
 
 This will trigger the function every hour.
 
+# Wrapping up
 
-# Conclusion
-It is possible to access the Kubernetes API form within your functions. We walked through a short example where we create a function to list events for different namespaces. What you choose to do with your cluster from your functions code is entirely up to you.
+It is possible to access the Kubernetes API form within your functions. We walked through a short example where we create a function to list events for different namespaces. What you choose to do with your cluster from your functions code is entirely up to you. You could create a function to:
+
+- Do any kind of reconciliation like cleaning up orphaned objects or applying a certain label to workloads
+- Build a self-service integration with Slack, where a chatbot can provision namespaces for teams
+- Run diagnostics against your cluster. We did something like this with the [OpenFaaS config-checker](https://github.com/openfaas/config-checker)
+
+Take a look at what you are using the Kubernetes API for. Maybe you could benefit from running some of that code as a function.
 
 We are interested to hear what workloads you would run using this approach. Let us know by tweeting to [@openfaas](https://twitter.com/openfaas).
+
+You may also like:
+
+- [A Deep Dive into Golang for OpenFaaS Functions](https://www.openfaas.com/blog/golang-deep-dive/)
+- [Gracefully handling Kubernetes API deprecations: The Tale of Two Ingresses.](https://www.openfaas.com/blog/ingress-api-deprecation/)

@@ -2,14 +2,13 @@
 title: "Custom health and readiness checks for your OpenFaaS Functions"
 description: "Learn how and why to use a custom health or readiness endpoint for your OpenFaaS Functions"
 date: 2022-10-26
-image: /images/2022-ready/background.png
+image: /images/2022-ready/background.jpg
 categories:
 - architecture
 - reliability
 - kubernetes
 - functions
-author_staff_member: han
-author_staff_member_editor: alex
+author_staff_member: alex
 ---
 
 Learn how and why to use a custom health or readiness endpoint for your OpenFaaS Functions.

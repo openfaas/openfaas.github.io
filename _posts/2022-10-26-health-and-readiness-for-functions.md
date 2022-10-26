@@ -52,7 +52,7 @@ Another example would be that you're running inference against a Machine Learnin
 
 If you had 5 replicas of the ML serving function, and 4 failed their readiness check, then Kubernetes would remove their IP addresses from the available pool, meaning all subsequent requests would go to the free Pod.
 
-![Readiness in action](/images/2022-ready/background.png)
+![Readiness in action](/images/2022-ready/conceptual.png)
 > Readiness in action, removing Kubernetes endpoint IP addresses from the available set.
 
 # A demo without readiness

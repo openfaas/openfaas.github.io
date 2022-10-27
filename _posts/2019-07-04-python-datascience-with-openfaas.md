@@ -202,7 +202,7 @@ This template uses Flask to power the background web server. The `handle` can re
 return json.dumps({"error": "No input provided"}), 400
 ```
 
-**Big models**: if your model file is very large and takes a few seconds to load, you can use the `com.openfaas.health.http.initialDelay` to extend the function healthcheck so that the function has enough time to load the file.  [Check the docs for and example.][of-stateless-microservices]
+**Big models**: if your model file is very large and takes a few seconds to load, you can use the `com.openfaas.ready.http.initialDelay` to extend the function readiness check so that the function has enough time to load the file.  [Check the docs for and example.][of-stateless-microservices]
 
 ### Deployment
 This template is designed to bundle the pre-trained model into the final Docker image. This means that the deployment steps look like this

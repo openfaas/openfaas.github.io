@@ -195,7 +195,7 @@ functions:
     handler: ./express-svc
     image: alexellis2/express-svc:latest
     annotations:
-      com.openfaas.health.http.path: /
+      com.openfaas.ready.http.path: /
 ```
 
 Now simply run `faas-cli up -f express-svc.yml` and you'll be able to access your Express.js microservice.

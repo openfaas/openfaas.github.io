@@ -179,6 +179,25 @@ Kubernetes is routing traffic away from the busy Pods which have a hard limit fo
 
 It'll do the same if you have a custom health endpoint for the usecases like: disk space, available RAM, open database connections or some other issue with a downstream API.
 
+## Configuration options for functions
+
+There are some default values set for all functions, configured in the Helm chart, you'll see us talk about these at the end of the post.
+
+These annotations are supported for the readiness check:
+
+* `com.openfaas.health.http.path` - the path to check for readiness
+* `com.openfaas.ready.http.periodSeconds` - how often to check the readiness endpoint?
+* `com.openfaas.ready.http.initialDelay` - how long to wait before checking the readiness endpoint of a newly deployed or updated function?
+* `com.openfaas.ready.http.failureThreshold` - how many times should a readiness probe fail until the function is considered not ready?
+
+And the following annotations are supported for the health check (liveness probe):
+
+* `com.openfaas.health.http.path` - the path to check for liveness
+* `com.openfaas.health.http.periodSeconds` - how often to check the health endpoint?
+* `com.openfaas.health.http.initialDelay` - how long to wait before checking the health endpoint of a newly deployed or updated function?
+
+Learn more about these options: [Docs: OpenFaaS workloads](https://docs.openfaas.com/reference/workloads/#custom-http-health-checks)
+
 ## Your own readiness endpoint
 
 Let's say that you're writing a program in Python, we'd recommend the `python3-http` template for that.

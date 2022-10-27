@@ -1,6 +1,6 @@
 ---
 title: "Custom health and readiness checks for your OpenFaaS Functions"
-description: "Learn how and why to use a custom health or readiness endpoint for your OpenFaaS Functions"
+description: "Learn how and why to use a custom health or readiness endpoint for Kubernetes workloads and OpenFaaS Functions too"
 date: 2022-10-26
 image: /images/2022-ready/background.jpg
 categories:
@@ -11,7 +11,7 @@ categories:
 author_staff_member: alex
 ---
 
-Learn how and why to use a custom health or readiness endpoint for your OpenFaaS Functions.
+Learn how and why to use a custom health or readiness endpoint for Kubernetes workloads and OpenFaaS Functions too.
 
 OpenFaaS has had HTTP health check or (liveness) probe support for some time, but recently we've worked with customers to bring custom HTTP readiness support for functions too.
 

@@ -84,6 +84,28 @@ Note that we use `python3-http-debian` for the `create-batch` function. [pandas]
 
 All dependencies have to be put into the `requirements.txt` file.
 
+We will use a pre-build function image for the inception function. Add the function to the `stack.yml` file:
+
+```yaml
+functions:
+  inception:
+    image: alexellis2/imagenet:0.0.12
+    skip_build: true
+    environment:
+      read_timeout: "60s"
+      write_timeout: "60s"
+      # OpenFaaS Pro annotations
+    annotations:
+      com.openfaas.ready.http.path: "/ready"
+      com.openfaas.ready.http.initialDelay: "5s"
+      com.openfaas.ready.http.periodSeconds: "2s"
+```
+The `skip_build` field tells the CLI to not attempt to build the Docker image for this function.
+
+The function needs to load the ML model before it can start accepting requests. Annotations are used to configure a custom readiness check on the `/ready` endpoint. This will prevent requests from being sent to the function before it is ready to accept them. You can take a look at the [source code of the imagenet function](https://github.com/alexellis/imagenet-openfaas) to see how this is implemented.
+
+> For an in depth overview on readiness and health checks take a look at our blog post: [Custom health and readiness checks for your OpenFaaS Functions ](https://www.openfaas.com/blog/health-and-readiness-for-functions/)
+
 The `requirements.txt` file for the `create-batch` function:
 
 ```

@@ -316,9 +316,14 @@ functions:
     image: welteki2/page-to-pdf:latest
     environment:
       max_inflight: 1
+    annotations:
+      com.openfaas.ready.http.path: /_/ready
 ```
-
 Note: after changing any value in an OpenFaaS YAML file, you must run `faas-cli deploy` for the change to take effect.
+
+When setting a concurrency limit on a function traffic may go to Pods which are overloaded, instead of Pods that are ready. To optimize throughput we can use the `com.openfaas.ready.http.path` annotation to configure a Kubernetes readiness probe for the `/_/ready` endpoint on our function. This way Kubernetes can route traffic away from the busy Pods which have reached the concurrency limit.
+
+> See also: [Custom health and readiness checks for your OpenFaaS Functions](https://www.openfaas.com/blog/health-and-readiness-for-functions/)
 
 ## Buffer and retry requests
 

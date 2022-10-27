@@ -322,9 +322,9 @@ But if you want to try it anyway, you can combine them both, because remember, t
       com.openfaas.health.http.periodSeconds: 5s
 ```
 
-## Slow starting functions
+## What about my slow starting functions?
 
-If you have a function that generally is slow to start, but then once it's ready, will stay that way, then you can tune the checks.
+If you have a function that generally is slow to start, but then once it's ready, will stay that way, then you can fine-tune the checks and experiment to get them right for your use-case.
 
 You may need this if you load data from a cache, download large files or load an ML model in memory before accepting requests.
 
@@ -332,12 +332,32 @@ What if your model is really very large and takes 60 seconds to load?
 
 ```yaml
     annotations:
-      com.openfaas.health.http.path: "/custom-health"
-      com.openfaas.health.http.initialDelay: "60s"
-      com.openfaas.health.http.periodSeconds: 5s
+      com.openfaas.ready.http.path: "/custom-ready"
+      com.openfaas.ready.http.initialDelay: "60s"
+      com.openfaas.ready.http.periodSeconds: 5s
 ```
 
 Here, we do the first check after 60 seconds, then every other check is on a 5 second timer.
+
+## Do I always need to set an initial delay and period seconds value?
+
+If you don't set the `initialDelay` or `periodSeconds` values, then OpenFaaS will default to using the default values set in the OpenFaaS Helm chart, or the defaults of Kubernetes.
+
+You'll also notice that we expose `timeoutSeconds` at the chart level, some of our customers use this with functions that are slow to respond to their readiness and liveness checks. Making this number higher gives the function longer to respond.
+
+```yaml
+faasnetes.readinessProbe.initialDelaySeconds
+faasnetes.readinessProbe.periodSeconds
+faasnetes.readinessProbe.timeoutSeconds
+```
+
+```yaml
+faasnetes.livenessProbe.initialDelaySeconds
+faasnetes.livenessProbe.periodSeconds
+faasnetes.livenessProbe.timeoutSeconds
+```
+
+See also: [OpenFaaS Helm chart](https://github.com/openfaas/faas-netes/tree/master/chart/openfaas#faas-netes--operator)
 
 ## Wrapping up
 

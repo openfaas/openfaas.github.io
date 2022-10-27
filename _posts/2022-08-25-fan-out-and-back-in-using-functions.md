@@ -55,10 +55,11 @@ You can find the [full example on GitHub](https://github.com/welteki/openfaas-fa
 ### Fan-out
 S3 will be used as the data store throughout this example. The input files are retrieved from an S3 bucket, results of invocations and the final result will be uploaded to the same bucket. To run this example yourself you will need to create an [Amazon S3 bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/GetStartedWithS3.html).
 
-The functions need access to AWS credentials in order to use the bucket. The `faas-cli` can be used to define these secrets.
+The functions need access to AWS credentials in order to use the bucket. Save your AWS access key Id and secret in separate files and use the `faas-cli` to create two new OpenFaaS secrets.
+
 ```bash
-echo $aws_access_key_id | faas-cli secret create s3-key
-echo $aws_secret_access_key | faas-cli secret create s3-secret
+faas-cli secret create s3-key --from-file aws_access_key_id.txt
+faas-cli secret create s3-secret --from-file aws_secret_access_key.txt
 ```
 
 > You can checkout the documentation for more info on [how to use secrets within your functions](https://docs.openfaas.com/reference/secrets/).

@@ -77,7 +77,7 @@ The new modes:
 
 Additionally functions can be scaled to zero when they are idle. Scaling to zero is an opt-in feature on a per function basis. It can be used in combination with any of the three scaling modes listed above for increased efficiency.
 
-There is a trade-off when using Scale to Zero, learn more about it here: [Dude, where's my coldstart?](https://www.openfaas.com/blog/what-serverless-coldstart/)
+There is a trade-off when using [Scale to Zero](https://docs.openfaas.com/openfaas-pro/scale-to-zero/), learn more about it here: [Dude, where's my coldstart?](https://www.openfaas.com/blog/what-serverless-coldstart/)
 
 What about Kubernetes' own auto-scaler?
 

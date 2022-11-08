@@ -7,9 +7,12 @@
 - name: eBooks
   class: navbar-item
   link: https://openfaas.gumroad.com/
-- name: Consulting
+- name: Pricing
   class: navbar-item
-  link: /consulting/
+  link: /pricing/
+# - name: Consulting
+#   class: navbar-item
+#   link: /consulting/
 - name: Docs
   class: navbar-item
   link: https://docs.openfaas.com/

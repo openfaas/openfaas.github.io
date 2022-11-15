@@ -313,11 +313,11 @@ NAME                   TYPE           CLUSTER-IP       EXTERNAL-IP
 istio-ingressgateway   LoadBalancer   10.106.200.195   <pending>
 ```
 
-<img src="https://docs.inlets.dev/images/inlets-oss-logo.svg" width="140px" alt="inlets logo">
+<img src="https://docs.inlets.dev/images/inlets-hero.png" width="140px" alt="inlets logo">
 
 > Inlets can enable LoadBalancers and Controllers for local and private Kubernetes clusters
 
-If you're running within a private VPC, on-premises or on your laptop, then you will need to get a public IP for Istio through the [inlets-operator](https://docs.inlets.dev/images/inlets-oss-logo.svg). See a full guide to [setting up the inlets-operator with Istio](https://blog.alexellis.io/a-bit-of-istio-before-tea-time/) to provide an IP via a secure tunnel. That will then change `<pending>` to a fully accessible IP.
+If you're running within a private VPC, on-premises or on your laptop, then you will need to get a public IP for Istio through the [inlets-operator](https://docs.inlets.dev/images/inlets-hero.png). See a full guide to [setting up the inlets-operator with Istio](https://blog.alexellis.io/a-bit-of-istio-before-tea-time/) to provide an IP via a secure tunnel. That will then change `<pending>` to a fully accessible IP.
 
 Otherwise, copy the IP or CNAME issued to you under `EXTERNAL-IP` and create your DNS entry. I'll be using the domain `faas.o6s.io`.
 

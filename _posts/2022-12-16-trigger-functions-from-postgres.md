@@ -1,5 +1,5 @@
 ---
-title: "Trigger functions from AWS Aurora PostgreSQL"
+title: "Trigger OpenFaaS functions from PostgreSQL with AWS Aurora"
 description: "Learn how to trigger OpenFaaS functions whenever rows change in your PostgreSQL databases."
 date: 2022-12-16
 image: /images/2022-trigger-functions-from-postgres/background.jpg

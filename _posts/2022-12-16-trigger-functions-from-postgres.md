@@ -30,7 +30,7 @@ Event connectors can be combined for where you may invoke a function through Kaf
 
 ## The new Postgresql connector
 
-We recently released a new connector for [PostgreSQL](https://www.postgresql.org). With this connector OpenFaaS functions can be triggered whenever changes are made to a database table. We've done work in the past with triggering functions from databases, but when Greg at Klar.mx told us about his migration to OpenFaaS Pro, we spent a couple of weeks working on a connector that would help his team.
+We recently released a new connector for [PostgreSQL](https://www.postgresql.org). With this connector OpenFaaS functions can be triggered whenever changes are made to a database table. We've done work in the past with triggering functions from databases, so when [Greg Burd](https://www.linkedin.com/in/gregburd/) at [Klar.mx](https://klar.mx) who'd just migrated to OpenFaaS Pro asked for help, we set some time aside and built this connector for his team.
 
 Greg inherited a large series of microservices written in Python and Java, along with dozens of database tables which had been used to store data over a long period of time.
 
@@ -232,9 +232,22 @@ faas-cli store deploy printer \
 
 ## Conclusion
 
-We've set up a PostgreSQL database with AWS Aurora and configured OpenFaaS Pro to dispatch messages to our functions when there are changes to a database table.
+We've set up a PostgreSQL database with AWS Aurora and configured OpenFaaS Pro to dispatch messages to our functions when there are changes to a database table. Triggering functions from your database allows you to run background jobs on database changes or it can be used to quickly extend an existing application.
 
-Triggering functions from your database allows you to run background jobs on database changes or it can be used to quickly extend an existing application.
+### Future work
+
+We're also considering introducing predicates for all OpenFaaS connectors. There are two use cases here:
+
+1. Filtering out data from large payloads, for the case where you only need to receive the primary key from a table, or just a few fields. You may also want to mutate data, for instance to redact all but the last 4 digits of a credit card number.
+2. Reducing the number of invocations through a simple expression
+
+In the first case, you may imagine that we'd add a basic transformation written in Python into an annotation like this, where you may have 100 different fields, but only need two as an input to the function: `return {k: v for (k, v) in data.items() if k in ["id","status"] }`.
+
+For the second case, you may potentially have a rule like this: `data["status"] == "settled"`, where you only want to have a function invoked when a customer's bill changes to from any other status to "settled".
+
+If you think either of these cases would save you time and make your functions perform better, please feel free to reach out to us.
+
+### Next steps
 
 If you have questions, please check out the [Postgres events page in the docs](https://docs.openfaas.com/openfaas-pro/postgres-events/), or [feel free to get in touch](https://openfaas.com/support/).
 

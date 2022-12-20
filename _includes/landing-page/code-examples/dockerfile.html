@@ -4,12 +4,14 @@
 <div class="has-text-grey-darker has-text-weight-light">
     Dockerfile
 </div>
-    <pre><code class="language-dockerfile">FROM ruby:2.7-alpine3.11
+    <pre><code class="language-dockerfile">FROM ruby:2.7-alpine
 
 WORKDIR /home/app
 COPY    .   .
 
 RUN bundle install
+
+EXPOSE 8080
 
 CMD ["ruby", "main.rb"]</code></pre>
 </div>

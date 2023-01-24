@@ -65,19 +65,23 @@ Once up and running, install Istio:
 arkade install istio
 ```
 
-At time of writing this installs Istio 1.9.
+At time of writing this installs Istio 1.16.1.
 
-### Install OpenFaaS
+### Install OpenFaaS Pro
 
-Now install OpenFaaS using the following changes:
+Now install OpenFaaS Pro using the following changes:
 
 The `gateway.directFunctions=true` flag prevents OpenFaaS from trying to do its own endpoint load-balancing between function replicas, and defers to Envoy instead. Envoy is configured for each pod by Istio and handles routing and retries.
+
+The `gateway.probeFunctions=true` is required to remediate a race condition where during scaling, Kubernetes reports ready endpoints, but the Envoy proxy is not yet ready to route traffic to them. This setting causes the gateway to access the function's HTTP readiness endpoint directly before sending traffic.
 
 The `istio.mtls` flag is optional, but when set encrypts the traffic between each of the pods in the `openfaas` and `openfaas-fn` namespace.
 
 ```bash
 arkade install openfaas \
+  --set openfaasPro=true \
   --set gateway.directFunctions=true \
+  --set gateway.probeFunctions=true \
   --set istio.mtls=true
 ```
 

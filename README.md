@@ -293,3 +293,4 @@ rm -rf outg/* ; ffmpeg -i videoplayback.mp4 -vf "select='not(mod(n,2000))',setpt
 
 ffmpeg -f image2 -framerate 1 -i outg/out%003d.jpg  -vf "scale=width=-2:height=ih/2 " out.gif
 ```
+

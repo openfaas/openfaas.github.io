@@ -60,29 +60,45 @@ kind create cluster \
   --name openfaas-istio
 ```
 
-### Add Istio
+### Install Istio first
 
-Once up and running, install Istio:
+Once the KinD cluster has started, install Istio:
 
 ```bash
 arkade install istio
 ```
 
-At time of writing this installs Istio 1.16.1.
+You can also install Istio using Helm or the istioctl tool, [see other options](https://istio.io/latest/docs/setup/install/).
+
+Download the CLI for Istio so we can use it later:
+
+```bash
+arkade get istioctl
+```
 
 ### Install OpenFaaS Pro
 
-Now install OpenFaaS Pro using the following changes:
+Only OpenFaaS Pro works with Istio, the Community Edition (CE) is meant for hobbyists and experimentation.
+
+Install OpenFaaS Pro using the following changes:
+
+Setting `openfaasPro=true` enables the OpenFaaS Pro features.
+
+The `--license-file` flag should be set to `$HOME/.openfaas/LICENSE` and will create the `openfaas-license` secret so that the components can start up.
 
 The `gateway.directFunctions=true` flag prevents OpenFaaS from trying to do its own endpoint load-balancing between function replicas, and defers to Envoy instead. Envoy is configured for each pod by Istio and handles routing and retries.
 
 The `gateway.probeFunctions=true` is required to remediate a race condition where during scaling, Kubernetes reports ready endpoints, but the Envoy proxy is not yet ready to route traffic to them. This setting causes the gateway to access the function's HTTP readiness endpoint directly before sending traffic.
 
+The `operator.create` option is not strictly necessary, but preferred as it enables the "Function" CRD.
+
 The `istio.mtls` flag is optional, but when set encrypts the traffic between each of the pods in the `openfaas` and `openfaas-fn` namespace.
 
 ```bash
 arkade install openfaas \
+  --license-file $HOME/.openfaas/LICENSE \
   --set openfaasPro=true \
+  --set operator.create=true \
   --set gateway.directFunctions=true \
   --set gateway.probeFunctions=true \
   --set istio.mtls=true
@@ -195,7 +211,8 @@ Events:
 You can also use `istioctl` to explore the status of the proxy:
 
 ```
-~/.arkade/bin/istioctl proxy-status
+istioctl proxy-status
+
 NAME                                                   CDS        LDS        EDS        RDS        ISTIOD                      VERSION
 alertmanager-7cb8f6487d-ch4fp.openfaas                 SYNCED     SYNCED     SYNCED     SYNCED     istiod-865fd47fcc-24vdp     1.9.1
 basic-auth-plugin-565b7cbc48-h9t8d.openfaas            SYNCED     SYNCED     SYNCED     SYNCED     istiod-865fd47fcc-24vdp     1.9.1
@@ -228,7 +245,11 @@ faas-cli deploy \
   --name env \
   --image ghcr.io/openfaas/alpine:latest \
   --fprocess="env"
+```
 
+Now invoke the function and view the headers injected by the Envoy sidecar:
+
+```
 echo | faas-cli invoke env
 
 HOSTNAME=env-58bd77889c-k8h76
@@ -265,8 +286,13 @@ If you would like to understand the quiescent load on the cluster, you can insta
 
 ```bash
 arkade install metrics-server
+```
 
-# Wait a few minutes for data collection, then run:
+
+Wait a few minutes for data collection, then run:
+
+bash
+```
 kubectl top node
 kubectl top pod -A
 ```
@@ -449,7 +475,7 @@ curl -s -d "" $OPENFAAS_URL/function/nodeinfo
 
 ## Wrapping up
 
-In a short period of time we were able to deploy Istio and OpenFaaS on a local KinD cluster and see Envoy's sidecar providing mutual TLS encryption. We then went on to explore the additional resource consumption added by using Istio, and finally showed you how to create a TLS certificate for external traffic using a free certificate from Let's Encrypt.
+In a short period of time we were able to deploy Istio and OpenFaaS Pro on a local KinD cluster and see Envoy's sidecar providing mutual TLS encryption. We then went on to explore the additional resource consumption added by using Istio, and finally showed you how to create a TLS certificate for external traffic using a free certificate from Let's Encrypt.
 
 Istio is feature-rich, with extensive documentation and examples.
 
@@ -466,5 +492,4 @@ Do you have questions, comments or suggestions?
 
 Do you have questions, comments or suggestions? Tweet to [@openfaas](https://twitter.com/openfaas).
 
-> Want to support our work? You can become a sponsor as an individual or a business via GitHub Sponsors with tiers to suit every budget and benefits for you in return. [Check out our GitHub Sponsors Page](https://github.com/sponsors/openfaas/)
-
+If you'd like to use Istio with OpenFaaS, you can find out about [options for OpenFaaS Pro here](https://openfaas.com/pricing).

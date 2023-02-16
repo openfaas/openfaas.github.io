@@ -8,6 +8,7 @@ categories:
  - enterprise
  - functions
  - istio
+ - openfaas-pro
 author_staff_member: alex
 dark_background: true
 
@@ -45,6 +46,8 @@ In this blog post we'll give you a quick introduction so that you can start inte
 ## Tutorial
 
 We are using arkade, the open source marketplace to download CLIs and to install the apps we need. You can also do this the hard way if you prefer, just refer to the documentation or the helm chart for more.
+
+You'll need OpenFaaS Pro for Istio to work. [Reach out to us](https://openfaas.com/pricing/) if you want to talk about options.
 
 ### Bootstrap the cluster
 

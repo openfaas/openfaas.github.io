@@ -7,6 +7,7 @@ categories:
 - autoscaling
 - prometheus
 - functions
+- openfaas-pro
 author_staff_member: han
 author_staff_member_editor: alex
 ---

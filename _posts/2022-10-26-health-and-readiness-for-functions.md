@@ -8,18 +8,19 @@ categories:
 - reliability
 - kubernetes
 - functions
+- openfaas-pro
 author_staff_member: alex
 ---
 
 Learn how and why to use a custom health or readiness endpoint for Kubernetes workloads and OpenFaaS Functions too.
 
-OpenFaaS has had HTTP health check or (liveness) probe support for some time, but recently we've worked with customers to bring custom HTTP readiness support for functions too.
+OpenFaaS Pro has had HTTP health check or (liveness) probe support for some time, but recently we've worked with customers to bring custom HTTP readiness support for functions too.
 
 In this article, I'll explain what the difference is between the two, and what distinct job they perform for Kubernetes workloads. We'll then see a few demos where you can participate too.
 
 [Kevin Lindsay](https://www.linkedin.com/in/kevin-lindsay-16a740160/) from [Surge](https://surge.com) helped co-design this feature with our team, and here's what he had to say:
 
-> "We apply hard concurrency limits to our OpenFaaS functions and had already been using the custom health checks. The new custom readiness support has resulted in higher throughput with fewer retries for both synchronous and asynchronous messages. Ultimately, it made our end-user experience much more responsive." - Kevin Lindsay, Surge
+> "We apply hard concurrency limits to our OpenFaaS Pro functions and had already been using the custom health checks. The new custom readiness support has resulted in higher throughput with fewer retries for both synchronous and asynchronous messages. Ultimately, it made our end-user experience much more responsive." - Kevin Lindsay, Surge
 
 ## Introduction
 

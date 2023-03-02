@@ -517,17 +517,17 @@ You can get the logs for your function or view its invocation history with `faas
 
 ## Wrapping up
 
-There are a bunch of SaaS tools like Zapier, Make (aka Integromat), IFTTT, Pipedream and others, and they can be convenient. Especially if you don't write code for a living, or are short on time. But at the same time, they cost money to even use in a basic way, and that bill quickly grows over time. Finally, when you need to do something out of the box, you just can't.
+There are a bunch of SaaS tools like Zapier, Make (aka Integromat), IFTTT, Pipedream and others, and they can be convenient. Especially if you don't write code for a living, or are short on time. But at the same time, they often need an upgraded plan to function in basic ways. Finally, when you need to do something out of the box, you just can't. Things like different languages, keeping the code in git, testing locally, more bespoke authentication needs, extra cron schedules, event triggers, etc.
 
 Where can you run your new function?
 
-That's where OpenFaaS Community Edition or Pro comes in. You have the ultimate flexibility to write in any language and to trigger by webhook, cron, events. And you can drop your code into a private GitHub / GitLab repo and publish the functions whenever you change then.
+That's where OpenFaaS Community Edition or Pro comes in. You have the ultimate flexibility to write in any language and to trigger by webhook, cron, events. And you can drop your code into a private GitHub / GitLab repo and publish the functions whenever you change them.
 
-* If you run Kubernetes, then the [OpenFaaS Community Edition](https://docs.openfaas.com) uses very few reasons and is easy to install
+* If you run Kubernetes, then the [OpenFaaS Community Edition](https://docs.openfaas.com) uses very few resources and is easy to set up.
 
     This is a popular option, and we've seen millions of pulls from the Docker Hub, along with 33k+ GitHub stars across the OpenFaaS project repos.
 
-* If you are looking for low overheads, then you can run faasd on a VM
+* If you are looking for really low overheads, then you can can't go far wrong with faasd that runs on a single VM
     
     "faasd" was designed to be installed on a cloud host and requires very little maintenance once installed. That's where I am running the two functions I mentioned in this post. Even a 10-15 USD / mo [Linode Nanode](https://www.openfaas.com/images/sponsors/linode.svg) or [DigitalOcean Droplet](https://m.do.co/c/2962aa9e56a1) is enough to run [faasd](http://github.com/openfaas/faasd).
 

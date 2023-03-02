@@ -494,6 +494,27 @@ faas-cli secret create pipedrive-api-key \
  --from-file $HOME/pipedrive-api-key.txt 
 ```
 
+## Deployment / updating
+
+Why not write a main.go file and scp it over to a VM?
+
+You absolutely could, and when I wrote this code, I started writing a main.go, before moving it over to the handler interface.
+
+[OpenFaaS functions are easy to build in GitHub Actions](https://docs.actuated.dev/examples/openfaas-publish/) or GitLab, because they're just container images.
+
+You can then do a secure remote deployment over HTTPS using the OpenFaaS CLI.
+
+```bash
+export OPENFAAS_URL=https://openfaas.example.com
+
+faas-cli login --username admin --password $OPENFAAS_PASSWORD
+faas-cli deploy
+```
+
+Just store `OPENFAAS_PASSWORD` as a secret for the repository.
+
+You can get the logs for your function or view its invocation history with `faas-cli describe` and `faas-cli logs`.
+
 ## Wrapping up
 
 There are a bunch of SaaS tools like Zapier, Make (aka Integromat), IFTTT, Pipedream and others, and they can be convenient. Especially if you don't write code for a living, or are short on time. But at the same time, they cost money to even use in a basic way, and that bill quickly grows over time. Finally, when you need to do something out of the box, you just can't.

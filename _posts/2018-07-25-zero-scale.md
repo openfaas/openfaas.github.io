@@ -10,11 +10,11 @@ categories:
 author_staff_member: alex
 ---
 
-In this post I'll explain how you can now save resources by having OpenFaaS automatically scale functions to zero replicas and back to their minimum replica-level again whenever they are needed. This feature has two parts and in the community we're calling it *zero-scale*.
+In this post I'll explain how you can now save resources by having OpenFaaS automatically scale functions to zero replicas and back to their minimum replica-level again whenever they are needed. The *zero-scale* feature consists of scaling up from zero and scaling down to zero, both work very together to provide cost savings and efficient use of resources.
 
 ## Brief history of auto-scaling 
 
-Auto-scaling was first introduced into OpenFaaS in the lead-up to my [keynote session at Dockercon 2017 in Austin, Texas](https://blog.alexellis.io/dockercon-2017-captains-log/). The feature was built using a combination of Prometheus metrics gathered from the [gateway](https://github.com/openfaas/faas/tree/master/gateway) component and rules defined in AlertManager. Each time the alert fired, a proportional amount of the maxmimum amount of replicas would be added and once the alert had been cleared for a period of time the replica count would be reset to the minimum value.
+Auto-scaling was first introduced into OpenFaaS in the lead-up to my [keynote session at Dockercon 2017 in Austin, Texas](https://blog.alexellis.io/dockercon-2017-captains-log/). The feature was built using a combination of Prometheus metrics gathered from the [gateway](https://github.com/openfaas/faas/tree/master/gateway) component and rules defined in AlertManager. Each time the alert fired, a proportional amount of the maximum amount of replicas would be added and once the alert had been cleared for a period of time the replica count would be reset to the minimum value.
 
 <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">During my Cool Hack <a href="https://twitter.com/DockerCon?ref_src=twsrc%5Etfw">@DockerCon</a> triggered a denial of service attack on <a href="https://twitter.com/github?ref_src=twsrc%5Etfw">@github</a> through stars. See the functions here <a href="https://t.co/MCFMnqB5X2">https://t.co/MCFMnqB5X2</a> <a href="https://t.co/cw8fLXiIfW">pic.twitter.com/cw8fLXiIfW</a></p>&mdash; Alex Ellis (@alexellisuk) <a href="https://twitter.com/alexellisuk/status/855064655538139136?ref_src=twsrc%5Etfw">April 20, 2017</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
 
@@ -32,11 +32,9 @@ Let's define "zero-scale" as the idea that a function can be reduced down to zer
 
 ### Scale down to zero
 
-OpenFaaS tracks usage metrics on all functions that pass through the [gateway](https://github.com/openfaas/faas/tree/master/gateway) component. Prometheus metrics are scraped on a regular interval meaning at any point in time we can query Prometheus and find out whether a function has been idle for a given amount of time. I wrote a component called [faas-idler](https://github.com/openfaas-incubator/faas-idler) to handle this task - it polls for Prometheus metrics on a regular basis to find functions which have been idle (received no traffic) for a given period of time. This is not the first "idler" to exist and it turns out the OpenShift project has been doing this successfully for several years using a component named [service-idler](https://github.com/openshift/service-idler).
+OpenFaaS tracks usage metrics on all functions that pass through the [gateway](https://github.com/openfaas/faas/tree/master/gateway) component. Prometheus metrics are scraped on a regular interval meaning at any point in time we can query Prometheus and find out whether a function has been idle for a given amount of time. I wrote a component called [faas-idler](https://docs.openfaas.com/openfaas-pro/scale-to-zero/#installation) to handle this task - it polls for Prometheus metrics on a regular basis to find functions which have been idle (received no traffic) for a given period of time. This is not the first "idler" to exist and it turns out the OpenShift project has been doing this successfully for several years using a component named [service-idler](https://github.com/openshift/service-idler).
 
-![](https://raw.githubusercontent.com/openfaas-incubator/faas-idler/master/docs/faas-idler.png)
-
-*Above: Conceptual diagram of faas-idler*
+> Since the original idler was written, we found a number of edge cases in both scaling to zero and back up again, in OpenFaaS Pro - the new autoscaler released in 2021 addresses all the issues we found.
 
 The OpenFaaS REST API already supports scaling a function to N replicas, so the faas-idler just needs to act as a controller to reconcile that state.
 
@@ -71,12 +69,13 @@ The zero-scale code for OpenFaaS is implemented in the [gateway](https://github.
 
 The scaling up behaviour can be enabled in the OpenFaaS gateway by setting the `scale_from_zero` flag to `true`. This can be configured in helm or via editing docker-compose.yml.
 
-## What's next?
-
 This wraps up the introductory blog post on zero-scale in OpenFaaS.
 
-> [Berndt Jung](https://twitter.com/berndtj) from VMware has already been making use of zero-scale with OpenFaaS to reduce the size (and cost) of his FaaS dev and test environments on public cloud. I'd also like to thank Berndt for his PR to [faas-netes](https://github.com/openfaas/faas-netes/pull/249) which helps fine-tune the start-up times of functions.
+> [Berndt Jung](https://twitter.com/berndtj) from VMware has already been making use of zero-scale with OpenFaaS to reduce the size (and cost) of his FaaS dev and test environments on public cloud.
 
-So if you're an early adopter and like tinkering or if you're a member of the Slack workspace then you can try out zero-scale in OpenFaaS today. For everyone else: keep an eye on the docs and for a follow-up tutorial on the OpenFaaS blog.
+## Try it out today
 
-Want to contribute to zero-scale or something else? Then [Join the OpenFaaS Slack Community](https://docs.openfaas.com/community) where we'll be waiting to say hello and hear how we can help you with your serverless journey.
+If you're an OpenFaaS Pro customer, you can try out scale to zero today:
+
+* [Autoscaling configuration](https://docs.openfaas.com/architecture/autoscaling/)
+* [Scale to zero guide](https://docs.openfaas.com/openfaas-pro/scale-to-zero/#installation)

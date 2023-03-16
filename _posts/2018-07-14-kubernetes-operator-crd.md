@@ -10,6 +10,8 @@ canonical_url: https://blog.alexellis.io/introducing-the-openfaas-operator/
 
 This blog post introduces OpenFaaS Operator which is a CRD and Controller for OpenFaaS on Kubernetes. We started working on this in the community in October last year to enable a tighter integration with Kubernetes. The most visible way you'll see this is by being able to type in `kubectl get functions`.
 
+> Note: OpenFaaS Operator and Function CRD are features of OpenFaaS Pro & Enterprise. It is not available for the Community Edition (CE), where `faas-cli` or the REST API can be used to manage functions instead.
+
 ## Brief history of Kubernetes support
 
 OpenFaaS has worked natively with Kubernetes for well over a year. Each function you build creates a Docker image which when deployed through the OpenFaaS API creates a `Deployment` and `Service` API object and that in turn creates a number of `Pods`.

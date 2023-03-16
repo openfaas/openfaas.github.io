@@ -21,6 +21,8 @@ After speaking to various customers about how to set up CI/CD with OpenFaaS, we 
 
 This article will focus on how to set dynamic data like an image tag or a git SHA, we'll also show you how to set specific configuration for functions in one place without having to resort to editing things in multiple places.
 
+> Note: OpenFaaS Operator and Function CRD are features of OpenFaaS Pro & Enterprise. It is not available for the Community Edition (CE), where `faas-cli` or the REST API can be used to manage functions instead.
+
 ## The OpenFaaS Operator
 
 The easiest way to deploy functions right now is by using the `faas-cli` commands. The CLI uses the OpenFaaS REST API to deploy functions. In modern production environments you might want to use a GitOps approach to deploy build artefacts from your Continuous Integration pipeline to your cluster.

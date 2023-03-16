@@ -241,7 +241,7 @@ We can see that with the new RAM allocation, and the higher load test values, th
 ![Scaling is needed](/images/2023-03-cluster-scaling-do/scaling-needed.png)
 > Cluster scaling is needed to get to the right number of Pods required
 
-The cluster autoscaler is not as quick as the OpenFaaS function scaler, so it takes a few minutes to detect the need for more nodes, and then to provision them.
+The default configuration for the cluster autoscaler is not as quick as the OpenFaaS function scaler, so it takes a few minutes to detect the need for more nodes. After detecting the need, provisioning and attaching the new nodes can also take a while.
 
 The ConfigMap shows the status, needing 3x nodes instead of 1:
 
@@ -282,6 +282,10 @@ What if the load exceeds capacity and your function can't scale up?
 
 Some cluster auto-scalers such as [Spot by NetApp](https://spot.io/) allow you to configure headroom, which means that you're not running right up to the wire before you add more nodes. It can also add nodes predictively based upon past load, oversize nodes or add heterogenous sizes.
 
+If you're an AWS EKS customer, did you know that you can also enable a node pool which runs entirely within ephemeral AWS Fargate containers?
+
+* [Nodeless OpenFaaS with AWS EKS and Fargate](https://blog.alexellis.io/nodeless-openfaas-with-aws-eks-and-fargate/)
+
 **Queuing and deferred execution**
 
 Another alternative is to use a queueing system, like the one built-into [OpenFaaS with NATS JetStream](https://www.openfaas.com/blog/jetstream-for-openfaas/). It defers work until there is enough capacity and will retry functions until they are processed.
@@ -297,6 +301,7 @@ See also:
 * [The Next Generation of Queuing: JetStream for OpenFaaS](https://www.openfaas.com/blog/jetstream-for-openfaas/)
 * [Rethinking Auto-scaling for OpenFaaS](https://www.openfaas.com/blog/autoscaling-functions/)
 * [Docs: OpenFaaS Pro Autoscaler](https://docs.openfaas.com/architecture/autoscaling/)
+* [Kubernetes Cluster Autoscaler repository](https://github.com/kubernetes/autoscaler)
 
 Would you like a demo, or to talk to our team about functions with OpenFaaS?
 

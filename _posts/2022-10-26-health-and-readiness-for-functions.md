@@ -359,6 +359,14 @@ What if your model is really very large and takes 60 seconds to load?
 
 Here, we do the first check after 60 seconds, then every other check is on a 5 second timer.
 
+## Scale from zero
+
+When scaling from zero the gateway uses the kubernetes replica count for a function to determine if the function is available before it forwards any traffic.
+
+If you are using a service mesh like Istio or Linkerd we recommend enabling function probing. With function probing enabled the gateway additionally checks the functions readiness endpoint. Probing can be enabled in the OpenFaaS Chart by setting `gateway.probeFunctions` to true.
+
+However if you run into any failed invocations whilst scaling from zero, even when you are not running a service mesh, we would recommend turning on function probing.
+
 ## Do I always need to set an initial delay and period seconds value?
 
 If you don't set the `initialDelay` or `periodSeconds` values, then OpenFaaS will default to using the default values set in the OpenFaaS Helm chart, or the defaults of Kubernetes.

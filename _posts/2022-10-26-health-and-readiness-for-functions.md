@@ -22,6 +22,8 @@ In this article, I'll explain what the difference is between the two, and what d
 
 > "We apply hard concurrency limits to our OpenFaaS Pro functions and had already been using the custom health checks. The new custom readiness support has resulted in higher throughput with fewer retries for both synchronous and asynchronous messages. Ultimately, it made our end-user experience much more responsive." - Kevin Lindsay, Surge
 
+To use the features described in this blog post you need at least version `0.9.9` of the [of-watchdog](https://github.com/openfaas/of-watchdog). Make sure your functions are using the latest version of our templates or update the of-watchdog version in your custom templates.
+
 ## Introduction
 
 OpenFaaS is a platform that provides a serverless FaaS experience on any cloud or private datacenter.

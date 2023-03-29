@@ -177,10 +177,10 @@ If you're running into problems where some of your invocations are failing - eit
 
 You'll need to enable two things in the Helm chart.
 
-    ```yaml
-    directFunctions: true
-    probeFunction: true
-    ```
+```yaml
+directFunctions: true
+probeFunctions: true
+```
 
 directFunctions defers to the service mesh for service discovery and load balancing, instead of using the Kubernetes API.
 

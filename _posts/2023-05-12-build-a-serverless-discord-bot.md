@@ -12,28 +12,28 @@ categories:
 author_staff_member: alex
 ---
 
-If you've ever tried to build a bot in the past, you may have noticed that they rely upon a long-lived websocket. This means that your code needs to stay running as a daemon in the background - all of the time.
+If you've ever tried to build a bot in the past, you may have noticed that they often rely upon a long-lived websocket. This means that your code needs to stay running all of the time, as a daemon.
 
-A serverless approach means writing efficient, stateless functions that respond to events and can be scaled independently. They only need to run when an event is available and can be scaled down to zero when not in use. 
+A serverless approach means writing efficient, stateless functions that respond to events and can be scaled independently. They only need to run when an event is available and can be scaled down to zero when not in use. Fortunately, most platforms that support websockets, also support webhooks for responding to events. 
 
 **Why did I want to build a bot for Discord?**
 
-We recently migrated our internal communications from [Slack](https://slack.com) to [Discord](https://discord.com) - it's a great tool for small teams and communities, but it also lacks some of the productivity features we're used to from Slack like being able to create a Zoom meeting on-demand. Part of the reason for this is that Discord has its own screen-sharing feature, but we already pay for Zoom and don't want to pay for two products that do the same thing.
+We recently migrated our company communications from [Slack](https://slack.com) to [Discord](https://discord.com) - it's a great tool for small teams and communities. One of the things we missed was being able to create a Zoom meeting on-demand within a DM or channel. Discord has its own screen-sharing and video calling features, so perhaps it's a non-goal for them to make Zoom easy to use. We have used the voice chat feature on Discord, but HD screensharing requires an additional subscription which doesn't make sense when we pay for Zoom already.
+
+With Slack, building a webhook-driven Slash command is trivial, however with Discord, I found the process to be long - drawn out and perplexing. So I'm writing this tutorial to help you create your own Discord bots with OpenFaaS. I'll be using Go - but you can translate the steps to other languages relatively easily once you understand how it all works.
 
 ![Conceptual architecture for the Discord to Zoom bot](/images/2023-05-discord/conceptual.png)
 > Conceptual architecture for the Discord to Zoom bot
-
-With Slack, building a webhook-driven Slash command is trivial, however with Discord, I found the process to be long - drawn out and perplexing. So I'm writing this tutorial to help you create your own Discord bots with OpenFaaS. I'll be using Go - but you can translate the steps to other languages relatively easily once you understand how it all works.
 
 See examples for Slack Slash commands:
 
 * [ChatOps bot for OpenFaaS Cloud](https://github.com/alexellis/ofc-bot) - Go example for DevOps using chat for a PaaS platform
 * [Slash command template for Python developers by Lucas Roesler](https://github.com/LucasRoesler/openfaas-slack-bot)
 
-There's actually two very common types of integration for Slack and Discord:
+There are two common types of integration for messaging products like Slack and Discord:
 
-1. A piece of code like a function sends a message to a channel or user via an incoming webhook
-2. A user types a command into a channel - and then the bot receives this message and responds
+1. Your code sends a message to a channel or user via a HTTPS endpoint hosted by the messaging platform
+2. A user types a command into a channel or DM and the messaging platform sends an event to your code
 
 We're covering the second type of integration in this walkthrough, but I also have an example at the end for how to send a message to a channel via a webhook.
 
@@ -43,9 +43,7 @@ I'll be walking you through some of the code, but the rest is [available on GitH
 
 We know that we'd like a command that can be typed into start a [Zoom meeting](https://zoom.us/) - but is it even possible to create a Zoom call via an API?
 
-That's where I started - and it turned out that there isn't just one Zoom API (v1), but a second version. And not just one way to authenticate a background process like a function, but multiple.
-
-After several hours of following outdated documentation, I found out that what you need is the V2 API and a JWT token obtained over an OAuth2 flow.
+That's where I started - and it turned out that there isn't just one version of the Zoom API, but two. And not just one way to authenticate a background process like a function, but multiple. After several hours of following outdated documentation, I found out that what you need is the V2 API and a JWT token obtained over an OAuth2 flow.
 
 You can find the [Zoom developer docs here](https://developers.zoom.us/docs/).
 

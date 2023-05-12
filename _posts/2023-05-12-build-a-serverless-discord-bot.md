@@ -39,6 +39,8 @@ We're covering the second type of integration in this walkthrough, but I also ha
 
 I'll be walking you through some of the code, but the rest is [available on GitHub](https://github.com/alexellis/discord-to-zoom). At the end of the post we'll deploy the bot to OpenFaaS - with either Kubernetes or faasd. [faasd](http://github.com/openfaas/faasd) can run on a VM with very low resource requirements, so it's a great way to get started with something like a bot and a few cron jobs.
 
+If you're following along - then we'll be saving a number of secrets into a local `.secrets` folder and then use `faas-cli secret create` to make them available to the function.
+
 ## Working backwards from the goal
 
 We know that we'd like a command that can be typed into start a [Zoom meeting](https://zoom.us/) - but is it even possible to create a Zoom call via an API?
@@ -65,7 +67,7 @@ Since the bot is only for internal use by our team, I picked: Intend to publish:
 
 If you look at the [zoom.go](https://github.com/alexellis/discord-to-zoom/blob/master/discord-start-zoom/zoom.go) file that I created, you'll see that the `requestZoomToken` function is called to obtain the JWT access token.
 
-A HTTP POST is made to https://zoom.us/oauth/token with grant_type: account_credentials, and then the clientID and clientSecret are encoded as username/password within an `Authorization: Basic` HTTP header.
+A HTTP POST is made to `https://zoom.us/oauth/token` with `grant_type` of `account_credentials`, and then the client ID and client secret are encoded as username/password within an `Authorization: Basic` HTTP header.
 
 Learn more about [Zoom authentication](https://zoom.github.io/api/#authentication)
 
@@ -243,8 +245,8 @@ If you'd like to see the full body of the request sent via Discord, then you can
 
 If you'd like to customise my bot, then just do the following:
 
-1. Fork the repository
-2. Clone your forked version
+1. Fork the the repository - [on GitHub](https://github.com/alexellis/discord-to-zoom)
+2. Clone your forked version to your own machine
 3. Edit the files you want to change
 4. Swap my username / Docker Hub account in `stack.yaml` under the `image:` field to your own
 5. Run `faas-cli up` and try out the new changes.

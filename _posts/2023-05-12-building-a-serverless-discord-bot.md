@@ -18,7 +18,7 @@ A serverless approach means writing efficient, stateless functions that respond 
 
 **Why did I want to build a bot for Discord?**
 
-We recently migrated our internal communications from Slack to Discord - it's a great tool for small teams and communities, but it also lacks some of the productivity features we're used to from Slack like being able to create a Zoom meeting on-demand. Part of the reason for this is that Discord has its own screen-sharing feature, but we already pay for Zoom and don't want to pay for two products that do the same thing.
+We recently migrated our internal communications from [Slack](https://slack.com) to [Discord](https://discord.com) - it's a great tool for small teams and communities, but it also lacks some of the productivity features we're used to from Slack like being able to create a Zoom meeting on-demand. Part of the reason for this is that Discord has its own screen-sharing feature, but we already pay for Zoom and don't want to pay for two products that do the same thing.
 
 ![Conceptual architecture for the Discord to Zoom bot](/images/2023-05-discord/conceptual.png)
 > Conceptual architecture for the Discord to Zoom bot
@@ -35,7 +35,9 @@ There's actually two very common types of integration for Slack and Discord:
 1. A piece of code like a function sends a message to a channel or user via an incoming webhook
 2. A user types a command into a channel - and then the bot receives this message and responds
 
-We're covering the second type of integration in this tutorial, but I also have an example at the end for how to send a message to a channel via a webhook.
+We're covering the second type of integration in this walkthrough, but I also have an example at the end for how to send a message to a channel via a webhook.
+
+I'll be walking you through some of the code, but the rest is [available on GitHub](https://github.com/alexellis/discord-to-zoom). At the end of the post we'll deploy the bot to OpenFaaS - with either Kubernetes or faasd. [faasd](http://github.com/openfaas/faasd) can run on a VM with very low resource requirements, so it's a great way to get started with something like a bot and a few cron jobs.
 
 ## Working backwards from the goal
 
@@ -122,7 +124,7 @@ Set that value in `discord_config.yaml` under the `discord_usernames` field. Or,
 
 Next, you'll need a way of receiving incoming webhooks to your function.
 
-If your OpenFaaS cluster or faasd server is exposed to the Internet, you'll just use the public domain you set up and add a path of `/function/discord-to-zoom` or similar. In my case, I'm running on my home network, so I created an [HTTPS tunnel using inlets](https://docs.inlets.dev/tutorial/automated-http-server/).
+If your OpenFaaS cluster or faasd server is exposed to the Internet, you'll just use the public domain you set up and add a path of `/function/discord-start-zoom` or similar. In my case, I'm running on my home network, so I created an [HTTPS tunnel using inlets](https://docs.inlets.dev/tutorial/automated-http-server/).
 
 ![Set the interactions URL to your function's public URL](/images/2023-05-discord/discord-webhook-url.png)
 > Set the interactions URL to your function's public URL
@@ -211,11 +213,11 @@ If you've completed all of the setup in the developer portals for Zoom and Disco
 2. Double check the values in `discord_config.yaml` and `zoom_config.yaml`
 3. Deploy the function to your cluster
     ```bash
-    faas-cli deploy --gateway https://gateway.example.com
+    faas-cli deploy
     ```
 4. Verify that the challenge was passed by checking the logs
     ```bash
-    faas-cli logs discord-to-zoom --gateway https://gateway.example.com
+    faas-cli logs discord-start-zoom
 
     2023-05-12T10:35:06Z 2023/05/12 10:35:06 Ping verified? true
     2023-05-12T10:35:06Z 2023/05/12 10:35:06 POST / - 200 OK - ContentLength: 11B (0.0030s)
@@ -228,6 +230,16 @@ If you've completed all of the setup in the developer portals for Zoom and Disco
 ![Creating a Zoom meeting to review this blog post](/images/2023-05-discord/command.png)
 
 > Creating a Zoom meeting to review this blog post
+
+We can see the logs that the call was created:
+
+```
+faas-cli logs discord-start-zoom
+2023-05-12T10:41:33Z 2023/05/12 10:41:33 Created a Zoom call for: Business chat
+2023-05-12T10:41:33Z 2023/05/12 10:41:33 POST / - 200 OK - ContentLength: 303B (1.0553s)
+```
+
+![The meeting is displayed to the channel](/images/2023-05-discord/zoom-meeting.png)
 
 If you'd like to see the full body of the request sent via Discord, then you can edit `stack.yaml` and set the `print_input` environment variable to `true` and redeploy the function.
 
@@ -263,4 +275,5 @@ To learn how to build functions in Go - check out the [Premium or Team edition o
 
 And for Node.js functions - and a complete manual for the [faasd project](http://github.com/openfaas/faasd) - check out [Serverless For Everyone Else](https://store.openfaas.com/l/serverless-for-everyone-else).
 
-[Sponsors for OpenFaaS](https://github.com/sponsors/openfaas/) get a 20% discount on all eBooks.
+Anyone sponsoring [OpenFaaS via GitHub](https://github.com/sponsors/openfaas/) receives [a 20% discount on all eBooks](https://insiders.alexellis.io).
+

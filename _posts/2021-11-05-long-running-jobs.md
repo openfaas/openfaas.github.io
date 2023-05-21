@@ -63,12 +63,12 @@ You can see the PR here: [openfaas/of-watchdog Speed up shutdown according to nu
 
 The next problem to solve was the configuration of the Termination Grace Period. I've often heard users complain that OpenFaaS has too many timeout values, and I sympathise with this viewpoint. I consulted the other regular contributors and we agreed that using one of the existing timeout values to set the Termination Grace Period was the best option.
 
-Now, whenever you set a `write_timeout` environment variable for your function, it will be used by the Kubernetes operator ([faas-netes](https://github.com/openfaas/faas-netes)) to set the Termination Grace Period to this value plus 2 seconds to allow for jitter.
+Now, whenever you set a `write_timeout` environment variable for your function, it will be used by the OpenFaaS Pro operator to set the Termination Grace Period to this value plus jitter. But that's not the only change required - a coordinated set of changes make this work correctly.
+
+Readiness is also a key change to make sure traffic is sent to the correct Pods during rolling updates and autoscaling. See also: [Custom health and readiness checks for your OpenFaaS Functions](https://www.openfaas.com/blog/health-and-readiness-for-functions/)
 
 ![OpenFaaS Conceptual Architecture](https://github.com/openfaas/faas/blob/master/docs/of-workflow.png?raw=true)
 > [OpenFaaS Conceptual Architecture](https://docs.openfaas.com/architecture/stack/) showing the separation of concerns between the gateway, queueing, metrics and the Kubernetes operator.
-
-Here's the PR I created for this separate change: [openfaas/faas-netes Set Termination Grace Period to write_timeout for functions to allow them to complete during a scale down event. #869](https://github.com/openfaas/faas-netes/pull/869)
 
 ### So what does this look like with an example?
 
@@ -102,7 +102,9 @@ functions:
       com.openfaas.scale.max: 1
 ```
 
-The function's handler is written in Go and reads the `handler_wait_duration` environment variable to determine the wait period to simulate.
+The test function's handler is written in Go and reads the `handler_wait_duration` environment variable to determine the wait period to simulate. 
+
+> Note that `handler_wait_duration` is not built into OpenFaaS, but is just a way for us to configure our test function.
 
 ```go
 package function

@@ -131,8 +131,8 @@ faas-cli store deploy sleep \
  --label com.openfaas.scale.max=10 \
  --label com.openfaas.scale.type=capacity \
  --annotation com.openfaas.ready.http.path="/_/ready" \
- --annotation com.openfaas.ready.http.initialDelay=1s \
- --annotation com.openfaas.ready.http.periodSeconds=1s
+ --annotation com.openfaas.ready.http.initialDelaySeconds=1 \
+ --annotation com.openfaas.ready.http.periodSeconds=1
 ```
 
 Now we have:
@@ -190,14 +190,18 @@ These annotations are supported for the readiness check:
 
 * `com.openfaas.health.http.path` - the path to check for readiness
 * `com.openfaas.ready.http.periodSeconds` - how often to check the readiness endpoint?
-* `com.openfaas.ready.http.initialDelay` - how long to wait before checking the readiness endpoint of a newly deployed or updated function?
+* `com.openfaas.ready.http.initialDelaySeconds` - how long to wait before checking the readiness endpoint of a newly deployed or updated function?
+* `com.openfaas.ready.http.timeoutSeconds` - number of seconds after which the probe times out.
+* `com.openfaas.ready.http.successThreshold` - how many consecutive successes should there be for the probe before the function is considered ready?
 * `com.openfaas.ready.http.failureThreshold` - how many times should a readiness probe fail until the function is considered not ready?
 
 And the following annotations are supported for the health check (liveness probe):
 
 * `com.openfaas.health.http.path` - the path to check for liveness
 * `com.openfaas.health.http.periodSeconds` - how often to check the health endpoint?
-* `com.openfaas.health.http.initialDelay` - how long to wait before checking the health endpoint of a newly deployed or updated function?
+* `com.openfaas.health.http.initialDelaySeconds` - how long to wait before checking the health endpoint of a newly deployed or updated function?
+* `com.openfaas.health.http.timeoutSeconds` - number of seconds after which the probe times out.
+* `com.openfaas.health.http.failureThreshold` - how many times should a liveness probe fail until the function is considered unhealthy?
 
 Learn more about these options: [Docs: OpenFaaS workloads](https://docs.openfaas.com/reference/workloads/#custom-http-health-checks)
 
@@ -255,8 +259,8 @@ functions:
     image: alexellis2/readyornot:latest
     annotations:
         com.openfaas.ready.http.path: /custom-readiness
-        com.openfaas.ready.http.initialDelay: 2s
-        com.openfaas.ready.http.periodSeconds: 2s
+        com.openfaas.ready.http.initialDelaySeconds: 2
+        com.openfaas.ready.http.periodSeconds: 2
 ```
 
 Deploy the function and watch it passing readiness, then failing after the internal counter gets to 20:
@@ -297,8 +301,8 @@ functions:
         ready_path: /custom-ready
     annotations:
         com.openfaas.ready.http.path: /_/ready
-        com.openfaas.ready.http.initialDelay: 2s
-        com.openfaas.ready.http.periodSeconds: 2s
+        com.openfaas.ready.http.initialDelaySeconds: 2
+        com.openfaas.ready.http.periodSeconds: 2
 ```
 
 Concurrency limiting is handled in the [OpenFaaS Watchdog](https://docs.openfaas.com/architecture/watchdog/) component, so needs an environment variable:
@@ -340,8 +344,8 @@ But if you want to try it anyway, you can combine them both, because remember, t
 ```yaml
     annotations:
       com.openfaas.health.http.path: "/custom-health"
-      com.openfaas.health.http.initialDelay: "10s"
-      com.openfaas.health.http.periodSeconds: 5s
+      com.openfaas.health.http.initialDelaySeconds: 10
+      com.openfaas.health.http.periodSeconds: 5
 ```
 
 ## What about my slow starting functions?
@@ -355,8 +359,8 @@ What if your model is really very large and takes 60 seconds to load?
 ```yaml
     annotations:
       com.openfaas.ready.http.path: "/custom-ready"
-      com.openfaas.ready.http.initialDelay: "60s"
-      com.openfaas.ready.http.periodSeconds: 5s
+      com.openfaas.ready.http.initialDelaySeconds: 60
+      com.openfaas.ready.http.periodSeconds: 5
 ```
 
 Here, we do the first check after 60 seconds, then every other check is on a 5 second timer.
@@ -371,23 +375,23 @@ However if you run into any failed invocations whilst scaling from zero, even wh
 
 ## Do I always need to set an initial delay and period seconds value?
 
-If you don't set the `initialDelay` or `periodSeconds` values, then OpenFaaS will default to using the default values set in the OpenFaaS Helm chart, or the defaults of Kubernetes.
+If you don't set the `initialDelaySeconds` or `periodSeconds` values, then OpenFaaS will default to using the default values set in the OpenFaaS Helm chart, or the defaults of Kubernetes.
 
 You'll also notice that we expose `timeoutSeconds` at the chart level, some of our customers use this with functions that are slow to respond to their readiness and liveness checks. Making this number higher gives the function longer to respond.
 
 ```yaml
-faasnetes.readinessProbe.initialDelaySeconds
-faasnetes.readinessProbe.periodSeconds
-faasnetes.readinessProbe.timeoutSeconds
+functions.readinessProbe.initialDelaySeconds
+functions.readinessProbe.periodSeconds
+functions.readinessProbe.timeoutSeconds
 ```
 
 ```yaml
-faasnetes.livenessProbe.initialDelaySeconds
-faasnetes.livenessProbe.periodSeconds
-faasnetes.livenessProbe.timeoutSeconds
+functions.livenessProbe.initialDelaySeconds
+functions.livenessProbe.periodSeconds
+functions.livenessProbe.timeoutSeconds
 ```
 
-See also: [OpenFaaS Helm chart](https://github.com/openfaas/faas-netes/tree/master/chart/openfaas#faas-netes--operator)
+See also: [OpenFaaS Helm chart](https://github.com/openfaas/faas-netes/tree/master/chart/openfaas#functions)
 
 ## Wrapping up
 

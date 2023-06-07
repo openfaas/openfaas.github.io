@@ -83,6 +83,10 @@ So the Function CRD is great, but who is this new `export` command for?
 
 Now in addition to all of the above, if you have an additional need - you can let us know and we may be able to tweak the tool to suit your needs. You can't do that so easily with `kubectl get function -o yaml`.
 
+Here's what Andrew Downey, Head of Development at Patchworks had to say about the tool:
+
+> "Our DevOps team was very grateful of the help. We used the earlier version of the export command to migrate every single function between two different cloud providers and Kubernetes clusters with essentially no pain. Massive thanks for that. The operator is enabled in our new cluster so any future (and hopefully that's distant future) migrations will be even easier."
+
 ## Introducing `faas-cli pro export`
 
 We created a new command for `faas-cli` earlier this year for Klar.mx, who wanted to be able to use build secrets securely for AWS Code Artifact and Npm.js without leaking them into a Dockerfile via a build-arg or ENV variable. You can read up more about that here: [Introducing our new Python template for production](https://www.openfaas.com/blog/openfaas-pro-python-template/)

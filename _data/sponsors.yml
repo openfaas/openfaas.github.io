@@ -1,21 +1,14 @@
 # Get in touch to hear more about sponsorship options and how we can help you 
 # increase your brand and awareness with developers.
-#
-# https://openfaas.com/consulting/
 
 # Want to be the first and only diamond sponsor?
 # diamond:
 
 platinum:
 
-# Expires 25th April 2022 - 12 mo
-- alt: "Linode"
+# Expires Apr 24
+- alt: "Linode by Akamai"
   url: https://www.linode.com/openfaas?utm_source=openfaas&utm_medium=web&utm_campaign=sponsorship
-  logo: linode.svg
+  logo: akamai.svg
 
 # gold:
-# # Expires April 1st 2023 - 12 mo
-# - alt: "Checkpoint Software Technologies Ltd"
-#   url: https://www.checkpoint.com/?utm_source=openfaas&utm_medium=web&utm_campaign=sponsorship
-#   logo: checkpoint.png
-

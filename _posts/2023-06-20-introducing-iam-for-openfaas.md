@@ -252,6 +252,14 @@ Finally add the following to the list of valid redirect URIs in your provider co
 - `http://127.0.0.1:31111/oauth/callback`, this is the callback url usd by the faas-cli.
 - If you are deploying the OpenFaaS dashboard add the redirect URI for your dashboard, e.g `https://dashboard.openfaas.example.com/auth/callback`
 
+In this tutorial we will be using Keycloak as the identity provider.
+
+1. Create a new client in your Keycloak realm with Client Type OpenID Connect.
+    ![Create a new client in Keycloak realm ](https://user-images.githubusercontent.com/16267532/238408210-4fc6d693-8c8d-4d04-86bd-90488426eecb.png)
+2. Enable the Standard Flow (Authorization Code Flow) for the client.
+    ![Enable the Standard Flow](https://user-images.githubusercontent.com/16267532/238408182-58267dd3-b0c3-4c97-809d-090325023356.png)
+3. Add the callback URLs for the cli and dashboard to the list of valid redirect URIs.
+    ![Add redirect URIs](https://user-images.githubusercontent.com/16267532/238408149-9c58144d-134e-423f-ace7-1344ffed1da1.png)
 
 ### Register a provider with OpenFaaS
 

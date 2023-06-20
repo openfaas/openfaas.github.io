@@ -14,6 +14,8 @@ author_staff_member: han
 
 In this tutorial we are going to walk you through all the steps required to deploy OpenFaaS with Identity and Access Management (IAM) enabled.
 
+With IAM users can authenticate to the OpenFaaS REST API via an OpenID Connect (OIDC) compatible identity provider. We have tested with Auth0, Google, Okta, Keycloak and Azure Active Directory but any other provider that supports OIDC should work.
+
 In the next sections we are going to:
 
 - Setup ingress and all other prerequisites to deploy OpenFaaS.

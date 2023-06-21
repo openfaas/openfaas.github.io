@@ -16,6 +16,23 @@ In this tutorial we are going to walk you through all the steps required to depl
 
 With IAM users can authenticate to the OpenFaaS REST API via an OpenID Connect (OIDC) compatible identity provider. We have tested with Auth0, Google, Okta, Keycloak and Azure Active Directory but any other provider that supports OIDC should work.
 
+IAM rules are configured through a set of custom Kubernetes objects that need to be defined in the `openfaas` namespace:
+
+- JwtIssuer - defines a trusted identity provider for OpenFaaS IAM
+- Policy - defines a set of permissions and objects on which they can be performed
+- Role - defines a set of policies that can be matched to a particular user or identity
+
+During authentication an OIDC access token from a trusted IdP is exchanged for an OpenFaaS access token. This token can be used to access the OpenFaaS REST API.
+
+1. The OpenFaaS CLI or dashboard performs an OAuth flow with your identity provider to get an OIDC access token.
+2. The token is sent to the internal OpenFaaS identity provider to exchange it for an OpenFaaS token.
+3. The OpenFaaS identity provider checks if the token is coming from a trusted provider.
+4. If the token is valid, Roles are matched for the particular identity.
+5. An OpenFaaS token is issued with a claim for all policies associated with the matched roles.
+
+![Conceptual authentication flow for the OpenFaaS dashboard](/images/2023-06-introducing-iam/dashboard-auth-flow.png)
+> Conceptual authentication flow for the OpenFaaS dashboard
+
 In the next sections we are going to:
 
 - Setup ingress and all other prerequisites to deploy OpenFaaS.
@@ -222,7 +239,7 @@ helm repo update \
   -f values-iam.yaml
 ```
 
-As part of OpenFaaS for Enterprises we we'll be enabling [multi namespace for functions](https://docs.openfaas.com/reference/namespaces/). Multiple namespaces can be used for logical separation between stages like dev, staging and production or for various teams or tenants.
+As part of OpenFaaS for Enterprises we'll be enabling [multi namespace for functions](https://docs.openfaas.com/reference/namespaces/). Multiple namespaces can be used for logical separation between stages like dev, staging and production or for various teams or tenants.
 
 Create an additional function namespace, we are going to name it `staging`:
 
@@ -287,7 +304,9 @@ spec:
 
 In the spec the `iss` field needs to be set to the url of your provider, eg. `https://accounts.google.com` for google or `https://example.eu.auth0.com/ for Auth0.
 
-The `aud` field contains a list of client apps this JwtIssuer is valid for. The value should be the client_id you received while registering an app with your IdP.
+The `aud` field needs to contain a set of accepted audiences. The set is used to validate the audience field in an OIDC access token and verify OpenFaaS is the intended audience. The audience is usually the gateway's public URL although for some providers it can also be the client id.
+
+The `tokenExpiry` field can be used to set the expiry time of the OpenFaaS access token issued in the token exchange.
 
 In addition to the JwtIssuer there are two other object that need to be defined before we can try and access the gateway API:
 
@@ -297,44 +316,6 @@ In addition to the JwtIssuer there are two other object that need to be defined 
 ### Create a sample Role and Policy
 
 Once a JWTIssuer has been registered you can start creating Roles and Policies. Policies are used to describe permissions on resources. A Role must be created to map users within the Issuer to a set of Policies based on conditions.
-
-Create a Role:
-```yaml
-apiVersion: openfaas.com/v1
-kind: Role
-metadata:
-  name: staging-staff-deployers
-  namespace: openfaas
-spec:
-  policy:
-  - staging-rw
-  principal:
-    jwt:sub:
-     - aa544816-e4e9-4ea0-b4cf-dd70db159d2e
-  condition:
-    StringEqual:
-      jwt:iss: [ "https://keycloak.example.com/realms/openfaas" ]
-```
-
-The `policy` field contains a set of Policies to apply for this Role.
-
-The `condition` field can be used to limit permissions by matching fields in the jwt access token.
-
-Every condition must return true for the Role to be considered as a match.
-
-Valid conditions include: `StringEqual` or `StringLike`
-
-A user's email could also be fuzzy matched with a condition, for example:
-
-```yaml
-condition:
-    StringLike:
-      jwt:email: ["*@example.com"]
-```
-
-The principal filed is optional, however if it is given, both the principal and the condition must match. If the principal contains multiple items only one must match the token for it to be considered a match.
-
-This Role will only match for 1 staff member with sub `aa544816-e4e9-4ea0-b4cf-dd70db159d2e` only if it was issued by `https://keycloak.example.com/realms/openfaas`.
 
 Create a policy:
 ```yaml
@@ -354,15 +335,53 @@ spec:
     resource: ["staging:*"]
 ```
 
-The Policy describes which permissions a user has, and on which resources.
-
 Permission can be scoped cluster wide or to specific namespaces. In this example the policy only applies for the `staging` namespace. To apply a policy cluster wide use `resource: ["*"]`.
 
 For an overview of the supported actions see: [permission](https://docs.openfaas.com/openfaas-pro/iam/overview/#permissions)
 
+Create a Role:
+```yaml
+apiVersion: openfaas.com/v1
+kind: Role
+metadata:
+  name: staging-staff-deployers
+  namespace: openfaas
+spec:
+  policy:
+  - staging-rw
+  principal:
+    jwt:sub:
+     - aa544816-e4e9-4ea0-b4cf-dd70db159d2e
+  condition:
+    StringEqual:
+      jwt:iss: [ "https://keycloak.example.com/realms/openfaas" ]
+```
+
+The `policy` field contains a set of Policies to apply for this Role. The set of policies is included as a claim in the OpenFaaS access token when it is issued. If policies are added or removed from a Role these changes will only be reflected after the user re-authenticates and receives a new access token.
+
+The `condition` field can be used to limit permissions by matching fields in the jwt access token.
+
+Every condition must return true for the Role to be considered as a match.
+
+Valid conditions include: `StringEqual` or `StringLike`
+
+A user's email could also be fuzzy matched with a condition, for example:
+
+```yaml
+condition:
+    StringLike:
+      jwt:email: ["*@example.com"]
+```
+
+The principal filed is optional, however if it is given, both the principal and the condition must match. If the principal contains multiple items only one must match the token for it to be considered a match.
+
+This Role will match for 1 staff member with sub `aa544816-e4e9-4ea0-b4cf-dd70db159d2e` only if it was issued by `https://keycloak.example.com/realms/openfaas`.
+
 ### Setup the OpenFaaS dashboard
 
-The dashboard requires a two keys to be created and stored in Kubernetes secrets:
+The classic UI is deprecated for OpenFaaS for Enterprises. If you want a UI to make operating and understanding OpenFaaS easier you can deploy the OpenFaaS dashboard. It was designed to work with IAM and allows users to login through your IdP.
+
+The dashboard requires two keys to be created and stored in Kubernetes secrets:
 
 - JWT signing key - to sign and verify user session cookies.
 - AES key - to encrypt the OpenFaaS access token in your cookie.
@@ -407,7 +426,7 @@ kubectl create secret generic \
     --from-file client_secret=./client_secret
 ```
 
-Add the following to the values-iam.yaml file we created earlier:
+Add the following to the values-iam.yaml file you created earlier:
 
 ```diff
 +dashboard:
@@ -446,7 +465,7 @@ helm upgrade openfaas \
 
 ### Authenticate with the faas-cli
 
-The faas-cli can be used to obtain an access token. 
+The faas-cli can be used to obtain an access token. Authentication commands for the faas-cli are available through the `pro` plugin.
 
 Install and enable the pro plugin:
 
@@ -455,7 +474,7 @@ faas-cli plugin get pro
 faas-cli pro enable
 ```
 
-Authenticate with the `pro auth` command:
+You can authenticate with the `pro auth` command:
 
 ```bash
 faas-cli pro auth \
@@ -463,7 +482,12 @@ faas-cli pro auth \
   --client-id openfaas
 ```
 
-The faas-cli will save the OpenFaaS Access token and use it when you run commands that require authentication to the gateway.
+The faas-cli will save the OpenFaaS access token and use it when you run commands that require authentication to the gateway.
+
+Auth configuration flags are saved for each gateway after the initial authentication. You can re-authenticate by running `faas-cli pro auth` without any additional flags when your token has expired.
+
+![Conceptual authentication flow for OpenFaaS CLI](/images/2023-06-introducing-iam/cli-auth-flow.png)
+> Conceptual authentication flow for the OpenFaaS CLI
 
 Running the following command will list the namespace the authenticated user is allowed to operate on:
 
@@ -491,3 +515,33 @@ Server returned unexpected status code: 403 - Unauthorized
 ```
 
 The Role and Policy we have created does not allow the user to list functions in the `openfaas-fn` namespace.
+
+## Inspect JWT tokens
+
+The faas-cli can be used to get an access token from your IdP and print it out for inspection. This can be useful to see what fields are available when creating Roles.
+
+To print the token you need to set two extra flags, `--no-exchange` and `--print-token`. The `--no-exchange` flag is required to stop the CLI from exchanging the access token for an OpenFaaS token. Running the same command without the `--no-exchange` flag will print out the OpenFaaS access token. 
+
+```bash
+$ faas-cli pro auth \
+  --authority https://keycloak.example.com/realms/openfaas \
+  --client-id openfaas
+  --no-exchange \
+  --print-token
+```
+
+You can copy/paste the token into [https://jwt.io/](https://jwt.io/) to see what fields are available.
+
+![Example for an id issued bey Keycloak](/images/2023-06-introducing-iam/jwt-io.png)
+> Example for an id token issued by Keycloak
+
+## Wrapping up
+
+We walked you through all the steps and concepts required to start using OpenFaaS Identity and Access Management.
+
+OpenFaaS IAM replaces the previous generation of SSO plugin. Some extra things to take note of during migration:
+
+- Remove ingress for the old SSO plugin.
+- The classic UI is deprecated in OpenFaaS for Enterprises. You will need to deploy the OpenFaaS dashboard to replace it if not deployed already.
+- An Ingress record for the new dashboard will have to be created.
+- Make sure the OpenFaaS gateway has Ingress. Previously it may have worked with port-forwarding.

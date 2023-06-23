@@ -36,7 +36,7 @@ The IAM feature covers:
 * Single Sign-On (SSO) for the OpenFaaS dashboard
 * Single Sign-On (SSO) via the OpenFaaS CLI
 * Fine-grained access control for the OpenFaaS API
-* Web Federation to CI systems like GitHub Actions and GitLab CI
+* Web Identity Federation to CI systems like GitHub Actions and GitLab CI
 
 Users can assume roles, roles may bind to one or more policies, and policies contain permissions for specific resources and namespaces. We drew inspiration from AWS IAM and Kubernetes RBAC whilst developing the system. All IAM objects are defined as Kubernetes Custom Resources (CRDs) and are stored in the `openfaas` namespace, which means you can manage them with a GitOps tool like ArgoCD, Flux or Helm.
 

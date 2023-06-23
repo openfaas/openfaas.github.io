@@ -325,7 +325,7 @@ Example issuer for a Keycloak provider:
 
 ```yaml
 ---
-apiVersion: openfaas.com/v1
+apiVersion: iam.openfaas.com/v1
 kind: JwtIssuer
 metadata:
   name: keycloak.example.com
@@ -355,7 +355,7 @@ Once a JWTIssuer has been registered you can start creating Roles and Policies. 
 Create a policy:
 
 ```yaml
-apiVersion: openfaas.com/v1
+apiVersion: iam.openfaas.com/v1
 kind: Policy
 metadata:
   name: staging-rw
@@ -378,7 +378,7 @@ For an overview of the supported actions see: [permission](https://docs.openfaas
 Create a Role:
 
 ```yaml
-apiVersion: openfaas.com/v1
+apiVersion: iam.openfaas.com/v1
 kind: Role
 metadata:
   name: staging-staff-deployers

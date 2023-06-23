@@ -11,9 +11,11 @@ categories:
 - openid
 - oidc
 - oauth
+dark_background: true
+image: /images/2023-06-iam-walkthrough/oidc.png
 author_staff_member: han
 author_staff_member_editor: alex
-
+hide_header_image: true
 ---
 
 Learn how to set up fine-grained access control for the OpenFaaS dashboard, CLI and API via OpenID Connect (OIDC).
@@ -56,7 +58,7 @@ During authentication an OIDC access token from a trusted IdP is exchanged for a
 4. If the token is valid, Roles are matched for the particular identity.
 5. An OpenFaaS token is issued with a claim for all policies associated with the matched roles.
 
-![Conceptual authentication flow for the OpenFaaS dashboard](/images/2023-06-introducing-iam/dashboard-auth-flow.png)
+![Conceptual authentication flow for the OpenFaaS dashboard](/images/2023-06-iam-walkthrough/dashboard-auth-flow.png)
 > Conceptual authentication flow for the OpenFaaS dashboard
 
 In the next sections we are going to:
@@ -521,7 +523,7 @@ The faas-cli will save the OpenFaaS access token and use it when you run command
 
 Auth configuration flags are saved for each gateway after the initial authentication. You can re-authenticate by running `faas-cli pro auth` without any additional flags when your token has expired.
 
-![Conceptual authentication flow for OpenFaaS CLI](/images/2023-06-introducing-iam/cli-auth-flow.png)
+![Conceptual authentication flow for OpenFaaS CLI](/images/2023-06-iam-walkthrough/cli-auth-flow.png)
 > Conceptual authentication flow for the OpenFaaS CLI
 
 Running the following command will list the namespace the authenticated user is allowed to operate on:
@@ -567,7 +569,7 @@ $ faas-cli pro auth \
 
 You can copy/paste the token into [https://jwt.io/](https://jwt.io/) to see what fields are available.
 
-![Example for an id issued bey Keycloak](/images/2023-06-introducing-iam/jwt-io.png)
+![Example for an id issued bey Keycloak](/images/2023-06-iam-walkthrough/jwt-io.png)
 > Example `id_token` issued by Keycloak
 
 ## Wrapping up

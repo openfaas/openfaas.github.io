@@ -8,8 +8,7 @@ categories:
 - microservices
 - migration
 dark_background: true
-author_staff_member: han
-author_staff_member_editor: alex
+author_staff_member: alex
 image: /images/2023-06-existing-containers/background.png
 hide_header_image: true
 ---

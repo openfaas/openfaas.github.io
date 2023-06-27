@@ -90,10 +90,26 @@ functions:
     expressjs:
         image: alexellis2/service:0.4.1
         skip_build: true
-
 ```
 
 Then run `faas-cli deploy` or `faas-cli deploy -f stack.yml`
+
+By default, OpenFaaS will configure Kubernetes to look for a readiness endpoint at: `/_/ready`, and if that's not present, you can add it to your container's code and publish a new version.
+
+Alternatively, OpenFaaS Standard and Enterprise allow fine-grained tuning of readiness probes, and you can override it with an annotation:
+
+```yaml
+functions:
+    expressjs:
+        image: alexellis2/service:0.4.1
+        skip_build: true
+        annotations:
+          com.openfaas.health.http.path: /ready
+```
+
+You can read more about tuning the probes here: [OpenFaaS Reference: Workloads](https://docs.openfaas.com/reference/workloads/)
+
+Just like with Kubernetes Pods, there are several ways to configure your function, and most of the time it will come down to either setting environment variables or using a number of secrets. ConfigMaps are not supported, however, you can use a secret instead which is the equivalent and has the benefit of being encrypted at rest when Kubernetes is appropriately configured.
 
 If you need them, annotations, labels, environment variables and secrets can be added to the stack.yml file as well.
 
@@ -300,8 +316,6 @@ I met with [Patrick Stephens](https://www.linkedin.com/in/patrickjkstephens/) th
 His team runs a Lua sandbox, so I wrote a basic function which would take Lua code via stdin and then execute it and print the output.
 
 ```go
-package function
-
 import (
 	"io"
 	"net/http"
@@ -321,27 +335,33 @@ func Handle(w http.ResponseWriter, r *http.Request) {
 
 		input = body
 	}
-	w.WriteHeader(http.StatusAccepted)
 
-	tmpFile, err := os.CreateTemp(os.TempDir(), "tmp")
-	if err != nil {
-		panic(err)
-	}
+	rPipe, wPipe, _ := os.Pipe()
+	orig := os.Stdout
+	defer func() {
+		os.Stdout = orig
 
-	name := tmpFile.Name()
-	defer os.Remove(tmpFile.Name())
+	}()
 
-	tmpFile.Write(input)
-	tmpFile.Close()
+	os.Stdout = wPipe
+
 	l := lua.NewState()
 	lua.OpenLibraries(l)
-	if err := lua.DoFile(l, name); err != nil {
-		panic(err)
+	if err := lua.DoString(l, string(input)); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
 	}
+
+	wPipe.Close()
+	output, _ := io.ReadAll(rPipe)
+	rPipe.Close()
+
+	w.WriteHeader(http.StatusOK)
+	w.Write(output)
 }
 ```
 
-If you redirect `os.Stdout` to the response writer, you'll be able to capture any output in the HTTP body, but for now we'll see it in the logs.
+By redirecting `os.Stdout` to a pipe, we can capture the output printed from the Lua code and return it to the caller via the HTTP body.
 
 Contents of `go.mod`:
 
@@ -358,11 +378,8 @@ Invoking the function gave logs like this:
 ```
 curl http://127.0.0.1:8080/function/patrick1 -d 'print("hi")'
 
-2023-06-26T14:37:41Z hi
 2023-06-26T14:37:41Z 2023/06/26 14:37:41 POST / - 202 Accepted - ContentLength: 0B (0.0027s)
 ```
-
-The print statement went to stdout as expected.
 
 ## Wrapping up
 

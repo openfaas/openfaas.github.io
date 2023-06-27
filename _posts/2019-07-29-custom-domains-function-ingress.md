@@ -161,7 +161,7 @@ Now we will map the Custom Domain to the function using a `FunctionIngress` defi
 Save the following in a YAML file `my-homepage-fni.yaml`:
 
 ```yaml
-apiVersion: openfaas.com/v1alpha2
+apiVersion: openfaas.com/v1
 kind: FunctionIngress
 metadata:
   name: my-homepage-tls
@@ -241,7 +241,7 @@ We can now create a dedicated URL for anything we deploy through OpenFaaS. There
 If we were to deploy a new version of our function (`my-homepage-v2`), we could deploy a new `FunctionIngress` record, or simply edit the object in Kubernetes via `kubectl`. The result is that the `Ingress` record will be edited to point at the new function without deleting or re-issuing a new `Certificate`.
 
 ```yaml
-apiVersion: openfaas.com/v1alpha2
+apiVersion: openfaas.com/v1
 kind: FunctionIngress
 metadata:
   name: my-homepage-tls
@@ -269,18 +269,3 @@ If you have any comments, questions or suggestions, then please connect with me 
 * [OpenFaaS Slack](https://slack.openfaas.io)
 
 You can follow [@alexellisuk](https://twitter.com/alexellis) on Twitter for more blogs, videos, tips and tutorials
-
-### Want to automate everything?
-
-If you'd like a more automated experience than offered through the blog today, then why not check out [OpenFaaS Cloud](https://github.com/openfaas/openfaas-cloud)?
-
-OpenFaaS Cloud offers:
-
-* hosting for your functions and microservices
-* free sub-domains and TLS certificates
-* deep integration with public and private repos on GitHub.com and GitLab
-* a personalized dashboard and login with OAuth2 to view your metrics and functions
-
-<blockquote class="twitter-tweet"><p lang="en" dir="ltr">&quot;OpenFaaS Cloud - Community Cluster&quot;<br><br>A SaaS solution built on OpenFaaS.<br><br>- Free sub-domain and endpoints<br>- TLS by default<br>- Login with GitHub<br>- No complex API or CLI needed, just push to git.<br><br>Apply for access today. 🏆<a href="https://t.co/IGuZGZiPT3">https://t.co/IGuZGZiPT3</a> <a href="https://twitter.com/hashtag/gitops?src=hash&amp;ref_src=twsrc%5Etfw">#gitops</a> <a href="https://twitter.com/hashtag/faasfriday?src=hash&amp;ref_src=twsrc%5Etfw">#faasfriday</a> <a href="https://t.co/pqIMzYsMbI">pic.twitter.com/pqIMzYsMbI</a></p>&mdash; OpenFaaS (@openfaas) <a href="https://twitter.com/openfaas/status/1144621477129379842?ref_src=twsrc%5Etfw">June 28, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-You can [self-host in 100 seconds](https://www.youtube.com/watch?v=Sa1VBSfVpK0) or apply for access to the [Community Cluster](https://github.com/openfaas/community-cluster).

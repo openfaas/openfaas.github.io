@@ -381,6 +381,23 @@ curl http://127.0.0.1:8080/function/patrick1 -d 'print("hi")'
 2023-06-26T14:37:41Z 2023/06/26 14:37:41 POST / - 202 Accepted - ContentLength: 0B (0.0027s)
 ```
 
+When using an invalid Lua script as the input, we see the expected HTTP error returned via the function's handler:
+
+```bash
+curl -i http://127.0.0.1:8080/function/
+patrick1 -d 'prints("hi")'
+HTTP/1.1 500 Internal Server Error
+Content-Length: 70
+Content-Type: text/plain; charset=utf-8
+Date: Tue, 27 Jun 2023 09:35:23 GMT
+X-Call-Id: fa909235-8032-4870-93b9-edf7e8b1cf9d
+X-Content-Type-Options: nosniff
+X-Duration-Seconds: 0.000939
+X-Start-Time: 1687858523767283659
+
+runtime error: [string "prints("hi")"]:1: attempt to call a nil value
+```
+
 ## Wrapping up
 
 We've taken a brief tour of what's needed to deploy an existing container image using `faas-cli`, we then explored how to use the same CLI to build and publish new versions. We saw how to add the OpenFaaS watchdog to an existing Dockerfile for greater compatibility, and finally we saw how to create a new function from a template.

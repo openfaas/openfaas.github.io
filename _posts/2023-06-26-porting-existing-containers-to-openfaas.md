@@ -54,6 +54,22 @@ I have a sample container built with Node.js and Express.js (alexellis/expressjs
 
 In the conclusion I'll be including lots of additional links for CI/CD, Scale to Zero, Autoscaling of functions, React Apps and Event-driven programming with AWS.
 
+Here's what [Kevin Lindsay, Principal Engineer at Surge](https://www.linkedin.com/in/kevin-lindsay-16a740160/) had to say about running both containers an functions with OpenFaaS.
+
+How do you use OpenFaaS at Surge?
+
+> We've been using OpenFaaS as an abstraction layer for Kubernetes resources, and by extension we're using it for any and all main workload types that Kubernetes is designed to handle.
+
+What separates OpenFaaS from other similar solutions?
+
+> OpenFaaS means we can bring our own infrastructure and also scale our workloads down to zero to save on money and management, it's the most battle-hardened product of its kind in this space. OpenFaaS gives us all the tools we need to just build our applications, and keeps things at the proper abstraction level. For us - it does for applications what snowflake does for databases.
+
+Can you explain one of your highest value use-cases?
+
+> I'd say that one of our most complex workloads is a distributed dynamic ETL pipeline wherein every stage of the ETL process is a discrete function that can handle multiple jobs simultaneously. When all the jobs within a stage complete, the next stage can begin. It coordinates using a database for individual job status tracking, and doesn't run into a deadlock - which is technically very hard to achieve otherwise.
+
+> OpenFaaS gives us the ability to have this entire process scale very quickly per stage, creating as many jobs as we require. We can burst out as arbitrarily high as we need with high auto-scaling precision and very low latency. Then, when everything is done, the entire pipeline scales to zero, and as far as we are concerned, our containers and functions are "just another few functions".
+
 ## Deploy a pre-built container image to OpenFaaS
 
 If you already building and publishing a container, then you can deploy it to OpenFaaS using the CLI:

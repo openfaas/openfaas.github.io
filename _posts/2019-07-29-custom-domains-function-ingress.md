@@ -69,20 +69,16 @@ Follow the steps for "Install cert-manager" and "Configure cert-manager" from th
 
 ### Deploy `IngressOperator`
 
-We'll now deploy the IngressOperator. You can star/fork, or read the [code of the project on GitHub](https://github.com/openfaas-incubator/ingress-operator).
+We'll now deploy the IngressOperator.
 
-I'll be [following instructions from the OpenFaaS documentation](https://docs.openfaas.com/reference/ssl/kubernetes-with-cert-manager/#20-ssl-and-custom-domains-for-functions).
+You'll need to find your values.yaml file for the OpenFaaS Helm chart, then add:
 
-```sh
-git clone https://github.com/openfaas-incubator/ingress-operator
-cd ingress-operator
-
-kubectl apply -f ./artifacts/operator-crd.yaml
-kubectl apply -f ./artifacts/operator-rbac.yaml
-kubectl apply -f ./artifacts/operator-amd64.yaml
+```yaml
+ingressOperator:
+  create: true
 ```
 
-The above creates: the CRD definition, RBAC roles and then deploys the Operator itself.
+Then run a `helm upgrade --install` as per the Helm chart README.
 
 ### Create a static website
 

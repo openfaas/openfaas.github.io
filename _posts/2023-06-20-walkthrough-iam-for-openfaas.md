@@ -562,7 +562,7 @@ To print the token you need to set two extra flags, `--no-exchange` and `--print
 ```bash
 $ faas-cli pro auth \
   --authority https://keycloak.example.com/realms/openfaas \
-  --client-id openfaas
+  --client-id openfaas \
   --no-exchange \
   --print-token
 ```
@@ -571,6 +571,20 @@ You can copy/paste the token into [https://jwt.io/](https://jwt.io/) to see what
 
 ![Example for an id issued bey Keycloak](/images/2023-06-iam-walkthrough/jwt-io.png)
 > Example `id_token` issued by Keycloak
+
+If you're not keen on pasting tokens into jwt.io, then we have an extra flag you can use to print out the decoded token.
+
+Print the token from your OAuth provider, without doing an exchange:
+
+```bash
+$ faas-cli pro auth \
+  --authority https://keycloak.example.com/realms/openfaas \
+  --client-id openfaas \
+  --no-exchange \
+  --pretty
+```
+
+To print out the formatted OpenFaaS token after having done an exchange, remove `--no-exchange` from the command above.
 
 ## Wrapping up
 

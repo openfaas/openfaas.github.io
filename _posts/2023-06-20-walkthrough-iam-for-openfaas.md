@@ -190,7 +190,7 @@ Create an ingress record for the dashboard:
 export DOMAIN="dashboard.openfaas.example.com"
 
 cat > dashboard-ingress.yaml <<EOF
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: openfaas-dashboard
@@ -208,13 +208,16 @@ spec:
     http:
       paths:
       - backend:
-          serviceName: openfaas-dashboard
-          servicePort: 8080
+          service
+            name: openfaas-dashboard
+            port:
+              number: 8080
         path: /
+        pathType: Prefix
   tls:
   - hosts:
     - $DOMAIN
-    secretName: letsencrypt
+    secretName: dashboard-cert
 EOF
 ```
 

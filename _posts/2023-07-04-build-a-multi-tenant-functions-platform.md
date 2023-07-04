@@ -37,13 +37,19 @@ SaaS teams look like: [Cognite](https://www.cognite.com/en/), [Waylay.io](https:
 
 Sometimes we see a mix of both, LivePerson for instance built a functions platform around OpenFaaS which means their customers get to inject custom code into chat workflows. Their VP of engineering also told me that it's become an essential way for their own developers to build new features and services - quickly, and easily without affecting the core product.
 
-We've just signed a deal with E2E Networks Limited, an ISP based in India to white-label OpenFaaS so that they can offer a "functions capability" for customers, think of it like AWS Lambda, but run with OpenFaaS. The popularity of OpenFaaS along with the flat-rate cost of our enterprise licensing was particularly attractive to them.
+## What are customers saying?
 
-I reached out to [Artyom Sivkov - Engineering Director at Waylay](https://be.linkedin.com/in/artyomsivkov) for a quote to share:
+Here's what [Shaked Askayo, Co-founder & CTO of Kubiya.ai](https://www.linkedin.com/in/shaked-askayo-18403714a) wanted to say about OpenFaaS:
+
+> "Exploring serverless orchestration on Kubernetes at Kubiya, we encountered powerful platforms like Knative, yet found them overly complex to manage. OpenFaaS struck the perfect balance. It combines dynamic elasticity, intuitive function packaging, a robust API and comprehensive metrics. With secure namespace isolation for managing multi-tenant environments, OpenFaaS has proven to be a perfect fit for our needs."
+
+In late 2021, [Veselin Pizurica, President of Waylay.io](https://www.linkedin.com/in/pizurica/) wrote an article on why OpenFaaS for Enterprises was right for them: [Case-study: Building a Low Code automation platform with OpenFaaS](https://www.openfaas.com/blog/low-code-automation/)
+
+More recently [Artyom Sivkov, Engineering Director at Waylay](https://be.linkedin.com/in/artyomsivkov) gave us an update on how things are going with OpenFaaS.
 
 > "At Waylay.io, OpenFaaS is our default choice when it comes to building robust, performant and scalable solutions for both SaaS and on-premises deployments. We especially value the constant evolution of OpenFaaS that brings more and more added value to our products and attention of OpenFaaS team to our requests and feedback."
 
-Waylay's CTO has spoken in the past about why an enterprise license for OpenFaaS was right for them: [Case-study: Building a Low Code automation platform with OpenFaaS](https://www.openfaas.com/blog/low-code-automation/)
+We've also just signed a deal with E2E Networks Limited, who provide cloud computing infrastructure and managed services. They'll be white-labelling OpenFaaS so that they can offer a "functions capability" for customers, think of it like AWS Lambda, but run with additional flexibility. The popularity of OpenFaaS along with the flat-rate cost of our enterprise licensing was particularly attractive to them, as well as their customers being able to debug and test functions locally using the Community Edition.
 
 ## Core components
 
@@ -476,6 +482,10 @@ I wanted to introduce you to a some customers and their use-cases for multi-tena
 Whilst this is not an exhaustive guide, it is built from real-world experience and feedback from customers, and I think it'll help you get started.
 
 There's a lot more to OpenFaaS that we could have talked about like giving direct access to `faas-cli` and the multi-tenant dashboard, integration with GitHub Actions or GitLab, event-triggers like Cron, Kafka and asynchronous function invocations with NATS JetStream.
+
+Here's what [Shaked Askayo, Co-founder & CTO of Kubiya.ai](https://www.linkedin.com/in/shaked-askayo-18403714a) wanted to say about OpenFaaS:
+
+> "Exploring serverless orchestration on Kubernetes at Kubiya, we encountered powerful platforms like Knative, yet found them overly complex to manage. OpenFaaS struck the perfect balance. It combines dynamic elasticity, intuitive function packaging, a robust API and comprehensive metrics. With secure namespace isolation for managing multi-tenant environments, OpenFaaS has proven to be a perfect fit for our needs."
 
 Remember, we're always here and happy to help you check and fine-tune your OpenFaaS for Enterprises setup for multi-tenancy.
 

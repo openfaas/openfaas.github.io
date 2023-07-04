@@ -437,7 +437,11 @@ Remember to create network policies with your Container Networking Interface (CN
 
 Various CNI drivers and service meshes offer encryption of traffic between pods, so you may want to introduce this in addition to network policies. For an example of how to do this with Istio, see: [Learn how Istio can provide a service mesh for your functions](https://www.openfaas.com/blog/istio-functions/)
 
-For the namespace, you may also wish to add a [Limit Range](https://kubernetes.io/docs/concepts/policy/limit-range/). A Limit Range may restrict a customer to using a maximum of 5 vCPU and 5 GBP of RAM for instance, across all replicas of his or her functions.
+For the namespace, you may also wish to add a [Limit Range](https://kubernetes.io/docs/concepts/policy/limit-range/). A Limit Range may restrict a customer to using a maximum of 5 vCPU and 8GB of RAM for instance, across all replicas of his or her functions.
+
+[Stefan Prodan](https://twitter.com/stefanprodan), a prior contributor to OpenFaaS and maintainer of Flux and Flagger suggested adding [Resource Quotas](https://kubernetes.io/docs/concepts/policy/resource-quotas/#object-count-quota) to the restrictions per namespace. So whilst a Limit Range could prevent a functions from taking more than say 8GB of RAM, it wouldn't prevent an exhaustion attack where the customer creates 8000 functions with 1MB of RAM each.
+
+ResourceQuotas can be created through YAML and kubectl, or via the Kubernetes API using a client.
 
 ## Backing up customer functions
 

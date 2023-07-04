@@ -130,11 +130,39 @@ Learn in: [Walkthrough of Identity and Access Management (IAM) for OpenFaaS](htt
 
 ## Accepting code from your end users
 
-There are a few options here:
+All OpenFaaS functions are built into container images - either using a template (which itself has a Dockerfile), or using a Dockerfile directly.
+
+We generally see customers provide only one programming language to their own users, Waylay offers Node.js, Cognite offers Python, and Patchworks offers PHP.
+
+But there's nothing stopping you from allowing a user to pick a template, then provide the additional files for the function's handler and package management tool:
+
+For Python:
+
+* Template: `python3-http`
+* Handler: `handler.py`
+* Manifest: `requirements.txt`
+
+For Go:
+
+* Template: `golang-middleware`
+* Handler: `handler.go`
+* Manifest: `go.mod`
+
+For Node.js:
+
+* Template: `node18`
+* Handler: `handler.js`
+* Manifest: `package.json`
+
+There are a few options for accepting the customer's source code to build it into an image:
 
 1. Enable IAM for OpenFaaS and create a Policy and Role so that customers can deploy directly to their own namespaces
 2. Write a web portal with a code editor like ACE or Monaco, then use the Function Builder API to build and deploy the function
 3. Integrate with GitHub or GitLab webhooks, so customers just commit their code to linked repositories, and your platform checks out the code and uses the Function Builder to do the rest
+
+In the first case, with direct API access, you may not have any access to the customer's code, but will receive a container image. This use-case is supported by some managed functions platforms, but the customer often has to push the image to a registry that you control before attempting a deployment.
+
+In the second and third case, you'll likely have access to the code and will build it for the customer. Here, you have the opportunity to run static analysis tools to check for bots, exploits, malware or other security issues. [Bandit](https://bandit.readthedocs.io/en/latest/) is an open source tool designed to find common security issues in Python code, you could run it as part of the build process for Python functions.
 
 Where should you store images for customers?
 

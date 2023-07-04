@@ -18,7 +18,7 @@ Learn what it takes to build a functions platform for multiple tenants based upo
 
 ## Introduction
 
-The OpenFaaS project has been around since late 2016, and since then it's seen many different kinds of users. Some are hobbyists, others are independent consultants who want to get the job done, some sneak it into a corporate stack without getting approval from their managers (they know what they need!), others make a conscious decision to adopt functions for more flexibility than cloud functions can offer. Some VPs and CTOs just know that a function-based approach will help their team to move faster. The list of ADOPTERS is long and varied, and unfortunately only a small subset of users make it into that list.
+The OpenFaaS project has been around since late 2016, and since then it's seen many different kinds of users. Some are hobbyists, others are independent consultants who want to get the job done, some sneak it into a corporate stack without getting approval from their managers (they know what they need!), others make a conscious decision to adopt functions for more flexibility than cloud functions can offer. Some VPs and CTOs just know that a function-based approach will help their team to move faster. The list of [ADOPTERS.md](https://github.com/openfaas/faas/blob/master/ADOPTERS.md) is long and varied, and unfortunately only a small subset of users make it into that list.
 
 One particular type of user that we've seen from the very early days is the "Platform team" and the "SaaS team". Let me briefly introduce you to both:
 

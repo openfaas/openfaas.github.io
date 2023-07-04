@@ -39,6 +39,10 @@ Sometimes we see a mix of both, LivePerson for instance built a functions platfo
 
 We've just signed a deal with E2E Networks Limited, an ISP based in India to white-label OpenFaaS so that they can offer a "functions capability" for customers, think of it like AWS Lambda, but run with OpenFaaS. The popularity of OpenFaaS along with the flat-rate cost of our enterprise licensing was particularly attractive to them.
 
+I reached out to [Artyom Sivkov - Engineering Director at Waylay](https://be.linkedin.com/in/artyomsivkov) for a quote to share:
+
+> "At Waylay.io, OpenFaaS is our default choice when it comes to building robust, performant and scalable solutions for both SaaS and on-premises deployments. We especially value the constant evolution of OpenFaaS that brings more and more added value to our products and attention of OpenFaaS team to our requests and feedback."
+
 ## Core components
 
 In each of these multi-tenant use-cases, the customers have a Kubernetes cluster, this could be self-hosted (Rancher, K3s, Kubespray, Ansible, on-prem or cloud-based) or a managed offering like AKS, GKE or EKS.
@@ -458,6 +462,10 @@ The Function CRD can be used to export customer functions from each namespace, a
 We also wrote a back-up tool for customers who are not yet on a version of OpenFaaS which uses the CRD:
 
 * [Backup and migrate functions between clusters with a new export command for the OpenFaaS CLI](https://www.openfaas.com/blog/backup-and-migrate-functions/)
+
+Here's what [Andrew Downey, Head of Development at Patchworks](https://www.linkedin.com/in/andernoo) had to say about the tool:
+
+> "Our DevOps team was very grateful of the help. We used the earlier version of the export command to migrate every single function between two different cloud providers and Kubernetes clusters with essentially no pain. Massive thanks for that. The operator is enabled in our new cluster so any future (and hopefully that’s distant future) migrations will be even easier."
 
 ## Wrapping up
 

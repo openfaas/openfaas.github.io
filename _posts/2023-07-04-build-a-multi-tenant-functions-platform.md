@@ -28,7 +28,7 @@ One particular type of user that we've seen from the very early days is the "Pla
 
 Examples of the Platform team include: mnemonic AS, who provide a vanilla OpenFaaS for Enterprises experience with IAM, users can deploy via GitLab or faas-cli using their identity. Citrix (based in the UK) built a web portal where automation engineers can input Python and PowerShell into a form, which is saved into a database, built as a function, and deployed into a white-labelled OpenFaaS called "CAP Lambda". 
 
-SaaS teams look like: Cognite, Waylay.io, Kubiya and Patchworks.
+SaaS teams look like: [Cognite](https://www.cognite.com/en/), [Waylay.io](https://waylay.io), [Kubiya](https://kubiya.ai) and [Patchworks](https://www.wearepatchworks.com/).
 
 * Cognite wrapped OpenFaaS and white-labelled it as "Cognite Functions", they offer it to data-scientists at oil mining companies in order to run their own simulations and models against huge data-sets.
 * Waylay.io built a platform for industrial IoT and automation, with very clever use of bayesian networks for running workflows. Each part of the workflow is an OpenFaaS function, built with our Function Builder and deployed into their Kubernetes cluster. Customers can provide the function via a UI.
@@ -438,6 +438,22 @@ Remember to create network policies with your Container Networking Interface (CN
 Various CNI drivers and service meshes offer encryption of traffic between pods, so you may want to introduce this in addition to network policies. For an example of how to do this with Istio, see: [Learn how Istio can provide a service mesh for your functions](https://www.openfaas.com/blog/istio-functions/)
 
 For the namespace, you may also wish to add a [Limit Range](https://kubernetes.io/docs/concepts/policy/limit-range/). A Limit Range may restrict a customer to using a maximum of 5 vCPU and 5 GBP of RAM for instance, across all replicas of his or her functions.
+
+## Backing up customer functions
+
+In most of the platforms we've seen, today's generation of GitOps tools don't offer a solution.
+
+Customers often build by entering text into an online editor, or by publishing an image and triggering a deployment.
+
+In one case, we learned of a customer with hundreds of functions, which would have to be recreated by their users if there was a catastrophic failure of their Kubernetes cluster.
+
+Fortunately, OpenFaaS Standard and OpenFaaS for Enterprises both offer a solution - the Custom Resource Definition (CRD).
+
+The Function CRD can be used to export customer functions from each namespace, as simply as: `kubectl get functions -n tenant1 -o yaml`.
+
+We also wrote a back-up tool for customers who are not yet on a version of OpenFaaS which uses the CRD:
+
+* [Backup and migrate functions between clusters with a new export command for the OpenFaaS CLI](https://www.openfaas.com/blog/backup-and-migrate-functions/)
 
 ## Wrapping up
 

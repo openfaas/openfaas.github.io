@@ -43,6 +43,8 @@ I reached out to [Artyom Sivkov - Engineering Director at Waylay](https://be.lin
 
 > "At Waylay.io, OpenFaaS is our default choice when it comes to building robust, performant and scalable solutions for both SaaS and on-premises deployments. We especially value the constant evolution of OpenFaaS that brings more and more added value to our products and attention of OpenFaaS team to our requests and feedback."
 
+Waylay's CTO has spoken in the past about why an enterprise license for OpenFaaS was right for them: [Case-study: Building a Low Code automation platform with OpenFaaS](https://www.openfaas.com/blog/low-code-automation/)
+
 ## Core components
 
 In each of these multi-tenant use-cases, the customers have a Kubernetes cluster, this could be self-hosted (Rancher, K3s, Kubespray, Ansible, on-prem or cloud-based) or a managed offering like AKS, GKE or EKS.

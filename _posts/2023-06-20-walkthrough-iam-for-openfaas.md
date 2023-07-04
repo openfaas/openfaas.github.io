@@ -413,7 +413,7 @@ condition:
       jwt:email: ["*@example.com"]
 ```
 
-The principal filed is optional, however if it is given, both the principal and the condition must match. If the principal contains multiple items only one must match the token for it to be considered a match.
+The principal field is optional, however if it is given, both the principal and the condition must match. If the principal contains multiple items only one must match the token for it to be considered a match.
 
 This Role will match for 1 staff member with sub `aa544816-e4e9-4ea0-b4cf-dd70db159d2e` only if it was issued by `https://keycloak.example.com/realms/openfaas`.
 

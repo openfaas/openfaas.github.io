@@ -144,7 +144,7 @@ Why? By having images in your own registry you can:
 
 * decrease the cold-start latency by having fast access to images
 * increase security continually scan and monitor images for exploits and vulnerabilities
-* reduce the complexity of managing the many non-standard adn complex approaches for registry authentication
+* reduce the complexity of managing the many non-standard and complex approaches for registry authentication
 * reduce costs by having images pulled from a registry operated in the same network or region as the OpenFaaS cluster
 
 ## The Function Builder
@@ -322,6 +322,7 @@ Functions can adopt a pre-defined profile by setting an annotation: `com.openfaa
 
 This includes: `podSecurityContext`, `affinity`, `tolerations`, `topologySpreadConstraints` and `runtimeClassName`.
 
+A note on 
 This example makes a function adopt the `gvisor` profile for sandboxing the container using Google's gVisor project:
 
 ```yaml
@@ -335,6 +336,8 @@ spec:
 ```
 
 Learn more about gVisor here: [What is gVisor?](https://gvisor.dev/docs/)
+
+[Kata Containers](https://katacontainers.io/) also offer Kubernetes integration using lightweight VMs such as Cloud Hypervisor (an alternative to Firecracker).
 
 You will need to consider all of these within your platform, so read up how to use them in the docs.
 
@@ -373,10 +376,34 @@ In the Helm chart, set:
 
 When you deploy functions you can enforce additional constraints:
 
-* Set a specific profile to have functions only run on certain nodes
+* Set a specific Profile to have functions only run on certain nodes
 * Set a profile to force the use of gVisor or Kata container sandboxing using a runtimeClass
 * Set CPU/RAM requests or limits to prevent resource exhaustion
 * Set `readOnlyRootFilesystem` to prevent functions from writing to the root filesystem, they'll still be able to write temporary data to /tmp/
+
+Auto-scaling limits including scale to zero are controlled through labels at deployment time.
+
+The readOnlyRootFilesystem setting, CPU/RAM requests and limits are controlled through additional fields in the function's spec. See the [OpenFaaS YAML reference as a guide](https://docs.openfaas.com/architecture/stack/).
+
+You can define a custom PodSecurityContext for functions using a Profile too, here's an example:
+
+```yaml
+kind: Profile
+apiVersion: openfaas.com/v1
+metadata:
+    name: gvisor
+    namespace: openfaas
+spec:
+    podSecurityContext:
+        runAsUser: 1000
+        runAsGroup: 3000
+        fsGroup: 2000
+        runAsNonRoot: true
+```
+
+In addition in both OpenFaaS Standard and OpenFaaS for Enterprises, `AllowPrivilegeEscalation` is set to false by default and cannot be changed on functions.
+
+We also disable the EnableServiceLinks feature in Kubernetes which can expose information about other services and endpoints to functions.
 
 Remember to create network policies with your Container Networking Interface (CNI) driver of choice to prevent functions from accessing the Kubernetes API or other services.
 
@@ -393,3 +420,6 @@ Whilst this is not an exhaustive guide, it is built from real-world experience a
 There's a lot more to OpenFaaS that we could have talked about like giving direct access to `faas-cli` and the multi-tenant dashboard, integration with GitHub Actions or GitLab, event-triggers like Cron, Kafka and asynchronous function invocations with NATS JetStream.
 
 Remember, we're always here and happy to help you check and fine-tune your OpenFaaS for Enterprises setup for multi-tenancy.
+
+* [Join the free Office Hours call for community users and customers](https://docs.openfaas.com/community/)
+* Make a suggestion or ask a question in the [Customer Community](https://github.com/openfaas/customers)

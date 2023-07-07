@@ -367,9 +367,13 @@ spec:
   statement:
   - sid: 1-rw-staging
     action:
-    - Function:Read
-    - Function:Admin
-    - Secret:Read
+    - Function:List
+    - Function:Get
+    - Function:Create
+    - Function:Update
+    - Function:Delete
+    - Function:Logs
+    - Namespace:List
     effect: Allow
     resource: ["staging:*"]
 ```

@@ -30,6 +30,9 @@ At the time of writing, IAM for OpenFaaS is very new, so you can get an overview
 
 You can follow along with the examples to get a conceptual idea of how everything works, or if you've already got a license, you can try it out yourself if you've enabled IAM.
 
+![Conceptual overview: Token exchange for Kubernetes JWT tokens](/images/2023-07-k8s-jwt-iam/projected-service-account-token-auth-flow.png)
+> Conceptual overview: Token exchange for Kubernetes JWT tokens
+
 ## Integrate with the OpenFaaS API using tokens
 
 IAM for OpenFaaS uses OpenID Connect (OIDC) and JSON Web Tokens (JWT) to perform a token exchange from your identity provider to a built-in OpenFaaS provider. That final token is an access token that will be used to authorize your requests to OpenFaaS REST API.

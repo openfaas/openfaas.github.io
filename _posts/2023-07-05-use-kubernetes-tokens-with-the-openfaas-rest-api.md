@@ -85,22 +85,17 @@ The token will have an expiry time and additional fields like `issuer` and `audi
 
 To get an access token for the OpenFaaS REST API the application needs to read the token from the configured file path. Next it needs to perform the token exchange request described in the previous section to exchange the token for an OpenFaaS token.
 
-Before tokens issued by the Kubernetes API can be exchanged for OpenFaaS tokens the Kubernetes API will have to be registered as a trusted JWT issuer with OpenFaaS:
+Before tokens issued by the Kubernetes API can be exchanged for OpenFaaS tokens the Kubernetes API will have to be registered as a trusted JWT issuer with OpenFaaS. The OpenFaaS chart should have created the JwtIssuer object on installation.
 
-```yaml
-apiVersion: iam.openfaas.com/v1
-kind: JwtIssuer
-metadata:
-  name: kubernetes.default.svc.cluster.local
-  namespace: openfaas
-spec:
-  iss: https://kubernetes.default.svc.cluster.local
-  aud:
-    - https://gateway.example.com
-  tokenExpiry: 2h
+You can list issuers and look for the kubernetes issuer to verify it is registerd with OpenFaaS:
+
+```bash
+$ kubectl get jwtissuers
+
+NAME        ISSUER                                        AUDIENCE                         EXPIRY
+system      https://gw.exit.welteki.dev                   ["https://gw.exit.welteki.dev"]  30m
+kubernetes  https://kubernetes.default.svc.cluster.local  ["https://gw.exit.welteki.dev"]  2h
 ```
-
-The audience should be the URL for your OpenFaaS gateway.
 
 To mount a token into your application Pod you could define a Pod manifest that is similar to:
 
@@ -245,7 +240,8 @@ metadata:
 spec:
   statement:
   - action:
-    - Function:Read
+    - Function:List
+    - Namespace:List
     effect: Allow
     resource:
     - dev:*

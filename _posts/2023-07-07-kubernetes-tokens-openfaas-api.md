@@ -102,23 +102,29 @@ We have thorough documentation on the REST API endpoints, a Go SDK and an OpenAP
 
 If your code is running in a Kubernetes cluster, then you can get the initial `id_token` from a service account. You'll need to create a dedicated Service Account and then bind it to the Pods that need to access the OpenFaaS API.
 
+Before tokens issued by the Kubernetes API can be exchanged for OpenFaaS tokens the Kubernetes API will have to be registered as a trusted JWT issuer with OpenFaaS. The OpenFaaS chart should have created the JwtIssuer object on installation.
 
-Before tokens issued by the Kubernetes API can be exchanged for OpenFaaS tokens the Kubernetes API will have to be registered as a trusted JWT issuer with OpenFaaS:
+You can inspect the issuer by running:
 
-```yaml
+```bash
+$ kubectl get jwtissuer kubernetes -o yaml
+
 apiVersion: iam.openfaas.com/v1
 kind: JwtIssuer
 metadata:
-  name: kubernetes.default.svc.cluster.local
+  annotations:
+    meta.helm.sh/release-name: openfaas
+    meta.helm.sh/release-namespace: openfaas
+  labels:
+    app.kubernetes.io/managed-by: Helm
+  name: kubernetes
   namespace: openfaas
 spec:
-  iss: https://kubernetes.default.svc.cluster.local
   aud:
-    - https://gateway.example.com
+  - https://gateway.example.com
+  iss: https://kubernetes.default.svc.cluster.local
   tokenExpiry: 2h
 ```
-
-The audience should be the URL for your OpenFaaS gateway.
 
 To mount a token into your application Pod you could define a Pod manifest that is similar to:
 

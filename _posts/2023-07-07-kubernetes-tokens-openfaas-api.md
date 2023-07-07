@@ -12,7 +12,7 @@ categories:
 dark_background: true
 author_staff_member: han
 author_staff_member_editor: alex
-image: ""
+image: "/images/2023-07-k8s-jwt-iam/background.png"
 hide_header_image: true
 ---
 
@@ -376,7 +376,7 @@ To deploy a second connector that operates on the staging namespaces:
 
 This connector should start to invoke the function in the staging namespace we deployed in the previous step.
 
-This is exactly the same process that you would take to enable cron or Kafka event riggers for different users in a multi-tenant OpenFaaS cluster.
+This is the same process that you would take to enable cron or Kafka event riggers for different users in a multi-tenant OpenFaaS cluster.
 
 ## Wrapping up
 

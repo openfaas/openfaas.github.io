@@ -18,6 +18,8 @@ We've been doing some housekeeping with old container images, so it's time to up
 
 In this article I'll explain how we've been doing housekeeping on old images for a while now, starting with the Docker Hub reset, why it's so important to be running up to date versions of OpenFaaS, how to update your Helm chart and how the project has been evolving over the past few years of full-time work.
 
+## Resetting the Docker Hub and the CVE firehose
+
 Earlier in this year in March, Docker Inc caused a commotion when its management team decided to make open source organisations chargeable, or delete the images of open source projects who weren't in a position to pay.
 
 See also: [Docker is deleting Open Source organisations - what you need to know](https://blog.alexellis.io/docker-is-deleting-open-source-images/)
@@ -32,7 +34,7 @@ At the time, I was surprised to see that there were lots and lots of image pulls
 
 On a recently call with a potential customer, I heard they were using a version of OpenFaaS that was three years old, just before we introduced the Community Edition of OpenFaaS. Having done a quick image scan using [grype](https://github.com/anchore/grype), an Open Source tool made by [Anchore Inc](https://anchore.com/), I found over 60 CVEs in one of the images alone, most of them high severity and around a dozen were critical.
 
-Some CVEs can be resolved by removing the Alpine Linux base that we've become accustomed to shipping with our images, but others are within the Go runtime itself, or Go libraries that we reference like Prometheus and NATS. It's not that these are bad software projects, it's just that they are heavily scrutinised and researched.
+Some CVEs can be resolved by updating the Alpine Linux base that we've become accustomed to shipping with our images, but others are within the Go runtime itself, or Go libraries that we reference like Prometheus and NATS. It's not that these are bad software projects, it's just that they are heavily scrutinised and researched.
 
 Do you want to know the kicker? The engineering director told me that they went to special lengths to set up a dedicated cluster for a customer who was so security focused, they didn't want to have shared tenancy on the SaaS version of OpenFaaS this company ran.
 

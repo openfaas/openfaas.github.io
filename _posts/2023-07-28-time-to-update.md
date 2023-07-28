@@ -1,5 +1,5 @@
 ---
-title: "As OpenFaaS continues to elove, it's time to update your images"
+title: "As OpenFaaS continues to evolve, it's time to update your images"
 description: "We've been doing some housekeeping with old container images, so it's time to update your OpenFaaS installation."
 date: 2023-07-28
 categories:
@@ -32,9 +32,13 @@ At the time, I was surprised to see that there were lots and lots of image pulls
 
 On a recently call with a potential customer, I heard they were using a version of OpenFaaS that was three years old, just before we introduced the Community Edition of OpenFaaS. Having done a quick image scan using [grype](https://github.com/anchore/grype), an Open Source tool made by [Anchore Inc](https://anchore.com/), I found over 60 CVEs in one of the images alone, most of them high severity and around a dozen were critical.
 
+Some CVEs can be resolved by removing the Alpine Linux base that we've become accustomed to shipping with our images, but others are within the Go runtime itself, or Go libraries that we reference like Prometheus and NATS. It's not that these are bad software projects, it's just that they are heavily scrutinised and researched.
+
 Do you want to know the kicker? The engineering director told me that they went to special lengths to set up a dedicated cluster for a customer who was so security focused, they didn't want to have shared tenancy on the SaaS version of OpenFaaS this company ran.
 
 This is an actively developed and maintained platform, so I'm not sure what's worse, misleading a customer that has high security needs, or just not updating container images for three years.
+
+It's a tough financial climate right now, and companies are trying to cut costs in any and every conceivable way, including making dangerous compromises.
 
 If you'd like to know how to scan container images using grype, I covered it in a recent blog post for an enterprise customer who needed SBOMs from us over on the actuated blog:
 
@@ -42,9 +46,9 @@ If you'd like to know how to scan container images using grype, I covered it in 
 
 ## Time to update
 
-So whether you run OpenFaaS Community Edition using the Helm chart, or [faasd](https://github.com/openfaas/faasd), you'll need to update if your are using a version of any image more than 90 days old.
+So whether you run OpenFaaS Community Edition using the Helm chart, or [faasd](https://github.com/openfaas/faasd), you'll need to update if you are using a version of any image more than 90 days old.
 
-Fortunately, we've made that very simple for you with our arkade tool, which we use ourselves to update images in Helm charts.
+Fortunately, we've made that very simple for you with our [arkade tool](https://arkade.dev), which we use ourselves to update images in Helm charts.
 
 For your values.yaml file or `docker-compose.yaml` file (with faasd):
 

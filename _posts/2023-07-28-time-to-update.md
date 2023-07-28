@@ -30,7 +30,7 @@ Now that's not to say that we don't still love docker, the tool within the OpenF
 
 At the time, I was surprised to see that there were lots and lots of image pulls for really quite old builds of OpenFaaS Community Edition. And I mean ancient, chock full of CVEs in Alpine Linux, Go dependencies, and so forth. Versions that clearly put teams and their customers at severe risk. Docker's move was a blessing and a curse - it made us to some housekeeping, and the fallout was relatively minor.
 
-On a recently call with a potential customer, I heard they were using a version of OpenFaaS that was three years old, just before we introduced the Community Edition of OpenFaaS. Having done a quick image scan using grype, an Open Source tool made by Anchorage, I found over 60 CVEs, most of them high severity and around a dozen were critical.
+On a recently call with a potential customer, I heard they were using a version of OpenFaaS that was three years old, just before we introduced the Community Edition of OpenFaaS. Having done a quick image scan using [grype](https://github.com/anchore/grype), an Open Source tool made by [Anchore Inc](https://anchore.com/), I found over 60 CVEs in one of the images alone, most of them high severity and around a dozen were critical.
 
 Do you want to know the kicker? The engineering director told me that they went to special lengths to set up a dedicated cluster for a customer who was so security focused, they didn't want to have shared tenancy on the SaaS version of OpenFaaS this company ran.
 

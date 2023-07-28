@@ -101,7 +101,9 @@ OpenFaaS has been going as a project since 2016, I've been working full-time on 
 
 I made a commitment to see OpenFaaS through for the long-term, which has involved personal and financial sacrifice. Our work as a team on OpenFaaS is bootstrapped, which means me and our salaried staff are paid by revenue from commercial software licenses.
 
-For every team, tech lead, CTO, or engineering director who becomes a paid-up customer, our company and team grows stronger, and we invest even more into the product and project for everyone. Conversely, for every Fortune 500 or Series C start-up that says: "We aren't renewing this time, we can get by with the Community Edition and save a little money", we are forced to make tougher and tougher decisions.
+For every team, tech lead, CTO, or engineering director who becomes a paid-up customer, our company and team grows stronger, and we invest even more into the product and project for everyone.
+
+> Conversely, for every Fortune 500 or Series C start-up that says: "We aren't renewing this time, we can get by with the Community Edition and save a little money", we are forced to make tougher and tougher decisions.
 
 {% include youtube.html id="QzwBmHkP-rQ" %}
 
@@ -118,12 +120,13 @@ But OpenFaaS Pro (Standard or For Enterprises) is where we have worked with cust
 We've developed [many new features](https://openfaas.com/pricing) for and with customers including:
 
 * A new Identity and Access Management (IAM) system for multi-tenancy
-* Event connectors for Kafka, AWS SQS, AWS SNS and will add new sources for customers who ask for them
+* Event connectors for Kafka, AWS SQS, AWS SNS, Postgres, and will add new sources for customers who ask for them
 * A new auto-scaler with different strategies to scale functions based upon their workloads
 * Fine-tuned scale-to-zero and scale-from-zero with zero dropped traffic
 * A new autoscaler to replace the deprecated NATS Streaming project, with JetStream from Synadia
 * A new UI portal for OpenFaaS which blends metadata from your deployment with the status of the function
 * A CRUD API for namespaces for multi-tenancy
+* A Function Builder API that uses rootless mode to build customer functions in isolation
 
 And many many tutorials, guides, videos, conference talks. All that whilst maintaining this free Community Edition, for [which we receive less than 500 USD / mo in funding](https://github.com/sponsors/openfaas) from a few, passionate individuals.
 

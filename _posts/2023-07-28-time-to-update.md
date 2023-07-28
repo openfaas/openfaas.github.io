@@ -115,7 +115,7 @@ It's meant for experimentation, for early prototyping, research, getting a feel 
 
 But OpenFaaS Pro (Standard or For Enterprises) is where we have worked with customers tirelessly for the past four years to create a production-ready platform that's ready to scale.
 
-We've developed:
+We've developed [many new features](https://openfaas.com/pricing) for and with customers including:
 
 * A new Identity and Access Management (IAM) system for multi-tenancy
 * Event connectors for Kafka, AWS SQS, AWS SNS and will add new sources for customers who ask for them

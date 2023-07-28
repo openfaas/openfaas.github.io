@@ -92,6 +92,10 @@ OpenFaaS has been going as a project since 2016, I've been working full-time on 
 
 I made a commitment to see OpenFaaS through for the long-term, which has involved personal and financial sacrifice. Our work on OpenFaaS is bootstrapped, which means staff are only paid salaries by customers who purchase a commercial license.
 
+{% include youtube.html id="QzwBmHkP-rQ" %}
+
+> Learn more: [GopherCon UK Keynote: Alex Ellis - Zero to OpenFaas in 60 months](https://www.youtube.com/watch?v=QzwBmHkP-rQ)
+
 So what's the Community Edition (CE)? The clue is in the name.
 
 The Community Edition isn't meant for profit-making companies to exploit commercially, whilst we scratch our heads about how to pay the salaries for our team members, or how to fund the challenging work of maintaining a project with millions of downloads, hundreds of contributors and a very complex underlying technology stack (Kubernetes).

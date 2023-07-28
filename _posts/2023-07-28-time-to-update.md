@@ -16,7 +16,7 @@ hide_header_image: true
 
 We've been doing some housekeeping with old container images, so it's time to update your OpenFaaS installation.
 
-In this article I'll explain how we've been doing housekeeping on old images for a while now, starting with the Docker Hub reset, why it's so important to be running up to date versions of OpenFaaS, how to update your Helm chart and how the project has been evolving over the past few years of full-time work.
+In this article I'll explain how we've been doing housekeeping on old images for a while now, starting with the Docker Hub reset, why it's so important to be running up to date versions of OpenFaaS, how to update your [Helm chart](https://github.com/openfaas/faas-netes/tree/master/chart/openfaas) and how the project has been evolving over the past few years of full-time work.
 
 ## Resetting the Docker Hub and the CVE firehose
 
@@ -63,7 +63,12 @@ arkade chart upgrade \
 
 The `arkade chart verify` command can also be used to flag which older images may have been removed.
 
-Alternatively, if you do not have a custom docker-compose.yaml file or values.yaml file, you can simply install the OpenFaaS chart again. This is the same approach we take for updating OpenFaaS between versions.
+Alternatively, if you do not have a custom docker-compose.yaml file or values.yaml file, you can simply install the OpenFaaS Helm chart again). This is the same approach we take for updating OpenFaaS between versions.
+
+See also:
+
+* [OpenFaaS Helm chart](https://github.com/openfaas/faas-netes/tree/master/chart/openfaas)
+* [Latest faasd docker-compose.yaml](https://github.com/openfaas/faasd/blob/master/docker-compose.yaml)
 
 ## Checking that everything is OK
 
@@ -92,7 +97,11 @@ You'll find details in the GitHub repository here: [config-checker](https://gith
 
 OpenFaaS has been going as a project since 2016, I've been working full-time on it since 2017, and in 2019 after [only having less than 500 USD / mo in GitHub sponsorships](https://github.com/sponsors/openfaas/), we had to pivot to an open-core model and that's the only reason the project continues to exist today, used at companies large and small all around the world: [ADOPTERS.md](https://github.com/openfaas/faas/blob/master/ADOPTERS.md).
 
-I made a commitment to see OpenFaaS through for the long-term, which has involved personal and financial sacrifice. Our work on OpenFaaS is bootstrapped, which means staff are only paid salaries by customers who purchase a commercial license.
+> The only reason you can run OpenFaaS within your product today is because we pivoted to an open-core model in 2019.
+
+I made a commitment to see OpenFaaS through for the long-term, which has involved personal and financial sacrifice. Our work as a team on OpenFaaS is bootstrapped, which means me and our salaried staff are paid by revenue from commercial software licenses.
+
+For every team, tech lead, CTO, or engineering director who becomes a paid-up customer, our company and team grows stronger, and we invest even more into the product and project for everyone. Conversely, for every Fortune 500 or Series C start-up that says: "We aren't renewing this time, we can get by with the Community Edition and save a little money", we are forced to make tougher and tougher decisions.
 
 {% include youtube.html id="QzwBmHkP-rQ" %}
 

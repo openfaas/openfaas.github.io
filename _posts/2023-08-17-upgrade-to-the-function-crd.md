@@ -111,7 +111,7 @@ We'd recommend running the migration on a backup or temporary cluster first, to 
 You may also like:
 
 * [How to package OpenFaaS functions with Helm](https://www.openfaas.com/blog/howto-package-functions-with-helm/)
-* [Learn how to manage your functions with kubectl](https://www.openfaas.com/blog/manage-functions-with-kubectl/)]
+* [Learn how to manage your functions with kubectl](https://www.openfaas.com/blog/manage-functions-with-kubectl/)
 * [Backup and migrate functions with OpenFaaS](https://www.openfaas.com/blog/backup-and-migrate-functions/)
 
 * [Bring GitOps to your OpenFaaS functions with ArgoCD](https://www.openfaas.com/blog/bring-gitops-to-your-openfaas-functions-with-argocd/)

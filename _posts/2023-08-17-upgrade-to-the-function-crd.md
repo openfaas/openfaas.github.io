@@ -3,7 +3,9 @@ title: "How and why you should upgrade to the Function Custom Resource Definitio
 description: "Whether you're just starting as a customer or have been for a while, you may be missing out with the Function CRD."
 date: 2023-08-17
 categories:
-- openfaas-standard
+- migration
+- operator
+- crd
 - production
 dark_background: true
 image: "/images/2023-08-17-crd-migration/background.png"

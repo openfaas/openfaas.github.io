@@ -6,7 +6,7 @@ categories:
 - openfaas-standard
 - production
 dark_background: true
-# image: "/images/2023-08-dashboard/background.png"
+image: "/images/2023-08-17-crd-migration/background.png"
 author_staff_member: alex
 hide_header_image: true
 ---
@@ -24,6 +24,9 @@ When I saw that Kubernetes was dominating the market, and that Docker Swarm was 
 The first version of faas-netes had a REST API that would create a Deployment and a Service for every function a user deployed. The list functions HTTP handler would search out Deployment objects with a certain label i.e. `faas_function` and then filter on that. We call this version of of the code "the controller" and it has an imperative API - you tell it what to do, and it has to do it right then and there.
 
 When we built a Function Custom Resource Definition, that meant we had to revisit the code and build an operator that would watch for instance of the Function CRD and then create a Deployment and Service just like the "controller" mode did.
+
+![The Operator mode for faas-netes](https://www.openfaas.com/images/2021-06-kubectl-functions/operator-crd.png)
+> Conceptual diagram - the Operator mode for faas-netes with the Function CRD.
 
 Long story short, there are a number of benefits of migrating to the Function CRD:
 
@@ -91,7 +94,9 @@ Then update the installation just as you always would with `helm upgrade --insta
 
 ## Wrapping up
 
-We'd like to see all customers moved onto the Function CRD, for the features and benefits it provides - both for us as maintainers and for you, as users.
+Where we started off, customers had to delete functions when upgrading to the Operator, and then deploy them again, then we built a backup tool, and now we've gone one step further to improve the developer experience with an automated migration, built-into the faas-netes code. There's nothing for you to do - it just kicks in when you turn on the Operator and does the most obvious thing.
+
+So with this latest improvement, we'd like to see all customers moved onto the Function CRD, for the features and benefits it provides - both for us as maintainers and for you, as users.
 
 * More reliable Deployments with the imperative approach
 * Access to kubectl for easy management
@@ -99,8 +104,13 @@ We'd like to see all customers moved onto the Function CRD, for the features and
 * Access to GitOps tools like FluxCD and ArgoCD
 * Easy backup and restore to the same cluster, or to enable migrations between clouds or clusters
 
+We'd recommend running the migration on a backup or temporary cluster first, to make sure all your functions convert and come up as expected. This is what dev and staging are for after all, right?
+
 You may also like:
 
 * [How to package OpenFaaS functions with Helm](https://www.openfaas.com/blog/howto-package-functions-with-helm/)
 * [Learn how to manage your functions with kubectl](https://www.openfaas.com/blog/manage-functions-with-kubectl/)]
 * [Backup and migrate functions with OpenFaaS](https://www.openfaas.com/blog/backup-and-migrate-functions/)
+
+* [Bring GitOps to your OpenFaaS functions with ArgoCD](https://www.openfaas.com/blog/bring-gitops-to-your-openfaas-functions-with-argocd/)
+* [Upgrade to Flux v2 to keep OpenFaaS up to date](https://www.openfaas.com/blog/upgrade-to-fluxv2-openfaas/)

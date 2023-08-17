@@ -1,6 +1,6 @@
 ---
 title: "How and why you should upgrade to the Function Custom Resource Definition (CRD)"
-description: "Whether you're just starting as a customer or have been for a while, you may be missing out with the Function CRD."
+description: "Whether you're just starting out with OpenFaaS or have been using it for a while, you may be missing out with the Function CRD."
 date: 2023-08-17
 categories:
 - migration
@@ -13,7 +13,7 @@ author_staff_member: alex
 hide_header_image: true
 ---
 
-Whether you're just starting as a customer or have been for a while, you may be missing out with the Function CRD.
+Whether you're just starting out with OpenFaaS or have been using it for a while, you may be missing out with the Function CRD.
 
 ## A quick history of OpenFaaS Kubernetes support
 
@@ -21,9 +21,9 @@ Around 2017 Kubernetes adopted a new pattern called the Custom Resource Definiti
 
 With the CRD, came the Operator pattern. You create a Custom Resource (an instance of a CRD) and get to have a descriptive name like "Function" or "Tunnel" (in the case of inlets). You can then build a so-called Operator whose sole purpose is to search out for instances of this Custom Resource, and then to create or update native Kubernetes APIs.
 
-When I saw that Kubernetes was dominating the market, and that Docker Swarm was unfortunately on the way out, I wrote the first version of "faas-netes". faas-netes was the cornerstone of the Kubernetes support, and because everything had been built in such a modular way, it was really the only thing we had to change, that and creating a Helm chart.
+When I saw that Kubernetes was dominating the market, and that Docker Swarm was unfortunately on the way out, I wrote the first version of "[faas-netes](https://github.com/openfaas/faas-netes)". faas-netes was the cornerstone of the Kubernetes support, and because everything had been built in such a modular way, it was really the only thing we had to change, that and creating a Helm chart.
 
-The first version of faas-netes had a REST API that would create a Deployment and a Service for every function a user deployed. The list functions HTTP handler would search out Deployment objects with a certain label i.e. `faas_function` and then filter on that. We call this version of of the code "the controller" and it has an imperative API - you tell it what to do, and it has to do it right then and there.
+The first version of [faas-netes had a REST API](https://docs.openfaas.com/reference/rest-api/) that would create a Deployment and a Service for every function a user deployed. The list functions HTTP handler would search out Deployment objects with a certain label i.e. `faas_function` and then filter on that. We call this version of of the code "the controller" and it has an imperative API - you tell it what to do, and it has to do it right then and there.
 
 When we built a Function Custom Resource Definition, that meant we had to revisit the code and build an operator that would watch for instance of the Function CRD and then create a Deployment and Service just like the "controller" mode did.
 
@@ -85,7 +85,7 @@ Fortunately with our latest change, a one-time migration is performed automatica
 
 Finally, it writes a ConfigMap into the openfaas namespace to prevent the operation from running again.
 
-So whether you're an existing user coming up from the Community Edition (CE), or have been running OpenFaaS Standard or Enterprise for a while, the only thing you need in your Helm chart is:
+So whether you're an existing user coming up from the Community Edition (CE), or have been running OpenFaaS Standard or Enterprise for a while, the only thing you need in your [Helm chart](https://github.com/openfaas/faas-netes/blob/master/chart/openfaas/README.md) is:
 
 ```yaml
 openfaasPro: true

@@ -525,6 +525,8 @@ Today we only scratched the surface, there are many different event triggers, la
 
 It's also worth noting that if you plan on serving traffic in a bursty fashion, where there may be millions of requests per minute, followed by periods of almost no traffic, then [Linode's LKE service](https://www.linode.com/products/kubernetes/) may be a better fit than K3s, because it's possible to scale the amount of VMs automatically which make up the cluster. More nodes, means more capacity to serve traffic.
 
+New Linode customers can get [free credit](https://www.linode.com/openfaas?utm_source=openfaas&utm_medium=web&utm_campaign=sponsorship) to try out this tutorial with K3s or LKE.
+
 Learn more:
 
 * [Read tutorials on the blog](https://openfaas.com/blog)

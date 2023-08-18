@@ -126,15 +126,16 @@ export EMAIL="mail@example.com"
 
 cat > issuer-prod.yaml <<EOF
 apiVersion: cert-manager.io/v1
-kind: ClusterIssuer
+kind: Issuer
 metadata:
-  name: letsencrypt
+  name: letsencrypt-prod
+  namespace: openfaas
 spec:
   acme:
     server: https://acme-v02.api.letsencrypt.org/directory
     email: $EMAIL
     privateKeySecretRef:
-      name: letsencrypt
+      name: letsencrypt-prod
     solvers:
     - http01:
         ingress:
@@ -156,7 +157,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
-    cert-manager.io/cluster-issuer: letsencrypt
+    cert-manager.io/issuer: letsencrypt-prod
     kubernetes.io/ingress.class: nginx
   labels:
     app: gateway
@@ -198,7 +199,7 @@ metadata:
   labels:
     app: openfaas-dashboard
   annotations:
-    cert-manager.io/cluster-issuer: letsencrypt
+    cert-manager.io/issuer: letsencrypt-prod
     kubernetes.io/tls-acme: "true"
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
     kubernetes.io/ingress.class: nginx
@@ -208,8 +209,8 @@ spec:
     http:
       paths:
       - backend:
-          service
-            name: openfaas-dashboard
+          service:
+            name: dashboard
             port:
               number: 8080
         path: /

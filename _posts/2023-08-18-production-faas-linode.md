@@ -215,7 +215,7 @@ k3sup join \
     --ip $EXTRA_SERVER_IP \
     --user $USER \
     --k3s-channel $CHANNEL \
-    --k3s-extra-args "--node-ip $EXTRA_SERVER_VLAN_IP --node-external-ip $EXTRA_SERVER_IP --flannel-iface eth1" \
+    --k3s-extra-args "--node-ip $EXTRA_SERVER_VLAN_IP --node-external-ip $EXTRA_SERVER_IP --flannel-iface eth1 --disable=traefik" \
     --tls-san $TLS_SAN
 ```
 
@@ -242,7 +242,7 @@ k3sup join \
     --ip $EXTRA_SERVER_IP \
     --user $USER \
     --k3s-channel $CHANNEL \
-    --k3s-extra-args "--node-ip $EXTRA_SERVER_VLAN_IP --node-external-ip $EXTRA_SERVER_IP --flannel-iface eth1" \
+    --k3s-extra-args "--node-ip $EXTRA_SERVER_VLAN_IP --node-external-ip $EXTRA_SERVER_IP --flannel-iface eth1 --disable=traefik" \
     --tls-san $TLS_SAN
 ```
 

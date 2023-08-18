@@ -61,7 +61,9 @@ Finally, we often hear that teams can both get into production with OpenFaaS in 
 
 You can find a list of companies and their use-cases in the [ADOPTERS file](https://github.com/openfaas/faas/blob/master/ADOPTERS.md), however this is only a very small sub-set of users.
 
-> Disclosure: at the time of writing, Linode sponsors the OpenFaaS homepage and provides credits for testing the OpenFaaS project. This article was commissioned by Linode/Akamai.
+> Disclosure: at the time of writing, [Linode](https://www.linode.com/openfaas?utm_source=openfaas&utm_medium=web&utm_campaign=sponsorship) sponsors the OpenFaaS homepage and provides credits for testing the OpenFaaS project. This article was commissioned by Linode/Akamai.
+
+New customers can get [free credit with Linode](https://www.linode.com/openfaas?utm_source=openfaas&utm_medium=web&utm_campaign=sponsorship) to try out this tutorial.
 
 ## The 10,000 ft overview
 

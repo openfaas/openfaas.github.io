@@ -313,6 +313,22 @@ Follow this up with:
 arkade install cert-manager
 ```
 
+This is an important step, and due to the way that cert-manager does its self-checks for ACME HTTP01 challenges.
+
+Edit the service for Ingress Nginx, then add the following to the spec:
+
+```
+kubectl edit svc/ingress-nginx-controller
+```
+
+```diff
+spec:
++  externalIPs:
++  - 139.144.247.125
+```
+
+Replace `139.144.247.125` with the IP address of the NodeBalancer.
+
 cert-manager will be used in the next stage to obtain a TLS certificate for the OpenFaaS Gateway and UI.
 
 ### Install OpenFaaS

@@ -72,9 +72,11 @@ There are many knobs and dials to configure Kubernetes or K3s for production. We
 ![Highly Available K3s cluster, with a Load Balancer](/images/2023-08-linode-k3s/k3s-ha.png)
 > Highly Available K3s cluster, with a Load Balancer
 
+For a HA control-plane, K3s supports using [a database](https://docs.k3s.io/datastore/ha) or [an embedded etcd cluster](https://docs.k3s.io/datastore/ha-embedded).
+
 We'll go through the following steps:
 
-* Create a HA K3s cluster with K3sup
+* Create a HA K3s cluster with K3sup - using the etcd option
 * Join additional worker nodes to the cluster
 * Install an Ingress Controller and configure TLS encryption
 * Install OpenFaaS and deploy a function

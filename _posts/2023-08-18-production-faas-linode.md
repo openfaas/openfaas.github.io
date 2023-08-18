@@ -61,6 +61,8 @@ Finally, we often hear that teams can both get into production with OpenFaaS in 
 
 You can find a list of companies and their use-cases in the [ADOPTERS file](https://github.com/openfaas/faas/blob/master/ADOPTERS.md), however this is only a very small sub-set of users.
 
+> Disclosure: at the time of writing, Linode sponsors the OpenFaaS homepage and provides credits for testing the OpenFaaS project. This article was commissioned by Linode/Akamai.
+
 ## The 10,000 ft overview
 
 There are many knobs and dials to configure Kubernetes or K3s for production. We won't be covering each and every option, because each team's requirements will vary so much. Instead we'll focus on creating a High Availability (HA) cluster, secure Ingress with TLS encryption, and then we'll deploy OpenFaaS to it.

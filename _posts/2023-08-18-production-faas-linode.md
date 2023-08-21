@@ -49,6 +49,8 @@ def handle(event, context):
     }
 ```
 
+> [Example taken from the python-flask template README](https://github.com/openfaas/python-flask-template)
+
 Here's what people tend to value in OpenFaaS over a hosted functions service:
 
 * Portability - it can be installed on any cloud where there is a managed Kubernetes service, or into VMs or on bare-metal using K3s, as well as on-premises

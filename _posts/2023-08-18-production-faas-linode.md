@@ -76,7 +76,7 @@ For a HA control-plane, K3s supports using [a database](https://docs.k3s.io/data
 
 We'll go through the following steps:
 
-* Create a HA K3s cluster with K3sup - using the etcd option
+* Create a HA K3s cluster with [K3sup](https://k3sup.dev/) - using the etcd option
 * Join additional worker nodes to the cluster
 * Install an Ingress Controller and configure TLS encryption
 * Install OpenFaaS and deploy a function
@@ -154,6 +154,15 @@ servers = {
 ```
 
 Now that you have the IP addresses for the VMs, you can build the k3sup commands to perform the installation.
+
+## Setup Kubernetes using K3sup
+
+[K3sup](https://github.com/alexellis/k3sup) is an open-source tool I wrote to install K3s over SSH, it makes managing all the configuration much simpler, and within a very short period of time, you can have a HA cluster up and running, with a Load Balancer providing a stable IP address for accessing the cluster via kubectl.
+
+With k3sup, there is no need to log into your VMs, or to run any commands on them. K3sup does everything, including fetching a kubeconfig file and merging it into your existing one, so that you can access the cluster with kubectl.
+
+![K3sup installation](https://github.com/alexellis/k3sup/blob/eecca82a26ffd8195d3064994525fa9a771ef7ea/docs/k3sup-cloud.png)
+> Example installation of K3s with K3sup
 
 Setup the first server:
 

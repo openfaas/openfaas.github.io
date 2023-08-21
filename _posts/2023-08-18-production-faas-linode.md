@@ -84,6 +84,28 @@ We'll go through the following steps:
 
 From there it's up to you to decide which parts you may want to automate with a GitOps or IaaC tool such as Flux for the Helm charts, or Terraform for the VMs themselves.
 
+Before we get started, I'd advise using my arkade tool to download all the various CLIs that we're going to need.
+
+```bash
+curl -sLS https://get.arkade.dev | sh
+```
+
+Follow the command to move arkade to `/usr/local/bin/` using `sudo`.
+
+Then:
+
+```bash
+arkade get \
+  terraform \
+  faas-cli \
+  kubectl \
+  helm
+```
+
+arkade is a time-saver for both downloading developer tools, but also for installing Helm charts, which we will see in the later steps, when we'll run commands like `arkade install cert-manager`. If you look carefully at the output, you'll see that it's a wrapper for the Helm command itself.
+
+* [Find out more about arkade on GitHub](https://github.com/alexellis/arkade)
+
 See also: [Use Terraform to Provision Infrastructure on Linode](https://www.linode.com/docs/guides/how-to-build-your-infrastructure-using-terraform-and-linode/)
 
 ## Create the VMs

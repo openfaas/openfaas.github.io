@@ -1,11 +1,12 @@
 ---
-title: "How to set up production-ready K3s with OpenFaaS on Linode"
-description: "Learn how to setup K3s for production on Linode, along with OpenFaaS for functions."
+title: "How to set up production-ready K3s with OpenFaaS with Akamai Cloud Computing"
+description: "Learn how to setup K3s for production with Akamai Cloud Computing, along with OpenFaaS for functions."
 date: 2023-08-18
 categories:
 - openfaas
 - k3s
 - linode
+- akamai
 - functions
 dark_background: true
 image: "/images/2023-08-linode-k3s/background.png"
@@ -13,7 +14,10 @@ author_staff_member: alex
 hide_header_image: true
 ---
 
-In this guide we'll show you how to setup and configure K3s for production use on Linode. Then we'll set up OpenFaaS so that we can deploy functions to the cluster.
+In this guide we'll show you how to setup and configure K3s for production use with Akamai Cloud Computing. Then we'll set up OpenFaaS so that we can deploy functions to the cluster.
+
+> Did you know? Linode was acquired by Akamai, and is now being branded as "Akamai Cloud Computing".
+> The rebranding is still in-progress, so we'll be referring to Linode throughout this article.
 
 [K3s](https://k3s.io) is a production-ready distribution of Kubernetes that was originally developed by Darren Shepherd at Rancher Labs, before donating it to the [Cloud Native Computing Foundation (CNCF)](https://cncf.io). It's become one of the most popular ways to run Kubernetes on-premises, at the edge, and on IoT devices. So why would you run it on Linode when Linode already offers its own Linode Kubernetes Engine (LKE)?
 

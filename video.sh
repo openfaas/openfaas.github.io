@@ -1,3 +1,7 @@
+# Convert from OBS:
+
+ffmpeg -i input.mkv -codec copy videoplayback.mp4 
+
 # Video size
 
 ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 ./videoplayback.mp4 

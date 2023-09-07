@@ -281,6 +281,8 @@ The `--watch` flag can be used with both the `local-run` and `up` command. Addin
 
 When using `--watch` flag with `faas-cli up` it is recommended to also set `--tag=digest`. This ensures unique image tags are generated for each build. The next section goes into more detail about the `--tag` flag.
 
+<script async id="asciicast-fqJamTOlxOEijhhedMR98tAvL" src="https://asciinema.org/a/fqJamTOlxOEijhhedMR98tAvL.js"></script>
+
 ## Generated image tags
 
 All OpenFaaS functions are built into container images. By default if no image tag is included for a function in the stack.yml file the `:latest` tag is used. When iterating over functions and pushing them to an image registry it is a best practice to organise different image versions using tags instead of always pushing to `:latest`.

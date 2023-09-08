@@ -117,7 +117,7 @@ node18 listening on port: 3000
 2023/09/05 16:00:07 POST / - 200 OK - ContentLength: 96B (0.0353s)
 ```
 
-## Select a port
+## Override the port for local-run
 
 By default the function container publishes port 8080. The `--port` flag can be used to change the port in case you are already port-forwarding the OpenFaaS gateway or when port 8080 is not available for another reason.
 
@@ -131,7 +131,7 @@ This will run the greeter function and make it available on port `3001`.
 curl -i http://127.0.0.1:3001
 ```
 
-## Run multiple functions
+## Run multiple functions with local-run
 
 The local-run command is great for running and testing individual OpenFaaS functions but it can only run a single function at a time.
 
@@ -167,7 +167,7 @@ functions:
   echo:
     lang: node18
     handler: ./echo
-    image: echo:latest 
+    image: ttl.sh/openfaas/echo:latest 
     secrets:
       - api-key
 ```
@@ -281,6 +281,22 @@ The `--watch` flag can be used with both the `local-run` and `up` command. Addin
 
 When using `--watch` flag with `faas-cli up` it is recommended to also set `--tag=digest`. This ensures unique image tags are generated for each build. The next section goes into more detail about the `--tag` flag.
 
+We find it convenient to use the temporary registry [ttl.sh](https://ttl.sh) instead of the Docker Hub for quick testing and prototyping. It's a little slower, however at the same time it doesn't require you to log in and any images you push get deleted after 24 hours.
+
+To configure a registry when you create a new function, set `OPENFAAS_PREFIX`.
+
+To use ttl.sh, without authentication, and temporary images:
+
+```bash
+OPENFAAS_PREFIX=ttl.sh/my-project
+```
+
+To use the [Docker Hub](https://hub.docker.com):
+
+```bash
+OPENFAAS_PREFIX=docker.io/my-user
+```
+
 <script async id="asciicast-fqJamTOlxOEijhhedMR98tAvL" src="https://asciinema.org/a/fqJamTOlxOEijhhedMR98tAvL.js"></script>
 
 ## Generated image tags
@@ -303,9 +319,7 @@ When using the flag `--tag=sha` the image tag used in the stack.yml file is suff
 ```yaml
 functions:
   echo:
-    lang: node18
-    handler: ttl.sh/openfaas/echo
-    image: echo:0.2
+    image: ttl.sh/openfaas/echo:0.2
 ```
 
 For this stack.yml file the resulting image name will be `echo:0.2-cf59cfc`
@@ -327,9 +341,7 @@ Here is an example of a stack.yml file:
 ```yaml
 functions:
   echo:
-    lang: node18
-    handler: ttl.sh/openfaas/echo
-    image: echo:${FN_VERSION:-latest}
+    image: ttl.sh/openfaas/echo:${FN_VERSION:-latest}
 ```
 
 The value of `FN_VERSION` can be set through en environment variable when running commands like `faas-cli up`, `build` or `publish`:

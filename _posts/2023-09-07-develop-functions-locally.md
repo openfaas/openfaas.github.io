@@ -361,7 +361,7 @@ up if your function doesn't have a lot of dependencies.
 
 You may also like:
 
-- [Run a registry on your computer to save on push an pull time](https://docs.openfaas.com/tutorials/local-kind-registry/)
+- [Run a registry on your computer to save on push and pull time](https://docs.openfaas.com/tutorials/local-kind-registry/)
 - [Smart rebuilds and live updates for OpenFaaS functions with Tilt](https://www.openfaas.com/blog/tilt/)
 
 Feel free to tweet to [@openfaas](https://twitter.com/openfaas) with your comments, questions and suggestions.

@@ -89,6 +89,8 @@ Create a topic for testing and name it `faas-request`:
 
 ![Create a topic](/images/2023-09-kafka-confluent/topic.png)
 
+For testing, you could set the partition to a smaller value like 3.
+
 Next we'll configure the Helm chart, and use the topic name in the configuration.
 
 ## Configure and install the Helm Chart

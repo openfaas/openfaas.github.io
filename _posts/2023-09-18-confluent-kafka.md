@@ -1,6 +1,6 @@
 ---
 title: "Trigger your functions from Kafka with Confluent Cloud"
-description: "Confluent's hosted Kafka service is a quick and cost effective to trigger your functions by events."
+description: "Confluent's hosted Kafka service is a quick and cost effective way to trigger your functions by events."
 date: 2023-09-18
 categories:
 - functions
@@ -13,7 +13,7 @@ image: "/images/2023-09-kafka-confluent/background.png"
 hide_header_image: true
 ---
 
-Confluent's hosted Kafka service is a quick and cost effective to trigger your functions by events
+Confluent's hosted Kafka service is a quick and cost effective way to trigger your functions by events
 
 In this walk-through, we'll set up a development account on Confluent Cloud for free access to an [Apache Kafka](https://kafka.apache.org/) cluster suitable for testing and development. We'll then set up the Kafka Connector which is bundled with OpenFaaS Standard to trigger functions on new messages.
 
@@ -26,7 +26,7 @@ Most of the time we see people publishing JSON, however binary and text data are
 
 Instead of managing dozens or hundreds of individual subscriptions between the various replicas of each function, this is managed in the long-lived Kafka connector. This pattern is common across the various connectors including Postgres, AWS SNS/SQS, Cron, etc. In addition to helping manage the number of subscribers per partition, having the subscription managed in a connector means that all functions can be scaled to zero safely.
 
-A connector can subscribe to one or many topics, and then invoke functions based upon the messages it receives. The connector is stateless, and can be scaled up or down to match the number of partitions in the topic. If it happens to crash, it'll pick up again from the last offset that was committed to the partition.
+[An OpenFaaS event connector](https://docs.openfaas.com/reference/triggers/) can subscribe to one or many topics, and then invoke functions based upon the messages it receives. The connector is stateless, and can be scaled up or down to match the number of partitions in the topic. If it happens to crash, it'll pick up again from the last offset that was committed to the partition.
 
 Once a connector is deployed and subscribed to one or more topics, then all you need to do is to update a function with an extra annotation. So if you added the `topic: payment.created` annotation to the `new-payment` function, from there on it would be invoked with the payload of every message that was published to the `payment.created` topic.
 
@@ -73,13 +73,13 @@ Click *Cluster Overview*, then *API Keys* and *Create Key*
 
 For testing, Confluent recommend using the *Global access* key.
 
-Save the Key as "kafka-broker-username.txt"
+Save the Key as `kafka-broker-username.txt`
 
-Save the Secret as "kafka-broker-password.txt"
+Save the Secret as `kafka-broker-password.txt`
 
 Add a description such as "openfaas" or "kafka-connector"
 
-Next, click *Cluster Settings, and under *Endpoints* copy the *Bootstrap server* value.
+Next, click *Cluster Settings*, and under *Endpoints* copy the *Bootstrap server* value.
 
 This will look like `pkc-l6wr6.europe-west2.gcp.confluent.cloud:9092`.
 
@@ -104,10 +104,10 @@ helm repo update
 
 The [Helm Chart for the Kafka Connector](https://github.com/openfaas/faas-netes/tree/master/chart/kafka-connector) can be installed in two ways:
 
-1) Once per topic - more scalable, with a bit more setup
-2) Once with many topics - less scalable, but easier to get started
+1. Once per topic - more scalable, with a bit more setup
+2. Once with many topics - less scalable, but easier to get started
 
-All settings are configured through a values.yaml file, and the end of the [README file](https://github.com/openfaas/faas-netes/tree/master/chart/kafka-connector) has a reference explaining all the various options.
+All settings are configured through a values.yaml file, and the end of the [README file](https://github.com/openfaas/faas-netes/tree/master/chart/kafka-connector#configuration) has a reference explaining all the various options.
 
 Now create a values.yaml file, and add each of the below sections:
 

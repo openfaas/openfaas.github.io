@@ -333,6 +333,8 @@ We've now configured a development Kafka cluster on Confluent Cloud, which shoul
 
 **Scaling and retries**
 
+> "The rule in Kafka is a maximum of 1 consumer per partition (as each partition must only be allocated to 1 consumer), so you can only have as many consumers (in a single consumer group) as there are partitions for a topic, but you can also have less." [instacluster by NetApp](https://www.instaclustr.com/blog/kafka-parallel-consumer-part-1/#:~:text=The%20rule%20in%20Kafka%20is,you%20can%20also%20have%20less.)
+
 We recommend installing the connector once per topic for production use, changing the Helm installation so that you can have multiple instances of the connector running in the same cluster. Then scale the Kafka connector deployment to match the size of the partition.
 
 So if the `faas-request` topic has 3 partitions, then you should have 3 replicas of the Kafka connector running. The replicas can be set in the *values.yaml* file or by running `kubectl scale -n openfaas deploy/kafka-connector --replicas=3`.

@@ -363,7 +363,7 @@ You can learn how to deploy OpenFaaS to Kubernetes and build functions and micro
 
 The OpenFaaS community values are: developers-first, operational simplicity, and community-centric.
 
-If you have comments, questions or suggestions or would like to join the community, then please [join us on OpenFaaS Slack](https://docs.openfaas.com/community/).
+If you have comments, questions or suggestions or would like to join the community, then please [join us on the weekly Office Hours call](https://docs.openfaas.com/community/).
 
 You can [follow me @alexellisuk](https://twitter.com/alexellisuk/) and [@openfaas on Twitter](https://twitter.com/openfaas/)
 

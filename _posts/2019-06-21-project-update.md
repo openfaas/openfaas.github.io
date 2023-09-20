@@ -112,7 +112,7 @@ I hope you enjoyed the video and my personal highlights from 2019. You can get c
 
 ### Connect
 
-If you have comments, questions or suggestions or would like to join the community, then please [join us on OpenFaaS Slack](https://docs.openfaas.com/community/).
+If you have comments, questions or suggestions or would like to join the community, then please [join us on the weekly Office Hours call](https://docs.openfaas.com/community/).
 
 You can follow [@openfaas on Twitter](https://twitter.com/openfaas/)
 

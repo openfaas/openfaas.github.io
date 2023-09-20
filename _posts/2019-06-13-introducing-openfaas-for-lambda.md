@@ -199,7 +199,7 @@ To register your interest and give feedback sign-up below:
 
 Are you using OpenFaaS in production? [Join the end-user community](https://github.com/openfaas/faas/issues/776) or [sponsor the project](https://www.openfaas.com/support/) to give back. Financial backing is required to ensure its on-going.
 
-If you have comments, questions or suggestions or would like to join the community, then please [join us on OpenFaaS Slack](https://docs.openfaas.com/community/).
+If you have comments, questions or suggestions or would like to join the community, then please [join us on the weekly Office Hours call](https://docs.openfaas.com/community/).
 
 You can follow [@openfaas on Twitter](https://twitter.com/openfaas/)
 

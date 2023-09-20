@@ -222,7 +222,7 @@ We took an OpenFaaS function and without making any code or configuration change
 
 Going forward you can continue to leverage OpenFaaS on any cloud - private, hybrid or public through OpenFaaS on Kubernetes, but today marks the day where OpenFaaS is so portable, that it even works on proprietary SaaS platforms. The Cloud Run and Knative approach to serverless containers mirrors very closely the design I outlined over two and a half years ago. There are however there are key differences in implementation, design and target audience between Knative project and the OpenFaaS community. In this post we built and packaged code with the OpenFaaS CLI and build templates and in my opinion that is a good place for Serverless 2.0 to start to converge. It takes much more than building and running container images to become a successful Open Source serverless project, to find out more about OpenFaaS read my post: [a bright future for 2019](https://blog.alexellis.io/openfaas-bright-2019/).
 
-The OpenFaaS community values are: developers-first, operational simplicity, and community-centric. If you have comments, questions or suggestions or would like to join the community, then please [join us on OpenFaaS Slack](https://docs.openfaas.com/community/).
+The OpenFaaS community values are: developers-first, operational simplicity, and community-centric. If you have comments, questions or suggestions or would like to join the community, then please [join us on the weekly Office Hours call](https://docs.openfaas.com/community/).
 
 You can [follow me @alexellisuk](https://twitter.com/alexellisuk/) and [@openfaas on Twitter](https://twitter.com/openfaas/)
 

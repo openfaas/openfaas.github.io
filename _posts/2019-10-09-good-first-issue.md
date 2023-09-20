@@ -129,7 +129,7 @@ Many thanks to [@alexellisuk](https://twitter.com/alexellisuk/) for helping me w
 
 The OpenFaaS community values are: developers-first, operational simplicity, and community-centric.
 
-If you have comments, questions or suggestions or would like to join the community, then please [join us on OpenFaaS Slack](https://docs.openfaas.com/community/).
+If you have comments, questions or suggestions or would like to join the community, then please [join us on the weekly Office Hours call](https://docs.openfaas.com/community/).
 
 You can [follow me @alexellisuk](https://twitter.com/alexellisuk/) and [@openfaas on Twitter](https://twitter.com/openfaas/)
 

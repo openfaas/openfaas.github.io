@@ -127,7 +127,7 @@ If you're experienced with OpenFaaS, then perhaps you'd like to stand-up your ow
 
 I've shared my 5 top tips for getting to grips with Serverless on Kubernetes. I hope you'll enjoy the material and projects as much as we have enjoyed building, testing and refining them over the past 2.5 years.
 
-If you have comments, questions or suggestions or would like to join the community, then please [join us on OpenFaaS Slack](https://docs.openfaas.com/community/).
+If you have comments, questions or suggestions or would like to join the community, then please [join us on the weekly Office Hours call](https://docs.openfaas.com/community/).
 
 You can [follow me @alexellisuk](https://twitter.com/alexellisuk/) and [@openfaas on Twitter](https://twitter.com/openfaas/)
 

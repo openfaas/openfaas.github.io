@@ -130,10 +130,12 @@ Your function's handler will receive the message as the body of the HTTP request
 Next add the address of the Kafka Cluster or Broker:
 
 ```yaml
-brokerAddress: pkc-l6wr6.europe-west2.gcp.confluent.cloud:9092
+brokerHosts: pkc-l6wr6.europe-west2.gcp.confluent.cloud:9092
 ```
 
-Makes ure you change this value, do not use the above value, which is from our own test cluster.
+> If you have more than one bootstrap server in the cluster, you can specify each in a comma-separated list.
+
+Make sure you change this value, do not use the above value, which is from our own test cluster.
 
 Since we know that both TLS and SASL are enabled on Confluent Cloud, we should now add:
 

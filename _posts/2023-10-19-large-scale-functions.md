@@ -29,7 +29,7 @@ First of all, I should explain that we are only aware of 2-3 users running over 
 
 In addition, with OpenFaaS running on top of Kubernetes, we have to provision a whole node for every 100-110 containers that are provisioned, including control-plane, service mesh and networking. So for 3000 functions, you need at least 30 nodes.
 
-We all know that clusters are slow to create on a platform like AWS EKS, and then adding nodes can take a good 3-5 minutes each. I did a calculation with the AWS cost estimator and to get to 3500 functions, you'd probably be looking at a spend of 1500 USD / mo in infrastructure costs alone.
+We all know that clusters are slow to create on a platform like [AWS Elastic Kubernetes Service (EKS)](https://aws.amazon.com/eks/), and then adding nodes can take a good 3-5 minutes each. I did a calculation with the AWS cost estimator and to get to 3500 functions, you'd probably be looking at a spend of 1500 USD / mo in infrastructure costs alone.
 
 **How did we find the problem?**
 

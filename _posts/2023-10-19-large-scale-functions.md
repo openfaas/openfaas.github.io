@@ -107,14 +107,6 @@ There was one other change that I made to k3sup, whenever you join a new node in
 
 That overwhelmed the server when I ran all 120 `k3sup join` commands at once, so now `k3sup node-token` will get the token, either into a file or into memory, and can then be passed in via `k3sup join --node-token`.
 
-## Show me the Functions
-
-After having got to 6500 functions without any issues on my own hardware at home, I decided to go large for the weekly Community Call where we deployed 15k functions across 3 different namespaces, with 5000 in each.
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/Bj7qQWIuhXE?si=H94WGBF-kVrOKiqw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-
-[Watch the live demo on YouTube](https://www.youtube.com/watch?v=Bj7qQWIuhXE)
-
 ## What did we change in OpenFaaS?
 
 **Leader election**
@@ -199,6 +191,14 @@ Previously, if a Function CR had been created, but not yet reconciled, then the 
 The same is the case for when a function is deployed via REST API, we used to print out a message saying "Deploying function X". Well, that's very noisy when you are trying to create 150000 functions in a short period of time.
 
 Lastly, whenever a function was invoked, we printed out the duration of the execution. We removed the noise, because printing a log statement for each invocation only increases the noise for log aggregators like Loki or Elasticsearch. Imagine how many useless log lines you would have seen from a load test over 5 minutes with 100 concurrent callers?
+
+## Show me the Functions
+
+After having got to 6500 functions without any issues on my own hardware at home, I decided to go large for the [weekly Community Call](https://docs.openfaas.com/community) where we deployed 15k functions across 3 different namespaces, with 5000 in each.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Bj7qQWIuhXE?si=H94WGBF-kVrOKiqw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+[Watch the live demo on YouTube](https://www.youtube.com/watch?v=Bj7qQWIuhXE)
 
 ## What's next?
 

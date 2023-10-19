@@ -208,7 +208,9 @@ Not only have we fixed the customer issue where the operator seemed to "lock-up"
 
 Patchworks partners include: Gymshark, Huel, Lounge, Cluse and HermanMiller amongst others.
 
-Conor Barr, Chief Technology Officer at Patchworks had to say about the results we got for them:
+[Conor Barr](https://www.linkedin.com/in/conor-barr-ab176227/), Chief Technology Officer at Patchworks had to say about the results we got for them:
+
+> "OpenFaaS is now a core part of our platform, running thousands of customer functions as and when required to integrate different e-commerce products, which usually cannot talk to each other"
 
 > "We've consistently had top class support from Alex and his team whenever we've had a question or a need that goes outside of the standard offering. We're really happy with the results that the team have got for us, and are looking forward to being able to scale to even larger numbers of customer functions with peace of mind."
 

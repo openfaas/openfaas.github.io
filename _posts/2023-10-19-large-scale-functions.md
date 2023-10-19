@@ -9,7 +9,7 @@ categories:
 - hosting
 dark_background: true
 author_staff_member: alex
-# image: "/images/2023-09-kafka-confluent/background.png"
+image: "/images/2023-10-scale-operator/background.jpg"
 hide_header_image: true
 ---
 
@@ -106,6 +106,14 @@ The public IP of the server was then used in the `k3sup plan` command via the `-
 There was one other change that I made to k3sup, whenever you join a new node into the cluster, the command first makes an SSH connection to the server to download the "node join token", then keeps it in memory and uses it to run an SSH command on the new node.
 
 That overwhelmed the server when I ran all 120 `k3sup join` commands at once, so now `k3sup node-token` will get the token, either into a file or into memory, and can then be passed in via `k3sup join --node-token`.
+
+## Show me the Functions
+
+After having got to 6500 functions without any issues on my own hardware at home, I decided to go large for the weekly Community Call where we deployed 15k functions across 3 different namespaces, with 5000 in each.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Bj7qQWIuhXE?si=H94WGBF-kVrOKiqw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+[Watch the live demo on YouTube](https://www.youtube.com/watch?v=Bj7qQWIuhXE)
 
 ## What did we change in OpenFaaS?
 

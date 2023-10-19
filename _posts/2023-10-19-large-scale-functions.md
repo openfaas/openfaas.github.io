@@ -216,6 +216,10 @@ Patchworks partners include: Gymshark, Huel, Lounge, Cluse and HermanMiller amon
 
 The updated operator has already been released for OpenFaaS Standard and OpenFaaS for Enterprise customers. You don't have to be running at massive scale to update and get these enhancements.
 
+Kevin Surge, Principal Engineer at workwithsurge.com and an OpenFaaS Standard customer said:
+
+> "The amount of work that has gone into OpenFaaS over the years to support customers is incredible. Good job, really well done."
+
 Just upgrade your Helm chart to get the latest changes, and if you'd like to use leader election, see the notes earlier in this post or in the values.yaml file under the `operator` section.
 
 **Do you also need to test at scale - efficiently?**

@@ -202,9 +202,13 @@ After having got to 6500 functions without any issues on my own hardware at home
 
 ## What's next?
 
+Not only have we fixed the customer issue where the operator seemed to "lock-up" at 3500, functions, but with the knowledge gained by writing actuated, we were able to test 15000 functions in a cost efficient manner using bare-metal hosts on Equinix Metal.
+
 The updated operator has already been released for OpenFaaS Standard and OpenFaaS for Enterprise customers. You don't have to be running at massive scale to update and get these enhancements.
 
-Not only have we fixed the customer issue where the operator seemed to "lock-up" at 3500, functions, but with the knowledge gained by writing actuated, we were able to test 15000 functions in a cost efficient manner using bare-metal hosts on Equinix Metal.
+Just upgrade your Helm chart to get the latest changes, and if you'd like to use leader election, see the notes earlier in this post or in the values.yaml file under the `operator` section.
+
+**Do you also need to test at scale - efficiently?**
 
 How are you testing your Kubernetes software at massive scale? Do you just run up a 2-3k USD / mo bill and hope that your boss won't mind? Maybe you are the boss, wouldn't it be nice to have a long term large test environment always on hand? If you think you'd benefit from the "slicer" tool I built as part of this support case, please feel free to reach out to me directly.
 

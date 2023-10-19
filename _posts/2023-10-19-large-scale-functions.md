@@ -206,7 +206,7 @@ The updated operator has already been released for OpenFaaS Standard and OpenFaa
 
 Not only have we fixed the customer issue where the operator seemed to "lock-up" at 3500, functions, but with the knowledge gained by writing actuated, we were able to test 15000 functions in a cost efficient manner using bare-metal hosts on Equinix Metal.
 
-How are you testing your Kubernetes software at massive scale? Do you just run up a 2-3k USD / mo bill and hope that your higher-ups mind? If you think you'd benefit from the slicer tool I built as part of this support case, please feel free to reach out to me directly.
+How are you testing your Kubernetes software at massive scale? Do you just run up a 2-3k USD / mo bill and hope that your boss won't mind? Maybe you are the boss, wouldn't it be nice to have a long term large test environment always on hand? If you think you'd benefit from the "slicer" tool I built as part of this support case, please feel free to reach out to me directly.
 
 Example slicer config for 3x servers and 10x workers on a machine with 128GB of RAM and 64 threads.
 

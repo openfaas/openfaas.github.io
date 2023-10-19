@@ -37,7 +37,7 @@ The problem was finally found after spending after building over a week of optim
 
 ## Building the test rig
 
-I started off by looking to hardware that I already owned, my PC has a Ryzen 9 with 16C/32T and behind me sits the Ampere Dev Platform with 64C and 64 RAM. I paid 500 USD to upgrade the Ampere box to 128GB RAM to look into the customer issue.
+I started off by looking to hardware that I already owned, my PC has an AMD Ryzen 9 with 16C/32T and behind me sits the [Ampere Developer Platform](https://www.ipi.wiki/products/ampere-altra-developer-platform) with 64C and 64 RAM. I paid 500 USD to upgrade the Ampere box to 128GB RAM to look into the customer issue.
 
 The container limit of 110 per Kubernetes node means that even if you have a bare-metal machine like this, it's largely wasted, unless you are running a few very very large Pods.
 
@@ -204,6 +204,14 @@ After having got to 6500 functions without any issues on my own hardware at home
 
 Not only have we fixed the customer issue where the operator seemed to "lock-up" at 3500, functions, but with the knowledge gained by writing actuated, we were able to test 15000 functions in a cost efficient manner using bare-metal hosts on Equinix Metal.
 
+[Patchworks](https://www.wearepatchworks.com/) offer an e-commerce platform, where customers can supply PHP functions to run within OpenFaaS. These functions are invoked in response to live events and for periodic batch jobs. An example might be, taking sales from a WordPress site and pushing them into Salesforce.
+
+Patchworks partners include: Gymshark, Huel, Lounge, Cluse and HermanMiller amongst others.
+
+Conor Barr, Chief Technology Officer at Patchworks had to say about the results we got for them:
+
+> "We've consistently had top class support from Alex and his team whenever we've had a question or a need that goes outside of the standard offering. We're really happy with the results that the team have got for us, and are looking forward to being able to scale to even larger numbers of customer functions with peace of mind."
+
 The updated operator has already been released for OpenFaaS Standard and OpenFaaS for Enterprise customers. You don't have to be running at massive scale to update and get these enhancements.
 
 Just upgrade your Helm chart to get the latest changes, and if you'd like to use leader election, see the notes earlier in this post or in the values.yaml file under the `operator` section.
@@ -231,3 +239,6 @@ config:
     ram_gb: 8
   # RAM = 80, vCPU = 20
 ```
+
+> Disclosure: Ampere Computing provided me with the Ampere Developer Platform at no cost, for evaluation and for open source enablement. Ampere Computing are also a customer of our secure CI/CD platform [actuated.dev](https://actuated.dev).
+

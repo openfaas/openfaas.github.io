@@ -13,7 +13,7 @@ image: "/images/2023-10-scale-operator/background.jpg"
 hide_header_image: true
 ---
 
-Scaling to 15000 functions and beyond
+Learn what changes we made to help a customer scale to 15000 functions and beyond.
 
 ## Introduction
 

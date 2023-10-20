@@ -21,9 +21,9 @@ In this post I'll give an overview of what we learned spending a week investigat
 
 If you've ever written software, which other people install and support, then you'll know how difficult and time-consuming it can be to debug and diagnose problems remotely. In this case it was no different, with our team spending over a week of R&D trying to reproduce the problem, pin-point the cause, and remediate it.
 
-> "We have noticed a slow down in function provisioning. We get up to around 3500 functions, then there's a delay of up to 15 minutes or longer, before new Functions get turned into Deployments"
+> "We reached out to Alex's team about a week ago about an issue we'd seen in staging, whilst trying to scale to beyond 3500 custom PHP functions. Alex's team went above and beyond to not only find the root cause and fix it, but to ship a patch to us that resolved the issue completely."
 > 
-> Andrew Downey, Head of Development at Patchworks. 
+> [Conor Barr](https://www.linkedin.com/in/conor-barr-ab176227/), Chief Technology Officer at Patchworks had to say about the results we got for them:
 
 What would be your first thought, if you got an email like that? You'll see my thought process, and input from the OpenFaaS community reflected in this post.
 

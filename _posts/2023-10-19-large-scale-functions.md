@@ -227,19 +227,11 @@ See also: [Multiple namespaces](https://docs.openfaas.com/reference/namespaces/)
 
 Not only have we fixed the customer issue where the operator seemed to "lock-up" at 3500, functions, but with the knowledge gained by writing actuated, we were able to test 15000 functions in a cost efficient manner using bare-metal hosts on Equinix Metal.
 
-[Patchworks](https://www.wearepatchworks.com/) offer an e-commerce platform, where customers can supply PHP functions to run within OpenFaaS. These functions are invoked in response to live events and for periodic batch jobs. An example might be, taking sales from a WordPress site and pushing them into Salesforce.
-
-Patchworks partners include: Gymshark, Huel, Lounge, Cluse and HermanMiller amongst others.
-
-[Conor Barr](https://www.linkedin.com/in/conor-barr-ab176227/), Chief Technology Officer at Patchworks had to say about the results we got for them:
-
-> "OpenFaaS is now a core part of our platform, running thousands of customer functions as and when required to integrate different e-commerce products, which usually cannot talk to each other"
-
-> "We've consistently had top class support from Alex and his team whenever we've had a question or a need that goes outside of the standard offering. We're really happy with the results that the team have got for us, and are looking forward to being able to scale to even larger numbers of customer functions with peace of mind."
-
 The updated operator has already been released for OpenFaaS Standard and OpenFaaS for Enterprise customers. You don't have to be running at massive scale to update and get these enhancements.
 
-Kevin Lindsay, Principal Engineer at workwithsurge.com and an OpenFaaS Standard customer said:
+Kevin, mentioned earlier runs OpenFaaS with much fewer functions, but with a heavier load.
+
+When he saw the video on the community call he remarked:
 
 > "The amount of work that has gone into OpenFaaS over the years to support customers is incredible. Good job, really well done."
 

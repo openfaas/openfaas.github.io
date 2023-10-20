@@ -21,9 +21,7 @@ In this post I'll give an overview of what we learned spending a week investigat
 
 If you've ever written software, which other people install and support, then you'll know how difficult and time-consuming it can be to debug and diagnose problems remotely. In this case it was no different, with our team spending over a week of R&D trying to reproduce the problem, pin-point the cause, and remediate it.
 
-> "We reached out to Alex's team about a week ago about an issue we'd seen in staging, whilst trying to scale to beyond 3500 custom PHP functions. Alex's team went above and beyond to not only find the root cause and fix it, but to ship a patch to us that resolved the issue completely."
-> 
-> [Conor Barr](https://www.linkedin.com/in/conor-barr-ab176227/), Chief Technology Officer at Patchworks had to say about the results we got for them:
+We had a support request from a customer that was running more functions than the typical team, so we decided to take a look at the problem and see what we could do to help them out.
 
 In this post, you'll see my thought process, and input from the OpenFaaS and Kubernetes community. Thanks to everyone who made suggestions or the problem over with me.
 

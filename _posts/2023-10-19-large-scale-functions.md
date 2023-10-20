@@ -21,9 +21,17 @@ In this post I'll give an overview of what we learned spending a week investigat
 
 If you've ever written software, which other people install and support, then you'll know how difficult and time-consuming it can be to debug and diagnose problems remotely. In this case it was no different, with our team spending over a week of R&D trying to reproduce the problem, pin-point the cause, and remediate it.
 
+> "We have noticed a slow down in function provisioning. We get up to around 3500 functions, then there's a delay of up to 15 minutes or longer, before new Functions get turned into Deployments"
+> 
+> Andrew Downey, Head of Development at Patchworks. 
+
+What would be your first thought, if you got an email like that? You'll see my thought process, and input from the OpenFaaS community reflected in this post.
+
 **How many functions is a normal amount?**
 
-First of all, I should explain that we are only aware of 2-3 users running over 2000-3000 functions in production, so this is more of an edge case than the norm for OpenFaaS teams. It's not that we discourage large scale, or function hosting, it's just that OpenFaaS is popular with individual project teams who have a modest number of functions. So, teams that I've talked to over the years, tend to run with 2-5 dozen functions, with a number of others well below the 3000 mark.
+First of all, I should explain that we are only aware of a handful of users running over 1000 functions in a single cluster in production, so this is more of an edge case than the norm for OpenFaaS teams. It's not that we discourage large scale, or function hosting, it's just that OpenFaaS is popular with individual project teams who have a modest number of functions.
+
+So, teams that I've talked to over the years, tend to run with 2-5 dozen functions, with a number of others well below the 3000 mark.
 
 **What does it cost to test at scale?**
 
@@ -37,26 +45,26 @@ The problem was finally found after spending over a week building  optimizations
 
 ## Building the test rig
 
-I started off by looking to hardware that I already owned, my PC has an AMD Ryzen 9 with 16C/32T and behind me sits the [Ampere Developer Platform](https://www.ipi.wiki/products/ampere-altra-developer-platform) with 64C and 64 RAM. I paid 500 USD to upgrade the Ampere box to 128GB RAM to look into the customer issue.
+I started off by looking to hardware that I already owned. My workstation runs Linux and has an AMD Ryzen 9 5950x with 16C/32T with 128GB of RAM. Then, behind me sits the [Ampere Developer Platform](https://www.ipi.wiki/products/ampere-altra-developer-platform) with 64C and 64 RAM. I paid an additional 500 USD to upgrade the Ampere machine to 128GB RAM in order to recreate the customer issue.
 
-The container limit of 110 per Kubernetes node means that even if you have a bare-metal machine like this, it's largely wasted, unless you are running a few very very large Pods.
+The container limit of 110 per Kubernetes node means that even if you have a bare-metal machine like this, it's largely wasted, unless you are running a few very large Pods.
 
 **Could existing testing solutions help?**
 
-A friend mentioned the community project adopted by a sig called [Kubernetes WithOut Kubelet (KWOK)](https://github.com/kubernetes-sigs/kwok).
+A friend mentioned the community project [Kubernetes WithOut Kubelet (KWOK)](https://github.com/kubernetes-sigs/kwok) as a potential option.
 
 I did some initial testing here, and showed my work, for numerous reasons, it did not work for this use-case.
 
 You can read the thread here, if interested: [Testing an Operator with KWOK](https://x.com/alexellisuk/status/1714991884970455203?s=20).
 
-**Could we slice up bare-metal?**
+**Could we slice up the bare-metal?**
 
-So what to do? My first instinct was to use multipass, a tool that we've been using for faasd development and for testing K3s, to create 30 VMs on each machine, combining them to get a 60 node cluster, which would allow for going up to at least 6000 functions, 2x over where the customer's cluster was stalling.
+So what to do? My first instinct was to use multipass, a tool that we've been using for [faasd development](https://blog.alexellis.io/containerd-development-multipass/) and for testing K3s, to create 30 VMs on each machine, combining them to get a 60 node cluster, which would allow for going up to at least 6000 functions, 2x over where the customer's cluster was stalling.
 
 [![Ampere Dev Platform](https://pbs.twimg.com/media/F8VsrYwWYAA7hUz?format=jpg&name=large)](https://twitter.com/alexellisuk/status/1712894730994901492/)
-> [The initial test rig, The Ampere Dev Platform by ADLINK](https://twitter.com/alexellisuk/status/1712894730994901492/)
+> [the Ampere Dev Platform by ADLINK was used for initial testing](https://twitter.com/alexellisuk/status/1712894730994901492/)
 
-Multipass created 10 nodes in about 10 minutes, then when I the command to list VMs, it took about 60s to return the results. I knew that this was not a direction I wanted to go in.
+Multipass created 10 nodes in about 15 minutes, then when I the command to list VMs, it took about 60s to return the results. I knew that this was not a direction I wanted to go in.
 
 Having written actuated over a year ago, to launch Firecracker VMs for GitLab CI and GitHub Actions jobs, I knew that I could get a workable platform together in 2 days to convert the bare-metal machines into dozens of VMs. So that's what I did.
 
@@ -77,16 +85,18 @@ My configuration was for 5x servers using 16GB of RAM and 8vCPU each, and then t
 
 **Put some K3sup (ketchup) on it**
 
-As the author and maintainer of [K3sup](https://k3sup.dev), I knew that K3s would be a really quick way to build out a HA cluster with multiple servers and agents, but I also knew that it was CLI-driven and lacked any automation.
+As the author and maintainer of [K3sup](https://k3sup.dev), I knew that K3s would be a really quick way to build out a High Availability (HA) Kubernetes cluster with multiple servers and agents. K3sup is a CLI command with an install and join command which are expected to be used against a single host at a time. There needed to be a way to make this more practical for 60-120 VMs.
 
-That's where `k3sup plan` came into being. My slicer tool can emit a JSON file with the hostname and IP address of its VMs. I took that file from all four servers, combined it into a single file, then ran the new `plan` command.
+That's where `k3sup plan` came into being. My slicer tool can emit a JSON file with the hostname and IP address of its VMs. I took that file from all four servers, combined it into a single file, then ran the new command. The command generates a bash script against each of the VMs, allocating a set value to act as servers via a `--servers` flag. The output can then be run using the existing k3sup commands.
 
 [![A new k3sup plan command](https://pbs.twimg.com/media/F8KoE4QWAAEjCi1?format=jpg&name=4096x4096)](https://twitter.com/alexellisuk/status/1712117186347593751)
 > A new k3sup plan command for creating huge clusters
 
+This command may make it into the k3sup repository, but I'm still iterating on it. Let me know if it's something you'd be interested in.
+
 **Load balancing the server VMs**
 
-The 5x server nodes will load balance the API server, but are only accessible within a private network on the Equinix Metal servers, so I used a TCP load-balancer ([mixctl](https://github.com/inlets/mixctl)) to expose the private IPs via the server's public IP:
+The 5x server VMs will load balance the API server, but are only accessible within a private network on the Equinix Metal servers, so I used a TCP load-balancer ([mixctl](https://github.com/inlets/mixctl)) to expose the private IPs via the server's public IP:
 
 *rules.yaml:*
 
@@ -170,11 +180,11 @@ nodeinfo-9ngtv   IPv4          8080    10.244.0.165   8s
 $ kubectl get endpointslice/nodeinfo-9ngtv -n openfaas-fn -o yaml
 ```
 
-In this case, there were 5x endpoints that would have to be fetched from the API, but only one EndpointSlice, making it more efficient to keep in sync.
+In this case, there were 5x endpoints that would have to be fetched from the API, but only one EndpointSlice, making it more efficient to keep in sync as functions scale up and down.
 
 **API reads are now cached**
 
-There were 2-3 other places where API calls were being made during reconciliation or in the API, where we could switch to an informer instead, so we've done that and it means already reconciled functions pass through the sync handler in 0ms.
+There were 2-3 other places where direct API calls were being made during the reconciliation loop or in the HTTP API. For read operations, using a cached informer is more efficient. So we've done that and it means already reconciled functions pass through the sync handler in 0ms.
 
 You'll see a new log message upon start-up such as:
 
@@ -183,11 +193,13 @@ Waiting for caches to sync for faas-netes:EndpointSlices
 Waiting for caches to sync for faas-netes:Service
 ```
 
+Once the initial cache is filled, a Kubernetes watch picks up any changes and keeps the cache up to date.
+
 **Many log messages have been removed**
 
-We took the verbosity down a level.
+We took the verbosity down a notch or two.
 
-Previously, if a Function CR had been created, but not yet reconciled, then the logs for the operator would have printed a message saying the Deployment was not available, whenever a component tried to list functions. That was noise that we just didn't need so it was taken away.
+With previous versions, if a Function CR had been created, but not yet reconciled, then the logs for the operator would have printed a message saying the Deployment was not available, whenever a component tried to list functions. That was noise that we just didn't need so it was taken away.
 
 The same is the case for when a function is deployed via REST API, we used to print out a message saying "Deploying function X". Well, that's very noisy when you are trying to create 15000 functions in a short period of time.
 
@@ -200,6 +212,8 @@ After having got to 6500 functions without any issues on my own hardware at home
 <iframe width="560" height="315" src="https://www.youtube.com/embed/Bj7qQWIuhXE?si=H94WGBF-kVrOKiqw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 [Watch the live demo on YouTube](https://www.youtube.com/watch?v=Bj7qQWIuhXE)
+
+See also: [Multiple namespaces](https://docs.openfaas.com/reference/namespaces/)
 
 ## What's next?
 
@@ -223,9 +237,17 @@ Kevin Surge, Principal Engineer at workwithsurge.com and an OpenFaaS Standard cu
 
 Just upgrade your Helm chart to get the latest changes, and if you'd like to use leader election, see the notes earlier in this post or in the values.yaml file under the `operator` section.
 
+You may also like:
+
+* [Build a Multi-Tenant Functions Platform with OpenFaaS](https://www.openfaas.com/blog/build-a-multi-tenant-functions-platform/)
+* [How and why you should upgrade to the Function Custom Resource Definition (CRD)](https://www.openfaas.com/blog/upgrade-to-the-function-crd/)
+* [Meet the next-gen dashboard we built for OpenFaaS in production](https://www.openfaas.com/blog/openfaas-dashboard/)
+
 **Do you also need to test at scale - efficiently?**
 
-How are you testing your Kubernetes software at massive scale? Do you just run up a 2-3k USD / mo bill and hope that your boss won't mind? Maybe you are the boss, wouldn't it be nice to have a long term large test environment always on hand? If you think you'd benefit from the "slicer" tool I built as part of this support case, please feel free to reach out to me directly.
+How are you testing your Kubernetes software at massive scale? Do you just run up a 2-3k USD / mo bill and hope that your boss won't mind? Maybe you are the boss, wouldn't it be nice to have a long term large test environment always on hand?
+
+If you think you'd benefit from the "slicer" tool I built as part of this support case, please feel free to reach out to me directly.
 
 Example slicer config for 3x servers and 10x workers on a machine with 128GB of RAM and 64 threads.
 
@@ -246,6 +268,4 @@ config:
     ram_gb: 8
   # RAM = 80, vCPU = 20
 ```
-
-> Disclosure: Ampere Computing provided me with the Ampere Developer Platform at no cost, for evaluation and for open source enablement. Ampere Computing are also a customer of our secure CI/CD platform [actuated.dev](https://actuated.dev).
-
+> Disclosure: Ampere Computing provided me with the Ampere Developer Platform at no cost, for evaluation and for open source enablement. Ampere Computing is a customer of our secure CI/CD platform [actuated.dev](https://actuated.dev).

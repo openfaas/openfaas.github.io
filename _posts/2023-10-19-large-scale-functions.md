@@ -259,6 +259,8 @@ How are you testing your Kubernetes software at massive scale? Do you just run u
 
 If you think you'd benefit from the "slicer" tool I built as part of this support case, please feel free to reach out to me directly.
 
+Here's a separate video explaining how the [slicer works with k3sup plan](https://www.youtube.com/watch?v=o4UxRw-Cc8c).
+
 Example slicer config for 3x servers and 10x workers on a machine with 128GB of RAM and 64 threads.
 
 ```yaml

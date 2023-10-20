@@ -25,7 +25,7 @@ If you've ever written software, which other people install and support, then yo
 > 
 > [Conor Barr](https://www.linkedin.com/in/conor-barr-ab176227/), Chief Technology Officer at Patchworks had to say about the results we got for them:
 
-What would be your first thought, if you got an email like that? You'll see my thought process, and input from the OpenFaaS community reflected in this post.
+In this post, you'll see my thought process, and input from the OpenFaaS and Kubernetes community. Thanks to everyone who made suggestions or the problem over with me.
 
 **How many functions is a normal amount?**
 

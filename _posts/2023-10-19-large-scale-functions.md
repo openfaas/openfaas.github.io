@@ -29,9 +29,19 @@ What would be your first thought, if you got an email like that? You'll see my t
 
 **How many functions is a normal amount?**
 
-First of all, I should explain that we are only aware of a handful of users running over 1000 functions in a single cluster in production, so this is more of an edge case than the norm for OpenFaaS teams. It's not that we discourage large scale, or function hosting, it's just that OpenFaaS is popular with individual project teams who have a modest number of functions.
+You may be tempted think of "serverless" through the lens of a cloud hosting company like AWS, Google Cloud or Azure, and their large scale multi-tenant products. With that perspective, it's tempting to think that every other functions platform should work in exactly the same way, and at the same scale, going up to millions of functions per installation.
 
-So, teams that I've talked to over the years, tend to run with 2-5 dozen functions, with a number of others well below the 3000 mark.
+We should perhaps pause and understand the [target user for OpenFaaS](https://github.com/openfaas/faas/blob/master/ADOPTERS.md), which is largely self-selecting and made up of individual product teams.
+
+We are aware of a handful of users running thousands of functions in production, usually as part of a system to [provide customers with a sandbox for custom code](https://www.openfaas.com/blog/build-a-multi-tenant-functions-platform/). More recently, we've started to work with ISPs around the world who want to bring a functions experience to their platform, but even there, uptake takes time, and may never quite hit the numbers of a large cloud company.
+
+Most users adopt OpenFaaS for portability, to be able to install on different clouds or directly onto customer hardware, for cost optimisation vs hosted functions, or in the case of Surge, because the of all the effort that's been spent on the developer experience. You can build, test and debug functions on your laptop with the same experience as you'd get in production.
+
+> "OpenFaaS has been insanely productive for our business. The ability to run the whole stack locally is really important for our developers, and the async system based upon NATS JetStream means we can fire off our jobs and forget about them. We're now turning to Kubernetes deployments and converting them into functions."
+
+> [Kevin Lindsay, Principal Engineer at workwithsurge.com](https://www.linkedin.com/in/kevin-lindsay-16a740160/)
+
+So it's not that we discourage large scale, or function hosting, we are seeing growing customer interest there, it's just that OpenFaaS is popular with individual project teams who have a few dozen functions.
 
 **What does it cost to test at scale?**
 

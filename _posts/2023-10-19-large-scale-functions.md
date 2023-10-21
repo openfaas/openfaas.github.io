@@ -217,9 +217,11 @@ Lastly, whenever a function was invoked, we printed out the duration of the exec
 
 After having got to 6500 functions without any issues on my own hardware at home, I decided to go large for the [weekly Community Call](https://docs.openfaas.com/community) where we deployed 15k functions across 3 different namespaces, with 5000 in each.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/Bj7qQWIuhXE?si=H94WGBF-kVrOKiqw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/VhPxqlbwoXE?si=6wRXjNXOlX_NEQK9" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-[Watch the live demo on YouTube](https://www.youtube.com/watch?v=Bj7qQWIuhXE)
+The video recording includes a short 4 minute introduction to explain what viewers are going to see, who may not have already read this blog post.
+
+[Watch the demo on YouTube](https://www.youtube.com/watch?v=VhPxqlbwoXE)
 
 See also: [Multiple namespaces](https://docs.openfaas.com/reference/namespaces/)
 

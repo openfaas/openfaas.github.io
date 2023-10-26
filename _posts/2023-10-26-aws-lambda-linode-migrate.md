@@ -92,27 +92,30 @@ As you can see Lambda and OpenFaaS functions look very similar. To migrate simpl
 
 **Building and deploying**
 
-To deploy a function on Lambda a function's compiled code or scripts and their dependencies need to be built into a deployment package. Lambda supports two types of deployment packages, container images and zip file archives. A deployment package has to be uploaded to S3 or ECR and can then be used to deploy a function.
+To deploy a Lambda function, compiled code or scripts and their dependencies need to be built into a deployment package. Lambda supports two types of deployment packages, container images and zip file archives. A deployment package has to be uploaded to S3 or ECR and can then be used to deploy a function.
+
+This usually involves a number of tools like the Lambda console, AWS CLI and some scripts to create the deployment package.
+
+There are CLIs and tools available that automate some of these steps and provide a way to define and manage your Lambda functions e.g. [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/what-is-sam.html)
 
 The main tool to interact with OpenFaaS and build and deploy functions is the [faas-cli](https://github.com/openfaas/faas-cli). The CLI uses Docker to build functions from a [set of supported language templates](https://docs.openfaas.com/languages/overview/). You can also [create your own templates](https://docs.openfaas.com/languages/custom/) or build functions from a [custom Dockerfile](https://docs.openfaas.com/languages/dockerfile/). This means that you can use any programming language or toolchain that can be packaged into a container image.
 
-Lambda:
+A quick comparison of the developer experience between AWS Lambda and OpenFaaS.
 
-- Use one of the supported runtimes to create a function.
-- Bundle function code and dependencies into deployment packages, either a zip file archive or container images based on one of the Lambda base images.
-- Manual steps to upload layers to S3 or images to ECR and deploy and configure a function.
-- It can be hard to test functions locally.
-- Hard limits for functions, e.g. the maximum runtime for container deployments is 15 minutes.
+AWS Lambda:
 
-There are CLIs and tools available that automate some of these steps and provide a way to bundle configuration in a file, e.g. [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/what-is-sam.html
-)
+- Functions can be created using one of the supported runtimes.
+- Function code and dependencies are bundled into deployment packages, either a zip file archive or container images based on one of the Lambda base images.
+- Manual steps are required to upload zip files to S3 or images to ECR and deploy and configure a function.
+- It can be challenging to test functions locally.
+- Hard limits exist for functions, e.g. the maximum runtime for container deployments is 15 minutes.
 
 OpenFaaS:
 
 - Supports any programming language or toolchain that can be packaged into a container image.
-- Build and deploy functions using the `faas-cli`. Build and deployment configuration is provided through a `stack.yml` configuration file.
-- Function can be tested locally using `faas-cli local-run`. It is easy to spin up an OpenFaaS cluster locally or use faasd to test functions.
-- No hard limits on image size, maximum runtime or function resources.
+- Functions can be built and deployed using the `faas-cli`. Build and deployment configuration is provided through a `stack.yml` configuration file.
+- Functions can be tested locally using `faas-cli local-run`. It is easy to spin up an OpenFaaS cluster locally or use faasd to test functions.
+- No hard limits exist on image size, maximum runtime or function resources.
 
 In the next section we will show you how to deploy an OpenFaaS cluster and walk through the steps required to migrate a real-world workflow from Lambda to OpenFaaS.
 
@@ -131,7 +134,9 @@ Once you have a cluster deployed an verified you are able to access it move on t
 
 ### Install OpenFaaS
 
-Install OpenFaaS on the cluster. Choose either the [Community Edition (CE)](https://docs.openfaas.com/deployment/kubernetes/) which is intended for development or proof of concepts.
+There are two options to choose from when installing OpenFaaS on the cluster.
+
+The [Community Edition (CE)](https://docs.openfaas.com/deployment/kubernetes/) which is intended for development or proof of concepts.
 
 For production and commercial use you should deploy [OpenFaaS Standard or OpenFaaS for Enterprises](https://docs.openfaas.com/deployment/pro/).
 
@@ -140,9 +145,9 @@ CE can be installed relatively quickly with our [arkade](https://github.com/alex
 ```bash
 arkade install openfaas
 ```
-You can now run `arkade info openfaas` to get the instructions to log in with the CLI and to how to get the password to access the UI.
+You can now run `arkade info openfaas` to get the instructions to log in with the CLI and obtain the password to access the UI.
 
-To follow along with this tutorial you can use the suggested port-forwarding instructions printed out by the info command to access the OpenFaaS gateway.
+To follow along with this tutorial you can use the suggested port-forwarding instructions returned by the info command to access the OpenFaaS gateway.
 
 > If you want to use a TLS-enabled URL to access OpenFaaS and your functions follow the instructions from the "Setup Ingress" and "Install OpenFaaS" sections in our blog post: [How to set up production-ready K3s with OpenFaaS with Akamai Cloud Computing](https://www.openfaas.com/blog/production-faas-linode/)
 
@@ -216,6 +221,7 @@ def handler(event, context):
         logging.error("failed to upload video preview")
         raise e
 ```
+> Source: [video_preview/lambda_function.py](https://github.com/welteki/video-preview/blob/migrate-lambda-function/aws/video-preview/video_preview/lambda_function.py)
 
 An amazon S3 trigger will invoke the function each time a source video is uploaded to the bucket. The function will lookup the bucket name and key of the source video from the event parameters it receives from S3. Next it will use ffmpeg to generate a video preview from the input video. It does this by taking short samples spread throughout the input video and stitching them back together to create a new video. The ffmpeg output is saved to a temporary file that is uploaded to S3 again.
 
@@ -248,6 +254,8 @@ def generate_video_preview(in_filename, out_filename, sample_duration, sample_se
     )
 ```
 
+> Source: [video_preview/preview.py](https://github.com/welteki/video-preview/blob/migrate-lambda-function/aws/video-preview/video_preview/preview.py)
+
 The FFmpeg bindings package, [ffmpeg-python](https://github.com/kkroening/ffmpeg-python) is used to interact with FFmpeg. This means our Lambda function requires the ffmpeg-python package and ffmpeg as a runtime dependency. In the previous section we talked about the different methods to include runtime dependencies. Either by including them in the .zip file archive for your Lambda function or by creating a container image.
 
 > Checkout the AWS docs for more info on how to [add runtime dependencies to Python Lambda functions](https://docs.aws.amazon.com/lambda/latest/dg/python-package.html).
@@ -268,7 +276,7 @@ For a detailed overview on how to create a Lambda function that is triggered by 
 
 ### Migrate to OpenFaaS
 
-In this section we will take function code from our Lambda function and walk through the steps required to run it as an OpenFaaS function. Since our function will be deployed to a Linode EKS cluster we will also be migrating from AWS S3 to [Linode Object Storage](https://www.linode.com/docs/products/storage/object-storage/) at the same time.
+In this section we will take the function code from our Lambda function and walk through the steps required to run it as an OpenFaaS function. Since our function will be deployed to a Linode EKS cluster we will also be migrating from AWS S3 to [Linode Object Storage](https://www.linode.com/docs/products/storage/object-storage/) at the same time.
 
 To migrate the function we will need to:
 
@@ -279,7 +287,7 @@ To migrate the function we will need to:
 
 **Setup Linode Object Storage**
 
-You can follow the official [get started guide](https://www.linode.com/docs/products/storage/object-storage/get-started/) to enable Object storage on Linode and create a new bucket.For this demo we created a bucket named `video-preview`.
+You can follow the official [get started guide](https://www.linode.com/docs/products/storage/object-storage/get-started/) to enable Object storage on Linode and create a new bucket. For this demo we created a bucket named `video-preview`.
 
 Make sure to save the access-key and access-secret for the bucket at the following path:
 
@@ -287,6 +295,8 @@ Make sure to save the access-key and access-secret for the bucket at the followi
 * Access secret - `.secrets/video-preview-s3-secret`
 
 `faas-cli local-run` uses the `.secrets` folder to look for secrets files when running the function locally for development.
+
+We will also be using these files to create the required secrets in our OpenFaaS cluster before we deploy the function.
 
 **Create the OpenFaaS function**
 
@@ -305,7 +315,7 @@ mv video-preview.yml stack.yml
 
 We are using the `python3-http` template to scaffold the function. This template creates a minimal function image based on alpine linux. If your functions depends on modules or packages that require a native build toolchain such as Pandas, Kafka, SQL etc. we recommend using the python3-http-debian template instead.
 
-Once the `video-preview` function is created from the template you can copy over the code from the Lambda function. We will start refactoring it step by step.
+Once the `video-preview` function is created from the template you can copy over the code from the Lambda function. We will start refactoring it step by step. Make sure the also copy the `preview.py` file from the Lambda function.
 
 **Initialize the S3 client**
 
@@ -317,7 +327,7 @@ The [S3 client](https://boto3.amazonaws.com/v1/documentation/api/latest/referenc
 
 Instead of initializing the boto3 client with the defaults we will create a separate function, `init_s3`, to configure the client with the required parameters. This function can be used in the function handler to initialize the S3 client the first time the function runs. After initialization the client is assigned to a global variable so that it can be reused on subsequent calls.
 
-Update `index.py` of the `video-preview` function:
+Update `handler.py` of the `video-preview` function:
 
 ```diff
 import os
@@ -390,7 +400,6 @@ functions:
 Make sure the secrets are created in the OpenFaaS cluster before deploying the functions. Secrets can be created in several ways, either through the REST API or using the `faas-cli`. In this example we will use the faas-cli to create the secrets.
 
 ```bash
-
 faas-cli secret create video-preview-s3-key \
   --from-file .secrets/video-preview-s3-key
 
@@ -408,14 +417,18 @@ OpenFaaS functions are always built into a container image. Our official templat
 
 For Python functions modules and packages can be added by including them in the `requirements.txt`. Additional packages can be installed in the function image through build arguments.
 
-The function handler folder includes a `requirements.txt` file that was created while scaffolding the video-preview function from the `python-http` template. All Python packages the function code depends on need to be added here. The `video-preview` function uses the official AWS SDK for python, `boto3` to upload files to any S3-compatible Object storage. The `ffmpeg-python` python package provides bindings to FFmpeg and is used to process the input video. Make sure both are included in the `requirements.txt` file:
+The function handler folder includes a `requirements.txt` file that was created while scaffolding the video-preview function from the `python-http` template. All Python packages the function code depends on need to be added here.
+
+The `video-preview` function uses the official AWS SDK for python, `boto3` to upload files to any S3-compatible Object storage. The `ffmpeg-python` python package provides bindings to FFmpeg and is used to process the input video. Make sure both are included in the `requirements.txt` file:
 
 ```
 boto3
 python-ffmpeg
 ```
 
-Like with the AWS function you have to make sure all additional binaries the code depends on are installed in the function image. In this case our code depends on FFmpeg. With the official python-http template the build argument, `ADDITIONAL_PACKAGE` can be used specify additional `[apk](https://wiki.alpinelinux.org/wiki/Alpine_Package_Keeper)` or `[apt](https://wiki.debian.org/AptCLI)` packages that need to be installed.
+You have to make sure all additional binaries the code depends on are installed in the function image. In this case our code depends on FFmpeg. Additional packages can be installed in the function image through build arguments.
+
+With the official python-http template the build argument, `ADDITIONAL_PACKAGE` can be used specify additional `[apk](https://wiki.alpinelinux.org/wiki/Alpine_Package_Keeper)` or `[apt](https://wiki.debian.org/AptCLI)` packages that need to be installed.
 
 Update the functions `stack.yml` configuration to include FFmpeg as an additional package:
 
@@ -437,7 +450,7 @@ Our Lambda function used an S3 trigger that invoked the function each time a new
 
 > If you want to copy the AWS workflow and trigger the function on bucket notifications you could add Ceph storage to your cluster with [Rook](https://rook.io/). It has support for setting up S3 compatible Object storage and sending bucket notifications over HTTP. [Minio](https://min.io/) is another option that also supports sending bucket notifications over HTTP.
 >
-> Configuring any of these is outside the scope is this post.
+> Configuring any of these is outside the scope of this post.
 
 ```diff
 import os
@@ -507,6 +520,7 @@ def handle(event, context):
         logging.error("failed to upload video preview")
         raise e
 ```
+> Source: [video-preview/handler.py](https://github.com/welteki/video-preview/blob/migrate-lambda-function/video-preview/handler.py)
 
 Changes made to the handler function:
 
@@ -541,10 +555,11 @@ functions:
       - video-preview-s3-key
       - video-preview-s3-secret
 ```
+> Source: [stack.yml](https://github.com/welteki/video-preview/blob/migrate-lambda-function/stack.yml)
 
 Note that we included three additional environment variables to [configure the function's timeouts](https://docs.openfaas.com/tutorials/expanded-timeouts/#part-2-your-functions-timeout). Transforming and transcoding videos can take some time depending on the size of the source video. If you have long running functions make sure the timeouts are configured properly so your functions can finish their work.
 
-For quick iterations and testing during development OpenFaaS function can run locally with docker using the `faas-cli local-run` command. We show how to use this feature in our blog post: [The faster way to iterate on your OpenFaaS functions](https://www.openfaas.com/blog/develop-functions-locally/).
+For quick iterations and testing during development OpenFaaS functions can be run locally with docker using the `faas-cli local-run` command. We show how to use this feature in our blog post: [The faster way to iterate on your OpenFaaS functions](https://www.openfaas.com/blog/develop-functions-locally/).
 
 To deploy the function run:
 
@@ -556,13 +571,15 @@ faas-cli up
 
 This will build the function, push the resulting image and deploy the function to your OpenFaaS cluster.
 
-Invoke the function with curl:
+Invoke the function with curl to test it:
 
 ```bash
 curl -i https://openfaas.example.com/function/video-preview \
   -H 'Content-Type: application/json' \
   -d '{"url": "https://video-preview.fr-par-1.linodeobjects.com/input/openfaas-homepage-vid.webm"}'
 ```
+
+If the invocation was successful you should be able to find the processed video in the `output` folder in your S3 bucket. You can login to the [Linode Cloud Manager](https://cloud.linode.com/object-storage/buckets) to check the content of the bucket.
 
 ## Taking it further
 

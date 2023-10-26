@@ -597,3 +597,5 @@ We saw how to deploy OpenFaaS in a managed Kubernetes cluster with LKE. Alternat
 We migrated our ETL pipeline from being restricted to only be deployable on AWS Lambda infrastructure to being completely portable by using OpenFaaS.
 
 Additionally developers are able to test their functions locally by either using the `faas-cli local-run` command or deploying an OpenFaaS cluster locally.
+
+If you are using Javascript, we have a similar article that shows you how to migrate NodeJS functions: [Migrate Your AWS Lambda Functions to Kubernetes with OpenFaaS ](https://www.openfaas.com/blog/lambda-to-openfaas/)

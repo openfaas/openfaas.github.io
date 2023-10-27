@@ -618,11 +618,7 @@ We migrated our ETL pipeline from being restricted to only be deployable on AWS 
 
 Additionally developers are able to test their functions locally by either using the `faas-cli local-run` command or deploying an OpenFaaS cluster locally.
 
-**Are you using Node.js and JavaScript? with AWS Lambda?**
-
-Then there's a similar guide you can follow which also touches on how to use IAM Service Accounts in AWS EKS:
-
-[Migrate Your AWS Lambda Functions to Kubernetes with OpenFaaS](https://www.openfaas.com/blog/lambda-to-openfaas/)
+If you are using Node.js or JavaScript with AWS Lambda, then there's a similar guide you can follow which also touches on how to use IAM Service Accounts in AWS EKS: [Migrate Your AWS Lambda Functions to Kubernetes with OpenFaaS](https://www.openfaas.com/blog/lambda-to-openfaas/)
 
 You may also like:
 

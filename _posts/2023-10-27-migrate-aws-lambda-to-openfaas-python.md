@@ -89,7 +89,7 @@ In this example, the handler along with the request and response are all very si
 
 Now, while the structure and type of the event payload in Lambda will vary depending on the trigger, OpenFaaS functions always have the same payload format. The event always contains the same data about the request: body, headers, method, query and path.
 
-In OpenFaaS, every invocation will happen over HTTP, whether it was triggered by an event in Apache Kafka, or a direct HTTP call through the gateway. Just like AWS Lambda, OpenFaaS supports different event sources. The concept we use is a [connectors](https://docs.openfaas.com/reference/triggers/#triggers). Some of our popular connectors include: Apache Kafka, AWS SQS or cron if a function needs to be invoked on a schedule.
+In OpenFaaS, every invocation will happen over HTTP, whether it was triggered by an event in Apache Kafka, or a direct HTTP call through the gateway. Just like AWS Lambda, OpenFaaS supports different event sources. The concept we use is a [connector](https://docs.openfaas.com/reference/triggers/#triggers). Some of our popular connectors include: Apache Kafka, AWS SQS or cron if a function needs to be invoked on a schedule.
 
 To sum up: Python code looks very similar in Lambda and OpenFaaS. To migrate simple functions you would only need to update your code to handle the different format of the event and context objects. For more complex code, where you rely on a trigger like an SQS event, you will also need to configure and deploy a connector. In Lambda, a function can assume a role and access other services without using credentials. There is similar support available for OpenFaaS functions when running on AWS EKS, however if you're running on-premises, you may need to obtain credentials and provide them to your function to access databases, object storage, and other managed services.
 
@@ -176,7 +176,8 @@ Since AWS IAM is not available on LKE, we will not include the steps to have an 
 
 The ETL workflow we will be migrating is a video transformation pipeline using [FFmpeg](https://www.ffmpeg.org/). A function fetches video and creates a short preview of the input by sampling frames throughout the video and stitching then back together to create the output video.
 
-<!-- Add diagram for workflow -->
+![ETL workflow diagram](/images/2023-10-migrate-lambda-functions/video-transformation-etl-workflow.png)
+> Video transformation workflow
 
 Let's start by taking a look at the Lambda function.
 

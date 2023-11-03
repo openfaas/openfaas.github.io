@@ -1,0 +1,546 @@
+<div class="container">
+
+    <h3 class="subtitle">High-level comparison</h3>
+
+    <table class="table is-fullwidth">
+        <thead>
+          <tr>
+            <th class="is-one-third"></th>
+            <th class="is-2">CE</th>
+            <th class="is-2">Standard</th>
+            <th class="is-2">Enterprise</th>
+          </tr>
+        </thead>
+        <tbody>
+
+            <tr>
+                <td colspan="4">
+                    <h3 class="subtitle pt-4">
+                        User interface & templates
+                    </h3>
+                </td>
+            </tr>
+
+            <tr>
+                <th class="is-one-third">User interface</th>
+                <td class="is-2">Legacy UI (in code-freeze)</td>
+                <td class="is-2">OpenFaaS Dashboard with shared admin password</td>
+                <td class="is-2">OpenFaaS Dashboard with OpenID Connect</td>
+            </tr>
+
+            <tr>
+                <th class="is-one-third">Community-supported templates</th>
+                <td class="is-2">Dozens in function store, or BYO</td>
+                <td class="is-2">Dozens in function store, or BYO</td>
+                <td class="is-2">Dozens in function store, or BYO</td>
+            </tr>
+
+            <tr>
+                <th class="is-one-third">Commercially supported templates</th>
+                <td class="is-2">None</td>
+                <td class="is-2">Go, Python, Node, PHP, &amp; Dockerfile</td>
+                <td class="is-2">Go, Python, Node, PHP  &amp; Dockerfile</td>
+            </tr>
+
+            <tr>
+                <td colspan="4">We can support other languages for licensed customers, free to reach out to us to ask.<td>
+            </tr>
+
+            <tr>
+                <td colspan="4">
+                    <h3 class="subtitle pt-4">
+                        Support
+                    </h3>
+                </td>
+            </tr>
+
+            <tr>
+                <th class="is-one-third">Email</th>
+                <td class="is-2">{% include no.html %}</td>
+                <td class="is-2">Direct to engineering</td>
+                <td class="is-2">Direct to engineering</td>
+            </tr>
+            <tr>
+                <th class="is-one-third">Private Slack channel*</th>
+                <td class="is-2">{% include no.html %}</td>
+                <td class="is-2">{% include no.html %}</td>
+                <td class="is-2">{% include yes.html %}</td>
+            </tr>
+            <tr>
+                <th class="is-one-third">Customer Community</th>
+                <td class="is-2">{% include no.html %}</td>
+                <td class="is-2">Private GitHub Discussions</td>
+                <td class="is-2">Private GitHub Discussions</td>
+            </tr>
+            <tr>
+                <th class="is-one-third">SLA for incidents*</th>
+                <td class="is-2">{% include no.html %}</td>
+                <td class="is-2">{% include no.html %}</td>
+                <td class="is-2">Within 1 business day</td>
+            </tr>
+            <tr>
+                <th class="is-one-third">Weekly Office Hours call</th>
+                <td class="is-2">{% include yes.html %}</td>
+                <td class="is-2">{% include yes.html %}</td>
+                <td class="is-2">{% include yes.html %}</td>
+            </tr>
+
+            <tr>
+                <td colspan="4">
+                    <i>* Support SLA and Private Slack channel require a separate agreement.</i>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="4">
+                    <h3 class="subtitle pt-4">
+                        Autoscaling
+                    </h3>
+                </td>
+            </tr>
+
+            <tr>
+                <th class="is-one-third">Maximum functions per namespace</th>
+                <td class="is-2">30</td>
+                <td class="is-2">500</td>
+                <td class="is-2">5000</td>
+            </tr>
+            <tr>
+                <th class="is-one-third">Maximum namespaces</th>
+                <td class="is-2">1</td>
+                <td class="is-2">1</td>
+                <td class="is-2">Unlimited</td>
+            </tr>
+            <tr>
+                <th class="is-one-third">Maximum replicas</th>
+                <td class="is-2">5/5</td>
+                <td class="is-2">Unlimited</td>
+                <td class="is-2">Unlimited</td>
+            </tr>
+
+            <tr>
+                <th class="is-one-third">Auto-scaling</th>
+                <td class="is-2">One global RPS rule</td>
+                <td class="is-2">RPS, Capacity & CPU</td>
+                <td class="is-2">RPS, Capacity & CPU</td>
+            </tr>
+            <tr>
+                <th class="is-one-third">Scale to zero</th>
+                <td class="is-2">
+                    {% include no.html %}
+                </td>
+                <td class="is-2">
+                    {% include yes.html %}
+                </td>
+                <td class="is-2">
+                    {% include yes.html %}
+                </td>
+            </tr>
+
+            <tr>
+                <th class="is-one-third">Concurrency limiting</th>
+                <td class="is-2">                         
+                    {% include no.html %}
+                </td>
+                <td class="is-2">                            
+                    {% include yes.html %}
+                </td>
+                <td class="is-2">                           
+                    {% include yes.html %}
+                </td>
+            </tr>
+
+            <tr>
+                <th class="is-one-third">Custom readiness probes for functions</th>
+                <td class="is-2">                         
+                    {% include no.html %}
+                </td>
+                <td class="is-2">                            
+                    {% include yes.html %}
+                </td>
+                <td class="is-2">                           
+                    {% include yes.html %}
+                </td>
+            </tr>
+
+            <tr>
+                <th class="is-one-third">GPU support</th>
+                <td class="is-2">                         
+                    {% include no.html %}
+                </td>
+                <td class="is-2">                            
+                    {% include yes.html %}
+                </td>
+                <td class="is-2">                           
+                    {% include yes.html %}
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="4">                   
+                    <h3 class="subtitle pt-4">Monitoring</h3>
+                </td>
+            </tr>
+
+            <tr>
+                <th class="is-one-third">Grafana Dashboards</th>
+                <td class="is-2">
+                    None
+                </td>
+                <td class="is-2">
+                    3x
+                </td>
+                <td class="is-2">
+                    4x
+                </td>
+            </tr>
+            <tr>
+                <th class="is-one-third">Invocation metrics</th>
+                <td class="is-2">
+                    {% include yes.html %}
+                </td>
+                <td class="is-2">
+                    {% include yes.html %}
+                </td>
+                <td class="is-2">
+                    {% include yes.html %}
+                </td>
+            </tr>
+            <tr>
+                <th class="is-one-third">OpenFaaS API metrics</th>
+                <td class="is-2">
+                    {% include no.html %}
+                </td>
+                <td class="is-2">
+                    {% include yes.html %}
+                </td>
+                <td class="is-2">
+                    {% include yes.html %}
+                </td>
+            </tr>
+            <tr>
+                <th class="is-one-third">Concurrency metrics</th>
+                <td class="is-2">
+                    {% include no.html %}
+                </td>
+                <td class="is-2">
+                    {% include yes.html %}
+                </td>
+                <td class="is-2">
+                    {% include yes.html %}
+                </td>
+            </tr>
+            <tr>
+                <th class="is-one-third">Queue-worker metrics</th>
+                <td class="is-2">                        
+                    {% include no.html %}
+                </td>
+                <td class="is-2">
+                    {% include yes.html %}
+                </td>
+                <td class="is-2">
+                    {% include yes.html %}
+                </td>
+            </tr>
+            <tr>
+                <th class="is-one-third">Function Builder metrics</th>
+                <td class="is-2">
+                    {% include no.html %}
+                </td>
+                <td class="is-2">                         
+                    {% include no.html %}
+                </td>
+                <td class="is-2">                     
+                    {% include yes.html %}
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="4">
+                    <h3 class="subtitle pt-4">
+                        Events &amp; triggers
+                    </h3>
+                </td>
+            </tr>
+
+            <tr>
+                <th class="is-one-third">Cron</th>
+                <td class="is-2">Basic version</td>
+                <td class="is-2">Enhanced version</td>
+                <td class="is-2">Enhanced version</td>
+            </tr>
+            <tr>
+                <th class="is-one-third">Asynchronous invocation</th>
+                <td class="is-2">Basic version</td>
+                <td class="is-2">Enhanced version</td>
+                <td class="is-2">Enhanced version</td>
+            </tr>
+            <tr>
+                <th class="is-one-third">Apache Kafka</th>
+                <td class="is-2">{% include no.html %}</td>
+                <td class="is-2">SASL &amp; TLS authentication supported</td>
+                <td class="is-2">Plus additional metrics</td>
+            </tr>
+            <tr>
+                <th class="is-one-third">AWS SQS & AWS SNS</th>
+                <td class="is-2">{% include no.html %}</td>
+                <td class="is-2">{% include yes.html %}</td>
+                <td class="is-2">{% include yes.html %}</td>
+            </tr>
+            <tr>
+                <th class="is-one-third">Postgresql</th>
+                <td class="is-2">{% include no.html %}</td>
+                <td class="is-2">{% include yes.html %}</td>
+                <td class="is-2">{% include yes.html %}</td>
+            </tr>
+
+            <tr>
+                <td colspan="4">
+                    <h3 class="subtitle pt-4">
+                        Async &amp; Queuing
+                    </h3>
+                </td>
+            </tr>
+
+            <tr>
+                <th class="is-one-third">Retries</th>
+                <td class="is-2">{% include no.html %}</td>
+                <td class="is-2">{% include yes.html %}</td>
+                <td class="is-2">{% include yes.html %}</td>
+            </tr>
+            <tr>
+                <th class="is-one-third">Maximum concurrency</th>
+                <td class="is-2">1</td>
+                <td class="is-2">Unlimited</td>
+                <td class="is-2">Unlimited</td>
+            </tr>
+            <tr>
+                <th class="is-one-third">Maximum named queues</th>
+                <td class="is-2">1</td>
+                <td class="is-2">1</td>
+                <td class="is-2">Unlimited</td>
+            </tr>
+            <tr>
+                <th class="is-one-third">Maximum payload</th>
+                <td class="is-2">256KB</td>
+                <td class="is-2">Configurable</td>
+                <td class="is-2">Configurable</td>
+            </tr>  
+            <tr>
+                <th class="is-one-third">Webhook for finished work</th>
+                <td class="is-2">{% include yes.html %}</td>
+                <td class="is-2">{% include yes.html %}</td>
+                <td class="is-2">{% include yes.html %}</td>
+            </tr>
+            <tr>
+                <th class="is-one-third">Monitoring</th>
+                <td class="is-2">{% include no.html %}</td>
+                <td class="is-2">Queue-depth, ingestion &amp; processing rate</td>
+                <td class="is-2">Queue-depth, ingestion &amp; processing rate</td>
+            </tr>
+            <tr>
+                <th class="is-one-third">HA clustering &amp; replication</th>
+                <td class="is-2">{% include no.html %}</td>
+                <td class="is-2">{% include yes.html %}</td>
+                <td class="is-2">{% include yes.html %}</td>
+            </tr>
+
+            <tr>
+                <th class="is-one-third">NATS version</th>
+                <td class="is-2">NATS Streaming (deprecated)</td>
+                <td class="is-2">NATS JetStream</td>
+                <td class="is-2">NATS JetStream</td>
+            </tr>
+
+            <tr>
+                <td colspan="4">
+                    <h3 class="subtitle pt-4">
+                        Security &amp; isolation
+                    </h3>
+                </td>
+            </tr>
+            <tr>
+                <th class="is-one-third">Read-only filesystem & non-root</th>
+                <td class="is-2">{% include yes.html %}</td>
+                <td class="is-2">{% include yes.html %}</td>
+                <td class="is-2">{% include yes.html %}</td>
+            </tr>
+            <tr>
+                <th class="is-one-third">Istio & Linkerd mTLS compatibility</th>
+                <td class="is-2">{% include no.html %}</td>
+                <td class="is-2">{% include yes.html %}</td>
+                <td class="is-2">{% include yes.html %}</td>
+            </tr>
+            <tr>
+                <th class="is-one-third">Scheduling/affinity rules</th>
+                <td class="is-2">{% include no.html %}</td>
+                <td class="is-2">{% include yes.html %}</td>
+                <td class="is-2">{% include yes.html %}</td>
+            </tr>
+
+            <tr>
+                <th class="is-one-third">Kubernetes Service Accounts for Functions</th>
+                <td class="is-2">{% include no.html %}</td>
+                <td class="is-2">{% include yes.html %}</td>
+                <td class="is-2">{% include yes.html %}</td>
+            </tr>
+
+            <tr>
+                <th class="is-one-third">IAM annotations for EKS and GKE</th>
+                <td class="is-2">{% include no.html %}</td>
+                <td class="is-2">{% include yes.html %}</td>
+                <td class="is-2">{% include yes.html %}</td>
+            </tr>
+
+
+            <tr>
+                <td colspan="4">
+                    <h3 class="subtitle pt-4">
+                        GitOps and Helm support
+                    </h3>
+                </td>
+            </tr>
+
+            <tr>
+                <th class="is-one-third">Helm support</th>
+                <td class="is-2">{% include no.html %}</td>
+                <td class="is-2">{% include yes.html %}</td>
+                <td class="is-2">{% include yes.html %}</td>
+            </tr>
+
+            <tr>
+                <th class="is-one-third">ArgoCD &amp; Flux support</th>
+                <td class="is-2">{% include no.html %}</td>
+                <td class="is-2">{% include yes.html %}</td>
+                <td class="is-2">{% include yes.html %}</td>
+            </tr>
+
+            <tr>
+                <th class="is-one-third">Kubernetes CRD</th>
+                <td class="is-2">No</td>
+                <td class="is-2">Function</td>
+                <td class="is-2">Function, Profile, Policy &amp; Role.</td>
+            </tr>
+
+            <tr>
+                <td colspan="4">                   
+                    <h3 class="subtitle pt-4">IAM and SSO</h3>
+                </td>
+            </tr>
+
+            <tr>
+                <th class="is-2">Single-Sign On</th>
+                <td>                         
+                    {% include no.html %}
+                </td>
+                <td>                            
+                    {% include no.html %}
+                </td>
+                <td>                           
+                    With OpenID Connect
+                </td>
+            </tr>
+            <tr>
+                <th class="is-2">Role Based Access Control</th>
+                <td>                         
+                    {% include no.html %}
+                </td>
+                <td>                            
+                    {% include no.html %}
+                </td>
+                <td>                           
+                    Custom policies for functions, secrets, logs and namespaces
+                </td>
+            </tr>
+
+            <tr>
+                <th class="is-2">Web Identity Federation for CI/CD</th>
+                <td>                         
+                    {% include no.html %}
+                </td>
+                <td>                            
+                    {% include no.html %}
+                </td>
+                <td>                           
+                    Keyless deployments via CI/CD.
+                </td>
+            </tr>
+
+
+            <tr>
+                <td colspan="4">                   
+                    <h3 class="subtitle pt-4">Platform features</h3>
+                </td>
+            </tr>
+            <tr>
+                <th class="is-2">REST API</th>
+                <td>                         
+                    Functions, secrets &amp; logs
+                </td>
+                <td>                            
+                    Functions, secrets &amp; logs
+                </td>
+                <td>                           
+                    Functions, secrets, logs &amp; namespaces
+                </td>
+            </tr>
+
+            <tr>
+                <th class="is-2">Function Builder REST API</th>
+                <td>                         
+                    {% include no.html %}
+                </td>
+                <td>                            
+                    {% include no.html %}
+                </td>
+                <td>                           
+                    {% include yes.html %}
+                </td>
+            </tr>
+            
+            <tr>
+                <th class="is-2">Runtime isolation</th>
+                <td>                         
+                    {% include no.html %}
+                </td>
+                <td>                            
+                    {% include no.html %}
+                </td>
+                <td>                           
+                    Secure isolation with i.e. gVisor
+                </td>
+            </tr>
+
+            <tr>
+                <th class="is-2">Auditing of REST API</th>
+                <td>                         
+                    {% include no.html %}
+                </td>
+                <td>                            
+                    {% include no.html %}
+                </td>
+                <td>                           
+                    Via webhook.
+                </td>
+            </tr>
+            <tr>
+                <th class="is-2">Billing metrics for charge-back</th>
+                <td>                         
+                    {% include no.html %}
+                </td>
+                <td>                            
+                    {% include no.html %}
+                </td>
+                <td>                           
+                    Via webhook.
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+
+    <p class="title has-text-centered has-text-weight-light is-size-5 is-size-5-desktop has-text-grey">
+        View a more detailed comparison of OpenFaaS versions: <a class="mt-3" href="https://docs.openfaas.com/openfaas-pro/introduction">Overview &amp; comparison</a>
+    </p>
+
+</div>

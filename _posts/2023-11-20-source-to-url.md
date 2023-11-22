@@ -256,7 +256,7 @@ If you'd like to see the equivalent HTTP REST call, you can prefix the command w
 PUT http://127.0.0.1:8080/system/functions
 Content-Type: [application/json]
 User-Agent: [faas-cli/dev]
-Authorization: [Basic YWRtaW46dFQxUk5FMVAwdzBi]
+Authorization: [Basic **********]
 {
   "service": "hello-world",
   "image": "ttl.sh/alexellis2/test-image-hello:0.1.0",

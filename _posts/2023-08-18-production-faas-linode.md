@@ -289,7 +289,7 @@ As before, verify that the third server has been added.
 
 With K3s, the costs can be kept quite low because the servers running the control-plane can also run user workloads. However, if you expect very heavy use or I/O intensive applications, then you could also add some agents to the cluster.
 
-This exercise is left for the reader, you could either duplicate the terraform, and replace the word "server" for "agent", or adapt it so that you input the number of servers and the number of agents separately.
+This exercise is left for the reader, you could either duplicate the terraform, and replace the word "server" for "agent", or adapt it so that you input the number of servers and the number of agents separately. Another option is to create an agent via the Linode CLI or UI.
 
 Once your VM is created, use the server IP of any of the three machines under the `--server-ip` flag. After it joins the cluster, K3s will tell it about the other server IPs in the case that one of them goes down.
 
@@ -372,7 +372,9 @@ cert-manager will be used in the next stage to obtain a TLS certificate for the 
 
 Next install OpenFaaS with either the [Community Edition (CE)](https://docs.openfaas.com/deployment/kubernetes/) or one of the versions designed for production and commercial use: [OpenFaaS Standard or OpenFaaS for Enterprises](https://docs.openfaas.com/deployment/pro/).
 
-CE can be installed relatively quickly with our arkade tool, which is a wrapper for the Helm chart, but you can also use the [OpenFaaS Helm chart](https://github.com/openfaas/faas-netes/tree/master/chart) directly, if you prefer.
+For commercial versions of OpenFaaS, we recommend installing via the [OpenFaaS Helm chart](https://github.com/openfaas/faas-netes/tree/master/chart), and keeping a copy of your values.yaml file safe for future upgrades.
+
+OpenFaaS CE can also be installed very quickly with the [arkade tool](https://arkade.dev). arkade is a wrapper for the Helm chart which reduces all the steps down to a single command:
 
 ```bash
 arkade install openfaas
@@ -390,7 +392,7 @@ arkade install openfaas-ingress \
     --domain openfaas.$DOMAIN
 ```
 
-If you want to create Kubernetes YAML files for the ingress, instead of using the arkade app, then see these instructions: [TLS for OpenFaaS](https://docs.openfaas.com/reference/ssl/kubernetes-with-cert-manager/).
+If you want to create Kubernetes YAML files for the Ingress, instead of using arkade, then see these instructions: [TLS for OpenFaaS](https://docs.openfaas.com/reference/ssl/kubernetes-with-cert-manager/).
 
 You can now run `arkade info openfaas` to get the instructions to log in with the CLI and to how to get the password to access the UI.
 

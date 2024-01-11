@@ -15,7 +15,7 @@ hide_header_image: true
 
 [OpenAI](https://openai.com/) models can take some time to fully respond, so we'll show you how to stream responses from functions using [Server Sent Events (SSE)](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events).
 
-With the latest versions of the OpenFaaS Standard helm charts, watchdog and python-flask template, you can now stream responses using Server Sent Events (SSE) directly from your functions. Prior to these changes, if a chat completion was going to take 10 seconds to emit several paragraphs of text, the user would have had to wait that long to see the first word.
+With the latest versions of the [OpenFaaS helm charts](https://github.com/openfaas/faas-netes/tree/master/chart), watchdog and [python-flask template](https://github.com/openfaas/python-flask-template), you can now stream responses using Server Sent Events (SSE) directly from your functions. Prior to these changes, if a chat completion was going to take 10 seconds to emit several paragraphs of text, the user would have had to wait that long to see the first word.
 
 Now, the first word will be displayed as soon as it's available from the OpenAI API. This is a great way to improve the user experience of your OpenAI-powered applications and was requested by one of our customers building a chat-driven experience for DevOps.
 
@@ -35,7 +35,7 @@ SSEs only work in one direction, so the client cannot send data back to the serv
 
 If we use the python3-flask template, it has built-in support for returning a streaming response from Flask, using the `stream_with_context()` helper. This is a generator function that yields data to the client as it becomes available.
 
-You can pull down the Python template using `faas-cli template store pull python3-flask-debian`, then create a new function with: `faas-cli new --lang python3-flask-debian stream-l`.
+You can pull down the Python template using `faas-cli template store pull python3-flask-debian`, then create a new function with: `faas-cli new --lang python3-flask-debian stream`.
 
 We're using the `debian` variant instead of the normal, smaller alpine variant of the image because it contains everything required to build the dependencies we'll need. On balance, the Debian image is still smaller than the Alpine one when all the build tools have been added in.
 
@@ -83,7 +83,7 @@ Next, in your stack.yaml file, set `buffer_body: true` under the `environment:` 
 I set up a self-hosted API endpoint that is compatible with OpenAI for this testing, but you can use the official API endpoint too. Just make sure you pass in your OpenAI token using an OpenFaaS secret and not an environment variable. Definitely don't hard-code it into your function's source code because it will be readable by anyone with the image.
 
 ```bash
-curl -i http://127.0.0.1:31112/function/stream-l \
+curl -i http://127.0.0.1:8080/function/stream \
     -H "Content-Type: text/plain" \
     -H "Accept: text/event-stream" \
     -d "What are some calorie dense foods?"
@@ -140,13 +140,21 @@ The prompt could probably do with some tuning, just edit handler.py and let me k
 
 I used [c0sogi/llama-api](https://github.com/c0sogi/llama-api) to set up a local OpenAI REST API endpoint using a free model. The answers are not the same caliber as gpt-3.5, however it is a good way to test the SSE functionality.
 
-You can learn more about the [official OpenAI Python SDK here](https://github.com/openai/openai-python)
+You can learn more about the [official OpenAI Python SDK here](https://github.com/openai/openai-python).
+
+Functions can also be called asynchronously, but if you're going down this route, it probably doesn't make sense to use server sent events. You can learn more about asynchronous functions in the [OpenFaaS docs](https://docs.openfaas.com/reference/async/).
 
 ## Wrapping up
 
 In a short period of time, we were able to add support to the various OpenFaaS components and Python template in order to support SSE for OpenAI. You could also use a generator to stream back your own data to a client, just remember that the response is text-based. So to stream back binary data like an image, you'd need to base64 encode each chunk.
 
 From here, you can now consume the streaming function in a front-end built with React, Vue.js, or Nuxt.js, etc, or from a CLI application.
+
+So what do you need to try out OpenFaaS?
+
+If you're familiar with Kubernetes, you can get started with the [Helm chart](https://docs.openfaas.com/deployment/kubernetes/).
+
+If Kubernetes is your antithesis, then you might like [faasd instead](https://docs.openfaas.com/deployment/faasd/), which can run on a single VM, and I've written a comprehensive manual for you to get started with it.
 
 If you'd like to learn more about OpenFaaS, we have a weekly call every Wednesday and we'd love to see you there to hear how you're using functions.
 

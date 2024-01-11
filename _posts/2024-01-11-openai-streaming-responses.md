@@ -78,14 +78,63 @@ langchain_community
 openai
 ```
 
+Next, in your stack.yaml file, set `buffer_body: true` under the `environment:` section. This reads all of the request input into memory, then sends it to the function, so there's no streaming input, just a streaming output.
+
 I set up a self-hosted API endpoint that is compatible with OpenAI for this testing, but you can use the official API endpoint too. Just make sure you pass in your OpenAI token using an OpenFaaS secret and not an environment variable. Definitely don't hard-code it into your function's source code because it will be readable by anyone with the image.
 
 ```bash
 curl -i http://127.0.0.1:31112/function/stream-l \
     -H "Content-Type: text/plain" \
     -H "Accept: text/event-stream" \
-    -d "You are a helpful AI assistant, try your best to help, respond with truthful answers, but if you don't know the correct answer, say so. Answer this question: What are the top 5 countries by GDP?"
+    -d "What are some calorie dense foods?"
 ```
+
+Example output:
+
+```
+HTTP/1.1 200 OK
+Content-Type: text/event-stream; charset=utf-8
+Date: Thu, 11 Jan 2024 13:33:04 GMT
+Server: waitress
+Transfer-Encoding: chunked
+
+data:  Some
+data:  cal
+data: orie
+data:  dense
+data:  food
+data: s
+data:  include
+data:  n
+data: uts
+data: ,
+data:  se
+data: eds
+data: ,
+data:  av
+data: oc
+data: ados
+data: ,
+data:  che
+data: ese   
+data: ,
+data:  pe
+data: an
+data: ut
+data: ut
+data:  but
+data: ter
+data: ,
+data:  dark
+data:  ch
+data: oc
+data: olate
+...
+```
+
+I trimmed the response, but you get the idea. This gave me text quite quickly, but if we'd had to wait for the full text it would have taken up to 30 seconds.
+
+The prompt could probably do with some tuning, just edit handler.py and let me know what you come up with.
 
 I used [c0sogi/llama-api](https://github.com/c0sogi/llama-api) to set up a local OpenAI REST API endpoint using a free model. The answers are not the same caliber as gpt-3.5, however it is a good way to test the SSE functionality.
 

@@ -134,6 +134,8 @@ data: olate
 
 I trimmed the response, but you get the idea. This gave me text quite quickly, but if we'd had to wait for the full text it would have taken up to 30 seconds.
 
+As a quick note, you'll need to [pay attention to your timeout values](https://docs.openfaas.com/tutorials/expanded-timeouts/) as the default timeouts for your function and installation may not be enough to stream a complete response from the remote API.
+
 The prompt could probably do with some tuning, just edit handler.py and let me know what you come up with.
 
 I used [c0sogi/llama-api](https://github.com/c0sogi/llama-api) to set up a local OpenAI REST API endpoint using a free model. The answers are not the same caliber as gpt-3.5, however it is a good way to test the SSE functionality.

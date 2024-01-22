@@ -474,25 +474,24 @@ kubectl create secret generic \
 Add the following to the values-iam.yaml file you created earlier:
 
 ```diff
-iam:
-  enabled: true
-  systemIssuer:
-    url: https://gateway.openfaas.example.com
-
 +dashboard:
 +  enabled: true
 +  publicURL: https://dashboard.openfaas.example.com
 +  signingKeySecret: "dashboard-jwt" 
 
-+  dashboardIssuer:
-+    url: "https://keycloak.example.com/realms/openfaas"
-+    clientId: openfaas
-+    # Leave blank if no client secret is required
-+    clientSecret: "keycloak-client-secret"
-+    scopes:
-+      - openid
-+      - profile
-+      - email
+iam:
+  enabled: true
+  systemIssuer:
+    url: https://gateway.openfaas.example.com
++ dashboardIssuer:
++   url: "https://keycloak.example.com/realms/openfaas"
++   clientId: openfaas
++   # Leave blank if no client secret is required
++   clientSecret: "keycloak-client-secret"
++   scopes:
++     - openid
++     - profile
++     - email
 ```
 
 Depending on your provider and setup you might need to request additional scopes. These can be set through the scopes parameter.

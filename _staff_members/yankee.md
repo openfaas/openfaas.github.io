@@ -1,6 +1,6 @@
 ---
 name: Yankee Maharjan
-position: contributor
+position: Contributor
 image_path: /images/author/yankee.jpg
 github_username: yankeexe
 twitter_username: yankexe

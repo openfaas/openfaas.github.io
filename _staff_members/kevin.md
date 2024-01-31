@@ -1,6 +1,6 @@
 ---
 name: Kevin Lindsay
-position: Guest
+position: Principal Engineer, Surge Consulting
 image_path: /images/author/kevin.png
 github_username: kevin-lindsay-1
 linkedin_username: kevin-lindsay-16a740160

@@ -9,11 +9,14 @@ categories:
   - kubernetes
   - kubecon
   - events
+  - dotnet
 author_staff_member: alex
 dark_background: true
 
 ---
 In this tutorial I'll show you how to build an ASP.NET Core API that you can deploy to [Kubernetes](https://kubernetes.io/) easily using [OpenFaaS](https://openfaas.com/). We'll be using steps from the official tutorial provided by the [.NET team](https://devblogs.microsoft.com/dotnet/) and explaining any custom steps taken along the way.
+
+> Last Updated: 2024-04-11
 
 # Why is OpenFaaS + ASP.NET Core a good combination?
 
@@ -33,20 +36,20 @@ The complete code example is [available on GitHub](https://github.com/alexellis/
 
 ### Setup OpenFaaS
 
-It's assumed that you already have Kubernetes and OpenFaaS set up, but if you do not then [k3d](https://github.com/rancher/k3d), [KinD](https://kind.sigs.k8s.io), and [minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/) can make good local options. I like working with remote clusters since they don't affect the battery life of my laptop, or the CPU/memory of my desktop and are always ready. A good option for a cheap remote cluster may be [DigitalOcean.com](https://m.do.co/c/2962aa9e56a1) or [Civo.com](https://civo.com/).
+It's assumed that you already have Kubernetes and OpenFaaS set up, but if you do not then [k3d](https://github.com/k3d-io/k3d), [KinD](https://kind.sigs.k8s.io), and [minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/) can make good local options. I like working with remote clusters since they don't affect the battery life of my laptop, or the CPU/memory of my desktop and are always ready. A good option for a cheap remote cluster may be [DigitalOcean.com](https://m.do.co/c/2962aa9e56a1) or [Civo.com](https://civo.com/).
 
 I'll provide two resources for you to get started:
 
 * [OpenFaaS Deployment on Kubernetes](https://docs.openfaas.com/deployment/kubernetes/) - start here if you're confident with deploying Kubernetes
 * [OpenFaaS step-by-step workshop](https://github.com/openfaas/workshop) - start here if Docker and Kubernetes are brand new to you
 
-### Install .NET Core 3.1
+### Install .NET Core 8.0
 
-Head over to the following site and download .NET Core for your OS, 2.2 will also work if that's what you're currently using:
+Head over to the following site and download .NET SDK for your OS:
 
-[.NET Core 3.1 download page](https://dotnet.microsoft.com/download/dotnet-core/3.1)
+[.NET Core 8.0 download page](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
 
-I recommend you download the installer and the SDK.
+> This tutorial also works for previous versions if that's what you're currently using.
 
 The .NET product automatically reports telemetry, you can [turn this off](https://docs.microsoft.com/en-gb/dotnet/core/tools/telemetry) if you wish. I added `DOTNET_CLI_TELEMETRY_OPTOUT` to my `$HOME/.bash_profile` file.
 
@@ -82,51 +85,54 @@ This uses the `webapi` project type (that's a REST API endpoint)
 dotnet new webapi -o openfaas-api --no-https
 ```
 
-This is the controller that was generated for us:
+The following code shows the contents of the Program.cs that was generated for us::
 
 ```cs
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+var builder = WebApplication.CreateBuilder(args);
 
-namespace openfaas_api.Controllers
+// Add services to the container.
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class WeatherForecastController : ControllerBase
-    {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
-        private readonly ILogger<WeatherForecastController> _logger;
+var summaries = new[]
+{
+    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+};
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
-        {
-            _logger = logger;
-        }
+app.MapGet("/weatherforecast", () =>
+{
+    var forecast =  Enumerable.Range(1, 5).Select(index =>
+        new WeatherForecast
+        (
+            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
+            Random.Shared.Next(-20, 55),
+            summaries[Random.Shared.Next(summaries.Length)]
+        ))
+        .ToArray();
+    return forecast;
+})
+.WithName("GetWeatherForecast")
+.WithOpenApi();
 
-        [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
-        {
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
-            })
-            .ToArray();
-        }
-    }
+app.Run();
+
+record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
+{
+    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
 }
 ```
 
-You can view it with [VSCode](https://code.visualstudio.com) at `./openfaas-api/Controllers/WeatherForecastController.cs`
+You can view it with [VSCode](https://code.visualstudio.com) at `./openfaas-api/Program.cs`
 
 We need to package the service in a container for OpenFaaS to be able to serve traffic, but for now let's try it out locally.
 
@@ -137,7 +143,7 @@ cd openfaas-api/
 dotnet run
 ```
 
-Then access the URL given such as http://localhost:5000 - add `WeatherForecast` to the path to form the URL for the controller: `http://localhost:5000/WeatherForecast`
+Then access the URL given such as http://localhost:5026 - add `WeatherForecast` to the path to form the URL for the controller: `http://localhost:5026/WeatherForecast`
 
 ![](/images/2019-asp-net-core/local.png)
 
@@ -154,14 +160,14 @@ docker --version
 We'll simply use the example [from the tutorial](https://dotnet.microsoft.com/learn/aspnet/microservice-tutorial/docker-file), but edit it for the name we picked:
 
 ```Dockerfile
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 COPY openfaas-api.csproj .
 RUN dotnet restore
 COPY . .
 RUN dotnet publish -c release -o /app
 
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
+FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
 COPY --from=build /app .
 ENTRYPOINT ["dotnet", "openfaas-api.dll"]
@@ -231,7 +237,6 @@ You should now have:
 ./openfaas-api/
 ./openfaas-api/Dockerfile
 ./openfaas-api/Program.cs
-./openfaas-api/Controllers/WeatherForecastController.cs
 # etc
 ```
 
@@ -254,21 +259,22 @@ You should see the image built successfully, but we need to make a couple of add
 The OpenFaaS API expects Docker images to conform to a [runtime workload contract](https://docs.openfaas.com/reference/workloads/), we can either implement that in our code by changing the HTTP port and adding a health-check, or by using the [OpenFaaS watchdog component](https://docs.openfaas.com/architecture/watchdog/).
 
 ```Dockerfile
-FROM openfaas/of-watchdog:0.7.2 as watchdog
+FROM  ghcr.io/openfaas/of-watchdog:0.9.15 as watchdog
 
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 COPY openfaas-api.csproj .
 RUN dotnet restore
 COPY . .
 RUN dotnet publish -c release -o /app
 
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
+FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
 COPY --from=build /app .
 COPY --from=watchdog /fwatchdog /usr/bin/fwatchdog
 RUN chmod +x /usr/bin/fwatchdog
 
+ENV ASPNETCORE_HTTP_PORTS=80
 ENV fprocess="dotnet openfaas-api.dll"
 ENV upstream_url="http://127.0.0.1:80"
 ENV mode="http"
@@ -280,12 +286,10 @@ The changes add the `fwatchdog` process as the entrypoint to the container. It r
 
 > See also: [OpenFaaS workloads](https://docs.openfaas.com/reference/workloads/)
 
-You can run the Docker image locally as a test before deploying it to OpenFaaS.
+You can run the function image locally as a test before deploying it to OpenFaaS.
 
 ```sh
-faas-cli build
-
-docker run --rm -p 8080:8080 -ti alexellis2/api
+faas-cli local-run
 ```
 
 Then access the site as before: `http://localhost:8080/WeatherForecast`
@@ -420,15 +424,11 @@ Official Template: false
 
 * Auto-scaling
 
-OpenFaaS has built-in auto-scaling rules based upon requests per second, and support for [Kubernetes HPAv2 also](https://docs.openfaas.com/tutorials/kubernetes-hpa/).
-
-[![OpenFaaS workflow](https://github.com/openfaas/faas/blob/master/docs/of-workflow.png?raw=true)](https://docs.openfaas.com/architecture/stack/)
-
-Try [Lab 9 of the OpenFaaS workshop](https://github.com/openfaas/workshop#lab-9---advanced-feature---auto-scaling), where you can learn how to test auto-scaling for your new ASP.NET Core application.
+Functions can be autoscaled horizontally or scaled to zero with the [OpenFaaS Standard autoscaler](https://docs.openfaas.com/architecture/autoscaling/)
 
 * Secrets and API keys
 
-You can learn how to securely manage APIs and secrets using the [lessons in Lab 10](https://github.com/openfaas/workshop#lab-10---advanced-feature---secrets)
+You can learn how to securely manage APIs and secrets using the following blog post: [Configure your OpenFaaS functions for staging and production](https://www.openfaas.com/blog/custom-environments/)
 
 * Versioning of .NET runtimes
 
@@ -440,11 +440,11 @@ That's fine, you can create different templates or you can just specify the runt
 
 You can apply 12-factor configuration through the `environment` section of your OpenFaaS stack.yml file.
 
-See also: [Lab 4: Inject configuration through environmental variables](https://github.com/openfaas/workshop/blob/master/lab4.md)
+See also: [Configure your OpenFaaS functions for staging and production](https://www.openfaas.com/blog/custom-environments/)
 
 ## Wrapping up
 
-In a short period of time we were able to deploy an ASP.NET Core application using .NET 3.1 or 2.x to Kubernetes, have it scale out and build into an immutable Docker image. OpenFaaS made this task much simpler than it would have been if we'd tried to program directly against Kubernetes.
+In a short period of time we were able to deploy an ASP.NET Core application using .NET 8.0 or 9.0 to Kubernetes, have it scale out and build into an immutable Docker image. OpenFaaS made this task much simpler than it would have been if we'd tried to program directly against Kubernetes.
 
 If you aren't quite convinced yet, then watch my KubeCon talk on the PLONK Stack that combines [OpenFaaS](https://openfaas.com/) with Kubernetes and several other CNCF projects like [Prometheus](https://prometheus.io) and [NATS](https://nats.io/) to create a platform for application developers.
 

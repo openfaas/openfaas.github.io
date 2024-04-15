@@ -16,7 +16,7 @@ dark_background: true
 ---
 In this tutorial I'll show you how to build an ASP.NET Core API that you can deploy to [Kubernetes](https://kubernetes.io/) easily using [OpenFaaS](https://openfaas.com/). We'll be using steps from the official tutorial provided by the [.NET team](https://devblogs.microsoft.com/dotnet/) and explaining any custom steps taken along the way.
 
-> Last Updated: 2024-04-11
+> Update 2024-04-11 - Migrate all examples to .NET 8
 
 # Why is OpenFaaS + ASP.NET Core a good combination?
 

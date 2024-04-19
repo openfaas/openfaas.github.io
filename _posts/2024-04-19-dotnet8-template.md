@@ -13,17 +13,26 @@ author_staff_member: han
 hide_header_image: true
 ---
 
-We created a new template for C# and .NET 8.0. The template is based on the ASP.NET Core [Minimal API](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis?view=aspnetcore-8.0).
+We have created a new OpenFaaS template for C# and .NET 8.0 and it's based on the [Minimal API](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis?view=aspnetcore-8.0) of ASP.NET Core.
 
-In the past we had an official csharp that used the original forking mode of the OpenFaaS watchdog, which created one process per request, and was less efficient than newer templates where one process would handle many requests concurrently. There were also a number of unofficial templates adopted by the community, which were not necessarily kept up to date, or something that we could support directly.
+In the past we provided a basic `csharp` template that used the original forking mode of the OpenFaaS watchdog, which created one process per request, and was less efficient than newer templates where one process would handle many requests concurrently.
+
+There were also a number of unofficial templates adopted by the community, which were not necessarily kept up to date, or something that we could support directly.
 
 The new template is called: `dotnet8-csharp` and has the following benefits:
 
 - Adding NuGet packages to a function for additional dependencies.
 - Register services for dependency injection
-- Using ASP.NET Core middleware
+- Uses the latest ASP.NET Core middleware
+- Based upon the highly-performant Kestrel HTTP server
 
 In the next section we will walk through an example that show you how to develop and deploy an OpenFaaS function with C# and the new template.
+
+In function will read rows from a database table, and return them as JSON.
+
+We'll then briefly discuss a few other features like dependency injection and how to use ASP.NET middlewares such as the static fileserver.
+
+OpenFaaS templates provide a handler, some way to add dependencies, and a build system to create an OCI compatible image. But if you're already building your own images, you can deploy them to OpenFaaS if they provide a HTTP server. See also: [Build ASP.NET Core APIs with Kubernetes and OpenFaaS](https://www.openfaas.com/blog/asp-net-core/)
 
 ## Prerequisites
 
@@ -36,14 +45,14 @@ In this section we will walk through an example showing how to create a function
 
 We will assume you are already running a Postgres database somewhere. You can use one of the many DBaaS services available, run a postgres with docker or use [arkade](https://github.com/alexellis/arkade) to quickly deploy a database in your cluster. If you are running faasd, the official guide [Serverless For Everyone Else](https://openfaas.gumroad.com/l/serverless-for-everyone-else) has a chapter that shows how to deploy PostgreSQL as an additional service.
 
-To quickly deploy PostgreSQL in your Kubernetes cluster run `arkade install postgresql`. After the installation it will print out all the instructions to get the password and connect to the database.
+You could use a managed PostgreSQL service from AWS, GCP, DigitalOcean, etc, or deploy a development version of PostgreSQL into your Kubernetes cluster using `arkade install postgresql`. After the installation it will print out all the instructions to get the password and connect to the database.
 
 We will create a table and insert some records that can be queried by our function:
 
 ```sql
 CREATE TABLE IF NOT EXISTS employee
 (
-    id INT   PRIMARY KEY NOT NULL,
+    id INT PRIMARY KEY NOT NULL,
     name TEXT NOT NULL,
     email TEXT NOT NULL
 );
@@ -174,7 +183,7 @@ faas-cli up
 
 Invoking the function should return a json response that looks like this:
 
-```
+```bash
 $ curl -i $OPENFAAS_URL/function/employee-api/employees
 
 HTTP/1.1 200 OK

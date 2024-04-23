@@ -28,7 +28,7 @@ The new template is called: `dotnet8-csharp` and has the following benefits:
 
 In the next section we will walk through an example that show you how to develop and deploy an OpenFaaS function with C# and the new template.
 
-In function will read rows from a database table, and return them as JSON.
+The function will read rows from a database table, and return them as JSON.
 
 We'll then briefly discuss a few other features like dependency injection and how to use ASP.NET middlewares such as the static fileserver.
 
@@ -239,9 +239,44 @@ public static class Handler
 }
 ```
 
+To use Entity Framework Core with our example database model you will need create the database context class `EmployeeDd`. This class is injected into the `/employees` handler and can be used to query the database.
+
+The full example of the `EmployeeDb.cs` file is available on [GitHub](https://github.com/welteki/openfaas-dotnet8-csharp-example/blob/dependency-injection/employee-api/EmployeeDb.cs).
+
+The Entity Framework (EF) Core provider for Npgsql also needs to be added as a dependency to the function. This can be done using the .NET CLI:
+
+```bash
+dotnet add employee-api \
+  package Npgsql.EntityFrameworkCore.PostgreSQL --version 8.0.2
+```
+
 ## Add Middleware
 
-The MapEndpoints methods gives you access the the `WebApplication` class. This makes it possible to add any existing ASP.NET Core middleware from the function.
+The MapEndpoints method gives you access to the `WebApplication` class. This makes it possible to add any existing ASP.NET Core middleware from the function.
+
+In this example we setup a file server to serve static files. Static files can be added in a folder named `static` in the function handler directory. All files in this folder will be copied into the final function image. The static folder is configured as the web root path for the application by default.
+
+To add static files to the `employee-api` function create the static folder:
+
+```bash
+mkdir -p employee-api/static
+```
+
+We are going to add a basic `index.html` file to the static folder:
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hello from OpenFaaS</title>
+</head>
+<body>
+    <h1>Hello from OpenFaaS</h1>
+</body>
+</html>
+```
+
+Configure the file server middleware in `Handler.cs`:
 
 ```c#
 public static class Handler
@@ -253,7 +288,7 @@ public static class Handler
        // Setup the file server to serve static files.
        app.UseFileServer();
 
-       app.MapGet("/", () => "Hello from OpenFaaS.");
+       app.MapGet("/employees", async () => .... );
     }
 
     // MapServices can be used to configure additional
@@ -262,10 +297,15 @@ public static class Handler
     {   
     }
 }
-
 ```
 
-For more information, see: [ASP.NET Core Middleware](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/?view=aspnetcore-8.0)
+After building and deploying the function again with `faas-cli up` it should now start serving the `index.html` file. You can verify this with curl:
+
+```bash
+curl -i $OPENFAAS_URL/function/employee-api/index.html
+```
+
+For more information on how to use middleware, see: [ASP.NET Core Middleware](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/?view=aspnetcore-8.0)
 
 ## Conclusion
 

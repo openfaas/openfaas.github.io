@@ -259,7 +259,6 @@ Before making any style changes / additions please consider:
 - make use of the declared SASS variables and mixins
 - each section on the website should have its own SASS file
 
-
 ### Altering the Header and Footer
 
 The site's navbar and footer are configured via YAML in the following files:

@@ -1,0 +1,40 @@
+- name: Corva
+  logo: corva.png
+- name: Baker Hughes Company
+  logo: bakerhughes.png
+- name: BCubed Engineering
+  logo: bcubed.png
+- name: Deloitte Cyber LLC
+  logo: deloitte.png
+- name: End to End Networks
+  logo: e2enetworks.png
+- name: Fullscript
+  logo: fullscript.png
+- name: Kubiya
+  logo: kubiya.png
+- name: Lifetime Value Corporation
+  logo: ltvco.png
+- name: Majesco
+  logo: majesco.png
+- name: Mnemonic As
+  logo: mnemonic.png
+- name: Optiv
+  logo: optiv.png
+- name: Patchworks Integration
+  logo: patchworks.png
+- name: Rudderstack
+  logo: rudderstack.png
+- name: Surge
+  logo: surge.png
+- name: Yokogawa Electrical
+  logo: yokogawa.png
+- name: Waylay
+  logo: waylay.png
+
+- name: Cognite AS
+  logo: cognite.png
+- name: LivePerson
+  logo: liveperson.png
+- name: Northwestern Mutual
+  logo: nw.png
+  

@@ -1,0 +1,38 @@
+.hero.is-primary {
+	.customers {
+		&-category {
+			&.title {
+				font-weight: 300;
+				text-transform: capitalize;
+			}
+		}
+
+        .button {
+            margin-top: $padding-step * 2;
+
+			border: 3px solid;
+			border-radius: 10px;
+
+            background: #ffffff;
+            border-color: #000000;
+
+            color: black;
+
+            transition: box-shadow .3s;
+
+            &:hover {
+                box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.26);
+                .icon {
+                    transform: translateX(10px);
+                }
+            }
+
+            .icon {
+                margin: 0 0 0 10px;
+
+                transition: transform .3s;
+            }
+		}
+
+	}
+}

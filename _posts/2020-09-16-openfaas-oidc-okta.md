@@ -16,6 +16,8 @@ dark_background: true
 
 Bring enterprise authentication and Single Sign-on (SSO) to OpenFaaS with Okta and OpenID Connect
 
+> Note: This article is over 4 years old. IAM for OpenFaaS has replaced all the instructions in this article.  See: [Identity and Access Management (IAM)](https://docs.openfaas.com/openfaas-pro/iam/overview/) and [Single Sign-On (SSO)](https://docs.openfaas.com/openfaas-pro/sso/overview/)
+
 ## Enterprise authentication 
 
 OpenID Connect is a common standard that builds upon OAuth2 to enable authentication to services and applications. Solutions like [Okta](https://www.okta.com) can be used to enable Single Sign-On across a number of third-party and in-house applications. This reduces the burden on IT administrators - fewer requests to reset passwords, fewer employees will share credentials and policy can enforced in one place.

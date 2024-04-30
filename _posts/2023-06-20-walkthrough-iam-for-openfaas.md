@@ -593,13 +593,55 @@ $ faas-cli pro auth \
 
 To print out the formatted OpenFaaS token after having done an exchange, remove `--no-exchange` from the command above.
 
+Here's an example of an OpenFaaS Token:
+
+```json
+{
+  "header": {
+    "alg": "ES256",
+    "kid": "ARyHBtoRuXRzCEqR_9NRr_HPP_s36vHKf9_X_Mjpad4x",
+    "typ": "JWT"
+  },
+  "payload": {
+    "at_hash": "F53gv7injmJ9hUGCOtDgBw",
+    "aud": "https://gateway.example.com",
+    "auth_time": 1706088607,
+    "azp": "openfaas",
+    "email_verified": true,
+    "exp": 1706131945,
+    "family_name": "Verstraete",
+    "fed:iss": "https://keycloak.example.com/realms/openfaas",
+    "given_name": "Han",
+    "groups": [
+      "openfaas-dev"
+    ],
+    "iat": 1706088745,
+    "iss": "https://gateway.example.com",
+    "jti": "81d42f43-8ebe-4d62-84f8-e1ecab5eb4b1",
+    "name": "Han Verstraete",
+    "nonce": "1706088744941521000",
+    "policy": [
+      "staging-rw"
+    ],
+    "preferred_username": "welteki",
+    "session_state": "65c3df72-dad8-4b2f-95aa-f1556b40ab80",
+    "sid": "65c3df72-dad8-4b2f-95aa-f1556b40ab80",
+    "sub": "fed:a81bcb85-72a8-446a-9263-004944a4e9f4",
+    "typ": "ID"
+  }
+}
+```
+
+Note the `policy` array which contains the policies associated with the user's Role.
+
+
 ## Wrapping up
 
 We covered a lot of ground in this post including new API objects for OpenFaaS, how to configure an IdP, and then how to authenticate to OpenFaaS using the CLI and Dashboard.
 
 Covering CI was out of scope, but you can learn about that in the docs for GitHub Actions and GitLab CI: [Overview: Identity and Access Management (IAM)](https://docs.openfaas.com/openfaas-pro/iam/overview/)
 
-You can reach out to us to see if OpenFaaS Standard or OpenFaaS for Enterprises is right for your team here: [OpenFaaS Pricing](https://openfaas.com/pricing/)
+You can reach out to us to see if OpenFaaS Standard or OpenFaaS for Enterprises is right for your team [here](https://openfaas.com/pricing/).
 
 FAQ:
 

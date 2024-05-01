@@ -7,7 +7,7 @@ categories:
 - faas
 - functions
 dark_background: true
-image: "/images/images/2024-04-crd-status/background.png"
+image: "/images/2024-04-crd-status/background.png"
 author_staff_member: alex
 hide_header_image: true
 ---

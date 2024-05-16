@@ -1,7 +1,7 @@
 ---
-title: Introducing built-in Function Authentication for OpenFaaS
+title: Introducing built-in authentication for OpenFaaS Functions
 description: 
-date: 2024-05-14
+date: 2024-05-16
 categories:
 - kubernetes
 - faas
@@ -9,16 +9,18 @@ categories:
 - authentication
 - authorization
 dark_background: true
-# image: "/images/2024-05-01-chargeback/background.png"
+image: "/images/2024-05-function-auth/background.png"
 author_staff_member: alex
 hide_header_image: true
 ---
 
 A long standing request from OpenFaaS users has been to add built-in authentication for functions. This would allow you to secure your function endpoints without having to write any additional code.
 
-In this blog post we'll show you how to use an updated version of IAM for OpenFaaS to create a Policy that restricts access to a function only to authorized users with JSON Web Token (JWT) authentication.
+Once a function deployed via the OpenFaaS gateway, it will become available on the gateway via the path: `/function/NAME` and `/async-function/NAME`. This means that anyone with access to the gateway can invoke the function, and the function's handler is responsible for any authentication or authorization.
 
-You'll need to have OpenFaaS for Enterprises pre-installed and configured to integrate with your existing Identify Provider (IdP) such as Okta, Keycloak, or Google.
+In this blog post we'll show you how to use a pre-release version of [IAM for OpenFaaS](https://docs.openfaas.com/openfaas-pro/iam/overview/) to create a Policy that restricts access to a function only to authorized users with JSON Web Token (JWT) authentication.
+
+You'll need to have [OpenFaaS for Enterprises](https://docs.openfaas.com/openfaas-pro/introduction/) pre-installed and configured to integrate with your existing Identify Provider (IdP) such as Okta, Keycloak, or Google.
 
 We will perform the initial one-time setup process:
 
@@ -207,6 +209,65 @@ The resulting token will look like this:
 
 Save the text from the "access_token" field as function-token.txt.
 
+It will look something like this:
+
+```json
+{
+  "iss": "https://openfaas.example.com",
+  "sub": "fed:a9e0e67a-5758-4373-a4ba-23957fa66e6b",
+  "aud": [
+    "https://openfaas.example.com"
+  ],
+  "exp": 1715892121,
+  "iat": 1715848921,
+  "function": {
+    "permissions": [
+      "openfaas-fn:*",
+      "dev:env"
+    ]
+  }
+}
+```
+
+As you can see, the union of permissions from the Policy are encoded into the Function Token.
+
+If you wish to restrict the token so that it can only be used to invoke a single function, or a subset of functions, you can request a specific audience when you exchange the token.
+
+```bash
+curl -S -L -X POST "${IDP_TOKEN_URL}" \
+--header 'Content-Type: application/x-www-form-urlencoded' \
+--data-urlencode "subject_token=${TOKEN}" \
+--data-urlencode "subject_token_type=urn:ietf:params:oauth:token-type:id_token" \
+--data-urlencode 'grant_type=urn:ietf:params:oauth:grant-type:token-exchange' \
+--data-urlencode 'scope=function' \
+--data-urlencode 'audience=openfaas-fn:env' \
+--data-urlencode 'audience=openfaas-fn:figlet'
+```
+
+Here's how the token looks, with the audience also specified.
+
+```json
+{
+  "iss": "https://openfaas.example.com",
+  "sub": "fed:a9e0e67a-5758-4373-a4ba-23957fa66e6b",
+  "aud": [
+    "https://openfaas.example.com"
+  ],
+  "exp": 1715892177,
+  "iat": 1715848977,
+  "function": {
+    "permissions": [
+      "openfaas-fn:*",
+      "dev:env"
+    ],
+    "audience": [
+      "openfaas-fn:env",
+      "openfaas-fn:figlet"
+    ]
+  }
+}
+```
+
 ## Invoke the function with the Function Token
 
 You now have a token that can be used to invoke a function. You can use it with curl or any HTTP client.
@@ -231,6 +292,10 @@ You should see a successful response from the function.
 If you already have IAM for OpenFaaS installed and configured for Single-Sign On, then there isn't a lot of additional work to do to secure your functions with Function Tokens. In most cases, you'll just set an additional environment variable on your protected functions and create a Policy and Role for any user that needs to invoke them.
 
 ### Q&A
+
+Q: Are Function Tokens production-ready? When will I be able to use them in production?
+
+A: Function Tokens, once released will be suitable for use in production. They are an extension of the already released IAM for OpenFaaS features and use the same underlying technology for the new type of Function Token. The work is currently pre-release and available for testing, once it's released you will have access to it via the Helm chart.
 
 Q: I use another version of OpenFaaS i.e. faasd, what can I do to authenticate functions?
 

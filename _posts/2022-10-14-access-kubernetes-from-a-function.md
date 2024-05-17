@@ -193,7 +193,7 @@ functions:
       com.openfaas.serviceaccount: fn-events
 ```
 
-> If you want to learn how to build functions with Go, check out [Alex's book (Premium Edition)](https://gumroad.com/l/everyday-golang) for lots of examples.
+> If you want to learn how to build functions with Go, check out [Alex's book (Premium Edition)](http://store.openfaas.com/l/everyday-golang?layout=profile) for lots of examples.
 
 We will be using the Kubernetes client package for Go to access data and resources in the cluster. The function first creates a new clientset with an in-cluster configuration. The clientset is then used to list the events for a specific namespace.
 

@@ -176,7 +176,7 @@ Once logged in, we will create a git repository so when we need to add webhooks 
 
 For this guide we will be using golang for the Gitea bot, but you can use any language that you are comfortable working with.
 
-> OpenFaaS and Gitea are both written in Go. Checkout Alex's new book [Everyday Go](https://gumroad.com/l/everyday-golang) for practical tips and hands-on examples to gain experience quickly or to level-up.
+> OpenFaaS and Gitea are both written in Go. Checkout Alex's new book [Everyday Go](http://store.openfaas.com/l/everyday-golang?layout=profile) for practical tips and hands-on examples to gain experience quickly or to level-up.
 
 To get started, we'll need to pull the prebuilt OpenFaaS template, and create the skeleton of a function using `faas-cli`.
 

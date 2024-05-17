@@ -432,7 +432,7 @@ Further work:
 
 * For the function to be invoked on the 10-minute schedule, you'll need to deploy the cron-connector as described in [Serverless For Everyone Else](https://openfaas.gumroad.com/l/serverless-for-everyone-else)
 * You may want to edit the "UK" filter that I added, and optionally, extend the 24 hour window. Why not read the value from [os.Getenv](https://pkg.go.dev/os) or [os.LookupEnv](https://pkg.go.dev/os) and add it to stock-finder.yml so it's easier to configure?
-* I'd also encourage you to use a database table or Redis to store which GUIDs have been alerted on or processed already. I cover how to do this in the [Premium Edition of Everyday Golang](https://gumroad.com/l/everyday-golang).
+* I'd also encourage you to use a database table or Redis to store which GUIDs have been alerted on or processed already. I cover how to do this in the [Premium Edition of Everyday Golang](http://store.openfaas.com/l/everyday-golang?layout=profile).
 * Why not figure out the vendor from the text in the URL and send along a URL to Discord, so you can get to the product page even quicker?
 
 You may also like my our work with handling events and forwarding them to Discord, or running other custom logic.

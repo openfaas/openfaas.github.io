@@ -357,7 +357,7 @@ OpenFaaS provides a flexible templating system and build process through the use
 
 You can learn how to deploy OpenFaaS to Kubernetes and build functions and microservices using the [OpenFaaS workshop](https://github.com/openfaas/workshop/).
 
-> OpenFaaS is written in Go. Checkout my new book [Everyday Go](https://gumroad.com/l/everyday-golang) for practical tips and hands-on examples to gain experience quickly or to level-up.
+> OpenFaaS is written in Go. Checkout my new book [Everyday Go](http://store.openfaas.com/l/everyday-golang?layout=profile) for practical tips and hands-on examples to gain experience quickly or to level-up.
 
 ### Join the community
 

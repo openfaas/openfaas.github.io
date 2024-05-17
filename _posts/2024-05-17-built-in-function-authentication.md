@@ -1,7 +1,7 @@
 ---
 title: Introducing built-in authentication for OpenFaaS Functions
 description: 
-date: 2024-05-16
+date: 2024-05-17
 categories:
 - kubernetes
 - faas

@@ -238,7 +238,7 @@ Some other ways you can deploy:
 * [Using ArgoCD](https://www.openfaas.com/blog/bring-gitops-to-your-openfaas-functions-with-argocd/)
 * [Using Flux v2](https://www.openfaas.com/blog/upgrade-to-fluxv2-openfaas/)
 
-OpenFaaS also has a REST API which is documented in [Serverless For Everyone Else](https://gumroad.com/l/serverless-for-everyone-else) along with examples on usage.
+OpenFaaS also has a REST API which is documented in [Serverless For Everyone Else](http://store.openfaas.com/l/serverless-for-everyone-else) along with examples on usage.
 
 ## Wrapping up
 

@@ -192,7 +192,7 @@ In the future, as Kubernetes becomes more adept at starting containers quickly, 
 If you'd like to learn more about the project and community, check out:
 
 * [My OpenFaaS Highlights from 2021](https://www.openfaas.com/blog/highlights-2021/)
-* [Serverless For Everyone Else (OpenFaaS handbook)](https://gumroad.com/l/serverless-for-everyone-else)
+* [Serverless For Everyone Else (OpenFaaS handbook)](http://store.openfaas.com/l/serverless-for-everyone-else)
 * [Check out OpenFaaS Pro - OpenFaaS for production](https://docs.openfaas.com/openfaas-pro/introduction/)
 * [Fork/star the of-watchdog on GitHub](https://github.com/openfaas/of-watchdog)
 

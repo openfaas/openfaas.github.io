@@ -236,7 +236,7 @@ We can offer [help and support](https://openfaas.com/support) if you would like 
 
 You may also like our recent post on deploying functions [Argo CD](https://www.openfaas.com/blog/bring-gitops-to-your-openfaas-functions-with-argocd/) or [Flux v1](https://www.openfaas.com/blog/openfaas-flux/). Stay tuned for a post on Flux v2 which we have in the works, keep in touch by [following us on Twitter](https://twitter.com/openfaas).
 
-Of course deploying functions is only part of the story, you'll also need to build them, so checkout my examples in my latest eBook on OpenFaaS: [Serverless For Everyone Else](https://gumroad.com/l/serverless-for-everyone-else). You'll find an example with GitHub Actions that works on regular cloud, ARM servers and Raspberry Pi
+Of course deploying functions is only part of the story, you'll also need to build them, so checkout my examples in my latest eBook on OpenFaaS: [Serverless For Everyone Else](http://store.openfaas.com/l/serverless-for-everyone-else). You'll find an example with GitHub Actions that works on regular cloud, ARM servers and Raspberry Pi
 
 Do you have questions, comments or suggestions?
 

@@ -284,7 +284,7 @@ We recently released a new OpenFaaS Pro queue-worker which decreases verbosity o
 
 I'd like to thank Surge for sponsoring this work and for helping to give feedback that we used to improve OpenFaaS and [OpenFaaS Pro](https://docs.openfaas.com/openfaas-pro/introduction/).
 
-> To learn more about timeouts, cron, logs and asynchronous timeouts, pick up a copy of the Official OpenFaaS manual: [Serverless for Everyone Else](https://gumroad.com/l/serverless-for-everyone-else)
+> To learn more about timeouts, cron, logs and asynchronous timeouts, pick up a copy of the Official OpenFaaS manual: [Serverless for Everyone Else](http://store.openfaas.com/l/serverless-for-everyone-else)
 
 If you'd like to know more about anything that I covered today for your team, then feel free to reach out to me at: [alex@openfaas.com](mailto:alex@openfaas.com). Alternatively, you can apply for a trial of OpenFaaS Pro and learn about our commercial services at [openfaas.com/support](https://openfaas.com/support)
 

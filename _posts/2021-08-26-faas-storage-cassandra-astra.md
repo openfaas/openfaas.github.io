@@ -552,7 +552,7 @@ Here are some additional links for taking things further.
 * [Get started with Astra DB](https://dtsx.io/2VYD4I4)
 * [Stargate Data API Gateway](https://stargate.io/?utm_source=openfaas&utm_medium=referral&utm_campaign=node-webapp&utm_term=backend-devplay&utm_content=serverless-storage-functions-openfaas)
 * [Document DB library for Astra DB and Node.js](https://www.npmjs.com/package/@astrajs/collections)
-* [Go deeper with OpenFaaS with Serverless for Everyone Else](https://gumroad.com/l/serverless-for-everyone-else)
+* [Go deeper with OpenFaaS with Serverless for Everyone Else](http://store.openfaas.com/l/serverless-for-everyone-else)
 
 Datastax has a series of live videos that they wanted to share with you, aimed at beginners.
 

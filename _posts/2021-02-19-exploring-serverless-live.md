@@ -115,17 +115,17 @@ Read on for a couple of ways to get started, or to support the community's work.
 
 Still not sure what Serverless is, or if it could be of use to you at home or at work?
 
-<a href="https://gumroad.com/l/serverless-for-everyone-else"><img src="https://camo.githubusercontent.com/4e204e93dcfc33679c997c739fbf4f651fdf268d23961bae6f9b4c25ad4ec145/68747470733a2f2f7062732e7477696d672e636f6d2f6d656469612f45735a3372753258634155513451673f666f726d61743d6a7067266e616d653d6d656469756d" alt="Workshop upgrade" width="80%"></a>
+<a href="http://store.openfaas.com/l/serverless-for-everyone-else"><img src="https://camo.githubusercontent.com/4e204e93dcfc33679c997c739fbf4f651fdf268d23961bae6f9b4c25ad4ec145/68747470733a2f2f7062732e7477696d672e636f6d2f6d656469612f45735a3372753258634155513451673f666f726d61743d6a7067266e616d653d6d656469756d" alt="Workshop upgrade" width="80%"></a>
 
 > You can run OpenFaaS on a cloud VM, your laptop, or a Raspberry Pi. In the hands-on video I'll show you how to build functions in Node.js.
 
 Until Monday 22nd Feb, you can get the video workshop upgrade for free when you buy the DevOps PRO tier.
 
-You can also see how I wrote an OpenFaaS function to get notifications from [Gumroad](https://gumroad.com/l/serverless-for-everyone-else) for sales, and how the free upgrades work, including the logic for sending emails and the promotion end-date.
+You can also see how I wrote an OpenFaaS function to get notifications from [Gumroad](http://store.openfaas.com/l/serverless-for-everyone-else) for sales, and how the free upgrades work, including the logic for sending emails and the promotion end-date.
 
 * [alexellis/gumroad-sales-forwarder](https://github.com/alexellis/gumroad-sales-forwarder/)
 
-Check it out on Gumroad: [Serverless For Everyone Else](https://gumroad.com/l/serverless-for-everyone-else)
+Check it out on Gumroad: [Serverless For Everyone Else](http://store.openfaas.com/l/serverless-for-everyone-else)
 
 ### Already using OpenFaaS?
 

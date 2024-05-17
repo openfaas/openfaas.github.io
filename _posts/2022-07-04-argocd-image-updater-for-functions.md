@@ -360,7 +360,7 @@ To build and push a new version of the images run
 TAG=0.1.4 faas-cli publish -f stack.yml
 ```
 
-If you'd like an example of how we recommend using GitHub Actions with OpenFaaS, see the chapter in [Serverless For Everyone Else](https://gumroad.com/l/serverless-for-everyone-else).
+If you'd like an example of how we recommend using GitHub Actions with OpenFaaS, see the chapter in [Serverless For Everyone Else](http://store.openfaas.com/l/serverless-for-everyone-else).
 
 The logs for the Argo Image Updater show that it is considering 1 annotated application for update. Once it queries the registry for updated images it will detect the new version of our function image and update the openfaas-functions application to use the new version of the marketing-list function.
 

@@ -345,7 +345,7 @@ curl -s \
 
 If you need any additional parameters, like environment variables, labels, etc, you can also set them here, or review the OpenFaaS Swagger definition for more fields.
 
-The [eBook Serverless For Everyone Else](https://gumroad.com/l/serverless-for-everyone-else) has detailed examples on how to use the OpenFaaS REST API.
+The [eBook Serverless For Everyone Else](http://store.openfaas.com/l/serverless-for-everyone-else) has detailed examples on how to use the OpenFaaS REST API.
 
 ## Conclusion
 

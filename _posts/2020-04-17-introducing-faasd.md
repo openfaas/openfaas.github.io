@@ -37,7 +37,7 @@ I've released my first eBook and video workshop called "Serverless For Everyone 
 
 In the labs you'll learn how to deploy faasd, how to use the OpenFaaS UI, CLI and REST API (via `curl`). The book then chances pace into hands-on labs with Node.js where you get to build out functions to query HTTP APIs, add npm modules, configure behaviour with environment variables and then add secrets. To top if off, you write a small CRUD API with Postgresql - all on the same host. The second half of the book concentrates on operational concerns like setting up TLS, or a HTTPS tunnel when you're running behind a firewall and gives detailed instructions on monitoring your functions.
 
-[Check it out on Gumroad](https://gumroad.com/l/serverless-for-everyone-else)
+[Check it out on Gumroad](http://store.openfaas.com/l/serverless-for-everyone-else)
 
 ## "But there's servers in serverless!"
 

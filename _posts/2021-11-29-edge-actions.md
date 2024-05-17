@@ -522,7 +522,7 @@ You may also decide to invoke your function from some internal system like Jenki
 
 When no API or SDK is available for an event source, then faasd can also be used to scrape websites: [Web scraping that just works with OpenFaaS with Puppeteer](https://www.openfaas.com/blog/puppeteer-scraping/). Just note that this blog post will not work on your Raspberry Pi without some additional effort.
 
-In my eBook [Serverless For Everyone Else](https://gumroad.com/l/serverless-for-everyone-else), I show practical examples of how to use the OpenFaaS REST API, connecting to databases, the asynchronous capability, private images and repos, custom domains and monitoring. You can also get a video of me walking through all those steps.
+In my eBook [Serverless For Everyone Else](http://store.openfaas.com/l/serverless-for-everyone-else), I show practical examples of how to use the OpenFaaS REST API, connecting to databases, the asynchronous capability, private images and repos, custom domains and monitoring. You can also get a video of me walking through all those steps.
 
 What if you really want to use K3s or Kubernetes? That's also fine. Everything that I showed you including the GitHub Action and sample code will work with K3s or Kubernetes running on your Raspberry Pi or edge device. You'll be paying a tax in CPU, memory and wear and tear on your SD card, but if you're already heavily committed to Kubernetes, the tradeoffs may be worthwhile. I spoke about them and showed real-world use-cases in my talk at KubeCon 2020.
 

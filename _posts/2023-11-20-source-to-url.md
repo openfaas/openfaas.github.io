@@ -289,11 +289,11 @@ The forth part of this tutorial is to create a custom domain and TLS certificate
 
 The Ingress Operator is an abstraction over Kubernetes Ingress that makes it quick and easy to create custom Ingress records configured to expose a function over a custom HTTP path or domain, or both. Access to functions is defined using a "FunctionIngress" Custom Resource Definition (CRD).
 
-You'll find [examples of FunctionIngress in the documentation](https://docs.openfaas.com/reference/ssl/kubernetes-with-cert-manager/).
+You'll find [examples of FunctionIngress in the documentation](https://docs.openfaas.com/reference/tls-functions/).
 
 It's not a compulsory component, and you could work with Ingress directly, or even [Istio](https://istio.io) if you wished.
 
-You'll need to have the [Ingress Operator](https://docs.openfaas.com/reference/ssl/kubernetes-with-cert-manager/#how-to-enable-the-openfaas-ingressoperator) enabled in the values.yaml file for OpenFaaS.
+You'll need to have the [Ingress Operator](https://docs.openfaas.com/reference/tls-functions/) enabled in the values.yaml file for OpenFaaS.
 
 Then, create a DNS record for the user's function.
 

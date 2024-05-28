@@ -300,7 +300,7 @@ spec:
   path: "/v1/user/(.*)"
 ```
 
-See also: [REST-style API mapping for your functions](https://docs.openfaas.com/reference/ssl/kubernetes-with-cert-manager/#30-rest-style-api-mapping-for-your-functions)
+See also: [REST-style API mapping for your functions](https://docs.openfaas.com/reference/tls-functions/)
 
 ## Wrapping up
 

@@ -68,7 +68,7 @@ I will be using Nginx for today's tutorial:
 helm install stable/nginx-ingress --name nginxingress --set rbac.create=true
 ```
 
-* [Install the cert-manager](https://docs.openfaas.com/reference/ssl/kubernetes-with-cert-manager/#10-ssl-for-the-gateway) (optional)
+* [Install the cert-manager](https://docs.openfaas.com/reference/tls-openfaas/) (optional)
 
 Installing the cert-manager to get automatic TLS certificates is optional but I highly recommend it. I will be using it today.
 
@@ -86,7 +86,7 @@ The easiest way to create DNS records is with the DigitalOcean CLI: [install doc
 
 The IngressOperator automatically manages the creation of custom ingress rules and TLS certificates for your functions using a new CRD called `FunctionIngress` introduced by Alex in the [previous blog post](https://www.openfaas.com/blog/custom-domains-function-ingress/).
 
-Lets deploy the operator to our cluster following the instructions at [the documentation](https://docs.openfaas.com/reference/ssl/kubernetes-with-cert-manager/#20-ssl-and-custom-domains-for-functions):
+Lets deploy the operator to our cluster following the instructions at [the documentation](https://docs.openfaas.com/reference/tls-functions/):
 
 ```sh
 git clone https://github.com/openfaas-incubator/ingress-operator

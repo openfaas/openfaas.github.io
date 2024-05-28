@@ -232,7 +232,7 @@ spec:
       kind: "Issuer"
 ```
 
-For more see the docs: [TLS and custom domains for functions](https://docs.openfaas.com/reference/ssl/kubernetes-with-cert-manager/#20-tls-and-custom-domains-for-functions)
+For more see the docs: [TLS and custom domains for functions](https://docs.openfaas.com/reference/tls-functions/)
 
 ## Wrapping up
 

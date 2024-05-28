@@ -63,7 +63,7 @@ helm install stable/nginx-ingress --name nginxingress --set rbac.create=true
 
 Using TLS is optional, but highly recommended and I will be setting it up today.
 
-Follow the steps for "Install cert-manager" and "Configure cert-manager" from the [OpenFaaS documentation here](https://docs.openfaas.com/reference/ssl/kubernetes-with-cert-manager/#10-ssl-for-the-gateway).
+Follow the steps for "Install cert-manager" and "Configure cert-manager" from the [OpenFaaS documentation here](https://docs.openfaas.com/reference/tls-openfaas/).
 
 > Note: You can skip the steps for creating a `Certificate` and `Ingress` entry for the gateway.
 

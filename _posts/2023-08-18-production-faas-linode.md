@@ -392,7 +392,7 @@ arkade install openfaas-ingress \
     --domain openfaas.$DOMAIN
 ```
 
-If you want to create Kubernetes YAML files for the Ingress, instead of using arkade, then see these instructions: [TLS for OpenFaaS](https://docs.openfaas.com/reference/ssl/kubernetes-with-cert-manager/).
+If you want to create Kubernetes YAML files for the Ingress, instead of using arkade, then see these instructions: [TLS for OpenFaaS]((https://docs.openfaas.com/reference/tls-openfaas/).
 
 You can now run `arkade info openfaas` to get the instructions to log in with the CLI and to how to get the password to access the UI.
 

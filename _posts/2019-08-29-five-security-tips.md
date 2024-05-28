@@ -58,7 +58,7 @@ Rather than force developers to set up or configure TLS, we give them the option
 
 See the following guides to set up TLS:
 
-* [Set up TLS for OpenFaaS on Kubernetes](https://docs.openfaas.com/reference/ssl/kubernetes-with-cert-manager/)
+* [Set up TLS for OpenFaaS on Kubernetes](https://docs.openfaas.com/reference/tls-openfaas/)
 * [Production readiness guide](https://docs.openfaas.com/architecture/production/)
 
 Once configured for your OpenFaaS Gateway, all traffic is encrypted with TLS between the client and the gateway.

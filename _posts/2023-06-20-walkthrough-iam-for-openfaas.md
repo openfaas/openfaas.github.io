@@ -97,134 +97,11 @@ Add the OpenFaaS helm chart repo:
 helm repo add openfaas https://openfaas.github.io/faas-netes/
 ```
 
-Configure ingress to make the OpenFaaS gateway and dashboard accessible to the users.
+Follow the instructions below to set up TLS for the gateway and the dashboard using certificates from Let's Encrypt:
 
-You will need to create two DNS entries for the domains the gateway and dashboard will be exposed at. These can either be on the public internet or kept within the internal network.
+* [Setup TLS for OpenFaaS](https://docs.openfaas.com/reference/tls-openfaas)
 
-The below instructions show how to set up Ingress with a TLS certificate using Ingress Nginx. You can also use any other ingress-controller, inlets-pro or an Istio Gateway.
-
-Install [cert-manager](https://cert-manager.io/docs/), which is used to manage TLS certificates.
-
-You can use Helm, or [arkade](https://github.com/alexellis/arkade):
-
-```bash
-arkade install cert-manager
-```
-
-Install ingress-nginx using arkade or Helm:
-
-```bash
-arkade install ingress-nginx
-```
-
-Istio, and other solutions for Ingress will also work in the same way.
-
-Create an ACME certificate issuer:
-
-```bash
-export EMAIL="mail@example.com"
-
-cat > issuer-prod.yaml <<EOF
-apiVersion: cert-manager.io/v1
-kind: Issuer
-metadata:
-  name: letsencrypt-prod
-  namespace: openfaas
-spec:
-  acme:
-    server: https://acme-v02.api.letsencrypt.org/directory
-    email: $EMAIL
-    privateKeySecretRef:
-      name: letsencrypt-prod
-    solvers:
-    - http01:
-        ingress:
-          class: nginx
-EOF
-```
-
-```bash
-kubectl apply -f issuer-prod.yaml
-```
-
-Create an ingress record for the gateway:
-
-```bash
-export DOMAIN="gateway.openfaas.example.com"
-
-cat > gateway-ingress.yaml <<EOF
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  annotations:
-    cert-manager.io/issuer: letsencrypt-prod
-    kubernetes.io/ingress.class: nginx
-  labels:
-    app: gateway
-  name: gateway
-  namespace: openfaas
-spec:
-  rules:
-  - host: $DOMAIN
-    http:
-      paths:
-      - backend:
-          service:
-            name: gateway
-            port:
-              number: 8080
-        path: /
-        pathType: Prefix
-  tls:
-  - hosts:
-    - $DOMAIN
-    secretName: gateway-cert
-EOF
-```
-
-```bash
-kubectl apply -f gateway-ingress.yaml
-```
-Create an ingress record for the dashboard:
-
-```bash
-export DOMAIN="dashboard.openfaas.example.com"
-
-cat > dashboard-ingress.yaml <<EOF
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: openfaas-dashboard
-  namespace: openfaas
-  labels:
-    app: openfaas-dashboard
-  annotations:
-    cert-manager.io/issuer: letsencrypt-prod
-    kubernetes.io/tls-acme: "true"
-    nginx.ingress.kubernetes.io/ssl-redirect: "true"
-    kubernetes.io/ingress.class: nginx
-spec:
-  rules:
-  - host: $DOMAIN
-    http:
-      paths:
-      - backend:
-          service:
-            name: dashboard
-            port:
-              number: 8080
-        path: /
-        pathType: Prefix
-  tls:
-  - hosts:
-    - $DOMAIN
-    secretName: dashboard-cert
-EOF
-```
-
-```bash
-kubectl apply -f dashboard-ingress.yaml
-```
+Whilst following these instructions, you'll create a `tls.yaml` file, which will be added to the `helm upgrade` command.
 
 Create a signing key for the OpenFaaS issuer. It is used by the OIDC plugin to sign access tokens issued by OpenFaaS.
 
@@ -275,7 +152,8 @@ helm repo update \
  && helm upgrade openfaas \
   --install openfaas/openfaas \
   --namespace openfaas  \
-  -f values-iam.yaml
+  -f values-iam.yaml \
+  -f tls.yaml
 ```
 
 As part of OpenFaaS for Enterprises we'll be enabling [multi namespace for functions](https://docs.openfaas.com/reference/namespaces/). Multiple namespaces can be used for logical separation between stages like dev, staging and production or for various teams or tenants.
@@ -503,8 +381,9 @@ Update the OpenFaaS deployment:
 ```bash
 helm upgrade openfaas \
   --install openfaas/openfaas \
-  --namespace openfaas  \
-  -f values-iam.yaml
+  --namespace openfaas \
+  -f values-iam.yaml \
+  -f tls.yaml
 ```
 
 ### Authenticate with the faas-cli

@@ -175,7 +175,7 @@ It will look something like this:
 
 Save the result as token.txt.
 
-## Perform a token exchange for an Function Token
+## Perform a token exchange for a Function Token
 
 There are two types of token exchange supported in OpenFaaS for Enterprises:
 

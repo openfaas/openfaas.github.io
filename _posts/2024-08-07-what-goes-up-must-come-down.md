@@ -13,6 +13,8 @@ author_staff_member: alex
 hide_header_image: true
 ---
 
+We look at the story of autoscaling functions with OpenFaaS and Kubernetes - past, present, and future.
+
 This article has two parts, in the first, we'll look at the evolution of autoscaling in OpenFaaS going back to the original version in 2016, along with how and why it changed, and continues to be improved. In the second part we will explain what needs to be considered when scaling up and down to prevent any dropped messages or HTTP errors.
 
 ## 1. The story so far

@@ -9,12 +9,12 @@
                 A sandbox for your customer's code
             </h2>
             <p class="has-text-weight-light is-size-5 is-size-4-desktop has-text-grey mt-2">
-                With OpenFaaS Enterprise, you can take code snippets from your customers and use them to extend your platform.
+                With OpenFaaS Enterprise, you can take code snippets from customers and use them to extend your own product.
             </p>
             <p class="has-text-weight-light is-size-5 is-size-4-desktop has-text-grey mt-2">
-                You can use the Function Builder API to turn source code into functions, which can be deployed via the OpenFaaS REST API.
+                The Function Builder API turns source code into functions, to deployed via REST API.
             <p class="has-text-weight-light is-size-5 is-size-4-desktop has-text-grey mt-2">
-                Network policies, resource limits, a runtime class, read-only filesystem and dedicated namespace means their code will be as isolated as possible.
+                Multi-tenancy is supported through Kubernetes network policies, resource limits, runtime classes, read-only filesystems, and dedicated namespaces per tenant.
             </p>
             <p class="has-text-weight-light is-size-5 is-size-4-desktop has-text-grey mt-2">
                 Who's doing this already? Waylay (for custom functions for industrial IoT), Patchworks (customer extensions for e-commerce), LivePerson (for customer extensions) and Cognite (for custom ML/data-science functions).
@@ -29,13 +29,13 @@
                 OpenFaaS Pro autoscaling can be fine-tuned to match the execution pattern of your functions, and to retry failed invocations.
             </p>
             <p class="has-text-weight-light is-size-5 is-size-4-desktop has-text-grey mt-2">
-                Through JetStream for OpenFaaS, you can fan out to many thousands of executions, executing in parallel and scaling automatically.
+                Through JetStream for OpenFaaS, you can fan out to many thousands of executions, executing in parallel, and scaling automatically.
             </p>
             <p class="has-text-weight-light is-size-5 is-size-4-desktop has-text-grey mt-2">
-                ML models can be deployed as functions, and scaled, even if they run for a long time.
+                Batch jobs and ML models can be deployed as functions, and scaled up and down properly, even if they run for a very long time.
             </p>
             <p class="has-text-weight-light is-size-5 is-size-4-desktop has-text-grey mt-2">
-                See also: <a href="https://www.openfaas.com/blog/fan-out-and-back-in-using-functions/" style="text-decoration: underline;">Exploring the Fan out and Fan in pattern with OpenFaaS</a>
+                See also: <a href="https://www.openfaas.com/blog/fan-out-and-back-in-using-functions/" style="text-decoration: underline;">Explore the Fan out and Fan in pattern with OpenFaaS</a>
             </p>
         </div>
 
@@ -44,15 +44,15 @@
                 Kubernetes, made usable
             </h2>
             <p class="has-text-weight-light is-size-5 is-size-4-desktop has-text-grey mt-2">
-                OpenFaaS enriches Kubernetes with scaling, queueing, monitoring and event triggers, so your team can focus on shipping features.
+                OpenFaaS enriches Kubernetes with scaling, queueing, monitoring, and event triggers, so your team can focus on shipping features.
             <p class="has-text-weight-light is-size-5 is-size-4-desktop has-text-grey mt-2">
-                Customers have told us that even from early on, they were shipping new functionality to production within hours.
+                Compared to plain Kubernetes, customers said that they are now shipping functionality to production within hours.
             </p>
             <p class="has-text-weight-light is-size-5 is-size-4-desktop has-text-grey mt-2">
                 Functions can be run on-demand, or on a schedule, and can be triggered by events from your existing systems like Apache Kafka or AWS. If you invoke them asynchronously, you'll also get to benefit from retries without writing any additional code.
             </p>
             <p class="has-text-weight-light is-size-5 is-size-4-desktop has-text-grey mt-2">
-                Deel migrated from AWS Lambda to Kubernetes, only to find that their code would no longer scale how they needed. They reached out to us, and we wrote up a reference architecture. 
+                deel.com migrated from AWS Lambda to Kubernetes, only to find that their code would no longer scale how they needed. They reached out to us, and we wrote up a reference architecture. 
             </p>
             </p>
             <p class="has-text-weight-light is-size-5 is-size-4-desktop has-text-grey mt-2">
@@ -65,7 +65,7 @@
                 One function, many clouds
             </h2>
             <p class="has-text-weight-light is-size-5 is-size-4-desktop has-text-grey mt-2">
-                Does your product need to run on multiple different clouds? Perhaps you're considering writing an abstraction layer to cover your bases?
+                Does your product need to run on different clouds, including on-premises? Perhaps you're considering writing an abstraction layer to cover your bases?
             <p class="has-text-weight-light is-size-5 is-size-4-desktop has-text-grey mt-2">
                 When faced with this question, <a href="https://www.openfaas.com/blog/low-code-automation/" style="text-decoration: underline;">Waylay.io</a> built their low-code platform with OpenFaaS.
             </p>

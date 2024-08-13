@@ -1,6 +1,6 @@
 ---
 title: How to Build Functions with the Go SDK for OpenFaaS
-description: Learn how to build functions from source with the Function builder API and Go SDK for OpenFaaS
+description: Learn how to build functions from source with the Function Builder API and Go SDK for OpenFaaS
 date: 2024-08-13
 categories:
 - kubernetes
@@ -18,7 +18,7 @@ In this blog post I'll show you how to build functions using the new `builder` p
 
 You can use the [builder package](https://pkg.go.dev/github.com/openfaas/go-sdk/builder) to access the the Function Builder API, which takes source code and builds container images without needing root or Docker. It's designed for SaaS companies who want their users to be able to supply their own code to integrate into their product. It can also be used by a platform or managed services team that manages a multi-tenant OpenFaaS environment.
 
-As a general rule, we see customers provide an AWS Lambda-like experience for their users, where code is typed into a text box using a web IDE, and then deployed with a single click.
+Since the Function Builder API has been available, we've mainly seen customers create a user-experience that resembles AWS Lambda, but for their own users. Users open a dashboard hosting a web IDE like Ace, CodeMirror or Monaco and supply code, it's then built and deployed to OpenFaaS via a single click.
 
 **Customer spotlight**
 
@@ -28,25 +28,42 @@ Whether the *Custom Script* is pre-supplied by the Patchworks team, or created b
 
 For an example of the user-experience Patchworks created for their users, see: [Patchworks docs: Adding & testing custom scripts](https://doc.wearepatchworks.com/product-documentation/developer-hub/custom-scripting/adding-and-testing-custom-scripts#creating-a-new-script)
 
-[E2E Networks Limited](https://www.e2enetworks.com/) is an NSE-listed, infrastructure company headquartered in India. They integrated OpenFaaS more directly, and provide an additional tab alongside other services such as Computer, Kubernetes, & VPCs in their cloud dashboard. Users can supply code using predefined OpenFaaS templates, invoke their functions, and monitor the results in one place. E2E Networks also supply a CLI and GitHub Actions integration.
+[E2E Networks Limited](https://www.e2enetworks.com/) is an NSE-listed, infrastructure company headquartered in India. They turned to OpenFaaS to offer customers a Function As A Service (FaaS) offering alongside their more traditional VPC, Compute, Object Storage, and Kubernetes services, with a goal to help customers migrate from existing cloud vendors. Users can supply code using predefined OpenFaaS templates, invoke their functions, and monitor the results in one place. E2E Networks also supply a CLI and GitHub Actions integration.
 
 See also: [E2E networks: Function as a Service (FaaS)](https://docs.e2enetworks.com/faas_doc/faas.html)
 
 **Contents**
 
 * A quick recap on function templates
-* Complete example with Go SDK
+* Complete example with Go SDK and other considerations
+* How to create a tenant namespace and deploy the function
 * How to build multi-arch images
 * How to pass build-arguments
 * Conclusion
 
 ## A quick recap on function templates
 
-OpenFaaS is a serverless platform for building, deploying, [monitoring](https://docs.openfaas.com/openfaas-pro/grafana-dashboards/), [triggering](https://docs.openfaas.com/reference/triggers/) and [scaling](https://docs.openfaas.com/architecture/autoscaling/) functions on Kubernetes. The logical unit is the Open Container Initiative (OCI) image which contains the function code and dependencies. The start-up process is generally the optional [watchdog](https://docs.openfaas.com/architecture/watchdog/) which is responsible for starting the process that handles HTTP requests from the OpenFaaS API. Existing code or containers can also be supplied so long as it conforms to the workload contract, and exposes HTTP traffic along with a readiness endpoint.
+OpenFaaS is a serverless platform for building, deploying, [monitoring](https://docs.openfaas.com/openfaas-pro/grafana-dashboards/), [triggering](https://docs.openfaas.com/reference/triggers/), and [scaling](https://docs.openfaas.com/architecture/autoscaling/) functions on Kubernetes. The logical unit is the Open Container Initiative (OCI) image which contains the Operating System (OS), function's source code and all its dependencies. The start-up process is generally the (optional) [watchdog](https://docs.openfaas.com/architecture/watchdog/) which is responsible for starting the process that handles HTTP requests from the OpenFaaS API. Existing code or containers can also be supplied so long as they conform to the OpenFaaS workload contract, and expose HTTP traffic on port 8080.
 
-The purpose of a template is to make starting a new function easy, without having to think about Dockerfiles, HTTP frameworks, or dependency management. Templates are stored in Git, and the built-in tooling in `faas-cli` can fetch them and use them to scaffold a new function. Templates can be written for any language, so long as they can execute on Linux, expose a HTTP server, and can be built into a container image using a Dockerfile.
+The purpose of a template is to make creating a new function easy, without having to think about boilerplate code like Dockerfiles, HTTP frameworks, or dependency management. The official templates are fetched from Git repositories, and the built-in tooling in `faas-cli` can download them to scaffold new functions. Templates can be written for any language, so long as they target Linux, expose a HTTP server, and can be built into a container image using a Dockerfile.
 
-For the [golang-middleware](https://github.com/openfaas/golang-http-template) template, whilst users only need to work with a `go.mod` and `handler.go` file, if you look at the Git repository, you'll see the code that starts the process, along with the Dockerfile etc:
+Let's take the [golang-middleware](https://github.com/openfaas/golang-http-template) template as an example.
+
+This is how the CLI can be used to pull the template and scaffold a new function, notice how the user only needs to edit the `handler.go` file, and the `go.mod` file if they need to add dependencies.
+
+```bash
+$ faas-cli template store pull golang-middleware
+
+$ faas-cli new --lang golang-middleware hello-world-go
+
+$ ls
+hello-world-go.yaml
+hello-world-go/
+hello-world-go/handler.go
+hello-world-go/go.mod
+```
+
+If you look at the Git repository, or the local `template` folder, you'll see all the additional files which are kept hidden from the user. This includes main.go that starts the process and HTTP server, implements a graceful shutdown, etc, and the multi-arch Dockerfile:
 
 ```
 template/golang-middleware
@@ -61,7 +78,7 @@ template/golang-middleware/function/go.mod
 template/golang-middleware/go.mod
 ```
 
-As a general rule, users will edit the files in the `function` directory, and template authors write and maintain the files outside of that directory.
+In order to reduce the cognitive load, and repetition between functions, code for the user is kept in the `function` directory, and template authors write and maintain the files outside of that directory.
 
 Every time a build is performed, the CLI will create a folder such as `build/hello-world`, then it writes the base content of the template into that directory and then copies the user's code into the `function` directory. The `build/hello-world` directory is then used as the build context for the container build.
 

@@ -14,9 +14,11 @@ author_staff_member: alex
 hide_header_image: true
 ---
 
-In this blog post I'll show you the new `builder` package for the [Go SDK](https://github.com/openfaas/go-sdk) for OpenFaaS.
+In this blog post I'll show you how to build functions using the new `builder` package for the [Go SDK](https://github.com/openfaas/go-sdk) for OpenFaaS.
 
-You can use the builder package to invoke the Function Builder API which takes source code and builds container images without needing Docker or root. It's designed for SaaS companies who want their users to supply their own code to integrate into their product. It can also be used by a platform team that supplies a multi-tenant OpenFaaS environments.
+You can use the [builder package](https://pkg.go.dev/github.com/openfaas/go-sdk/builder) to access the the Function Builder API, which takes source code and builds container images without needing root or Docker. It's designed for SaaS companies who want their users to be able to supply their own code to integrate into their product. It can also be used by a platform or managed services team that manages a multi-tenant OpenFaaS environment.
+
+As a general rule, we see customers provide an AWS Lambda-like experience for their users, where code is typed into a text box using a web IDE, and then deployed with a single click.
 
 **Customer spotlight**
 

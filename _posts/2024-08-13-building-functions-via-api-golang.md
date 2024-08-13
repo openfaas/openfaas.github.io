@@ -16,7 +16,7 @@ hide_header_image: true
 
 In this blog post I'll show you how to build functions using the new `builder` package for the [Go SDK](https://github.com/openfaas/go-sdk) for OpenFaaS.
 
-You can use the [builder package](https://pkg.go.dev/github.com/openfaas/go-sdk/builder) to access the the Function Builder API, which takes source code and builds container images without needing root or Docker. It's designed for SaaS companies who want their users to be able to supply their own code to integrate into their product. It can also be used by a platform or managed services team that manages a multi-tenant OpenFaaS environment.
+You can use the [builder package](https://pkg.go.dev/github.com/openfaas/go-sdk/builder) to access the Function Builder API, which takes source code and builds container images without needing root or Docker. It's designed for SaaS companies who want their users to be able to supply their own code to integrate into their product. It can also be used by a platform or managed services team that manages a multi-tenant OpenFaaS environment.
 
 Since the Function Builder API has been available, we've mainly seen customers create a user-experience that resembles AWS Lambda, but for their own users. Users open a dashboard hosting a web IDE like Ace, CodeMirror or Monaco and supply code, it's then built and deployed to OpenFaaS via a single click.
 
@@ -86,7 +86,7 @@ Templates can be shared with the community, or kept private within an organizati
 
 ## Complete example with Go SDK
 
-The Function Builder API takes a Docker build context as an input, and returns the URL to a published image, along with the logs as the result. It can run as non-root, and does not require Docker to be installed. The feature is available in OpenFaaS for Enterprises and is deployed via [separate Helm chart](https://github.com/openfaas/faas-netes/tree/master/chart/pro-builder).
+The Function Builder API takes a Docker build context as an input, and returns the URL to a published image, along with the logs from the container builder. It can run as non-root, and does not require Docker to be installed. The feature is available in OpenFaaS for Enterprises and is deployed via [separate Helm chart](https://github.com/openfaas/faas-netes/tree/master/chart/pro-builder).
 
 You can read how the Function Builder API works in the [OpenFaaS documentation](https://docs.openfaas.com/openfaas-pro/builder/), which also includes step-by-step examples using Bash, `curl`, and `tar` to show exactly how to prepare a bundle of source code and configuration for the builder.
 
@@ -206,7 +206,7 @@ The `builder.CreateBuildContext` call takes the `lang` variable which is the nam
 
 The `faas-cli` is able to clone templates from a Git repository by looking up a JSON manifest file that indexes the various public templates, however you are likely going to have your own set of private templates.
 
-You aren't limited to hosting your templates in a public Git repository like the official templates, you could do any of the following as examples:
+You aren't limited to hosting your templates in a public Git repository like the official templates, you could do any of the following for example:
 
 * Embedded in your application using Go's [`embed` package](https://pkg.go.dev/embed)
 * Stored in a Git repository and cloned at build-time
@@ -267,7 +267,7 @@ The Function Builder API supports building images for multiple different CPU arc
 
 It will increase build latency, waste CPU cycles and use up storage space, if you needlessly build multi-arch images. However, if your worker nodes are heterogeneous, or you want to support a wider range of devices for deployment, then multi-arch images make more sense. All the container images for the core OpenFaaS platform are built for both `linux/amd64` and `linux/arm64` to support Ampere Altra, AWS Graviton, and IoT devices like the Raspberry Pi,
 
-64-Arm images be be built either on a `linux/arm64` node, or on a `linux/amd64` host using an emulation layer such as QEMU. Having dedicated Arm nodes for Arm builds requires additional resources, but is a much faster option than emulation. If you want to publish a multi-arch image in one shot, then you will have to endure emulation of at least one of the two build platforms.
+64-Arm images can be built either on a `linux/arm64` node, or on a `linux/amd64` host using an emulation layer such as QEMU. Having dedicated Arm nodes for Arm builds requires additional resources, but is a much faster option than emulation. If you want to publish a multi-arch image in one shot, then you will have to endure emulation of at least one of the two build platforms.
 
 And for a completely optimised build, you'll perform three builds. One `linux/amd64` build on `linux/amd64` hardware, one `linux/arm64` build on `linux/arm64` hardware, and then a final build which ties together the references into a single image manifest. Practically speaking, the third build can be optimised away by using a Go container library such as [github.com/google/go-containerregistry](github.com/google/go-containerregistry) to write the manifest without invoking a third build.
 

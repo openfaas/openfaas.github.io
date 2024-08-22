@@ -28,6 +28,8 @@ One approach such as RPS or Capacity may yield good results with many types of f
 
 Look out for how latency is affected during peak times, which HTTP status codes you receive, and don't rule out invoking functions asynchronously, to defer and buffer the work.
 
+To learn more about the built-in scaling options, see: [Docs: Auto-scaling your functions](https://docs.openfaas.com/architecture/autoscaling/)
+
 ## Overview - How scaling on custom metrics works
 
 With the current design of the OpenFaaS Autoscaler, you need to do three things:
@@ -376,4 +378,8 @@ In part one we also introduced the stable window for scaling down, which can be 
 
 OpenFaaS customers can reach out to us at any time via email for help and advice on autoscaling and general configuration of the platform. We also have a [weekly call](https://docs.openfaas.com/community/) that is free to attend, where you'll get to speak to other customers, share experiences, suggest improvements, and ask questions.
 
-See also: [On Autoscaling - What Goes Up Must Come Down](/blog/what-goes-up-must-come-down/)
+See also:
+
+* [On Autoscaling - What Goes Up Must Come Down](/blog/what-goes-up-must-come-down/)
+* [Docs: Scale to zero](https://docs.openfaas.com/openfaas-pro/scale-to-zero/)
+* [Docs: Grafana metrics & monitoring](https://docs.openfaas.com/openfaas-pro/grafana-dashboards/)

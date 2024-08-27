@@ -70,6 +70,10 @@ The first half `ceil(sum(irate ( pod_cpu_usage_seconds_total{}[1m])*1000) by (fu
 
 The second half: `* on (function_name) avg by (function_name) (gateway_service_target_load{scaling_type="cpu"}  > bool 1` is an optimisation which means this rule is only evaluated when a function has a label set of `com.openfaas.scaling.type: cpu`.
 
+You can set recording rules permanently [by editing values.yaml](https://docs.openfaas.com/architecture/autoscaling/#custom-autoscaling-rules), or insert them temporarily by running `kubectl edit -n openfaas configmap/prometheus-config` followed by `kubectl rollout restart -n openfaas deploy/prometheus`.
+
+Bear in mind that if you're port-forwarding Prometheus to your local machine, you will need to terminate the command and to run it again after the new version of the Pod is available.
+
 ### 3. Set the scaling type on your function
 
 Here is a redacted example of how a function can target the `cpu` recording rule:

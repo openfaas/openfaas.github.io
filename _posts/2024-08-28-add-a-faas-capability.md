@@ -79,7 +79,7 @@ You've considered building your own solution, and may have explored options like
 
 Your development team already works on a product, and is quite capable of front-end and back-end development, so when given well documented APIs and occasional guidance, you believe that they can integrate them into the product within a relatively short period of time. 
 
-An example user is Cognite, work on a platform for the oil industry. Their users can provide data-science functions in Python or JavaScript which run against the stream of data coming from offshore oil rigs. We discuss Waylay and Patchworks later in this article, both of whom fit this profile.
+The team at Cognite integrated OpenFaaS to create an offering for data-scientists at oil mining companies. Their users provide functions in Python or JavaScript which run simulations and fault prediction models using huge sets of data from the oil rigs. We discuss Waylay and Patchworks later in this article, both of whom also fit this profile.
 
 **3. Your business provides cloud computing**
 

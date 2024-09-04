@@ -16,22 +16,28 @@ author_staff_member: alex
 hide_header_image: true
 ---
 
-Learn how Alex bought a set of premium chisels by monitoring the price using HTML scraping and a cron job with OpenFaaS. You can apply the same technique for things you'd like to buy or monitor, or for automating other tasks.
+Learn how Alex bought a set of premium woodworking chisels by monitoring their price using HTML scraping and a cron job with OpenFaaS. You can apply the same technique for things you'd like to monitor & buy, or for automating other tasks.
+
+Here I am cutting dovetails for a [Dutch Tool Chest](https://www.finewoodworking.com/2021/11/01/how-to-build-a-dutch-tool-chest), a cabinet for storing tools with a slanted lid.
+
+![Dovetailing my Dutch Tool Chest in Pine](/images/2024-09-stockcheck/dovetailing.jpg)
+
+> Above: A fine chisel made from traditional O1 carbon steel by one of the last English toolmakers, [Ashley Iles](https://www.youtube.com/watch?v=d7Hu7UaAuVg).
 
 Let me start by saying that not all code and not all functions need to live forever. I think as developers we tend to associate code with permanence, but very few things are permanent, and most things change over time. So I think it's OK if it serves a temporary purpose for a single task or a short period of time, if it gets a job done.
 
 And what better way to automate a task than with a short block of code deployed as a function, without any boiler plate Dockerfiles, HTTP servers or deployment scripts?
 
-I wanted to purchase a set of premium Lie Nielsen chisels and had been scouring the used market including eBay for a while. Eventually I found a set of 4 which was marked at around 86 GBP per item, a fairly cheeky price for a second hand item, considering they are only 100GBP brand new. I phone the company and said I'd make an offer and they could sell them today, but they declined and said to check back in September when they'd reduce the price if they hadn't sold.
+Whilst I'm very fond of Ashley Iles chisels, I wanted to purchase a set of Lie Nielsen chisels (made in the USA). They're particularly expensive since they are an import, so I had been scouring the used market including for a while. Eventually I found a set of 4 which was marked at around 86 GBP per item, a fairly cheeky price for a second hand item, considering they are only 100GBP brand new with a full year's warranty.
 
-It wasn't enough of a deal for me to pay that price, so I kept an eye on eBay with a search alert and as September neared, I decided to look into their website to decide if I could parse the price and send myself an alert via email, Slack or Discord, if it changed in some way.
+I phoned the company and said I'd make an offer and they could sell them today, but they declined and said to check back in September when they'd reduce the price if they hadn't sold. It wasn't enough of a deal for me to pay that price, so I kept an eye on eBay with a search alert and as September neared, I decided to look into their website to decide if I could parse the price and send myself an alert via email, Slack or Discord, if it changed in some way.
 
 ![Conceptual architecture](/images/2024-09-stockcheck/conceptual.png)
 > We'll also cover using a traditional HTML parser first, then compare it to using a Large Language Model (LLM) for the same task.
 
 At the end of the article, you can see the complete function code, how to design a system prompt to use an LLM instead, and some discussion on real-life uses-cases and other ideas for combining functions, cron jobs and LLMs.
 
-## faasd or OpenFaaS CE with Kubernetes?
+## Should we use faasd or OpenFaaS CE with Kubernetes?
 
 For these types of automation functions, I prefer to use faasd over OpenFaaS CE with Kubernetes, but if you have a cluster set up already it'll work just as well.
 
@@ -134,6 +140,8 @@ Then it jumped out at me, they'd made it so easy:
 That was it, I just needed an XPath to get a meta tag with the property "og:price:amount" and I could get the price. Then I thought it'd also be worth checking the availability, so I could get a notification if they went out of stock.
 
 ## Picking a language
+
+OpenFaaS functions can be written in whatever language you like, if there is already an [official template](https://docs.openfaas.com/languages/overview/) or a community one, you'll be able to pull it down and scaffold your function immediately. If you need something custom, you can often adapt what's already there, or write your own.
 
 I'm no stranger to web automation and testing using Selenium or scraping tools like [Scrapy](https://scrapy.org/) (Python) or [cheerio](https://cheerio.js.org/) (Node), and have written [stock checkers in the past for the Raspberry Pi, and then the Zero](https://www.openfaas.com/blog/searching-for-raspberrypi/).
 

@@ -646,20 +646,19 @@ The simplest option would be a remotely hosted cloud database, or even an Object
 
 ## So did it work?
 
-It did indeed work. I felt the team at Classic Hand Tools were rather stingy with their discount, but I was probably the first person to find out about the price change.
+It did indeed work. I felt the team at Classic Hand Tools were rather stingy with their discount, but I was probably the first person to find out about the price change so the function achieved its goal.
 
-Monitoring the function's logs in the OpenFaaS Pro UI:
+The next morning I clicked on the Logs tab for the function and selected "24h" in the OpenFaaS Pro dashboard, that showed me what happened leading up to the alert:
 
 ![Dropped prices](/images/2024-09-stockcheck/detected.png)
 
-Then the Discord alert I got when I checked my phone:
+Here's the Discord alert I got when I checked my phone:
 
 ![Discord alert](/images/2024-09-stockcheck/discord.png)
 
-Whilst it's overkill for this task, and standard HTML scraping and parsing techniques worked perfectly well, I decided to try out running a local Llama3.1 8B model on my Nvidia RTX 3090 GPU to see if it was up to the task.
+Whilst it's overkill for this task because standard HTML scraping and parsing techniques worked perfectly well, I decided to try out running a local Llama3.1 8B model on my Nvidia RTX 3090 GPU to see if it was up to the task.
 
 It wasn't until I ran `ollama run llama3.1:8b-instruct-q8_0` and pasted in my prompt that I realised just how long that HTML was was. It was huge, over 681KB of text, this is generally considered a large context window for a Large Language Model.
-
 
 {% raw %}
 ```
@@ -700,6 +699,12 @@ Provide the result in the following format, but avoid using the example in your 
 If a local LLM wasn't up to the task, then we could have also used a cloud-hosted service like the OpenAI API, or one of the many other options that charge per request.
 
 And in the case that the local LLM aced the task, we could also try scaling down to something that can run better on CPU, or that doesn't require so many resources. I tried out the phi3 model from Microsoft which was designed with this in mind. After setting the system prompt, to my surprise performed the task just as well and returned the same JSON for me.
+
+To integrate a local LLM with your function, you can package [Ollama](https://ollama.com/) as a container image using the instructions on our sister site: inlets.dev - [Access local Ollama models from a cloud Kubernetes Cluster](https://inlets.dev/blog/2024/08/09/local-ollama-tunnel-k3s.html). There are a few options here including deploying the LLM as a function, or deploying it as a regular Kubernetes Deployment, either will work, but the Deployment allows for easier Pod spec customisation if you're using a more complex GPU sharing technology like [NVidia Time Slicing](https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/gpu-sharing.html#time-slicing-gpus-in-kubernetes).
+
+Both Ollama and Llama.cpp are popular options for running a local model in Kubernetes, and Ollama provides a simple HTTP REST API that can be used from your function's handler. There are a few eaxmples in the above linked article.
+
+In the conclusion, I'll also link to where we've packaged OpenAI Whisper as a function for CPU or GPU accelerated transcription of audio and video files.
 
 ## Ok so what about me and my use-case?
 

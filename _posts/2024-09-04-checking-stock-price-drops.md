@@ -656,7 +656,7 @@ Here's the Discord alert I got when I checked my phone:
 
 ![Discord alert](/images/2024-09-stockcheck/discord.png)
 
-Whilst it's overkill for this task because standard HTML scraping and parsing techniques worked perfectly well, I decided to try out running a local Llama3.1 8B model on my Nvidia RTX 3090 GPU to see if it was up to the task.
+Whilst it's overkill for this task because standard HTML scraping and parsing techniques worked perfectly well, I decided to try out running a local [Llama3.1](https://ai.meta.com/blog/meta-llama-3-1/) 8B model on my Nvidia RTX 3090 GPU to see if it was up to the task.
 
 It wasn't until I ran `ollama run llama3.1:8b-instruct-q8_0` and pasted in my prompt that I realised just how long that HTML was was. It was huge, over 681KB of text, this is generally considered a large context window for a Large Language Model.
 
@@ -698,7 +698,7 @@ Provide the result in the following format, but avoid using the example in your 
 
 If a local LLM wasn't up to the task, then we could have also used a cloud-hosted service like the OpenAI API, or one of the many other options that charge per request.
 
-And in the case that the local LLM aced the task, we could also try scaling down to something that can run better on CPU, or that doesn't require so many resources. I tried out the phi3 model from Microsoft which was designed with this in mind. After setting the system prompt, to my surprise performed the task just as well and returned the same JSON for me.
+And in the case that the local LLM aced the task, we could also try scaling down to something that can run better on CPU, or that doesn't require so many resources. I tried out [Microsoft's phi3 model](https://azure.microsoft.com/en-us/blog/introducing-phi-3-redefining-whats-possible-with-slms/) which was designed with limited resources in mind. After setting the system prompt, to my surprise performed the task just as well and returned the same JSON for me.
 
 To integrate a local LLM with your function, you can package [Ollama](https://ollama.com/) as a container image using the instructions on our sister site: inlets.dev - [Access local Ollama models from a cloud Kubernetes Cluster](https://inlets.dev/blog/2024/08/09/local-ollama-tunnel-k3s.html). There are a few options here including deploying the LLM as a function, or deploying it as a regular Kubernetes Deployment, either will work, but the Deployment allows for easier Pod spec customisation if you're using a more complex GPU sharing technology like [NVidia Time Slicing](https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/gpu-sharing.html#time-slicing-gpus-in-kubernetes).
 

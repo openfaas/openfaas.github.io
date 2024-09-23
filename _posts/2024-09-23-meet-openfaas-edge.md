@@ -152,9 +152,15 @@ Examples of where OpenFaaS Edge could be used include:
 * A local API or appliance for a customer to use locally, or connected to the cloud
 * A local processing engine for a SaaS application
 
+### Remote monitoring and support
+
 Monitoring and support can be achieved using the OpenFaaS REST API, with a logging agent to forward logs from the systemd journal to a centralised logging system, and with Prometheus which contains detailed RAM/CPU usage metrics, and [HTTP invocation metrics from the OpenFaaS Pro gateway and JetStream Queue Worker](https://docs.openfaas.com/architecture/metrics/).
 
 For remote access to the OpenFaaS REST API and Prometheus metrics, you can use a solution like our inlets uplink product, which does not require a VPN, firewall rule, or port forwarding. It makes an outbound TLS connection to your Kubernetes cluster. Your internal applications can then interact with the two HTTP endpoints as if they were local within the cluster.
+
+![Inlets Uplink example](/images/2024-09-openfaas-edge/remote-management.png)
+
+> Only services within your own Kubernetes cluster can access each tenant's tunnel. The tunnel can expose multiple HTTP and TCP services, such as Prometheus and OpenFaaS. If you run a Postgresql database via faasd, you could also expose that in the same way.
 
 [Learn about inlets uplink](https://inlets.dev/blog/2022/11/16/service-provider-uplinks.html)
 

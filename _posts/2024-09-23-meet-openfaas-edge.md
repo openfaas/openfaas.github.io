@@ -162,7 +162,11 @@ For remote access to the OpenFaaS REST API and Prometheus metrics, you can use a
 
 > Only services within your own Kubernetes cluster can access each tenant's tunnel. The tunnel can expose multiple HTTP and TCP services, such as Prometheus and OpenFaaS. If you run a Postgresql database via faasd, you could also expose that in the same way.
 
-[Learn about inlets uplink](https://inlets.dev/blog/2022/11/16/service-provider-uplinks.html)
+Learn more:
+
+* [inlets uplink](https://inlets.dev/blog/2022/11/16/service-provider-uplinks.html)
+* [OpenFaaS metrics](https://docs.openfaas.com/architecture/metrics/)
+* [OpenFaaS REST API](https://docs.openfaas.com/reference/rest-api/)
 
 ## Q&A
 

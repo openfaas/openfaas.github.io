@@ -5,7 +5,6 @@ founders:
 
 contributors:
   - han
-  - lucas
   - nitishkumar
   - kevin
   - maria
@@ -14,6 +13,7 @@ contributors:
 
 # Listed for several months, GitHub and leaderboard shows former contributors permanently
 former_contributors:
+  - lucas
   - vivek
   - alistair
   - yankee

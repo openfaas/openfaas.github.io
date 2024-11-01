@@ -122,7 +122,7 @@ A Docker Compose file is provided to simplify developing/contributing to the web
 
 Run the site locally with:
 
-    docker-compose up
+    docker compose up
 
 This will make the site available locally at - http://localhost:4000.
 

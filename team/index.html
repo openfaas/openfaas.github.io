@@ -1,24 +1,24 @@
 ---
 title: Team
-description: The people behind the OpenFaaS community.
+description: The people behind the OpenFaaS product & community.
 image: /images/city-background.jpg
 ---
 
 <section class="hero is-primary is-small">
     <div class="hero-body has-text-centered intro">
         <h1 class="title is-size-3 is-size-2-desktop has-text-grey-darker">
-            Our Team
+            Our Team & Community
         </h1>
         <h1 class="title is-size-5 is-size-4-desktop has-text-grey-darker has-text-weight-light">
-            OpenFaaS is an independent open-source project hosted by <a href="https://github.com/openfaas/media"><u>OpenFaaS Ltd.</u></a>
+            OpenFaaS products and solutions are independent and hosted by <a href="https://github.com/openfaas/media"><u>OpenFaaS Ltd.</u></a>
         </h1>
             <h1 class="title is-size-5 is-size-4-desktop has-text-grey-darker has-text-weight-light">
-            There are <a href="https://kenfdev.o6s.io/github-stats-page#/"><u>many contributors</u></a>. Meet the <a href="https://github.com/openfaas/faas/blob/master/CONTRIBUTING.md#how-do-i-become-a-maintainer">community team</a> below.
+            There are <a href="https://kenfdev.o6s.io/github-stats-page#/"><u>many contributors</u></a>. Meet our staff, and the <a href="https://github.com/openfaas/faas/blob/master/CONTRIBUTING.md">community team</a> below.
         </h1>
     </div>
 
     <div class="hero-body grey team-wrapper founder">
-        {% include team-page/team-members.html type="Project Lead" members=site.data.members.founders %}
+        {% include team-page/team-members.html type="Staff" members=site.data.members.staff %}
     </div>
 
     <div class="hero-body grey team-wrapper git-members">
@@ -28,7 +28,6 @@ image: /images/city-background.jpg
     <div class="hero-body grey team-wrapper former-members">
         {% include team-page/team-members.html type="Emeritus Contributors" members=site.data.members.former_contributors %}
     </div>
-
 
     <div class="hero-body grey wavy-2 contributors">
         {% include landing-page/landing-contributors.html %}

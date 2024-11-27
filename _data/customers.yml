@@ -2,8 +2,12 @@
   logo: corva.png
 - name: Baker Hughes Company
   logo: bakerhughes.png
+- name: Bryter
+  logo: bryter.jpg
 - name: BCubed Engineering
   logo: bcubed.png
+- name: Curiflow
+  logo: curiflow.png
 - name: Deloitte Cyber LLC
   logo: deloitte.png
 - name: End to End Networks
@@ -24,6 +28,8 @@
   logo: patchworks.png
 - name: Rudderstack
   logo: rudderstack.png
+- name: Softbank Group Japan
+  logo: softbank.png
 - name: Surge
   logo: surge.png
 - name: Yokogawa Electrical

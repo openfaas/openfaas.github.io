@@ -13,7 +13,6 @@
         </thead>
         <tbody>
 
-
             <tr>
                 <td colspan="4">
                     <h3 class="subtitle pt-4">
@@ -139,7 +138,7 @@
 
             <tr>
                 <th class="is-one-third">Maximum functions per namespace</th>
-                <td class="is-2">15</td>
+                <td class="is-2">10</td>
                 <td class="is-2">500</td>
                 <td class="is-2">5000</td>
             </tr>
@@ -159,8 +158,8 @@
             <tr>
                 <th class="is-one-third">Auto-scaling</th>
                 <td class="is-2">One global RPS rule</td>
-                <td class="is-2">RPS, Capacity & CPU</td>
-                <td class="is-2">RPS, Capacity & CPU</td>
+                <td class="is-2">RPS, Capacity, CPU, RAM, or Custom metric</td>
+                <td class="is-2">RPS, Capacity, CPU, RAM, or Custom metric</td>
             </tr>
             <tr>
                 <th class="is-one-third">Scale to zero</th>
@@ -177,39 +176,39 @@
 
             <tr>
                 <th class="is-one-third">Concurrency limiting</th>
-                <td class="is-2">                         
+                <td class="is-2">
                     {% include no.html %}
                 </td>
-                <td class="is-2">                            
+                <td class="is-2">   
                     {% include yes.html %}
                 </td>
-                <td class="is-2">                           
+                <td class="is-2">  
                     {% include yes.html %}
                 </td>
             </tr>
 
             <tr>
                 <th class="is-one-third">Custom readiness probes for functions</th>
-                <td class="is-2">                         
+                <td class="is-2">
                     {% include no.html %}
                 </td>
-                <td class="is-2">                            
+                <td class="is-2">   
                     {% include yes.html %}
                 </td>
-                <td class="is-2">                           
+                <td class="is-2">  
                     {% include yes.html %}
                 </td>
             </tr>
 
             <tr>
                 <th class="is-one-third">GPU support</th>
-                <td class="is-2">                         
+                <td class="is-2">
                     {% include no.html %}
                 </td>
-                <td class="is-2">                            
+                <td class="is-2">   
                     {% include yes.html %}
                 </td>
-                <td class="is-2">                           
+                <td class="is-2">  
                     {% include yes.html %}
                 </td>
             </tr>
@@ -285,7 +284,7 @@
                 <td class="is-2">
                     {% include no.html %}
                 </td>
-                <td class="is-2">                         
+                <td class="is-2">
                     {% include no.html %}
                 </td>
                 <td class="is-2">                     
@@ -321,6 +320,12 @@
             </tr>
             <tr>
                 <th class="is-one-third">AWS SQS & AWS SNS</th>
+                <td class="is-2">{% include no.html %}</td>
+                <td class="is-2">{% include yes.html %}</td>
+                <td class="is-2">{% include yes.html %}</td>
+            </tr>
+            <tr>
+                <th class="is-one-third">RabbitMQ</th>
                 <td class="is-2">{% include no.html %}</td>
                 <td class="is-2">{% include yes.html %}</td>
                 <td class="is-2">{% include yes.html %}</td>
@@ -396,6 +401,12 @@
                         Security &amp; isolation
                     </h3>
                 </td>
+            </tr>
+            <tr>
+                <th class="is-one-third">Function Authentication</th>
+                <td class="is-2">User supplied</td>
+                <td class="is-2">User supplied</td>
+                <td class="is-2">By RBAC policy, or User supplied.</td>
             </tr>
             <tr>
                 <th class="is-one-third">Read-only filesystem & non-root</th>

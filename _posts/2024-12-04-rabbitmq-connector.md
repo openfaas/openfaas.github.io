@@ -18,7 +18,7 @@ Learn how to connect RabbitMQ to OpenFaaS to trigger functions from new and exis
 
 ### Introduction
 
-When distributed systems need to run work in the background, developers often turn to message brokers like RabbitMQ, commit-logs like Kafka, or pub/sub systems like NATS. These components decouple the request from the response, allowing for asynchronous processing and scaling out to handle huge amounts of work.
+When distributed systems need to run work in the background, developers often turn to message brokers like [RabbitMQ](https://www.rabbitmq.com/), commit-logs like Kafka, or pub/sub systems like NATS. These components decouple the request from the response, allowing for asynchronous processing and scaling out to handle huge amounts of work.
 
 OpenFaaS supports event-driven architectures through the built-in asynchronous function concept, and through event connectors, to import events from external systems. In this post, we'll explore how to use the RabbitMQ connector for OpenFaaS to trigger functions from RabbitMQ queues.
 

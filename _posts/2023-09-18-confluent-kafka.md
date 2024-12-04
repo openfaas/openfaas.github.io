@@ -343,7 +343,7 @@ So if the `faas-request` topic has 3 partitions, then you should have 3 replicas
 
 If the connector crashes for some reason, or the Pod is scheduled to a different node, then Kubernetes will automatically restart it, and it'll pick up from the last message it processed.
 
-For retries, set the `asyncInvoke` option to `true`, so that consumed messages get put into the NATS JetStream queue and retried according to the policy you've defined. There are more advanced options covered in the docs and Helm chart, but what we've covered today should cover 80% of the use-cases for triggering functions from Kafka.
+For retries, set the `asyncInvocation` option to `true`, so that consumed messages get put into the NATS JetStream queue and retried according to the policy you've defined. There are more advanced options covered in the docs and Helm chart, but what we've covered today should cover 80% of the use-cases for triggering functions from Kafka.
 
 If you have any further questions, please feel [free to get in touch with us](https://www.openfaas.com/pricing).
 

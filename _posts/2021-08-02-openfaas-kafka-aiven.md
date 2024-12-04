@@ -267,9 +267,9 @@ We've now set up a managed Kafka broker using Aiven and configured OpenFaaS Pro 
 
 * How does this scale? Well you can set up the Kafka connector to listen to multiple topics by changing the `overrides.yaml` file such as: `topics: "signup,churn,quote-requested,quote-completed"` and each function can also subscribe to multiple topics.
 
-* If you have functions which are long-running, you can have them run in the background using the `asyncInvoke` setting for the Kafka connector, with this in place, all messages are dispatched to OpenFaaS' built-in NATS queue for processing when there is capacity available.
+* If you have functions which are long-running, you can have them run in the background using the `asyncInvocation` setting for the Kafka connector, with this in place, all messages are dispatched to OpenFaaS' built-in NATS queue for processing when there is capacity available.
 
-* What about retries? If you enable the `asyncInvoke` behaviour of the connector, and are an OpenFaaS Pro customer, then messages can be retried with an exponential back-off.
+* What about retries? If you enable the `asyncInvocation` behaviour of the connector, and are an OpenFaaS Pro customer, then messages can be retried with an exponential back-off.
 
 * What if I use [Confluent Cloud](https://www.confluent.co.uk/confluent-cloud/) or self-hosted Apache Kafka? You can also use SALS authentication if you're a [Confluent Cloud](https://www.confluent.co.uk/confluent-cloud/) customer, or bypass authentication if you run Kafka on a private network and are self-hosting the service.
 

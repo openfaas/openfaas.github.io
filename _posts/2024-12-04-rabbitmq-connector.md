@@ -11,7 +11,7 @@ categories:
   - automation
 dark_background: true
 image: "/images/2024-12-rabbit/background.png"
-hide_header_image: false
+hide_header_image: true
 ---
 
 Learn how to connect RabbitMQ to OpenFaaS to trigger functions from new and existing message queues.

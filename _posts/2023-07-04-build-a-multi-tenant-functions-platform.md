@@ -443,11 +443,86 @@ spec:
 
 In addition in both OpenFaaS Standard and OpenFaaS for Enterprises, `AllowPrivilegeEscalation` is set to false by default and cannot be changed on functions.
 
-We also disable the EnableServiceLinks feature in Kubernetes which can expose information about other services and endpoints to functions.
+**EnableServiceLinks**
 
-Remember to create network policies with your Container Networking Interface (CNI) driver of choice to prevent functions from accessing the Kubernetes API or other services.
+Functions have the EnableServiceLinks configuration set to `false`. Service Links were an early feature in Kubernetes used to help with service discovery by injecting environment variables of the name of services within the namespace.
 
-Various CNI drivers and service meshes offer encryption of traffic between pods, so you may want to introduce this in addition to network policies. For an example of how to do this with Istio, see: [Learn how Istio can provide a service mesh for your functions](https://www.openfaas.com/blog/istio-functions/)
+Why would you want to disable this? The values can be enumerated to discover other functions, or services deployed to the namespace.
+
+Once disabled, there will still be an environment variable printed for the Kubernetes API server itself. This is hard-coded in the Go code for Kubernetes and presents absolutely no risk whatsoever. When some users see this, they mistakenly assume that `EnableServiceLinks` is not working or being set appropriately.
+
+```
+KUBERNETES_SERVICE_PORT=443
+KUBERNETES_SERVICE_PORT_HTTPS=443
+KUBERNETES_PORT=tcp://10.43.0.1:443
+KUBERNETES_PORT_443_TCP=tcp://10.43.0.1:443
+KUBERNETES_PORT_443_TCP_PROTO=tcp
+KUBERNETES_PORT_443_TCP_PORT=443
+KUBERNETES_PORT_443_TCP_ADDR=10.43.0.1
+KUBERNETES_SERVICE_HOST=10.43.0.1
+```
+
+If in double, you can do the following:
+
+```bash
+$ faas-cli store deploy env
+
+$ kubectl get deploy/env -n openfaas-fn -o yaml|grep -i servicelink
+      enableServiceLinks: false
+```
+
+**The default Service account for Functions**
+
+Functions can assume a named service account through the `com.openfaas.serviceaccount` annotation. This is useful for functions that need to access the Kubernetes API, or other resources within the cluster.
+
+It is recommended that you restrict the annotations that are applied to functions for your tenants, so that they cannot use this environment variable, however bear in mind that this can only be used to select a pre-existing service account within the tenant's namespace, and there is no way for them to create one through the OpenFaaS APIs.
+
+All functions will obtain a token from the default Service Account in the tenant namespace:
+
+```sh
+$ kubectl get serviceaccount -n openfaas-fn
+NAME      SECRETS   AGE
+default   0         235d
+
+$ kubectl get serviceaccount -n dev
+NAME      SECRETS   AGE
+default   0         150d
+```
+
+The default service account has no privileges, and presents no risk to the cluster if a customer's code was to attempt to use it with the Kubernetes API server.
+
+If you really wish, you can disable the automatic mounting of the service account.
+
+After creating a namespace for a tenant, patch the Service Account:
+
+```sh
+$ kubectl create namespace tenant1
+$ kubectl patch serviceaccount default -n tenant1 -p '{"automountServiceAccountToken": false}'
+```
+
+Learn more: [Configure Service Accounts for Pods](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/)
+
+**Cloud IAM and Metadata endpoints**
+
+Certain cloud platforms such as AWS EC2 make a metadata endpoint available to all virtual machines, which can be used to retrieve temporary credentials for the cloud provider's API.
+
+Unless you've explicitly granted privileges to the virtual machine, there should be empty, or very minimal read-only privileges granted to the instance.
+
+That said, each cloud provider has its own security model, and you should review the documentation for the cloud provider you are using.
+
+From the "Security Practices for Multi-Tenant SaaS Applications using Amazon EKS" documentation: [Restrict the use of host networking and block access to instance metadata service](https://docs.aws.amazon.com/whitepapers/latest/security-practices-multi-tenant-saas-applications-eks/restrict-the-use-of-host-networking-and-block-access-to-instance-metadata-service.html)
+
+**Network policies to control access to the core services**
+
+Remember to create [Network Policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/) with your Container Networking Interface (CNI) driver of choice to prevent functions from accessing the Kubernetes API or services in other namespaces.
+
+**Encrypting of traffic at the network level / mTLS**
+
+Various CNI drivers and service meshes offer encryption of traffic between pods, so you may want to introduce this in addition to network policies.
+
+Istio and Linkerd offer an alternative to encryption at the network level by injecting sidecars to each Pod and redirecting all traffic through a proxy using mutual TLS (mTLS). For an example of how to do this with Istio, see: [Learn how Istio can provide a service mesh for your functions](https://www.openfaas.com/blog/istio-functions/)
+
+**Limit ranges and quotas for the namespace**
 
 For the namespace, you may also wish to add a [Limit Range](https://kubernetes.io/docs/concepts/policy/limit-range/). A Limit Range may restrict a customer to using a maximum of 5 vCPU and 8GB of RAM for instance, across all replicas of his or her functions.
 

@@ -85,11 +85,13 @@ We'll explore this more below, but OpenFaaS also provides a built-in asynchronou
 
 Here's an example: every day you receive a CSV with up to 1000 rows of data, each row is the URL of a podcast episode, which you need to download, and then transcribe using a GPU and OpenAI's Whisper. One asynchronous invocation can be fanned out per row, running in parallel with the amount of GPUs available, then the results will be stored in a relational database for later retrieval through your customer portal.
 
-**From a customer**
+**Hear from a customer**
 
 Kevin Lindsay is a Principal Engineer at [Surge](https://workwithsurge.com). Surge provides mortgage industry data and financial information on applicants for loans via Salesforce.
 
-"We first adopted OpenFaaS Pro in 2021 because we wanted a way to write code without having to think about Kubernetes. The initial set of functions that we wrote needed to import mortgage data from various sources, transform it, then store it in AWS S3, ready for ingestion via Snowflake. It needed for run for an hour or more, which made OpenFaaS with its asynchronous queue-worker an obvious choice for us. What would have taken a week or so, was tested and promoted to production within a few hours. Several years later and we're still using OpenFaaS for much of our application and internal tools, where possible we've moved services and containers off Kubernetes and to OpenFaaS to make it easier to iterate on our platform."
+> "We first adopted OpenFaaS Pro in 2021 because we wanted a way to write code without having to think about Kubernetes. The initial set of functions that we wrote needed to import mortgage data from various sources, transform it, then store it in AWS S3, ready for ingestion via Snowflake. It needed for run for an hour or more, which made OpenFaaS with its asynchronous queue-worker an obvious choice for us. What would have taken a week or so, was tested and promoted to production within a few hours.
+> 
+> Several years later and we're still using OpenFaaS for much of our application and internal tools, where possible we've moved services and containers off Kubernetes and to OpenFaaS to make it easier to iterate on our platform."
 
 Kevin can often be found at the [weekly Office Hours call](https://docs.openfaas.com/community/#weekly-office-hours), where he shares feedback and helps other users.
 

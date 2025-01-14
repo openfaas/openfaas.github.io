@@ -103,7 +103,7 @@ This means that if your team writes mainly in a traditional language like Java, 
 
 **Portability**
 
-Unlike cloud-based functions like AWS Lambda, or Google Cloud Functions, When you write a function with OpenFaaS, it doesn't just run on that one cloud, but it can run on any cloud, or your own hardware without any changes to the code or its configuration. Functions get built into container images, and are deployed to a Kubernetes cluster, which can be on-premises, in the cloud, or at the edge - wherever you need it.
+Unlike cloud-based functions like AWS Lambda, or Google Cloud Functions, When you write a function with OpenFaaS, it doesn't just run on that one cloud, but it can run on any cloud, or on-premises without any changes to the code or its configuration. Functions get built into container images, and are deployed to a Kubernetes cluster, which can be on-premises, in the cloud, or at the edge - wherever you need it.
 
 Customers have told us that portability was a key factor in choosing OpenFaaS:
 

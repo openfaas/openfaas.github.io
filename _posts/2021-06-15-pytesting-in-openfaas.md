@@ -338,7 +338,7 @@ If you are a fan of Github Actions, you only need two steps:
   run: faaas-cli build
 ```
 
-Here the [arkade tool](https://get-arkade.dev/) created by the OpenFaaS community is used as a downloader for `faas-cli`. 
+Here the [arkade tool](https://arkade.dev/) created by the OpenFaaS community is used as a downloader for `faas-cli`. 
 
 ## Wrapping up
 

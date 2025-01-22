@@ -34,7 +34,7 @@ We no longer need to manually issue `helm install` or `kubectl apply` commands t
 
 ## Tools
 
-I'm using [arkade](https://get-arkade.dev) to download the CLIs tools that we need. You could also download the tools with your favourite package manager or from the various project websites.
+I'm using [arkade](https://arkade.dev) to download the CLIs tools that we need. You could also download the tools with your favourite package manager or from the various project websites.
 
 ```bash
 curl -SLs https://get.arkade.dev | sh

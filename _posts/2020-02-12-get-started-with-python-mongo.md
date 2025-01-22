@@ -33,7 +33,7 @@ We'll first of all get OpenFaaS installed using the easiest way possible. Then w
 
 Make sure that you have the Kubernetes CLI ([kubectl](https://kubernetes.io/docs/reference/kubectl/overview/)) available.
 
-Download [arkade](https://get-arkade.dev/), which is an installer for helm charts for any Kubernetes cluster. We will install OpenFaaS using `arkade install` and [the OpenFaaS helm chart](https://github.com/openfaas/faas-netes/tree/master/chart/openfaas):
+Download [arkade](https://arkade.dev/), which is an installer for helm charts for any Kubernetes cluster. We will install OpenFaaS using `arkade install` and [the OpenFaaS helm chart](https://github.com/openfaas/faas-netes/tree/master/chart/openfaas):
 
 ```sh
 curl -sSLf https://get.arkade.dev | sudo sh

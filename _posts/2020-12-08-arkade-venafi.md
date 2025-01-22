@@ -20,7 +20,7 @@ Today we are announcing the availability of the Venafi Sponsored Apps for arkade
 
 * [Venafi](https://venafi.com) provides Machine Identity to enterprise companies and is the primary sponsor of the CNCF project [cert-manager](https://cert-manager.io/). Machine Identity solutions allow for businesses to have finer-grain control over policy, governance, and the lifecycle of certificates.
 
-* [arkade](https://get-arkade.dev/) is a portable [Kubernetes](https://kubernetes.io/) marketplace which can be used with any cloud or local Kubernetes distribution to install apps like the Kubernetes Dashboard, [Istio](https://istio.io/), [OpenFaaS](https://www.openfaas.com/) and [Minio](https://min.io). arkade is developed by OpenFaaS Ltd, the host company for OpenFaaS.
+* [arkade](https://arkade.dev/) is a portable [Kubernetes](https://kubernetes.io/) marketplace which can be used with any cloud or local Kubernetes distribution to install apps like the Kubernetes Dashboard, [Istio](https://istio.io/), [OpenFaaS](https://www.openfaas.com/) and [Minio](https://min.io). arkade is developed by OpenFaaS Ltd, the host company for OpenFaaS.
 
 Each application is fully automated, and can be installed with a single command such as `arkade install cert-manager`. The `arkade get` command also provides a rapid way to download a number of DevOps CLIs like: `kubectl`, `kops` and `terraform`.
 
@@ -318,7 +318,7 @@ It's now over to you to try out OpenFaaS with cert-manager and one of the issuer
 
 Are there apps that you would like to see us add next? How about CLIs?
 
-* Request an App or CLI to be added by [raising an issue on GitHub](https://get-arkade.dev/)
-* Find out more about [Arkade Sponsored Apps](https://get-arkade.dev/)
+* Request an App or CLI to be added by [raising an issue on GitHub](https://arkade.dev/)
+* Find out more about [Arkade Sponsored Apps](https://arkade.dev/)
 * See also: [Why did the OpenFaaS community build arkade and what's in it for you?](https://www.openfaas.com/blog/openfaas-arkade/)
 

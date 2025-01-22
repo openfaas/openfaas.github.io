@@ -48,7 +48,7 @@ With OpenFaaS Cloud functions are managed through typing `git push` which reduce
 ## Pre-requisites
 
 * DigitalOcean Account - We are going to use DigitalOcean as a provider to host our exit-node.
-* [arkade](https://get-arkade.dev) - arkade provides a portable marketplace for downloading your favourite devops CLIs and installing helm charts, with a single command.
+* [arkade](https://arkade.dev) - arkade provides a portable marketplace for downloading your favourite devops CLIs and installing helm charts, with a single command.
 * inletsctl - inletsctl automates the task of creating an exit-node on cloud infrastructure. 
 * inlets-pro - You can use inlets-pro to tunnel out any TCP traffic from an internal network to another network. 
 * multipass - Multipass provides a command line interface to launch, manage and generally fiddle about with instances of Linux.

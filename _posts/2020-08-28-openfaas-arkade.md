@@ -14,15 +14,15 @@ dark_background: true
 
 The OpenFaaS community is building a tool for Kubernetes developers, learn how it can help you install OpenFaaS, along with complementary CLIs and applications to your cluster
 
-<a href="https://get-arkade.dev"><img src="https://raw.githubusercontent.com/alexellis/arkade/master/docs/arkade-logo-sm.png" alt="arkade logo" width="300" height="300"></a>
+<a href="https://arkade.dev"><img src="https://raw.githubusercontent.com/alexellis/arkade/master/docs/arkade-logo-sm.png" alt="arkade logo" width="300" height="300"></a>
 
-> [arkade](https://get-arkade.dev) - Portable Kubernetes marketplace
+> [arkade](https://arkade.dev) - Portable Kubernetes marketplace
 
 ## Solving pain
 
 The popular essay [Cathedral and the Bazaar](http://www.catb.org/~esr/writings/cathedral-bazaar/cathedral-bazaar/) was written over 20 years ago by author and then open source activist Eric Steven Raymond. In it, he contrasts the development of proprietary software within a corporation (the cathedral) to that of an open-source model (the bazaar). One of the key points he makes is that most open-source software starts when a developer has an itch they need to scratch or finds a pain-point that they can solve.
 
-[arkade](https://get-arkade.dev) has evolved since it was first created to install OpenFaaS, to now install 40 different applications using their preferred installation method.
+[arkade](https://arkade.dev) has evolved since it was first created to install OpenFaaS, to now install 40 different applications using their preferred installation method.
 
 * OpenFaaS - [helm3](https://helm.sh)
 * Linkerd - its own CLI
@@ -34,7 +34,7 @@ It then gained the ability to install CLIs such as `faas-cli`, `terraform`, `kub
 
 Now if you're anything like us, then you will be re-creating a cluster several times per day or per week to test a PR or change to your project, you may even be creating a cluster in a CI job to test each incoming commit. arkade is built for developers to rapidly get a working system with whatever they need. You can use it in production, or in a pipeline, but you may find that a GitOps style more suitable using a tool like [ArgoCD](https://argoproj.github.io/argo-cd/) or [Flux](https://fluxcd.io).
 
-> ⭐️ Star/fork [arkade](https://get-arkade.dev) on GitHub
+> ⭐️ Star/fork [arkade](https://arkade.dev) on GitHub
 
 ### Helm 2 - insecure by default
 
@@ -246,7 +246,7 @@ Find out more on the [inlets PRO landing page](https://inlets.dev/), there's als
 
 ## Wrapping up
 
-[arkade](https://get-arkade.dev) was written to make the life of developers easier, it can install many different applications, which may involve using Helm, kubectl, or an additional CLI. It gives helpful usage information, and tries to prevent you doing things you shouldn't, like installing an application to your Raspberry Pi cluster that isn't built for ARM CPUs. It makes the tedious task of downloading dozens of CLIs much quicker.
+[arkade](https://arkade.dev) was written to make the life of developers easier, it can install many different applications, which may involve using Helm, kubectl, or an additional CLI. It gives helpful usage information, and tries to prevent you doing things you shouldn't, like installing an application to your Raspberry Pi cluster that isn't built for ARM CPUs. It makes the tedious task of downloading dozens of CLIs much quicker.
 
 Looking forward, arkade will continue to be maintained by the OpenFaaS community and is accepting PRs and suggestions. It evolved to solve a clear pain-point, and as we approach 1000 stars on GitHub, it has proven useful to the community so far.
 
@@ -254,7 +254,7 @@ Looking forward, arkade will continue to be maintained by the OpenFaaS community
 * Is there a CLI that you often use with a Kubernetes cluster?
 * Do you want to view the code?
 
-[View the code on GitHub](https://get-arkade.dev)
+[View the code on GitHub](https://get.arkade.dev)
 
 Try it out today:
 
@@ -271,4 +271,4 @@ curl -sLS https://get.arkade.dev | sh
 
 What about commercial apps? One of the lessons we've learned as a community about Open Source, is just how much effort it takes to sustain a project where everything's given away for free. Commercial users are often not interested or willing to contribute through sponsorships, support, consulting, or paid development. Now there has been interest from commercial companies that want to have their app listed. We've come up with a way for them to differentiate their offerings through Sponsored Apps.
 
-Find out about [Sponsored Apps](https://get-arkade.dev)
+Find out about [Sponsored Apps](https://get.arkade.dev)

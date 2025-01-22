@@ -31,7 +31,7 @@ Loki is a light-weight tool that's easy to use. When it comes to Kubernetes, dep
 
 Once a log aggregator is installed and configured it will often have a UI for exploring the logs, for ELK this is [Kibana](https://www.elastic.co/kibana) and for Loki it is [Grafana Explore](https://grafana.com/docs/grafana/latest/features/explore/).
 
-Since OpenFaaS Gateway 0.15.0+ (July 2019), OpenFaaS supports [pluggable logging providers](https://docs.openfaas.com/architecture/logs-provider/) to support streaming function logs via the Gateway API and the `faas-cli`.  With the latest release of [arkade](https://get-arkade.dev/) all three (OpenFaaS, Loki, and Grafana) can be installed in just a few lines, allowing you to access the same function logs from the `faas-cli`, the API, or the Grafana Explore dashboard.  We will walk-though the steps below.
+Since OpenFaaS Gateway 0.15.0+ (July 2019), OpenFaaS supports [pluggable logging providers](https://docs.openfaas.com/architecture/logs-provider/) to support streaming function logs via the Gateway API and the `faas-cli`.  With the latest release of [arkade](https://arkade.dev/) all three (OpenFaaS, Loki, and Grafana) can be installed in just a few lines, allowing you to access the same function logs from the `faas-cli`, the API, or the Grafana Explore dashboard.  We will walk-though the steps below.
 
 
 ## Prerequisites

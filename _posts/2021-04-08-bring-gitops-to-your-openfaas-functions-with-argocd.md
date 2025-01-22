@@ -78,7 +78,7 @@ To get more detail please refer to this [link](https://blog.alexellis.io/introdu
 
 Once we have arkade, we can create a cluster and install ArgoCD. If you prefer, you can also manually download all the tools required, and find the instructions for ArgoCD's helm chart.
 
- * [arkade](https://get-arkade.dev) (v0.7.10) Kubernetes marketplace
+ * [arkade](https://arkade.dev) (v0.7.10) Kubernetes marketplace
 
   ```bash
   # Run with or without sudo

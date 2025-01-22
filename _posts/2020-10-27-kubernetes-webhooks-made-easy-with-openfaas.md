@@ -42,7 +42,7 @@ Supporting TLS for external webhook server is also required because admission is
 ### Prerequisites
 ##### Arkade
 
-* [arkade](https://get-arkade.dev) is The OpenFaaS community built tool for Kubernetes developers, with arkade you can easily install all necessary cli tools to your host and deploy apps to the cluster.
+* [arkade](https://arkade.dev) is The OpenFaaS community built tool for Kubernetes developers, with arkade you can easily install all necessary cli tools to your host and deploy apps to the cluster.
 
 ```sh
 $ curl -sLS https://get.arkade.dev | sudo sh

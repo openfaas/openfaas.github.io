@@ -84,7 +84,7 @@ The [initial response on Twitter was very encouraging](https://twitter.com/alexe
 
 ## Wrapping up
 
-As part of building the course, we enhanced various aspects of OpenFaaS including the documentation, Python templates, and the onboarding process for new users with [arkade](https://get-arkade.dev/). This was all contributed back to the community as open-source enhancements and we would welcome your feedback on what we can improve in the project, as you go through the course yourself.
+As part of building the course, we enhanced various aspects of OpenFaaS including the documentation, Python templates, and the onboarding process for new users with [arkade](https://arkade.dev/). This was all contributed back to the community as open-source enhancements and we would welcome your feedback on what we can improve in the project, as you go through the course yourself.
 
 You can enroll for the free course via edx.org here:
 

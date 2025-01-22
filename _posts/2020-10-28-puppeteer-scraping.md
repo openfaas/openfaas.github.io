@@ -87,7 +87,7 @@ We have made OpenFaaS as easy as possible to deploy on a single VM or on a Kuber
 
 In this post we'll be running Kubernetes on your laptop, meaning that you don't have to spend any money on public cloud to start trying things out. The tutorial should take you less than 15-30 minutes to try.
 
-For the impatient, our [arkade tool](https://get-arkade.dev) can get you up and running in less than 5 minutes. You'll just need to have [Docker](https://docker.com/) installed on your computer.
+For the impatient, our [arkade tool](https://github.com/alexellis/arkade) can get you up and running in less than 5 minutes. You'll just need to have [Docker](https://docker.com/) installed on your computer.
 
 ```bash
 # Get arkade, and move it to $PATH

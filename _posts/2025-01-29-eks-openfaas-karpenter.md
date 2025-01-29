@@ -3,6 +3,7 @@ title: "Save costs on AWS EKS with OpenFaaS and Karpenter"
 description: "Learn how to save on infrastructure costs for your OpenFaaS functions on AWS EKS with Karpenter cluster autoscaling."
 date: 2025-01-29
 author_staff_member: han
+author_staff_member_editor: alex
 categories:
   - eks
   - openfaas
@@ -13,27 +14,33 @@ image: "/images/2025-01-eks-openfaas-karpenter/background.png"
 hide_header_image: true
 ---
 
-In this tutorial we will show you an optimised configuration for OpenFaaS Functions for Karpenter on AWS EKS.
+In this tutorial we will show you a recommended configuration for OpenFaaS Functions for Karpenter on AWS EKS.
 
-We will show how to deploy OpenFaaS on [AWS EKS](https://aws.amazon.com/eks/) and use [Karpenter](https://karpenter.sh/) for cluster autoscaling.
+We'll start by deploying OpenFaaS to [AWS EKS](https://aws.amazon.com/eks/), then we'll set up [Karpenter](https://karpenter.sh/) for cluster autoscaling. When you autoscale both your functions and your Kubernetes nodes, then you can keep costs down to an absolute minimum. There are some trade-offs to this approach, so we'll cover that along the way.
 
-The cluster will be split in static and dynamic capacity. The OpenFaaS core components will be running on static nodes in an [EKS Managed Node Group](https://docs.aws.amazon.com/eks/latest/userguide/managed-node-groups.html). Karpenter will dynamically add, remove and resize nodes in the cluster based on workload demands for functions.
+The cluster will be split in static and dynamic capacity. The OpenFaaS core components will be running on static nodes in an [EKS Managed Node Group](https://docs.aws.amazon.com/eks/latest/userguide/managed-node-groups.html). Then, Karpenter will be used to add, remove and resize nodes in the cluster based on the load observed on your functions.
 
 **What is Karpenter?**
 
-Karpenter is an open-source Kubernetes cluster autoscaler. It automates the provisioning and deprovisioning of nodes based on the scheduling needs of Pods, allowing efficient scaling and cost optimization.
+Karpenter is an open-source Kubernetes cluster autoscaler originally created for use with AWS EKS. It automates the provisioning and deprovisioning of nodes based on the scheduling needs of Pods, allowing efficient scaling and cost optimization.
 
-Compared to other alternatives like [Amazon EC2 Auto Scaling Groups](https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-groups.html) and the [Kubernetes Cluster Autoscaler](https://github.com/kubernetes/autoscaler/tree/master/cluster-autoscaler) (CAS), Karpenter is:
+Compared to other alternatives like [Amazon EC2 Auto Scaling Groups](https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-groups.html) and the [Kubernetes Cluster Autoscaler](https://github.com/kubernetes/autoscaler/tree/master/cluster-autoscaler) (CAS), Karpenter has some differences.
 
-- Easier to deploy and configure and consolidates instance orchestration responsibilities within a single system. 
-- More flexible and allows provisioning of diverse nodes based on workload requirements with minimal configuration. Instead of managing many specific custom node groups, Karpenter could let you manage diverse workload capacity with a single, flexible NodePool.
-- Faster at provisioning nodes and scheduling Pods reducing the time workloads spend in a pending state.
+- It's specialised primarily for use with AWS, and has some experimental support for Azure.
+- Is a modern, purpose built autoscaler that not only adds and removes nodes like the other two solutions, but tries to optimise for density, by replacing smaller nodes with larger ones when possible.
+- Has a built-in concept of "NodePools" which can be used to group nodes together and apply different constraints to them. This can be used to run different workloads on different types of nodes.
+- Has a tight integration with Kubernetes through its own Custom Resources Definitions (CRDs) and controllers.
+- Comes with insights on cost, performance, utilisation through its own set of Grafana dashboards and metrics
+
+Karpenter is a good fit for OpenFaaS because it can be used to scale the cluster based on the load of the functions. This can be used to save costs by removing nodes when functions are not used and adding nodes when functions are scaled up. Karpenter can also be used to run functions on different types of nodes based on their requirements such as whether they should run on spot instances, on-demand instances or *on nodes with GPU resources*.
+
+In a future article, we'll show you how to combine everything we've covered here with scale to zero GPUs, for use with functions that require GPU resources like Large Language Models (LLMs) or audio transcription.
 
 **What makes Karpenter a good match for OpenFaaS?**
 
 Improved scalability
 
-Karpenter automatically provisions and deprovisions nodes based on real-time workload requirements to ensure there is enough capacity in the cluster. It can increase the size of the cluster when more functions are deployed or when a function has high demand and is scaled up by the OpenFaaS autoscaler.
+Karpenter will provision and deprovision nodes automatically based upon real-time workload requirements to ensure there is enough capacity in the cluster. It can increase the size of the cluster when more functions are deployed or when a function has high demand and is scaled up by the OpenFaaS autoscaler.
 
 Cost optimization
 
@@ -45,8 +52,7 @@ Operational simplicity
 
 Karpenter simplifies node management. Scaling a Kubernetes cluster often requires pre-configured node groups, scaling rules or manually adding nodes. Karpenter eliminates this by dynamically selecting the right instance types and adding them to the cluster based on a flexible NodePool configuration. Unlike node group-level autoscalers, Karpenter makes scaling decisions based on the entire cluster’s needs.
 
-
-## Deploy OpenFaaS and Karpenter on AWS EKS.
+## How to Deploy OpenFaaS and Karpenter on AWS EKS
 
 In the following sections we will run you through the steps to get a basic OpenFaaS deployment with Karpenter running on EKS.
 
@@ -54,15 +60,14 @@ In the following sections we will run you through the steps to get a basic OpenF
 
 ### Prerequisites
 
-Tools that need te be installed on your system to follow along with this guide. Most of these are available in [arkade](https://github.com/alexellis/arkade).
+Tools that need te be installed on your system to follow along with this guide. Most of these are available in [arkade](https://github.com/alexellis/arkade), which is an easy way to install common CLIs for developers.
 
 1. [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
 2. [eksctl](https://eksctl.io/installation/), CLI for AWS EKS - `arkade get eksctl`
 3. [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/) - `arkade get kubectl`
 4. [Helm](https://helm.sh/docs/intro/install/) - `arkade get helm`
 
-
-### Create an EKS cluster
+### Create an AWS EKS cluster
 
 > The instructions are based on the [Karpenter gettings started guide](https://karpenter.sh/v0.37/getting-started/getting-started-with-karpenter/). You can check out this guide for a more in depth overview of how to get started with Karpenter.
 
@@ -161,7 +166,7 @@ Create a new EKS cluster using the cluster configuration:
 eksctl create cluster -f clusterconfig.yaml
 ```
 
-Create a role to allow spot instances.
+Create a role on AWS to allow access to spot instances.
 
 > Unless your AWS account has already onboarded to EC2 Spot, you will need to create the service linked role to avoid the [`ServiceLinkedRoleCreationNotPermitted` error](https://karpenter.sh/v0.37/troubleshooting/#missing-service-linked-role).
 
@@ -169,7 +174,6 @@ Create a role to allow spot instances.
 aws iam create-service-linked-role --aws-service-name spot.amazonaws.com || true
 # If the role has already been successfully created, you will see:
 # An error occurred (InvalidInput) when calling the CreateServiceLinkedRole operation: Service role name AWSServiceRoleForEC2Spot has been taken in this account, please try a different suffix.
-
 ```
 
 ### Deploy Karpenter
@@ -213,11 +217,27 @@ helm upgrade --install karpenter \
     --wait
 ```
 
-### Deploy OpenFaaS
+### Deploy OpenFaaS Standard
+
+We are going to use OpenFaaS Standard here, however the instructions are the same for OpenFaaS for Enterprises.
 
 Detailed installation instructions including the various chart configuration options are available in the [OpenFaaS docs](https://docs.openfaas.com/deployment/pro/) and [Helm chart](https://github.com/openfaas/faas-netes/tree/master/chart/openfaas).
 
-For the OpenFaaS configuration we start from the recommended configuration with the addition of a node affinity rule. The nodeAffinity restricts Pods of the OpenFaaS core components to static nodes in the AWS EKS managed node group and prevents them from running on dynamic nodes provisioned by Karpenter.
+For the OpenFaaS configuration we start from the recommended configuration, then add a nodeAffinity rule. The nodeAffinity will make any Pods needed for the OpenFaaS core components run on AWS managed nodes, for stability. Whilst the control-plane can run in High Availability (HA), and tolerate node disruption, it's recommended to run the core components on static nodes.
+
+```yaml
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: karpenter.sh/nodepool
+              operator: DoesNotExist
+```
+
+The rule makes sure that the components will not run on nodes managed by Karpenter. We detect this by looking for the absence of the `karpenter.sh/nodepool` label.
+
+Create a `openfaas-values.yaml` file with the following content:
 
 ```yaml
 cat > openfaas-values.yaml <<EOF
@@ -230,7 +250,6 @@ operator:
     enabled: true
 
 gateway:
-  # Run a single gateway replica. 3 are recommended for production.
   replicas: 1
 
   # 10 minute timeout
@@ -245,7 +264,6 @@ dashboard:
   enabled: true
 
 queueWorker:
-  # Run a single queue-worker replica. 3 are recommended for production.
   replicas: 1
 
 queueWorkerPro:
@@ -266,11 +284,15 @@ affinity:
 EOF
 ```
 
-Create the namespaces for OpenFaaS Pro and functions:
+We've also set the replica count for the `queueWorker` and `gateway` to 1, instead of their defaults to make everything fit into a single node for the purposes of the demo.
+
+Create the namespaces for the OpenFaaS core components, and one for the functions:
 
 ```sh
 kubectl apply -f https://raw.githubusercontent.com/openfaas/faas-netes/master/namespaces.yml
 ```
+
+You will now have the `openfaas` and `openfaas-fn` namespaces.
 
 Create a secret for your OpenFaaS license:
 
@@ -295,37 +317,32 @@ helm upgrade openfaas \
 
 #### Verify the installation
 
-Once all the services are up and running, log into the gateway using the OpenFaaS CLI. This will cache your credentials into the `~/.openfaas/config.yml` file.
+Once all the services are up and running, log into the gateway using the OpenFaaS CLI `faas-cli`.
 
-Fetch your public IP or NodePort via `kubectl get svc -n openfaas gateway-external -o wide` and set it as an environmental variable as below:
-
-```sh
-export OPENFAAS_URL=http://127.0.0.1:31112
-```
-
-If using a remote cluster, you can port-forward the gateway to your local machine:
+Usually, the OpenFaaS gateway is exposed over HTTPS using a LoadBalancer service, but for the purposes of the demo, we are going to keep the gateway service as a ClusterIP, so it's private and hidden. You can use `kubectl port-forward` to access the gateway:
 
 ```sh
-export OPENFAAS_URL=http://127.0.0.1:8080
 kubectl port-forward -n openfaas svc/gateway 8080:8080 &
 ```
 
 Log in with the CLI and check connectivity:
 
 ```sh
-echo -n $PASSWORD | faas-cli login -g $OPENFAAS_URL -u admin --password-stdin
+PASSWORD=$(kubectl get secret -n openfaas basic-auth -o jsonpath="{.data.basic-auth-password}" | base64 --decode; echo)
+
+echo -n $PASSWORD | faas-cli login -u admin --password-stdin
 faas-cli version
 ```
 
 ### Create a Karpenter NodePool
 
-Karpenter only starts creating nodes when there is at least one NodePool configured. A NodePool sets constraints on the nodes that can be created and the pods that can run on those nodes. Karpenter makes scheduling and provisioning decisions based on pod attributes such as labels and affinity. A single Karpenter NodePool is capable of handling many different pod shapes.
+Karpenter only starts creating nodes when there is at least one NodePool configured using the `NodePool` CRD. A NodePool sets constraints on the nodes that can be created and the Pods that can run on those nodes. Karpenter makes scheduling and provisioning decisions based on Pod attributes such as labels and affinity. A single Karpenter NodePool is capable of handling many different Pod shapes.
 
-We will create a default NodePool and NodeClass that is capable of handling function pods and any other pods deployed to the cluster.
+We will create default `NodePool` and `NodeClass` Custom Resources that are capable of handling function Pods and any other Pods deployed to the cluster.
 
 **Create a NodeClass**
 
-Node Classes enable configuration of AWS specific settings like the AMIs for Karpenter to use when provisioning nodes. Each NodePool must reference an EC2NodeClass using `spec.template.spec.nodeClassRef`. 
+Node Classes enable configuration of AWS specific settings like the AMIs for Karpenter to use when provisioning nodes. Each `NodePool` must reference an `EC2NodeClass` using the `spec.template.spec.nodeClassRef` field in the spec.
 
 ```yaml
 export ARM_AMI_ID="$(aws ssm get-parameter --name /aws/service/eks/optimized-ami/${K8S_VERSION}/amazon-linux-2-arm64/recommended/image_id --query Parameter.Value --output text)"
@@ -408,7 +425,7 @@ kubectl apply -f default-nodepool.yaml
 
 ### Demo: See Karpenter add nodes due to load on a function
 
-Deploy an OpenFaaS function with OpenFaaS [autoscaling labels](https://docs.openfaas.com/architecture/autoscaling/). We are going to invoke the function with Hey and trigger it to get scaled up by the OpenFaaS autoscaler. The higher replica count will not fit within our cluster resources and we should see Karpenter provision an additional node to run the new replicas. After the function scales down again the node will get removed.
+Deploy an OpenFaaS function with OpenFaaS [autoscaling labels](https://docs.openfaas.com/architecture/autoscaling/). We are going to invoke the function with a load generation tool called `hey`, so that the OpenFaaS autoscaler observes the load, and adds more replicas. The higher replica count will not fit within our cluster resources and we should see Karpenter provision an additional node to run the new replicas. After the function scales down again the node will get removed.
 
 ```sh
 faas-cli store deploy sleep \
@@ -423,7 +440,7 @@ Note that we set a high cpu request value on the function. This will increase th
 
 Run the following command before you start to invoke the function to observe what is happening.
 
-Watch function pods in one terminal:
+Watch function Pods in one terminal:
 
 ```sh
 kubectl get pods -n openfaas-fn -o wide -w
@@ -441,12 +458,20 @@ Watch the logs for the Karpenter controller in a third terminal:
 kubectl logs -f -n "${KARPENTER_NAMESPACE}" -l app.kubernetes.io/name=karpenter -c controller
 ```
 
+You can download `hey` with `arkade get hey`, or by [building it from source using Go](https://github.com/rakyll/hey). We recommend you use the binaries we built and provide via arkade.
+
 Invoke the function with hey to trigger autoscaling:
 
 ```sh
-hey -t 10 -z 3m -c 25 \
+hey -t 120 -z 3m -c 25 \
   http://127.0.0.1:8080/function/sleep
 ```
+
+The parameters used in the `hey` command are:
+
+* `-t 120` - Use a 120s timeout for any requests just in case there are any nodes that need to be added and a longer cold start is required
+* `-z 3m` - Run the test for 3 minutes, note the duration is expressed as a Go duration string with a suffix i.e. `s` or `m`
+* `-c 25` - Use 25 concurrent connections to generate load
 
 After the function is scaled down the node should be reclaimed.
 
@@ -460,11 +485,13 @@ After the function is scaled down the node should be reclaimed.
 
 Karpenter makes scheduling and provisioning decisions based on attributes such as resource requests, affinity, tolerations, nodeSelector and topology spread. Only the configuration of resource requests is supported through the OpenFaaS function spec. To set any of the other configuration attributes OpenFaaS has the concept of Profiles.
 
-Profiles allow for advanced configuration of function deployments on Kubernetes and allow you to easily apply the configuration to multiple functions. Profiles can be used to configure tolerations, nodeAffinity, etc. See: [the OpenFaaS profiles docs](https://docs.openfaas.com/reference/profiles/) for all configuration options. They are applied to functions by adding the `com.openfaas.profile` annotation with the name of the Profile to the function.
+Profiles allow for advanced configuration of function deployments on Kubernetes and allow you to easily apply the configuration to multiple functions. Profiles can be used to configure tolerations, nodeAffinity, etc. See: [the OpenFaaS profiles docs](https://docs.openfaas.com/reference/profiles/) for all configuration options.
 
-To get Karpenter to schedule functions to the `default` NodePool we need to set NodeAffinity on the function pods for the functions nodePool.
+All profiles need to be created in the `openfaas` namespace, and are generally managed by cluster administrators. They can then be selected by a function by adding the `com.openfaas.profile` annotation with the name of the Profile to the function. Multiple profiles are supported with a comma separated list.
 
-Create a `functions` Profile that has a nodeAffinity rule to constrain function pods to the `default` NodePool:
+To get Karpenter to schedule functions to the `default` NodePool we need to set NodeAffinity on the function Pods for the functions NodePool.
+
+Create a `functions` Profile that has a nodeAffinity rule to constrain function Pods to the `default` NodePool:
 
 ```yaml
 cat > functions-profile.yaml <<EOF
@@ -486,6 +513,8 @@ spec:
 EOF
 ```
 
+Apply the Profile in the OpenFaaS namespace:
+
 ```sh
 kubectl apply -f functions-profile.yaml
 ```
@@ -500,7 +529,7 @@ After deploying the function Karpenter will try to schedule it to a node in the 
 
 ### Demo: Schedule functions to spot instances with a Profile
 
-If one or more of your functions can tolerate being interrupted or cancelled due to a node being reclaimed, then you could consider using spot instances. Spot instances are available [up to a 90% off](https://aws.amazon.com/ec2/spot/pricing/) compared to On-Demand pricing. If you have a mixed workload of functions that can tolerate interruptions and functions that can not we recommend creating a separate nodePool for functions that can use spot nodes.
+If one or more of your functions can tolerate being interrupted or cancelled due to a node being reclaimed, then you could consider using spot instances. Spot instances are available [up to a 90% off](https://aws.amazon.com/ec2/spot/pricing/) compared to On-Demand pricing. If you have a mixed workload of functions that can tolerate interruptions and functions that can not we recommend creating a separate NodePool for functions that can use spot nodes.
 
 Create a `spot` NodePool:
 
@@ -552,7 +581,7 @@ EOF
 kubectl apply -f  spot-nodepool.yaml
 ```
 
-This NodePool is almost identical to the default pool that was created earlier. Except for two changes. The `karpenter.sh/capacity-type` requirement was changed to `spot` and a taint was added. This taint should prevent running any pods that do not explicitly tolerate it on spot instance nodes.
+This NodePool is almost identical to the default pool that was created earlier. Except for two changes. The `karpenter.sh/capacity-type` requirement was changed to `spot` and a taint was added. This taint should prevent running any Pods that do not explicitly tolerate it on spot instance nodes.
 
 To run functions on spot nodes a toleration needs to be added to the function deployment. This can be done by creating a `spot-functions` Profile.
 
@@ -589,7 +618,7 @@ The OpenFaaS autoscaler can [scale idle functions to zero](https://docs.openfaas
 
 Scale to zero can save money because fewer nodes are required in a cluster and the available resources are used more efficiently. When combined with Karpenter cost savings could be even higher. When functions are scaled to zero Karpenter removes underutilized nodes from the cluster or replaces a bigger node with a cheaper smaller one if the capacity is not required.
 
-When all functions using a nodePool are scaled to zero this means Karpenter will remove all nodes until there are requests for the function again bringing down the node cost to 0 while functions are idle.
+When all functions using a NodePool are scaled to zero this means Karpenter will remove all nodes until there are requests for the function again bringing down the node cost to 0 while functions are idle.
 
 ![Scale to zero node removal conceptual diagram](/images/2025-01-eks-openfaas-karpenter/scale-to-zero-node-concept.png)
 > Conceptual diagram showing how an underutilized node get removed from the cluster by Karpter when the sleep function running on the node gets scaled down to zero replicas by OpenFaaS.
@@ -598,29 +627,41 @@ When all functions using a nodePool are scaled to zero this means Karpenter will
 
 The latency between accepting a request for an unavailable function and serving the request is often called a "cold start". The cold start time for OpenFaaS functions can vary based on your cluster and the size of the function image but is usually not more than a few seconds. When using Karpenter you have to take into account the cold start can be significantly longer if a new node has to be provisioned. During our testing we saw that it took around 45-50 seconds for a function to become ready on on-demand nodes and around 70 seconds for nodes running on spot instances.
 
-Your application will need to be able to handle these longer cold start times by either setting a higher timeout for request or supporting retries. Alternatively functions can be invoked [asynchronously](https://docs.openfaas.com/reference/async/) to gracefully handle longer cold starts.
+Whatever you are using to invoke the function will need to be able to handle these longer start-up times by either setting a higher timeout for request or supporting retries. Alternatively functions can be invoked [asynchronously](https://docs.openfaas.com/reference/async/) to gracefully handle longer cold starts by retrying functions for you, and decoupling the request and response from the caller.
 
-To allow faster function scale up it could be a good idea to keep some baseline capacity in the cluster. This is currently not supported by Karpenter but there is an [issue tracking this feature request](https://github.com/kubernetes-sigs/karpenter/issues/749). As an alternative you could enure there is alwways some spare capacity in the static node group running the core components or create an separate EKS Managed Node Group with some nodes to provide this basline capacity.
+Functions can generally scale up very quickly if the images are not too large, and you have some left over capacity aka headroom within the cluster. Unfortunately, headroom is currently not supported by Karpenter but there is an [issue tracking this feature request](https://github.com/kubernetes-sigs/karpenter/issues/749). As an alternative you could enure there is always some spare capacity in the static node group running the core components or create an separate EKS Managed Node Group with some nodes to provide this basline capacity.
 
-### Delete the cluster
+To learn more about cold-starts and how to minimise them in OpenFaaS, read: [Fine-tuning the cold-start in OpenFaaS](/blog/fine-tuning-the-cold-start/) on the blog.
 
-If you are just following along this tutorial to try things out don't forget to delete the cluster to avoid unwanted charges to your AWS account. Double check any EC2 instances provisioned by Karpenter got deleted.
+### Clean up after the demo
+
+If you leave the demo running, you will incur charges on AWS, so it's important to clean up when you no longer want to run the cluster.
+
+Run the following in this order:
 
 ```sh
-helm uninstall karpenter --namespace "${KARPENTER_NAMESPACE}"
 helm uninstall openfaas --namespace openfaas
+
+helm uninstall karpenter --namespace "${KARPENTER_NAMESPACE}"
+
 aws cloudformation delete-stack --stack-name "Karpenter-${CLUSTER_NAME}"
+
 aws ec2 describe-launch-templates --filters "Name=tag:karpenter.k8s.aws/cluster,Values=${CLUSTER_NAME}" |
     jq -r ".LaunchTemplates[].LaunchTemplateName" |
     xargs -I{} aws ec2 delete-launch-template --launch-template-name {}
+
 eksctl delete cluster --name "${CLUSTER_NAME}"
 ```
 
+Finally, then check for any related resources in the region such as EC2 instances, or LoadBalancers and remove them.
+
 ## Conclusion
 
-We walked though the steps required to deploy OpenFaaS and Karpenter on an EKS cluster that we provisioned using eksctl.
+In this blog post, we set out to show you how to save costs on AWS EKS with OpenFaaS and Karpenter. Karpenter also provides a more modern, and dynamic approach to scaling nodes which also supports various types of NodePools, and scaling them to zero, something you don't get with alternative solutions. We were able to combine the two so you don't have to pay for idle resources.
 
-We showed how OpenFaaS and Karptner can be used together in several demo's:
+We walked though the steps required to deploy OpenFaaS and Karpenter on an EKS cluster that we provisioned using `eksctl`. If you have an existing cluster, we also shared a link to the Karpenter documentation for migrating from the Kubernetes Cluster Autoscaler.
+
+Then we showed how OpenFaaS and Karptner can be used together in several demos:
 
 - We showed how Karpenter can remove underutilized nodes to save cost by [scaling functions to zero](https://docs.openfaas.com/openfaas-pro/scale-to-zero/).
 - [Asynchronous invocations](https://docs.openfaas.com/reference/async/) can be used to handle invocations in a more reliable way. They can help to handle delays and retries when functions take longer to become ready because a new node has to be provisioned.
@@ -629,3 +670,4 @@ We showed how OpenFaaS and Karptner can be used together in several demo's:
 In a next article we will show you how OpenFaaS and Karpenter can be used to efficiently run functions that need GPU resources by building on the configuration and features discussed in this article, like scale to zero and OpenFaaS Profiles.
 
 [Reach out to us](https://www.openfaas.com/pricing/) if you’d like a demo, or if you have any questions about OpenFaaS on AWS EKS, or OpenFaaS in general.
+

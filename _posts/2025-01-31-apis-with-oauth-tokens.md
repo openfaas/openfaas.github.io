@@ -1,7 +1,7 @@
 ---
 title: "How to access APIs with OAuth tokens from OpenFaaS functions"
 description: "Learn how headless functions can access APIs which need to be authorized by a human in front of a keyboard for background jobs and ETL tasks"
-date: 2025-01-29
+date: 2025-01-31
 author_staff_member: alex
 categories:
   - oauth

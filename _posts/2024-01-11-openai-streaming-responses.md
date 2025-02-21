@@ -154,7 +154,7 @@ So what do you need to try out OpenFaaS?
 
 If you're familiar with Kubernetes, you can get started with the [Helm chart](https://docs.openfaas.com/deployment/kubernetes/).
 
-If Kubernetes is your antithesis, then you might like [faasd instead](https://docs.openfaas.com/deployment/faasd/), which can run on a single VM, and I've written a [comprehensive manual for you](https://store.openfaas.com/) to get started with it.
+If Kubernetes is your antithesis, then you might like [faasd instead](https://docs.openfaas.com/deployment/edge/), which can run on a single VM, and I've written a [comprehensive manual for you](https://store.openfaas.com/) to get started with it.
 
 If you'd like to learn more about OpenFaaS, we have a weekly call every Wednesday and we'd love to see you there to hear how you're using functions.
 

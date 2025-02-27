@@ -293,7 +293,7 @@ The kafka-connector will need to authenticate to your cluster. It will need to h
 Edit `/var/lib/faasd/docker-compose.yaml` and add the configuration for the kafka-connector:
 ```yaml
 kafka-connector:
-    image: ghcr.io/openfaasltd/kafka-connector:0.6.1
+    image: ghcr.io/openfaasltd/kafka-connector:latest
     environment:
       - gateway_url=http://gateway:8080
       - topics=user.signup
@@ -303,7 +303,7 @@ kafka-connector:
       - asynchronous_invocation=false
       - basic_auth=true
       - secret_mount_path=/run/secrets
-      - broker_host=pkc-5r697.europe-west1.gcp.confluent.cloud:9092
+      - broker_hosts=pkc-5r697.europe-west1.gcp.confluent.cloud:9092
       - upstream_timeout=2m
       - rebuild_interval=30s
       - content_type=text/plain

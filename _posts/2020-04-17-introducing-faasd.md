@@ -149,9 +149,7 @@ We hope that faasd could provide a way for us to deprecate support for Docker Sw
 
 ### You're not on your own!
 
-Finally, if you do run into technical issues with OpenFaaS and you need support, do feel free to join the Slack community and ask away.
-
-> We're here to help you, and if you need more than can be offered by the community, [OpenFaaS Ltd](mailto:sales@openfaas.com) offers reassurance and consulting services.
+We're here to help you, and if you need more than can be offered by the community, [OpenFaaS Ltd](mailto:sales@openfaas.com) offers reassurance and consulting services.
 
 ### Connect with the community
 

@@ -43,8 +43,6 @@ For these types of automation functions, I prefer to use faasd over OpenFaaS CE 
 
 [faasd](https://docs.openfaas.com/deployment/#faasd-serverless-for-everyone-else) is lightweight, easy to install, can run on as little as 1GB of RAM and is perfect for automation tasks. It runs using containerd so doesn't need Kubernetes or clustering. faasd uses a docker-compose file to define all the core components for OpenFaaS, and can be extended to add stateful containers like Grafana and Postgresql backed by persistent volumes.
 
-faasd is permissively licensed under MIT which means it can also be used for commercial use.
-
 I wrote a detailed guide for writing and deploying automation tasks and workflows to faasd called [Serverless For Everyone Else](https://openfaas.gumroad.com/l/serverless-for-everyone-else) which is available in PDF and ePUB format with a longer video and a Grafana dashboard included in premium packages.
 
 ## Scraping the website

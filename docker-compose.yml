@@ -1,9 +1,15 @@
-version: "3"
+# version: "3"
 services:
   openfaas-jekyll:
     command: jekyll serve --force_polling
     image: jekyll/jekyll:3.8
     volumes:
       - .:/srv/jekyll
+      - site:/srv/jekyll/_site
     ports:
       - 4000:4000
+    environment:
+      - JEKYLL_UID=1000
+
+volumes:
+  site:

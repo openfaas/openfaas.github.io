@@ -108,3 +108,7 @@ function initVideoModal() {
         showModal(false);
     });
 }
+
+// Run shrinkNav on start-up to cover up the white bar shown between the nav
+// and the blue hero on the landing page
+// shrinkNav()

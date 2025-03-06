@@ -10,9 +10,6 @@
 - name: Support
   class: navbar-item
   link: /support/
-- name: Team
-  class: navbar-item
-  link: /team/
 - name: Docs
   class: navbar-item
   link: https://docs.openfaas.com/

@@ -128,7 +128,7 @@ OpenFaaS supports various different languages through the use of its own [templa
 
 The Whisper model is available as a python package. We will be using a slightly adapted version of the [python3-http template](https://docs.openfaas.com/languages/python/) called `python-http-cuda` to scaffold our function. To provide the CUDA Toolkit from NVIDIA the `python3-http-cuda` template uses [nividia/cuda](https://hub.docker.com/r/nvidia/cuda) instead of Debian as the base image.
 
-Create a new function with the [OpenFaaS CLI](https://github.com/openfaas/faas-cli) then rename its YAML file to stack.yml. We do this so we don’t need to specify the name using --yaml or -f on every command.
+Create a new function with the [OpenFaaS CLI](https://github.com/openfaas/faas-cli) then rename its YAML file to stack.yaml. We do this so we don’t need to specify the name using --yaml or -f on every command.
 
 ```sh
 # Change this line to your own registry
@@ -139,9 +139,6 @@ faas-cli template pull https://github.com/skatolo/python-flask-template
 
 # Scaffold a new function using the python3-http-cuda template
 faas-cli new whisper --lang python3-http-cuda
-
-# Rename the function configuration file to stack.yaml
-mv whisper.yaml stack.yaml
 ```
 
 The function handler `whisper/handler.py` is where we write our custom code. In this case the function retrieves an audio file from a url that is passed in through the request body. Next the whisper model transcribes the audio file and the transcript is returned in the response.

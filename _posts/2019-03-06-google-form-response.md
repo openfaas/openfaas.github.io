@@ -119,10 +119,6 @@ In your terminal of choice, create the new function from the `csharp` template:
 
 ```sh
 $ faas-cli new signup-form --lang csharp
-
-# Rename signup-form.yml to the default "stack.yml", to reduce on typing.
-
-$ mv signup-form.yml stack.yml
 ```
 
 We're going to need to add a dependency to `Newtonsoft.Json` to parse the JSON request from the form. We'll also add the C# Slack SDK to make it easy to post a message to the appropriate channel. The dependencies will be added from Nuget via `dotnet add`:

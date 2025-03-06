@@ -89,16 +89,11 @@ This will create:
 ./hello/handler_test.py
 ./hello/requirements.txt
 ./hello/handler.py
-./hello.yml
+./stack.yaml
 ```
 
 Multiple functions can be added to the same stack YAML file by passing the `--append` flag to `faas-cli new`.
 
-To make the command shorter, let's now rename `hello.yml` to `stack.yml`, so we can skip the `--file` flag in future commands.
-
-```sh
-mv hello.yml stack.yml
-```
 
 Now there's a way to test the function without even deploying it, so long as it doesn't try to access the network of the Kubernetes cluster.
 
@@ -306,7 +301,7 @@ def handle(event, context):
 
 ```
 
-Now update stack.yml to include the secret:
+Now update stack.yaml to include the secret:
 
 ```diff
 functions:

@@ -131,7 +131,7 @@ spec:
   image: functions/nodeinfo:latest
 ```
 
-* How to generate a CRD entry from a `stack.yml` file:
+* How to generate a CRD entry from a `stack.yaml` file:
 
 ```bash
 # create a go function for Docker Hub user `alexellis2`
@@ -141,7 +141,7 @@ faas-cli new --lang go --prefix alexellis2 crd-example
 faas-cli build -f crd-example.yaml
 faas-cli push -f crd-example.yaml
 
-# generate the CRD entry from the "stack.yml" file and apply in the cluster
+# generate the CRD entry from the "stack.yaml" file and apply in the cluster
 faas-cli generate -f crd-example.yaml | kubectl apply -f -
 ```
 
@@ -183,7 +183,7 @@ Any containers deployed with "privileged mode" on Kubernetes, if compromised cou
 
 The OpenFaaS core components run as non-root users to reduce attack surface.
 
-Templates contain a Dockerfile and an entrypoint, which is usually a HTTP server. These allow developers to avoid repeating themselves with hundreds of lines of Kubernetes YAML, instead they get 3-4 lines in a CRD or OpenFaaS `stack.yml` file. The official OpenFaaS templates use a non-root user so that functions are running as normal users. 
+Templates contain a Dockerfile and an entrypoint, which is usually a HTTP server. These allow developers to avoid repeating themselves with hundreds of lines of Kubernetes YAML, instead they get 3-4 lines in a CRD or OpenFaaS `stack.yaml` file. The official OpenFaaS templates use a non-root user so that functions are running as normal users. 
 
 See an example: [openfaas-incubator/node10-express-service](https://github.com/openfaas-incubator/node10-express-service/blob/master/template/node10-express-service/Dockerfile)
 
@@ -199,7 +199,7 @@ OpenFaaS Pods can make use of Kubernetes secrets. To create a secret use `faas-c
 echo SECRET | faas-cli secret create api-key
 ```
 
-You can then attach the secret to a function by editing its stack.yml file, or by using the `--secret` flag with `faas-cli up`.
+You can then attach the secret to a function by editing its stack.yaml file, or by using the `--secret` flag with `faas-cli up`.
 
 See also: [OpenFaaS workshop: Lab 10 - Secrets](https://github.com/openfaas/workshop/blob/master/lab10.md)
 

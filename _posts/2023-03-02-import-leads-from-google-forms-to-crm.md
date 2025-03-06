@@ -457,7 +457,7 @@ func Test_toAlphabetIndex_2IsC(t *testing.T) {
 }
 ```
 
-Here's the stack.yml file:
+Here's the stack.yaml file:
 
 ```yaml
 version: 1.0

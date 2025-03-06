@@ -143,7 +143,7 @@ faas-cli secret create auth-token --from-literal='<token>'
 
 ### Configure the function
 
-Open the function's configuration file called `stack.yml`. Append the following lines to the file:
+Open the function's configuration file called `stack.yaml`. Append the following lines to the file:
 
 ```yml
     environment:
@@ -161,7 +161,7 @@ Open the function's configuration file called `stack.yml`. Append the following 
 
 > The schedule used `0 0 */1 * *` means once every day of the month at 00:00
 
-We have increased the default timeout of the function to `30s`. Replace `<repository>` with one of your own repositories. The whole `stack.yml` file should look something like this:
+We have increased the default timeout of the function to `30s`. Replace `<repository>` with one of your own repositories. The whole `stack.yaml` file should look something like this:
 
 ```yml
 version: 1.0

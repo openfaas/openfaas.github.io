@@ -458,14 +458,14 @@ faas-cli template store pull golang-middleware
 faas-cli deploy
 ```
 
-This will deploy the sample stack using the stack.yml file, you can open it and see what we're deploying.
+This will deploy the sample stack using the stack.yaml file, you can open it and see what we're deploying.
 
 #### Rebuild and deploy for Raspberry Pi
 
 For a Raspberry Pi, you will need to rebuild the images and replace "alexellis2" with your own Docker Hub account.
 
 ```sh
-sed -i stack.yml s/alexellis2/your-docker-hub/g
+sed -i stack.yaml s/alexellis2/your-docker-hub/g
 export DOCKER_BUILDKIT=1
 
 faas-cli up --tag=sha

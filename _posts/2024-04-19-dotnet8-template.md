@@ -68,7 +68,6 @@ Create a new OpenFaaS function using the `dotnet8-csharp` template. This templat
 faas-cli template store pull dotnet8-csharp
 faas-cli new --lang dotnet8-csharp \
     employee-api
-mv employee-api.yml stack.yml
 ```
 
 ```c#
@@ -148,7 +147,7 @@ faas-cli secret create pg-connection \
   --from-file .secrets/pg-connection
 ```
 
-Update the `stack.yml` file:
+Update the `stack.yaml` file:
 
 ```yaml
 version: 1.0

@@ -170,7 +170,7 @@ For the case study we created a function that uses [Puppeteer](https://pptr.dev/
 
 We want to automatically scale up the function so that we can handle more requests even if the concurrency limit for the function is reached. The `capacity` based autoscaling can be used for this.
 
-The functions `stack.yml` definition looks like this:
+The functions `stack.yaml` definition looks like this:
 
 ```yaml
 functions:

@@ -191,7 +191,7 @@ We should also create a `openfaas-api/.gitignore` file to prevent us committing 
 
 Run: `cp .dockerignore .gitignore`
 
-* Create an OpenFaaS stack.yml file
+* Create an OpenFaaS stack.yaml file
 
 Let's use the OpenFaaS template called `dockerfile` to define a new template for the project and call it `api`.
 
@@ -201,7 +201,7 @@ faas-cli new --lang dockerfile api
 
 Now you'll see a folder generated called `api` containing a `Dockerfile` and `api.yml`
 
-Let's edit stack.yml and have it point at our `Dockerfile` we created earlier:
+Let's edit stack.yaml and have it point at our `Dockerfile` we created earlier:
 
 ```yaml
 version: 1.0
@@ -216,7 +216,7 @@ functions:
     image: api:latest
 ```
 
-* Let's rename the file to the default `stack.yml`
+* Let's rename the file to the default `stack.yaml`
 * And also change the `handler` folder to point at the existing folder
 * Then add our Docker Hub username or private Docker container registry as a prefix to `image:` 
 
@@ -233,7 +233,7 @@ functions:
 You should now have:
 
 ```
-./stack.yml
+./stack.yaml
 ./openfaas-api/
 ./openfaas-api/Dockerfile
 ./openfaas-api/Program.cs
@@ -438,7 +438,7 @@ That's fine, you can create different templates or you can just specify the runt
 
 * 12-factor configuration
 
-You can apply 12-factor configuration through the `environment` section of your OpenFaaS stack.yml file.
+You can apply 12-factor configuration through the `environment` section of your OpenFaaS stack.yaml file.
 
 See also: [Configure your OpenFaaS functions for staging and production](https://www.openfaas.com/blog/custom-environments/)
 

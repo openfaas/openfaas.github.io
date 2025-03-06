@@ -66,7 +66,7 @@ spec:
   image: functions/nodeinfo:latest
 ```
 
-The `faas-cli generate` command can be used to convert the OpenFaaS stack.yml file into the Function CustomResource for use with `kubectl`.
+The `faas-cli generate` command can be used to convert the OpenFaaS stack.yaml file into the Function CustomResource for use with `kubectl`.
 
 The _OpenFaaS Operator_ comes with an extension to the Kubernetes API that allows you to manage OpenFaaS functions in a
 declarative manner. The operator implements a control loop that tries to match the desired state of your OpenFaaS

@@ -49,7 +49,7 @@ The project should now look like
 
 ```txt
 .
-├── stack.yml
+├── stack.yaml
 ├── template
 │   ├── python27-flask
 │   │   ├ ...
@@ -78,7 +78,7 @@ The project should now look like this
 
 ```txt
 .
-├── stack.yml
+├── stack.yaml
 ├── template
 │   ├── ...
 └── wordcount

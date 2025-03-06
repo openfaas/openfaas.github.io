@@ -442,7 +442,7 @@ Next, pull down the Python HTTP templates from the store:
 faas-cli template store pull python3-http
 ```
 
-Create a new function, then rename its YAML file to stack.yml, we do this so we don't need to specify the name using `--yaml` or `-f` on every command. A stack.yml file can contain multiple functions, but we'll only be using one right now.
+Create a new function, then rename its YAML file to stack.yaml, we do this so we don't need to specify the name using `--yaml` or `-f` on every command. A stack.yaml file can contain multiple functions, but we'll only be using one right now.
 
 See also: [stack.yaml reference](https://docs.openfaas.com/reference/yaml/)
 
@@ -452,8 +452,6 @@ export OPENFAAS_PREFIX="docker.io/alexellis2"
 
 faas-cli new --lang python3-http \
   ping-url
-
-mv ping-url.yml stack.yml
 ```
 
 We'll use the requests library to make a HTTP request to any passed in URL to the function.

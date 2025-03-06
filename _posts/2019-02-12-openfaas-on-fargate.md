@@ -59,7 +59,7 @@ scheduled in a `private subnet` that has no access to the Internet
 to manage service registration / de-registration
 * **\[logging\]** we configure each container workload to log to [AWS cloudwatch](https://aws.amazon.com/cloudwatch).
 * **\[secrets\]** managed using [AWS Secrets Manager](https://aws.amazon.com/secrets-manager/) and assigned access to functions
-in the `stack.yml`
+in the `stack.yaml`
 * **\[tls\]** ingress TLS is automatically provisioned using [Certbot](https://certbot.eff.org/) and the
 [Let's Encrypt](https://letsencrypt.org/) certificate authority.
 

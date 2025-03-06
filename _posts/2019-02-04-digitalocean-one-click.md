@@ -118,12 +118,6 @@ Function created in folder: hello-digitalocean
 Stack file written: hello-digitalocean.yml
 ```
 
-* Rename `hello-digitalocean.yml` to `stack.yml`:
-
-```sh
-$ mv hello-digitalocean.yml stack.yml
-```
-
 * Edit `hello-digitalocean/handler.py` to add our function's code:
 
 ```python

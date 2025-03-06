@@ -34,7 +34,7 @@ environment variables can be used to configure non-confidential data such as fea
 
 * Do manage config with environment variables
 
-You can manage configuration with environment variables by declaring an `environment:` section in your function's `stack.yml` file. Or you can create an external file for your environmental configuration with `environment_file:`.
+You can manage configuration with environment variables by declaring an `environment:` section in your function's `stack.yaml` file. Or you can create an external file for your environmental configuration with `environment_file:`.
 
 Read more about using environment variables for config in the [YAML reference](https://docs.openfaas.com/reference/yaml/#function-environmental-variables).
 

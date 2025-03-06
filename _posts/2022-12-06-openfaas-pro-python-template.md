@@ -84,7 +84,7 @@ faas-cli template pull https://github.com/openfaas/openfaas-pro
 
 faas-cli new --lang python@3.8-debian \
    withprivaterepo
-mv withprivaterepo.yml stack.yml
+mv withprivaterepo.yml stack.yaml
 ```
 
 Pip supports installing packages from a [Git repository](https://pip.pypa.io/en/stable/topics/vcs-support/#vcs-support) using the URI form:
@@ -136,7 +136,7 @@ functions:
 The function can now be build and deployed using the OpenFaaS Pro CLI:
 
 ```bash
-faas-cli pro publish -f stack.yml
+faas-cli pro publish -f stack.yaml
 faas-cli deploy
 ```
 
@@ -203,7 +203,6 @@ Next create a simple function to query the database.
 ```
 faas-cli new --lang python@3.8-debian \
    query-db
-mv query-db.yml stack.yml
 ```
 Update the `handler.py` file for the function and don't forget to add `psycopg2` to the `requirements.txt` file.
 
@@ -260,7 +259,7 @@ The database connection parameters are read from environment variables and the p
 
 The OpenFaaS philosophy is that environment variables should be used for non-confidential configuration values only, and not used to inject secrets. The secret can be created using the `faas-cli`.
 
-Update the `stack.yml` file and add the environment variables and secret for the database connection. Also don't forget to include the `libpq` build option:
+Update the `stack.yaml` file and add the environment variables and secret for the database connection. Also don't forget to include the `libpq` build option:
 
 ```diff
 functions:

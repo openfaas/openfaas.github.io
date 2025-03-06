@@ -35,7 +35,7 @@ See also: [Apache Kafka Documentation](https://kafka.apache.org/documentation/).
 
 ## Kafka Connector
 
-The [kafka-connector](https://github.com/openfaas-incubator/kafka-connector) is designed to connect Kafka topics to OpenFaaS Functions. After deploying the kafka-connector and pointing it at your broker, you can connect functions to topics by adding a simple annotation via your functions' stack.yml file.
+The [kafka-connector](https://github.com/openfaas-incubator/kafka-connector) is designed to connect Kafka topics to OpenFaaS Functions. After deploying the kafka-connector and pointing it at your broker, you can connect functions to topics by adding a simple annotation via your functions' stack.yaml file.
 
 Conceptual architecture diagram:
 
@@ -123,14 +123,14 @@ $ export OPENFAAS_PREFIX=docker.io/alexellis2
 # Create a function in Go
 $ faas-cli new email-receipt \
   --lang=go
-$ mv email-receipt.yml stack.yml
+$ mv email-receipt.yml stack.yaml
 ```
 
-> We also renamed the function's YAML file to  `stack.yml` (the default)
+> We also renamed the function's YAML file to  `stack.yaml` (the default)
 
 The function is a simple `Hello World` written in Go, you can edit it if you want, but for simplicity in our example we will keep the default message.
 
-Edit the `stack.yml` file by adding `topic` annotation with the value which which we pointed in the Kafka Connector `payment-received`. The file should look like this:
+Edit the `stack.yaml` file by adding `topic` annotation with the value which which we pointed in the Kafka Connector `payment-received`. The file should look like this:
 
 ```yaml
 provider:

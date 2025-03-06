@@ -118,9 +118,6 @@ I started off by building my function for OpenFaaS Cloud on [The Community Clust
 
     # This generated my badge/handler.js and badge/handler.json files
     faas-cli new --lang node10-express badge
-
-    # The YAML file must be called stack.yml
-    mv badge.yml stack.yml
     ```
 
 * Add the dependencies
@@ -308,7 +305,7 @@ OpenFaaS Official functions:
 
 * [Bot to thank new Patreon backers](https://github.com/openfaas/backer-thankyou/)
 
-* [HTTPS short-URLs](https://github.com/openfaas/cloud-functions/blob/master/stack.yml) - we built a number of short/pretty-URLs for the community to use for joining Slack, Zoom calls and for [becoming an OpenFaaS Insider](https://insiders.openfaas.io/)
+* [HTTPS short-URLs](https://github.com/openfaas/cloud-functions/blob/master/stack.yaml) - we built a number of short/pretty-URLs for the community to use for joining Slack, Zoom calls and for [becoming an OpenFaaS Insider](https://insiders.openfaas.io/)
 
 The UK-based cloud company [Civo.com](https://civo.com/) has an OpenFaaS function on The Community Cluster which filters Twitter mentions and then forwards them onto their Slack community so that the team can engage better with their own community:
 

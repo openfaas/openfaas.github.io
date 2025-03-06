@@ -54,7 +54,6 @@ The example code will be available [on GitHub here](https://github.com/alexellis
 
 ```bash
 faas-cli new --lang node access-control --prefix=alexellis2
-mv access-control.yml stack.yml
 echo "alexellis" > ./access-control/valid_user.txt
 ```
 

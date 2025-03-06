@@ -40,7 +40,7 @@ faas-cli new --lang node12 \
 
 You'll then get three files:
 
-* `pdf-writer.yml` (can also be renamed to stack.yml)
+* `pdf-writer.yml` (can also be renamed to stack.yaml)
 * `pdf-writer/package.json` - standard package management with `npm`
 * `pdf-writer/handler.js` - where you write your code
 

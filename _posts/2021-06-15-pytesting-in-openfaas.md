@@ -38,14 +38,13 @@ $ cd pytest-sample
 $ faas-cli template store pull python3-flask
 ```
 
-Create a new function called `calc` and then rename its YAML file to the default `stack.yml`, to avoid needing the `-f` flag later on.
+Create a new function called `calc` and then rename its YAML file to the default `stack.yaml`, to avoid needing the `-f` flag later on.
 
 ```sh
 $ faas-cli new --lang python3-flask calc
-$ mv calc.yml stack.yml
 ```
 
-Since the templates are never committed to Git, each time someone clones the repository, they would need to run `faas-cli template store pull`. Fortunately, there is a work-around which adds the template name and source to the `stack.yml` file to automate this task.
+Since the templates are never committed to Git, each time someone clones the repository, they would need to run `faas-cli template store pull`. Fortunately, there is a work-around which adds the template name and source to the `stack.yaml` file to automate this task.
 
 ```yaml
 configuration:

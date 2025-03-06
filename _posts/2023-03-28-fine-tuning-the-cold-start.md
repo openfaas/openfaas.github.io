@@ -79,7 +79,7 @@ But even with all of the above, we're still going to have a cold-start of 1-2 se
 
     So by only setting this on the functions that need it, you can reduce the load on the cluster.
 
-    stack.yml:
+    stack.yaml:
 
     ```yml
     functions:
@@ -295,7 +295,7 @@ Now, [Install the Helm chart](https://docs.openfaas.com/deployment/pro/) and pas
 
 The following function.yaml runs an Alpine Linux shell and for each invocation, runs the bash built-in command `env`. I'm using it because it's a very small function and quick to load test.
 
-You could also use the below configuration with one of your own functions. If you're using a stack.yml file, you can generate a CRD file using the `faas-cli generate` command.
+You could also use the below configuration with one of your own functions. If you're using a stack.yaml file, you can generate a CRD file using the `faas-cli generate` command.
 
 ```yaml
 ---

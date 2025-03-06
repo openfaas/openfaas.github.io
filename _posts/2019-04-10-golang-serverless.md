@@ -341,7 +341,7 @@ OK
 
 As part of a blog post on how to build a full Single Page App with OpenFaaS I used the golang-middleware template to build a function to consume events from GitHub and to store them in a Postgres database.
 
-You can read the code here for [handler.go](https://github.com/alexellis/leaderboard-app/blob/master/github-sub/handler.go). Confidential data is configured through the use of secrets and non-confidential configuration us set through environment variables in [stack.yml](https://github.com/alexellis/leaderboard-app/blob/master/stack.yml#L18).
+You can read the code here for [handler.go](https://github.com/alexellis/leaderboard-app/blob/master/github-sub/handler.go). Confidential data is configured through the use of secrets and non-confidential configuration us set through environment variables in [stack.yaml](https://github.com/alexellis/leaderboard-app/blob/master/stack.yaml#L18).
 
 ## Custom templates
 

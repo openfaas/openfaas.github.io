@@ -41,7 +41,7 @@ Now if you were to run a `build`, `push` or `deploy` you'd carry that step out f
 
 You can simply type in `faas-cli build --filter=filter2` for instance.
 
-Now if you do happen to edit most of your functions most of the time such as with [OpenFaaS Cloud](https://github.com/openfaas/openfaas-cloud/blob/master/stack.yml), then you can use the `--parallel` flag and your images will be built concurrently. If you have 16 functions in one YAML file and use `--parallel=4` they will build in batches of 4 saving time overall. This speed-boosting feature isn't available when working with Docker outside of OpenFaaS.
+Now if you do happen to edit most of your functions most of the time such as with [OpenFaaS Cloud](https://github.com/openfaas/openfaas-cloud/blob/master/stack.yaml), then you can use the `--parallel` flag and your images will be built concurrently. If you have 16 functions in one YAML file and use `--parallel=4` they will build in batches of 4 saving time overall. This speed-boosting feature isn't available when working with Docker outside of OpenFaaS.
 
 You can also split your functions into separate folders, repos or YAML files.
 
@@ -111,7 +111,7 @@ Successfully tagged alexellis2/test1:latest-b6d5661
 
 If we change the tag in the YAML file from `latest` to `0.1` then the image tag would have been: `test1:0.1-b6d5661`. This is useful for CI/CD jobs and is supported by the verbs: `build`, `push`, `deploy` and `up`.
 
-You can also omit the `--yaml/-f` flag if you rename your YAML file to `stack.yml`
+You can also omit the `--yaml/-f` flag if you rename your YAML file to `stack.yaml`
 
 ## Tip 5: Use `faas-cli up` and save on typing
 

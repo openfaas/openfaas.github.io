@@ -247,7 +247,7 @@ def shrinkwrap(image, handler, lang):
 
 The function takes three arguments: the image name to build, the path to our handler directory and the template to use. It uses the [subprocess](https://docs.Python.org/3/library/subprocess.html) module to spawn a new process running the `faas-cli build --shrinkwrap` command.
 
-In this example we pass individual values to the build command using flags but you could also use a stack YAML file and run `faas-cli build -f stack.yml`.
+In this example we pass individual values to the build command using flags but you could also use a stack YAML file and run `faas-cli build -f stack.yaml`.
 
 ### Create a tar archive
 

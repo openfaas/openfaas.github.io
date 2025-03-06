@@ -28,7 +28,7 @@ As we understand it, most of you are deploying your functions using our [faas-cl
 ![Using the CRD to deploy functions with kubectl](/images/2021-06-kubectl-functions/operator-crd.png)
 > Pictured: Using the CRD to deploy functions with kubectl
 
-The Custom Resource only contains information on how to deploy the function once it's already been built, where as the stack.yml file contains this along with how to build the function itself.
+The Custom Resource only contains information on how to deploy the function once it's already been built, where as the stack.yaml file contains this along with how to build the function itself.
 
 You can use `kubectl apply` instead of the OpenFaaS CLI and API which has several implications:
 
@@ -62,10 +62,10 @@ spec:
   image: functions/nodeinfo:latest
 ```
 
-The equivalent in an OpenFaaS stack.yml file would be:
+The equivalent in an OpenFaaS stack.yaml file would be:
 
 ```yaml
-# stack.yml
+# stack.yaml
 functions:
   nodeinfo:
     image: functions/nodeinfo:latest
@@ -117,7 +117,7 @@ spec:
 
 ### Generating the Function Custom Resource
 
-Remember that earlier I said that Custom Resource only contains information on how to deploy the function once it's already been built? Well that means that you still need your `stack.yml` file for the build information.
+Remember that earlier I said that Custom Resource only contains information on how to deploy the function once it's already been built? Well that means that you still need your `stack.yaml` file for the build information.
 
 So instead of maintaining two files, we added a command to generate the Kubernetes YAML. This way your workflow is to update and maintain just the existing file and generate a Kubernetes manifest whenever you need it, even at deployment time if you like.
 
@@ -145,12 +145,11 @@ spec:
   labels: {}
 ```
 
-Generate YAML from all the functions within a single stack.yml file:
+Generate YAML from all the functions within a single stack.yaml file:
 
 ```bash
 faas-cli new --lang go fn1
 faas-cli new --lang go fn2 --append fn1.yml
-mv fn1.yml stack.yml
 
 faas-cli generate \
   > functions.yaml

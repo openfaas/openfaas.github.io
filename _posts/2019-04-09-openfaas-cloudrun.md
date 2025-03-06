@@ -198,7 +198,7 @@ Now go over to your fork of my GitHub repo and edit your `cloudbuild.yaml` file.
 
 When complete it will deploy a second revision to the Cloud Run Service and we'll get a URL on the Cloud Run dashboard.
 
-> Don't like managing a `cloudbuild.yaml` file for every one of your GitHub repositories? No problem - checkout [OpenFaaS Cloud](https://docs.openfaas.com/openfaas-cloud/intro/) which uses your existing stack.yml file to automate CI/CD for any linked repository on GitHub or self-hosted GitLab.
+> Don't like managing a `cloudbuild.yaml` file for every one of your GitHub repositories? No problem - checkout [OpenFaaS Cloud](https://docs.openfaas.com/openfaas-cloud/intro/) which uses your existing stack.yaml file to automate CI/CD for any linked repository on GitHub or self-hosted GitLab.
 
 ### Monitor the function
 

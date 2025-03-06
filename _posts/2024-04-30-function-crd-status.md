@@ -94,7 +94,7 @@ Within the conditions, we've added four types:
 
 ### Getting started
 
-There's a lot more to say about the Function CRD, like how to generate it from the existing OpenFaaS stack.yml file, how to inject variables via environment substitution, and how to use it with Helm.
+There's a lot more to say about the Function CRD, like how to generate it from the existing OpenFaaS stack.yaml file, how to inject variables via environment substitution, and how to use it with Helm.
 
 Head over to the [OpenFaaS docs for the Function CRD](https://docs.openfaas.com/openfaas-pro/function-crd/) for more detailed information and examples of how to get started with ArgoCD.
 

@@ -64,7 +64,7 @@ The database will have:
 ![Staging configuration](/images/2021-12-environments/staging.png)
 > The Staging configuration for our database and marketing function uses a disposable, local database.
 
-So how do we configure this using the standard [OpenFaaS CLI](https://github.com/openfaas/faas-cli) and its [stack.yml file](https://docs.openfaas.com/reference/yaml/)?
+So how do we configure this using the standard [OpenFaaS CLI](https://github.com/openfaas/faas-cli) and its [stack.yaml file](https://docs.openfaas.com/reference/yaml/)?
 
 ### Confidential configuration
 
@@ -120,7 +120,7 @@ faas-cli secret create \
     --trim
 ```
 
-With this approach, we only need one `stack.yml` file with the secret listed, and change the gateway field.
+With this approach, we only need one `stack.yaml` file with the secret listed, and change the gateway field.
 
 Or we use different namespaces within the same cluster and OpenFaaS URL:
 
@@ -140,11 +140,11 @@ faas-cli secret create \
     --trim
 ```
 
-With this approach, we can still use one `stack.yml` file, but we need to change the namespace field using a flag.
+With this approach, we can still use one `stack.yaml` file, but we need to change the namespace field using a flag.
 
 ### Non-confidential configuration
 
-For non-confidential configuration, we can use the `environment` section of the stack.yml file:
+For non-confidential configuration, we can use the `environment` section of the stack.yaml file:
 
 ```yaml
   list:

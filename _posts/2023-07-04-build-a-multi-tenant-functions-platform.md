@@ -162,7 +162,7 @@ For Go:
 
 For Node.js:
 
-* Template: `node18`
+* Template: `node20`
 * Handler: `handler.js`
 * Manifest: `package.json`
 

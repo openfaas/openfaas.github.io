@@ -343,7 +343,7 @@ In the previous steps we used a Helm chart and the Function CRD to deploy our fu
 
 We still need the OpenFaaS Stack YAML file to publish new versions of the functions from CI (using faas-cli).
 
-Whilst the Image Updater will keep the image up to date, anything else you change in your stack.yml file like memory limits or labels will need to synchronised manually.
+Whilst the Image Updater will keep the image up to date, anything else you change in your stack.yaml file like memory limits or labels will need to synchronised manually.
 
 We can use the [envsubst](https://docs.openfaas.com/reference/yaml/#yaml-environment-variable-substitution) feature of the OpenFaaS Stack YAML file to make the image tag configurable, then we can pass in the `TAG` environment variable to `faas-cli publish`.
 
@@ -357,7 +357,7 @@ We can use the [envsubst](https://docs.openfaas.com/reference/yaml/#yaml-environ
 To build and push a new version of the images run
 
 ```bash
-TAG=0.1.4 faas-cli publish -f stack.yml
+TAG=0.1.4 faas-cli publish -f stack.yaml
 ```
 
 If you'd like an example of how we recommend using GitHub Actions with OpenFaaS, see the chapter in [Serverless For Everyone Else](http://store.openfaas.com/l/serverless-for-everyone-else).

@@ -245,7 +245,7 @@ def handle(event, context):
     }
 ```
 
-Then edit your `stack.yml` to apply the required annotation:
+Then edit your `stack.yaml` to apply the required annotation:
 
 ```yaml
 version: 1.0

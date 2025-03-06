@@ -117,7 +117,7 @@ The label `doks.digitalocean.com/node-pool` is attached to all nodes in a DOKS c
 
 Learn more about [Profiles here](https://docs.openfaas.com/reference/profiles/)
 
-Next, let's create a function using the OpenFaaS Function custom resource, you could also use `faas-cli` and a stack.yml file if you wish.
+Next, let's create a function using the OpenFaaS Function custom resource, you could also use `faas-cli` and a stack.yaml file if you wish.
 
 `nodeinfo.yaml`:
 

@@ -129,7 +129,7 @@ AWS Lambda:
 OpenFaaS:
 
 - Supports any programming language or toolchain that can be packaged into a container image.
-- Functions can be built and deployed using the `faas-cli`. Build and deployment configuration is provided through a `stack.yml` configuration file.
+- Functions can be built and deployed using the `faas-cli`. Build and deployment configuration is provided through a `stack.yaml` configuration file.
 - Functions can be tested locally using `faas-cli local-run`. It is easy to spin up an OpenFaaS cluster locally or use faasd to test functions.
 - No hard limits exist on image size, maximum runtime or function resources.
 - Has its own "faas-cli" and stack.yaml file without relying on third party solutions.
@@ -339,9 +339,6 @@ faas-cli template store pull python3-http
 
 # Scaffold the function.
 faas-cli new video-preview --lang python3-http
-
-# Rename the function configuration file.
-mv video-preview.yml stack.yml
 ```
 
 We are using the `python3-http` template to scaffold the function. This template creates a minimal function image based on alpine linux. If your functions depends on modules or packages that require a native build toolchain such as Pandas, Kafka, SQL etc. we recommend using the python3-http-debian template instead.
@@ -413,7 +410,7 @@ The S3 credentials are provided to the function as secrets. Confidential configu
 
 The `init_s3` function reads the S3 key and secret from the file system. The S3 endpoint URL is read from an environment variable. Next, these parameters are used to initialize the client.
 
-The function configuration in the `stack.yml` file needs to be updated. To tell OpenFaaS which secrets to mount for a function add the secret names to the `secrets` section. Also include the `s3_endpoint_url` for your Linode region in the `environment` section.
+The function configuration in the `stack.yaml` file needs to be updated. To tell OpenFaaS which secrets to mount for a function add the secret names to the `secrets` section. Also include the `s3_endpoint_url` for your Linode region in the `environment` section.
 
 ```diff
 functions:
@@ -461,7 +458,7 @@ You have to make sure all additional binaries the code depends on are installed 
 
 With the official python-http template the build argument, `ADDITIONAL_PACKAGE` can be used specify additional `[apk](https://wiki.alpinelinux.org/wiki/Alpine_Package_Keeper)` or `[apt](https://wiki.debian.org/AptCLI)` packages that need to be installed.
 
-Update the functions `stack.yml` configuration to include FFmpeg as an additional package:
+Update the functions `stack.yaml` configuration to include FFmpeg as an additional package:
 
 ```diff
  functions:
@@ -555,14 +552,14 @@ def handle(event, context):
 
 Changes made to the handler function:
 
-- Instead of getting the S3 bucket name from the event payload we now read it from an environment variable. Make sure to add `s3_bucket_name` to the `environment` section in the `stack.yml` file.
+- Instead of getting the S3 bucket name from the event payload we now read it from an environment variable. Make sure to add `s3_bucket_name` to the `environment` section in the `stack.yaml` file.
 - The Lambda function used an S3 key that was also read from the event payload to generate a pre-signed URL to download the source video. In the OpenFaaS function we are reading the download URL directly from the request body.
 
 These are the minimal changes required to run our code as an OpenFaaS function.
 
 **Deploy the OpenFaaS function**
 
-Before you go ahead and deploy the function to the OpenFaaS cluster make sure to check the `stack.yml` file. After adding all the configuration options from the previous steps it should look something like this:
+Before you go ahead and deploy the function to the OpenFaaS cluster make sure to check the `stack.yaml` file. After adding all the configuration options from the previous steps it should look something like this:
 
 ```yaml
 version: 1.0
@@ -586,7 +583,7 @@ functions:
       - video-preview-s3-key
       - video-preview-s3-secret
 ```
-> Source: [stack.yml](https://github.com/welteki/video-preview/blob/migrate-lambda-function/stack.yml)
+> Source: [stack.yaml](https://github.com/welteki/video-preview/blob/migrate-lambda-function/stack.yaml)
 
 Note that we included three additional environment variables to [configure the function's timeouts](https://docs.openfaas.com/tutorials/expanded-timeouts/#part-2-your-functions-timeout). Transforming and transcoding videos can take some time depending on the size of the source video. If you have long running functions make sure the timeouts are configured properly so your functions can finish their work.
 

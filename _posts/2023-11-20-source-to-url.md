@@ -136,7 +136,7 @@ cd /tmp/functions
 Create a new function
 
 ```bash
-faas-cli new --lang node18 hello-world
+faas-cli new --lang node20 hello-world
 ```
 
 The `--shrinkwrap` flag performs templating without actually invoking docker or buildx to build or publish an image. The Function Builder API will do that for us instead.

@@ -45,11 +45,8 @@ Create a function or use an existing one and try to run it locally with `faas-cl
 We will create and run a simple nodeJs function:
 
 ```bash
-# Create a new function using the node18 template
-faas-cli new greeter --lang node18
-
-# Rename the the functions yaml definition to stack.yml
-mv greeter.yml stack.yml
+# Create a new function using the node20 template
+faas-cli new greeter --lang node20
 ```
 
 Update `greeter/handler.js` so that the function returns a nice greeting message.
@@ -98,7 +95,7 @@ Starting local-run for: echo on: http://0.0.0.0:8080
 2023/09/05 15:58:55 Listening on port: 8080
 2023/09/05 15:58:55 Writing lock-file to: /tmp/.lock
 2023/09/05 15:58:55 Metrics listening on port: 8081
-node18 listening on port: 3000
+node20 listening on port: 3000
 ```
 
 Once the container is running, `curl` can be used to invoke the function:
@@ -113,7 +110,7 @@ Function logs for each invocation can also be inspected in the console:
 
 ```
 2023/09/05 15:58:55 Metrics listening on port: 8081
-node18 listening on port: 3000
+node20 listening on port: 3000
 2023/09/05 16:00:07 POST / - 200 OK - ContentLength: 96B (0.0353s)
 ```
 
@@ -137,10 +134,10 @@ The local-run command is great for running and testing individual OpenFaaS funct
 
 If your stack.yaml file only contains a single function, local-run will run that function by default. When there are multiple functions you need to add the name of the function you want to run as an extra argument to the command.
 
-Create a second function, `echo` and append it to the stack.yml file.
+Create a second function, `echo` and append it to the stack.yaml file.
 
 ```bash
-faas-cli new greeter --lang node18 --append stack.yml
+faas-cli new greeter --lang node20 --append stack.yaml
 faas-cli local-run greeter
 ```
 
@@ -150,7 +147,7 @@ If you are building function pipelines where you need to talk to other functions
 
 While there are some workarounds like port-forwarding the gateway first and making the gateway url configurable in your function through an environment variable you might want to use `faas-cli up --watch` instead.
 
-Running `faas-cli up` will build, push and deploy all functions in the `stack.yml` file. The `--watch` flag will tell the faas-cli to monitor the function source files for any changes and automatically rebuild and redeploy functions as you edit and save your code.
+Running `faas-cli up` will build, push and deploy all functions in the `stack.yaml` file. The `--watch` flag will tell the faas-cli to monitor the function source files for any changes and automatically rebuild and redeploy functions as you edit and save your code.
 
 We take a more detailed look into the watch functionality later in this article.
 
@@ -165,7 +162,7 @@ As an example we will add a secret named `api-key` to the echo function:
 ```yaml
 functions:
   echo:
-    lang: node18
+    lang: node20
     handler: ./echo
     image: ttl.sh/openfaas/echo:latest 
     secrets:
@@ -301,20 +298,20 @@ OPENFAAS_PREFIX=docker.io/my-user
 
 ## Generated image tags
 
-All OpenFaaS functions are built into container images. By default if no image tag is included for a function in the stack.yml file the `:latest` tag is used. When iterating over functions and pushing them to an image registry it is a best practice to organise different image versions using tags instead of always pushing to `:latest`.
+All OpenFaaS functions are built into container images. By default if no image tag is included for a function in the stack.yaml file the `:latest` tag is used. When iterating over functions and pushing them to an image registry it is a best practice to organise different image versions using tags instead of always pushing to `:latest`.
 
 There are two options to set tags for function images.
 
 1. Let the faas-cli generate the tag automatically.
-2. Set the image tag in the stack.yml file.
+2. Set the image tag in the stack.yaml file.
 
 The `--tag` option can be used with the `build`, `push` and `deploy` sub-commands of the faas-cli. If this flag is provided, image tags for functions will automatically be generated based on available metadata. This can be either Git metadata like the commit sha or branch name or digest of the function handler content.
 
-The generated tag is always suffixed to any tag defined in the stack.yml file or `latest` if no tag is defined.
+The generated tag is always suffixed to any tag defined in the stack.yaml file or `latest` if no tag is defined.
 
 Some examples:
 
-When using the flag `--tag=sha` the image tag used in the stack.yml file is suffixed with the short Git SHA. e.g
+When using the flag `--tag=sha` the image tag used in the stack.yaml file is suffixed with the short Git SHA. e.g
 
 ```yaml
 functions:
@@ -322,9 +319,9 @@ functions:
     image: ttl.sh/openfaas/echo:0.2
 ```
 
-For this stack.yml file the resulting image name will be `echo:0.2-cf59cfc`
+For this stack.yaml file the resulting image name will be `echo:0.2-cf59cfc`
 
-If no tag is set in the stack.yml file the suffix is appended to latest.
+If no tag is set in the stack.yaml file the suffix is appended to latest.
 
 ```
 image: echo => image: echo:latest-cf59cfc      
@@ -336,7 +333,7 @@ If you are using `faas-cli up` with the `--watch` flag we recommend also setting
 
 Alternatively [environment variable substitution](https://docs.openfaas.com/reference/yaml/#yaml-environment-variable-substitution) can be used to set the image.
 
-Here is an example of a stack.yml file:
+Here is an example of a stack.yaml file:
 
 ```yaml
 functions:

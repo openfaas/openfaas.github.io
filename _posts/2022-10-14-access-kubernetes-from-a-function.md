@@ -332,7 +332,7 @@ arkade install cron-connector
 
 Two annotation are required to trigger the function, a `topic` of `cron-function` and a `schedule` using a valid Cron expression.
 
-Add these annotations to the `stack.yml`:
+Add these annotations to the `stack.yaml`:
 
 ```yaml
 functions:

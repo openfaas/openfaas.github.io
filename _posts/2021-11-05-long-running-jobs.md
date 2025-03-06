@@ -80,7 +80,7 @@ cd go-long
 
 faas-cli deploy --filter go-long
 
-cat stack.yml
+cat stack.yaml
 ```
 
 ```yaml

@@ -60,7 +60,7 @@ exports.handler = async (event) => {
 };
 ```
 
-Let's examine the example for OpenFaaS. When you create a new function with the OpenFaaS CLI and the `node18` template, sample code is provided as shown here:
+Let's examine the example for OpenFaaS. When you create a new function with the OpenFaaS CLI and the `node20` template, sample code is provided as shown here:
 
 ```js
 'use strict'
@@ -176,39 +176,35 @@ Now, create the new "shortener" function:
 
 ```sh
 $ faas-cli new shortener \
-    --lang node18
+    --lang node20
 ```
 
 This will create a `shortener.yml` file, and a directory with the same name containing the sample function code to work from. By setting the `OPENFAAS_PREFIX` environment variable your registry name is added to the image so that the image can be pushed.
 
-OpenFaaS uses the convention of having a `stack.yml` file that contains all of the function definitions to operate on. You can use the `--yaml` or `-f` flags to provide a differently named file, but for this post, we'll rename the generated yml file making the remainder of the commands simpler.
-
-```bash
-mv shortener.yml stack.yml
-```
+OpenFaaS uses the convention of having a `stack.yaml` file that contains all of the function definitions to operate on. You can use the `--yaml` or `-f` flags to provide a differently named file, but for this post, we'll rename the generated yml file making the remainder of the commands simpler.
 
 When we create the "redirector" function, we can pass the `--append` flag to automatically add the new function's definition to the existing file.
 
 ```sh
 $ faas-cli new redirector \
-    --lang node18 \
-    --append stack.yml
+    --lang node20 \
+    --append stack.yaml
 ```
 
-The resulting `stack.yml` file will look something like this:
+The resulting `stack.yaml` file will look something like this:
 
 ```yaml
 functions:
   shortener:
-    lang: node18
+    lang: node20
     handler: ./shortener
     image: burtonr/shortener:latest
   redirector:
-    lang: node18
+    lang: node20
     handler: ./redirector
     image: burtonr/redirector:latest
 ```
-_file source: [openfaas/stack.yml](https://github.com/welteki/lambda-openfaas-blog/blob/master/openfaas/stack.yml)_
+_file source: [openfaas/stack.yaml](https://github.com/welteki/lambda-openfaas-blog/blob/master/openfaas/stack.yaml)_
 
 ### Migrate the Function Code
 
@@ -286,13 +282,13 @@ Finally, we'll add the secrets to the function's `yml` file so that the function
 ```yaml
 functions:
   shortener:
-    lang: node18
+    lang: node20
     ...
     secrets:
       - shorturl-dynamo-key
       - shorturl-dynamo-secret
 ```
-_file source: [openfaas/stack.yml](https://github.com/welteki/lambda-openfaas-blog/blob/master/openfaas/stack.yml)_
+_file source: [openfaas/stack.yaml](https://github.com/welteki/lambda-openfaas-blog/blob/master/openfaas/stack.yaml)_
 
 > Read more about [Unifying Secrets with OpenFaaS](/blog/unified-secrets)
 
@@ -306,12 +302,12 @@ Below is the additions that would need to be added to the function's yaml file:
 ```yaml
 functions:
   shortener:
-    lang: node18
+    lang: node20
     ...
     annotations:
       com.openfaas.serviceaccount: "iamserviceaccount"
 ```
-_file source: [openfaas/stack.yml](https://github.com/welteki/lambda-openfaas-blog/blob/master/openfaas/stack.yml)_
+_file source: [openfaas/stack.yaml](https://github.com/welteki/lambda-openfaas-blog/blob/master/openfaas/stack.yaml)_
 
 
 ### Code differences

@@ -63,7 +63,7 @@ What are the features we can leverage from OpenFaaS?
 * Extend the function's timeout to whatever we want
 * Run the invocation asynchronously, and in parallel
 * Get a HTTP callback with the result when done, such as a screenshot or test result in JSON
-* Limit concurrency with `max_inflight` environment variable in our `stack.yml` file to prevent overloading the container
+* Limit concurrency with `max_inflight` environment variable in our `stack.yaml` file to prevent overloading the container
 * Trigger the invocations from cron, or events like Kafka and NATS
 * Get rate, error and duration (RED) metrics from Prometheus, and view them in Grafana
 

@@ -76,15 +76,15 @@ faas-cli template store pull python3-flask
 
 # Scaffold the functions
 faas-cli new create-batch --lang python3-http-debian
-mv create-batch.yml stack.yml
-faas-cli new run-model --lang python3-http -f stack.yml
+
+faas-cli new run-model --lang python3-http -f stack.yaml
 ```
 
 Note that we use `python3-http-debian` for the `create-batch` function. [pandas](https://pypi.org/project/pandas/) will be used to process the CSV file. The pandas pip module requires a native build toolchain. It is advisable to use the Debian version of the template for native dependencies.
 
 All dependencies have to be put into the `requirements.txt` file.
 
-We will use a pre-build function image for the inception function. Add the function to the `stack.yml` file:
+We will use a pre-build function image for the inception function. Add the function to the `stack.yaml` file:
 
 ```yaml
 functions:

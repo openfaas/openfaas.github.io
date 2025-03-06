@@ -155,11 +155,10 @@ It'll be invoked in two ways:
 2. With the result from `page-to-pdf` to `/save`
   We'll assume anything coming to this path with a HTTP POST is a PDF for us to save to S3
 
-It's best to rename the YAML file for your functions to stack.yml, which means the various faas-cli commands will work without a `-f` argument.
+It's best to rename the YAML file for your functions to stack.yaml, which means the various faas-cli commands will work without a `-f` argument.
 
 ```bash
-mv page-to-pdf.yml stack.yml
-faas-cli new pdf-gen --lang node17 --append stack.yml
+faas-cli new pdf-gen --lang node17 --append stack.yaml
 ```
 
 Edit the `stack.yaml` file to include the names of the secrets used for S3 and update the environment variable `s3_bucket` with the bucket's name.

@@ -244,7 +244,7 @@ Now deploy the function to OpenFaaS:
 faas-cli up -f fn1.yml --tag=digest
 ```
 
-You should really update the image tag inside of `stack.yml` every time you change it i.e. `0.0.1` to `0.2.0` and so forth. For convenience, the `--tag=digest` flag will generate a new tag based upon the contents of the handler folder, and saves some typing during development.
+You should really update the image tag inside of `stack.yaml` every time you change it i.e. `0.0.1` to `0.2.0` and so forth. For convenience, the `--tag=digest` flag will generate a new tag based upon the contents of the handler folder, and saves some typing during development.
 
 You can now connect your WebSocket client to the `fn1` function using the gateway's URL:
 

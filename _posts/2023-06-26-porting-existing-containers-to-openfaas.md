@@ -44,8 +44,8 @@ That's what we'll be answering in this short tutorial.
 
 As with most things, there's a number of ways to get this done, and the work you put in, the more you'll be able to take advantage of the featureet of OpenFaaS.
 
-* Deploy a pre-built container image to OpenFaaS via the CLI or a stack.yml file
-* Create a stack.yml so that `faas-cli` can be used to publish and deploy the image
+* Deploy a pre-built container image to OpenFaaS via the CLI or a stack.yaml file
+* Create a stack.yaml so that `faas-cli` can be used to publish and deploy the image
 * Add the OpenFaaS watchdog to the image for extra compatibility
 * Compare the above to a template-based function
 
@@ -80,7 +80,7 @@ faas-cli deploy \
 ```
 
 
-You can also use a stack.yml file to deploy the image, which is more succinct:
+You can also use a stack.yaml file to deploy the image, which is more succinct:
 
 ```yaml
 provider:
@@ -91,7 +91,7 @@ functions:
         skip_build: true
 ```
 
-Then run `faas-cli deploy` or `faas-cli deploy -f stack.yml`
+Then run `faas-cli deploy` or `faas-cli deploy -f stack.yaml`
 
 By default, OpenFaaS will configure Kubernetes to look for a readiness endpoint at: `/_/ready`, and if that's not present, you can add it to your container's code and publish a new version.
 
@@ -110,9 +110,9 @@ You can read more about tuning the probes here: [OpenFaaS Reference: Workloads](
 
 Just like with Kubernetes Pods, there are several ways to configure your function, and most of the time it will come down to either setting environment variables or using a number of secrets. ConfigMaps are not supported, however, you can use a secret instead which is the equivalent and has the benefit of being encrypted at rest when Kubernetes is appropriately configured.
 
-If you need them, annotations, labels, environment variables and secrets can be added to the stack.yml file as well.
+If you need them, annotations, labels, environment variables and secrets can be added to the stack.yaml file as well.
 
-Read the [stack.yml reference guide here](https://docs.openfaas.com/reference/yaml/)
+Read the [stack.yaml reference guide here](https://docs.openfaas.com/reference/yaml/)
 
 This is what it looks like if you enable scale to zero, auto-scaling, Prometheus scraping, a custom environment variable and a secret:
 ```yaml
@@ -135,7 +135,7 @@ functions:
 
 Secrets are always mounted under `/var/openfaas/secrets/` and should be read from there whenever they are needed. Secrets can be created via `faas-cli secret create` or `kubectl create secret generic`.
 
-Did you know that you can even generate a Kubernetes Custom Resource from the stack.yml file?
+Did you know that you can even generate a Kubernetes Custom Resource from the stack.yaml file?
 
 ```bash
 faas-cli generate > expressjs.yml
@@ -161,12 +161,12 @@ spec:
 To build your existing Dockerfiles with faas-cli, structure the directory like this:
 
 ```bash
-./stack.yml
+./stack.yaml
 ./expressjs/
 ./expressjs/Dockerfile
 ```
 
-Then remove `skip_build: true` from the stack.yml file and add `handler: ./expressjs` to the function definition.
+Then remove `skip_build: true` from the stack.yaml file and add `handler: ./expressjs` to the function definition.
 
 ```yaml
 provider:
@@ -306,7 +306,7 @@ faas-cli new --lang golang-middleware gofn
 You'll find the following:
 
 
-* `./gofn.yml` - this is your stack.yml file
+* `./gofn.yml` - this is your stack.yaml file
 * `./gofn/handler.go` - this is your function's code
 * `./gofn/go.mod` - specify any dependencies here
 

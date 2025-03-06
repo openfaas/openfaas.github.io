@@ -217,12 +217,6 @@ func Handle(req handler.Request) (handler.Response, error) {
 }
 ```
 
-For convenience rename `repo-events.yml` to `stack.yml`:
-
-```bash
-mv repo-events.yml stack.yml
-```
-
 Initialise the a Go module for your function:
 
 ```bash
@@ -254,7 +248,7 @@ You'll need to have Docker installed locally for this to work.
 
 Subsequent builds will be faster, as the various parts of the build will be cached.
 
-Update the stack.yml file and add the following, so that the CI system won't need to have `faas-cli template store pull` commands for the Go HTTP template.
+Update the stack.yaml file and add the following, so that the CI system won't need to have `faas-cli template store pull` commands for the Go HTTP template.
 
 ```yaml
 configuration:
@@ -309,7 +303,7 @@ jobs:
           fetch-depth: 1
       - name: Get faas-cli
         run: curl -sLSf https://cli.openfaas.com | sudo sh
-      - name: Pull custom templates from stack.yml
+      - name: Pull custom templates from stack.yaml
         run: faas-cli template pull stack
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
@@ -489,7 +483,7 @@ Creating secret: webhook-secret
 Created: 200 OK
 ```
 
-Edit your stack.yml file and add a "secret":
+Edit your stack.yaml file and add a "secret":
 
 ```yaml
     image: ghcr.io/alexellis/repo-events:latest

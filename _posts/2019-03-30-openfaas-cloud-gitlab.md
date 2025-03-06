@@ -324,7 +324,7 @@ Now add a tag to the repo so that OpenFaaS Cloud knows that it can manage this r
 
 * Create a new function:
 
-```
+```bash
 faas-cli template store pull node10-express
 faas-cli new --lang node10-express timezone-shift --prefix=dockerhub_username
 ```
@@ -333,14 +333,14 @@ Now let's create a quick function to shift timezones for meetings.
 
 We'll install an `npm` module so you'll need to have Node.js installed on your local machine, or run this command in a container and grab the resulting `package.json` file.
 
-```
+```bash
 cd timezone-shift
 npm install --save moment
 ```
 
 Enter into `handler.js`:
 
-```
+```js
 "use strict"
 const moment = require('moment');
 module.exports = (event, context) => {
@@ -352,15 +352,11 @@ module.exports = (event, context) => {
 }
 ```
 
-We need to rename our function’s YAML file to `stack.yml`, so that it can be picked up by the OpenFaaS Cloud CI/CD pipeline.
-
-```
-mv timezone-shift.yml stack.yml
-```
+We need to rename our function’s YAML file to `stack.yaml`, so that it can be picked up by the OpenFaaS Cloud CI/CD pipeline.
 
 Push the code:
 
-```
+```bash
 git add .
 git commit
 git push origin master

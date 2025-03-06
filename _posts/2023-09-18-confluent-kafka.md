@@ -201,7 +201,7 @@ The Kafka topic we created was called *faas-request*, we can have a function sub
 
 The printer function from the OpenFaaS Store will show the message that it received in its logs along with any additional headers.
 
-Create a stack.yml file:
+Create a stack.yaml file:
 
 ```yaml
 provider:

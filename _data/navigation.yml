@@ -10,9 +10,6 @@
 - name: Support
   class: navbar-item
   link: /support/
-- name: eBooks
-  class: navbar-item
-  link: https://openfaas.gumroad.com/
 - name: Team
   class: navbar-item
   link: /team/

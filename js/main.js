@@ -5,7 +5,7 @@ function shrinkNav() {
     var nav = document.getElementById('top-nav');
     var htmlTag = document.documentElement;
 
-    var maxHeight = 184;
+    var maxHeight = 120;
     var minHeight = 80;
 
     if (window.innerWidth <= 1080) {

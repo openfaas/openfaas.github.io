@@ -3,10 +3,14 @@ layout: default
 ---
 
 <div class="post-page-full">
+	{% if page.hide_header_image %}
+		<section class="hero is-medium is-bold cover-solid" {% include blog-page/relative-post-hero.html hide_header_image=page.hide_header_image src=page.image %}>
+	{% else %}
 		<section class="hero is-medium is-bold cover" {% include blog-page/relative-post-hero.html hide_header_image=page.hide_header_image src=page.image %}>
+	{% endif %}
 			<div class="hero-body">
 				<div class="container">
-					<h1 class="title is-size-3 is-size-1-desktop has-text-weight-normal">
+					<h1 class="title is-size-3 is-size-1-desktop has-text-weight-normal" style="padding-bottom: 10px;">
 						{{ page.title }}
 					</h1>
 					<h2 class="subtitle is-size-4">
@@ -16,7 +20,7 @@ layout: default
 			</div>
 		</section>
 
-    <section class="hero is-medium">
+    <section class="hero">
     	<div class="hero-body hero-blog-content">
             <div class="container">
                 {{ content }}

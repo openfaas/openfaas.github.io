@@ -7,9 +7,9 @@
 - name: Pricing
   class: navbar-item
   link: /pricing/
-# - name: Products
-#   class: navbar-item
-#   link: /products/
+- name: Products
+  class: navbar-item
+  link: /products/
 - name: Support
   class: navbar-item
   link: /support/

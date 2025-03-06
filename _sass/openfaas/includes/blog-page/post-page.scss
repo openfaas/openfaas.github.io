@@ -40,11 +40,61 @@
 
 				.hero-blog-content {
 					background: white;
+					padding-top: 4.5rem;
+					padding-left: 4.5rem;
+					padding-right: 4.5rem;
 
 					padding-bottom: 0rem;
 					.content {
 						font-size: 20px;
 						.post-content {
+							font-size: 20px;
+							margin-left: auto;
+							margin-right: auto;
+							width: 90%;
+						}
+					
+					}				
+				}
+			}
+		}
+
+		&.cover-solid {
+			position: relative;
+
+			background-size: cover;
+			background-repeat: no-repeat;
+
+			&:before {
+				content: '';
+
+				position: absolute;
+
+				left: 0;
+				right: 0;
+				top: 0;
+				bottom: 0;
+
+				background: rgba(58, 95, 233, 1);
+			}
+
+			.hero-body {
+				.title,
+				.subtitle {
+					color: white;
+				}
+
+				.hero-blog-content {
+					background: white;
+					padding-top: 4.5rem;
+					padding-left: 4.5rem;
+					padding-right: 4.5rem;
+					
+					padding-bottom: 0rem;
+					.content {
+						font-size: 20px;
+						.post-content {
+
 							font-size: 20px;
 							margin-left: auto;
 							margin-right: auto;

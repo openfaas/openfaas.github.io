@@ -30,7 +30,7 @@ Instead of Docker, or even compose, faasd was built from the ground up to integr
 
 ## What is OpenFaaS Edge and faasd CE?
 
-faasd CE is the original version of faasd, it's free to use under the [faasd CE EULA](https://github.com/openfaas/faasd/blob/master/pro/EULA.md) for personal use and within a Small Business Environment, with up to 15 functions, but it doesn't come with support, and is limited to the same set of features and capabilities of OpenFaaS CE on Kubernetes.
+faasd CE is the original version of faasd, it's free to use under the [faasd CE EULA](https://github.com/openfaas/faasd/blob/master/pro/EULA.md) for personal use, with up to 15 functions, but it doesn't come with support, and is limited to the same set of features and capabilities of OpenFaaS CE on Kubernetes.
 
 ## New features from OpenFaaS Pro
 
@@ -39,7 +39,8 @@ OpenFaaS Edge comes with support, plus new features from OpenFaaS Pro:
 * Upgraded Pro components from OpenFaaS Standard: Gateway, Cron Connector, JetStream Queue Worker and Classic Scale to Zero
 * Deploy up to 250 functions per installation
 * Configure private DNS servers
-* Airgap-friendly with installation bundled in an OCI image
+* Airgap-friendly with installation bundled in an OCI image or RPM package
+* Support for private registries
 * Multiple namespace support
 
 The upgraded components support structured logs in JSON format for better observability. We'll cover some of the new features below. 
@@ -54,7 +55,11 @@ Both versions of faasd and their container images support the Intel/AMD and 64-A
 
 ## Simple activation
 
-For individual use, OpenFaaS Edge can be activated during installation with:
+Commercial users can order licenses via email to contact@openfaas.com, with automated options available for rolling out to your own customers.
+
+For personal non-commercial use, OpenFaaS Edge is available for a 25 USD / mo sponsorship to @openfaas on GitHub.
+
+This is intended purely for individuals used outside of a work setting, for testing, experimentation, and learning.
 
 ```bash
 # Verify sponsorship status for @openfaas
@@ -63,10 +68,6 @@ faasd-pro github login
 # Activate OpenFaaS Edge via API call
 faasd-pro activate
 ```
-
-For commercial redistribution, a HTTP REST API is available to activate installations using your API token.
-
-This can be done during delivery to a customer, or on a self-service basis through your existing back-office or onboarding operations.
 
 ## Pre-configured for production
 
@@ -173,6 +174,9 @@ Learn more:
 Q: Are there any limitations of OpenFaaS Edge over OpenFaaS Pro on Kubernetes?
 A: Each function can have a maximum of 1 replica.
 
+Q: Is High Availability (HA) supported?
+A: OpenFaaS Edge is designed to run on a single device only such as a VM, edge device or bare-metal server. Single devices are inherently a Single Point of Failure (SPoF). Therefore OpenFaaS Edge focuses on a fast installation and Mean Time To Recovery (MTTR) over HA.
+
 Q: Is scale to zero supported?
 A: A classic experience of scale to zero is supported, with a single timeout for all functions.
 
@@ -183,23 +187,23 @@ Q: How does pricing for OpenFaaS Edge compare to OpenFaaS Standard/for Enterpris
 A: OpenFaaS Edge is designed for edge distribution, and is available at a lower price point than OpenFaaS Standard/for Enterprises from OpenFaaS Ltd.
 
 Q: Is the OpenFaaS Pro Dashboard included?
-A: OpenFaaS Edge is designed for headless use, and for commercial redistribution as part of a white-box/OEM solution, so this user-facing component is not included at present.
+A: OpenFaaS Edge is designed for headless use, and for commercial redistribution as part of a white-box/OEM solution, so this user-facing component is not included in the base price. It is available as a separate add-on.
 
-Q: Can I use OpenFaaS Edge for individual use?
+Q: Is there a discount for OpenFaaS for non-profits and charitable organisations?
+A: We can offer a reduced-cost OpenFaaS option for certain organisations, subject to a brief call to learn more about the intended use-case.
+
+Q: Can I use OpenFaaS Edge for personal use?
 A: Yes, with a GitHub Sponsorship for OpenFaaS at the 25 USD / mo tier or higher. We have included this option for developers to explore the technology and to make use of the additional features in their own projects.
 
 Q: Can I still use faasd CE at work for internal use?
-A: If the environment qualifies as a Small Business Environment, then yes, however you may want to consider the benefits of OpenFaaS Edge.
-
-Q: Is the Small Business Environment relevant for OpenFaaS Edge?
-A: Apart from personal/individual usage, commercial usage of OpenFaaS Edge will require the purchase of a license from OpenFaaS Ltd.
+A: No, a commercial license is necessary.
 
 Q: What level of support is included with OpenFaaS Edge?
 A: OpenFaaS Edge comes with standard support via email.
 
 ## Get started with faasd
 
-If you want to use faasd for Personal use, or [qualify as a Small Business Environment](https://github.com/openfaas/faasd/blob/master/pro/EULA.md), then you can [get started with faasd CE for free](https://github.com/openfaas/faasd) for up to 15 functions, including the use of private registries.
+If you want to use faasd for Personal use, then you can [get started with faasd CE for free](https://github.com/openfaas/faasd) for up to 15 functions, including the use of private registries.
 
 Individuals who [sponsor OpenFaaS via GitHub](https://github.com/sponsors/openfaas) on the 25 USD / mo tier or greater, can deploy the [full version of OpenFaaS Edge for personal use](https://github.com/openfaas/faasd).
 

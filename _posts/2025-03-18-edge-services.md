@@ -126,7 +126,8 @@ Disable a service for a period of time, whilst retaining it in the file:
 
 ```yaml
   cron-connector:
-    replicas: 0
+    deploy:
+      replicas: 0
 ```
 
 Enable automatic restarts for a service such as `nats`:

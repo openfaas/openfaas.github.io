@@ -16,7 +16,9 @@ In this post we'll look at how to take a regular command-line program, script, o
 
 I just got off a call with a Director of IT for a non-profit in North Carolina. He told me that he had around 40 scripts that he kept on his laptop, and ran manually from time to time. He also wanted to make one of them available to around 600 employees to submit an annual report, for central processing. You could think of this collection of code as traditional "back office" processing - the parts that make the system work. He found out about functions, and thought it would be easier to manage than writing an API and deploying it to a cloud VM.
 
-So this post is for you, if you want to get code into production, but don't want to get bogged down with making choices about infra, hosting, monitoring, and security. Serverless covers most of this for you, so you can focus on solving the problem at hand.
+This post is for you (if like him) want to get your code into production in a quick and reliable way, without getting bogged down with making choices about infra, hosting, monitoring, and security. Serverless covers most of this for you, so you can focus on solving the problem at hand.
+
+We'll first look at the concept of a function, how they run on cloud solutions, and how self-hosted can sometimes be a better option. We'll then go through the mechanics of input, output, configuration, state, dealing with files and secrets, and there'll be lots of code examples along the way.
 
 ## What is a Serverless Function?
 

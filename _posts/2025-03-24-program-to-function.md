@@ -46,7 +46,7 @@ Once your functions are deployed, you can monitor them through the [OpenFaaS Das
 
 The [autoscaler](https://docs.openfaas.com/architecture/autoscaling/) helps your code respond to spikes in demand, and scale to zero can keep your costs and utilization down when demand is low.
 
-![Conceptual overview](./images/2025-03-convert-to-function/conceptual-fns.png)
+![Conceptual overview](/images/2025-03-convert-to-function/conceptual-fns.png)
 
 In the above conceptual overview, we have the following:
 

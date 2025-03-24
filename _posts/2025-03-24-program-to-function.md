@@ -12,11 +12,11 @@ image: images/2025-03-convert-to-function/background.png
 hide_header_image: true
 ---
 
-In this post we'll look at how to take a regular command-line program or HTTP server and convert it into a serverless function, along with some of the benefits of doing so.
+In this post we'll look at how to take a regular command-line program, script, or HTTP server and convert it into a serverless function, along with some of the benefits of doing so.
 
-I just got off a call with a Director of IT for a non-profit in the Midwest. He told me that he had around 40 scripts that he kept on his laptop, and ran manually from time to time. He thought his only option was to start creating his own API and deploying it to a cloud VM.
+I just got off a call with a Director of IT for a non-profit in North Carolina. He told me that he had around 40 scripts that he kept on his laptop, and ran manually from time to time. He also wanted to make one of them available to around 600 employees to submit an annual report, for central processing. You could think of this collection of code as traditional "back office" processing - the parts that make the system work. He found out about functions, and thought it would be easier to manage than writing an API and deploying it to a cloud VM.
 
-This post is for you if you want to take your code to production, but don't want to get bogged down with infra, hosting, and security details.
+So this post is for you, if you want to get code into production, but don't want to get bogged down with making choices about infra, hosting, monitoring, and security. Serverless covers most of this for you, so you can focus on solving the problem at hand.
 
 ## What is a Serverless Function?
 

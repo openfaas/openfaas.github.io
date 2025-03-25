@@ -47,7 +47,7 @@ In this blog post we'll give you a quick introduction so that you can start inte
 
 We are using arkade, the open source marketplace to download CLIs and to install the apps we need. You can also do this the hard way if you prefer, just refer to the documentation or the helm chart for more.
 
-You'll need OpenFaaS Pro for Istio to work. [Reach out to us](https://openfaas.com/pricing/) if you want to talk about options.
+You'll need OpenFaaS Standard or Enterprise for Istio to work. OpenFaaS CE does its own load-balancing with Pod IPs instead. [Reach out to us](https://openfaas.com/pricing/) if you want to talk about options.
 
 ### Bootstrap the cluster
 
@@ -65,8 +65,10 @@ kind create cluster \
 Once the KinD cluster has started, install Istio:
 
 ```bash
-arkade install istio
+arkade install istio --version 1.16.1
 ```
+
+> Note: newer versions of Istio are available, however this was the last tested version when the blog post was written.
 
 You can also install Istio using Helm or the istioctl tool, [see other options](https://istio.io/latest/docs/setup/install/).
 
@@ -76,11 +78,16 @@ Download the CLI for Istio so we can use it later:
 arkade get istioctl
 ```
 
-### Install OpenFaaS Pro
+### Install OpenFaaS
 
-Only OpenFaaS Pro works with Istio, the Community Edition (CE) is meant for hobbyists and experimentation.
+OpenFaaS can be installed via Helm or arkade, the below flags for arkade can be converted to Helm values if you prefer.
 
-Install OpenFaaS Pro using the following changes:
+If you see `--set gateway.directFunctions=true`, then you could convert that to the following for a values.yaml file:
+
+```yaml
+gateway:
+  directFunctions: true
+```
 
 Setting `openfaasPro=true` enables the OpenFaaS Pro features.
 
@@ -92,7 +99,20 @@ The `gateway.probeFunctions=true` is required to remediate a race condition wher
 
 The `operator.create` option is not strictly necessary, but preferred as it enables the "Function" CRD.
 
+Install without mTLS:
+
+```bash
+arkade install openfaas \
+  --license-file $HOME/.openfaas/LICENSE \
+  --set openfaasPro=true \
+  --set operator.create=true \
+  --set gateway.directFunctions=true \
+  --set gateway.probeFunctions=true
+```
+
 The `istio.mtls` flag is optional, but when set encrypts the traffic between each of the pods in the `openfaas` and `openfaas-fn` namespace.
+
+Here is the updated command to install with mTLS:
 
 ```bash
 arkade install openfaas \
@@ -105,6 +125,8 @@ arkade install openfaas \
 ```
 
 At this point everything is configured and you can use OpenFaaS.
+
+Alternatively, follow the instructions in the [OpenFaaS documentation](https://docs.openfaas.com/deployment/pro/).
 
 ### Access OpenFaaS with an Istio Gateway
 

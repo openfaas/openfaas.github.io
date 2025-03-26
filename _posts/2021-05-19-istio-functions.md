@@ -16,6 +16,8 @@ dark_background: true
 
 Learn how to enable Istio for your OpenFaaS functions to take advantage of Mutual TLS and more
 
+> Last updated: Tested and updated on 26 March 2025
+
 ## Introduction
 
 Service meshes have become popular add-ons for Kubernetes, so much so that they have their [own ServiceMeshCon days](https://events.linuxfoundation.org/servicemeshcon/) at [KubeCon](https://events.linuxfoundation.org/kubecon-cloudnativecon-europe/), the official Kubernetes conference.
@@ -35,7 +37,7 @@ The value for users is:
 * Encrypting traffic between all OpenFaaS components and functions for "zero trust"
 * Providing advanced networking like retries, and weighting for canaries and gradual rollouts of new functions
 
-Thank you to [John Howard](https://github.com/howardjohn) from Google for helping us with this work and to [Lucas Roesler](https://github.com/lucasroesler) for reviewing and testing the work.
+Thank you to [John Howard](https://github.com/howardjohn) from the Istio team for helping us with reviewing this blog post.
 
 In this blog post we'll give you a quick introduction so that you can start integrating Istio with OpenFaaS. We'll then go on to show you how to measure the resource consumption of the cluster, and how to create a TLS certificate for the Istio Gateway.
 
@@ -72,6 +74,10 @@ arkade get istioctl@1.25.0
 istioctl install \
   --set meshConfig.defaultConfig.holdApplicationUntilProxyStarts=true
 ```
+
+The [holdApplicationUntilProxyStarts](https://istio.io/latest/docs/reference/config/istio.mesh.v1alpha1/#ProxyConfig-hold_application_until_proxy_starts) option is important to counter delays and race conditions from latency that Istio introduces from injecting its sidecar into each meshed container.
+
+If you are able to use [Istio's native sidecars](https://istio.io/latest/blog/2023/native-sidecars/), that can be use as an alternative, but requires Kubernetes 1.28 or higher.
 
 See other options for: [istioctl](https://istio.io/latest/docs/setup/install/istioctl/).
 

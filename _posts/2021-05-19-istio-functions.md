@@ -65,68 +65,38 @@ kind create cluster \
 Once the KinD cluster has started, install Istio:
 
 ```bash
-arkade install istio --version 1.16.1
+arkade get istioctl@1.25.0
 ```
-
-> Note: newer versions of Istio are available, however this was the last tested version when the blog post was written.
-
-You can also install Istio using Helm or the istioctl tool, [see other options](https://istio.io/latest/docs/setup/install/).
-
-Download the CLI for Istio so we can use it later:
 
 ```bash
-arkade get istioctl
+istioctl install \
+  --set meshConfig.defaultConfig.holdApplicationUntilProxyStarts=true
 ```
+
+See other options for: [istioctl](https://istio.io/latest/docs/setup/install/istioctl/).
 
 ### Install OpenFaaS
 
-OpenFaaS can be installed via Helm or arkade, the below flags for arkade can be converted to Helm values if you prefer.
+OpenFaaS can be installed via Helm using the instructions below, or via arkade by passing in various `--set` flags.
 
-If you see `--set gateway.directFunctions=true`, then you could convert that to the following for a values.yaml file:
+Download [values-pro.yaml](https://github.com/openfaas/faas-netes/blob/master/chart/openfaas/values-pro.yaml) from the OpenFaaS Helm chart repository.
 
-```yaml
+Then add/change:
+
+```diff
 gateway:
-  directFunctions: true
++  directFunctions: true
++  probeFunctions: true
 ```
 
-Setting `openfaasPro=true` enables the OpenFaaS Pro features.
+If you wish to enable mTLS for the `openfaas` and `openfaas-fn` namespaces, then also add:
 
-The `--license-file` flag should be set to `$HOME/.openfaas/LICENSE` and will create the `openfaas-license` secret so that the components can start up.
-
-The `gateway.directFunctions=true` flag prevents OpenFaaS from trying to do its own endpoint load-balancing between function replicas, and defers to Envoy instead. Envoy is configured for each pod by Istio and handles routing and retries.
-
-The `gateway.probeFunctions=true` is required to remediate a race condition where during scaling, Kubernetes reports ready endpoints, but the Envoy proxy is not yet ready to route traffic to them. This setting causes the gateway to access the function's HTTP readiness endpoint directly before sending traffic.
-
-The `operator.create` option is not strictly necessary, but preferred as it enables the "Function" CRD.
-
-Install without mTLS:
-
-```bash
-arkade install openfaas \
-  --license-file $HOME/.openfaas/LICENSE \
-  --set openfaasPro=true \
-  --set operator.create=true \
-  --set gateway.directFunctions=true \
-  --set gateway.probeFunctions=true
+```diff
++istio:
++  mtls: true
 ```
 
-The `istio.mtls` flag is optional, but when set encrypts the traffic between each of the pods in the `openfaas` and `openfaas-fn` namespace.
-
-Here is the updated command to install with mTLS:
-
-```bash
-arkade install openfaas \
-  --license-file $HOME/.openfaas/LICENSE \
-  --set openfaasPro=true \
-  --set operator.create=true \
-  --set gateway.directFunctions=true \
-  --set gateway.probeFunctions=true \
-  --set istio.mtls=true
-```
-
-At this point everything is configured and you can use OpenFaaS.
-
-Alternatively, follow the instructions in the [OpenFaaS documentation](https://docs.openfaas.com/deployment/pro/).
+Then run the the rest of the [commands from the docs](https://docs.openfaas.com/deployment/pro/) to create the initial namespaces, add the license key, and to install the OpenFaaS chart with Helm.
 
 ### Access OpenFaaS with an Istio Gateway
 

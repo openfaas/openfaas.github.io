@@ -712,7 +712,7 @@ The `callId` field is returned from the `/async-function/` endpoint, and is used
 
 We see a few 429 errors, followed by the eventual successful response.
 
-![Responses from the queue-worker](./images/2025-03-convert-to-function/ui.png)
+![Responses from the queue-worker](/images/2025-03-convert-to-function/ui.png)
 
 If you want to receive the result of a function, you can pass in the `X-Callback-URL` header with the URL to receive the result.
 

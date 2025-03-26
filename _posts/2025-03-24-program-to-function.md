@@ -14,21 +14,21 @@ hide_header_image: true
 
 In this post we'll look at how to take a regular command-line program, script, or HTTP server and convert it into a serverless function, along with some of the benefits of doing so.
 
-I just got off a call with a Director of IT for a non-profit in North Carolina. He told me that he had around 40 scripts that he kept on his laptop, and ran manually from time to time. He also wanted to make one of them available to around 600 employees to submit an annual report, for central processing. You could think of this collection of code as traditional "back office" processing - the parts that make the system work. He found out about functions, and thought it would be easier to manage than writing an API and deploying it to a cloud VM.
+I just got off a call with a Director of IT for a non-profit in North Carolina. He told me that he had around 40 Python scripts that he kept on his laptop, and ran manually from time to time. He also wanted to make one of them available to around 600 employees to submit an annual report, for central processing. You could think of this collection of code as traditional "back office" processing - the parts that make the system work. He found out about functions, and thought it would be easier to manage than writing an API and deploying it to a cloud VM.
 
-This post is for you (if like him) want to get your code into production in a quick and reliable way, without getting bogged down with making choices about infra, hosting, monitoring, and security. Serverless covers most of this for you, so you can focus on solving the problem at hand.
+This post is for you, if like him, want to get your code into production in a quick and reliable way, without getting bogged down with making choices about infra, hosting, monitoring, and security. Serverless covers most of this for you, so you can focus on solving the problem at hand.
 
 We'll first look at the concept of a function, how they run on cloud solutions, and how self-hosted can sometimes be a better option. We'll then go through the mechanics of input, output, configuration, state, dealing with files and secrets, and there'll be lots of code examples along the way.
 
 ## What is a Serverless Function?
 
-Functions are stateless, ephemeral, and event-driven, meaning they can be triggered by various events such as HTTP requests, file uploads, or database changes. With the idea that developers focus on writing code, rather than managing servers.
+Functions are stateless, ephemeral, and event-driven, meaning they can be triggered by various events such as HTTP requests, file uploads, or database changes. Developers can focus on writing code, rather than managing servers.
 
-The concept originated from the cloud, being popularlised by the AWS Lambda service and is now widely available from other providers such as Google Cloud Functions and Azure Functions. Lambda is a SaaS service designed to serve hundreds of thousands of tenants in an efficient, and cost-effective manner.
+The concept originated from the cloud, being popularised by the AWS Lambda service and is now widely available from other providers such as Google Cloud Functions and Azure Functions. Lambda is a SaaS service designed to serve hundreds of thousands of tenants in an efficient, and cost-effective manner.
 
-In order to run a reliable and profitable service, AWS had to implement a stringent set of limits, and capabilities, which can leave developers feeling frustrated when they want to do something outside of the set limits, such as running an execution over an extended period of time, running on-premises, or deploying existing code to another cloud provider, [or even using a GPU](https://www.openfaas.com/blog/transcribe-audio-with-openai-whisper/).
+In order to run a reliable and profitable service, AWS had to implement a stringent set of limits, and capabilities, which can leave developers feeling frustrated when they want to do something outside of the set limits, such as running an execution over an extended period of time, running on-premises, deploying existing code to another cloud provider, or [even using a GPU](https://www.openfaas.com/blog/transcribe-audio-with-openai-whisper/).
 
-Functions also offer benefits over traditional server-based applications by simplifying packaging, deployment, and management
+Functions also offer benefits over traditional server-based applications by simplifying packaging, deployment, and management.
 
 So what if we could take the concept of functions, but solve for some of these issues?
 
@@ -36,7 +36,7 @@ So what if we could take the concept of functions, but solve for some of these i
 
 OpenFaaS takes the familiar model of functions, and makes them portable, and configurable. You can now run them not only on AWS using a service like AWS EKS, but on Google Cloud, Azure, Oracle Cloud, and even on-premises with your own hardware.
 
-How? The paradigm shifts when you self-host functions using containers & Kubernetes. Where once you were limited to a 15 minute timeout, you can now run an execution for hours, or even days. Where you couldn't use a GPU, you can now allocate one or more to a function, or even package a popular LLM such as Deepseek to serve requests.
+How? The paradigm shifts when you self-host functions using containers and Kubernetes. Where once you were limited to a 15 minute timeout, you can now run an execution for hours, or even days. Where you couldn't use a GPU, you can now allocate one or more to a function, or even package a popular LLM such as Deepseek to serve requests.
 
 It also improves the developer experience. You can install the same platform on your machine and test your functions fully on your own machine, with a fast feedback loop, before publishing them to production.
 
@@ -237,6 +237,8 @@ echo | faas-cli invoke http-to-json \
   -H "X-Parse-Url=https://hacker-news.firebaseio.com/v0/topstories.json"
 ```
 
+The faas-cli command requires an input from STDIN, so we can either run the command and give an input, or pass an empty input with `echo`.
+
 ### Environment variables for configuration
 
 Environment variables are used for static configuration for many kinds of programs, including HTTP servers. You may be setting an option for log verbosity, or the URL for a dataset that is needed for the program to operate.
@@ -262,8 +264,8 @@ functions:
     lang: golang-middleware
     handler: ./flags
     image: ttl.sh/flags:latest
-+    environment:
-+      VERBOSE: "1"
++   environment:
++     VERBOSE: "1"
 ```
 
 Alternatively, we can supply the name of an environment file. This is useful for when you want to deploy the same function to multiple different environments or regions, and just want to change the environment variables for each one.
@@ -286,9 +288,35 @@ functions:
     lang: golang-middleware
     handler: ./flags
     image: ttl.sh/flags:latest
-+    environment_file:
-+    - dev.env
++   environment_file:
++   - dev.env
 ```
+
+Then, if you needed to replace the name of the environment file, you could do so in the `stack.yml` file using environment variables.
+
+```diff
+functions:
+  flags:
+    lang: golang-middleware
+    handler: ./flags
+    image: ttl.sh/flags:latest
+    environment_file:
++   - ${ENV_FILE:-dev.env}
+```
+
+Then you have the option to set the environment variable `ENV_FILE` to the name of the file you want to use.
+
+```bash
+# Deploy with the development configuration
+faas-cli up
+
+# Deploy with the staging configuration
+ENV_FILE=staging.env faas-cli up
+
+# Deploy with the production configuration
+ENV_FILE=prod.env faas-cli up
+```
+
 
 Here's how we can read the environment variable in Go:
 
@@ -369,7 +397,7 @@ mkdir -p tmpl/static
 
 cat <<EOF > tmpl/static/welcome.html.tpl
 <html>
-Hello, {{.Name}}
+{% raw %}Hello, {{.Name}}{% endraw %}
 </html>
 EOF
 ```
@@ -400,7 +428,7 @@ func init() {
 }
 
 type WelcomeRequest struct {
-	Name string `json:"name"`
+	Name string
 }
 
 func Handle(w http.ResponseWriter, r *http.Request) {

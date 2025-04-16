@@ -371,6 +371,12 @@ Whilst Ollama does not yet support multi-modal models, which can process and pro
 
 You can deploy the [function we wrote previously on the blog](https://www.openfaas.com/blog/transcribe-audio-with-openai-whisper/) that uses Whisper to OpenFaaS Edge as a core service, then send it HTTP requests like we did to the Ollama service.
 
+You may find that despite the hype around LLMs, they are not a one-size fits all solution.
+
+An alternative that is popular for classification is to use BERT (Bidirectional Encoder Representations from Transformers), a state-of-the-art NLP model from Google.
+
+There's good examples on the [Kaggle](https://www.kaggle.com/code/merishnasuwal/document-classification-using-bert), [Keras](https://keras.io/keras_hub/api/models/bert/bert_text_classifier/), and [Tensorflow](https://www.tensorflow.org/text/tutorials/classify_text_with_bert) sites.
+
 ### Conclusion
 
 The latest release of [OpenFaaS Edge](https://docs.openfaas.com/deployment/edge/) adds support for Nvidia GPUs for core services defined in the `docker-compose.yaml` file. This makes it easy to run local LLMs using a tool like Ollama, then to call them for a wide range of tasks and workflows, whilst retaining data privacy and complete confidentiality.

@@ -151,6 +151,7 @@ ollama-init:
   image: docker.io/alpine/curl:latest
   command:
     - "curl"
+    - "-s"
     - "-X"
     - "POST"
     - "http://ollama:11434/api/pull"

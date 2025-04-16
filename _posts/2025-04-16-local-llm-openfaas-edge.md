@@ -73,7 +73,7 @@ The build uses an AMD Ryzen 9 5950X 16-Core CPU with 2x 3060 GPUs, 128GB of RAM,
 
 ![PC with 2x 3060 GPUs](https://actuated.com/images/2024-03-gpus/3060.jpg)
 
-It made practical sense for us to build a PC with consumer components, however you could just as easily build an affordable server [using components from Supermicro](https://www.supermicro.com/en/support/resources/gpu), or even run a used PowerEdge server acquired from a reseller. Ampere's range of Arm servers and workstations [report good performance](https://amperecomputing.com/developers/power-your-ai) whilst running inference workloads purely on CPU.
+It made practical sense for us to build a PC with consumer components, however you could just as easily build an affordable server [using components from Supermicro](https://www.supermicro.com/en/support/resources/gpu), or even run a used PowerEdge server acquired from a reseller. [Ampere's](https://amperecomputing.com) range of Arm servers and workstations [report good performance](https://amperecomputing.com/developers/power-your-ai) whilst running inference workloads purely on CPU.
 
 Around 9 months later, we swapped the 2x 3060 GPUs for 2x 3090s taking the VRAM from 24GB total to 48GB total when both GPUs are allocated.
 
@@ -399,4 +399,6 @@ From our sister brands:
 * Inlets - [Access local Ollama models from a cloud Kubernetes Cluster](https://inlets.dev/blog/2024/08/09/local-ollama-tunnel-k3s.html)
 * Actuated - [Run AI models with ollama in CI with GitHub Actions](https://actuated.com/blog/ollama-in-github-actions)
 * Actuated - [Accelerate GitHub Actions with dedicated GPUs](https://actuated.com/blog/gpus-for-github-actions)
+
+Disclosure: Ampere Computing is a client of OpenFaaS Ltd
 

@@ -15,6 +15,14 @@ hide_header_image: true
 
 The rise of hosted LLMs has been meteoric, but many Non-Disclosure Agreements (NDAs) would prevent you from using them. We explore how a self-hosted solution protects your data.
 
+This post at a glance:
+
+* Pros and cons of hosted vs. self-hosted LLMs.
+* Bill of materials for a PC with cost-effective Nvidia GPUs
+* Configuration for OpenFaaS Edge with Ollama
+* Sample function and test data for categorizing cold outreach emails
+* Past posts on AI and LLMs from OpenFaaS and sister companies
+
 ## Why Self-Hosted LLMs?
 
 Self-hosted models are great for experimentation and exploring what is possible, without having to worry about how much your API calls are costing you ($$$). Practically speaking, they are the only option if you are dealing with Confidential Information covered by an NDA.
@@ -45,7 +53,7 @@ Downsides for hosted models:
 Pros for self-hosted models:
 
 * Tools such as [Ollama](https://ollama.com), [llama.cpp](https://github.com/ggml-org/llama.cpp), [LLM Studio](https://lmstudio.ai) and [vLLM](https://github.com/vllm-project/vllm) make it trivial to run LLMs locally
-* A modest investment in 1 or 2 NVIDIA GPUs such as 3060 or 3090 can give you access to a wide range of models
+* A modest investment in 1 or 2 Nvidia GPUs such as 3060 or 3090 can give you access to a wide range of models
 * Running on your own hardware means there are no API costs - all you can eat
 * You have full control over the model, and can choose to use open source models, or your own fine-tuned models
 * You have full control over the data, and can choose to keep it on-premises or in a private cloud
@@ -59,7 +67,7 @@ Cons for self-hosted models:
 
 ## Build of materials for a PC
 
-For our sister company [actuated.com](https://actuated.com), we built a custom PC to show [how to leverage GPUs and LLMs during CI/CD with GitHub Actions and GitLab CI](https://actuated.com/blog/ollama-in-github-actions).
+For our sister brand [actuated.com](https://actuated.com), we built a custom PC to show [how to leverage GPUs and LLMs during CI/CD with GitHub Actions and GitLab CI](https://actuated.com/blog/ollama-in-github-actions).
 
 The build uses an AMD Ryzen 9 5950X 16-Core CPU with 2x 3060 GPUs, 128GB of RAM, 1TB of NVMe storage, and a 1000W power supply.
 
@@ -71,7 +79,7 @@ Around 9 months later, we swapped the 2x 3060 GPUs for 2x 3090s taking the VRAM 
 
 For this post, we allocated one of the two 3090 cards to a microVM, then we installed OpenFaaS Edge.
 
-At the time of writing, a brand-new NVIDIA 3060 card with 12GB of VRAM is currently available for around [250 GBP as a one-off cost from Amazon.co.uk](https://amzn.to/42tE1Xp). If you use it heavily, will pay for itself in a short period of time compared to the cost of API credits.
+At the time of writing, a brand-new Nvidia 3060 card with 12GB of VRAM is currently available for around [250 GBP as a one-off cost from Amazon.co.uk](https://amzn.to/42tE1Xp). If you use it heavily, will pay for itself in a short period of time compared to the cost of API credits.
 
 ## How to get started with OpenFaaS Edge
 
@@ -89,11 +97,11 @@ Use the [official instructions to install OpenFaaS Edge](https://docs.openfaas.c
 
 Activate your license using your license key or GitHub Sponsorship.
 
-### Install the NVIDIA Container Toolkit
+### Install the Nvidia Container Toolkit
 
-Follow the instructions for your platform to install the NVIDIA Container Toolkit. This will allow you to run GPU workloads in Docker containers.
+Follow the instructions for your platform to install the Nvidia Container Toolkit. This will allow you to run GPU workloads in Docker containers.
 
-[Installing the NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html)
+[Installing the Nvidia Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html)
 
 You should be able to run `nvidia-smi` and see your GPUs detected.
 
@@ -365,7 +373,7 @@ You can deploy the [function we wrote previously on the blog](https://www.openfa
 
 ### Conclusion
 
-The latest release of [OpenFaaS Edge](https://docs.openfaas.com/deployment/edge/) adds support for NVIDIA GPUs for core services defined in the `docker-compose.yaml` file. This makes it easy to run local LLMs using a tool like Ollama, then to call them for a wide range of tasks and workflows, whilst retaining data privacy and complete confidentiality.
+The latest release of [OpenFaaS Edge](https://docs.openfaas.com/deployment/edge/) adds support for Nvidia GPUs for core services defined in the `docker-compose.yaml` file. This makes it easy to run local LLMs using a tool like Ollama, then to call them for a wide range of tasks and workflows, whilst retaining data privacy and complete confidentiality.
 
 The functions can be written in any language, both synchronously and asynchronously for durability and scaling out.
 
@@ -380,7 +388,7 @@ We've covered various AI/LLM related topics across our blog in the past:
 * [How to check for price drops with Functions, Cron & LLMs](https://www.openfaas.com/blog/checking-stock-price-drops/)
 * [How to transcribe audio with OpenAI Whisper and OpenFaaS](https://www.openfaas.com/blog/transcribe-audio-with-openai-whisper/)
 
-From our sister companies:
+From our sister brands:
 
 * Inlets - [Access local Ollama models from a cloud Kubernetes Cluster](https://inlets.dev/blog/2024/08/09/local-ollama-tunnel-k3s.html)
 * Actuated - [Run AI models with ollama in CI with GitHub Actions](https://actuated.com/blog/ollama-in-github-actions)

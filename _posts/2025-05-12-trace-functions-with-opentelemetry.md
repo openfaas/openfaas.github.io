@@ -13,30 +13,33 @@ image: "/images/2025-05-opentelemetry/background.png"
 hide_header_image: true
 ---
 
-[OpenTelemetry](https://opentelemetry.io/) is an open-source framework for collecting, generating, and exporting telemetry data like traces, metrics, and logs, from applications to help monitor and troubleshoot them. In this article we show you how to capture traces from your OpenFaaS functions.
+[OpenTelemetry](https://opentelemetry.io/) is an open-source observability framework. This article shows you how to use OpenTelemetry to capture traces from OpenFaaS functions.
 
-![Screenshot of a trace visualization in Grafana](/images/2025-05-opentelemetry/db-access-trace-detail.png)
+![Screenshot of a trace visualization for the order function in Grafana](/images/2025-05-opentelemetry/db-access-trace-detail.png)
+> Function trace of the order function accessing a PostgreSQL database and invoking the order-confirmation function. The function is auto-instrumented, exporting traces for both database queries and HTTP requests without requiring any code changes or manual span definitions.
 
-OpenFaaS functions can be instrumented manually by either explicitly adding code to the function to capture telemetry data or, for supported languages, by leveraging [auto-instrumentation](https://opentelemetry.io/docs/zero-code/). Auto-instrumentation uses built in tools or agents to automatically collect telemetry without changing your function code.
+OpenFaaS functions can be instrumented manually using OpenTelemetry by either explicitly adding code to the function to capture telemetry data or, for supported languages, by leveraging [auto-instrumentation](https://opentelemetry.io/docs/zero-code/). Auto-instrumentation uses built in tools or agents to automatically collect telemetry without changing your function code.
 
 While OpenTelemetry aims to be a comprehensive solution that covers traces, logs and metrics we are going to focus exclusively on traces in this article. Traces can be a great addition to the wide [range of Prometheus metrics](https://docs.openfaas.com/architecture/metrics/) OpenFaaS already makes available for monitoring functions.
 
 **What value does tracing bring to functions?**
 
-By collecting traces from functions, especially in more complex applications where functions are chained together or where they are calling a lot of external services traces can help you:
+By collecting traces from functions, especially in more complex applications where functions are chained together or where they are calling a lot of external services, traces can help you:
 
-- Identify performance bottlenecks
+- Identify performance bottlenecks.
 - Detect errors and perform root cause analysis.
 - Understand system behaviour.
 
-However tracing comes with some trade-offs as well. It requires additional infrastructure, incurs extra costs and adds cognitive overhead for instrumenting functions and managing telemetry data.
+However tracing comes with some trade-offs as well. It requires additional infrastructure, such as cloud storage or compute resources, which may increase costs, and adds cognitive overhead from instrumenting functions and managing telemetry data.
+
+
 
 ![Diagram showing the different components involved in collecting traces from functions.](/images/2025-05-opentelemetry/function-otel-collection-diagram.png)
 > Diagram showing the different components involved in collecting traces from functions.
 
 ## What we'll cover
 
-This tutorial shows you how to use OpenTelemetry to capture traces from OpenFaaS functions, helping you debug issues and optimize performance. We'll use zero-code instrumentation to keep things simple, setting up a tracing pipeline with open-source tools. Here's what we'll cover:
+This tutorial shows you how to use OpenTelemetry to capture traces from OpenFaaS functions, helping you debug issues and optimize performance. We'll use auto-instrumentation to keep things simple, setting up a tracing pipeline with open-source tools. Here's what we'll cover:
 
 - Deploy [Grafana Tempo](https://grafana.com/oss/tempo/) as the backend for storing traces.
 - Run and configure [Grafana Alloy](https://grafana.com/oss/alloy-opentelemetry-collector/) as a [Collector](https://opentelemetry.io/docs/collector/) for traces.
@@ -195,7 +198,7 @@ The `alloy.configMap.content` section contains the content of the Alloy configur
 
 Checkout the docs for more details on [how to configure Grafana Alloy to collect OpenTelemetry data](https://grafana.com/docs/alloy/latest/collect/opentelemetry-data/)
 
-The OTLP receiver needs the be reachable by functions so they can send their telemetry data. The `extraPorts` parameter is used to add both HTTP and gRPC ports to the alloy service that is created by the Chart.
+The OTLP receiver needs to be reachable by functions so they can send their telemetry data. The `extraPorts` parameter is used to add both HTTP and gRPC ports to the alloy service that is created by the Chart.
 
 To deploy Alloy to the cluster run:
 
@@ -222,11 +225,11 @@ kubectl get pods --namespace monitoring
 
 OpenTelemetry zero code instrumentation allows you to collect telemetry data from your OpenFaaS functions without making any changes to your functions code.
 
-Instead of manually adding OpenTelemetry SDK calls to your codebase, zero-code instrumentation relies on agents to inject the necessary instrumentation at runtime.
+Instead of manually adding OpenTelemetry SDK calls to your codebase, auto-instrumentation relies on agents to inject the necessary instrumentation at runtime.
 
-At the time of writing OpenTelemetry has zero-code instrumentation support for [JavaScript](https://opentelemetry.io/docs/zero-code/js/), [Python](https://opentelemetry.io/docs/zero-code/python/), [PHP](https://opentelemetry.io/docs/zero-code/php/), [Java]() and [.NET](https://opentelemetry.io/docs/zero-code/dotnet/) with [Go](https://opentelemetry.io/docs/zero-code/go/) support being a work in progress.
+At the time of writing OpenTelemetry has auto-instrumentation support for [JavaScript](https://opentelemetry.io/docs/zero-code/js/), [Python](https://opentelemetry.io/docs/zero-code/python/), [PHP](https://opentelemetry.io/docs/zero-code/php/), [Java](https://opentelemetry.io/docs/zero-code/java/) and [.NET](https://opentelemetry.io/docs/zero-code/dotnet/) with [Go](https://opentelemetry.io/docs/zero-code/go/) support being a work in progress.
 
-For most languages using zero-code instrumentation for OpenFaaS functions will require you to [customise the language template](https://docs.openfaas.com/cli/templates/#how-to-customise-a-template). There are two ways to customise a template:
+For most languages using auto-instrumentation for OpenFaaS functions will require you to [customise the language template](https://docs.openfaas.com/cli/templates/#how-to-customise-a-template). There are two ways to customise a template:
 
 - Fork the template repository and modify the template. Recommended method that allows for distribution and reuse of the template.
 - Pull the template and apply patches directly in the `./template/<language_name>` directory. Good for quick iteration and experimentation with template modifications. The modified template can not be shared and reused. Changes may get overwritten when pulling templates again.
@@ -284,7 +287,7 @@ We are making use of [environment variable substitution](https://docs.openfaas.c
 
 The `NODE_OPTIONS` environment variable needs to have the value `--require @opentelemetry/auto-instrumentations-node/register` to register and initialize the auto instrumentation module.
 
-The `OTEL_EXPORTER_OTLP_ENDPOINT` env variable is used to specify the endpoint of the OTLP receiver to which telemetry data should be sent. The url of the Alloy instance we deployed in the cluster is used as the default value.
+The `OTEL_EXPORTER_OTLP_ENDPOINT` env variable is used to specify the endpoint of the OTLP receiver to which telemetry data should be sent. The URL of the Alloy instance we deployed in the cluster is used as the default value.
 
 For this tutorial we are only interested in traces, by setting `OTEL_METRICS_EXPORTER` and `OTEL_LOGS_EXPORTER` to `none` we disable the metrics and logs exporters.
 
@@ -295,13 +298,13 @@ Checkout the [configuration docs](https://opentelemetry.io/docs/zero-code/js/con
 
 **Deploy the function**
 
-Test the function locally with `faass-cli local-run` and the `console` exporter. This should output the exporter outputs to stdout/console, a good way to quickly check the instrumentation configuration.
+Test the function locally with `faas-cli local-run` and the `console` exporter. This should output the exporter outputs to stdout/console, a good way to quickly check the instrumentation configuration.
 
 ```sh
 EXPORTER="console" faas-cli local-run echo
 ```
 
-Invoke the function to function to verify traces get exported to the console:
+Invoke the function to verify traces get exported to the console:
 
 ```sh
 curl -i http://127.0.0.1:8080 -d "Hello OTEL"
@@ -344,14 +347,12 @@ RUN pip install --no-cache-dir --user -r requirements.txt
 
 The `opentelemetry-bootstrap -a install` command reads through the list of packages installed in your active site-packages folder, and installs the corresponding instrumentation libraries for these packages, if applicable. The OpenTelemetry Python agent uses [monkey patching](https://stackoverflow.com/questions/5626193/what-is-monkey-patching) to modify functions in these libraries at runtime.
 
-Update the fprocess ENV in the Dockerfile to start the OpenTelemetry agent:
+Update the function process in `./template/python3-http/template.yaml`to run `"opentelemetry-instrument`.
 
 ```diff
-# configure WSGI server and healthcheck
-USER app
-
-- ENV fprocess="python index.py"
-+ ENV fprocess="opentelemetry-instrument python index.py"
+language: python3-http
+- fprocess: python index.py
++ fprocess: opentelemetry-instrument python index.py
 ```
 
 **Create a new function**
@@ -381,13 +382,13 @@ functions:
 
 We use [environment variable substitution](https://docs.openfaas.com/reference/yaml/#yaml-environment-variable-substitution) in the stack file to make parameters easily configurable when deploying the function.
 
-`OTEL_SERVICE_NAME` sets the name of the service associated with the telemetry and is used to identify telemetry for a specific function. It can be set to any value you want be we recommend using the clear function identifier `<fn-name>.<fn-namespace>`.
+`OTEL_SERVICE_NAME` sets the name of the service associated with the telemetry and is used to identify telemetry for a specific function. It can be set to any value you want, but we recommend using the clear function identifier `<fn-name>.<fn-namespace>`.
 
-The `OTEL_EXPORTER_OTLP_ENDPOINT` env variable is used to specify the endpoint of the OTLP receiver to which telemetry data should be sent. The url of the Alloy instance we deployed in the cluster is used as the default value.
+The `OTEL_EXPORTER_OTLP_ENDPOINT` env variable is used to specify the endpoint of the OTLP receiver to which telemetry data should be sent. The URL of the Alloy instance we deployed in the cluster is used as the default value.
 
 For this tutorial we are only interested in traces, by setting `OTEL_METRICS_EXPORTER` and `OTEL_LOGS_EXPORTER` to `none` we disable the metrics and logs exporters.
 
-By default the Agent will instrument any [supported package](https://opentelemetry.io/ecosystem/registry/?language=python&component=instrumentation) it can. You can omit specific packages from instrumentation by using the `OTEL_PYTHON_DISABLED_INSTRUMENTATIONS environment` variable.
+By default the Agent will instrument any [supported package](https://opentelemetry.io/ecosystem/registry/?language=python&component=instrumentation) it can. You can omit specific packages from instrumentation by using the `OTEL_PYTHON_DISABLED_INSTRUMENTATIONS` environment variable.
 
 Checkout the [configuration docs](https://opentelemetry.io/docs/zero-code/python/configuration/) for more details and to see all available configuration options.
 
@@ -442,7 +443,7 @@ You can now use the Explore tab to start exploring traces. Make sure to select T
 
 Checkout the Grafana documentation for more info on how to [add traces visualizations to a Grafana dashboard](https://grafana.com/docs/grafana/latest/panels-visualizations/visualizations/traces/#traces)
 
-## Expand an auto-instrumented function with manual traces
+## Add manual traces to your function
 
 Auto instrumentation captures traces from the standard library and known libraries at the edges of the function, such as inbound and outbound HTTP requests. To capture traces for custom business logic or spans for things that go on inside the function you will have to add some manual instrumentation.
 
@@ -525,7 +526,9 @@ curl -i "http://127.0.0.1:8080/function/order?id=1"
 
 ## OpenTelemetry on OpenFaaS Edge
 
-Collecting telemetry is also supported on [OpenFaaS Edge](https://docs.openfaas.com/edge/overview/). The Alloy collector can be deployed as an additional service. Detailed instructions on how to configure Alloy and add it to the `docker-compose.yaml` file are available in [our documentation](https://docs.openfaas.com/edge/open-telemetry/).
+Collecting telemetry is also supported on [OpenFaaS Edge](https://docs.openfaas.com/edge/overview/). OpenFaaS Edge is a lightweight option for running OpenFaaS functions that does not use Kubernetes, ideal for edge computing environments.
+
+When using OpenFaaS Edge the Alloy collector can be deployed as an additional service and configured to export traces to an external backend. Detailed instructions on how to configure Alloy and add it to the `docker-compose.yaml` file are available in [our documentation](https://docs.openfaas.com/edge/open-telemetry/).
 
 Any instrumented function can be deployed to OpenFaaS Edge. Just make sure the `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable is set correctly.
 Modify the `stack.yaml` file and change the environment variable to `alloy:4317`. Or use the environment substitution to override it. In OpenFaaS Edge the service name can be used as the hostname.
@@ -537,21 +540,21 @@ OTEL_EXPORTER_OTLP_ENDPOINT=alloy:4317 faas-cli up
 
 ## Conclusion
 
-In this tutorial we showed how OpenTelemetry zero-code instrumentation can be used to quickly get telemetry and traces for OpenFaaS functions without having to manually instrument your functions code.
+In this tutorial we showed how OpenTelemetry auto-instrumentation can be used to quickly get telemetry and traces for OpenFaaS functions without having to manually instrument your functions code.
 
 We ran through the process of deploying and configuring a [Collector](https://opentelemetry.io/docs/collector/), and tracing backend to collect and store traces for OpenFaaS functions. While we used  [Grafana Alloy](https://grafana.com/oss/alloy-opentelemetry-collector/) as the Collector and [Grafana Tempo](https://grafana.com/oss/tempo/) to store traces these components can be exchanged easily without changing instrumentation for functions.
 
-Other common open-source alternatives for collecting and storing traces include: [Jeager and Zipkin](https://edgedelta.com/company/blog/the-battle-of-tracers-jaeger-vs-zipkin-the-complete-comparison)
+Other common open-source alternatives for collecting and storing traces include: [Jaeger and Zipkin](https://edgedelta.com/company/blog/the-battle-of-tracers-jaeger-vs-zipkin-the-complete-comparison)
 
-I you are a Datadog user take a look at [how to collect OpenTelemetry data in datadog](https://docs.datadoghq.com/opentelemetry/). For more alternatives see: [vendors who natively support OpenTelemetry](https://opentelemetry.io/ecosystem/vendors/)
+If you are a Datadog user take a look at [how to collect OpenTelemetry data in datadog](https://docs.datadoghq.com/opentelemetry/). For more alternatives see: [vendors who natively support OpenTelemetry](https://opentelemetry.io/ecosystem/vendors/)
 
 To support auto instrumentation some minor customisations to the OpenFaaS function templates are required. We walked through the steps to modify the Node.js and Python templates. With python we took it one step further and extended the auto instrumented traces with some custom spans.
 
 ### Auto-instrumentation with OpenTelemetry Operator for Kubernetes
 
-If you are using OpenFaaS on Kubernetes there is the option to use the [OpenTelemetry Operator for Kubernetes ](https://opentelemetry.io/docs/platforms/kubernetes/operator/) to [inject zero-code instrumentation](https://opentelemetry.io/docs/platforms/kubernetes/operator/automatic/). The Operator supports injecting and configuring auto-instrumentation libraries for .NET, Java, Node.js, Python and Go functions. It requires no changes to your existing functions, however it comes with a couple of tradeoffs.
+If you are using OpenFaaS on Kubernetes there is the option to use the [OpenTelemetry Operator for Kubernetes ](https://opentelemetry.io/docs/platforms/kubernetes/operator/) for [auto-instrumentation](https://opentelemetry.io/docs/platforms/kubernetes/operator/automatic/). The Operator supports injecting and configuring auto-instrumentation libraries for .NET, Java, Node.js, Python and Go functions. It requires no changes to your existing functions, however it comes with a couple of tradeoffs.
 
-- Depending on the language, the instrumentation relies on init-containers, mounting volumes or using sidecars. This can increase the [cold-start](https://docs.openfaas.com/architecture/autoscaling/#scaling-up-from-zero-replicas) when autoscaling functions.
+- Depending on the language, the instrumentation relies on init-containers, mounting volumes or using sidecars. This can increase the [cold-start](https://docs.openfaas.com/architecture/autoscaling/#scaling-up-from-zero-replicas) when autoscaling functions as it causing an extra delay when the container initializes.
 - Go instrumentation works through a sidecar container that uses eBPF and requires elevated permissions for the function.
 
 We recommend using function templates and the `stack.yaml` configuration described in this article instead. It does not have these tradeoffs and ensures your functions are portable to other OpenFaaS versions that do not use Kubernetes, like [OpenFaaS Edge](https://docs.openfaas.com/deployment/edge/).

@@ -15,7 +15,7 @@ hide_header_image: true
 
 [OpenTelemetry](https://opentelemetry.io/) is an open-source framework for collecting, generating, and exporting telemetry data like traces, metrics, and logs, from applications to help monitor and troubleshoot them. In this article we show you how to capture traces from your OpenFaaS functions.
 
-![](/images/2025-05-opentelemetry/db-access-trace-detail.png)
+![Screenshot of a trace visualization in Grafana](/images/2025-05-opentelemetry/db-access-trace-detail.png)
 
 OpenFaaS functions can be instrumented manually by either explicitly adding code to the function to capture telemetry data or, for supported languages, by leveraging [auto-instrumentation](https://opentelemetry.io/docs/zero-code/). Auto-instrumentation uses built in tools or agents to automatically collect telemetry without changing your function code.
 
@@ -34,12 +34,16 @@ However tracing comes with some trade-offs as well. It requires additional infra
 ![Diagram showing the different components involved in collecting traces from functions.](/images/2025-05-opentelemetry/function-otel-collection-diagram.png)
 > Diagram showing the different components involved in collecting traces from functions.
 
-In this tutorial we are going to:
+## What we'll cover
+
+This tutorial shows you how to use OpenTelemetry to capture traces from OpenFaaS functions, helping you debug issues and optimize performance. We'll use zero-code instrumentation to keep things simple, setting up a tracing pipeline with open-source tools. Here's what we'll cover:
 
 - Deploy [Grafana Tempo](https://grafana.com/oss/tempo/) as the backend for storing traces.
 - Run and configure [Grafana Alloy](https://grafana.com/oss/alloy-opentelemetry-collector/) as a [Collector](https://opentelemetry.io/docs/collector/) for traces.
-- Capture telemetry from functions using zero-code instrumentation.
-
+- Instrument Node.js and Python functions without making changes to the function code.
+- Explore and visualize traces with Grafana.
+- Extend an auto-instrumented function with additional custom spans.
+- How to use OpenTelemetry with OpenFaaS Edge.
 
 ## Prepare the cluster for telemetry collection
 

@@ -524,6 +524,177 @@ curl -i "http://127.0.0.1:8080/function/order?id=1"
 ![Screenshot of the Grafana Explorer showing an invocation trace with a custom span](/images/2025-05-opentelemetry/manual-span-trace.png)
 > Trace detail showing the function invocation with the custom span. The span has the order id attribute and events that we added to it.
 
+## Capture traces from libraries and frameworks
+
+Traces and auto-instrumentation can become really valuable when you have more complex function workflows where functions are chained together or interact with external systems. These functions most likely use third-party Python libraries to perform actions like query a database, make HTTP requests, talk to a message broker or key value store, etc. Auto-instrumentation allows you to capture traces from many popular libraries without changing your code.
+
+We will expand the order function to simulate this kind of workflow. The order function will look up an order in a PostgreSQL database and invoke a second function, `order-confirmation` when it is done processing the order.
+
+To follow along with this example you can quickly deploy a PostgreSQL database in your cluster using [arkade](https://github.com/alexellis/arkade?tab=readme-ov-file#getting-arkade):
+
+```sh
+arkade install postgresql
+```
+arkade prints out connection instructions and the command to get the database password. Connect to the database and seed it with an orders table and some dummy content.
+
+Create the `orders` table:
+
+```sql
+CREATE TABLE orders (
+    id SERIAL PRIMARY KEY,
+    customer_name VARCHAR(100) NOT NULL,
+    order_date DATE NOT NULL DEFAULT CURRENT_DATE,
+    total_amount NUMERIC(10, 2) NOT NULL
+);
+```
+
+Insert a sample order:
+
+```sql
+INSERT INTO orders (customer_name, order_date, total_amount)
+VALUES ('Alice Johnson', '2025-05-12', 149.99);
+```
+
+[Psycopg](https://www.psycopg.org/docs/) will be used to query the Postgresql database and the [Requests](https://requests.readthedocs.io/en/latest/) package to make HTTP requests. Both packages need to be appended to the `requirements.txt` file for the order function.
+
+```diff
+opentelemetry-distro
+opentelemetry-exporter-otlp
++psycopg2-binary
++requests
+```
+
+Update the `handler.py` to get orders from the database and invoke the `order-confirmation` function.
+
+```diff
+import time
+from opentelemetry import trace
++ import psycopg2
++ import requests
+
+# Get a tracer
+tracer = trace.get_tracer(__name__)
+
++ # Database connection settings
++ db_config = {
++     'dbname': 'postgres',
++     'user': 'postgres',
++     'password': '<replace_with_db_password>',
++     'host': 'postgresql.default.svc.cluster.local',
++     'port': '5432'  # default PostgreSQL port
++ }
+
++ confirmation_url = 'http://gateway.openfaas.svc.cluster.local:8080/function/order-confirmation'
+
+def handle(event, context):
+    process_order(event.query['id'])
++    # Send confirmation request
++    requests.post(confirmation_url, json={'order_id': event.query['id']})
+
+    return {
+        "statusCode": 200,
+        "body": "Order processed"
+    }
+
+def process_order(order_id):
+    # Manually create a span
+    with tracer.start_as_current_span("process_order"):
+        # you can also add attributes or events
+        trace.get_current_span().set_attribute("order.id", order_id)
+        trace.get_current_span().add_event("Order processing started")
+
++        # Get order from database
++        order = get_order_from_db(order_id)
+
+        # simulate some work for the order
+        time.sleep(0.4)
+
+        result = "done"
+        trace.get_current_span().add_event("Order processing finished")
+        return result
+    
++ def get_order_from_db(order_id):
++    try:
++        # Connect to the database
++        conn = psycopg2.connect(**db_config)
++        cursor = conn.cursor()
++
++        # Execute a query to get the order
++        cursor.execute("SELECT * FROM orders WHERE id = %s", (order_id,))
++
++
++       order = cursor.fetchone()
++        return order
++
++    except psycopg2.Error as e:
++        print("Database error:", e)
++        return None
++
++    finally:
++        if 'cursor' in locals():
++            cursor.close()
++        if 'conn' in locals():
++            conn.close()
+```
+
+Add a new function `order-confirmation` and update the `stack.yaml` to configure the OpenTelemetry agent for the function.
+
+```sh
+faas-cli new order-confirmation --lang python3-http --append stack.yaml
+```
+
+```yaml
+functions:
+  order:
+    lang: python3-http
+    handler: ./order-confirmation
+    image: ${REPO:-ttl.sh}/${OWNER:-openfaas}/order-confirmation:0.0.1
+    environment:
+      OTEL_SERVICE_NAME: order-confirmation.${NAMESPACE:-openfaas-fn}
+      OTEL_TRACES_EXPORTER: ${EXPORTER:-otlp}
+      OTEL_METRICS_EXPORTER: none
+      OTEL_LOGS_EXPORTER: none
+      OTEL_EXPORTER_OTLP_ENDPOINT: ${OTEL_EXPORTER_OTLP_ENDPOINT:-alloy.monitoring.svc.cluster.local:4317}
+      OTEL_EXPORTER_OTLP_TRACES_INSECURE: true
+```
+
+In a real application this function would perform jobs like sending out the order confirmation via email. To keep things simple we are just going to sleep a couple of milliseconds to simulate some work.
+
+```python
+import time
+
+def handle(event, context):
+
+    # simulate sending order confirmation email
+    time.sleep(0.2)
+
+    return {
+        "statusCode": 200,
+        "body": "Confirmation order"
+    }
+```
+
+Deploy both functions:
+
+```sh
+faas-cli up
+```
+
+Invoke the order function and view the trace in Grafana.
+
+```sh
+curl -i "http://127.0.0.1:8080/function/order?id=1"
+```
+
+![Screenshot of a trace visualization for the order function in Grafana](/images/2025-05-opentelemetry/db-access-trace-detail.png)
+> Screenshot of a trace visualization for the order function in Grafana
+
+The trace includes 5 spans. We can clearly see the different operations the function performed and how much time they took. The top level span for the GET request to `orders.openfaas-fn` shows the complete function invocation took 616.73ms. As children of that span we see our custom `process_order` span and the `POST` request made to the `order-confirmation` function. We also get a span with the details of the database query.
+
+Note that we did not have to make any changes to get traces from the `psycopg2` and `requests` package. The auto-instrumentation took care of that.
+
+The Python agent by default will detect a Python program’s packages and instrument any packages it can. This makes instrumentation easy, but can also result in too much or unwanted data. You can omit specific packages from instrumentation by using the `OTEL_PYTHON_DISABLED_INSTRUMENTATIONS` environment variable. See: [Disabling Specific Instrumentations](https://opentelemetry.io/docs/zero-code/python/configuration/) for more details.
+
 ## OpenTelemetry on OpenFaaS Edge
 
 Collecting telemetry is also supported on [OpenFaaS Edge](https://docs.openfaas.com/edge/overview/). OpenFaaS Edge is a lightweight option for running OpenFaaS functions that does not use Kubernetes, ideal for edge computing environments.

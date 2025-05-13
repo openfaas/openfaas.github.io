@@ -1,7 +1,7 @@
 ---
 title: "How to Trace Functions with OpenTelemetry"
 description: "Capture traces from your functions to debug tricky issues, and to identify potential improvements"
-date: 2025-05-12
+date: 2025-05-13
 author_staff_member: han
 categories:
 - functions

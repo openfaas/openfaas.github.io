@@ -1,6 +1,6 @@
 ---
 title: "Build a Function Editor for Your Customer Dashboard"
-description: "Let customers supply source code and have it run in a sandbox within your product."
+description: "Extend your product with a Function Editor built into your customer dashboard powered by Kubernetes and OpenFaaS."
 date: 2025-05-29
 author_staff_member: han
 author_staff_member_editor: alex
@@ -13,18 +13,28 @@ image: "/images/2025-05-function-editor/background.png"
 hide_header_image: true
 ---
 
-We wanted to show you how to build a Function Editor directly into your product’s dashboard so customers can supply code and have it run in a sandbox within your product.
+We talk you through our example of a Function Editor that you can integrate directly into your product to sandbox code from customers.
 
-When it comes to building and hosting functions outside of managed services like AWS Lambda or Google Cloud Functions, Kubernetes is the obvious option and many of you are already using it for your existing applications.
+One of the simplest ways to integrate functions into your product is to turn to a managed service like AWS Lambda or Google Cloud Functions. However, these services come with limitations, such as vendor lock-in, unpredictable surges in cost, lack of control over the runtime environment. They're also harder to manage if you're already using Kubernetes to deploy your applications.
 
-With [OpenFaaS for Enterprises](https://docs.openfaas.com/openfaas-pro/introduction/), we've built all the APIs needed to quickly and securely extend your application with FaaS capabilities. That includes multi-tenant functions, network segmentation, isolation per tenant in namespaces, non-root containers, and read-only file systems.
+[OpenFaaS for Enterprises](https://docs.openfaas.com/openfaas-pro/introduction/) provides all the REST APIs and guidelines needed to quickly and securely extend your application with code supplied by customers. That includes multi-tenant isolation per tenant, network segmentation, non-root containers, read-only file systems, and more advanced scheduling needs.
 
-User functions can be further sandboxed with runtimes like [gVisor](https://gvisor.dev/) or [Kata Containers](https://katacontainers.io/) if desired.
+User functions can be further sandboxed with runtimes like [gVisor](https://gvisor.dev/) or [Kata Containers](https://katacontainers.io/) if deemed necessary.
+
+And, when *scale to zero* is combined with *spot instances*, the costs can be dramatically lower than managed services.
+
+This post at a glance:
+
+* A detailed walk through of our sample Function Editor application
+* How to build and deploy functions from source code using the Function Builder API
+* How to build a function into a container image and deploy it to OpenFaaS
+* A video demo of everything working together, and next steps to try it out yourself
 
 ![Screenshot of the OpenFaaS Function Editor main page](/images/2025-05-function-editor/function-editor.png)
 > A demo you can [check out on GitHub](https://github.com/openfaas/function-editor-demo) to see how the various APIs are tied together to build customer functions
 
-In this post we start by showing you a demo that we built in around half a day with the assistance of [Cursor](https://www.cursor.com/) and the OpenFaaS API documentation.
+In this post we start by showing you a demo that we built in around half a day with the assistance of [the Cursor IDE](https://www.cursor.com/) and the OpenFaaS API documentation.
+
 It has the following pages:
 
 - Supply source code for the handler
@@ -35,7 +45,7 @@ It has the following pages:
 
 Our demo is a single page app that focuses on editing only one function, however yours could list all available functions and customers could click on the one they want to edit, before seeing a similar page to this.
 
-Let’s take a look at each page and discuss how it works and how you could implement something similar.
+Let's take a look at each page and discuss how it works and how you could implement something similar.
 
 > Disclaimer: The demo application is suitable for development and testing only. You will need to add some form of suitable authentication if you intend to expose it on the Internet. We recommend running it on localhost, or exposing it via a tool that [can add authentication like Inlets](https://docs.inlets.dev/tutorial/http-authentication/).
 
@@ -50,21 +60,23 @@ The sample application is composed of two main components: a frontend built with
 
 The application uses readily available OpenFaaS APIs to transform user-supplied source code into an OpenFaaS-compatible function image, which is then deployed to OpenFaaS to get a custom HTTP endpoint.
 
-OpenFaaS components utilized:
+There are two separate APIs that we use in the sample application:
 
 - [Function Builder API](https://docs.openfaas.com/openfaas-pro/builder/)
 
-    Allows code to be submitted, built, and deployed seamlessly.
+    Based upon Docker's BuildKit, this API is used to build functions from source code and publish them as container images.
 
-    This REST API accepts a Docker build context and publishes a container image to a remote registry.
+    It runs as non-root, includes monitoring, capacity limiting, and provides a user-friendly REST API.
 
-- [OpenFaaS REST API](https://docs.openfaas.com/reference/rest-api/)
+- [OpenFaaS REST API](https://docs.openfaas.com/reference/rest-api/) aka the "OpenFaaS Gateway"
 
-    API for managing and invoking functions, secrets and namespaces.
+    API for managing and invoking functions, secrets, and tenant namespaces.
 
     The OpenFaaS REST API has endpoints to create and manage tenant namespaces, to deploy new functions, list and query existing ones, invoke them and query function logs.
 
-### A place to write the code
+    The REST API can be authenticated with basic auth or OpenID Connect providers such as Kubernetes Service Accounts, Okta, or Keycloak.
+
+### A place to write your code
 
 The main interface of the app features a function editor powered by the [monaco-editor](https://github.com/microsoft/monaco-editor), offering users an in-browser code editor they can use to change the function handler code.
 
@@ -72,15 +84,21 @@ The main interface of the app features a function editor powered by the [monaco-
 
 Currently, our implementation supports editing a single language. However, it's possible to extend this with a language selector that allows users to pick a different [language template](https://docs.openfaas.com/languages/overview/). You could allow users to pick one of the official OpenFaaS language templates, use your own template or even allow users to provide their own templates.
 
+If your application doesn't have a UI, customers could also provide code via your CLI, a Terraform Module, or through a webhook that you register with GitHub, or GitLab, etc.
+
 ### Where you add the dependencies
 
-For most languages you would want to provide users with some way to add extra dependencies to a function e.g. Python packages, npm packages or Go modules.
+For most languages you would want to provide users with some way to add extra dependencies in a standard way e.g. Python packages via pip, Node packages via npm, or Go modules.
 
 In this case we use a separate tab where users can modify the `package.json` file to add extra dependencies. For Python the equivalent would be to allow editing a `requirements.txt` file and for Go the `go.mod` file.
 
 ![Screenshot of the dependencies tab](/images/2025-05-function-editor/add-dependencies.png)
 
 Depending on the requirements of your application you have the options to let users add any dependency they want, only allow a predefined set of packages or don't allow any extra dependencies at all.
+
+You could also provide a way to provide additional files through extra tabs in the UI, for instance if a JSON dataset or some images needed to be embedded in the code.
+
+AWS Lambda typically uses an IDE editor for small functions, and larger ones involve uploading a ZIP file to an S3 bucket. There is nothing to prevent you from taking a similar approach.
 
 ### Build and deploy
 
@@ -129,8 +147,8 @@ The API supports streaming logs using newline delimited JSON (ndjson) so you cou
 In our documentation we show [three ways to call the builder API](https://docs.openfaas.com/openfaas-pro/builder/#usage).
 
 - Via faas-cli - for testing the initial deployment.
-- via curl - to understand what's happening with bash.
-- Via various code samples - to help you integrate with the API.
+- Via `curl` - to understand what's happening with standard bash commands.
+- Via various code samples - to help you integrate with the API within a few hours or days.
 
 In our sample app the backend runs through the following steps to create the build context that is used to invoke the builder API.
 
@@ -147,7 +165,9 @@ You might also want to take a look at our [Function Builder examples](https://gi
 
 **Deploy the function**
 
-After the build has completed the `/api/publish` endpoint is called. This endpoint uses the [OpenFaaS API](https://docs.openfaas.com/reference/rest-api/#deploy-a-function) to deploy the function with the image we just built. The function name and image are the only two fields required to deploy the function. However there are many additional configuration parameters that can be included like environment variables, annotations, labels, CPU/memory constraints, and references to required secrets.
+After the build has completed the `/api/publish` endpoint is called on the back-end for the UI. This endpoint uses the [OpenFaaS API](https://docs.openfaas.com/reference/rest-api/#deploy-a-function) to deploy the function with the image we just built, which is `/system/function` on the OpenFaaS Gateway.
+
+The function name and image are the only two fields required to deploy the function. However there are many additional configuration parameters that can be included like environment variables, annotations, labels, CPU/memory constraints, and references to required secrets.
 
 Many OpenFaaS features like [autoscaling](https://docs.openfaas.com/architecture/autoscaling/), [additional profiles](https://docs.openfaas.com/reference/profiles/), [HTTP health checks](https://docs.openfaas.com/reference/workloads/#custom-http-health-checks) etc, are all configured through these parameters.
 
@@ -208,13 +228,17 @@ We showed how to use a web based editor to let users provide source code but you
 
 ### Watch a video demo
 
-In the video you'll see Alex build and invoke the default handler, then copy and paste in code from the OrcaScan documentation for a function which disallows barcodes from the "@openfaas.com" domain. He invokes the function with a sample payload, sees that the function rejects the payload then sends a new one from "@example.com" which is accepted.
+For additional clarity, you can watch a demo of Alex walking through the sample application against a live OpenFaaS installation.
+
+He starts off by showing you how the default handler and pages work, then he takes a code sample from a SaaS product along with a sample payload and shows how to build a function that rejects events containing certain email domains, such as "@openfaas.com".
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/zkYaTgmldpo?si=Ka5PcR0pQyzYj5IY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ### Contact us to find out more
 
-Would you like to talk to our team about integrating OpenFaaS? Please get in touch via the [OpenFaaS for Enterprises form](https://docs.google.com/forms/d/e/1FAIpQLScFOsfabIDD5gZPs6XvsVWfqwV9kksI-B0FdtU5XdspB7Jk6A/viewform).
+To learn more, please reach out via our contact form for [OpenFaaS for Enterprises](https://docs.google.com/forms/d/e/1FAIpQLScFOsfabIDD5gZPs6XvsVWfqwV9kksI-B0FdtU5XdspB7Jk6A/viewform).
+
+Did you know? [The Community Edition (CE) of OpenFaaS](https://openfaas.com/pricing) is free to use for personal use and for a limited commercial trial. You don't need to sign up or register to use it and it'll help you get familiar with the basic concepts of OpenFaaS.
 
 You may also like:
 

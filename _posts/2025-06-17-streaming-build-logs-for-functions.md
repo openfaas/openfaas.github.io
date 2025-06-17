@@ -1,7 +1,7 @@
 ---
 title: "Introducing Streaming Logs from the Function Builder"
 description: "Learn how to stream real-time build logs from the OpenFaaS Function Builder API."
-date: 2025-06-16
+date: 2025-06-17
 author_staff_member: han
 categories:
  - functions

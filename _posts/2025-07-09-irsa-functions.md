@@ -24,6 +24,16 @@ Both AWS Lambda and OpenFaaS can be used to manage resources within AWS, with ei
 
 Our function will be used to create repositories in Elastic Container Registry (ECR). This is a common task for teams that run OpenFaaS in a multi-tenant environment, where each tenant or team publishes their own functions to the platform. It'll receive credentials using IAM Roles for Service Accounts (IRSA), which is the most modern way to map Kubernetes Service Accounts to native AWS IAM roles.
 
+Contents:
+
+* [Create an EKS cluster with IRSA enabled](#create-an-eks-cluster-with-irsa-enabled)
+* [Install OpenFaaS Standard or For Enterprises](#install-openfaas-standard-or-for-enterprises)
+* [IAM Policy for ECR Access](#iam-policy-for-ecr-access)
+* [Create IAM Role and Service Account](#create-iam-role-and-service-account)
+* [Create a function that uses the IAM Role](#create-a-function-that-uses-the-iam-role)
+* [Invoke the function to create a new repository](#invoke-the-function-to-create-a-new-repository)
+* [Wrapping up and next steps](#wrapping-up-and-next-steps)
+
 ## Create an EKS cluster with IRSA enabled
 
 You may already have an AWS EKS cluster provisioned, if so, you can enable IRSA by following these instructions: [IRSA on EKS](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html).
@@ -277,7 +287,7 @@ aws ecr list-images --repository-name tenant1/fn1 --region eu-west-1
 aws ecr describe-repositories --repository-name tenant1/fn1 --region eu-west-1
 ```
 
-## Wrapping up
+## Wrapping up and next steps
 
 In a very short period of time, we created a function using the `golang-middleware` template, added the AWS SDK for Go as a dependency, and used it to create a repository in ECR.
 

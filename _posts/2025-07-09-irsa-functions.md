@@ -22,7 +22,7 @@ If your team is developing code for Kubernetes using AWS EKS, then OpenFaaS can 
 
 Both AWS Lambda and OpenFaaS can be used to manage resources within AWS, with either shared credentials which need to be created, managed and rotated by your team, or with ambient credentials which are automatically obtained at runtime by the function.
 
-Our function will be used to create repositories in Elastic Container Registry (ECR). This is a common task for teams that run OpenFaaS in a multi-tenant environment, where each tenant or team publishes their own functions to the platform. It'll receive credentials using IAM Roles for Service Accounts (IRSA), which is the most modern way to map Kubernetes Service Accounts to native AWS IAM roles.
+Our function will be used to create repositories in Elastic Container Registry (ECR). This is a common task for teams that run [OpenFaaS in a multi-tenant environment](https://www.openfaas.com/blog/build-a-multi-tenant-functions-platform/), where each tenant or team publishes their own functions to the platform. It'll receive credentials using IAM Roles for Service Accounts (IRSA), which is the most modern way to map Kubernetes Service Accounts to native AWS IAM roles.
 
 Contents:
 
@@ -298,7 +298,7 @@ With a few simple steps, you can take code in the form of a plain files, a zip f
 1. Create a tenant namespace using the [OpenFaaS Gateway's REST API](https://docs.openfaas.com/reference/rest-api/#create-a-namespace) i.e. `tenant`
 2. Create a repository for the tenant's new function you want to build i.e. `tenant/fn1`
 3. Use the [Function Builder's API](https://docs.openfaas.com/openfaas-pro/builder/) to publish the image to the full ARN path i.e. `ACCOUNT_NUMBER.dkr.ecr.eu-west-1.amazonaws.com/tenant1/fn1:TAG`
-4. Post a request to the pOpenFaaS Gateway's REST API](https://docs.openfaas.com/reference/rest-api/#deploy-a-function) to deploy the function to the `tenant1` namespace
+4. Post a request to the [OpenFaaS Gateway's REST API](https://docs.openfaas.com/reference/rest-api/#deploy-a-function) to deploy the function to the `tenant1` namespace
 
 Highlights of this approach:
 
@@ -315,3 +315,7 @@ We wrote to the AWS API directly, however you can use the [Event Connectors for 
 
 The same technique can be applied for other APIs such as the Kubernetes API, for when you want a function to obtain an identity to manage resources in one or more Kubernetes clusters: [Learn how to access the Kubernetes API from a Function](https://www.openfaas.com/blog/access-kubernetes-from-a-function/).
 
+You may also like to learn how to run OpenFaaS as a multi-tenant platform:
+
+* High-level overview and customer stories - [Integrate FaaS Capabilities into Your Platform with OpenFaaS](https://www.openfaas.com/blog/add-a-faas-capability/)]
+* Deep dive into technical details - [Build a multi-tenant functions platform](https://www.openfaas.com/blog/build-a-multi-tenant-functions-platform/).

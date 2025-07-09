@@ -285,10 +285,10 @@ This is required step to push new images to an AWS ECR registry, and could form 
 
 With a few simple steps, you can take code in the form of a plain files, a zip file, tar file, or Git repository, and turn it into a function.
 
-1) Create a tenant namespace using the [OpenFaaS Gateway's REST API](https://docs.openfaas.com/reference/rest-api/#create-a-namespace) i.e. `tenant`
-2) Create a repository for the tenant's new function you want to build i.e. `tenant/fn1`
-3) Use the [Function Builder's API](https://docs.openfaas.com/openfaas-pro/builder/) to publish the image to the full ARN path i.e. `ACCOUNT_NUMBER.dkr.ecr.eu-west-1.amazonaws.com/tenant1/fn1:TAG`
-3) Post a request to the pOpenFaaS Gateway's REST API](https://docs.openfaas.com/reference/rest-api/#deploy-a-function) to deploy the function to the `tenant1` namespace
+1. Create a tenant namespace using the [OpenFaaS Gateway's REST API](https://docs.openfaas.com/reference/rest-api/#create-a-namespace) i.e. `tenant`
+2. Create a repository for the tenant's new function you want to build i.e. `tenant/fn1`
+3. Use the [Function Builder's API](https://docs.openfaas.com/openfaas-pro/builder/) to publish the image to the full ARN path i.e. `ACCOUNT_NUMBER.dkr.ecr.eu-west-1.amazonaws.com/tenant1/fn1:TAG`
+4. Post a request to the pOpenFaaS Gateway's REST API](https://docs.openfaas.com/reference/rest-api/#deploy-a-function) to deploy the function to the `tenant1` namespace
 
 Highlights of this approach:
 
@@ -298,8 +298,8 @@ Highlights of this approach:
 
 To take things further, consider authentication options for the function.
 
-1) [Built-in Function Authentication using OpenFaaS IAM](https://docs.openfaas.com/openfaas-pro/iam/function-authentication/).
-2) Your own code in the handler to process an Authorization header with a static key or JWT token.
+1. [Built-in Function Authentication using OpenFaaS IAM](https://docs.openfaas.com/openfaas-pro/iam/function-authentication/).
+2. Your own code in the handler to process an Authorization header with a static key or JWT token.
 
 We wrote to the AWS API directly, however you can use the [Event Connectors for AWS SQS or SNS](https://docs.openfaas.com/openfaas-pro/sqs-events/) to receive events from other AWS services such as S3, DynamoDB, etc.
 

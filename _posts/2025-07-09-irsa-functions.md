@@ -14,9 +14,9 @@ hide_header_image: true
 
 In this post we'll create a function in Golang that uses AWS IAM and ambient credentials to create and manage resources in AWS.
 
-AWS Lambda is often used for this task, but how does OpenFaaS compare?
+As a built-in offering, AWS Lambda is often used to respond to events and to manage AWS resources, so how does OpenFaaS compare?
 
-OpenFaaS is a self-hosted platform that can run on any cloud or on-premises, including AWS EKS. Whilst AWS Lambda is a popular and convenient offering, it does have some tradeoffs and limitations which can cause friction for teams with more specialised requirements and workflows.
+OpenFaaS is a self-hosted platform that can run on any cloud or on-premises, including AWS EKS. Whilst AWS Lambda is a popular and convenient offering, it does have some tradeoffs and limitations which can cause friction for teams with more specialised requirements, workflows, or high usage ($$$).
 
 If your team is developing code for Kubernetes using AWS EKS, then OpenFaaS can be a more natural fit than AWS Lambda, since it can use the same workflows, tools and processes you already have in place for your existing Kubernetes applications. That includes Helm, CRDs, Kubernetes RBAC, container builders in CI/CD and ArgoCD/Flux.
 

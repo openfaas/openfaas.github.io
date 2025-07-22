@@ -173,16 +173,16 @@ spec:
     spec:
       template:
         spec:
-		  serviceAccountName: headroom-scaler
+          serviceAccountName: headroom-scaler
           containers:
             - name: kubectl
               image: alpine/kubectl:latest # Or a specific version
               command:
-			  - "/bin/sh"
-			  - "-c"
-			  - |
-			  	apk add --no-cache kubectl
-			  	kubectl scale headroom/openfaas-fn-buffer --replicas=0
+              - "/bin/sh"
+              - "-c"
+              - |
+                apk add --no-cache kubectl
+                kubectl scale headroom/openfaas-fn-buffer --replicas=0
 ```
 
 The Cron Job will scale the headroom down to 0 replicas at midnight every day.

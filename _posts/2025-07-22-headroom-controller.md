@@ -146,7 +146,7 @@ All Pods created by the Headroom Controller will have the label `headroom: $NAME
 
 The following screenshot shows a K3s cluster with one master, and 5 additional nodes which have been added to the cluster to satisfy the spread constraint.
 
-![Spread out across 5x additional nodes](/images/2025-07-headroom/spread.png)
+[![Spread out across 5x additional nodes](/images/2025-07-headroom/spread.png)](/images/2025-07-headroom/spread.png)
 
 ### Scaling the headroom
 

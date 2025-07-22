@@ -264,9 +264,9 @@ You will need to spend some time fine-tuning your Headroom resources to get the 
 
 Feel free to reach out with your comments, questions, and suggestions. 
 
-Right now you can try out the Headroom Controller for free without signing up for a subscription.
+During the beta period, anyone can try out the Headroom Controller for free without signing up for a subscription.
 
-After the initial period, OpenFaaS customers get free access to the Headroom Controller as part of their subscription. For everyone else, you can purchase a license for 300 USD/year per cluster - which is less than 1 USD per day for near-instant scaling and scheduling of Pods.
+After the beta period, OpenFaaS customers get free access to the Headroom Controller as part of their subscription. For everyone else, you can purchase a license for 300 USD/year per cluster - which is less than 1 USD per day for near-instant scaling and scheduling of Pods.
 
 Even if you wanted to make your own controller for fun, you have to factor in the continued maintenance and support, and what happens when you leave the company. We've priced the controller at the point where it makes sense to outsource it.
 

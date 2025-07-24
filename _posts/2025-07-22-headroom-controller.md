@@ -104,6 +104,37 @@ spec:
     memory: 250Mi
 ```
 
+Now set up two priority classes.
+
+1. Create a default priority priorityClassName
+
+```bash
+kubectl apply -f - << EOF
+apiVersion: scheduling.k8s.io/v1
+kind: PriorityClass
+metadata:
+  name: default
+value: 1000
+globalDefault: true
+description: "Default priority class for all pods"
+EOF
+```
+
+2. Create a low priority class for the headroom Custom Resources
+
+```bash
+kubectl apply -f - <<EOF
+apiVersion: scheduling.k8s.io/v1
+kind: PriorityClass
+metadata:
+  name: headroom
+description: Low priority class for headroom pods
+globalDefault: false
+preemptionPolicy: Never
+value: -10
+EOF
+```
+
 Within a short period of time, a new Deployment will be created with the request values you specified.
 
 If these Pods cannot be scheduled, the autoscaler you're using should request one or more new nodes to be added to the cluster to host them.
@@ -218,7 +249,6 @@ spec:
       value: "spot"
       effect: "NoSchedule"
 ```
-
 
 ## Getting started with the headroom controller
 

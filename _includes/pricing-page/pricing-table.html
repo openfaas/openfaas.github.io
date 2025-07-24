@@ -159,7 +159,7 @@
                 <th class="is-one-third">Auto-scaling</th>
                 <td class="is-2">One global RPS rule</td>
                 <td class="is-2">RPS, Capacity, CPU, RAM, or Custom metrics</td>
-                <td class="is-2">RPS, Capacity, CPU, RAM, or Custom metrics</td>
+                <td class="is-2">RPS, Capacity, CPU, RAM, Custom metrics, or Queue Depth</td>
             </tr>
             <tr>
                 <th class="is-one-third">Scale to zero</th>
@@ -372,10 +372,16 @@
                 <td class="is-2">Unlimited</td>
             </tr>
             <tr>
-                <th class="is-one-third">Maximum named queues</th>
+                <th class="is-one-third">Maximum dedicated queues</th>
                 <td class="is-2">1</td>
                 <td class="is-2">1</td>
                 <td class="is-2">Unlimited</td>
+            </tr>
+            <tr>
+                <th class="is-one-third">Queue modes</th>
+                <td class="is-2">Shared FIFO</td>
+                <td class="is-2">Shared FIFO</td>
+                <td class="is-2">Consumer per function (fair scheduling) or Shared FIFO</td>
             </tr>
             <tr>
                 <th class="is-one-third">Maximum payload</th>
@@ -482,7 +488,7 @@
                 <th class="is-one-third">Kubernetes CRD</th>
                 <td class="is-2">No</td>
                 <td class="is-2">Function</td>
-                <td class="is-2">Function, Profile, Policy &amp; Role.</td>
+                <td class="is-2">Function, Profile, JwtIssuer, Policy &amp; Role.</td>
             </tr>
 
             <tr>
@@ -529,22 +535,21 @@
                 </td>
             </tr>
 
-
             <tr>
                 <td colspan="4">                   
-                    <h3 class="subtitle pt-4">Platform features</h3>
+                    <h3 class="subtitle pt-4">Platform-building/multi-tenant features</h3>
                 </td>
             </tr>
             <tr>
                 <th class="is-2">REST API</th>
                 <td>                         
-                    Functions, secrets &amp; logs
+                    Functions, secrets, &amp; logs
                 </td>
                 <td>                            
-                    Functions, secrets &amp; logs
+                    Functions, secrets, &amp; logs
                 </td>
                 <td>                           
-                    Functions, secrets, logs &amp; namespaces
+                    Functions, secrets, logs, &amp; namespaces
                 </td>
             </tr>
 
@@ -560,7 +565,7 @@
                     {% include yes.html %}
                 </td>
             </tr>
-            
+
             <tr>
                 <th class="is-2">Runtime isolation</th>
                 <td>                         

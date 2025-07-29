@@ -18,7 +18,7 @@ Learn how to run headless browsers on Kubernetes with massive scale using OpenFa
 
 > Intro from Alex:
 >
-> We had a call with a team from Deel (an international payroll company) who told us they'd recently migrated their PDF generation functions from AWS Lambda to Kubernetes. They told us that AWS Lambda scaled exactly how they wanted, despite its high cost. Then, after moving to Kubernetes, they started to run into various problems scaling headless Chrome and it is still a pain point for them today.
+> We had a call with a team from [Deel](https://deel.com) (an international payroll company) who told us they'd recently migrated their PDF generation functions from AWS Lambda to Kubernetes. They told us that AWS Lambda scaled exactly how they wanted, despite its high cost. Then, after moving to Kubernetes, they started to run into various problems scaling headless Chrome and it is still a pain point for them today.
 >
 > This article shows how we approached the problem using built-in features of OpenFaaS - connection-based (aka capacity), hard limits (aka max_inflight) and a flexible queuing system that can retry failed invocations.
 >

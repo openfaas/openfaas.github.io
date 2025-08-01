@@ -10,7 +10,7 @@ categories:
 - kubernetes
 - serverless
 dark_background: true
-# image: "/images/2025-07-headroom/background.png"
+image: "/images/2025-07-queue-based/background.png"
 hide_header_image: true
 ---
 

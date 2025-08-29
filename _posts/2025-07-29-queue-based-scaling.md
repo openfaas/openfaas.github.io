@@ -196,6 +196,8 @@ A number of changes have been made to support Queue-Based Scaling:
 
 Note that the 0.5.x gateway will start publishing messages to a new subject format, so if you update the gateway, you must also update the Queue Worker to 0.4.x or later, otherwise the Queue Worker will not be able to consume any messages.
 
+This includes any dedicated or separate queue-workers that you have deployed, update them using the separate queue-worker Helm chart.
+
 ## How do you turn it all on?
 
 Since these features change the way that OpenFaaS works, and we value backwards compatibility, Queue-Based Scaling is an opt-in feature.

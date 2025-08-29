@@ -226,7 +226,7 @@ In the main chart, the `jetstreamQueueWorker.durableName` field is no longer use
 
 If you have dedicated queue-workers deployed, you will need to update them using the separate queue-worker Helm chart.
 
-A new field is introduced called `queueName` in values.yaml, the default value is `faas-request`, so make sure you override it with the name that you are using in the `com.openfaas.queue` annotation.
+A new field is introduced called `queueName` in values.yaml, the default value is not set. When it is not set, the queue will take the name of the stream.
 
 So if you had an annotation of `com.openfaas.queue=slow-fns`, you would set the `queueName` like this in values.yaml:
 
@@ -236,11 +236,13 @@ maxInflight: 5
 mode: static
 nats:
   stream:
-    name: slow-fns-requests
+    name: slow-fns
   consumer:
     durableName: slow-fns-workers
 upstreamTimeout: 15m  
 ```
+
+Alternatively, you can leave `queueName` as empty, or not set it at all, and the name will be taken from `nats.stream.name`.
 
 The top level setting `durableName` has now been removed.
 

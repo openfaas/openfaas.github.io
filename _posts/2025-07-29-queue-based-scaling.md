@@ -220,6 +220,32 @@ At the same time, as introducing this new setting, we have deprecated an older c
 
 So if you have a `queueMode` setting in your `values.yaml`, you can now safely remove it so long as you stay on a newer version of the Helm chart.
 
+In the main chart, the `jetstreamQueueWorker.durableName` field is no longer used or required.
+
+### Dedicated queue-workers
+
+If you have dedicated queue-workers deployed, you will need to update them using the separate queue-worker Helm chart.
+
+A new field is introduced called `queueName` in values.yaml, the default value is `faas-request`, so make sure you override it with the name that you are using in the `com.openfaas.queue` annotation.
+
+So if you had an annotation of `com.openfaas.queue=slow-fns`, you would set the `queueName` like this in values.yaml:
+
+```diff
+maxInflight: 5
++queueName: slow-fns
+mode: static
+nats:
+  stream:
+    name: slow-fns-requests
+  consumer:
+    durableName: slow-fns-workers
+upstreamTimeout: 15m  
+```
+
+The top level setting `durableName` has now been removed.
+
+You can read more in the [README](https://github.com/openfaas/faas-netes/blob/master/chart/queue-worker/README.md) for the queue-worker chart.
+
 ## Wrapping up
 
 A quick summary about Queue-Based Scaling:

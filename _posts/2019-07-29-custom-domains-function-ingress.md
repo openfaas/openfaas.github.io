@@ -35,7 +35,7 @@ To run through the tutorial, you will need to have some software set up already 
 
 You need to have a Kubernetes cluster. I recommend using [DigitalOcean Kubernetes](https://www.digitalocean.com/) for an easy and cost-efficient set-up.
 
-[Get free credits](https://m.do.co/c/2962aa9e56a1)
+[Get free credits](https://m.do.co/c/8d4e75e9886f)
 
 * helm
 

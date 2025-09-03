@@ -28,7 +28,7 @@ In this post we'll guide you through creating your first OpenFaaS function using
 
 * A DigitalOcean account
 
-You will need to use your [DigitalOcean](https://m.do.co/c/2962aa9e56a1) account. If you're a new user then you can get credits of $100 over 60 days using this [referral link](https://m.do.co/c/2962aa9e56a1). This is a generous amount of credit with the most economic Droplet size being just $5 a month.
+You will need to use your [DigitalOcean](https://m.do.co/c/8d4e75e9886f) account. If you're a new user then you can get credits of $100 over 60 days using this [referral link](https://m.do.co/c/8d4e75e9886f). This is a generous amount of credit with the most economic Droplet size being just $5 a month.
 
 * The OpenFaaS CLI
 

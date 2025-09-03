@@ -83,7 +83,7 @@ I'll now show you how to set up faasd on Equinix Metal's bare-metal platform. If
 
 We're using [Johan Siebens' module for faasd and Equinix Metal](https://github.com/jsiebens/terraform-equinix-faasd). It abstracts and automates the installation of faasd using cloud-init and will return the URL and username/password for OpenFaaS after the machine is provisioned.
 
-There is also an example for [DigitalOcean](https://m.do.co/c/2962aa9e56a1) in the [faasd repository](https://github.com/openfaas/faasd/tree/master/docs/bootstrap).
+There is also an example for [DigitalOcean](https://m.do.co/c/8d4e75e9886f) in the [faasd repository](https://github.com/openfaas/faasd/tree/master/docs/bootstrap).
 
 * Create an account on Equinix Metal, you'll also create a project, so note down the project ID. Projects are the logical separation used on the platform and are required for API calls.
 * Run `export PROJECT_ID="..."` so that you can use it later on.

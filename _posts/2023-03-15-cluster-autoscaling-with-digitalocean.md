@@ -17,7 +17,7 @@ If you've heard of or worked with OpenFaaS in the past, you'll know that it has 
 
 The two perform very difficult tasks, but in similar ways and should be configured properly to work in harmony.
 
-I'll show you how to setup OpenFaaS Pro with [DigitalOcean's](https://m.do.co/c/2962aa9e56a1) managed Kubernetes service, and how to configure your functions to run there.
+I'll show you how to setup OpenFaaS Pro with [DigitalOcean's](https://m.do.co/c/8d4e75e9886f) managed Kubernetes service, and how to configure your functions to run there.
 
 The concepts are going to very similar for other managed Kubernetes services too - like AWS EKS, GKE, Azure AKS and Linode Kubernetes. You'll also see plenty of screenshots and extra links, as we also cover Google Cloud and AWS EKS.
 
@@ -25,7 +25,7 @@ By the end of the tutorial, you'll have two node pools: one for the core service
 
 Even if your load is static and predictable, spot instances also rely on cluster autoscaling and are usually up to 50-70% cheaper than statically provisioned nodes.
 
-> Disclosure: From time to time, the DigitalOcean Open Source team has issued the OpenFaaS maintainers with cloud credit for open source enablement. If you'd like to try out the tutorial, you can get 200 USD of credit to use over 60 days, if you're a new user. [Use this referral link to claim it](https://m.do.co/c/2962aa9e56a1).
+> Disclosure: From time to time, the DigitalOcean Open Source team has issued the OpenFaaS maintainers with cloud credit for open source enablement. If you'd like to try out the tutorial, you can get 200 USD of credit to use over 60 days, if you're a new user. [Use this referral link to claim it](https://m.do.co/c/8d4e75e9886f).
 
 ## Overview
 
@@ -51,7 +51,7 @@ That's where the cluster auto-scaler comes in. If the cluster is under-provision
 ![A node pool with some spare capacity](/images/2023-03-cluster-scaling-do/node-pool-partial.png)
 > A node pool with some spare capacity
 
-Each cluster auto-scaler is different, and in the case of [DigitalOcean](https://m.do.co/c/2962aa9e56a1), you don't need to install it - it's managed for you. There didn't seem to be a way to fine tune it when installed through the DigitalOcean UI.
+Each cluster auto-scaler is different, and in the case of [DigitalOcean](https://m.do.co/c/8d4e75e9886f), you don't need to install it - it's managed for you. There didn't seem to be a way to fine tune it when installed through the DigitalOcean UI.
 
 See also:
 * [DigitalOcean's cluster auto-scaler set-up guide](https://docs.digitalocean.com/products/kubernetes/how-to/autoscale/)
@@ -268,13 +268,13 @@ We have a number of autoscaler test suites and sample functions which you can ru
 
 See also: [OpenFaaS autoscaler tests](https://github.com/openfaas/openfaas-autoscaler-tests/)
 
-With [DigitalOcean](https://m.do.co/c/2962aa9e56a1) Kubernetes in particular, every node gets 1GB of Pods schedule to it before you get to run any of your work Pods. Bear this in mind, and make sure that you have enough resources to run the functions you need.
+With [DigitalOcean](https://m.do.co/c/8d4e75e9886f) Kubernetes in particular, every node gets 1GB of Pods schedule to it before you get to run any of your work Pods. Bear this in mind, and make sure that you have enough resources to run the functions you need.
 
 > I got caught out during testing, where three nodes were added with 1GB of free RAM, but the auto-scaler didn't remove them again because of all of DigitalOcean's own Pods that it runs.
 
 Cluster auto-scaling is much slower than Pod scaling, machines have to be found, provisioned, loaded up and joined into the cluster. So whilst a Pod may come online in under 2 seconds, a new node could take several minutes in the worst case.
 
-If you'd like to try out the tutorial, you can get 200 USD of credit to use over 60 days, if you're a new user. [Use this referral link to claim it](https://m.do.co/c/2962aa9e56a1).
+If you'd like to try out the tutorial, you can get 200 USD of credit to use over 60 days, if you're a new user. [Use this referral link to claim it](https://m.do.co/c/8d4e75e9886f).
 
 **Headroom and heterogenous node sizes**
 

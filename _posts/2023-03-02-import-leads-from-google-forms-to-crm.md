@@ -529,7 +529,7 @@ That's where OpenFaaS Community Edition or Pro comes in. You have the ultimate f
 
 * If you are looking for really low overheads, then you can can't go far wrong with faasd that runs on a single VM
     
-    "faasd" was designed to be installed on a cloud host and requires very little maintenance once installed. That's where I am running the two functions I mentioned in this post. Even a 10-15 USD / mo [Linode Nanode](https://www.openfaas.com/images/sponsors/linode.svg) or [DigitalOcean Droplet](https://m.do.co/c/2962aa9e56a1) is enough to run [faasd](http://github.com/openfaas/faasd).
+    "faasd" was designed to be installed on a cloud host and requires very little maintenance once installed. That's where I am running the two functions I mentioned in this post. Even a 10-15 USD / mo [Linode Nanode](https://www.openfaas.com/images/sponsors/linode.svg) or [DigitalOcean Droplet](https://m.do.co/c/8d4e75e9886f) is enough to run [faasd](http://github.com/openfaas/faasd).
 
 faasd has its own eBook, and if you're more of a JavaScript developer than a Go developer, you'll find lots of practical code examples that you can use to write your own automations and functions: [Serverless for Everyone Else](https://store.openfaas.com/l/serverless-for-everyone-else)
 

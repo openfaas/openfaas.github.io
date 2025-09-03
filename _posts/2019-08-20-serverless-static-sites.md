@@ -31,7 +31,7 @@ A note from [Alex Ellis, OpenFaaS Founder](https://www.openfaas.com/team/):
 
 * Kubernetes
 
-You need to have a Kubernetes cluster up & running. I would recommend [DigitalOcean](https://www.digitalocean.com/), it's cost-efficient and very easy to set-up. [Get free credits](https://m.do.co/c/2962aa9e56a1).
+You need to have a Kubernetes cluster up & running. I would recommend [DigitalOcean](https://www.digitalocean.com/), it's cost-efficient and very easy to set-up. [Get free credits](https://m.do.co/c/8d4e75e9886f).
 
 * [Install Helm](https://github.com/openfaas/faas-netes/blob/master/HELM.md)
 
@@ -78,7 +78,7 @@ You'll need to install the Hugo CLI. Use it to create a static site and to serve
 
 * DNS management
 
-You'll need to create an A record to serve your static site. I'm using [DigitalOcean](https://m.do.co/c/2962aa9e56a1) which offers free domain management at time of writing.
+You'll need to create an A record to serve your static site. I'm using [DigitalOcean](https://m.do.co/c/8d4e75e9886f) which offers free domain management at time of writing.
 
 The easiest way to create DNS records is with the DigitalOcean CLI: [install doctl](https://github.com/digitalocean/doctl#installing-doctl).
 
@@ -188,7 +188,7 @@ nginxingress-nginx-ingress-controller        LoadBalancer   10.245.116.147   159
 
 You can see that my external IP address is: `159.89.221.240`.
 
-If you are getting started with DNS management I recommend [DigitalOcean](https://m.do.co/c/2962aa9e56a1) which is free and easy to use. Here is how I use the CLI to create the record for `my-site.matiaspan.dev`:
+If you are getting started with DNS management I recommend [DigitalOcean](https://m.do.co/c/8d4e75e9886f) which is free and easy to use. Here is how I use the CLI to create the record for `my-site.matiaspan.dev`:
 
 ```sh
 doctl compute domain create my-site.matiaspan.dev --ip-address 159.89.221.240

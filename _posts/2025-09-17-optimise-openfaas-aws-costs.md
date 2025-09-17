@@ -62,7 +62,7 @@ Avoid [EKS Extended Support fees](https://cloudgov.ai/resources/blog/how-to-save
 
 **Kubernetes nodes**
 
-Kubernetes reqquires nodes to run your Pods, which are usually provided by AWS EC2 (virtual machines). AWS also offers products like Fargate, but Fargate tends to be more expensive, and slower to start up.
+Kubernetes requires nodes to run your Pods, which are usually provided by AWS EC2 (virtual machines). AWS also offers products like Fargate, but Fargate tends to be more expensive, and slower to start up.
 
 The cost of nodes can be optimised in three ways:
 
@@ -106,7 +106,7 @@ Each installation of OpenFaaS requires a separate license key.
 
 If you have environments that sound like this: Dev, QA, UAT, Staging, Pre-Prod, DR, Prod, then OpenFaaS could work out quite expensive.
 
-To optimise your costs, you may want to reevaluate whether you *really need* as many as 7 different Kubernetes clusters to test your functions in before finally rolling them out to production. For OpenFaaS for Enterprises, we can sometimes offer custom package for this type of secenario, so definitely reach out to us for a call.
+To optimise your costs, you may want to reevaluate whether you *really need* as many as 7 different Kubernetes clusters to test your functions in before finally rolling them out to production. For OpenFaaS for Enterprises, we can sometimes offer custom package for this type of scenario, so definitely reach out to us for a call.
 
 An alternative option when you have many environments is to use OpenFaaS for Enterprises and its multiple-namespace support. In this way, the various environments become Kubernetes namespaces that are isolated from one another. It's also ideal for centrally managed IT, FaaS offered as a service to employees, and for multi-tenant environments.
 
@@ -188,7 +188,7 @@ From the top:
 * Do enable scale to zero where a modest coldstart is acceptable, or where functions run mainly asynchronously.
 * Don't overprovision CPU/RAM just because that's what you had for a cloud function in the past.
 
-We realise that many teams have made a firm committment to stay on AWS and cannot consider another vendor, or self-hosting. But, if you can, do consider bare-metal, or on-premises infrastructure. Maybe you could run part of your product on a different cloud provider, if it meant getting the 5-6x cost reductions we outlined in the example with Hetzner?
+We realise that many teams have made a firm commitment to stay on AWS and cannot consider another vendor, or self-hosting. But, if you can, do consider bare-metal, or on-premises infrastructure. Maybe you could run part of your product on a different cloud provider, if it meant getting the 5-6x cost reductions we outlined in the example with Hetzner?
 
 Finally, if you are in need of help, reach out to us using your existing communication channels with us. Or if you're new here via our [Pricing page](https://www.openfaas.com/pricing/).
 

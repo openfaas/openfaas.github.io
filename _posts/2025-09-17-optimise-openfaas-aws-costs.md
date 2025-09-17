@@ -56,7 +56,7 @@ This is beyond the scope of our article that focuses on AWS EKS, [EC2](https://a
 * Use VPC endpoints for AWS services (e.g., S3, DynamoDB) to avoid public internet fees—savings of $0.01/GB or more.
 * Minimize cross-AZ traffic by pinning functions to single-AZ nodes if latency allows.
 
-Take a detailed look at your monthly AWS bill and identify any hot spots for improvements.
+Take a detailed look at your monthly bill with [AWS Cost Explorer](https://aws.amazon.com/aws-cost-management/aws-cost-explorer/).
 
 Avoid [EKS Extended Support fees](https://cloudgov.ai/resources/blog/how-to-save-money-on-amazon-eks-clusters-with-extended-support-version-updates/). EKS charges $0.60/hr per cluster if you linger on an unsupported Kubernetes version. Keep a quarterly upgrade policy (N-2 policy) to stay on the standard $0.10/hr control-plane price.
 

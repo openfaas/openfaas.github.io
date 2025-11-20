@@ -250,6 +250,32 @@ spec:
       effect: "NoSchedule"
 ```
 
+For a self-hosted [HA K3s cluster with SlicerVM.com](https://docs.slicervm.com/examples/ha-k3s/) running with our modified Cluster Autoscaler, you could try something like this:
+
+```bash
+kubectl taint node k3s-cp-1 cp:NoSchedule
+kubectl taint node k3s-cp-2 cp:NoSchedule
+kubectl taint node k3s-cp-3 cp:NoSchedule
+```
+
+Followed by adding:
+
+```yaml
+spec:
+  priorityClassName: headroom
+  replicas: 2
+  requests:
+    cpu: 500m
+    memory: 512Mi
+  tolerations:
+  - effect: NoSchedule
+    key: cp
+    operator: Equal
+    value: "1"
+```
+
+In that case, if you have no agents, the autoscaler will provision a new node to host the two new replicas of the headroom Pods.
+
 ## Getting started with the headroom controller
 
 You can get started right away, even if you're not an OpenFaaS customer. OpenFaaS is not a pre-requisite, but we've put it under the brand to signal to customers that this is something we are supporting, and think is an important add-on for any cluster autoscaler.

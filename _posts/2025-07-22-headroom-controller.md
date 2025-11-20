@@ -108,32 +108,32 @@ Now set up two priority classes.
 
 1. Create a default priority priorityClassName
 
-```bash
-kubectl apply -f - << EOF
-apiVersion: scheduling.k8s.io/v1
-kind: PriorityClass
-metadata:
-  name: default
-value: 1000
-globalDefault: true
-description: "Default priority class for all pods"
-EOF
-```
+  ```bash
+  kubectl apply -f - << EOF
+  apiVersion: scheduling.k8s.io/v1
+  kind: PriorityClass
+  metadata:
+    name: default
+  value: 1000
+  globalDefault: true
+  description: "Default priority class for all pods"
+  EOF
+  ```
 
 2. Create a low priority class for the headroom Custom Resources
 
-```bash
-kubectl apply -f - <<EOF
-apiVersion: scheduling.k8s.io/v1
-kind: PriorityClass
-metadata:
-  name: headroom
-description: Low priority class for headroom pods
-globalDefault: false
-preemptionPolicy: Never
-value: -10
-EOF
-```
+  ```bash
+  kubectl apply -f - <<EOF
+  apiVersion: scheduling.k8s.io/v1
+  kind: PriorityClass
+  metadata:
+    name: headroom
+  description: Low priority class for headroom pods
+  globalDefault: false
+  preemptionPolicy: Never
+  value: -10
+  EOF
+  ```
 
 Within a short period of time, a new Deployment will be created with the request values you specified.
 
@@ -255,7 +255,7 @@ spec:
 You can get started right away, even if you're not an OpenFaaS customer. OpenFaaS is not a pre-requisite, but we've put it under the brand to signal to customers that this is something we are supporting, and think is an important add-on for any cluster autoscaler.
 
 ```bash
-helm repo add openfaas https://openfaas.github.io/faas-helm/
+helm repo add openfaas https://openfaas.github.io/faas-netes/
 helm repo update
 ```
 

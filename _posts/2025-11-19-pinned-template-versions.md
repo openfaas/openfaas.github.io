@@ -32,7 +32,26 @@ You can pin a template in three ways:
 * `lang: golang-middleware@inproc` - a branch name
 * `lang: golang-middleware@sha-af599e` - a specific commit hash prefixed with `sha-` with a short or long SHA format
 
+When specifying a release tag or branch name, an efficient shallow clone can be performed, however if you specify a SHA, a full clone of the repository is required to checkout that specific commit. A full clone could impact the performance of CI/CD pipelines if the repository is large or has a long history.
+
 Finally, if you do not pin a version, then the latest version will be fetched from git whenever it is not available in the local `./template` folder.
+
+> Note: if you have added the `@` character into any of your custom template names, that will no longer be supported. So if you had written `node@22`, that should ideally be renamed to `node22` or `node-22` or similar.
+
+Whenever templates are expanded, a new `meta.json` file is written into each template's folder. This file will make its way into the build of any function, so that you can understand which template and version was used to build a function image once it's already been published.
+
+For `golang-middleware@sha-2e6e262`, the following was written out:
+
+```json
+{
+  "repository": "https://github.com/openfaas/golang-http-template",
+  "ref_name": "sha-2e6e262",
+  "sha": "2e6e262a724fc07d4eac75612c98a8870acf5606",
+  "written_at": "2025-11-13T18:20:02.109733766Z"
+}
+```
+
+
 
 **How do I fetch pinned templates?**
 

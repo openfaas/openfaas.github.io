@@ -258,6 +258,12 @@ kubectl taint node k3s-cp-2 cp:NoSchedule
 kubectl taint node k3s-cp-3 cp:NoSchedule
 ```
 
+Or if there are no agents yet:
+
+```bash
+kubectl taint node --all cp:NoSchedule
+```
+
 Followed by adding:
 
 ```yaml

@@ -242,13 +242,10 @@ On the first run, the base VM image will be downloaded and unpacked. It can take
 
 Then once booted, the userdata to set up K3s and wait for its readiness could also take a minute or two.
 
-Wait until userdata has fully completed, you can also run this via `watch`:
+The following command will block until userdata has fully completed.
 
 ```bash
-sudo -E ./slicer vm health
-HOSTNAME                  AGENT UPTIME         SYSTEM UPTIME        AGENT VERSION   USERDATA RAN
---------                  ------------         -------------        -------------   ------------
-k3s-rce-1                 22s                  22s                  0.1.57          1         
+sudo -E slicer vm ready --userdata
 ```
 
 ### Step 5: Shell into the VM

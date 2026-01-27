@@ -215,6 +215,7 @@ echo "cat /home/ubuntu/.openfaas-password | faas-cli login --password-stdin" >> 
 
 ```bash
 slicer new k3s-rce \
+  --graceful-shutdown=false \
   --net=isolated \
   --allow=0.0.0.0/0 \
   --cpu=2 \

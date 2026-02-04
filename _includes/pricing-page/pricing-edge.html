@@ -7,6 +7,10 @@
                         OpenFaaS Edge
                         <span class="tag is-small is-primary ml-2" style="vertical-align: middle; font-size: 0.6rem;">NEW</span>
                     </p>
+
+                    <p class="has-text-grey-dark is-size-4 font-medium mb-2">
+                        <span class="is-size-5 font-medium">$</span>300<span class="is-size-6 font-medium"> / mo</span>
+                    </p>
     
                     <p style="margin-bottom: 6px; min-height: 10px" class="has-text-grey-dark is-size-8 mt-2">
                         Distribute event-driven automation to your customers.
@@ -101,7 +105,7 @@
                         </div>
                     </div>
 
-                    <div class="is-flex is-align-items-center is-size-6">                    
+                    <div class="is-flex is-align-items-center is-size-6 is-flex-wrap-wrap">                    
 
                         <div class="book-a-call mr-3 is-size-2">
                             <div class="field">
@@ -114,18 +118,67 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="book-a-call ml-3 is-size-2">
+                        <div class="book-a-call mr-3 is-size-2">
                             <div class="field">
-                                <label class="label mt-3">Talk to us about edge</label>
+                                <label class="label mt-3">Pricing details</label>
                                 <div class="control">
-                                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSe2O9tnlTjc7yqzXLMvqvF2HVqwNW7ePNOxLchacKRf9LZL7Q/viewform?usp=header" class="button is-primary is-medium">
-                                        <span class="icon"><i class="fas fa-calendar-alt"></i></span>
-                                        <span>Talk to us about edge</span>
-                                        </a>
+                                    <button id="edge-info-icon" class="button is-primary is-medium">
+                                        <span class="icon"><i class="fas fa-info-circle"></i></span>
+                                        <span>Find out more</span>
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                    <!-- Edge Redistribution Modal -->
+                    <div id="edge-modal" class="modal">
+                        <div class="modal-background"></div>
+                        <div class="modal-card">
+                            <header class="modal-card-head">
+                                <p class="modal-card-title">OpenFaaS Edge - Redistribution License</p>
+                                <button class="delete edge-modal-close" aria-label="close"></button>
+                            </header>
+                            <section class="modal-card-body">
+                                <div class="content">
+                                    <h4 class="has-text-grey-dark">Designed for Redistribution</h4>
+                                    <p>OpenFaaS Edge is designed specifically for redistribution - distributing your developed functions to end customers as part of your product or solution.</p>
+                                    
+                                    <h4 class="has-text-grey-dark mt-4">Industry Examples</h4>
+                                    <p>Edge is ideal for industries that need to deploy automation to customer sites:</p>
+                                    <div class="tags">
+                                        <span class="tag is-light is-medium">Rail</span>
+                                        <span class="tag is-light is-medium">Freight</span>
+                                        <span class="tag is-light is-medium">Shipping</span>
+                                        <span class="tag is-light is-medium">Telecoms</span>
+                                        <span class="tag is-light is-medium">Manufacturing</span>
+                                        <span class="tag is-light is-medium">Logistics</span>
+                                        <span class="tag is-light is-medium">Industrial Automation</span>
+                                        <span class="tag is-light is-medium">Edge Monitoring</span>
+                                        <span class="tag is-light is-medium">ETL</span>
+                                        <span class="tag is-light is-medium">Data Pre-Processing</span>
+                                    </div>
+
+                                    <h4 class="has-text-grey-dark mt-4">Pricing</h4>
+                                    <ul>
+                                        <li>$300 USD/month is the starting price, per installation</li>
+                                        <li>Pricing scales based on deployment needs and function count</li>
+                                        <li>Paid annually by invoice - SWIFT (GBP) / ACH (USD)</li>
+                                    </ul>
+
+                                    <div class="notification is-info is-light mt-4">
+                                        <p class="mb-0">Need functions for internal or production use in your business? See <a href="/pricing/">OpenFaaS Standard</a>.</p>
+                                    </div>
+                                </div>
+                            </section>
+                            <footer class="modal-card-foot">
+                                <a href="https://docs.google.com/forms/d/e/1FAIpQLSe2O9tnlTjc7yqzXLMvqvF2HVqwNW7ePNOxLchacKRf9LZL7Q/viewform?usp=header" class="button is-primary" target="_blank" rel="noopener">
+                                    <span class="icon"><i class="fas fa-video"></i></span>
+                                    <span>Book Zoom call</span>
+                                </a>
+                                <button class="button edge-modal-close">Close</button>
+                            </footer>
+                        </div>
                 </div>
             </div>
         </div>

@@ -109,6 +109,53 @@ function initVideoModal() {
     });
 }
 
+/*-----------Init Edge redistribution modal---------*/
+/*--------------------------------------------------*/
+
+function initEdgeModal() {
+    var trigger = document.getElementById('edge-info-icon');
+    var modal = document.getElementById('edge-modal');
+    
+    if (!trigger || !modal) {
+        return;
+    }
+
+    var background = modal.querySelector('.modal-background');
+    var closeButtons = modal.querySelectorAll('.edge-modal-close');
+
+    function showModal(visible) {
+        if (visible) {
+            modal.classList.add('is-active');
+            document.documentElement.classList.add('is-clipped');
+        } else {
+            modal.classList.remove('is-active');
+            document.documentElement.classList.remove('is-clipped');
+        }
+    }
+
+    trigger.addEventListener('click', function() {
+        showModal(true);
+    });
+
+    Array.from(closeButtons).forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            showModal(false);
+        });
+    });
+
+    background.addEventListener('click', function() {
+        showModal(false);
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && modal.classList.contains('is-active')) {
+            showModal(false);
+        }
+    });
+}
+
+initEdgeModal();
+
 // Run shrinkNav on start-up to cover up the white bar shown between the nav
 // and the blue hero on the landing page
 // shrinkNav()

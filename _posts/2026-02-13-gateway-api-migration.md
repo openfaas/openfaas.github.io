@@ -37,7 +37,7 @@ Honestly, we don't need to explain how Ingress works, it's so well understood an
 
 But there was a glint in the eyes of the Kubernetes maintainers, and they wanted to provide something that was much more ambitious in its scope, that addressed needs that OpenFaaS customers don't tend to have. The [Istio service mesh](https://istio.io/) was a precursor for this, with its own set of add-ons with similar names, and was eventually crystallised into the *Gateway API*.
 
-Most OpenFaaS and Inlets customers we've encountered have been using Ingress (many moved away from Istio and service meshes) preferring simplicity and ease of use. They tended to always be using the [ingress-nginx](https://kubernetes.github.io/ingress-nginx/) controller. A brief history: Ingress Nginx started off as a hobby project for a single maintainer, who was unable to find corporate sponsorship or support from the CNCF, and had to give it up in 2019. Shortly after 2-3 maintainers stepped up and ran it reasonably well as a spare-time project, but without sustainable backing as part of a day job, the same thing started to happen again. More issues were raised, than there were people ready to fix and test them.
+Most OpenFaaS and Inlets customers we've encountered have been using Ingress (many moved away from Istio and service meshes) preferring simplicity and ease of use. They tended to always be using the [ingress-nginx](https://kubernetes.github.io/ingress-nginx/) controller. A brief history: Ingress Nginx started off as a hobby project for a single maintainer, who was unable to find corporate sponsorship or support from the CNCF, and had to give it up in 2019. Shortly after 2-3 maintainers stepped up and ran it reasonably well as a spare-time project, but without sustainable backing as part of a day job, the same thing started to happen again. Issues were being reported, quicker than they could be fixed.
 
 So the Kubernetes maintainers made a judgement call, they decided to announce project would be officially mothballed in March 2026. No further updates, or security patches. That's a big deal.
 
@@ -307,13 +307,11 @@ NAME                     READY   SECRET                   AGE
 openfaas-gateway-cert    True    openfaas-gateway-cert    2m
 ```
 
-If the certificate is not become ready, check the cert-manager logs:
+If the certificate doesn't show Ready as True, then you can check the logs of cert-manager's controller, and also its various Custom Resources.
 
 ```bash
 kubectl logs -n cert-manager deploy/cert-manager
 ```
-
-You can also explore the various resources created by cert-manager.
 
 Use either the `get` or `describe` verb for more information about the resources.
 
@@ -492,7 +490,7 @@ That concludes the walk-through
 
 If you're not sure whether to try to hang onto Ingress with one of the Ingress Controllers that's still being maintained like Traefik, or to migrate to the Gateway API right now. We'd strongly encourage you to pick a sensible default like Envoy Gateway, and Gateway API. It will require some initial setup to migrate, but once it's in place, we don't expect you to need to change it much.
 
-In summary we coveered:
+In summary we covered:
 
 * The double whammy of Ingress being sidelined by the community as a "legacy" technology, and ingress-nginx being deprecated with a very short notice period.
 * A sensible default for implementing Gateway API with Envoy Gateway.

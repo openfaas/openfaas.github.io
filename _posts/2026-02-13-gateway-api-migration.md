@@ -16,6 +16,19 @@ hide_header_image: true
 
 In this post we'll walk through the current options for getting traffic into OpenFaaS on Kubernetes, the latest Gateway API, and how to migrate from Ingress.
 
+Table of contents:
+
+* [Preamble: The unfortunate double-whammy](#preamble-the-unfortunate-double-whammy)
+* [Introduction to Gateway API](#introduction-to-gateway-api)
+* [Prerequisites](#prerequisites)
+* [Check and update Gateway API CRDs](#check-and-update-gateway-api-crds)
+* [Install a Gateway API Implementation](#install-a-gateway-api-implementation)
+* [Install cert-manager](#install-cert-manager)
+* [Create a cert-manager Issuer](#create-a-cert-manager-issuer)
+* [Expose the OpenFaaS gateway with TLS](#expose-the-openfaas-gateway-with-tls)
+* [Add the OpenFaaS dashboard](#add-the-openfaas-dashboard)
+* [Final thoughts and next steps](#final-thoughts-and-next-steps)
+
 ## Preamble: The unfortunate double-whammy
 
 For as long as we can remember, Ingress has been the de facto standard for exposing HTTP services from Kubernetes clusters. It has always had a very simple syntax, and has only gone through one major change, graduating from `extensions/v1beta1` to `networking.k8s.io/v1` in Kubernetes 1.19 (around 2019). The key change was the introduction of the `pathType` field for precise path matching and the `IngressClass` (instead of annotations) resource for consistent controller configuration.
@@ -24,22 +37,22 @@ Honestly, we don't need to explain how Ingress works, it's so well understood an
 
 But there was a glint in the eyes of the Kubernetes maintainers, and they wanted to provide something that was much more ambitious in its scope, that addressed needs that OpenFaaS customers don't tend to have. The [Istio service mesh](https://istio.io/) was a precursor for this, with its own set of add-ons with similar names, and was eventually crystallised into the *Gateway API*.
 
-Most OpenFaaS and Inlets customers we've encountered have been using Ingress (many moved away from Istio and service meshes) preferring simplicity and ease of use. They tended to always be using the [ingress-nginx](https://kubernetes.github.io/ingress-nginx/) controller. A brief history: Ingress Nginx started off as a hobby project for a single maintainer, who was unable to find corporate sponsorship or support from the CNCF, and had to give it up after some tough years on his own. Shortly after 2-3 maintainers stepped up and ran it reasonably well as a spare-time project, but without sustainable backing as part of a day job, the same thing started to happen again. More issues were raised, than there were people ready to fix and test them.
+Most OpenFaaS and Inlets customers we've encountered have been using Ingress (many moved away from Istio and service meshes) preferring simplicity and ease of use. They tended to always be using the [ingress-nginx](https://kubernetes.github.io/ingress-nginx/) controller. A brief history: Ingress Nginx started off as a hobby project for a single maintainer, who was unable to find corporate sponsorship or support from the CNCF, and had to give it up in 2019. Shortly after 2-3 maintainers stepped up and ran it reasonably well as a spare-time project, but without sustainable backing as part of a day job, the same thing started to happen again. More issues were raised, than there were people ready to fix and test them.
 
 So the Kubernetes maintainers made a judgement call, they decided to announce project would be officially mothballed in March 2026. No further updates, or security patches. That's a big deal.
 
-Why is this a double whammy?
+**Why is this a double whammy?**
 
 The announcement had some choice words: "if you must continue to use Ingress" - sounds a bit like you're in the wrong if you are using something that fits your needs. It has an undertone of Ingress being a legacy or inappropriate solution, potentially something that may eventually go the way of ingress-nginx. We focus on simple solutions that work well for our users, however, reading between the lines, we want to make sure you're prepared for the future.
 
-So if we're pragmatic, we have a couple of options:
+**So if we're pragmatic, we have a couple of options:**
 
-1) try to move to an Ingress Controller like Traefik which can support some of the behaviours and settings of Ingress Nginx,
-2) or move to Gateway API (the developing, but approved future standard).
+1. try to move to an Ingress Controller like Traefik which can support some of the behaviours and settings of Ingress Nginx,
+2. or move to Gateway API (the developing, but approved future standard).
 
 Rather than installing one chart, and creating a basic Ingress resource, and adding 1-2 annotations, we have a much more varied path. Gateway API intends to provide an agnostic overlay, shying away from annotations as extensions, and focusing on a new set of decoupled API objects.
 
-It's only a bit of YAML, how hard could it be?
+**It's only a bit of YAML, how hard could it be?**
 
 For OpenFaaS customers, we're trying to make this transition as simple as possible, starting with this guide that converts YAML for like for like. But one of our other products [Inlets Uplink](https://docs.inlets.dev/uplink/) integrates ingress-nginx much more deeply and relies on its annotations, that is going to be significantly more work both for the controller itself, and for users needing to upgrade.
 
@@ -164,13 +177,14 @@ Install cert-manager with Gateway API support enabled:
 helm upgrade --install cert-manager oci://quay.io/jetstack/charts/cert-manager \
   --namespace cert-manager \
   --create-namespace \
+  --version v1.19.3 \
   --set crds.enabled=true \
   --set config.apiVersion="controller.config.cert-manager.io/v1alpha1" \
   --set config.kind="ControllerConfiguration" \
   --set config.enableGatewayAPI=true
 ```
 
-The above command will install the latest stable version of the cert-manager Helm chart, at time of writing that was `v1.19.3`.
+You can run `crane ls jetstack/cert-manager` to see alternative versions.
 
 > Note: The Gateway API CRDs must be installed before cert-manager starts.
 > If you installed them after cert-manager, restart the controller with: `kubectl rollout restart deployment cert-manager -n cert-manager`

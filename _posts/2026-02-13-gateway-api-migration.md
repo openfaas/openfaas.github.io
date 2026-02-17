@@ -345,10 +345,16 @@ spec:
     - path:
         type: PathPrefix
         value: /
+    timeouts:
+      # Should match gateway.writeTimeout in the OpenFaaS Helm chart.
+      # Envoy's default of 15s is too short for most functions.
+      request: 10m
     backendRefs:
     - name: gateway
       port: 8080
 ```
+
+The `timeouts.request` field sets the maximum duration for the gateway to respond to an HTTP request. This value should be set to match the `gateway.writeTimeout` configured in the OpenFaaS Helm chart. If omitted, Envoy Proxy uses a default of 15 seconds which will cause functions with longer execution times to time out at the proxy level. See the [expanded timeouts guide](https://docs.openfaas.com/tutorials/expanded-timeouts/) for details on configuring all timeout values.
 
 The `parentRefs` field defines which Gateway this route wants to be attached to, in this case the `openfaas-gateway` Gateway. The `hostnames` field filters requests by the Host header before rules are evaluated, ensuring only requests for `gw.example.com` are matched. The `backendRefs` field defines the backend service where matching requests are forwarded - in this case the OpenFaaS `gateway` service on port 8080.
 
@@ -469,6 +475,10 @@ spec:
     - path:
         type: PathPrefix
         value: /
+    timeouts:
+      # Should match gateway.writeTimeout in the OpenFaaS Helm chart.
+      # Envoy's default of 15s is too short for most functions.
+      request: 10m
     backendRefs:
     - name: dashboard
       port: 8080

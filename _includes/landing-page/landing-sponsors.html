@@ -1,19 +1,19 @@
 <div class="container">
     <div class="columns is-multiline">
-        <div class="column is-12 is-spaced-bottom has-text-centered">
-            <h2 class="title is-size-3 is-size-2-desktop has-text-grey-darker">
+        <div class="column is-12 has-text-centered" style="padding-bottom: 0.25rem; margin-bottom: 0;">
+            <h2 class="title is-size-3 is-size-2-desktop has-text-grey-darker" style="margin-bottom: 0.5rem;">
                 Thank you to our sponsors
             </h2>
         </div>
 
         {% for category in site.data.sponsors %}
-            <div class="column is-12 has-text-centered">
-                <h1 class="title is-size-5 is-size-4-desktop has-text-grey sponsors-category">
+            <div class="column is-12 has-text-centered" style="padding-top: 0.25rem; padding-bottom: 0.125rem; margin-bottom: 0;">
+                <h1 class="title is-size-5 is-size-4-desktop has-text-grey sponsors-category" style="margin-bottom: 0.25rem;">
                     {{ category[0] }} Tier
                 </h1>
             </div>
 
-            <div class="column is-12 has-text-centered">
+            <div class="column is-12 has-text-centered" style="padding-bottom: 0.25rem; margin-bottom: 0;">
                 <div class="columns">
                     {% for sponsor in category[1] %}
                         {% if sponsor %}
@@ -29,8 +29,8 @@
                 </div>
             </div>
         {% endfor %}
-        <div class="column is-12 has-text-centered">
-            <p class="has-text-weight-light is-size-5 is-size-4-desktop has-text-grey sponsors-category">Become an individual or corporate sponsor via GitHub:</p>
+        <div class="column is-12 has-text-centered" style="padding-top: 0.5rem; margin-top: 0;">
+            <p class="has-text-weight-light is-size-5 is-size-4-desktop has-text-grey sponsors-category" style="margin-bottom: 0.5rem;">Become an individual or corporate sponsor via GitHub:</p>
             <a href="https://github.com/sponsors/openfaas" class="button is-primary">
                 Become a sponsor
                 <span class="icon">

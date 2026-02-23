@@ -22,35 +22,24 @@
 
 <div class="container">
     <div class="columns is-multiline">
-        <div class="column is-12 has-text-centered">
-            <h2 class="title is-size-3 is-size-2-desktop has-text-white">
+        <div class="column is-12 has-text-centered" style="padding-bottom: 0.5rem; margin-bottom: 0;">
+            <h2 class="title is-size-3 is-size-2-desktop has-text-white" style="margin-bottom: 0.5rem;">
                 Trusted in production
             </h2>
         </div>
 
-        <div class="column is-12">
-            <div class="columns is-multiline">
+        <div class="column is-12" style="padding-top: 0;">
+            <div class="columns is-multiline" style="margin-top: 0; margin-bottom: 0;">
                 {% for customer in site.data.customers %}
                 {% if customer %}
-                <div class="column is-2-desktop is-4-tablet is-6-mobile">
-                    <figure class="image is-128x128">
+                <div class="column is-2-desktop is-4-tablet is-6-mobile" style="padding: 0.5rem;">
+                    <figure class="image is-customer-logo" style="margin: 0;">
                         <img class="customer-logo" src="images/customers/{{ customer.logo }}" alt="{{ customer.name }} logo" title="{{ customer.name }}">
                     </figure>
                 </div>
                 {% endif %}
                 {% endfor %}
             </div>
-        </div>
-
-        <div class="column is-12 has-text-centered">
-            <p class="has-text-weight-light is-size-5 is-size-4-desktop has-text-white customers-category">
-                Learn about OpenFaaS features & benefits</p>
-            <a href="{{ site.baseurl }}/pricing" class="button is-primary">
-                See options
-                <span class="icon">
-                    <i class="fas fa-long-arrow-alt-right"></i>
-                </span>
-            </a>
         </div>
     </div>
 </div>

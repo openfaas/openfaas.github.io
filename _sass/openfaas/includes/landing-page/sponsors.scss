@@ -4,7 +4,12 @@
 			&.title {
 				font-weight: 300;
 				text-transform: capitalize;
+				margin-bottom: 0.25rem !important;
 			}
+		}
+
+		.title {
+			margin-bottom: 0.5rem !important;
 		}
 
         .of-sponsor-logo {
@@ -25,7 +30,7 @@
 		}
 
 		.button {
-            margin-top: $padding-step * 2;
+            margin-top: 0.5rem;
 
 			border: 3px solid;
 			border-radius: 10px;

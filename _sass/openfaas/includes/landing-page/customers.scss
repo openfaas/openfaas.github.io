@@ -7,6 +7,31 @@
 			}
 		}
 
+		.columns {
+			margin-top: 0 !important;
+			margin-bottom: 0 !important;
+		}
+
+		.column {
+			padding: 0.5rem !important;
+		}
+
+		figure {
+			margin: 0 !important;
+
+			&.is-customer-logo {
+				width: 128px;
+				height: 80px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+		}
+
+		.title {
+			margin-bottom: 0.5rem !important;
+		}
+
         .button {
             margin-top: $padding-step * 2;
 

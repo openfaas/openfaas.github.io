@@ -1,8 +1,9 @@
 # version: "3"
 services:
   openfaas-jekyll:
-    command: jekyll serve --force_polling
-    image: jekyll/jekyll:3.8
+    command: >
+      bash -lc "bundle check || bundle install && bundle exec jekyll serve --force_polling --host 0.0.0.0 --port 4000"
+    image: jekyll/jekyll:4
     volumes:
       - .:/srv/jekyll
       - site:/srv/jekyll/_site

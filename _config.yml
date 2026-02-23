@@ -54,6 +54,19 @@ exclude:
   - LICENCE.jekyll_theme
   - .DEREK.yml
   - .gitignore
+  - .bundle
+  - .git
+  - .sass-cache
+  - .jekyll-cache
+  - .DS_Store
+  - _site
+  - site
+  - build
+  - out
+  - tmp
+  - slicer
+  - vm_agent_secret
+  - ofblog-1.img
   - CNAME
 
 collections:

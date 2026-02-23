@@ -6,3 +6,6 @@ _site
 vendor
 /tmp
 /files.txt
+/slicer/**
+/*.img
+/vm_agent_secret

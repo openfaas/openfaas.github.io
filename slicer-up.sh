@@ -25,7 +25,7 @@ _cleanup() {
 trap _cleanup EXIT
 
 HOST_GROUP="${SLICER_HOST_GROUP:-}"
-SOCKET_PATH="${SLICER_SOCKET_PATH:-./slicer/slicer.sock}"
+SOCKET_PATH="./slicer/slicer.sock"
 PID_FILE="$STATE_DIR/slicer.pid"
 LOG_FILE="$STATE_DIR/slicer.log"
 USERDATA_FILE="$STATE_DIR/userdata.sh"
@@ -34,7 +34,7 @@ HOST_PROJECT_NAME="$(basename "$HOST_PROJECT_DIR")"
 GUEST_PROJECT_DIR="/home/ubuntu/$HOST_PROJECT_NAME"
 SITE_SERVICE="blog.service"
 LEGACY_SITE_SERVICE="ofblog-site.service"
-SLICER_API_URL="${SLICER_API_URL:-${SLICER_SOCKET_PATH:-}}"
+SLICER_URL="${SLICER_URL:-}"
 VM_NAME="${HOST_GROUP}-1"
 DEFAULT_HOST_GROUP="ofblog"
 MAC_HOST_GROUP="sbox"
@@ -65,8 +65,8 @@ _configure_slicer_with_url() {
   fi
 
   SLICER_WITH_URL=("${cmd[@]}")
-  if [[ -n "$SLICER_API_URL" ]]; then
-    SLICER_WITH_URL+=(--url "$SLICER_API_URL")
+  if [[ -n "$SLICER_URL" ]]; then
+    SLICER_WITH_URL+=(--url "$SLICER_URL")
   fi
 }
 
@@ -90,7 +90,7 @@ Usage:
 Notes:
   - Commands use a unix-socket API.
   - If SLICER_INFO reports Server OS=darwin and arch=arm64, defaults use slicer-mac conventions.
-- If SLICER_API_URL is empty, we fall back to slicer's default.
+  - If SLICER_URL is unset, defaults are local slicer-mac socket conventions when applicable.
 - Set SLICER_TOKEN or SLICER_TOKEN_FILE for remote slicer API access.
 - Set SLICER_USE_VM_FORWARD=1 to use forwarded localhost access when VM IP is not reachable.
   - workspace defaults to the script directory.
@@ -141,7 +141,7 @@ _has_vm() {
 }
 
 _wait_for_socket() {
-  if [[ "$SLICER_API_URL" != /* && "$SLICER_API_URL" != unix://* ]]; then
+  if [[ "$SLICER_URL" != /* && "$SLICER_URL" != unix://* ]]; then
     return 0
   fi
   local i=0
@@ -165,38 +165,37 @@ _configure_runtime_from_slicer_info() {
     return 0
   fi
 
-  local info server_os server_arch
+  local info server_os server_arch tagged_vm
   info="$(_query_slicer_info)"
+  tagged_vm="$("${SLICER_WITH_URL[@]}" vm list 2>/dev/null | awk -v tag="${SLICER_VM_TAG:-}" '$NF == tag && tag != "" {print $1; exit}')"
   if [[ -n "$info" ]]; then
     server_os="$(printf '%s\n' "$info" | awk -F: '/^Server OS:/ {gsub(/^[[:space:]]+|[[:space:]]+$/, "", $2); print tolower($2)}' | head -n1)"
     server_arch="$(printf '%s\n' "$info" | awk -F: '/^Server arch:/ {gsub(/^[[:space:]]+|[[:space:]]+$/, "", $2); print tolower($2)}' | head -n1)"
 
     if [[ -z "${SLICER_HOST_GROUP:-}" ]]; then
-      if [[ "$server_os" == "darwin" && "$server_arch" == "arm64" ]]; then
+      if [[ -n "$tagged_vm" ]]; then
+        HOST_GROUP="${tagged_vm%%-*}"
+        VM_NAME="$tagged_vm"
+      elif [[ "$server_os" == "darwin" && "$server_arch" == "arm64" ]]; then
         HOST_GROUP="$MAC_HOST_GROUP"
+        VM_NAME="${HOST_GROUP}-1"
       else
         HOST_GROUP="$DEFAULT_HOST_GROUP"
+        VM_NAME="${HOST_GROUP}-1"
       fi
-      VM_NAME="${HOST_GROUP}-1"
     fi
 
-    if [[ -z "${SLICER_SOCKET_PATH:-}" && -z "${SLICER_API_URL:-}" && "$server_os" == "darwin" && "$server_arch" == "arm64" ]]; then
-      SLICER_API_URL="/Users/alex/slicer-mac/slicer.sock"
-      SOCKET_PATH="$SLICER_API_URL"
+    if [[ -z "${SLICER_URL}" && "$server_os" == "darwin" && "$server_arch" == "arm64" ]]; then
+      SLICER_URL="/Users/alex/slicer-mac/slicer.sock"
+      SOCKET_PATH="$SLICER_URL"
     fi
   elif [[ -z "${SLICER_HOST_GROUP:-}" ]]; then
     HOST_GROUP="$DEFAULT_HOST_GROUP"
     VM_NAME="${HOST_GROUP}-1"
   fi
 
-  if [[ -n "${SLICER_SOCKET_PATH:-}" ]]; then
-    SOCKET_PATH="$SLICER_SOCKET_PATH"
-    if [[ -z "$SLICER_API_URL" ]]; then
-      SLICER_API_URL="$SLICER_SOCKET_PATH"
-    fi
-  fi
-  if [[ -z "$SLICER_API_URL" ]]; then
-    SLICER_API_URL="$SOCKET_PATH"
+  if [[ -z "$SLICER_URL" ]]; then
+    SLICER_URL="$SOCKET_PATH"
   fi
 
   _configure_slicer_with_url
@@ -256,7 +255,7 @@ _get_vm_name() {
   if [[ -n "${SLICER_VM_TAG:-}" ]]; then
     vm_name="$(
       "${SLICER_WITH_URL[@]}" vm list 2>/dev/null \
-        | awk -v host="${HOST_GROUP}" -v tag="${SLICER_VM_TAG}" '$1 ~ "^" host "-[0-9]+$" && $NF == tag {print $1}' \
+        | awk -v tag="${SLICER_VM_TAG}" '$NF == tag {print $1}' \
         | head -n1 \
         || true
     )"
@@ -410,13 +409,13 @@ _wait_for_forward() {
 }
 
 _forward_port_listening() {
-  if command -v lsof >/dev/null 2>&1; then
-    lsof -tiTCP -sTCP:LISTEN -Pn "tcp:${SLICER_VM_FORWARD_PORT}" >/dev/null 2>&1
+  if command -v nc >/dev/null 2>&1; then
+    nc -z 127.0.0.1 "$SLICER_VM_FORWARD_PORT" >/dev/null 2>&1
     return $?
   fi
 
-  if command -v nc >/dev/null 2>&1; then
-    nc -z 127.0.0.1 "$SLICER_VM_FORWARD_PORT" >/dev/null 2>&1
+  if command -v lsof >/dev/null 2>&1; then
+    lsof -iTCP -P -n -sTCP:LISTEN 2>/dev/null | grep -qE "(^|[[:space:]])127\\.0\\.0\\.1:${SLICER_VM_FORWARD_PORT}([[:space:]]|$)"
     return $?
   fi
 
@@ -710,7 +709,7 @@ up() {
   _cleanup_host_stale_artifacts
   SLICER_CREATED_VM_NAME=""
   if ! _api_ready; then
-    _log "slicer API is not reachable at ${SLICER_API_URL}"
+    _log "slicer API is not reachable at ${SLICER_URL}"
     return 1
   fi
 

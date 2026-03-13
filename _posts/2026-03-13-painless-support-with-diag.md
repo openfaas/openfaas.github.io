@@ -1,36 +1,60 @@
 ---
 title: "Introducing: Painless support and hands-off architecture reviews"
-description: "Learn how faas-cli diag collects diagnostic data from your OpenFaaS cluster — making support requests faster and architecture reviews hands-off."
-date: 2026-03-10
+description: "Run one command to collect an OpenFaaS cluster report: logs, resources, events, and metrics that you can share for quick help"
+date: 2026-03-13
 categories:
 - kubernetes
 - troubleshooting
 - openfaas-pro
 author_staff_member: han
+author_staff_member_editor: alex
 dark_background: true
-# image: "/images/2026-03-diag/background.png"
 hide_header_image: true
 ---
 
-Learn how faas-cli diag collects diagnostic data from your OpenFaaS cluster — making support requests faster and architecture reviews hands-off.
+Learn how the new `diag` plugin for faas-cli can be used to diagnose issues and make architecture reivews a hands-off exercise.
 
-`faas-cli diag` is a plugin for the faas-cli that collects diagnostic data from your OpenFaaS cluster. We built it to take the friction out of two things: getting help when something's broken, and making sure you're getting the most out of OpenFaaS.
-
-It generates an HTML report you can open in your browser to explore graphs and visualisations, and packages everything into an archive you can quickly share to get support. One command, no manual steps, nothing to forget.
+It helps you (or us together) to answer two questions: What's breaking? Are we using OpenFaaS to its full potential?
 
 ![End-to-end flow for faas-cli diag](/images/2026-03-diag/e2e_flow.png)
 
-**Hands-off support**
+> Diag builds a HTML report, an instructions file for AI agents, graphs, and visualisations so you can explore the data and share if necessary, to get help. One command, no manual steps, nothing to forget.
+
+## Two case-studies
+
+**Misconfiguration leads to an outage in production**
+
+An enterprise customer using OpenFaaS for 3 years accidentially changed their gateway's timeout to 0.5s from 2 hours.
+
+> An inadvertent change to values.yaml on the customer's end enforced a half second timeout, causing functions to time-out unexpectedly. We requested a "diag" run, and within a 30 minutes had found the issue, advised the team, and got them up and running again.
+
+**It's always DNS. Actually it was a bad node in EKS.**
+
+A defense contractor in the US that uses OpenFaaS for building AI analytics software started to complain of timeouts and reliability issues in production.
+
+> We sent them the troubleshooting guide, and said "Can you try these?" After a couple of weeks, they'd not run any of the commands, so we went them specific commands - they ran these and shared the output. It was helpful, but we neeed more.
+> 
+> We then went down the route of trying to reproduce the issue locally, and couldn't. We told the team to try HTTP readiness probes, which sometimes cure this kind of issue.
+> 
+> Eventually, after sending commands back and forth over the course of a few days, they sent over a "diag" run.
+>
+> We saw network timeouts between core Pods like NATS, the Gateway and Prometheus. Even between containers in the same Pod. The insights helped them track it down to an EKS node that had "gone bad" and needed replacement.
+
+## Two main uses-cases
+
+**Self-service, and pain-free support**
 
 When something goes wrong in production, the last thing you want is to be sent to a troubleshooting guide and told to run half a dozen commands. Your product is on fire. People are starting to point the finger of blame. You just want it fixed.
 
-That's why we built `faas-cli diag`, a single command that collects everything we need to help: deployments, function definitions, logs, events, pod status, and Prometheus metrics. Run it, send us the archive, and we can start working on your issue immediately, without a back-and-forth asking you to gather more data.
+Everything that could be relevant is collected: deployments, function definitions, logs, events, pod status, and Prometheus metrics. Run it, send us the archive, and we can start working on your issue immediately, without a back-and-forth asking you to gather more data.
 
-**Review your architecture**
+**Architecture review and Value extraction**
 
-Beyond troubleshooting, the data and graphs collected by `faas-cli diag` can help you answer broader questions about your setup: are you getting the most value possible from the product? Is there an OpenFaaS features that could help with your type of workload? Is there a production incident waiting to happen because something's been mixed up in the `values.yaml`?
+Beyond troubleshooting, the data and graphs collected by `faas-cli diag` can help you answer broader questions about your setup: are you getting the *most value possible* from the product? Is there an OpenFaaS feature that could help with your type of workload? Is there a production incident waiting to happen because something's been mixed up in the `values.yaml`?
 
-The report generated by diag gives you a starting point. You can inspect invocation rates, error rates, replica counts, and resource usage without needing to set up dashboards or port-forward to Prometheus. You can also send us the archive if you'd like help with an architecture review, and we'll come back with recommendations tailored to your setup.
+The report generated by diag gives you a starting point. You can inspect invocation rates, error rates, replica counts, and resource usage without needing to set up dashboards or port-forward to Prometheus.
+
+Reviews no longer have to be annual ceremonies.
 
 ## What does it collect?
 
@@ -51,25 +75,20 @@ All collected data is written to a local directory and archived into a `.tar.gz`
 
 ## Install the diag plugin
 
-Install the diag plugin using the faas-cli plugin manager:
+Install the plugin, and check the version. It's useful to run this command before very run - because we're actively improving the tool as we get feedback.
 
 ```bash
 faas-cli plugin get diag
-```
-
-Verify the installation:
-
-```bash
 faas-cli diag version
 ```
 
 ## Generate a report
 
-By default, diag runs against your currently selected kubectl context. Generate a configuration file, then run the tool:
+By default, `diag` reads configuration from `diag.yaml` in your current directory. Generate that file first, then run the tool:
 
 ```bash
 # Generate a `diag.yaml` config file
-faas-cli diag config simple
+faas-cli diag config simple > diag.yaml
 
 # Run diagnostics
 faas-cli diag
@@ -79,18 +98,20 @@ The first command creates a `diag.yaml` with sensible defaults that works for mo
 
 **Staging and production**
 
-If you manage separate clusters for staging and production, you can run diag multiple times against each environment. Either switch your kubectl context between runs, or create a dedicated config file per cluster:
+Here's how you could collect data from both production and staging:
 
 ```bash
-faas-cli diag config simple > diag-staging.yaml
-faas-cli diag config simple > diag-prod.yaml
-```
+mkdir ~/diag
+cd ~/diag
 
-Edit each config to set the `context` field and any other parameters for that environment, then generate a report for each:
+# Generate an initial config:
+faas-cli diag config simple > diag.yaml
 
-```bash
-faas-cli diag diag-staging.yaml
-faas-cli diag diag-prod.yaml
+kubectl config use-context eks-staging-us-east-1
+faas-cli diag "staging"
+
+kubectl config use-context eks-prod-us-east-1
+faas-cli diag "prod"
 ```
 
 For more advanced options like targeting specific functions or using an external Prometheus instance, see the [full configuration reference](#appendix-full-configuration-reference) at the end of this post.
@@ -100,7 +121,7 @@ For more advanced options like targeting specific functions or using an external
 If you're running a multi-tenant setup with hundreds of function namespaces, you probably don't want to collect from all of them at once. Use the `--namespace` flag to target a specific subset:
 
 ```bash
-faas-cli diag config simple --namespace staging --namespace production
+faas-cli diag config simple --namespace tenant-1 --namespace tenant-2
 ```
 
 Or use `'*'` to automatically discover all OpenFaaS function namespaces:
@@ -113,11 +134,12 @@ faas-cli diag config simple --namespace '*'
 
 ## Exploring the report
 
-Output is saved to the `./run` directory in a timestamped folder, along with a `.tar.gz` archive ready to share with the OpenFaaS team or colleagues. Open the generated `index.html` file in a browser to explore the collected metrics and inspect graphs:
+Data is saved to `./run` - either with a date and timestamp, or with the name of the run you passed.
 
-```bash
-open ./run/2026-03-10_14-30-00/index.html
-```
+* `diag "prod"` creates `./run/diag/`
+* `diag` on its own creates i.e. `./run/2026-03-10_14-30-00/`
+
+To explore the data, you can open the `index.html` file in those folders.
 
 The report includes visualisations of Prometheus metrics such as function invocation rates, error rates, and replica counts, giving you a quick overview of cluster health without needing to set up Grafana or port-forward to Prometheus yourself.
 
@@ -127,16 +149,18 @@ The report includes visualisations of Prometheus metrics such as function invoca
 ![The metrics dashboard showing function replicas, request rates by status code, and execution duration.](/images/2026-03-diag/report-metrics-dashboard.png)
 > The metrics dashboard showing function replicas, request rates by status code, and execution duration.
 
-**AI ready**
+**Diag is AI ready**
 
-The output also includes an `AGENTS.md` file that instructs AI coding agents like Claude Code, Codex, and similar tools to interpret and diagnose issues from the collected data. This means you can outsource the first pass of a support investigation or architecture review to an AI agent, clearing up any initial issues.
+The output also includes an `AGENTS.md` file that instructs AI coding agents like Claude Code, Codex, and similar tools to interpret and diagnose issues from the collected data. This gives you a fast first pass for support investigations or architecture reviews using AI, while keeping the decision loop with your team.
 
-A word of caution: most AI coding plans retain data from anywhere between 30 days to 5 years, and some may train on customer data. Many providers offer a zero data retention option through API-based tokens and/or specific Enterprise plans. We advise very careful review of your provider's data handling policies before sending any potentially sensitive cluster data to an AI agent.
+But before you load up Claude Code, Codex, or Gemini, make sure that your organisation has any of the following:
 
-If data privacy is a concern, the realistic paths are:
+- A zero-data retention agreement with your inference provider.
+- Your own private deploymeny of a model to Azure/AWS/Google etc, with approved data policies.
+- Or access to private, airgapped local GPUs and AI models.
+- Have redacted all credentials, tokens, customer identifiers or confidential information
 
-- Scrub or redact the collected data before passing it to an AI agent
-- Use a local model. OpenFaaS Ltd has tested a number of local models with physical GPUs in airgapped environments
+If in doubt, do not use any form of AI with the output, most issues can be found by humans on your end or ours.
 
 ## Useful flags and options
 
@@ -148,7 +172,7 @@ If data privacy is a concern, the realistic paths are:
 
 ## Wrapping up
 
-The `faas-cli diag` plugin gives you a fast, repeatable way to collect everything needed for support requests and architecture reviews. Instead of manually running a dozen `kubectl` commands, you get a single workflow that captures logs, events, pod status, and metrics — all archived and ready to share.
+The new `faas-cli diag` plugin gives you a fast, repeatable way to collect everything needed for support requests and architecture reviews. Instead of manually running a dozen `kubectl` commands, you get a single workflow that captures logs, events, pod status, and metrics — all archived and ready to share.
 
 Whether you're debugging an incident or reviewing your cluster setup, the workflow is the same: run `faas-cli diag` and explore the report. If you need our help, send us the archive.
 
@@ -216,5 +240,5 @@ A few options worth noting:
 - `context` - lets you target a specific kubectl context if you manage multiple clusters. Leave it empty to use whichever context is currently active.
 - `functions` - uses glob patterns to filter which functions are collected. Use `'*'` for all, or patterns like `'api-*'` to narrow the scope on large clusters.
 - `prometheus.url` - lets you point to an external Prometheus instance, bypassing the automatic port-forward.
-- `collection` - toggles let you disable individual collectors if you only need a subset of the data.
+- `collection` - toggles to disable individual collectors if you only need a subset of the data.
 - `logAge` - controls how far back to collect logs retrospectively. Leave it empty to collect all available logs.

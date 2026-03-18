@@ -1,33 +1,21 @@
 <div class="container">
     <div class="columns is-multiline">
-        <div class="column is-12 is-spaced-bottom">
-            <div class="columns">
-                <div class="column is-8 is-offset-2 has-text-centered">
-                    <h2 class="title is-size-3 is-size-2-desktop has-text-grey-darker">
-                        We speak your language
-                    </h2>
-                </div>
-            </div>
+        <div class="column is-12-tablet is-5-desktop is-spaced-bottom">
+            <h2 class="title is-size-3 is-size-2-desktop has-text-grey-darker">
+                Write in any language. Bring your frameworks too.
+            </h2>
+            <p class="has-text-weight-light is-size-5 is-size-4-desktop has-text-grey-dark mt-2">
+                Use official templates for Node.js, Python, Go, Java, C#, Ruby, and PHP — or create your own.
+            </p>
+            <p class="has-text-weight-light is-size-5 is-size-4-desktop has-text-grey-dark mt-2">
+                Already have microservices built with Express.js, Flask, FastAPI, Django, or ASP.NET Core? Deploy them to OpenFaaS as-is and stop managing Kubernetes by hand.
+            </p>
+            <p class="has-text-weight-light is-size-5 has-text-grey-dark mt-4">
+                <a href="https://docs.openfaas.com/languages/overview/" style="text-decoration: underline;">Browse the official templates &rarr;</a>
+            </p>
         </div>
-        <div class="column is-12 has-text-centered  is-spaced-bottom">
-            <div class="columns">
-                <div class="column is-8 is-offset-2 has-text-centered">
-                    <p class="title has-text-weight-light is-size-5 is-size-4-desktop has-text-grey">
-                        Functions can be written in any language, and are built into portable Open Container Initiative (OCI) images with tooling like Docker & Buildkit.
-                    </p>
-                    <p class="title has-text-weight-light is-size-5 is-size-4-desktop has-text-grey">
-                        There are official templates available for: Node.js, Python, Go, Java, C#, Ruby, and PHP. It's quick and easy to customise templates, or even write your own.
-                    </p>
-                    <p class="title has-text-weight-light is-size-5 is-size-4-desktop has-text-grey">
-                        Your existing microservices written with frameworks like Express.js, Vert.x, Flask, ASP.NET Core, FastAPI, and Django can be deployed to OpenFaaS to reduce the time you need to spend managing Kubernetes.
-                    </p>
-                    <p class="title has-text-weight-light is-size-5 is-size-4-desktop has-text-grey">
-                        Browse the official templates <a class="underline" href="https://docs.openfaas.com/languages/overview/">in the docs</a> or build your own.
-                    </p>
-                </div>
-            </div>
+        <div class="column is-12-tablet is-7-desktop is-spaced-bottom">
+            {% include landing-page/landing-demo-code-samples.html %}
         </div>
     </div>
 </div>
-
-{% include landing-page/landing-demo-code-samples.html %}

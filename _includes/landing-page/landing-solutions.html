@@ -1,82 +1,147 @@
+<style>
+    @media (max-width: 768px) {
+        .solutions-cards {
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
+        .solutions-cards .column {
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 2rem;
+            margin-bottom: 1rem;
+        }
+        .solutions-cards .column:last-child {
+            border-bottom: none;
+        }
+    }
+</style>
 <div class="container">
     <h2 class="title is-size-3-tablet is-size-2-desktop has-text-grey-darker">
-        Solutions
+        How teams use OpenFaaS
     </h2>
-    <div class="columns is-multiline">
+    <div class="columns is-multiline solutions-cards">
 
         <div class="column is-12-tablet is-6-desktop is-spaced-bottom">
-            <h2 class="title is-size-4 has-text-grey-darker">
+            <div class="mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 48px; height: 48px; color: #3078fe;">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5" />
+                </svg>
+            </div>
+            <h3 class="title is-size-4 has-text-grey-darker">
                 A sandbox for your customer's code
-            </h2>
-            <p class="has-text-weight-light is-size-5 is-size-4-desktop has-text-grey mt-2">
-                With OpenFaaS Enterprise, you can take code snippets from customers and use them to extend your own product.
+            </h3>
+            <p class="has-text-weight-semibold is-size-6 has-text-grey-dark mt-2" style="text-transform: uppercase; letter-spacing: 0.5px;">
+                The challenge
             </p>
-            <p class="has-text-weight-light is-size-5 is-size-4-desktop has-text-grey mt-2">
-                The Function Builder API turns source code into functions, to deployed via REST API.
-            <p class="has-text-weight-light is-size-5 is-size-4-desktop has-text-grey mt-2">
-                Multi-tenancy is supported through Kubernetes network policies, resource limits, runtime classes, read-only filesystems, and dedicated namespaces per tenant.
+            <p class="has-text-weight-light is-size-5 has-text-grey-dark mt-1">
+                You want customers to extend your product with custom code — but running untrusted code safely is hard to get right.
             </p>
-            <p class="has-text-weight-light is-size-5 is-size-4-desktop has-text-grey mt-2">
-                Who's doing this already? Waylay (for custom functions for industrial IoT), Patchworks (customer extensions for e-commerce), LivePerson (for customer extensions) and Cognite (for custom ML/data-science functions).
+            <p class="has-text-weight-semibold is-size-6 has-text-grey-dark mt-4" style="text-transform: uppercase; letter-spacing: 0.5px;">
+                With OpenFaaS
             </p>
-        </div>
-
-        <div class="column is-12-tablet is-6-desktop is-spaced-bottom">
-            <h2 class="title is-size-4 has-text-grey-darker">
-                ETL and data-pipelines
-            </h2>
-            <p class="has-text-weight-light is-size-5 is-size-4-desktop has-text-grey mt-2">
-                OpenFaaS Pro autoscaling can be fine-tuned to match the execution pattern of your functions, and to retry failed invocations.
+            <p class="has-text-weight-light is-size-5 has-text-grey-dark mt-1">
+                Turn code snippets into isolated functions, built and deployed through a REST API. Each tenant runs in its own namespace with security boundaries enforced at every layer.
             </p>
-            <p class="has-text-weight-light is-size-5 is-size-4-desktop has-text-grey mt-2">
-                Through JetStream for OpenFaaS, you can fan out to many thousands of executions, executing in parallel, and scaling automatically.
+            <p class="has-text-weight-light is-size-6 has-text-grey-dark mt-3">
+                Used in production by Waylay (IoT), LivePerson, Cognite (ML/data-science), and RudderStack.
             </p>
-            <p class="has-text-weight-light is-size-5 is-size-4-desktop has-text-grey mt-2">
-                Batch jobs and ML models can be deployed as functions, and scaled up and down properly, even if they run for a very long time.
+            <p class="has-text-weight-light is-size-5 has-text-grey-dark mt-3">
+                <a href="https://www.openfaas.com/blog/add-a-faas-capability/" style="text-decoration: underline;">Add a FaaS capability to your product &rarr;</a>
             </p>
-            <p class="has-text-weight-light is-size-5 is-size-4-desktop has-text-grey mt-2">
-                See also: <a href="https://www.openfaas.com/blog/fan-out-and-back-in-using-functions/" style="text-decoration: underline;">Explore the Fan out and Fan in pattern with OpenFaaS</a>
+            <p class="has-text-weight-light is-size-5 has-text-grey-dark mt-1">
+                <a href="https://www.openfaas.com/blog/build-a-function-editor/" style="text-decoration: underline;">Build a function editor for your customers &rarr;</a>
             </p>
         </div>
 
         <div class="column is-12-tablet is-6-desktop is-spaced-bottom">
-            <h2 class="title is-size-4 has-text-grey-darker">
+            <div class="mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 48px; height: 48px; color: #3078fe;">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />
+                </svg>
+            </div>
+            <h3 class="title is-size-4 has-text-grey-darker">
+                ETL and data pipelines
+            </h3>
+            <p class="has-text-weight-semibold is-size-6 has-text-grey-dark mt-2" style="text-transform: uppercase; letter-spacing: 0.5px;">
+                The challenge
+            </p>
+            <p class="has-text-weight-light is-size-5 has-text-grey-dark mt-1">
+                You're processing large volumes of data but managing the infrastructure for parallel execution, retries, and scaling is a project in itself.
+            </p>
+            <p class="has-text-weight-semibold is-size-6 has-text-grey-dark mt-4" style="text-transform: uppercase; letter-spacing: 0.5px;">
+                With OpenFaaS
+            </p>
+            <p class="has-text-weight-light is-size-5 has-text-grey-dark mt-1">
+                Fan out to thousands of parallel function executions that scale automatically. Batch jobs and ML models run as functions with built-in retries — whether they take milliseconds or hours.
+            </p>
+            <p class="has-text-weight-light is-size-6 has-text-grey-dark mt-3">
+                Surge runs async jobs at scale — importing financial and government data to power background checks for customers through Salesforce.
+            </p>
+            <p class="has-text-weight-light is-size-5 has-text-grey-dark mt-3">
+                <a href="https://www.openfaas.com/blog/queue-based-scaling/" style="text-decoration: underline;">Queue-based scaling with OpenFaaS &rarr;</a>
+            </p>
+        </div>
+
+        <div class="column is-12-tablet is-6-desktop is-spaced-bottom">
+            <div class="mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 48px; height: 48px; color: #3078fe;">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 14.25h13.5m-13.5 0a3 3 0 01-3-3m3 3a3 3 0 100 6h13.5a3 3 0 100-6m-16.5-3a3 3 0 013-3h13.5a3 3 0 013 3m-19.5 0a4.5 4.5 0 01.9-2.7L5.737 5.1a3.375 3.375 0 012.7-1.35h7.126c1.062 0 2.062.5 2.7 1.35l2.587 3.45a4.5 4.5 0 01.9 2.7m0 0a3 3 0 01-3 3m0 3h.008v.008h-.008v-.008zm0-6h.008v.008h-.008v-.008zm-3 6h.008v.008h-.008v-.008zm0-6h.008v.008h-.008v-.008z" />
+                </svg>
+            </div>
+            <h3 class="title is-size-4 has-text-grey-darker">
                 Kubernetes, made usable
-            </h2>
-            <p class="has-text-weight-light is-size-5 is-size-4-desktop has-text-grey mt-2">
-                OpenFaaS enriches Kubernetes with scaling, queueing, monitoring, and event triggers, so your team can focus on shipping features.
-            <p class="has-text-weight-light is-size-5 is-size-4-desktop has-text-grey mt-2">
-                Compared to plain Kubernetes, customers said that they are now shipping functionality to production within hours.
+            </h3>
+            <p class="has-text-weight-semibold is-size-6 has-text-grey-dark mt-2" style="text-transform: uppercase; letter-spacing: 0.5px;">
+                The challenge
             </p>
-            <p class="has-text-weight-light is-size-5 is-size-4-desktop has-text-grey mt-2">
-                Functions can be run on-demand, or on a schedule, and can be triggered by events from your existing systems like Apache Kafka or AWS. If you invoke them asynchronously, you'll also get to benefit from retries without writing any additional code.
+            <p class="has-text-weight-light is-size-5 has-text-grey-dark mt-1">
+                Kubernetes has the building blocks, but wiring up auto-scaling, queuing, retries, and event triggers from scratch takes months of work.
             </p>
-            <p class="has-text-weight-light is-size-5 is-size-4-desktop has-text-grey mt-2">
-                deel.com migrated from AWS Lambda to Kubernetes, only to find that their code would no longer scale how they needed. They reached out to us, and we wrote up a reference architecture. 
+            <p class="has-text-weight-semibold is-size-6 has-text-grey-dark mt-4" style="text-transform: uppercase; letter-spacing: 0.5px;">
+                With OpenFaaS
             </p>
+            <p class="has-text-weight-light is-size-5 has-text-grey-dark mt-1">
+                Get all of that out of the box. Run functions on-demand or on a schedule, trigger them from Kafka or AWS, and benefit from async retries — no extra code. Teams ship to production in hours, not weeks.
             </p>
-            <p class="has-text-weight-light is-size-5 is-size-4-desktop has-text-grey mt-2">
-                Learn more: <a href="https://www.openfaas.com/blog/pdf-generation-at-scale-on-kubernetes/" style="text-decoration: underline;">Generate PDFs at scale on Kubernetes using OpenFaaS and Puppeteer</a>
+            <p class="has-text-weight-light is-size-6 has-text-grey-dark mt-3">
+                Teams migrating from AWS Lambda to Kubernetes use OpenFaaS to keep the scaling and developer experience they had before.
+            </p>
+            <p class="has-text-weight-light is-size-5 has-text-grey-dark mt-3">
+                <a href="https://www.openfaas.com/blog/integrate-with-openfaas/" style="text-decoration: underline;">Integrate with OpenFaaS &rarr;</a>
+            </p>
+            <p class="has-text-weight-light is-size-5 has-text-grey-dark mt-1">
+                <a href="https://www.openfaas.com/blog/pdf-generation-at-scale-on-kubernetes/" style="text-decoration: underline;">PDF generation at scale &rarr;</a>
             </p>
         </div>
 
         <div class="column is-12-tablet is-6-desktop is-spaced-bottom">
-            <h2 class="title is-size-4 has-text-grey-darker">
-                One function, many clouds
-            </h2>
-            <p class="has-text-weight-light is-size-5 is-size-4-desktop has-text-grey mt-2">
-                Does your product need to run on different clouds, including on-premises? Perhaps you're considering writing an abstraction layer to cover your bases?
-            <p class="has-text-weight-light is-size-5 is-size-4-desktop has-text-grey mt-2">
-                When faced with this question, <a href="https://www.openfaas.com/blog/low-code-automation/" style="text-decoration: underline;">Waylay.io</a> built their low-code platform with OpenFaaS.
+            <div class="mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 48px; height: 48px; color: #3078fe;">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 003 12c0-1.605.42-3.113 1.157-4.418" />
+                </svg>
+            </div>
+            <h3 class="title is-size-4 has-text-grey-darker">
+                Dedicated installs of your SaaS
+            </h3>
+            <p class="has-text-weight-semibold is-size-6 has-text-grey-dark mt-2" style="text-transform: uppercase; letter-spacing: 0.5px;">
+                The challenge
             </p>
-            <p class="has-text-weight-light is-size-5 is-size-4-desktop has-text-grey mt-2">
-                OpenFaaS functions are built as OCI images, which means they're portable, and integrate well with teams who use containers or Kubernetes already.
+            <p class="has-text-weight-light is-size-5 has-text-grey-dark mt-1">
+                Your SaaS product needs to run on your cloud, your customer's cloud, and on-premises — with the same experience everywhere.
             </p>
-
-            <p class="has-text-weight-light is-size-5 is-size-4-desktop has-text-grey mt-2">
-                See also: <a href="https://www.openfaas.com/blog/low-code-automation/" style="text-decoration: underline;">Low-code automation with OpenFaaS</a>
+            <p class="has-text-weight-semibold is-size-6 has-text-grey-dark mt-4" style="text-transform: uppercase; letter-spacing: 0.5px;">
+                With OpenFaaS
+            </p>
+            <p class="has-text-weight-light is-size-5 has-text-grey-dark mt-1">
+                Functions are portable OCI images that run anywhere Kubernetes does. Ship the same code to every customer environment without vendor-specific wrappers or per-cloud rewrites.
+            </p>
+            <ul class="has-text-weight-light is-size-6 has-text-grey-dark mt-3" style="list-style: disc; padding-left: 1.25rem;">
+                <li>Corva deploys AI analytics into oil and gas companies including Baker Hughes and Nabors.</li>
+                <li>Waylay built their multi-cloud low-code platform on OpenFaaS to ship across customer environments.</li>
+            </ul>
+            <p class="has-text-weight-light is-size-5 has-text-grey-dark mt-3">
+                <a href="https://www.openfaas.com/blog/low-code-automation/" style="text-decoration: underline;">Low-code automation with OpenFaaS &rarr;</a>
+            </p>
         </div>
 
     </div>
-
 </div>

@@ -1,4 +1,20 @@
+body.landing-page {
+    overflow-x: hidden;
+}
+
 .hero {
+    overflow-x: hidden;
+
+    &.is-small .hero-body {
+        padding-left: 0;
+        padding-right: 0;
+
+        > .container {
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
+    }
+
     .wavy {
         background: url('../images/openfaas/wave-a.svg'), linear-gradient(to bottom, transparent 46%, $of-grey 46%);
         background-repeat: no-repeat;

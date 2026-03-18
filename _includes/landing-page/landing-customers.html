@@ -17,6 +17,8 @@
 <style>
     .customer-logo{
         filter: grayscale(1);
+        max-height: 60px;
+        object-fit: contain;
     }
 </style>
 
@@ -29,10 +31,10 @@
         </div>
 
         <div class="column is-12" style="padding-top: 0;">
-            <div class="columns is-multiline" style="margin-top: 0; margin-bottom: 0;">
+            <div class="columns is-multiline is-mobile" style="margin-top: 0; margin-bottom: 0;">
                 {% for customer in site.data.customers %}
                 {% if customer %}
-                <div class="column is-2-desktop is-4-tablet is-6-mobile" style="padding: 0.5rem;">
+                <div class="column is-2-desktop is-3-tablet is-4-mobile" style="padding: 0.5rem;">
                     <figure class="image is-customer-logo" style="margin: 0;">
                         <img class="customer-logo" src="images/customers/{{ customer.logo }}" alt="{{ customer.name }} logo" title="{{ customer.name }}">
                     </figure>

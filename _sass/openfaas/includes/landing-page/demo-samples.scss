@@ -191,6 +191,16 @@ a.button {
   padding: 6px 12px;
   border: 1px solid #ccc;
   border-top: none;
+  overflow-x: auto;
+
+  pre {
+    overflow-x: auto;
+  }
+}
+
+.code-samples {
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .tabs {

@@ -1,187 +1,24 @@
 <div class="container">
     <div class="columns is-multiline">
-
-            <div class="column is-12">
-                <div class="box has-background-white">
-                    <p style="min-height: 10px;" class="has-text-grey-dark is-size-4 font-medium mb-2">
-                        OpenFaaS Edge
-                        <span class="tag is-small is-primary ml-2" style="vertical-align: middle; font-size: 0.6rem;">NEW</span>
-                    </p>
-
-                    <p class="has-text-grey-dark is-size-4 font-medium mb-2">
-                        <span class="is-size-5 font-medium">$</span>300<span class="is-size-6 font-medium"> / mo</span>
-                    </p>
-    
-                    <p style="margin-bottom: 6px; min-height: 10px" class="has-text-grey-dark is-size-8 mt-2">
-                        For whitelabelled and OEM solution providers: distribute event-driven automation to your customers.
-                    </p>
-
-                    <div class="columns is-multiline">
-                        <div class="column is-6">
-                            <ul class="has-text-grey-dark is-size-6 mt-3 mb-4" style="list-style: none">
-                            <li class="mb-3 is-flex is-align-items-center">
-                                <svg class="image is-24x24 mr-2" xmlns="http://www.w3.org/2000/svg"stroke="currentColor" fill="#10b981" viewBox="0 0 1792 1792">
-                                    <path d="M1412 734q0-28-18-46l-91-90q-19-19-45-19t-45 19l-408 407-226-226q-19-19-45-19t-45 19l-91 90q-18 18-18 46 0 27 18 45l362 362q19 19 45 19 27 0 46-19l543-543q18-18 18-45zm252 162q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z">
-                                    </path>
-                                </svg>
-                                <a class="underline-on-hover" href="https://github.com/openfaas/faas/blob/master/pro/EULA.md">OpenFaaS Commercial License (EULA)</a>
-                            </li>
-
-                            <li class="mb-3 is-flex is-align-items-center">
-                                <svg class="image is-24x24 mr-2" xmlns="http://www.w3.org/2000/svg"stroke="currentColor" fill="#10b981" viewBox="0 0 1792 1792">
-                                    <path d="M1412 734q0-28-18-46l-91-90q-19-19-45-19t-45 19l-408 407-226-226q-19-19-45-19t-45 19l-91 90q-18 18-18 46 0 27 18 45l362 362q19 19 45 19 27 0 46-19l543-543q18-18 18-45zm252 162q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z">
-                                    </path>
-                                </svg>
-                                Deploy to a VM or bare-metal (without Kubernetes)
-                            </li>
-                            <li class="mb-3 is-flex is-align-items-center">
-                                <svg class="image is-24x24 mr-2" xmlns="http://www.w3.org/2000/svg"stroke="currentColor" fill="#10b981" viewBox="0 0 1792 1792">
-                                    <path d="M1412 734q0-28-18-46l-91-90q-19-19-45-19t-45 19l-408 407-226-226q-19-19-45-19t-45 19l-91 90q-18 18-18 46 0 27 18 45l362 362q19 19 45 19 27 0 46-19l543-543q18-18 18-45zm252 162q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z">
-                                    </path>
-                                </svg>
-                                <span data-tooltip="250 included in base package, additional functions available as add-ons.">250 functions included in base tier (up to 500 via add-on)</span>
-                            </li>
-                            <li class="mb-3 is-flex is-align-items-center">
-                                <svg class="image is-24x24 mr-2" xmlns="http://www.w3.org/2000/svg"stroke="currentColor" fill="#10b981" viewBox="0 0 1792 1792">
-                                    <path d="M1412 734q0-28-18-46l-91-90q-19-19-45-19t-45 19l-408 407-226-226q-19-19-45-19t-45 19l-91 90q-18 18-18 46 0 27 18 45l362 362q19 19 45 19 27 0 46-19l543-543q18-18 18-45zm252 162q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z">
-                                    </path>
-                                </svg>
-                                REST API &amp; CLI
-                            </li>
-                            <li class="mb-3 is-flex is-align-items-center">
-                                {% include yes.html %}
-                                <span data-tooltip="Attach Nvidia GPUs to stateful services such a Ollama.">GPU support</span>
-                            </li>
-                            <li class="mb-3 is-flex is-align-items-center">
-                                {% include maybe.html %}
-                                OpenFaaS Dashboard (optional add-on)
-                            </li>
-                            <li class="mb-3 is-flex is-align-items-center">
-                                {% include maybe.html %}
-                                <span data-tooltip="Cron trigger included, all others available as add-ons.">Event triggers</span>
-                            </li>
-                        </ul>
-                        </div>
-                        <div class="column is-6">
-                            <ul class="has-text-grey-dark is-size-6 mt-3 mb-4" style="list-style: none">
-                            <li class="mb-3 is-flex is-align-items-center">
-                                <svg class="image is-24x24 mr-2" xmlns="http://www.w3.org/2000/svg"stroke="currentColor" fill="#10b981" viewBox="0 0 1792 1792">
-                                    <path d="M1412 734q0-28-18-46l-91-90q-19-19-45-19t-45 19l-408 407-226-226q-19-19-45-19t-45 19l-91 90q-18 18-18 46 0 27 18 45l362 362q19 19 45 19 27 0 46-19l543-543q18-18 18-45zm252 162q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z">
-                                    </path>
-                                </svg>
-                                Scale to Zero
-                            </li>
-                            <li class="mb-3 is-flex is-align-items-center">
-                                <svg class="image is-24x24 mr-2" xmlns="http://www.w3.org/2000/svg"stroke="currentColor" fill="#10b981" viewBox="0 0 1792 1792">
-                                    <path d="M1412 734q0-28-18-46l-91-90q-19-19-45-19t-45 19l-408 407-226-226q-19-19-45-19t-45 19l-91 90q-18 18-18 46 0 27 18 45l362 362q19 19 45 19 27 0 46-19l543-543q18-18 18-45zm252 162q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z">
-                                    </path>
-                                </svg>
-                                <span data-tooltip="Commercial version of NATS JetStream Queue Worker.">Async Queue with retries</span>                               
-                            </li>
-                            <li class="mb-3 is-flex is-align-items-center">
-                                <svg class="image is-24x24 mr-2" xmlns="http://www.w3.org/2000/svg"stroke="currentColor" fill="#10b981" viewBox="0 0 1792 1792">
-                                    <path d="M1412 734q0-28-18-46l-91-90q-19-19-45-19t-45 19l-408 407-226-226q-19-19-45-19t-45 19l-91 90q-18 18-18 46 0 27 18 45l362 362q19 19 45 19 27 0 46-19l543-543q18-18 18-45zm252 162q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z">
-                                    </path>
-                                </svg>
-                                <span data-tooltip="On-premises and completely offline environments.">Airgap support</span>                               
-                            </li>
-                            <li class="mb-3 is-flex is-align-items-center">
-                                <svg class="image is-24x24 mr-2" xmlns="http://www.w3.org/2000/svg"stroke="currentColor" fill="#10b981" viewBox="0 0 1792 1792">
-                                    <path d="M1412 734q0-28-18-46l-91-90q-19-19-45-19t-45 19l-408 407-226-226q-19-19-45-19t-45 19l-91 90q-18 18-18 46 0 27 18 45l362 362q19 19 45 19 27 0 46-19l543-543q18-18 18-45zm252 162q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z">
-                                    </path>
-                                </svg>
-                                <a class="underline-on-hover" href="https://store.openfaas.com/l/serverless-for-everyone-else"><span data-tooltip="A complete manual for writing functions with Node.js/JavaScript.">Training eBook included</span></a>
-                            </li>
-
-                            <li class="mb-3 is-flex is-align-items-center">
-                                {% include no.html %}
-                                <span data-tooltip="A single function can handle many requests, however it won't scale beyond 1/1 replicas.">Horizontal scaling</span>
-                            </li>
-                            <li class="mb-3 is-flex is-align-items-center">
-                                {% include no.html %}
-                                <span data-tooltip="Designed for low-maintenance, low-overheads, and easy redistribution instead of for clustering.">High Availability (HA)</span>
-                            </li>
-                        </ul>
-                        </div>
+        <div class="column is-12">
+            <div class="box has-background-white">
+                <div class="columns is-vcentered">
+                    <div class="column">
+                        <p class="has-text-grey-dark is-size-4 font-medium mb-2">
+                            OpenFaaS Edge
+                            <span class="tag is-small is-primary ml-2" style="vertical-align: middle; font-size: 0.6rem;">NEW</span>
+                        </p>
+                        <p class="has-text-grey-dark is-size-6 mt-2">
+                            For whitelabelled and OEM solution providers: deploy event-driven functions to customer sites on VMs or bare-metal, without Kubernetes.
+                        </p>
                     </div>
-
-                    <div class="is-flex is-align-items-center is-size-6 is-flex-wrap-wrap">                    
-
-                        <div class="book-a-call mr-3 is-size-2">
-                            <div class="field">
-                                <label class="label mt-3">Read about Edge</label>
-                                <div class="control">
-                                    <a href="https://docs.openfaas.com/deployment/edge/" class="button is-light is-medium">
-                                        <span class="icon"><i class="fas fa-book"></i></span>
-                                        <span>Read about Edge</span>
-                                        </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="book-a-call mr-3 is-size-2">
-                            <div class="field">
-                                <label class="label mt-3">Pricing details</label>
-                                <div class="control">
-                                    <button id="edge-info-icon" class="button is-primary is-medium">
-                                        <span class="icon"><i class="fas fa-info-circle"></i></span>
-                                        <span>Find out more</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="column is-narrow">
+                        <a href="/edge/" class="button is-primary is-medium">
+                            <span>Learn more about OpenFaaS Edge &rarr;</span>
+                        </a>
                     </div>
-
-                    <!-- Edge Redistribution Modal -->
-                    <div id="edge-modal" class="modal">
-                        <div class="modal-background"></div>
-                        <div class="modal-card">
-                            <header class="modal-card-head">
-                                <p class="modal-card-title">OpenFaaS Edge - Redistribution License</p>
-                                <button class="delete edge-modal-close" aria-label="close"></button>
-                            </header>
-                            <section class="modal-card-body">
-                                <div class="content">
-                                    <h4 class="has-text-grey-dark">Designed for Redistribution</h4>
-                                    <p>OpenFaaS Edge is designed specifically for redistribution - distributing your developed functions to end customers as part of your product or solution.</p>
-                                    
-                                    <h4 class="has-text-grey-dark mt-4">Industry Examples</h4>
-                                    <p>Edge is ideal for industries that need to deploy automation to customer sites:</p>
-                                    <div class="tags">
-                                        <span class="tag is-light is-medium">Rail</span>
-                                        <span class="tag is-light is-medium">Freight</span>
-                                        <span class="tag is-light is-medium">Shipping</span>
-                                        <span class="tag is-light is-medium">Telecoms</span>
-                                        <span class="tag is-light is-medium">Manufacturing</span>
-                                        <span class="tag is-light is-medium">Logistics</span>
-                                        <span class="tag is-light is-medium">Industrial Automation</span>
-                                        <span class="tag is-light is-medium">Edge Monitoring</span>
-                                        <span class="tag is-light is-medium">ETL</span>
-                                        <span class="tag is-light is-medium">Data Pre-Processing</span>
-                                    </div>
-
-                                    <h4 class="has-text-grey-dark mt-4">Pricing</h4>
-                                    <ul>
-                                        <li>$300 USD/month is the starting price, per installation</li>
-                                        <li>Pricing scales based on deployment needs and function count</li>
-                                        <li>Paid annually by invoice - SWIFT (GBP) / ACH (USD)</li>
-                                    </ul>
-
-                                    <div class="notification is-info is-light mt-4">
-                                        <p class="mb-0">Need functions for internal or production use in your business? See <a href="/pricing/">OpenFaaS Standard</a>.</p>
-                                    </div>
-                                </div>
-                            </section>
-                            <footer class="modal-card-foot">
-                                <a href="https://docs.google.com/forms/d/e/1FAIpQLSe2O9tnlTjc7yqzXLMvqvF2HVqwNW7ePNOxLchacKRf9LZL7Q/viewform?usp=header" class="button is-primary" target="_blank" rel="noopener">
-                                    <span class="icon"><i class="fas fa-video"></i></span>
-                                    <span>Book Zoom call</span>
-                                </a>
-                                <button class="button edge-modal-close">Close</button>
-                            </footer>
-                        </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-

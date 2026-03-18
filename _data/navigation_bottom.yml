@@ -7,6 +7,9 @@
 - name: Pricing
   class: navbar-item
   link: /pricing/
+- name: Edge
+  class: navbar-item
+  link: /edge/
 - name: Products
   class: navbar-item
   link: /products/

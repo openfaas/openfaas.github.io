@@ -1,0 +1,248 @@
+---
+title: OpenFaaS Edge - Serverless at the Edge, Without Kubernetes
+description: Deploy event-driven functions to VMs and bare-metal at customer sites. Designed for OEM and whitelabel solution providers in manufacturing, logistics, telecoms, and more.
+image: https://www.openfaas.com/images/pexels-fauxels-3183150.jpg
+---
+
+<section class="hero">
+    <div class="hero-body has-text-centered intro">
+        <div class="container">
+            <h1 class="title is-size-3-mobile is-size-2-tablet is-size-1-desktop is-capitalized has-text-weight-bold">
+                OpenFaaS Edge
+            </h1>
+            <p class="title is-size-5 is-size-4-desktop has-text-grey-darker has-text-weight-light">
+                Deploy event-driven functions to customer sites &mdash; on VMs or bare-metal, without Kubernetes.
+            </p>
+        </div>
+    </div>
+
+    <div class="hero-body white call-to-action is-spaced-bottom">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8 is-offset-2">
+
+                    <div class="content is-medium">
+
+                        <h2 class="title is-4">Built for redistribution</h2>
+                        <p>
+                            OpenFaaS Edge is designed for OEM and whitelabel solution providers who need to ship event-driven automation as part of their product. Package your functions and deploy them to your customers' environments &mdash; on-premises, air-gapped, or at the edge.
+                        </p>
+
+                    </div>
+
+                    <div class="columns is-vcentered has-text-centered mt-4 mb-4">
+                        <div class="column">
+                            <div class="box" style="border-top: 3px solid #00d1b2;">
+                                <span class="icon is-large has-text-primary"><i class="fas fa-code fa-2x"></i></span>
+                                <p class="title is-5 mt-3 mb-1">Build</p>
+                                <p class="is-size-7 has-text-grey">Write functions using<br>standard templates &amp; tooling</p>
+                            </div>
+                        </div>
+                        <div class="column is-narrow is-hidden-mobile">
+                            <span class="icon is-large has-text-grey-light"><i class="fas fa-arrow-right fa-lg"></i></span>
+                        </div>
+                        <div class="column is-narrow is-hidden-tablet">
+                            <span class="icon is-large has-text-grey-light"><i class="fas fa-arrow-down fa-lg"></i></span>
+                        </div>
+                        <div class="column">
+                            <div class="box" style="border-top: 3px solid #3298dc;">
+                                <span class="icon is-large has-text-info"><i class="fas fa-box fa-2x"></i></span>
+                                <p class="title is-5 mt-3 mb-1">Package</p>
+                                <p class="is-size-7 has-text-grey">Container images stored<br>in your private registry</p>
+                            </div>
+                        </div>
+                        <div class="column is-narrow is-hidden-mobile">
+                            <span class="icon is-large has-text-grey-light"><i class="fas fa-arrow-right fa-lg"></i></span>
+                        </div>
+                        <div class="column is-narrow is-hidden-tablet">
+                            <span class="icon is-large has-text-grey-light"><i class="fas fa-arrow-down fa-lg"></i></span>
+                        </div>
+                        <div class="column">
+                            <div class="box" style="border-top: 3px solid #3273dc;">
+                                <span class="icon is-large has-text-link"><i class="fas fa-shipping-fast fa-2x"></i></span>
+                                <p class="title is-5 mt-3 mb-1">Ship</p>
+                                <p class="is-size-7 has-text-grey">Deploy to customer sites<br>on-prem, airgapped, or at the edge</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content is-medium">
+
+                        <p>
+                            Unlike OpenFaaS Standard or Enterprise, Edge runs without Kubernetes. It deploys to a single VM or bare-metal host using containerd, keeping operational overhead low and making it practical to redistribute to dozens or hundreds of customer sites.
+                        </p>
+
+                        <h2 class="title is-4 mt-6">Industry use cases</h2>
+                        <p>Edge is ideal for industries that deploy automation to customer sites or remote locations:</p>
+
+                        <div class="tags are-medium">
+                            <span class="tag is-primary is-light">Rail</span>
+                            <span class="tag is-primary is-light">Freight</span>
+                            <span class="tag is-primary is-light">Shipping</span>
+                            <span class="tag is-info is-light">Telecoms</span>
+                            <span class="tag is-info is-light">Manufacturing</span>
+                            <span class="tag is-info is-light">Logistics</span>
+                            <span class="tag is-primary is-light">Industrial Automation</span>
+                            <span class="tag is-primary is-light">Edge Monitoring</span>
+                            <span class="tag is-info is-light">ETL</span>
+                            <span class="tag is-info is-light">Data Pre-Processing</span>
+                        </div>
+
+                        <p>
+                            If your product includes scheduled jobs, webhook integrations, data pipelines, or event-driven processing that needs to run at a customer site rather than in your cloud, Edge gives you a ready-made runtime with a commercial redistribution license.
+                        </p>
+
+                        <h2 class="title is-4 mt-6">Capabilities</h2>
+
+                    </div>
+
+                    <div class="columns is-multiline mt-2">
+                        <div class="column is-6">
+                            <div class="box">
+                                <h3 class="title is-5 mb-3"><span class="icon has-text-primary mr-2"><i class="fas fa-server"></i></span>Deployment</h3>
+                                <ul>
+                                    <li>Single Linux host &mdash; VM, bare-metal, or cloud instance</li>
+                                    <li>Same templates and tooling as OpenFaaS on Kubernetes</li>
+                                    <li>Airgap support with preloaded function images</li>
+                                    <li>TLS for securing the gateway</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="column is-6">
+                            <div class="box">
+                                <h3 class="title is-5 mb-3"><span class="icon has-text-info mr-2"><i class="fas fa-layer-group"></i></span>Scaling &amp; queuing</h3>
+                                <ul>
+                                    <li>Scale to zero when idle</li>
+                                    <li>Async queue with retries (JetStream)</li>
+                                    <li>Resource constraints for RAM/CPU per function</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="column is-6">
+                            <div class="box">
+                                <h3 class="title is-5 mb-3"><span class="icon has-text-success mr-2"><i class="fas fa-shield-alt"></i></span>Security &amp; isolation</h3>
+                                <ul>
+                                    <li><a href="https://docs.openfaas.com/edge/gvisor">gVisor sandboxing</a> for container isolation</li>
+                                    <li>Read-only filesystem and non-root by default</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="column is-6">
+                            <div class="box">
+                                <h3 class="title is-5 mb-3"><span class="icon has-text-warning mr-2"><i class="fas fa-bolt"></i></span>Events &amp; integrations</h3>
+                                <ul>
+                                    <li>Cron trigger included</li>
+                                    <li><a href="https://docs.openfaas.com/edge/kafka-deployment">Kafka connector</a> available as add-on</li>
+                                    <li><a href="https://docs.openfaas.com/edge/open-telemetry">OpenTelemetry</a> tracing</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="column is-6">
+                            <div class="box">
+                                <h3 class="title is-5 mb-3"><span class="icon has-text-link mr-2"><i class="fas fa-microchip"></i></span>Stateful services</h3>
+                                <ul>
+                                    <li>Run long-lived containers alongside functions via docker-compose</li>
+                                    <li>Attach Nvidia GPUs for AI/ML workloads (e.g. Ollama)</li>
+                                    <li>Preload functions and services for offline distribution</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="column is-6">
+                            <div class="box">
+                                <h3 class="title is-5 mb-3"><span class="icon has-text-primary mr-2"><i class="fas fa-puzzle-piece"></i></span>Optional add-ons</h3>
+                                <ul>
+                                    <li><a href="https://docs.openfaas.com/edge/builder">Function Builder API</a> &mdash; build from source as non-root</li>
+                                    <li>OpenFaaS Dashboard</li>
+                                    <li>Additional event connectors beyond cron</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content is-medium">
+
+
+                        <h2 class="title is-4 mt-6">Edge vs Standard</h2>
+                        <p>Edge and Standard solve different problems:</p>
+
+                        <table class="table is-fullwidth">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Edge</th>
+                                    <th>Standard</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th>Designed for</th>
+                                    <td>Redistribution to customer sites</td>
+                                    <td>Internal production use</td>
+                                </tr>
+                                <tr>
+                                    <th>Infrastructure</th>
+                                    <td>Single VM or bare-metal</td>
+                                    <td>Kubernetes cluster</td>
+                                </tr>
+                                <tr>
+                                    <th>Horizontal scaling</th>
+                                    <td>No</td>
+                                    <td>Yes, with fine-tuned autoscaling</td>
+                                </tr>
+                                <tr>
+                                    <th>High availability</th>
+                                    <td>No</td>
+                                    <td>Yes</td>
+                                </tr>
+                                <tr>
+                                    <th>Redistribution rights</th>
+                                    <td>Yes, under commercial license</td>
+                                    <td>No</td>
+                                </tr>
+                                <tr>
+                                    <th>Airgap support</th>
+                                    <td>Yes</td>
+                                    <td>Yes (annual license)</td>
+                                </tr>
+                                <tr>
+                                    <th>Functions included</th>
+                                    <td>25 (up to 500 via add-on)</td>
+                                    <td>500</td>
+                                </tr>
+                                <tr>
+                                    <th>Starting price</th>
+                                    <td>$300/mo per installation</td>
+                                    <td>$1,250/mo per cluster</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="notification is-info is-light mt-5">
+                            <p class="mb-0">Need functions for internal production use in your business? See <a href="/pricing/">OpenFaaS Standard</a> instead.</p>
+                        </div>
+
+                        <h2 class="title is-4 mt-6">Pricing</h2>
+                        <ul>
+                            <li><strong>$300 USD/month</strong> is the starting price, per installation</li>
+                            <li>Pricing scales based on deployment needs and function count</li>
+                            <li>Paid annually by invoice &mdash; SWIFT (GBP) / ACH (USD)</li>
+                        </ul>
+
+                        <div class="has-text-centered mt-6 mb-6">
+                            <a href="https://docs.google.com/forms/d/e/1FAIpQLSe2O9tnlTjc7yqzXLMvqvF2HVqwNW7ePNOxLchacKRf9LZL7Q/viewform?usp=header" class="button is-primary is-large" target="_blank" rel="noopener">
+                                <span class="icon"><i class="fas fa-comments"></i></span>
+                                <span>Talk to us</span>
+                            </a>
+                            <a href="https://docs.openfaas.com/deployment/edge/" class="button is-light is-large ml-3">
+                                <span class="icon"><i class="fas fa-book"></i></span>
+                                <span>Read the docs</span>
+                            </a>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -132,11 +132,11 @@
                     </p>
 
                     <p class="has-text-grey-dark is-size-4 font-medium mb-2">
-                        <span class="is-size-5 font-medium">$</span>1250<span class="is-size-5 font-medium"> / mo</span><span class="is-size-5 is-italic font-medium">*</span>
+                        <span class="is-size-5 font-medium">$</span>1250<span class="is-size-5 font-medium"> / mo</span><span class="is-size-5 is-italic font-medium" data-tooltip="Based upon an annual commitment for 1x Kubernetes cluster">*</span>
                     </p>
 
                     <p style="margin-bottom: 6px; min-height: 48px" class="has-text-grey-dark is-size-8 mt-2">
-                        Production-ready functions for a team or product.
+                        Production-ready functions for a single team or tenant.
                     </p>
 
                     <ul class="has-text-grey-dark is-size-6 mt-3 mb-4">
@@ -289,7 +289,20 @@
                             <span data-tooltip="Access to GitHub Discussions for questions, suggestions and new features.">Self-service support with email</span>
                         </li>
 
-                        * Based upon an annual commitment for 1x Kubernetes cluster
+                        <h3 class="mb-3" style="font-weight: bold;">Restrictions</h3>
+
+                        <li class="mb-3 is-flex is-align-items-center">
+                            {% include no.html %}
+                            <span data-tooltip="Multi-tenant hosting requires OpenFaaS for Enterprises">Multi-tenant hosting</span>
+                        </li>
+                        <li class="mb-3 is-flex is-align-items-center">
+                            {% include no.html %}
+                            <span data-tooltip="Function sandboxing with gVisor requires OpenFaaS for Enterprises">Sandboxing</span>
+                        </li>
+                        <li class="mb-3 is-flex is-align-items-center">
+                            {% include no.html %}
+                            <span data-tooltip="Custom procurement and legal terms require OpenFaaS for Enterprises">Procurement / Custom Terms</span>
+                        </li>
 
                         <div class="book-a-call">
                             <div class="field mt-3">
@@ -491,6 +504,61 @@
 
                     </ul>
 
+                </div>
+            </div>
+
+    </div>
+
+    <div class="has-text-centered mt-5">
+        <button id="support-info-icon" class="button is-primary is-medium">
+            <span class="icon"><i class="fas fa-headset"></i></span>
+            <span>View support options</span>
+        </button>
+    </div>
+
+    <div>
+            <!-- Support Options Modal -->
+            <div id="support-modal" class="modal">
+                <div class="modal-background"></div>
+                <div class="modal-card">
+                    <header class="modal-card-head">
+                        <p class="modal-card-title">Support Options</p>
+                        <button class="delete support-modal-close" aria-label="close"></button>
+                    </header>
+                    <section class="modal-card-body">
+                        <div class="content">
+                            <h4 class="has-text-grey-dark">Standard Support</h4>
+                            <p class="mb-1"><strong>Included with OpenFaaS Standard</strong></p>
+                            <p>Your team will self-support OpenFaaS, but you're not alone.</p>
+                            <ul>
+                                <li>An SLA isn't necessary &mdash; tricky issues or sudden downtime wouldn't impact your business.</li>
+                                <li>You're happy to pay by invoice, without meetings with procurement or the legal team.</li>
+                                <li>Collaborate with other customers in a private Customer Community.</li>
+                                <li>Send suggestions and feedback directly to our team via GitHub Discussions.</li>
+                                <li>Talk to us at our <a href="https://docs.openfaas.com/community/">weekly Office Hours call</a>.</li>
+                            </ul>
+
+                            <hr>
+
+                            <h4 class="has-text-grey-dark">Enterprise Support</h4>
+                            <p class="mb-1"><strong>Add-on for OpenFaaS for Enterprises</strong></p>
+                            <p>The world's best support for OpenFaaS in production.</p>
+                            <ul>
+                                <li>Critical issues or downtime could affect your business.</li>
+                                <li>Rest assured that you'll get a response within the agreed Service Level Agreement (SLA) period.</li>
+                                <li>Procurement, legal review, or red lines may be required.</li>
+                                <li>Learn best practices and configuration for production.</li>
+                                <li>Direct access to our engineering team via Slack.</li>
+                            </ul>
+                        </div>
+                    </section>
+                    <footer class="modal-card-foot">
+                        <a href="https://forms.gle/qW5SBa3MMdcSq41M8" class="button is-primary" target="_blank" rel="noopener">
+                            <span class="icon"><i class="fas fa-calendar-alt"></i></span>
+                            <span>Book a meeting</span>
+                        </a>
+                        <button class="button support-modal-close">Close</button>
+                    </footer>
                 </div>
             </div>
 

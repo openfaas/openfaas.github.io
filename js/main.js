@@ -156,6 +156,57 @@ function initEdgeModal() {
 
 initEdgeModal();
 
+function initSupportModal() {
+    var trigger = document.getElementById('support-info-icon');
+    var modal = document.getElementById('support-modal');
+
+    if (!trigger || !modal) {
+        return;
+    }
+
+    var background = modal.querySelector('.modal-background');
+    var closeButtons = modal.querySelectorAll('.support-modal-close');
+
+    function showModal(visible) {
+        if (visible) {
+            modal.classList.add('is-active');
+            document.documentElement.classList.add('is-clipped');
+        } else {
+            modal.classList.remove('is-active');
+            document.documentElement.classList.remove('is-clipped');
+        }
+    }
+
+    trigger.addEventListener('click', function() {
+        showModal(true);
+    });
+
+    var triggerBottom = document.getElementById('support-info-icon-bottom');
+    if (triggerBottom) {
+        triggerBottom.addEventListener('click', function() {
+            showModal(true);
+        });
+    }
+
+    Array.from(closeButtons).forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            showModal(false);
+        });
+    });
+
+    background.addEventListener('click', function() {
+        showModal(false);
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && modal.classList.contains('is-active')) {
+            showModal(false);
+        }
+    });
+}
+
+initSupportModal();
+
 // Run shrinkNav on start-up to cover up the white bar shown between the nav
 // and the blue hero on the landing page
 // shrinkNav()

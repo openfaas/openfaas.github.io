@@ -16,9 +16,6 @@
 - name: eBooks
   class: navbar-item
   link: https://store.openfaas.com
-- name: Support
-  class: navbar-item
-  link: /support/
 - name: Docs
   class: navbar-item
   link: https://docs.openfaas.com/

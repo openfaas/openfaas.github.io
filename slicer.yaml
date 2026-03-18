@@ -1,0 +1,31 @@
+name: openfaas-blog
+setup: |
+  export DEBIAN_FRONTEND=noninteractive
+  apt-get update -qy
+  apt-get install -qy --no-install-recommends ruby ruby-dev build-essential zlib1g-dev libyaml-dev libreadline-dev make gcc
+  gem install -N bundler -v 2.2.2
+init: |
+  export BUNDLE_PATH=/home/ubuntu/.bundle
+  bundle install --jobs 4 --retry 3
+services:
+  - name: blog
+    command: bundle exec jekyll serve --force_polling --host 0.0.0.0 --port 4000
+    env:
+      JEKYLL_ENV: production
+      PAGES_REPO_NWO: openfaas/openfaas.github.io
+      BUNDLE_PATH: /home/ubuntu/.bundle
+ready:
+  http: http://localhost:4000
+  timeout: 120s
+forward:
+  - "4000:4000"
+exclude:
+  - .git
+  - _site
+  - vendor
+  - .bundle
+  - .sass-cache
+  - .jekyll-cache
+  - node_modules
+  - slicer
+  - "*.img"

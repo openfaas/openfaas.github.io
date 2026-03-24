@@ -10,6 +10,7 @@ categories:
 - enterprise
 dark_background: true
 author_staff_member: alex
+image: "/images/2026-03-build-secrets/background.png"
 hide_header_image: true
 ---
 

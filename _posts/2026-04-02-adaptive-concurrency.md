@@ -10,7 +10,7 @@ categories:
 - kubernetes
 - batch-processing
 dark_background: true
-# image: "/images/2026-03-adaptive-concurrency/background.png"
+image: "/images/2026-03-adaptive-concurrency/background.png"
 hide_header_image: true
 ---
 

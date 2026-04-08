@@ -14,6 +14,8 @@ hide_header_image: true
 
 Cluster Autoscalers add and remove Nodes to match the demand for resources. But they often leave no room for new Pods, adding an extra 1-2 minutes of latency.
 
+> Notice: The Headroom Controller is now out of the free beta/trial period. OpenFaaS customers can use it for free on licensed clusters. For everyone else, you can subscribe using the notes in the [Helm chart README file](https://github.com/openfaas/faas-netes/blob/master/chart/headroom-controller/README.md).
+
 That's latency that you don't want to pass onto your users.
 
 In addition, when using spot instances, you're given a very a short window to reschedule Pods from reclaimed nodes.
@@ -328,7 +330,7 @@ Feel free to reach out with your comments, questions, and suggestions.
 
 During the beta period, anyone can try out the Headroom Controller for free without signing up for a subscription.
 
-After the beta period, OpenFaaS customers get free access to the Headroom Controller as part of their subscription. For everyone else, you can purchase a license for 300 USD/year per cluster - which is less than 1 USD per day for near-instant scaling and scheduling of Pods.
+After the beta period, OpenFaaS customers get free access to the Headroom Controller as part of their subscription. For everyone else, you can [purchase a license](https://github.com/openfaas/faas-netes/blob/master/chart/headroom-controller/README.md) for 300 USD/year per cluster - which is less than 1 USD per day for near-instant scaling and scheduling of Pods.
 
 Even if you wanted to make your own controller for fun, you have to factor in the continued maintenance and support, and what happens when you leave the company. We've priced the controller at the point where it makes sense to outsource it.
 

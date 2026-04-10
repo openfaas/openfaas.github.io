@@ -481,21 +481,19 @@ If the email is incomplete or ambiguous, base your judgment on available content
 Email:
 ```
 
-The classification function shown below constructs the full prompt dynamically based on the email content and sends it to the OpenAI Chat API using the `gpt-3.5-turbo` model:
+The classification function shown below constructs the full prompt dynamically based on the email content and sends it to the OpenAI Responses API using the `gpt-5.4-nano` model:
 
 ```python
 def classify_email_content(prompt, content):
     full_prompt = f"{prompt}\n\nFrom: {content['from']}\nSubject: {content['subject']}\nBody:\n{content['body']}"
-    response = openAIClient.chat.completions.create(
-        model="gpt-3.5-turbo",
-        messages=[
-            {"role": "system", "content": "You are an assistant that classifies emails. Always respond with JSON."},
-            {"role": "user", "content": full_prompt}
-        ],
+    response = openAIClient.responses.create(
+        model="gpt-5.4-nano",
+        instructions="You are an assistant that classifies emails. Always respond with JSON.",
+        input=full_prompt,
         temperature=0.2,  # Low randomness for consistent output
-        max_tokens=300
+        max_output_tokens=300
     )
-    return response.choices[0].message.content
+    return response.output_text
 ```
 
 When implementing your own version of the function feel free to experiment with different available models. The prompt we use in this example is very minimal and you might want to give it more context and examples for a more reliable and consistent output. OpenAI also has a great article on [how to optimize the correctness and accuracy of an LLM for specific tasks](https://platform.openai.com/docs/guides/optimizing-llm-accuracy).

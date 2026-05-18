@@ -1,103 +1,149 @@
 <div class="container">
-  <div class="columns is-multiline">
+  <div class="column is-10 mx-auto">
 
+    <div class="purchase-toggle-wrap">
+      <div class="purchase-toggle" role="tablist">
+        <a class="purchase-toggle-option is-active" data-purchase-tab="annual" role="tab">Annual</a>
+        <a class="purchase-toggle-option" data-purchase-tab="monthly" role="tab">Monthly</a>
+      </div>
+    </div>
 
-    <div class="column is-full">
-      <div class="column is-8 mx-auto">
-      <div
-        class="card"
-        style="height: 100%; box-shadow: 0 0 5px rgb(50, 31, 221)"
-      >
-        <div
-          class="card-content is-flex is-flex-direction-column"
-          style="height: 100%"
-        >
-          <div>
-            <h3 class="is-size-4 has-text-grey-darker mb-3">
-              Annual payment
-            </h3>
-            <subtitle class="is-size-5 mb-6">
-                12 month subscription
-            </subtitle>
-            <div class="has-text-grey-dark is-size-6">
-              <ul
-                style="
-                  line-height: 2.5rem;
-                  text-align: left;
-                  padding-left: 20px;
-                  list-style-type: square;
-                "
-              >
-                <li>1250 USD / mo / cluster</li>
-                <li>Payment in advance by invoice</li>
-                <li>Transfer: ACH (15000 USD) or SWIFT (11820 GBP)</li>
-                <li>Offline license key - online or air-gapped</li>
-                <li>Free 30 minute onboarding call</li>
-              </ul>
+    <style>
+      .purchase-toggle-wrap {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 1.5rem;
+      }
+      .purchase-toggle {
+        display: inline-flex;
+        background-color: #f0eef9;
+        border-radius: 9999px;
+        padding: 4px;
+      }
+      .purchase-toggle-option {
+        padding: 0.5rem 1.5rem;
+        border-radius: 9999px;
+        color: #363636;
+        cursor: pointer;
+        user-select: none;
+        transition: background-color 0.15s ease, color 0.15s ease;
+      }
+      .purchase-toggle-option:hover {
+        color: rgb(50, 31, 221);
+      }
+      .purchase-toggle-option.is-active {
+        background-color: rgb(50, 31, 221);
+        color: #fff;
+      }
+      .purchase-toggle-option.is-active:hover {
+        color: #fff;
+      }
+    </style>
+
+    <div class="column is-8 mx-auto">
+
+      <div data-purchase-pane="annual" class="purchase-pane">
+        <div class="card" style="box-shadow: 0 0 5px rgb(50, 31, 221)">
+          <div class="card-content">
+            <div>
+              <h3 class="is-size-4 has-text-grey-darker mb-3">
+                Annual payment
+              </h3>
+              <subtitle class="is-size-5 mb-6">
+                  12 month subscription
+              </subtitle>
+              <div class="has-text-grey-dark is-size-6">
+                <ul
+                  style="
+                    line-height: 2.5rem;
+                    text-align: left;
+                    padding-left: 20px;
+                    list-style-type: square;
+                  "
+                >
+                  <li>1250 USD / mo / cluster</li>
+                  <li>Payment in advance by invoice</li>
+                  <li>Transfer: ACH (15000 USD) or SWIFT (11820 GBP)</li>
+                  <li>Offline license key - online or air-gapped</li>
+                  <li>Free 30 minute onboarding call</li>
+                </ul>
+              </div>
             </div>
-          </div>
-          <div class="mt-auto">
-            <p class="mt-4">Save 3600 USD per year per cluster</p>
-            <a
-              href="https://forms.gle/dimFYHjCtxhqStGs7"
-              target="_blank"
-              class="button is-primary is-medium mt-4"
-            >
-              <span class="icon"><i class="fas fa-file-alt"></i></span>
-              <span>Request Invoice</span>
-            </a>
+            <div class="mt-4">
+              <p>Save 3600 USD per year per cluster</p>
+              <a
+                href="https://forms.gle/dimFYHjCtxhqStGs7"
+                target="_blank"
+                class="button is-primary is-medium mt-4"
+              >
+                <span class="icon"><i class="fas fa-file-alt"></i></span>
+                <span>Request Invoice</span>
+              </a>
+            </div>
           </div>
         </div>
       </div>
-      </div>
-    </div>
 
-    <div class="column is-full">
-      <div class="column is-8 mx-auto">
-      <div class="card" style="height: 100%">
-        <div
-          class="card-content is-flex is-flex-direction-column"
-          style="height: 100%"
-        >
-          <div>
-            <h3 class="is-size-4 font-medium has-text-grey-dark mb-3">
-              Monthly payments
-            </h3>
-            <subtitle class="is-size-5 font-medium has-text-grey-dark mb-6">
-                30 day rolling subscription
-            </subtitle>
-            <div class="has-text-grey-dark is-size-6">
-              <ul
-                style="
-                  line-height: 2.5rem;
-                  text-align: left;
-                  padding-left: 20px;
-                  list-style-type: square;
-                "
-              >
-                <li>1500 USD / mo / cluster</li>
-                <li>Company Credit/Debit card</li>
-                <li>Internet connection required at all times, must keep OpenFaaS up to date</li>
-                <li>Self-service - license key sent via email</li>
-              </ul>
+      <div data-purchase-pane="monthly" class="purchase-pane is-hidden">
+        <div class="card">
+          <div class="card-content">
+            <div>
+              <h3 class="is-size-4 font-medium has-text-grey-dark mb-3">
+                Monthly payments
+              </h3>
+              <subtitle class="is-size-5 font-medium has-text-grey-dark mb-6">
+                  30 day rolling subscription
+              </subtitle>
+              <div class="has-text-grey-dark is-size-6">
+                <ul
+                  style="
+                    line-height: 2.5rem;
+                    text-align: left;
+                    padding-left: 20px;
+                    list-style-type: square;
+                  "
+                >
+                  <li>1500 USD / mo / cluster</li>
+                  <li>Company Credit/Debit card</li>
+                  <li>Internet connection required at all times</li>
+                  <li>Self-service - license key sent via email</li>
+                </ul>
+              </div>
             </div>
-          </div>
-          <div class="mt-auto">
-            <a
-              href="https://subscribe.openfaas.com/checkout/buy/68c4d2ba-5e28-4cd3-89ec-ecf4d0d0967f"
-              target="_top"
-              class="button is-primary is-medium mt-4"
-            >
-              <span class="icon"><i class="fas fa-shopping-cart"></i></span>
-              <span>Checkout now</span>
-            </a>
-            <p><i>Sales Tax/VAT may be added by payment provider at checkout.</i><p>
+            <div class="mt-4">
+              <p class="mb-3"><i>Sales Tax/VAT may be added by payment provider at checkout.</i></p>
+              <a
+                href="https://subscribe.openfaas.com/checkout/buy/68c4d2ba-5e28-4cd3-89ec-ecf4d0d0967f"
+                target="_top"
+                class="button is-primary is-medium"
+              >
+                <span class="icon"><i class="fas fa-shopping-cart"></i></span>
+                <span>Checkout now</span>
+              </a>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    </div>
 
+    </div>
 
   </div>
 </div>
+
+<script>
+(function() {
+  var tabs = document.querySelectorAll('[data-purchase-tab]');
+  var panes = document.querySelectorAll('[data-purchase-pane]');
+  tabs.forEach(function(tab) {
+    tab.addEventListener('click', function(e) {
+      e.preventDefault();
+      var key = tab.getAttribute('data-purchase-tab');
+      tabs.forEach(function(t) { t.classList.remove('is-active'); });
+      tab.classList.add('is-active');
+      panes.forEach(function(p) {
+        p.classList.toggle('is-hidden', p.getAttribute('data-purchase-pane') !== key);
+      });
+    });
+  });
+})();
+</script>

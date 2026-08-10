@@ -32,11 +32,7 @@ But I tended to be more pragmatic than that, leaning on [XKCD's cartoon: Is it w
 
 [![https://imgs.xkcd.com/comics/is_it_worth_the_time.png](https://imgs.xkcd.com/comics/is_it_worth_the_time.png)](https://xkcd.com/1205/)
 
-One thing I learned with sales, is how quickly you need to follow up with people after they ask for a call.
-
-OpenFaaS Community Edition (CE) is free and nobody has to pay for that to use it, even commercially. So I get a lot of people expecting to pay nothing contact me for a meeting, who ask for pricing and have no intention of buying anything. But there are also a bunch of people who have identified OpenFaaS on their short-list of solutions, and believe in the brand, and want to have a serious conversation about how we can help.
-
-You just can't leave those people hanging.
+One thing I learned with sales, is how quickly you need to follow up with people after they ask for a call. You just can't leave those people hanging - priorities shift, budgets get closed, etc.
 
 That's one of the reasons that I bought into a CRM, and secondly why I finally automated importing leads from a Google Form.
 

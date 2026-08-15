@@ -18,7 +18,7 @@ Learn how to pass private registry tokens, API keys, and certificates into the F
 
 ## Introduction
 
-Build secrets are already supported for [local builds and CI jobs](https://docs.openfaas.com/cli/build/#plugins-and-build-time-secrets) using `faas-cli pro build`. In that workflow, the secret files live on the build machine and are mounted directly into Docker's BuildKit. There's no network transport involved.
+Build secrets are already supported for [local builds and CI jobs](https://docs.openfaas.com/cli/build/#build-time-secrets) using `faas-cli build`. In that workflow, the secret files live on the build machine and are mounted directly into Docker's BuildKit. There's no network transport involved.
 
 The [Function Builder API](https://docs.openfaas.com/openfaas-pro/builder/) is different. It's designed for building untrusted code from third parties  - your customers. A SaaS platform takes user-supplied source code, sends it to the builder over HTTP, and gets back a container image. The build happens in-cluster, without Docker, without root, and without sharing a Docker socket.
 
@@ -197,7 +197,14 @@ CMD ["fwatchdog"]
 
 The `--mount=type=secret,id=api_key` line tells BuildKit to mount the secret at `/run/secrets/api_key` during that `RUN` step. It's only available during the build  - it doesn't end up in any image layer.
 
-Edit `stack.yaml` to add `build_secrets`:
+Create a file to hold the secret value:
+
+```bash
+mkdir -p .secrets
+echo -n "sk-live-my-secret-key" > .secrets/api_key.txt
+```
+
+Edit `stack.yaml` to add `build_secrets`. The values must be file paths — `faas-cli` reads the file contents before sealing and sending them to the builder:
 
 ```yaml
 version: 1.0
@@ -210,7 +217,7 @@ functions:
     handler: ./sealed-test
     image: ttl.sh/test-build-secrets/sealed-test:2h
     build_secrets:
-      api_key: sk-live-my-secret-key
+      api_key: .secrets/api_key.txt
 ```
 
 ### Build with the remote builder
@@ -274,7 +281,13 @@ The secret was encrypted on the client, sent over the wire inside the build tar,
 
 In production, you'd use this to pass credentials for private package registries. Here's what that would look like for a Python function using the `python3-http` template.
 
-In your `stack.yaml`:
+Create a file with the index URL:
+
+```bash
+echo -n "https://token:pypi-secret@my-org.jfrog.io/artifactory/api/pypi/python-local/simple" > .secrets/pip_index_url.txt
+```
+
+In your `stack.yaml`, point `build_secrets` to the file:
 
 ```yaml
 functions:
@@ -283,7 +296,7 @@ functions:
     handler: ./data-processor
     image: registry.example.com/data-processor:latest
     build_secrets:
-      pip_index_url: https://token:pypi-secret@my-org.jfrog.io/artifactory/api/pypi/python-local/simple
+      pip_index_url: .secrets/pip_index_url.txt
 ```
 
 Then in the template's Dockerfile, you'd change the `pip install` line to mount the secret:
@@ -340,7 +353,7 @@ We've added four new subcommands to `faas-cli secret`:
 
 ## Wrapping up
 
-Build secrets for local builds and CI have been available for a while via `faas-cli pro build`. This feature brings the same capability to the Function Builder API, where builds happen in-cluster on behalf of third-party users and the secrets need to be protected over the wire.
+Build secrets for local builds and CI have been available for a while via the `faas-cli`. This feature brings the same capability to the Function Builder API, where builds happen in-cluster on behalf of third-party users and the secrets need to be protected over the wire.
 
 We developed this together with [Waylay](https://waylay.io) based on their production requirements, using NaCl box encryption to protect secrets over the wire. The `seal` package in the [Go SDK](https://github.com/openfaas/go-sdk) is generic and could be reused for other use-cases in the future.
 

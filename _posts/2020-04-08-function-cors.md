@@ -156,7 +156,7 @@ Some of the most popular HTTP-based templates (with of-watchdog) include:
 * node12
 * golang-http
 * golang-middleware
-* java11-vertx
+* java11-vert-x
 * python3-flask-http
 * csharp-httprequest
 * ruby-http

@@ -26,9 +26,9 @@ You'll need access to the following:
 
 ## Tutorial
 
-We'll first of all get OpenFaaS installed using the easiest way possible. Then we'll build two different functions, one will use a function-like template called `java11` and the other `java11-vert-x` will use Vert.x from the Eclipse Foundation. Both OpenFaaS templates are based upon Debian Linux and have built-in support for external dependencies from artifact repositories such as jCenter. The chosen build system for the templates is Gradle, so that you can see a worked example and start making use of your Kubernetes clusters to solve real problems.
+We'll first of all get OpenFaaS installed using the easiest way possible. Then we'll build two different functions, one will use a function-like template called `java11` and the other `java11-vert-x` will use Vert.x from the Eclipse Foundation. Both OpenFaaS templates use Eclipse Temurin images based on Ubuntu 24.04 Noble and have built-in support for external dependencies from artifact repositories such as Maven Central. The chosen build system for the templates is Gradle, so that you can see a worked example and start making use of your Kubernetes clusters to solve real problems.
 
-> OpenFaaS templates are fully customisable and you can fork them and update to use [Maven](https://maven.apache.org/), or [AdoptOpenJDK](https://adoptopenjdk.net/), if you wish. See the link at the end of the post.
+> OpenFaaS templates use Eclipse Temurin for their JDK and JRE images. They are fully customisable, so you can fork them and switch to [Maven](https://maven.apache.org/) if you wish. See the link at the end of the post.
 
 ### Get OpenFaaS
 
@@ -84,10 +84,17 @@ If you lose this information just type in `arkade info openfaas` at any time.
 
 ### Example 1) The `java11` function
 
+Pull the official templates:
+
+```sh
+faas-cli template pull
+```
+
 Create a new function named `find-a-quote`:
 
 ```sh
 faas-cli new --lang java11 \
+  --yaml find-a-quote.yml \
   find-a-quote
 ```
 
@@ -123,12 +130,11 @@ This is the handler, which you can customise.
 ```java
 package com.openfaas.function;
 
-import com.openfaas.model.IHandler;
 import com.openfaas.model.IResponse;
 import com.openfaas.model.IRequest;
 import com.openfaas.model.Response;
 
-public class Handler implements com.openfaas.model.IHandler {
+public class Handler extends com.openfaas.model.AbstractHandler {
 
     public IResponse Handle(IRequest req) {
         Response res = new Response();
@@ -139,27 +145,17 @@ public class Handler implements com.openfaas.model.IHandler {
 }
 ```
 
-We're going to query [QuoteGarden](https://pprathameshmore.github.io/QuoteGarden/) and use the query-string to form a URL `https://quote-garden.herokuapp.com/quotes/search/:query`
+We're going to query [DummyJSON](https://dummyjson.com/docs/quotes) and use the query-string to select a quote by ID from `https://dummyjson.com/quotes/:id`.
 
-This template uses Gradle, and we'll need to add a dependency to fetch HTTP pages such as [okhttp](https://square.github.io/okhttp/).
+This template uses Gradle, and we'll need to add dependencies to fetch HTTP pages with [OkHttp](https://square.github.io/okhttp/).
 
-Edit `build.gradle`, add a dependency:
+Keep the template's existing dependencies and add these two lines to its `dependencies` block:
 
 ```javascript
 dependencies {
-    // This dependency is exported to consumers, that is to say found on their compile classpath.
-    api 'org.apache.commons:commons-math3:3.6.1'
-
-    // This dependency is used internally, and not exposed to consumers on their own compile classpath.
-    implementation 'com.google.guava:guava:23.0'
-
-    // Use JUnit test framework
-    testImplementation 'junit:junit:4.12'
-
-    compile project(':model')
-
-    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
-    implementation 'com.squareup.okio:okio:1.14.1'
+    // Existing template dependencies remain above.
+    compile 'com.squareup.okhttp3:okhttp:3.10.0'
+    compile 'com.squareup.okio:okio:1.14.1'
 }
 ```
 
@@ -179,22 +175,19 @@ public interface IRequest {
 }
 ```
 
-In the URL we will pass a querystring of `?q=phrase` for our search, so let's see what that looks like:
+In the URL we will pass a query string of `?id=1` to select a quote, so let's see what that looks like:
 
 ```java
 package com.openfaas.function;
 
-import com.openfaas.model.IHandler;
 import com.openfaas.model.IResponse;
 import com.openfaas.model.IRequest;
 import com.openfaas.model.Response;
 import java.util.Map;
 
-import java.io.IOException;
-
 import okhttp3.OkHttpClient;
 
-public class Handler implements IHandler {
+public class Handler extends com.openfaas.model.AbstractHandler {
 
     public IResponse Handle(IRequest req) {
         IResponse res = new Response();
@@ -203,9 +196,9 @@ public class Handler implements IHandler {
             OkHttpClient client = new OkHttpClient();
 
             Map<String, String> query = req.getQuery();
-            String q = query.get("q");
+            String id = query.get("id");
 
-            String url = "https://quote-garden.herokuapp.com/quotes/search/" + q;
+            String url = "https://dummyjson.com/quotes/" + id;
             okhttp3.Request request = new okhttp3.Request.Builder()
                 .url(url)
                 .build();
@@ -243,30 +236,20 @@ kubectl get deploy -n openfaas-fn -o wide
 ```
 
 ```sh
-curl -sSLf http://192.168.0.26:31112/function/find-a-quote?q=tree | jq
+curl -sSLf http://127.0.0.1:8080/function/find-a-quote?id=1 | jq
 ```
 
-In the example above I used the `jq` utility to format the output, it looks like there were 10 results for "tree".
+In the example above I used the `jq` utility to format the output:
 
 ```json
 {
-  "count": 18,
-  "results": [
-    {
-      "_id": "5d91b45d9980192a317c8acc",
-      "quoteText": "Notice that the stiffest tree is most easily cracked, while the bamboo or willow survives by bending with the wind.",
-      "quoteAuthor": "Bruce Lee"
-    },
-    {
-      "_id": "5d91b45d9980192a317c8a62",
-      "quoteText": "Notice that the stiffest tree is most easily cracked, while the bamboo or willow survives by bending with the wind.",
-      "quoteAuthor": "Bruce Lee"
-    }
-  ]
+  "id": 1,
+  "quote": "Your heart is the size of an ocean. Go find yourself in its hidden depths.",
+  "author": "Rumi"
 }
 ```
 
-As an extension of this example, why don't you customise the code to return a random index of the quotes found? You'll also want to find yourself a JSON parsing library and then to add it to your `build.gradle` file.
+As an extension of this example, why don't you customise the code to parse the response and return only the quote text? You'll want to find yourself a JSON parsing library and then add it to your `build.gradle` file.
 
 > In my blog post [Java comes to OpenFaaS from 2018](https://blog.alexellis.io/java-comes-to-openfaas/), I used [Gson from Google](https://github.com/google/gson). You'll find an example of how to use the library in that post.
 
@@ -278,6 +261,7 @@ Why do this? Well downloading binaries from GitHub's releases page is a common t
 
 ```sh
 faas-cli new --lang java11-vert-x \
+  --yaml github-release-finder.yml \
   github-release-finder
 ```
 
@@ -320,17 +304,11 @@ Let's update the Handler with my sample code:
 ```java
 package com.openfaas.function;
 
-import io.vertx.core.http.HttpServerResponse;
 import io.vertx.ext.web.RoutingContext;
-import io.vertx.ext.web.handler.BodyHandler;
 import io.vertx.core.json.JsonObject;
 
-import io.vertx.core.Vertx;
-import io.vertx.core.VertxOptions;
 import io.vertx.core.buffer.Buffer;
-import io.vertx.core.http.HttpClientOptions;
 import io.vertx.ext.web.client.HttpResponse;
-import io.vertx.ext.web.client.HttpRequest;
 import io.vertx.ext.web.client.WebClient;
 import io.vertx.ext.web.client.WebClientOptions;
 
@@ -388,12 +366,12 @@ Now update your `build.gradle` file again and add in the following for `io.vertx
 ```javascript
 dependencies {
     // Vert.x project
-    compile 'io.vertx:vertx-web:3.5.4'
+    implementation 'io.vertx:vertx-web:3.5.4'
 
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'    
 
-    compile 'io.vertx:vertx-web-client:3.8.5'
+    implementation 'io.vertx:vertx-web-client:3.8.5'
 }
 ```
 
@@ -412,7 +390,7 @@ Let's try the function:
 ```sh
 curl http://127.0.0.1:8080/function/github-release-finder ; echo
 {
-  "releaseUrl" : "https://github.com/openfaas/faas-cli/releases/tag/0.11.7"
+  "releaseUrl" : "https://github.com/openfaas/faas-cli/releases/tag/0.18.13"
 }
 ```
 
@@ -444,7 +422,7 @@ Perhaps next you'd like to move to a managed Kubernetes service, or add a TLS ce
 
 Find out more about OpenFaaS and Vert.x
 
-* [Get started with the OpenFaaS workshop](htttps://github.com/openfaas/workshop/) - 12 self-paced labs for setting up a Kubernetes cluster with OpenFaaS locally or in the cloud.
+* [Get started with the OpenFaaS workshop](https://github.com/openfaas/workshop/) - 12 self-paced labs for setting up a Kubernetes cluster with OpenFaaS locally or in the cloud.
 * Read the [Vert.x docs](https://vertx.io/docs/)
 * Read the code for the [OpenFaaS Java11 templates](https://github.com/openfaas/templates)
 

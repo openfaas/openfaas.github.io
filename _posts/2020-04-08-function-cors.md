@@ -153,12 +153,12 @@ There are various openfaas templates which support setting HTTP headers, these t
 
 Some of the most popular HTTP-based templates (with of-watchdog) include:
 
-* node12
+* node26
 * golang-http
 * golang-middleware
 * java11-vert-x
-* python3-flask-http
-* csharp-httprequest
+* python3-http
+* dotnet8-csharp
 * ruby-http
 
 Run `faas-cli template store list` for a complete list of community templates.

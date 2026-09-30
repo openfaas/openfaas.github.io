@@ -3,6 +3,7 @@ title: "Protect your OpenFaaS functions with built-in OAuth - Part 1"
 description: "Without writing a line of code, you can now gate access to functions using an Identity Provider and OAuth."
 date: 2026-09-30
 author_staff_member: han
+author_staff_member_editor: alex
 categories:
   - oauth
   - functions

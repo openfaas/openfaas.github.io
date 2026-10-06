@@ -62,7 +62,7 @@ After sign-in, the browser sends the session cookie with each request. The watch
 
 - **Authorization (AuthZ)** decides what a signed-in visitor can access.
 
-    The cookie created by the watchdog can be parsed in your function's handler to further restrict access based on specific claims like email, username, or group.
+    The session cookie created by the watchdog holds the signed-in visitor's identity claims, never the provider's tokens. Your function's handler can verify the cookie and use these claims to further restrict access, for example by subject or email address. See [Session cookie](https://docs.openfaas.com/reference/function-oauth/#session-cookie) in the docs.
 
 Three options for Authentication:
 
@@ -216,4 +216,4 @@ For calls from other services or automation, see [built-in authentication for Op
 In part two of this post we are going to build a small Python web page and show how to implement:
 
 - Sign-out - The watchdog provides a `/auth/logout` endpoint that accepts POST requests. It clears the browser's session cookie, signing the user out of the function.
-- Custom authorization - Functions can read and parse the watchdog's cookie and restrict access by email address, group, or other claims.
+- Custom authorization - Functions can verify the watchdog's session cookie with its signing key, then restrict access by the visitor's subject or email address. See [Read the session in a handler](https://docs.openfaas.com/reference/function-oauth/#read-the-session-in-a-handler).

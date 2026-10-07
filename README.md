@@ -149,6 +149,19 @@ For example, if you add your own post in `_posts/2018-07-31-my-post.md` you will
     openfaas-jekyll_1  |       Remote Theme: Using theme cloudcannon/frisco-jekyll-template
     openfaas-jekyll_1  |                     ...done in 2.0199265 seconds.
 
+### Faster rebuilds while writing
+
+`_config_dev.yml` is a development-only overlay, GitHub Pages never reads it. It turns on incremental builds, skips the unlinked `/category/` archive pages, and stops Jekyll recompiling Bulma through Ruby Sass on every change (about 3s of every rebuild). Both `docker compose up` and `slicer env up` run one full build first, then serve with the overlay, so a change to a post regenerates in about half a second instead of 6-9s.
+
+**Caveat: CSS does not regenerate on every change.** The overlay excludes `css/openfaas.scss` and keeps the already-built `css/openfaas.css`, so edits under `_sass/` are picked up by the file watcher (you'll see `Regenerating:` in the log) but have no effect on the served CSS until you force a real rebuild. Deleting `_site/css/openfaas.css` does **not** fix this either; the source is excluded, so Jekyll never looks at it again until a full build runs.
+
+To pick up a `_sass/` change, force a full build by restarting the service:
+
+* `docker compose restart openfaas-jekyll` (or stop/`up` again)
+* on a slicer env, restart the `blog` service, or re-run `slicer env up`
+
+Either one re-runs the plain `jekyll build` step (no dev overlay, no excludes), which recompiles Bulma properly, then goes back to serving with the fast overlay.
+
 ### Add end-user company
 
 * Edit `_data/users.yml`

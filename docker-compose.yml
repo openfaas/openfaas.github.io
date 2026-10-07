@@ -2,7 +2,7 @@
 services:
   openfaas-jekyll:
     command: >
-      bash -lc "bundle check || bundle install && bundle exec jekyll serve --force_polling --host 0.0.0.0 --port 4000"
+      bash -lc "bundle check || bundle install && bundle exec jekyll build && bundle exec jekyll serve --config _config.yml,_config_dev.yml --force_polling --host 0.0.0.0 --port 4000"
     image: jekyll/jekyll:4
     volumes:
       - .:/srv/jekyll
@@ -11,6 +11,10 @@ services:
       - 4000:4000
     environment:
       - JEKYLL_UID=1000
+      # Gemfile.lock pins bundler 2.2.22; a fresh jekyll/jekyll:4 image only has the
+      # system bundler (2.6.9 on Ruby 3.4) and crashes trying to auto-install 2.2.22.
+      - BUNDLE_VERSION=system
+      - BUNDLER_VERSION=2.6.9
 
 volumes:
   site:

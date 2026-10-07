@@ -9,7 +9,10 @@ init: |
   bundle install --jobs 4 --retry 3
 services:
   - name: blog
-    command: bundle exec jekyll serve --force_polling --host 0.0.0.0 --port 4000
+    # Full build once so _site/css/openfaas.css exists, then serve with the dev overlay
+    # (_config_dev.yml): incremental, no category archives, CSS kept between builds.
+    # Files pushed by `slicer env push --watch` land on the VM's own disk, so inotify works.
+    command: bash -c 'bundle exec jekyll build && exec bundle exec jekyll serve --config _config.yml,_config_dev.yml --host 0.0.0.0 --port 4000'
     env:
       JEKYLL_ENV: production
       PAGES_REPO_NWO: openfaas/openfaas.github.io
@@ -27,5 +30,6 @@ exclude:
   - .sass-cache
   - .jekyll-cache
   - node_modules
+  - tmp
   - slicer
   - "*.img"

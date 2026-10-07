@@ -1,0 +1,38 @@
+# Local development overrides. Never used by GitHub Pages.
+# Usage: bundle exec jekyll build && bundle exec jekyll serve --config _config.yml,_config_dev.yml
+#
+# 1. Skip the /category/ archive pages (268 pages, unlinked from the site)
+jekyll-archives:
+  enabled: []
+# 2. Only re-render changed posts
+incremental: true
+# 3. Do not recompile Bulma through Ruby Sass on every change (~3s).
+#    Run a plain `jekyll build` once so _site/css/openfaas.css exists, then keep it.
+keep_files:
+  - .git
+  - .svn
+  - css/openfaas.css
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - LICENCE.jekyll_theme
+  - .DEREK.yml
+  - .gitignore
+  - .bundle
+  - .git
+  - .sass-cache
+  - .jekyll-cache
+  - .DS_Store
+  - _site
+  - vendor/bundle
+  - vendor
+  - site
+  - build
+  - out
+  - tmp
+  - slicer
+  - vm_agent_secret
+  - ofblog-1.img
+  - CNAME
+  - css/openfaas.scss

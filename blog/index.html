@@ -2,6 +2,9 @@
 title: Blog
 description: Keep up with the latest from the OpenFaaS team & community.
 image: /images/preview_image.png
+# Incremental dev builds (_config_dev.yml): page 1 of the list has a real source file, so
+# Jekyll would otherwise skip it when a post is added. Ignored by normal full builds.
+regenerate: true
 ---
 
 <section class="hero is-primary is-small">

@@ -11,8 +11,9 @@ services:
       - 4000:4000
     environment:
       - JEKYLL_UID=1000
-      # Gemfile.lock pins bundler 2.2.22; a fresh jekyll/jekyll:4 image only has the
-      # system bundler (2.6.9 on Ruby 3.4) and crashes trying to auto-install 2.2.22.
+      # Use the Bundler version present in the jekyll/jekyll:4 image, matching
+      # what's recorded in Gemfile.lock (bundle install rewrote the pin from
+      # 2.2.22 to 2.6.9 when this ran under the image's own bundler).
       - BUNDLE_VERSION=system
       - BUNDLER_VERSION=2.6.9
 

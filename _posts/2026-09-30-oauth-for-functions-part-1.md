@@ -166,7 +166,7 @@ provider:
   gateway: https://gateway.example.com
 functions:
   nodeinfo:
-    image: ghcr.io/openfaas/nodeinfo:latest
+    image: ghcr.io/openfaas/nodeinfo:0.1.14
     skip_build: true
     environment:
       oauth_enabled: "true"
@@ -180,7 +180,7 @@ functions:
       - nodeinfo-google-client-secret
 ```
 
-The image is the same one used by the store. `skip_build: true` tells the CLI to use the pre-built image.
+The `0.1.14` image contains of-watchdog 0.12.5. Pinning it makes the session behaviour reproducible instead of depending on whichever image `latest` identifies later. `skip_build: true` tells the CLI to use the pre-built image.
 
 - `oauth_enabled` enables browser login and session validation when set to `true`.
 - `oauth_base_url` is the public function URL. The watchdog needs to know it to build the callback URL and redirect to the correct locations.

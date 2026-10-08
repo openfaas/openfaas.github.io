@@ -62,7 +62,7 @@ After sign-in, the browser sends the session cookie with each request. The watch
 
 - **Authorization (AuthZ)** decides what a signed-in visitor can access.
 
-    The session cookie created by the watchdog holds the signed-in visitor's identity claims, never the provider's tokens. Your function's handler can verify the cookie and use these claims to further restrict access, for example by subject or email address. See [Session cookie](https://docs.openfaas.com/reference/function-oauth/#session-cookie) in the docs.
+    With OIDC, the session cookie created by the watchdog holds selected claims from the provider's verified ID token, never the provider's tokens. The provider's subject is the stable identifier. Verified email and selected group claims can also be used when appropriate for the provider. Your function's handler must verify the cookie before using these claims to restrict access. See [Session cookie](https://docs.openfaas.com/reference/function-oauth/#session-cookie) in the docs.
 
 Three options for Authentication:
 
@@ -137,6 +137,8 @@ In this example we will be using Google as the Identity Provider. To enable auth
 ## Enable OAuth authentication for the function
 
 When OAuth is enabled, the watchdog directs visitors to the identity provider to sign in. After a successful login, it issues its own JSON Web Token (JWT) and stores it in an HttpOnly cookie. The browser sends this cookie with subsequent requests, and the watchdog verifies it before forwarding requests to the function.
+
+Use of-watchdog 0.12.5 or later. It issues a typed, flat session JWT, copies identity only from a verified OIDC ID token, and can select provider groups with the `oauth_groups` option. Version 0.12.4 could promote identity from an unverified ID token in explicit plain-OAuth endpoint mode, while version 0.12.3 used an intermediate session format.
 
 Authentication is stateless. Function replicas sharing the same OAuth configuration can handle any stage of the sign-in and validate session cookies without requiring requests to return to the same replica.
 
@@ -216,4 +218,4 @@ For calls from other services or automation, see [built-in authentication for Op
 In part two of this post we are going to build a small Python web page and show how to implement:
 
 - Sign-out - The watchdog provides a `/auth/logout` endpoint that accepts POST requests. It clears the browser's session cookie, signing the user out of the function.
-- Custom authorization - Functions can verify the watchdog's session cookie with its signing key, then restrict access by the visitor's subject or email address. See [Read the session in a handler](https://docs.openfaas.com/reference/function-oauth/#read-the-session-in-a-handler).
+- Custom authorization - Functions can verify the watchdog's session cookie with its signing key, then restrict access by the visitor's subject, verified email, or selected groups. See [Read the session in a handler](https://docs.openfaas.com/reference/function-oauth/#read-the-session-in-a-handler).

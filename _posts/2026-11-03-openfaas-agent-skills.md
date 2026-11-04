@@ -33,7 +33,7 @@ And the experience did not stop there - when I tried to create functions using t
 
 ## Skills
 
-![OpenCode exploring the set of OpenFaaS skills](images/2026-11-03-skills/skills.png)
+![OpenCode exploring the set of OpenFaaS skills](/images/2026-11-03-skills/skills.png)
 > OpenCode running inside our Superterm agent manager, exploring the available skills.
 
 **The first skill - setup-openfaas**

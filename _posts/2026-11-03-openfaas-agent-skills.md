@@ -33,6 +33,9 @@ And the experience did not stop there - when I tried to create functions using t
 
 ## Skills
 
+![OpenCode exploring the set of OpenFaaS skills](images/2026-11-03-skills/skills.png)
+> OpenCode running inside our Superterm agent manager, exploring the available skills.
+
 **The first skill - setup-openfaas**
 
 The first skill was a setup-openfaas skill which covered the OpenFaaS Standard installation. We built it for ourselves for supporting customers by reproducing an installation quickly, and for end-to-end testing of new features. The initial version was too chatty, and ended up taking almost 23 minutes - but with some refinement, and stronger direction, we could set up a fully configured Kubernetes cluster, deploy a function, and invoke it in a SlicerVM within around 2 minutes 30.
